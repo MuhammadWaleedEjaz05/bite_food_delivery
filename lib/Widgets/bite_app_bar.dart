@@ -5,11 +5,12 @@ class BiteAppBar extends StatelessWidget implements PreferredSizeWidget {
   const BiteAppBar({
     super.key,
     this.isLogoVisible = false,
+    this.isDarkMode = false,
     this.backButton = false,
     required this.title,
     required this.actions,
   });
-
+  final bool isDarkMode;
   final bool isLogoVisible;
   final bool backButton;
   final Widget title;
@@ -21,6 +22,8 @@ class BiteAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: Colors.white.withAlpha(0),
+      surfaceTintColor: Colors.white.withAlpha(0),
       toolbarHeight: 100.h,
       leadingWidth: isLogoVisible ? 100.w : 75.w,
       leading: isLogoVisible
@@ -38,7 +41,7 @@ class BiteAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Navigator.pop(context);
               },
               style: IconButton.styleFrom(
-                foregroundColor: Colors.black,
+                foregroundColor: isDarkMode ? Colors.white : Colors.black,
                 backgroundColor: Colors.grey.withAlpha(50),
               ),
               icon: Icon(Icons.arrow_back, size: 30.r),

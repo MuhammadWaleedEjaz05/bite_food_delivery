@@ -95,7 +95,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () => Navigator.pushNamed(context, '/cart_screen'),
           style: IconButton.styleFrom(
             foregroundColor: Colors.white,
             backgroundColor: Colors.black,

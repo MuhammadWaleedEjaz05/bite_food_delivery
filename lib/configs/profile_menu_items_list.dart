@@ -21,7 +21,13 @@ List<BiteMenuItemModel> pAppList(BuildContext context) => [
     leadingIcon: Icons.shopping_bag_outlined,
     leadingIconColor: Colors.lightBlue,
     title: 'Cart',
-    onTap: () {},
+    onTap: () => Navigator.pushNamed(context, '/cart_screen'),
+  ),
+  BiteMenuItemModel(
+    leadingIcon: Icons.history_rounded,
+    leadingIconColor: Colors.green,
+    title: 'Order History',
+    onTap: () => Navigator.pushNamed(context, '/order_history_screen'),
   ),
   BiteMenuItemModel(
     leadingIcon: Icons.favorite_border,
