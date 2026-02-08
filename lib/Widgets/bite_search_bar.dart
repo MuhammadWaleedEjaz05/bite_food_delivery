@@ -10,13 +10,12 @@ class BiteSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SearchBar(
+      autoFocus: false,
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
       onTap: () => isEnabled
           ? Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => const _OpenSearchScreen(),
-              ),
+              MaterialPageRoute(builder: (context) => const OpenSearchScreen()),
             )
           : null,
       padding: WidgetStatePropertyAll(
@@ -35,8 +34,8 @@ class BiteSearchBar extends StatelessWidget {
   }
 }
 
-class _OpenSearchScreen extends StatelessWidget {
-  const _OpenSearchScreen();
+class OpenSearchScreen extends StatelessWidget {
+  const OpenSearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,7 @@ class _OpenSearchScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         children: [
           50.verticalSpace,
-          BiteSearchBar(isEnabled: false),
+          const BiteSearchBar(isEnabled: false),
           10.verticalSpace,
           ListView.builder(
             itemBuilder: (context, index) => Padding(

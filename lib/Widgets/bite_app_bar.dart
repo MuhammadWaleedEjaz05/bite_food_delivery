@@ -22,6 +22,7 @@ class BiteAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Colors.white.withAlpha(0),
       surfaceTintColor: Colors.white.withAlpha(0),
       toolbarHeight: 100.h,
