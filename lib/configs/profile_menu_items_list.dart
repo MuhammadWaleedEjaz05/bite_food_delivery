@@ -33,7 +33,7 @@ List<BiteMenuItemModel> pAppList(BuildContext context) => [
     leadingIcon: Icons.favorite_border,
     leadingIconColor: Colors.pink,
     title: 'Favorites',
-    onTap: () {},
+    onTap: () => Navigator.pushNamed(context, '/favourite'),
   ),
   BiteMenuItemModel(
     leadingIcon: Icons.notifications_none,
