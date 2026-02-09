@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             routes: routes,
             debugShowCheckedModeBanner: false,
-            theme: lightTheme,
+            theme: lightorangeTheme,
             home: Scaffold(
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               body:

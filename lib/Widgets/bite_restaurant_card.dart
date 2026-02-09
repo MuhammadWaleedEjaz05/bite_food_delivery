@@ -3,9 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BiteRestaurantCard extends StatelessWidget {
-  const BiteRestaurantCard({
-    super.key,
-  });
+  const BiteRestaurantCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,23 +17,17 @@ class BiteRestaurantCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20.r),
           ),
         ),
-        Text(
-          'Restaurant Name',
-          style: GoogleFonts.sen(fontSize: 25.sp),
-        ),
+        Text('Restaurant Name', style: GoogleFonts.sen(fontSize: 25.sp)),
         Text(
           'Restaurant Category',
-          style: GoogleFonts.sen(
-            fontSize: 18.sp,
-            color: Colors.grey.shade600,
-          ),
+          style: GoogleFonts.sen(fontSize: 18.sp, color: Colors.grey.shade600),
         ),
         5.verticalSpace,
         Row(
           children: [
             Icon(
               Icons.star_outline,
-              color: Colors.deepOrange,
+              color: Theme.of(context).primaryColor,
               size: 18.sp,
             ),
             4.horizontalSpace,
@@ -50,30 +42,24 @@ class BiteRestaurantCard extends StatelessWidget {
             10.horizontalSpace,
             Icon(
               Icons.delivery_dining,
-              color: Colors.deepOrange,
+              color: Theme.of(context).primaryColor,
               size: 18.sp,
             ),
             4.horizontalSpace,
             Text(
               '30-40 min',
-              style: GoogleFonts.sen(
-                fontSize: 16.sp,
-                color: Colors.black,
-              ),
+              style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.black),
             ),
             10.horizontalSpace,
             Icon(
               Icons.timelapse_outlined,
-              color: Colors.deepOrange,
+              color: Theme.of(context).primaryColor,
               size: 18.sp,
             ),
             4.horizontalSpace,
             Text(
               '\$2.99',
-              style: GoogleFonts.sen(
-                fontSize: 16.sp,
-                color: Colors.black,
-              ),
+              style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.black),
             ),
           ],
         ),

@@ -74,11 +74,16 @@ class _TabSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TabBar(
-      indicatorColor: Theme.of(context).primaryColor,
-      labelColor: Theme.of(context).primaryColor,
-      unselectedLabelColor: Colors.grey.shade500,
-      labelStyle: GoogleFonts.sen(fontSize: 20.sp, fontWeight: FontWeight.bold),
-      unselectedLabelStyle: GoogleFonts.sen(fontSize: 20.sp),
+      indicatorSize: TabBarIndicatorSize.tab,
+      indicator: BoxDecoration(
+        color: Theme.of(context).primaryColor,
+        borderRadius: BorderRadius.circular(30.r),
+      ),
+      dividerColor: Colors.transparent,
+      labelColor: Colors.white,
+      unselectedLabelColor: Colors.black,
+      labelStyle: GoogleFonts.sen(fontSize: 16.sp, fontWeight: FontWeight.bold),
+      unselectedLabelStyle: GoogleFonts.sen(fontSize: 16.sp),
       tabs: [
         Tab(text: 'Foods'),
         Tab(text: 'Restaurants'),
@@ -104,17 +109,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
           color: Theme.of(context).primaryColor,
         ),
       ),
-      actions: [
-        IconButton(
-          onPressed: () {},
-          style: IconButton.styleFrom(
-            foregroundColor: Colors.black,
-            backgroundColor: Colors.grey.shade100,
-          ),
-          icon: Icon(Icons.clear_all_rounded, size: 35.r),
-        ),
-        15.horizontalSpace,
-      ],
+      actions: [],
     );
   }
 }

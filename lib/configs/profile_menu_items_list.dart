@@ -39,7 +39,7 @@ List<BiteMenuItemModel> pAppList(BuildContext context) => [
     leadingIcon: Icons.notifications_none,
     leadingIconColor: Colors.purple,
     title: 'Notifications',
-    onTap: () {},
+    onTap: () => Navigator.pushNamed(context, '/notification'),
   ),
   BiteMenuItemModel(
     leadingIcon: Icons.credit_card_off_outlined,
@@ -66,7 +66,7 @@ List<BiteMenuItemModel> pSupportList(BuildContext context) => [
     leadingIcon: Icons.settings_outlined,
     leadingIconColor: Colors.green,
     title: 'Settings',
-    onTap: () {},
+    onTap: () => Navigator.pushNamed(context, '/setting_screen'),
   ),
 ];
 

@@ -56,9 +56,9 @@ class _CheckOutSection extends StatelessWidget {
                         'EDIT',
                         style: GoogleFonts.sen(
                           fontSize: 15.sp,
-                          color: Colors.deepOrange,
+                          color: Theme.of(context).primaryColor,
                           decoration: TextDecoration.underline,
-                          decorationColor: Colors.deepOrange,
+                          decorationColor: Theme.of(context).primaryColor,
                           decorationThickness: 2,
                         ),
                       ),
@@ -84,7 +84,7 @@ class _CheckOutSection extends StatelessWidget {
                       style: GoogleFonts.sen(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
-                        color: Colors.deepOrange,
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                   ],
@@ -95,7 +95,7 @@ class _CheckOutSection extends StatelessWidget {
                     Expanded(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.deepOrange,
+                          backgroundColor: Theme.of(context).primaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.r),
                           ),
@@ -169,9 +169,13 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
             isEditActive ? 'DONE' : 'EDIT ITEMS',
             style: GoogleFonts.sen(
               fontSize: 20.sp,
-              color: isEditActive ? Colors.green : Colors.deepOrange,
+              color: isEditActive
+                  ? Colors.green
+                  : Theme.of(context).primaryColor,
               decoration: TextDecoration.underline,
-              decorationColor: isEditActive ? Colors.green : Colors.deepOrange,
+              decorationColor: isEditActive
+                  ? Colors.green
+                  : Theme.of(context).primaryColor,
               decorationThickness: 2,
             ),
           ),

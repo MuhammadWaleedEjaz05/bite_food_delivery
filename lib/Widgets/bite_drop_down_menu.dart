@@ -31,12 +31,12 @@ class BiteDropDownMenu extends StatelessWidget {
       ),
       trailingIcon: Icon(
         Icons.arrow_drop_down,
-        color: Colors.deepOrange,
+        color: Theme.of(context).primaryColor,
         size: 30.sp,
       ),
       selectedTrailingIcon: Icon(
         Icons.arrow_drop_up,
-        color: Colors.deepOrange,
+        color: Theme.of(context).primaryColor,
         size: 30.sp,
       ),
       initialSelection: 'Pizza',

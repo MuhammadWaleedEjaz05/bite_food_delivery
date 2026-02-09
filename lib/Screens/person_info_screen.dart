@@ -30,9 +30,9 @@ class PersonInfoScreen extends StatelessWidget {
               'EDIT',
               style: GoogleFonts.sen(
                 fontSize: 20.sp,
-                color: Colors.deepOrange,
+                color: Theme.of(context).primaryColor,
                 decoration: TextDecoration.underline,
-                decorationColor: Colors.deepOrange,
+                decorationColor: Theme.of(context).primaryColor,
                 decorationThickness: 2,
               ),
             ),

@@ -52,6 +52,7 @@ dependencies:
   equatable: ^2.0.8
   meta: ^1.17.0
   shared_preferences: ^2.5.4
+  flutter_stripe: ^12.2.0
 
 dev_dependencies:
   flutter_test:

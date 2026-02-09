@@ -38,7 +38,7 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.star_outline,
-                      color: Colors.deepOrange,
+                      color: Theme.of(context).primaryColor,
                       size: 18.sp,
                     ),
                     4.horizontalSpace,
@@ -53,7 +53,7 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                     10.horizontalSpace,
                     Icon(
                       Icons.delivery_dining,
-                      color: Colors.deepOrange,
+                      color: Theme.of(context).primaryColor,
                       size: 18.sp,
                     ),
                     4.horizontalSpace,
@@ -67,7 +67,7 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                     10.horizontalSpace,
                     Icon(
                       Icons.timelapse_outlined,
-                      color: Colors.deepOrange,
+                      color: Theme.of(context).primaryColor,
                       size: 18.sp,
                     ),
                     4.horizontalSpace,
