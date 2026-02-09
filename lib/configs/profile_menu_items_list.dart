@@ -46,7 +46,7 @@ List<BiteMenuItemModel> pAppList(BuildContext context) => [
     leadingIcon: Icons.credit_card_off_outlined,
     leadingIconColor: Colors.blue,
     title: 'Payment Method',
-    onTap: () {},
+    onTap: () => Navigator.pushNamed(context, '/payment_screen'),
   ),
 ];
 

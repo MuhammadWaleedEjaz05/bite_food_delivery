@@ -9,7 +9,6 @@ class BiteSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SearchBar(
-      autoFocus: true,
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
       onTap: () => showSearch(context: context, delegate: OpenSearchScreen()),
       padding: WidgetStatePropertyAll(
