@@ -44,10 +44,8 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
       title: BiteDropDownMenu(),
       actions: [
         IconButton(
-          onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const OpenSearchScreen()),
-          ),
+          onPressed: () =>
+              showSearch(context: context, delegate: OpenSearchScreen()),
           style: IconButton.styleFrom(
             foregroundColor: Colors.white,
             backgroundColor: Colors.black,

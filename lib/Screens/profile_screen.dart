@@ -120,17 +120,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
           color: Theme.of(context).primaryColor,
         ),
       ),
-      actions: [
-        IconButton(
-          onPressed: () {},
-          style: IconButton.styleFrom(
-            foregroundColor: Colors.black,
-            backgroundColor: Colors.grey.shade100,
-          ),
-          icon: Icon(Icons.more_horiz, size: 35.r),
-        ),
-        15.horizontalSpace,
-      ],
+      actions: [],
     );
   }
 }

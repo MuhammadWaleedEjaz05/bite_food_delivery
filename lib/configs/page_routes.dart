@@ -3,6 +3,7 @@ import 'package:bite_food_delivery/Screens/all_category_screen.dart';
 import 'package:bite_food_delivery/Screens/all_restaurant_screen.dart';
 import 'package:bite_food_delivery/Screens/cart_screen.dart';
 import 'package:bite_food_delivery/Screens/category_screen.dart';
+import 'package:bite_food_delivery/Screens/faq_screen.dart';
 import 'package:bite_food_delivery/Screens/favourite_screen.dart';
 import 'package:bite_food_delivery/Screens/notification_screen.dart';
 import 'package:bite_food_delivery/Screens/order_history_screen.dart';
@@ -21,4 +22,5 @@ final Map<String, Widget Function(BuildContext)> routes = {
   '/favourite': (context) => FavouriteScreen(),
   '/notification': (context) => NotificationScreen(),
   '/setting_screen': (context) => SettingScreen(),
+  '/faq_screen': (context) => FAQScreen(),
 };

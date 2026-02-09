@@ -4,20 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BiteSearchBar extends StatelessWidget {
-  final bool isEnabled;
-  const BiteSearchBar({super.key, this.isEnabled = true});
+  const BiteSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SearchBar(
-      autoFocus: false,
+      autoFocus: true,
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
-      onTap: () => isEnabled
-          ? Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const OpenSearchScreen()),
-            )
-          : null,
+      onTap: () => showSearch(context: context, delegate: OpenSearchScreen()),
       padding: WidgetStatePropertyAll(
         EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
       ),
@@ -34,29 +28,69 @@ class BiteSearchBar extends StatelessWidget {
   }
 }
 
-class OpenSearchScreen extends StatelessWidget {
-  const OpenSearchScreen({super.key});
+class OpenSearchScreen extends SearchDelegate {
+  @override
+  Widget buildLeading(BuildContext context) {
+    return Row(
+      children: [
+        8.horizontalSpace,
+        IconButton(
+          onPressed: () => close(context, Null),
+
+          style: IconButton.styleFrom(
+            foregroundColor: Colors.black,
+            backgroundColor: Colors.grey.withAlpha(50),
+          ),
+          icon: Icon(Icons.arrow_back, size: 30.r),
+        ),
+      ],
+    );
+  }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 15.w),
-        children: [
-          50.verticalSpace,
-          const BiteSearchBar(isEnabled: false),
-          10.verticalSpace,
-          ListView.builder(
-            itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.h),
-              child: BiteRestaurantCard(),
-            ),
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: 10,
-          ),
-        ],
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+        onPressed: () {},
+        style: IconButton.styleFrom(
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.black,
+        ),
+        icon: Icon(Icons.clear_outlined, size: 30.r),
       ),
+      15.horizontalSpace,
+    ];
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return ListView.builder(
+      padding: EdgeInsets.symmetric(horizontal: 15.w),
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: EdgeInsets.symmetric(vertical: 10.h),
+          child: BiteRestaurantCard(),
+        );
+      },
+      itemCount: 2,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    return ListView.builder(
+      padding: EdgeInsets.symmetric(horizontal: 15.w),
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: EdgeInsets.symmetric(vertical: 10.h),
+          child: BiteRestaurantCard(),
+        );
+      },
+      itemCount: 1,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
     );
   }
 }

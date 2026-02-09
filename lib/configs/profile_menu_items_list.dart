@@ -1,3 +1,4 @@
+import 'package:bite_food_delivery/Widgets/bite_edit_profile_modal.dart';
 import 'package:bite_food_delivery/Widgets/bite_menu_item.dart';
 import 'package:flutter/material.dart';
 
@@ -54,13 +55,7 @@ List<BiteMenuItemModel> pSupportList(BuildContext context) => [
     leadingIcon: Icons.support_outlined,
     leadingIconColor: Colors.red,
     title: 'FAQs',
-    onTap: () {},
-  ),
-  BiteMenuItemModel(
-    leadingIcon: Icons.reviews,
-    leadingIconColor: Colors.cyan,
-    title: 'Reviews',
-    onTap: () {},
+    onTap: () => Navigator.pushNamed(context, '/faq_screen'),
   ),
   BiteMenuItemModel(
     leadingIcon: Icons.settings_outlined,
@@ -76,20 +71,38 @@ List<BiteMenuItemModel> personalInfoList(BuildContext context) => [
     leadingIconColor: Colors.deepOrange,
     title: 'Full Name',
     subtitle: 'Waleed Ejaz',
-    onTap: () {},
+    onTap: () {
+      showDialog(
+        context: context,
+        builder: (context) =>
+            Dialog(child: BiteEditProfileModal(title: 'Full Name')),
+      );
+    },
   ),
   BiteMenuItemModel(
     leadingIcon: Icons.email_outlined,
     leadingIconColor: Colors.blue,
     title: 'Email',
     subtitle: 'm.waleedejaz2003@gmail.com',
-    onTap: () {},
+    onTap: () {
+      showDialog(
+        context: context,
+        builder: (context) =>
+            Dialog(child: BiteEditProfileModal(title: 'Email')),
+      );
+    },
   ),
   BiteMenuItemModel(
     leadingIcon: Icons.phone_outlined,
     leadingIconColor: Colors.green,
     title: 'Phone',
     subtitle: '+92 3009633165',
-    onTap: () {},
+    onTap: () {
+      showDialog(
+        context: context,
+        builder: (context) =>
+            Dialog(child: BiteEditProfileModal(title: 'Phone Number')),
+      );
+    },
   ),
 ];

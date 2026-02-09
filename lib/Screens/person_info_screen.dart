@@ -23,22 +23,7 @@ class PersonInfoScreen extends StatelessWidget {
             color: Theme.of(context).primaryColor,
           ),
         ),
-        actions: [
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              'EDIT',
-              style: GoogleFonts.sen(
-                fontSize: 20.sp,
-                color: Theme.of(context).primaryColor,
-                decoration: TextDecoration.underline,
-                decorationColor: Theme.of(context).primaryColor,
-                decorationThickness: 2,
-              ),
-            ),
-          ),
-          15.horizontalSpace,
-        ],
+        actions: [],
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
