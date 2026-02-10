@@ -10,6 +10,7 @@ import 'package:bite_food_delivery/Screens/notification_screen.dart';
 import 'package:bite_food_delivery/Screens/order_history_screen.dart';
 import 'package:bite_food_delivery/Screens/payment_screen.dart';
 import 'package:bite_food_delivery/Screens/person_info_screen.dart';
+import 'package:bite_food_delivery/Screens/restaurant_screen.dart';
 import 'package:bite_food_delivery/Screens/setting_screen.dart';
 import 'package:bite_food_delivery/Screens/add_card_screen.dart';
 import 'package:flutter/material.dart';
@@ -29,4 +30,5 @@ final Map<String, Widget Function(BuildContext)> routes = {
   '/add_address_screen': (context) => AddAddressScreen(),
   '/payment_screen': (context) => PaymentScreen(),
   '/add_card_screen': (context) => AddCardScreen(),
+  '/restaurant_screen': (context) => RestaurantScreen(),
 };

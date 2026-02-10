@@ -24,7 +24,9 @@ class BiteAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white.withAlpha(0),
-      surfaceTintColor: Colors.white.withAlpha(0),
+      shadowColor: Colors.white.withAlpha(0),
+      scrolledUnderElevation: 0,
+      elevation: 0,
       toolbarHeight: 100.h,
       leadingWidth: isLogoVisible ? 100.w : 75.w,
       leading: isLogoVisible
