@@ -70,38 +70,78 @@ class _MenuSection extends StatelessWidget {
 }
 
 class _UserInfoSection extends StatelessWidget {
-  const _UserInfoSection();
+  final bool isLoggedIn;
+  const _UserInfoSection({this.isLoggedIn = false});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        CircleAvatar(radius: 60.r, backgroundColor: Colors.grey),
-        20.horizontalSpace,
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Waleed Ejaz',
-              style: GoogleFonts.sen(
-                fontSize: 25.sp,
-                fontWeight: FontWeight.bold,
+    return isLoggedIn
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircleAvatar(radius: 60.r, backgroundColor: Colors.grey),
+              20.horizontalSpace,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Waleed Ejaz',
+                    style: GoogleFonts.sen(
+                      fontSize: 25.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'I Love Fast Food',
+                    style: GoogleFonts.sen(
+                      fontSize: 15.sp,
+                      color: Colors.grey.shade500,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               ),
-            ),
-            Text(
-              'I Love Fast Food',
-              style: GoogleFonts.sen(
-                fontSize: 15.sp,
-                color: Colors.grey.shade500,
+              30.horizontalSpace,
+            ],
+          )
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 20.w,
+            children: [
+              ElevatedButton(
+                onPressed: () => Navigator.pushNamed(context, '/login_screen'),
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.all(10.r),
+                  backgroundColor: Theme.of(context).primaryColor,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
+                  textStyle: GoogleFonts.sen(
+                    fontSize: 25.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                child: Text('Login'),
               ),
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
-        ),
-        30.horizontalSpace,
-      ],
-    );
+              ElevatedButton(
+                onPressed: () {},
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.all(10.r),
+                  backgroundColor: Theme.of(context).primaryColor,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
+                  textStyle: GoogleFonts.sen(
+                    fontSize: 25.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                child: Text('SignUp'),
+              ),
+            ],
+          );
   }
 }
 
