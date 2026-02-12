@@ -2,7 +2,6 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_address_text_field.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
@@ -42,7 +41,8 @@ class ForgotPasswordScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () =>
+                                Navigator.pushNamed(context, '/otp_screen'),
                             style: TextButton.styleFrom(
                               padding: EdgeInsets.symmetric(
                                 horizontal: 20.w,
@@ -59,64 +59,6 @@ class ForgotPasswordScreen extends StatelessWidget {
                               ),
                             ),
                             child: Text('Send Code'),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Don\'t have an account? ',
-                          style: GoogleFonts.sen(fontSize: 15.sp),
-                        ),
-                        TextButton(
-                          onPressed: () =>
-                              Navigator.pushNamed(context, '/signup_screen'),
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.all(10.r),
-                            foregroundColor: Colors.deepOrange,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            textStyle: GoogleFonts.sen(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          child: Text('Sign Up'),
-                        ),
-                      ],
-                    ),
-                    5.verticalSpace,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Or', style: GoogleFonts.sen(fontSize: 20.sp)),
-                      ],
-                    ),
-                    10.verticalSpace,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      spacing: 10.w,
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.grey.shade200,
-                          radius: 40.r,
-                          child: SvgPicture.asset(
-                            'assets/svgs/google.svg',
-                            height: 30.h,
-                            width: 30.w,
-                          ),
-                        ),
-                        CircleAvatar(
-                          backgroundColor: Colors.grey.shade200,
-                          radius: 40.r,
-                          child: SvgPicture.asset(
-                            'assets/svgs/facebook.svg',
-                            height: 40.h,
-                            width: 40.w,
                           ),
                         ),
                       ],
@@ -156,8 +98,9 @@ class _HeadTitleSection extends StatelessWidget {
         ),
 
         Text(
-          'Please sign in to your existing account',
-          style: GoogleFonts.sen(fontSize: 20.sp, color: Colors.white),
+          'Please enter your email address to receive a verification code.',
+          style: GoogleFonts.sen(fontSize: 15.sp, color: Colors.white),
+          textAlign: TextAlign.center,
         ),
       ],
     );
