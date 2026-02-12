@@ -1,6 +1,7 @@
 import 'package:bite_food_delivery/Cubits/BottomNavigationSelection/bottom_navigation_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
+import 'package:bite_food_delivery/Screens/SplashPage/Pages/splash_screen.dart';
 import 'package:bite_food_delivery/Themes/light_themes.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_bottom_navigation_bar.dart';
 import 'package:bite_food_delivery/configs/page_routes.dart';
@@ -34,25 +35,34 @@ class MyApp extends StatelessWidget {
             routes: routes,
             debugShowCheckedModeBanner: false,
             theme: lightorangeTheme,
-            home: Scaffold(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              body:
-                  BlocBuilder<
-                    BottomNavigationSelectorCubit,
-                    BottomNavigationSelectorState
-                  >(
-                    builder: (context, state) {
-                      return screenList[state is BottomNavigationSelectorChanged
-                              ? state.selectedIndex
-                              : 0]
-                          .page!;
-                    },
-                  ),
-              bottomNavigationBar: BiteBottomNavigationBar(),
-            ),
+            home: SplashScreen(),
           );
         },
       ),
+    );
+  }
+}
+
+class MainPage extends StatelessWidget {
+  const MainPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body:
+          BlocBuilder<
+            BottomNavigationSelectorCubit,
+            BottomNavigationSelectorState
+          >(
+            builder: (context, state) {
+              return screenList[state is BottomNavigationSelectorChanged
+                      ? state.selectedIndex
+                      : 0]
+                  .page!;
+            },
+          ),
+      bottomNavigationBar: BiteBottomNavigationBar(),
     );
   }
 }
