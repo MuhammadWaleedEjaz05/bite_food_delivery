@@ -1,20 +1,21 @@
-import 'package:bite_food_delivery/Screens/add_address_screen.dart';
-import 'package:bite_food_delivery/Screens/address_screen.dart';
-import 'package:bite_food_delivery/Screens/all_category_screen.dart';
-import 'package:bite_food_delivery/Screens/all_restaurant_screen.dart';
-import 'package:bite_food_delivery/Screens/cart_screen.dart';
-import 'package:bite_food_delivery/Screens/category_screen.dart';
-import 'package:bite_food_delivery/Screens/faq_screen.dart';
-import 'package:bite_food_delivery/Screens/favourite_screen.dart';
-import 'package:bite_food_delivery/Screens/food_item_screen.dart';
-import 'package:bite_food_delivery/Screens/login_screen.dart';
-import 'package:bite_food_delivery/Screens/notification_screen.dart';
-import 'package:bite_food_delivery/Screens/order_history_screen.dart';
-import 'package:bite_food_delivery/Screens/payment_screen.dart';
-import 'package:bite_food_delivery/Screens/person_info_screen.dart';
-import 'package:bite_food_delivery/Screens/restaurant_screen.dart';
-import 'package:bite_food_delivery/Screens/setting_screen.dart';
-import 'package:bite_food_delivery/Screens/add_card_screen.dart';
+import 'package:bite_food_delivery/Screens/AddressPage/Page/add_address_screen.dart';
+import 'package:bite_food_delivery/Screens/AddressPage/Page/address_screen.dart';
+import 'package:bite_food_delivery/Screens/AllCategoryPage/Page/all_category_screen.dart';
+import 'package:bite_food_delivery/Screens/AllRestaurantPage/Page/all_restaurant_screen.dart';
+import 'package:bite_food_delivery/Screens/CartPage/Page/cart_screen.dart';
+import 'package:bite_food_delivery/Screens/CategoryPage/Page/category_screen.dart';
+import 'package:bite_food_delivery/Screens/FAQPage/Page/faq_screen.dart';
+import 'package:bite_food_delivery/Screens/FavouritePage/Page/favourite_screen.dart';
+import 'package:bite_food_delivery/Screens/FoodItemPage/Page/food_item_screen.dart';
+import 'package:bite_food_delivery/Screens/LoginPage/Page/login_screen.dart';
+import 'package:bite_food_delivery/Screens/NotificationPage/Page/notification_screen.dart';
+import 'package:bite_food_delivery/Screens/OrderHistoryPage/Page/order_history_screen.dart';
+import 'package:bite_food_delivery/Screens/PaymentPage/Page/payment_screen.dart';
+import 'package:bite_food_delivery/Screens/PersonInfoPage/Page/person_info_screen.dart';
+import 'package:bite_food_delivery/Screens/RestaurantPage/Page/restaurant_screen.dart';
+import 'package:bite_food_delivery/Screens/SettingPage/Page/setting_screen.dart';
+import 'package:bite_food_delivery/Screens/PaymentPage/Page/add_card_screen.dart';
+import 'package:bite_food_delivery/Screens/SignupPage/Page/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 final Map<String, Widget Function(BuildContext)> routes = {
@@ -35,4 +36,5 @@ final Map<String, Widget Function(BuildContext)> routes = {
   '/restaurant_screen': (context) => RestaurantScreen(),
   '/food_item_screen': (context) => FoodItemScreen(),
   '/login_screen': (context) => LoginScreen(),
+  '/signup_screen': (context) => SignupScreen(),
 };

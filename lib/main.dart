@@ -2,7 +2,7 @@ import 'package:bite_food_delivery/Cubits/BottomNavigationSelection/bottom_navig
 import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/Themes/light_themes.dart';
-import 'package:bite_food_delivery/Widgets/bite_bottom_navigation_bar.dart';
+import 'package:bite_food_delivery/GlobalWidgets/bite_bottom_navigation_bar.dart';
 import 'package:bite_food_delivery/configs/page_routes.dart';
 import 'package:bite_food_delivery/configs/screen_list.dart';
 import 'package:firebase_core/firebase_core.dart';

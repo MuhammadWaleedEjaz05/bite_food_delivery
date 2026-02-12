@@ -1,7 +1,7 @@
-import 'package:bite_food_delivery/Screens/home_screen.dart';
-import 'package:bite_food_delivery/Screens/profile_screen.dart';
-import 'package:bite_food_delivery/Screens/search_screen.dart';
-import 'package:bite_food_delivery/Widgets/bite_bottom_navigation_bar.dart';
+import 'package:bite_food_delivery/Screens/HomePage/Page/home_screen.dart';
+import 'package:bite_food_delivery/Screens/ProfilePage/Page/profile_screen.dart';
+import 'package:bite_food_delivery/Screens/SearchPage/Page/search_screen.dart';
+import 'package:bite_food_delivery/GlobalWidgets/bite_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 List<BiteBottomItemModel> screenList = [

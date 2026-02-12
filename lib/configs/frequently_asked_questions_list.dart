@@ -1,4 +1,4 @@
-import 'package:bite_food_delivery/Widgets/bite_menu_item.dart';
+import 'package:bite_food_delivery/GlobalWidgets/bite_menu_item.dart';
 import 'package:flutter/material.dart';
 
 List<BiteMenuItemModel> orderFAQs(BuildContext context) => [
