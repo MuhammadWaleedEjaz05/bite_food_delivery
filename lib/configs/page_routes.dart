@@ -1,7 +1,7 @@
 import 'package:bite_food_delivery/Screens/AddressPage/Page/add_address_screen.dart';
 import 'package:bite_food_delivery/Screens/AddressPage/Page/address_screen.dart';
-import 'package:bite_food_delivery/Screens/AllCategoryPage/Page/all_category_screen.dart';
-import 'package:bite_food_delivery/Screens/AllRestaurantPage/Page/all_restaurant_screen.dart';
+import 'package:bite_food_delivery/Screens/CategoryPage/Page/all_category_screen.dart';
+import 'package:bite_food_delivery/Screens/RestaurantPage/Page/all_restaurant_screen.dart';
 import 'package:bite_food_delivery/Screens/CartPage/Page/cart_screen.dart';
 import 'package:bite_food_delivery/Screens/CategoryPage/Page/category_screen.dart';
 import 'package:bite_food_delivery/Screens/FAQPage/Page/faq_screen.dart';
