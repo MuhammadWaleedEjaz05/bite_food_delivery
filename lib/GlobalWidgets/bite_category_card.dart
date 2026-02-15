@@ -1,6 +1,8 @@
+import 'package:bite_food_delivery/Cubits/CategorySelectionCubit/category_selection_cubit.dart';
 import 'package:bite_food_delivery/Models/category_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,11 +15,16 @@ class BiteCategoryCard extends StatelessWidget {
     return Column(
       children: [
         GestureDetector(
-          onTap: () => Navigator.pushNamed(
-            context,
-            '/category_screen',
-            arguments: category.categoryName,
-          ),
+          onTap: () {
+            BlocProvider.of<CategorySelectionCubit>(
+              context,
+            ).selectCategory(category.categoryName);
+            Navigator.pushNamed(
+              context,
+              '/category_screen',
+              arguments: category.categoryName,
+            );
+          },
           child: Card(
             elevation: 4,
             margin: EdgeInsets.symmetric(vertical: 15.h, horizontal: 5.w),
