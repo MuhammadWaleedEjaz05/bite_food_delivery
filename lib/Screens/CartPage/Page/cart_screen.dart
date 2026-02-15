@@ -1,6 +1,8 @@
+import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Screens/CartPage/Widgets/bite_cart_item_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -100,7 +102,11 @@ class _CheckOutSection extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10.r),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          BlocProvider.of<RestaurantsCubit>(
+                            context,
+                          ).uploadRestaurants();
+                        },
                         child: Text(
                           'CHECKOUT',
                           style: GoogleFonts.sen(

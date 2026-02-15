@@ -1,5 +1,8 @@
+import 'package:bite_food_delivery/Cubits/RecentSearchesCubit/recent_searches_cubit.dart';
+import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_restaurant_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -63,33 +66,99 @@ class OpenSearchScreen extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.symmetric(horizontal: 15.w),
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.h),
-          child: BiteRestaurantCard(),
-        );
+    return BlocBuilder<RestaurantsCubit, RestaurantsState>(
+      builder: (context, state) {
+        if (state is RestaurantsLoading) {
+          return Center(child: CircularProgressIndicator());
+        } else if (state is RestaurantsError) {
+          return Center(child: Text('Error: ${state.message}'));
+        } else if (state is RestaurantsLoaded) {
+          final filteredRestaurants = state.restaurants
+              .where(
+                (restaurant) =>
+                    restaurant.name.toLowerCase().contains(query.toLowerCase()),
+              )
+              .toList();
+
+          if (filteredRestaurants.isEmpty) {
+            return Center(
+              child: Text(
+                'No restaurants found',
+                style: GoogleFonts.sen(fontSize: 18.sp),
+              ),
+            );
+          }
+
+          return ListView.builder(
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.h),
+                child: BiteRestaurantCard(
+                  restaurant: filteredRestaurants[index],
+                ),
+              );
+            },
+            itemCount: filteredRestaurants.length,
+          );
+        } else {
+          return Text('Unknown state: ${state.runtimeType}');
+        }
       },
-      itemCount: 2,
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
     );
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.symmetric(horizontal: 15.w),
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.h),
-          child: BiteRestaurantCard(),
-        );
+    return BlocBuilder<RestaurantsCubit, RestaurantsState>(
+      builder: (context, state) {
+        if (state is RestaurantsLoading) {
+          return Center(child: CircularProgressIndicator());
+        } else if (state is RestaurantsError) {
+          return Center(child: Text('Error: ${state.message}'));
+        } else if (state is RestaurantsLoaded) {
+          final filteredRestaurants = query.isEmpty
+              ? state.restaurants
+              : state.restaurants
+                    .where(
+                      (restaurant) => restaurant.name.toLowerCase().contains(
+                        query.toLowerCase(),
+                      ),
+                    )
+                    .toList();
+
+          if (filteredRestaurants.isEmpty) {
+            return Center(
+              child: Text(
+                'No restaurants found',
+                style: GoogleFonts.sen(fontSize: 18.sp),
+              ),
+            );
+          }
+
+          return ListView.builder(
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.h),
+                child: BiteRestaurantCard(
+                  restaurant: filteredRestaurants[index],
+                ),
+              );
+            },
+            itemCount: filteredRestaurants.length,
+          );
+        } else {
+          return Text('Unknown state: ${state.runtimeType}');
+        }
       },
-      itemCount: 1,
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
     );
+  }
+
+  @override
+  void showResults(BuildContext context) {
+    super.showResults(context);
+    FocusScope.of(context).unfocus();
+    BlocProvider.of<RecentSearchesCubit>(context).addSearch(query);
   }
 }

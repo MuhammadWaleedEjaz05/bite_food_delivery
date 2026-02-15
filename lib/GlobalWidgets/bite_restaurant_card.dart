@@ -1,9 +1,12 @@
+import 'package:bite_food_delivery/Models/restaurants_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BiteRestaurantCard extends StatelessWidget {
-  const BiteRestaurantCard({super.key});
+  final RestaurantModel restaurant;
+  const BiteRestaurantCard({super.key, required this.restaurant});
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +20,16 @@ class BiteRestaurantCard extends StatelessWidget {
           Container(
             height: 120.h,
             decoration: BoxDecoration(
-              color: Colors.blueGrey,
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(restaurant.logoUrl),
+                fit: BoxFit.cover,
+              ),
               borderRadius: BorderRadius.circular(20.r),
             ),
           ),
-          Text('Restaurant Name', style: GoogleFonts.sen(fontSize: 25.sp)),
+          Text(restaurant.name, style: GoogleFonts.sen(fontSize: 25.sp)),
           Text(
-            'Restaurant Category',
+            restaurant.category,
             style: GoogleFonts.sen(
               fontSize: 18.sp,
               color: Colors.grey.shade600,
@@ -39,7 +45,7 @@ class BiteRestaurantCard extends StatelessWidget {
               ),
               4.horizontalSpace,
               Text(
-                '4.5',
+                restaurant.rating.toString(),
                 style: GoogleFonts.sen(
                   fontSize: 16.sp,
                   color: Colors.black,
@@ -54,7 +60,7 @@ class BiteRestaurantCard extends StatelessWidget {
               ),
               4.horizontalSpace,
               Text(
-                '30-40 min',
+                '35 min',
                 style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.black),
               ),
               10.horizontalSpace,
@@ -65,7 +71,7 @@ class BiteRestaurantCard extends StatelessWidget {
               ),
               4.horizontalSpace,
               Text(
-                '\$2.99',
+                '\$${restaurant.deliveryFee}',
                 style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.black),
               ),
             ],

@@ -1,9 +1,12 @@
+import 'package:bite_food_delivery/Cubits/RecentSearchesCubit/recent_searches_cubit.dart';
+import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_heading.dart';
 import 'package:bite_food_delivery/Screens/SearchPage/Widgets/bite_recent_search_button.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_restaurant_card.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,14 +42,37 @@ class _PopularRestaurantSection extends StatelessWidget {
       children: [
         BiteHeading(title: 'Popular Restaurants', isSeeAll: false),
         10.verticalSpace,
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: 5,
-          physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) => Padding(
-            padding: EdgeInsets.symmetric(vertical: 10.h),
-            child: BiteRestaurantCard(),
-          ),
+        BlocBuilder<RestaurantsCubit, RestaurantsState>(
+          builder: (context, state) {
+            if (state is RestaurantsLoading) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is RestaurantsError) {
+              return Center(child: Text('Error: ${state.message}'));
+            } else if (state is RestaurantsLoaded) {
+              final popular = state.restaurants
+                  .where((restaurant) => restaurant.rating >= 4.5)
+                  .toList();
+              if (popular.isEmpty) {
+                return Center(
+                  child: Text(
+                    'No popular restaurants found',
+                    style: GoogleFonts.sen(fontSize: 18.sp),
+                  ),
+                );
+              }
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: popular.length,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) => Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                  child: BiteRestaurantCard(restaurant: popular[index]),
+                ),
+              );
+            } else {
+              return SizedBox();
+            }
+          },
         ),
       ],
     );
@@ -64,12 +90,48 @@ class _RecentSearchSection extends StatelessWidget {
         10.verticalSpace,
         SizedBox(
           height: 40.h,
-          child: ListView.separated(
-            itemCount: 5,
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) => BiteRecentSearchButton(),
-            separatorBuilder: (context, index) => 5.horizontalSpace,
+          child: BlocConsumer<RecentSearchesCubit, RecentSearchesState>(
+            listener: (context, state) {
+              if (state is RecentSearchedAdded) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Added "${state.search}" to recent searches'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              } else if (state is RecentSearchedRemoved) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content:
+                        Text('Removed "${state.search}" from recent searches'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              }
+            },
+            builder: (context, state) {
+              if (state is RecentSearchesLoaded) {
+                if (state.recentSearches.isEmpty) {
+                  return Center(
+                    child: Text(
+                      'No recent searches',
+                      style: GoogleFonts.sen(fontSize: 18.sp),
+                    ),
+                  );
+                }
+                return ListView.separated(
+                  itemCount: state.recentSearches.length,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => BiteRecentSearchButton(
+                    search: state.recentSearches[index],
+                  ),
+                  separatorBuilder: (context, index) => 5.horizontalSpace,
+                );
+              } else {
+                return SizedBox.shrink();
+              }
+            },
           ),
         ),
       ],

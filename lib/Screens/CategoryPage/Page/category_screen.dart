@@ -1,3 +1,4 @@
+import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Screens/CategoryPage/Widgets/bite_drop_down_menu.dart';
 import 'package:bite_food_delivery/Screens/CategoryPage/Widgets/bite_filter_modal.dart';
@@ -5,6 +6,7 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_heading.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_restaurant_card.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -12,19 +14,45 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String categoryImage =
+        ModalRoute.of(context)?.settings.arguments as String? ?? "";
     return Scaffold(
-      appBar: _AppBarSection(),
+      appBar: _AppBarSection(categoryImage),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         children: [
           const BiteHeading(title: 'Open Restaurants', isSeeAll: false),
           20.verticalSpace,
-          ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) => const BiteRestaurantCard(),
-            separatorBuilder: (context, index) => 10.verticalSpace,
-            itemCount: 5,
+          BlocBuilder<RestaurantsCubit, RestaurantsState>(
+            builder: (context, state) {
+              if (state is RestaurantsLoading) {
+                return Center(child: CircularProgressIndicator());
+              } else if (state is RestaurantsError) {
+                return Center(child: Text('Error: ${state.message}'));
+              } else if (state is RestaurantsLoaded) {
+                final filteredRestaurants = state.restaurants
+                    .where(
+                      (restaurant) =>
+                          restaurant.category.toLowerCase() ==
+                          categoryImage.toLowerCase(),
+                    )
+                    .toList();
+                return ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    final restaurant = filteredRestaurants[index];
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      child: BiteRestaurantCard(restaurant: restaurant),
+                    );
+                  },
+                  itemCount: filteredRestaurants.length,
+                );
+              } else {
+                return SizedBox();
+              }
+            },
           ),
         ],
       ),
@@ -33,7 +61,8 @@ class CategoryScreen extends StatelessWidget {
 }
 
 class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
-  const _AppBarSection();
+  final String title;
+  const _AppBarSection(this.title);
   @override
   Size get preferredSize => Size.fromHeight(100.h);
 
@@ -41,7 +70,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return BiteAppBar(
       backButton: true,
-      title: BiteDropDownMenu(),
+      title: BiteDropDownMenu(title: title),
       actions: [
         IconButton(
           onPressed: () =>

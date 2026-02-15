@@ -1,9 +1,12 @@
+import 'package:bite_food_delivery/Cubits/CategoriesCubit/categories_cubit.dart';
+import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_category_card.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_heading.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_restaurant_card.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -43,16 +46,29 @@ class _CategorySection extends StatelessWidget {
               Navigator.pushNamed(context, '/all_categories_screen'),
         ),
         20.verticalSpace,
-        SizedBox(
-          height: 180.h,
-          child: ListView.builder(
-            itemBuilder: (context, index) {
-              return BiteCategoryCard();
-            },
-            itemCount: 3,
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-          ),
+        BlocBuilder<CategoriesCubit, CategoriesState>(
+          builder: (context, state) {
+            if (state is CategoriesLoading) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is CategoriesError) {
+              return Center(child: Text('Error: ${state.error}'));
+            } else if (state is CategoriesLoaded) {
+              return SizedBox(
+                height: 179.h,
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    final category = state.categories[index];
+                    return BiteCategoryCard(category: category);
+                  },
+                  itemCount: 3,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                ),
+              );
+            } else {
+              return Text('Unknown state: ${state.runtimeType}');
+            }
+          },
         ),
       ],
     );
@@ -73,16 +89,29 @@ class _OpenRestaurantsSection extends StatelessWidget {
               Navigator.pushNamed(context, '/all_restaurants_screen'),
         ),
         20.verticalSpace,
-        ListView.builder(
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.h),
-              child: BiteRestaurantCard(),
-            );
+        BlocBuilder<RestaurantsCubit, RestaurantsState>(
+          builder: (context, state) {
+            if (state is RestaurantsLoading) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is RestaurantsError) {
+              return Center(child: Text('Error: ${state.message}'));
+            } else if (state is RestaurantsLoaded) {
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  final restaurant = state.restaurants[index];
+                  return Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.h),
+                    child: BiteRestaurantCard(restaurant: restaurant),
+                  );
+                },
+                itemCount: state.restaurants.length,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+              );
+            } else {
+              return Text('Unknown state: ${state.runtimeType}');
+            }
           },
-          itemCount: 5,
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
         ),
       ],
     );

@@ -1,5 +1,7 @@
 import 'package:bite_food_delivery/Cubits/BottomNavigationSelection/bottom_navigation_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
+import 'package:bite_food_delivery/Cubits/CategoriesCubit/categories_cubit.dart';
+import 'package:bite_food_delivery/Cubits/RecentSearchesCubit/recent_searches_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/Screens/SplashPage/Pages/splash_screen.dart';
 import 'package:bite_food_delivery/Themes/light_themes.dart';
@@ -24,7 +26,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => CategoriesCubit()),
         BlocProvider(create: (context) => RestaurantsCubit()),
+        BlocProvider(create: (context) => RecentSearchesCubit()),
         BlocProvider(create: (context) => CartCubit()),
         BlocProvider(create: (context) => BottomNavigationSelectorCubit()),
       ],
