@@ -1,5 +1,7 @@
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
+import 'package:bite_food_delivery/Models/restaurants_model.dart';
 import 'package:bite_food_delivery/Screens/RestaurantPage/Widgets/bite_food_card.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +11,8 @@ class RestaurantScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final restaurant =
+        ModalRoute.of(context)!.settings.arguments as RestaurantModel;
     return Scaffold(
       body: Column(
         children: [
@@ -19,8 +23,15 @@ class RestaurantScreen extends StatelessWidget {
                 bottomRight: Radius.circular(32.r),
               ),
               child: Container(
-                decoration: BoxDecoration(color: Colors.blueGrey),
-                child: Column(children: [_AppBarSection()]),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: CachedNetworkImageProvider(restaurant.logoUrl),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Column(
+                  children: [_AppBarSection(restaurant.isFavorite)],
+                ),
               ),
             ),
           ),
@@ -33,9 +44,9 @@ class RestaurantScreen extends StatelessWidget {
                 shrinkWrap: true,
                 children: [
                   20.verticalSpace,
-                  _RatingAndTimeSection(),
+                  _RatingAndTimeSection(restaurant),
                   10.verticalSpace,
-                  _FoodNameAndDescSection(),
+                  _FoodNameAndDescSection(restaurant),
                   20.verticalSpace,
                   _CategorySelectionSection(),
                   20.verticalSpace,
@@ -117,7 +128,9 @@ class _CategorySelectionSection extends StatelessWidget {
 }
 
 class _FoodNameAndDescSection extends StatelessWidget {
-  const _FoodNameAndDescSection();
+  const _FoodNameAndDescSection(this.restaurant);
+
+  final RestaurantModel restaurant;
 
   @override
   Widget build(BuildContext context) {
@@ -125,11 +138,11 @@ class _FoodNameAndDescSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Spicy Restaurant',
+          restaurant.name,
           style: GoogleFonts.sen(fontSize: 30.sp, fontWeight: FontWeight.bold),
         ),
         Text(
-          'Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.',
+          restaurant.description,
           style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.grey),
         ),
       ],
@@ -138,7 +151,8 @@ class _FoodNameAndDescSection extends StatelessWidget {
 }
 
 class _RatingAndTimeSection extends StatelessWidget {
-  const _RatingAndTimeSection();
+  final RestaurantModel restaurant;
+  const _RatingAndTimeSection(this.restaurant);
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +164,7 @@ class _RatingAndTimeSection extends StatelessWidget {
           children: [
             Icon(Icons.star_outlined, color: Colors.deepOrange, size: 20.r),
             Text(
-              '4.5',
+              restaurant.rating.toString(),
               style: GoogleFonts.sen(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.bold,
@@ -167,7 +181,9 @@ class _RatingAndTimeSection extends StatelessWidget {
               size: 20.r,
             ),
             Text(
-              'Free',
+              restaurant.deliveryFee == 0
+                  ? 'Free'
+                  : '\$${restaurant.deliveryFee}',
               style: GoogleFonts.sen(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.bold,
@@ -180,7 +196,7 @@ class _RatingAndTimeSection extends StatelessWidget {
           children: [
             Icon(Icons.timer_outlined, color: Colors.deepOrange, size: 20.r),
             Text(
-              '30-40 min',
+              '${restaurant.deliveryTime} min',
               style: GoogleFonts.sen(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.bold,
@@ -194,7 +210,8 @@ class _RatingAndTimeSection extends StatelessWidget {
 }
 
 class _AppBarSection extends StatelessWidget {
-  const _AppBarSection();
+  final bool isFavorite;
+  const _AppBarSection(this.isFavorite);
 
   @override
   Widget build(BuildContext context) {
@@ -206,10 +223,13 @@ class _AppBarSection extends StatelessWidget {
         IconButton(
           onPressed: () {},
           style: IconButton.styleFrom(
-            foregroundColor: Colors.black,
+            foregroundColor: Colors.red,
             backgroundColor: Colors.grey.shade200,
           ),
-          icon: Icon(Icons.more_horiz, size: 30.r),
+          icon: Icon(
+            isFavorite ? Icons.favorite : Icons.favorite_outline,
+            size: 30.r,
+          ),
         ),
         15.horizontalSpace,
       ],

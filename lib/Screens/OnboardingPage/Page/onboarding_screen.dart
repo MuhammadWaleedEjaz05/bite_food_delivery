@@ -1,7 +1,9 @@
+import 'package:bite_food_delivery/Cubits/FirstTimeLaunchCubit/first_time_launch_cubit.dart';
 import 'package:bite_food_delivery/Screens/OnboardingPage/Widgets/bite_carousel_slider_page.dart';
 import 'package:bite_food_delivery/main.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -68,6 +70,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: ElevatedButton(
               onPressed: () {
                 if (_isLastPage) {
+                  BlocProvider.of<FirstTimeLaunchCubit>(
+                    context,
+                  ).setFirstTimeLaunched();
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => MainPage()),

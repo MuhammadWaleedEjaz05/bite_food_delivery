@@ -17,3 +17,11 @@ final class RestaurantsError extends RestaurantsState {
 
   RestaurantsError({required this.message});
 }
+
+final class RestaurantsUploading extends RestaurantsState {}
+
+final class RestaurantsUploaded extends RestaurantsState {
+  final RestaurantModel restaurant;
+
+  RestaurantsUploaded({required this.restaurant});
+}

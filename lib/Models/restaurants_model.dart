@@ -9,9 +9,10 @@ class RestaurantModel extends Equatable {
   final double rating;
   final int reviewsCount;
   final double deliveryFee;
-  final double distance;
+  final double deliveryTime;
   final bool isOpen;
   final String category;
+  final bool isFavorite;
 
   const RestaurantModel({
     required this.id,
@@ -22,9 +23,10 @@ class RestaurantModel extends Equatable {
     required this.rating,
     required this.reviewsCount,
     required this.deliveryFee,
-    required this.distance,
+    required this.deliveryTime,
     required this.isOpen,
     required this.category,
+    required this.isFavorite,
   });
 
   factory RestaurantModel.fromJson(Map<String, dynamic> json) {
@@ -37,9 +39,10 @@ class RestaurantModel extends Equatable {
       rating: (json['rating'] as num).toDouble(),
       reviewsCount: json['reviewsCount'],
       deliveryFee: (json['deliveryFee'] as num).toDouble(),
-      distance: (json['distance'] as num).toDouble(),
+      deliveryTime: (json['deliveryTime'] as num).toDouble(),
       isOpen: json['isOpen'],
       category: json['category'],
+      isFavorite: json['isFavorite'],
     );
   }
 
@@ -53,9 +56,10 @@ class RestaurantModel extends Equatable {
       'rating': rating,
       'reviewsCount': reviewsCount,
       'deliveryFee': deliveryFee,
-      'distance': distance,
+      'deliveryTime': deliveryTime,
       'isOpen': isOpen,
       'category': category,
+      'isFavorite': isFavorite,
     };
   }
 
@@ -68,7 +72,8 @@ class RestaurantModel extends Equatable {
     double? rating,
     int? reviewsCount,
     double? deliveryFee,
-    double? distance,
+    double? deliveryTime,
+    bool? isFavorite,
     bool? isOpen,
     String? category,
   }) {
@@ -81,7 +86,8 @@ class RestaurantModel extends Equatable {
       rating: rating ?? this.rating,
       reviewsCount: reviewsCount ?? this.reviewsCount,
       deliveryFee: deliveryFee ?? this.deliveryFee,
-      distance: distance ?? this.distance,
+      deliveryTime: deliveryTime ?? this.deliveryTime,
+      isFavorite: isFavorite ?? this.isFavorite,
       isOpen: isOpen ?? this.isOpen,
       category: category ?? this.category,
     );
@@ -97,7 +103,8 @@ class RestaurantModel extends Equatable {
     rating,
     reviewsCount,
     deliveryFee,
-    distance,
+    deliveryTime,
+    isFavorite,
     isOpen,
     category,
   ];

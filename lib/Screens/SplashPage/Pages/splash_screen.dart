@@ -1,5 +1,8 @@
+import 'package:bite_food_delivery/Cubits/FirstTimeLaunchCubit/first_time_launch_cubit.dart';
 import 'package:bite_food_delivery/Screens/OnboardingPage/Page/onboarding_screen.dart';
+import 'package:bite_food_delivery/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,6 +18,7 @@ class _SplashScreenState extends State<SplashScreen>
   late Animation<double> _scaleAnimation;
   late Animation<double> _circleFadeAnimation;
   late Animation<double> _logoFadeAnimation;
+  bool _didNavigate = false;
 
   @override
   void initState() {
@@ -35,31 +39,58 @@ class _SplashScreenState extends State<SplashScreen>
       parent: _controller,
       curve: const Interval(0.75, 0.92, curve: Curves.easeIn),
     );
+    _controller.addStatusListener(_handleAnimationStatus);
     _controller.forward();
-    _controller.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        Future.delayed(const Duration(milliseconds: 800), () {
-          if (mounted) {
-            Navigator.pushReplacement(
-              context,
-              PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) =>
-                    const OnboardingScreen(),
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                      return FadeTransition(opacity: animation, child: child);
-                    },
-                transitionDuration: const Duration(milliseconds: 600),
-              ),
-            );
-          }
-        });
-      }
-    });
+  }
+
+  Future<void> _handleAnimationStatus(AnimationStatus status) async {
+    if (status != AnimationStatus.completed || _didNavigate) {
+      return;
+    }
+    _didNavigate = true;
+    await Future.delayed(const Duration(milliseconds: 800));
+
+    final FirstTimeLaunchCubit cubit = context.read<FirstTimeLaunchCubit>();
+    FirstTimeLaunchState state = cubit.state;
+    if (state is FirstTimeLaunchInitial) {
+      state = await cubit.stream.firstWhere(
+        (state) => state is! FirstTimeLaunchInitial,
+      );
+    }
+    _navigateToOnState(state);
+  }
+
+  void _navigateToOnState(FirstTimeLaunchState state) {
+    if (state is FirstTimeLaunched) {
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const OnboardingScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+          transitionDuration: const Duration(milliseconds: 600),
+        ),
+      );
+    } else if (state is NotFirstTimeLaunched) {
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const MainPage(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+          transitionDuration: const Duration(milliseconds: 600),
+        ),
+      );
+    }
   }
 
   @override
   void dispose() {
+    _controller.removeStatusListener(_handleAnimationStatus);
     _controller.dispose();
     super.dispose();
   }

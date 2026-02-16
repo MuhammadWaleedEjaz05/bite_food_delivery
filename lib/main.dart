@@ -2,6 +2,7 @@ import 'package:bite_food_delivery/Cubits/BottomNavigationSelection/bottom_navig
 import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CategoriesCubit/categories_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CategorySelectionCubit/category_selection_cubit.dart';
+import 'package:bite_food_delivery/Cubits/FirstTimeLaunchCubit/first_time_launch_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RecentSearchesCubit/recent_searches_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/Screens/SplashPage/Pages/splash_screen.dart';
@@ -9,14 +10,18 @@ import 'package:bite_food_delivery/Themes/light_themes.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_bottom_navigation_bar.dart';
 import 'package:bite_food_delivery/configs/page_routes.dart';
 import 'package:bite_food_delivery/configs/screen_list.dart';
+import 'package:bite_food_delivery/configs/shared_preference_fucntions.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await sharedPreference;
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MyApp());
 }
 
@@ -33,6 +38,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => CartCubit()),
         BlocProvider(create: (context) => BottomNavigationSelectorCubit()),
         BlocProvider(create: (context) => CategorySelectionCubit()),
+        BlocProvider(
+          create: (context) => FirstTimeLaunchCubit()..checkFirstTimeLaunch(),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),

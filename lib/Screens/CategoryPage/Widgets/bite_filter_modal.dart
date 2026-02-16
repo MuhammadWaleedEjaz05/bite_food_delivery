@@ -18,8 +18,6 @@ class BiteFilterModal extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _OfferSection(),
-              15.verticalSpace,
               _DeliveryTimeSection(),
               15.verticalSpace,
               _PricingSection(),
@@ -84,19 +82,19 @@ class _RatingSection extends StatelessWidget {
             shrinkWrap: true,
             children: [
               _BiteFilterTextButton(
-                title: '1 star',
+                title: '< 3.5',
                 isSelected: false,
                 onTap: () {},
               ),
               10.horizontalSpace,
               _BiteFilterTextButton(
-                title: '2 star',
+                title: '3.5 - 4.0',
                 isSelected: false,
                 onTap: () {},
               ),
               10.horizontalSpace,
               _BiteFilterTextButton(
-                title: '3 star',
+                title: '> 4.0',
                 isSelected: false,
                 onTap: () {},
               ),
@@ -172,53 +170,6 @@ class _DeliveryTimeSection extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ],
-    );
-  }
-}
-
-class _OfferSection extends StatelessWidget {
-  const _OfferSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        BiteHeading(title: 'OFFERS', isSeeAll: false),
-        15.verticalSpace,
-        GridView(
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            mainAxisSpacing: 10.h,
-            crossAxisSpacing: 10.w,
-            mainAxisExtent: 40.h,
-          ),
-          children: [
-            _BiteFilterTextButton(
-              title: 'Delivery',
-              isSelected: false,
-              onTap: () {},
-            ),
-            _BiteFilterTextButton(
-              title: 'Pickup',
-              isSelected: false,
-              onTap: () {},
-            ),
-            _BiteFilterTextButton(
-              title: 'Offer',
-              isSelected: false,
-              onTap: () {},
-            ),
-            _BiteFilterTextButton(
-              title: 'Online Payment Available',
-              isSelected: false,
-              onTap: () {},
-            ),
-          ],
         ),
       ],
     );

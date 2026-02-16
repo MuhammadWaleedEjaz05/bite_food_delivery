@@ -12,7 +12,11 @@ class BiteRestaurantCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/restaurant_screen');
+        Navigator.pushNamed(
+          context,
+          '/restaurant_screen',
+          arguments: restaurant,
+        );
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
