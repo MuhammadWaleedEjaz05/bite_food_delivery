@@ -1,10 +1,11 @@
-import 'package:bite_food_delivery/GlobalWidgets/bite_address_text_field.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
-import 'package:bite_food_delivery/GlobalWidgets/bite_password_text_field.dart';
+import 'package:bite_food_delivery/GlobalWidgets/bite_user_auth_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+final _formKey = GlobalKey<FormState>();
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -140,7 +141,11 @@ class _LoginActionButton extends StatelessWidget {
       children: [
         Expanded(
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                // Perform login action
+              }
+            },
             style: TextButton.styleFrom(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
               backgroundColor: Colors.deepOrange,
@@ -202,12 +207,15 @@ class _LoginCredentialSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        BiteAddressTextField(title: 'Email'),
-        20.verticalSpace,
-        BitePasswordTextField(),
-      ],
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          BiteUserAuthTextField(title: 'Email', isEmail: true),
+          20.verticalSpace,
+          BiteUserAuthTextField(isPassword: true, title: 'Password'),
+        ],
+      ),
     );
   }
 }

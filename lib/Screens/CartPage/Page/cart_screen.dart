@@ -103,9 +103,9 @@ class _CheckOutSection extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          // BlocProvider.of<RestaurantsCubit>(
-                          //   context,
-                          // ).uploadRestaurants();
+                          BlocProvider.of<RestaurantsCubit>(
+                            context,
+                          ).uploadRestaurants();
                         },
                         child: Text(
                           'CHECKOUT',

@@ -64,7 +64,7 @@ class BiteRestaurantCard extends StatelessWidget {
               ),
               4.horizontalSpace,
               Text(
-                '35 min',
+                '${restaurant.deliveryTime.toInt()} min',
                 style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.black),
               ),
               10.horizontalSpace,

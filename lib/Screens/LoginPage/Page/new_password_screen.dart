@@ -1,5 +1,5 @@
-import 'package:bite_food_delivery/GlobalWidgets/bite_address_text_field.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
+import 'package:bite_food_delivery/GlobalWidgets/bite_user_auth_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,9 +35,9 @@ class NewPasswordScreen extends StatelessWidget {
                   ),
                   children: [
                     10.verticalSpace,
-                    BiteAddressTextField(title: 'New Password'),
+                    BiteUserAuthTextField(title: 'New Password'),
                     20.verticalSpace,
-                    BiteAddressTextField(title: 'Confirm Password'),
+                    BiteUserAuthTextField(title: 'Confirm Password'),
                     20.verticalSpace,
                     Row(
                       children: [

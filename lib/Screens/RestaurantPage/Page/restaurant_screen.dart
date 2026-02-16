@@ -1,8 +1,10 @@
+import 'package:bite_food_delivery/Cubits/FavouriteCubit/favourite_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Models/restaurants_model.dart';
 import 'package:bite_food_delivery/Screens/RestaurantPage/Widgets/bite_food_card.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,9 +31,7 @@ class RestaurantScreen extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                child: Column(
-                  children: [_AppBarSection(restaurant.isFavorite)],
-                ),
+                child: Column(children: [_AppBarSection(restaurant)]),
               ),
             ),
           ),
@@ -210,8 +210,8 @@ class _RatingAndTimeSection extends StatelessWidget {
 }
 
 class _AppBarSection extends StatelessWidget {
-  final bool isFavorite;
-  const _AppBarSection(this.isFavorite);
+  final RestaurantModel restaurant;
+  const _AppBarSection(this.restaurant);
 
   @override
   Widget build(BuildContext context) {
@@ -220,16 +220,30 @@ class _AppBarSection extends StatelessWidget {
       isDarkMode: true,
       title: SizedBox.shrink(),
       actions: [
-        IconButton(
-          onPressed: () {},
-          style: IconButton.styleFrom(
-            foregroundColor: Colors.red,
-            backgroundColor: Colors.grey.shade200,
-          ),
-          icon: Icon(
-            isFavorite ? Icons.favorite : Icons.favorite_outline,
-            size: 30.r,
-          ),
+        BlocBuilder<FavouriteCubit, FavouriteState>(
+          builder: (context, state) {
+            return IconButton(
+              onPressed: () {
+                if (state is FavouriteAdded) {
+                  context.read<FavouriteCubit>().removeFromFavourite(
+                    restaurant.id,
+                  );
+                } else {
+                  context.read<FavouriteCubit>().addToFavourite(restaurant.id);
+                }
+              },
+              style: IconButton.styleFrom(
+                foregroundColor: Colors.red,
+                backgroundColor: Colors.grey.shade200,
+              ),
+              icon: Icon(
+                state == FavouriteAdded()
+                    ? Icons.favorite
+                    : Icons.favorite_outline,
+                size: 30.r,
+              ),
+            );
+          },
         ),
         15.horizontalSpace,
       ],

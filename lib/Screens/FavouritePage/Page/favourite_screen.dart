@@ -1,7 +1,10 @@
+import 'package:bite_food_delivery/Cubits/FavouriteCubit/favourite_cubit.dart';
+import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Screens/FavouritePage/Widgets/bite_favourite_block.dart';
 import 'package:bite_food_delivery/Screens/FavouritePage/Widgets/bite_favourite_restaurant_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -47,10 +50,40 @@ class _ReataurantFavouriteSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemBuilder: (context, index) => BiteFavouriteRestaurantCard(),
-      separatorBuilder: (context, index) => 10.verticalSpace,
-      itemCount: 5,
+    return BlocBuilder<FavouriteCubit, FavouriteState>(
+      builder: (context, state) {
+        if (state is FavouriteInitial) {
+          return Center(child: Text('No favourite restaurants found.'));
+        }
+        if (state is FavouriteAdded || state is FavouriteRemoved) {
+          context.read<RestaurantsCubit>().loadRestaurants();
+        }
+        return BlocBuilder<RestaurantsCubit, RestaurantsState>(
+          builder: (context, state) {
+            if (state is RestaurantsLoading) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is RestaurantsError) {
+              return Center(child: Text('Error: ${state.message}'));
+            } else if (state is RestaurantsLoaded) {
+              final favouriteRestaurants = state.restaurants
+                  .where((restaurant) => restaurant.isFavorite)
+                  .toList();
+              if (favouriteRestaurants.isEmpty) {
+                return Center(child: Text('No favourite restaurants found.'));
+              }
+              return ListView.separated(
+                itemBuilder: (context, index) => BiteFavouriteRestaurantCard(
+                  restaurant: favouriteRestaurants[index],
+                ),
+                separatorBuilder: (context, index) => 10.verticalSpace,
+                itemCount: favouriteRestaurants.length,
+              );
+            } else {
+              return SizedBox.shrink();
+            }
+          },
+        );
+      },
     );
   }
 }

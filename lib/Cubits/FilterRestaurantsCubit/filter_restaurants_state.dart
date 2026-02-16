@@ -1,25 +1,25 @@
 part of 'filter_restaurants_cubit.dart';
 
-sealed class FilterRestaurantsState extends Equatable {
-  const FilterRestaurantsState();
+enum RatingFilterRange { below35, between35And40, above40 }
+
+enum DeliveryTimeFilterRange { under15, between15And30, over30 }
+
+final class FilterRestaurantsState extends Equatable {
+  const FilterRestaurantsState({this.ratingRange, this.deliveryTimeRange});
+
+  final RatingFilterRange? ratingRange;
+  final DeliveryTimeFilterRange? deliveryTimeRange;
+
+  FilterRestaurantsState copyWith({
+    RatingFilterRange? ratingRange,
+    DeliveryTimeFilterRange? deliveryTimeRange,
+  }) {
+    return FilterRestaurantsState(
+      ratingRange: ratingRange ?? this.ratingRange,
+      deliveryTimeRange: deliveryTimeRange ?? this.deliveryTimeRange,
+    );
+  }
 
   @override
-  List<Object> get props => [];
-}
-
-final class FilterRestaurantsInitial extends FilterRestaurantsState {}
-
-final class RestaurantFilteredByRating extends FilterRestaurantsState {
-  final double rating;
-  const RestaurantFilteredByRating({required this.rating});
-}
-
-final class RestaurantFilteredByDeliveryTime extends FilterRestaurantsState {
-  final int deliveryTime;
-  const RestaurantFilteredByDeliveryTime({required this.deliveryTime});
-}
-
-final class RestaurantFilteredByPricing extends FilterRestaurantsState {
-  final String priceRange;
-  const RestaurantFilteredByPricing({required this.priceRange});
+  List<Object?> get props => [ratingRange, deliveryTimeRange];
 }

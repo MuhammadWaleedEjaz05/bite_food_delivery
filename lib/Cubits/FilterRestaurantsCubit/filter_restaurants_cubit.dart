@@ -4,17 +4,17 @@ import 'package:equatable/equatable.dart';
 part 'filter_restaurants_state.dart';
 
 class FilterRestaurantsCubit extends Cubit<FilterRestaurantsState> {
-  FilterRestaurantsCubit() : super(FilterRestaurantsInitial());
+  FilterRestaurantsCubit() : super(const FilterRestaurantsState());
 
-  void filterByRating(double rating) {
-    emit(RestaurantFilteredByRating(rating: rating));
+  void setRatingRange(RatingFilterRange? range) {
+    emit(state.copyWith(ratingRange: range));
   }
 
-  void filterByDeliveryTime(int deliveryTime) {
-    emit(RestaurantFilteredByDeliveryTime(deliveryTime: deliveryTime));
+  void setDeliveryTimeRange(DeliveryTimeFilterRange? range) {
+    emit(state.copyWith(deliveryTimeRange: range));
   }
 
-  void filterByPriceRange(String priceRange) {
-    emit(RestaurantFilteredByPricing(priceRange: priceRange));
+  void clearFilters() {
+    emit(const FilterRestaurantsState());
   }
 }

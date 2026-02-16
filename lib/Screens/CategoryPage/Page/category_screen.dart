@@ -1,4 +1,5 @@
 import 'package:bite_food_delivery/Cubits/CategorySelectionCubit/category_selection_cubit.dart';
+import 'package:bite_food_delivery/Cubits/FilterRestaurantsCubit/filter_restaurants_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Screens/CategoryPage/Widgets/bite_drop_down_menu.dart';
@@ -24,37 +25,55 @@ class CategoryScreen extends StatelessWidget {
           20.verticalSpace,
           BlocBuilder<CategorySelectionCubit, String>(
             builder: (context, selectedCategory) {
-              return BlocBuilder<RestaurantsCubit, RestaurantsState>(
-                builder: (context, state) {
-                  if (state is RestaurantsLoading) {
-                    return Center(child: CircularProgressIndicator());
-                  } else if (state is RestaurantsError) {
-                    return Center(child: Text('Error: ${state.message}'));
-                  } else if (state is RestaurantsLoaded) {
-                    final filteredRestaurants = selectedCategory.isEmpty
-                        ? state.restaurants
-                        : state.restaurants
-                              .where(
-                                (restaurant) =>
-                                    restaurant.category.toLowerCase() ==
-                                    selectedCategory.toLowerCase(),
-                              )
-                              .toList();
-                    return ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: filteredRestaurants.length,
-                      itemBuilder: (context, index) {
-                        final restaurant = filteredRestaurants[index];
-                        return Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.h),
-                          child: BiteRestaurantCard(restaurant: restaurant),
+              return BlocBuilder<
+                FilterRestaurantsCubit,
+                FilterRestaurantsState
+              >(
+                builder: (context, filterState) {
+                  return BlocBuilder<RestaurantsCubit, RestaurantsState>(
+                    builder: (context, state) {
+                      if (state is RestaurantsLoading) {
+                        return Center(child: CircularProgressIndicator());
+                      } else if (state is RestaurantsError) {
+                        return Center(child: Text('Error: ${state.message}'));
+                      } else if (state is RestaurantsLoaded) {
+                        final filteredRestaurants = state.restaurants.where((
+                          restaurant,
+                        ) {
+                          final isCategoryMatch =
+                              selectedCategory.isEmpty ||
+                              restaurant.category.toLowerCase() ==
+                                  selectedCategory.toLowerCase();
+                          final isRatingMatch = _isRatingMatch(
+                            restaurant.rating,
+                            filterState.ratingRange,
+                          );
+                          final isDeliveryTimeMatch = _isDeliveryTimeMatch(
+                            restaurant.deliveryTime,
+                            filterState.deliveryTimeRange,
+                          );
+                          return isCategoryMatch &&
+                              isRatingMatch &&
+                              isDeliveryTimeMatch;
+                        }).toList();
+
+                        return ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: filteredRestaurants.length,
+                          itemBuilder: (context, index) {
+                            final restaurant = filteredRestaurants[index];
+                            return Padding(
+                              padding: EdgeInsets.symmetric(vertical: 10.h),
+                              child: BiteRestaurantCard(restaurant: restaurant),
+                            );
+                          },
                         );
-                      },
-                    );
-                  } else {
-                    return SizedBox();
-                  }
+                      } else {
+                        return SizedBox();
+                      }
+                    },
+                  );
                 },
               );
             },
@@ -62,6 +81,33 @@ class CategoryScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  bool _isRatingMatch(double rating, RatingFilterRange? range) {
+    if (range == null) {
+      return true;
+    }
+    if (range == RatingFilterRange.below35) {
+      return rating < 3.5;
+    } else if (range == RatingFilterRange.between35And40) {
+      return rating >= 3.5 && rating <= 4.0;
+    }
+    return rating > 4.0;
+  }
+
+  bool _isDeliveryTimeMatch(
+    double deliveryTime,
+    DeliveryTimeFilterRange? range,
+  ) {
+    if (range == null) {
+      return true;
+    }
+    if (range == DeliveryTimeFilterRange.under15) {
+      return deliveryTime < 15;
+    } else if (range == DeliveryTimeFilterRange.between15And30) {
+      return deliveryTime >= 15 && deliveryTime <= 30;
+    }
+    return deliveryTime > 30;
   }
 }
 
