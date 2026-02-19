@@ -1,11 +1,16 @@
+import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_user_auth_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final _formKey = GlobalKey<FormState>();
+
+final _emailController = TextEditingController();
+final _passwordController = TextEditingController();
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -70,28 +75,54 @@ class _OtherLoginOptionSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [Text('Or', style: GoogleFonts.sen(fontSize: 20.sp))],
         ),
-        5.verticalSpace,
+        20.verticalSpace,
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 10.w,
           children: [
-            CircleAvatar(
-              backgroundColor: Colors.grey.shade200,
-              radius: 40.r,
-              child: SvgPicture.asset(
-                'assets/svgs/google.svg',
-                height: 30.h,
-                width: 30.w,
-              ),
-            ),
-            CircleAvatar(
-              backgroundColor: Colors.grey.shade200,
-              radius: 40.r,
-              child: SvgPicture.asset(
-                'assets/svgs/facebook.svg',
-                height: 40.h,
-                width: 40.w,
-              ),
+            BlocConsumer<UserAuthCubit, UserAuthState>(
+              listener: (context, state) {
+                if (state is UserLoggedIn) {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Successfully signed in with Google!'),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                } else if (state is UserAuthError) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.message),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                  print('Google Sign-In Error: ${state.message}');
+                }
+              },
+              builder: (context, state) {
+                final isLoading = state is UserLoading;
+                return GestureDetector(
+                  onTap: isLoading
+                      ? null
+                      : () {
+                          BlocProvider.of<UserAuthCubit>(
+                            context,
+                          ).signInWithGoogle();
+                        },
+                  child: CircleAvatar(
+                    backgroundColor: Colors.grey.shade200,
+                    radius: 30.r,
+                    child: isLoading
+                        ? CircularProgressIndicator()
+                        : SvgPicture.asset(
+                            'assets/svgs/google.svg',
+                            height: 30.h,
+                            width: 30.w,
+                          ),
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -143,7 +174,14 @@ class _LoginActionButton extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                // Perform login action
+                BlocProvider.of<UserAuthCubit>(context)
+                    .login(
+                      _emailController.text.trim(),
+                      _passwordController.text.trim(),
+                    )
+                    .then((_) {
+                      Navigator.pop(context);
+                    });
               }
             },
             style: TextButton.styleFrom(
@@ -211,9 +249,17 @@ class _LoginCredentialSection extends StatelessWidget {
       key: _formKey,
       child: Column(
         children: [
-          BiteUserAuthTextField(title: 'Email', isEmail: true),
+          BiteUserAuthTextField(
+            title: 'Email',
+            isEmail: true,
+            controller: _emailController,
+          ),
           20.verticalSpace,
-          BiteUserAuthTextField(isPassword: true, title: 'Password'),
+          BiteUserAuthTextField(
+            isPassword: true,
+            title: 'Password',
+            controller: _passwordController,
+          ),
         ],
       ),
     );

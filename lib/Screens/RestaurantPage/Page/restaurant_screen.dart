@@ -16,45 +16,41 @@ class RestaurantScreen extends StatelessWidget {
     final restaurant =
         ModalRoute.of(context)!.settings.arguments as RestaurantModel;
     return Scaffold(
-      body: Column(
+      body: ListView(
         children: [
-          Expanded(
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(32.r),
-                bottomRight: Radius.circular(32.r),
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: CachedNetworkImageProvider(restaurant.logoUrl),
-                    fit: BoxFit.cover,
-                  ),
+          ClipRRect(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(32.r),
+              bottomRight: Radius.circular(32.r),
+            ),
+            child: Container(
+              height: 250.h,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: CachedNetworkImageProvider(restaurant.logoUrl),
+                  fit: BoxFit.cover,
                 ),
-                child: Column(children: [_AppBarSection(restaurant)]),
               ),
+              child: Column(children: [_AppBarSection(restaurant)]),
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              decoration: BoxDecoration(color: Colors.white),
-              child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 15.w),
-                shrinkWrap: true,
-                children: [
-                  20.verticalSpace,
-                  _RatingAndTimeSection(restaurant),
-                  10.verticalSpace,
-                  _FoodNameAndDescSection(restaurant),
-                  20.verticalSpace,
-                  _CategorySelectionSection(),
-                  20.verticalSpace,
-                  _FoodItemSection(),
-
-                  20.verticalSpace,
-                ],
-              ),
+          Container(
+            decoration: BoxDecoration(color: Colors.white),
+            child: ListView(
+              padding: EdgeInsets.symmetric(horizontal: 15.w),
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              children: [
+                20.verticalSpace,
+                _RatingAndTimeSection(restaurant),
+                10.verticalSpace,
+                _FoodNameAndDescSection(restaurant),
+                20.verticalSpace,
+                _CategorySelectionSection(),
+                20.verticalSpace,
+                _FoodItemSection(),
+                20.verticalSpace,
+              ],
             ),
           ),
         ],

@@ -1,10 +1,18 @@
+import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_user_auth_text_field.dart';
+import 'package:bite_food_delivery/Models/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final _formKey = GlobalKey<FormState>();
+final _emailController = TextEditingController();
+final _passwordController = TextEditingController();
+final _confirmPasswordController = TextEditingController();
+final _fullNameController = TextEditingController();
+final _phoneController = TextEditingController();
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -63,7 +71,18 @@ class _SignupActionSection extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                // Perform signup action
+                BlocProvider.of<UserAuthCubit>(context)
+                    .register(
+                      UserModel(
+                        fullName: _fullNameController.text.trim(),
+                        email: _emailController.text.trim(),
+                        password: _passwordController.text.trim(),
+                        phoneNumber: _phoneController.text.trim(),
+                      ),
+                    )
+                    .then((_) {
+                      Navigator.pop(context);
+                    });
               }
             },
             style: TextButton.styleFrom(
@@ -95,15 +114,34 @@ class _SignupCredentialsSection extends StatelessWidget {
       key: _formKey,
       child: Column(
         children: [
-          BiteUserAuthTextField(title: 'Full Name'),
+          BiteUserAuthTextField(
+            title: 'Full Name',
+            controller: _fullNameController,
+          ),
           20.verticalSpace,
-          BiteUserAuthTextField(title: 'Email', isEmail: true),
+          BiteUserAuthTextField(
+            title: 'Email',
+            isEmail: true,
+            controller: _emailController,
+          ),
           20.verticalSpace,
-          BiteUserAuthTextField(title: 'Phone Number', isPhone: true),
+          BiteUserAuthTextField(
+            title: 'Phone Number',
+            isPhone: true,
+            controller: _phoneController,
+          ),
           20.verticalSpace,
-          BiteUserAuthTextField(isPassword: true, title: 'Password'),
+          BiteUserAuthTextField(
+            isPassword: true,
+            title: 'Password',
+            controller: _passwordController,
+          ),
           20.verticalSpace,
-          BiteUserAuthTextField(isPassword: true, title: 'Confirm Password'),
+          BiteUserAuthTextField(
+            isPassword: true,
+            title: 'Confirm Password',
+            controller: _confirmPasswordController,
+          ),
         ],
       ),
     );

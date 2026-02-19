@@ -4,7 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BiteAddressTextField extends StatelessWidget {
   final String title;
-  const BiteAddressTextField({super.key, required this.title});
+  final TextEditingController? controller;
+  const BiteAddressTextField({super.key, required this.title, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class BiteAddressTextField extends StatelessWidget {
         Text(title, style: GoogleFonts.sen(fontSize: 20.sp)),
         5.verticalSpace,
         TextFormField(
+          controller: controller,
           decoration: InputDecoration(
             hintText: 'Enter $title',
             hintStyle: GoogleFonts.sen(fontSize: 20.sp),

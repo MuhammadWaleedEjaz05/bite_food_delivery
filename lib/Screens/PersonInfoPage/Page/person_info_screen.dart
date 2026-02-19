@@ -1,8 +1,11 @@
+import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_menu_item.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_menu_section.dart';
 import 'package:bite_food_delivery/configs/profile_menu_items_list.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -47,33 +50,79 @@ class _UserInfoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        CircleAvatar(radius: 60.r, backgroundColor: Colors.grey),
-        20.horizontalSpace,
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Waleed Ejaz',
-              style: GoogleFonts.sen(
-                fontSize: 25.sp,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'I Love Fast Food',
-              style: GoogleFonts.sen(
-                fontSize: 15.sp,
-                color: Colors.grey.shade500,
-              ),
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
-        ),
-        30.horizontalSpace,
-      ],
+    return BlocBuilder<UserAuthCubit, UserAuthState>(
+      builder: (context, state) {
+        if (state is UserLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is UserAuthError) {
+          return Center(child: Text(state.message));
+        }
+        return state is UserLoggedIn
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 90.h,
+                    width: 90.w,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: CachedNetworkImageProvider(
+                          state.user.photoUrl ?? '',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  20.horizontalSpace,
+                  SizedBox(
+                    width: 175.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          state.user.fullName,
+                          style: GoogleFonts.sen(
+                            fontSize: 25.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          state.user.bio ?? 'I Love Fast Food',
+                          style: GoogleFonts.sen(
+                            fontSize: 15.sp,
+                            color: Colors.grey.shade500,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                  30.horizontalSpace,
+                ],
+              )
+            : Column(
+                children: [
+                  CircleAvatar(radius: 60.r, backgroundColor: Colors.grey),
+                  20.verticalSpace,
+                  Text(
+                    'Guest User',
+                    style: GoogleFonts.sen(
+                      fontSize: 25.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'Please login to view your profile',
+                    style: GoogleFonts.sen(
+                      fontSize: 15.sp,
+                      color: Colors.grey.shade500,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              );
+      },
     );
   }
 }

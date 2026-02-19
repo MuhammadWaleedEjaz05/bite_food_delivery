@@ -2,8 +2,6 @@ import 'package:bite_food_delivery/Screens/AddressPage/Page/add_address_screen.d
 import 'package:bite_food_delivery/Screens/AddressPage/Page/address_screen.dart';
 import 'package:bite_food_delivery/Screens/CategoryPage/Page/all_category_screen.dart';
 import 'package:bite_food_delivery/Screens/LoginPage/Page/forgot_password_screen.dart';
-import 'package:bite_food_delivery/Screens/LoginPage/Page/new_password_screen.dart';
-import 'package:bite_food_delivery/Screens/LoginPage/Page/otp_screen.dart';
 import 'package:bite_food_delivery/Screens/RestaurantPage/Page/all_restaurant_screen.dart';
 import 'package:bite_food_delivery/Screens/CartPage/Page/cart_screen.dart';
 import 'package:bite_food_delivery/Screens/CategoryPage/Page/category_screen.dart';
@@ -41,6 +39,4 @@ final Map<String, Widget Function(BuildContext)> routes = {
   '/login_screen': (context) => LoginScreen(),
   '/signup_screen': (context) => SignupScreen(),
   '/forgot_password_screen': (context) => ForgotPasswordScreen(),
-  '/otp_screen': (context) => OTPScreen(),
-  '/new_password_screen': (context) => NewPasswordScreen(),
 };

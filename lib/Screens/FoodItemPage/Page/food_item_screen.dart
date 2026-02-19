@@ -11,36 +11,34 @@ class FoodItemScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: Column(
+      body: ListView(
         children: [
-          Expanded(
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(32.r),
-                bottomRight: Radius.circular(32.r),
-              ),
-              child: Container(
-                decoration: BoxDecoration(color: Colors.blueGrey),
-                child: Column(children: [_AppBarSection()]),
-              ),
+          ClipRRect(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(32.r),
+              bottomRight: Radius.circular(32.r),
+            ),
+            child: Container(
+              height: 250.h,
+              decoration: BoxDecoration(color: Colors.blueGrey),
+              child: Column(children: [_AppBarSection()]),
             ),
           ),
-          Flexible(
-            flex: 2,
-            child: Container(
-              decoration: BoxDecoration(color: Colors.white),
-              child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 15.w),
-                children: [
-                  20.verticalSpace,
-                  _FoodDescSection(),
-                  20.verticalSpace,
-                  _FoodSizeSelectionSection(),
-                  30.verticalSpace,
-                  _FlavorSelectionSection(),
-                  150.verticalSpace,
-                ],
-              ),
+          Container(
+            decoration: BoxDecoration(color: Colors.white),
+            child: ListView(
+              padding: EdgeInsets.symmetric(horizontal: 15.w),
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              children: [
+                20.verticalSpace,
+                _FoodDescSection(),
+                20.verticalSpace,
+                _FoodSizeSelectionSection(),
+                30.verticalSpace,
+                _FlavorSelectionSection(),
+                150.verticalSpace,
+              ],
             ),
           ),
         ],

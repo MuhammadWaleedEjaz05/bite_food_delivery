@@ -1,6 +1,8 @@
+import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/Screens/PersonInfoPage/Widgets/bite_edit_profile_modal.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_menu_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 List<BiteMenuItemModel> pInfoList(BuildContext context) => [
   BiteMenuItemModel(
@@ -70,7 +72,11 @@ List<BiteMenuItemModel> personalInfoList(BuildContext context) => [
     leadingIcon: Icons.person_outline,
     leadingIconColor: Colors.deepOrange,
     title: 'Full Name',
-    subtitle: 'Waleed Ejaz',
+    subtitle: BlocProvider.of<UserAuthCubit>(context).state is UserLoggedIn
+        ? (BlocProvider.of<UserAuthCubit>(context).state as UserLoggedIn)
+              .user
+              .fullName
+        : 'Guest User',
     onTap: () {
       showDialog(
         context: context,
@@ -83,7 +89,11 @@ List<BiteMenuItemModel> personalInfoList(BuildContext context) => [
     leadingIcon: Icons.email_outlined,
     leadingIconColor: Colors.blue,
     title: 'Email',
-    subtitle: 'm.waleedejaz2003@gmail.com',
+    subtitle: BlocProvider.of<UserAuthCubit>(context).state is UserLoggedIn
+        ? (BlocProvider.of<UserAuthCubit>(context).state as UserLoggedIn)
+              .user
+              .email
+        : '',
     onTap: () {
       showDialog(
         context: context,
@@ -96,7 +106,12 @@ List<BiteMenuItemModel> personalInfoList(BuildContext context) => [
     leadingIcon: Icons.phone_outlined,
     leadingIconColor: Colors.green,
     title: 'Phone',
-    subtitle: '+92 3009633165',
+    subtitle: BlocProvider.of<UserAuthCubit>(context).state is UserLoggedIn
+        ? (BlocProvider.of<UserAuthCubit>(context).state as UserLoggedIn)
+                  .user
+                  .phoneNumber ??
+              ''
+        : '' ,
     onTap: () {
       showDialog(
         context: context,

@@ -7,12 +7,14 @@ class BiteUserAuthTextField extends StatefulWidget {
   final bool isEmail;
   final bool isPhone;
   final String title;
+  final TextEditingController? controller;
   const BiteUserAuthTextField({
     super.key,
     required this.title,
     this.isPassword = false,
     this.isEmail = false,
     this.isPhone = false,
+    this.controller,
   });
   @override
   State<BiteUserAuthTextField> createState() => _BiteUserAuthTextFieldState();
@@ -29,6 +31,7 @@ class _BiteUserAuthTextFieldState extends State<BiteUserAuthTextField> {
         Text(widget.title, style: GoogleFonts.sen(fontSize: 20.sp)),
         5.verticalSpace,
         TextFormField(
+          controller: widget.controller,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           obscureText: widget.isPassword
               ? (isPasswordVisible ? false : true)

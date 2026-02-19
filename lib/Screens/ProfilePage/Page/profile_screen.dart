@@ -1,8 +1,11 @@
+import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_menu_item.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_menu_section.dart';
 import 'package:bite_food_delivery/configs/profile_menu_items_list.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -32,116 +35,160 @@ class _MenuSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        BiteMenuSection(
-          menuItems: pInfoList(
-            context,
-          ).map((item) => BiteMenuItem(item: item)).toList(),
-        ),
-        20.verticalSpace,
-        BiteMenuSection(
-          menuItems: pAppList(
-            context,
-          ).map((item) => BiteMenuItem(item: item)).toList(),
-        ),
-        20.verticalSpace,
-        BiteMenuSection(
-          menuItems: pSupportList(
-            context,
-          ).map((item) => BiteMenuItem(item: item)).toList(),
-        ),
-        30.verticalSpace,
-        BiteMenuSection(
-          menuItems: [
-            BiteMenuItem(
-              item: BiteMenuItemModel(
-                leadingIcon: Icons.logout,
-                leadingIconColor: Colors.red,
-                title: 'Logout',
-                onTap: () {},
-              ),
+    return BlocBuilder<UserAuthCubit, UserAuthState>(
+      builder: (context, state) {
+        return Column(
+          children: [
+            state is UserLoggedIn
+                ? BiteMenuSection(
+                    menuItems: pInfoList(
+                      context,
+                    ).map((item) => BiteMenuItem(item: item)).toList(),
+                  )
+                : const SizedBox.shrink(),
+            20.verticalSpace,
+            state is UserLoggedIn
+                ? BiteMenuSection(
+                    menuItems: pAppList(
+                      context,
+                    ).map((item) => BiteMenuItem(item: item)).toList(),
+                  )
+                : const SizedBox.shrink(),
+            20.verticalSpace,
+            BiteMenuSection(
+              menuItems: pAppList(
+                context,
+              ).map((item) => BiteMenuItem(item: item)).toList(),
             ),
+            20.verticalSpace,
+            BiteMenuSection(
+              menuItems: pSupportList(
+                context,
+              ).map((item) => BiteMenuItem(item: item)).toList(),
+            ),
+            30.verticalSpace,
+            state is UserLoggedIn
+                ? BiteMenuSection(
+                    menuItems: [
+                      BiteMenuItem(
+                        item: BiteMenuItemModel(
+                          leadingIcon: Icons.logout,
+                          leadingIconColor: Colors.red,
+                          title: 'Logout',
+                          onTap: () {
+                            context.read<UserAuthCubit>().logout();
+                          },
+                        ),
+                      ),
+                    ],
+                  )
+                : const SizedBox.shrink(),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }
 
 class _UserInfoSection extends StatelessWidget {
-  final bool isLoggedIn;
-  const _UserInfoSection({this.isLoggedIn = false});
+  const _UserInfoSection();
 
   @override
   Widget build(BuildContext context) {
-    return isLoggedIn
-        ? Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircleAvatar(radius: 60.r, backgroundColor: Colors.grey),
-              20.horizontalSpace,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+    return BlocBuilder<UserAuthCubit, UserAuthState>(
+      builder: (context, state) {
+        if (state is UserLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is UserAuthError) {
+          return Center(child: Text(state.message));
+        }
+        return state is UserLoggedIn
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Waleed Ejaz',
-                    style: GoogleFonts.sen(
-                      fontSize: 25.sp,
-                      fontWeight: FontWeight.bold,
+                  Container(
+                    height: 90.h,
+                    width: 90.w,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: CachedNetworkImageProvider(
+                          state.user.photoUrl ?? '',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                  Text(
-                    'I Love Fast Food',
-                    style: GoogleFonts.sen(
-                      fontSize: 15.sp,
-                      color: Colors.grey.shade500,
+                  20.horizontalSpace,
+                  SizedBox(
+                    width: 175.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          state.user.fullName,
+                          style: GoogleFonts.sen(
+                            fontSize: 25.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          softWrap: true,
+                        ),
+                        Text(
+                          state.user.bio ?? 'I Love Fast Food',
+                          style: GoogleFonts.sen(
+                            fontSize: 15.sp,
+                            color: Colors.grey.shade500,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
                     ),
-                    overflow: TextOverflow.ellipsis,
+                  ),
+                  30.horizontalSpace,
+                ],
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 20.w,
+                children: [
+                  ElevatedButton(
+                    onPressed: () =>
+                        Navigator.pushNamed(context, '/login_screen'),
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.all(10.r),
+                      backgroundColor: Theme.of(context).primaryColor,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      textStyle: GoogleFonts.sen(
+                        fontSize: 25.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    child: Text('Login'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () =>
+                        Navigator.pushNamed(context, '/signup_screen'),
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.all(10.r),
+                      backgroundColor: Theme.of(context).primaryColor,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      textStyle: GoogleFonts.sen(
+                        fontSize: 25.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    child: Text('SignUp'),
                   ),
                 ],
-              ),
-              30.horizontalSpace,
-            ],
-          )
-        : Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 20.w,
-            children: [
-              ElevatedButton(
-                onPressed: () => Navigator.pushNamed(context, '/login_screen'),
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.all(10.r),
-                  backgroundColor: Theme.of(context).primaryColor,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  textStyle: GoogleFonts.sen(
-                    fontSize: 25.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                child: Text('Login'),
-              ),
-              ElevatedButton(
-                onPressed: () => Navigator.pushNamed(context, '/signup_screen'),
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.all(10.r),
-                  backgroundColor: Theme.of(context).primaryColor,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  textStyle: GoogleFonts.sen(
-                    fontSize: 25.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                child: Text('SignUp'),
-              ),
-            ],
-          );
+              );
+      },
+    );
   }
 }
 

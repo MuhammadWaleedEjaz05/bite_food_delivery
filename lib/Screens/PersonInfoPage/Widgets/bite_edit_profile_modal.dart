@@ -1,7 +1,11 @@
+import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+final TextEditingController _controller = TextEditingController();
 
 class BiteEditProfileModal extends StatelessWidget {
   final String title;
@@ -9,7 +13,22 @@ class BiteEditProfileModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = TextEditingController();
+    final userState = BlocProvider.of<UserAuthCubit>(context).state;
+    if (userState is UserLoggedIn) {
+      switch (title) {
+        case 'Name':
+          _controller.text = userState.user.fullName;
+          break;
+        case 'Email':
+          _controller.text = userState.user.email;
+          break;
+        case 'Phone Number':
+          _controller.text = userState.user.phoneNumber ?? '';
+          break;
+        default:
+          _controller.text = '';
+      }
+    }
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
@@ -45,7 +64,7 @@ class BiteEditProfileModal extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             children: [
               TextFormField(
-                controller: controller,
+                controller: _controller,
                 decoration: InputDecoration(
                   hintText: 'Enter $title',
                   hintStyle: GoogleFonts.sen(fontSize: 20.sp),
@@ -64,7 +83,12 @@ class BiteEditProfileModal extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        BlocProvider.of<UserAuthCubit>(
+                          context,
+                        ).updateProfile(title, _controller.text.trim());
+                        Navigator.pop(context);
+                      },
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(vertical: 10.h),
                         backgroundColor: Theme.of(context).primaryColor,
@@ -89,4 +113,8 @@ class BiteEditProfileModal extends StatelessWidget {
       ),
     );
   }
+}
+
+void dispose() {
+  _controller.dispose();
 }
