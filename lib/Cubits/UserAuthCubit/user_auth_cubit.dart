@@ -14,6 +14,15 @@ class UserAuthCubit extends Cubit<UserAuthState> {
     checkAuthStatus();
   }
 
+  Future<UserModel> _withAddresses(UserModel user, String userId) async {
+    final db = getCollection('UsersDB');
+    final addressSnapshot = await db.doc(userId).collection('addresses').get();
+    final addresses = addressSnapshot.docs
+        .map((doc) => AddressModel.fromJson(doc.data()))
+        .toList();
+    return user.copyWith(addresses: addresses);
+  }
+
   Future<void> login(String email, String password) async {
     try {
       emit(UserLoading());
@@ -34,7 +43,11 @@ class UserAuthCubit extends Cubit<UserAuthState> {
         emit(const UserAuthError('User data is empty'));
         return;
       }
-      emit(UserLoggedIn(UserModel.fromJson(data)));
+      final userWithAddresses = await _withAddresses(
+        UserModel.fromJson(data),
+        currentUser.uid,
+      );
+      emit(UserLoggedIn(userWithAddresses));
     } catch (e) {
       emit(UserAuthError(e.toString()));
     }
@@ -94,7 +107,11 @@ class UserAuthCubit extends Cubit<UserAuthState> {
         emit(UserLoggedOut());
         return;
       }
-      emit(UserLoggedIn(UserModel.fromJson(data)));
+      final userWithAddresses = await _withAddresses(
+        UserModel.fromJson(data),
+        currentUser.uid,
+      );
+      emit(UserLoggedIn(userWithAddresses));
     } catch (e) {
       emit(UserAuthError(e.toString()));
     }
@@ -141,7 +158,11 @@ class UserAuthCubit extends Cubit<UserAuthState> {
           emit(const UserAuthError('Updated user data is empty'));
           return;
         }
-        emit(UserLoggedIn(UserModel.fromJson(data)));
+        final userWithAddresses = await _withAddresses(
+          UserModel.fromJson(data),
+          currentUser.uid,
+        );
+        emit(UserLoggedIn(userWithAddresses));
       } else if (title == 'Email') {
         emit(UserLoading());
         final currentUser = getCurrentUser();
@@ -162,7 +183,11 @@ class UserAuthCubit extends Cubit<UserAuthState> {
           emit(const UserAuthError('Updated user data is empty'));
           return;
         }
-        emit(UserLoggedIn(UserModel.fromJson(data)));
+        final userWithAddresses = await _withAddresses(
+          UserModel.fromJson(data),
+          currentUser.uid,
+        );
+        emit(UserLoggedIn(userWithAddresses));
       } else if (title == 'Phone Number') {
         emit(UserLoading());
         final currentUser = getCurrentUser();
@@ -182,7 +207,11 @@ class UserAuthCubit extends Cubit<UserAuthState> {
           emit(const UserAuthError('Updated user data is empty'));
           return;
         }
-        emit(UserLoggedIn(UserModel.fromJson(data)));
+        final userWithAddresses = await _withAddresses(
+          UserModel.fromJson(data),
+          currentUser.uid,
+        );
+        emit(UserLoggedIn(userWithAddresses));
       }
       if (title == 'Address') {
         emit(UserLoading());
@@ -221,7 +250,11 @@ class UserAuthCubit extends Cubit<UserAuthState> {
           emit(const UserAuthError('Updated user data is empty'));
           return;
         }
-        emit(UserLoggedIn(UserModel.fromJson(updatedData)));
+        final userWithAddresses = await _withAddresses(
+          UserModel.fromJson(updatedData),
+          currentUser.uid,
+        );
+        emit(UserLoggedIn(userWithAddresses));
       }
     } catch (e) {
       emit(UserAuthError(e.toString()));
@@ -328,7 +361,11 @@ class UserAuthCubit extends Cubit<UserAuthState> {
         emit(const UserAuthError('User data is empty'));
         return;
       }
-      emit(UserLoggedIn(UserModel.fromJson(data)));
+      final userWithAddresses = await _withAddresses(
+        UserModel.fromJson(data),
+        currentUser.uid,
+      );
+      emit(UserLoggedIn(userWithAddresses));
     } catch (e) {
       emit(UserAuthError(e.toString()));
     }

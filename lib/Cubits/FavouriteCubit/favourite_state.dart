@@ -9,6 +9,19 @@ sealed class FavouriteState extends Equatable {
 
 final class FavouriteInitial extends FavouriteState {}
 
-final class FavouriteAdded extends FavouriteState {}
+enum FavouriteType { restaurant, foodItem }
 
-final class FavouriteRemoved extends FavouriteState {}
+final class FavouriteChanged extends FavouriteState {
+  final String id;
+  final FavouriteType type;
+  final bool isFavourite;
+
+  const FavouriteChanged({
+    required this.id,
+    required this.type,
+    required this.isFavourite,
+  });
+
+  @override
+  List<Object> get props => [id, type, isFavourite];
+}

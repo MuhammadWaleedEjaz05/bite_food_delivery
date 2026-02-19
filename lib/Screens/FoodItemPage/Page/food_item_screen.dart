@@ -1,6 +1,10 @@
+import 'package:bite_food_delivery/Cubits/FavouriteCubit/favourite_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
+import 'package:bite_food_delivery/Models/food_item_model.dart';
 import 'package:bite_food_delivery/Screens/FoodItemPage/Widgets/bite_flavor_list_tile.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,6 +13,11 @@ class FoodItemScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>? ??
+        {};
+    final foodItem = args['foodItem'] as FoodItemModel;
+    final restaurantName = args['restaurantName'] as String;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: ListView(
@@ -20,8 +29,13 @@ class FoodItemScreen extends StatelessWidget {
             ),
             child: Container(
               height: 250.h,
-              decoration: BoxDecoration(color: Colors.blueGrey),
-              child: Column(children: [_AppBarSection()]),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: CachedNetworkImageProvider(foodItem.images[0]),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Column(children: [_AppBarSection(foodItem)]),
             ),
           ),
           Container(
@@ -32,24 +46,25 @@ class FoodItemScreen extends StatelessWidget {
               shrinkWrap: true,
               children: [
                 20.verticalSpace,
-                _FoodDescSection(),
+                _FoodDescSection(foodItem, restaurantName),
                 20.verticalSpace,
-                _FoodSizeSelectionSection(),
+                _FoodSizeSelectionSection(foodItem),
                 30.verticalSpace,
-                _FlavorSelectionSection(),
+                _FlavorSelectionSection(foodItem),
                 150.verticalSpace,
               ],
             ),
           ),
         ],
       ),
-      bottomSheet: _AddCardBottomSheet(),
+      bottomSheet: _AddCardBottomSheet(foodItem),
     );
   }
 }
 
 class _AddCardBottomSheet extends StatelessWidget {
-  const _AddCardBottomSheet();
+  final FoodItemModel foodItem;
+  const _AddCardBottomSheet(this.foodItem);
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +86,7 @@ class _AddCardBottomSheet extends StatelessWidget {
               children: [
                 10.horizontalSpace,
                 Text(
-                  'RS 500',
+                  'RS ${foodItem.price.toStringAsFixed(2)}',
                   style: GoogleFonts.sen(
                     fontSize: 25.sp,
                     fontWeight: FontWeight.bold,
@@ -149,10 +164,12 @@ class _AddCardBottomSheet extends StatelessWidget {
 }
 
 class _FlavorSelectionSection extends StatelessWidget {
-  const _FlavorSelectionSection();
+  final FoodItemModel foodItem;
+  const _FlavorSelectionSection(this.foodItem);
 
   @override
   Widget build(BuildContext context) {
+    if (foodItem.flavors.isEmpty) return SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -174,10 +191,12 @@ class _FlavorSelectionSection extends StatelessWidget {
 }
 
 class _FoodSizeSelectionSection extends StatelessWidget {
-  const _FoodSizeSelectionSection();
+  final FoodItemModel foodItem;
+  const _FoodSizeSelectionSection(this.foodItem);
 
   @override
   Widget build(BuildContext context) {
+    if (foodItem.sizes.isEmpty) return SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -224,7 +243,9 @@ class _FoodSizeSelectionSection extends StatelessWidget {
 }
 
 class _FoodDescSection extends StatelessWidget {
-  const _FoodDescSection();
+  final FoodItemModel foodItem;
+  final String restaurantName;
+  const _FoodDescSection(this.foodItem, this.restaurantName);
 
   @override
   Widget build(BuildContext context) {
@@ -232,70 +253,18 @@ class _FoodDescSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Burger Bistro',
+          foodItem.name,
           style: GoogleFonts.sen(fontSize: 30.sp, fontWeight: FontWeight.bold),
         ),
         5.verticalSpace,
         Text(
-          'Spicy Restaurant',
+          restaurantName,
           style: GoogleFonts.sen(fontSize: 20.sp, color: Colors.grey),
         ),
         20.verticalSpace,
-        Row(
-          spacing: 20.w,
-          children: [
-            Row(
-              spacing: 5.w,
-              children: [
-                Icon(Icons.star_outlined, color: Colors.deepOrange, size: 20.r),
-                Text(
-                  '4.5',
-                  style: GoogleFonts.sen(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              spacing: 5.w,
-              children: [
-                Icon(
-                  Icons.delivery_dining_outlined,
-                  color: Colors.deepOrange,
-                  size: 20.r,
-                ),
-                Text(
-                  'Free',
-                  style: GoogleFonts.sen(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              spacing: 5.w,
-              children: [
-                Icon(
-                  Icons.timer_outlined,
-                  color: Colors.deepOrange,
-                  size: 20.r,
-                ),
-                Text(
-                  '30-40 min',
-                  style: GoogleFonts.sen(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
         10.verticalSpace,
         Text(
-          'Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.',
+          foodItem.description,
           style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.grey),
         ),
       ],
@@ -304,7 +273,8 @@ class _FoodDescSection extends StatelessWidget {
 }
 
 class _AppBarSection extends StatelessWidget {
-  const _AppBarSection();
+  final FoodItemModel foodItem;
+  const _AppBarSection(this.foodItem);
 
   @override
   Widget build(BuildContext context) {
@@ -313,13 +283,36 @@ class _AppBarSection extends StatelessWidget {
       isDarkMode: true,
       title: SizedBox.shrink(),
       actions: [
-        IconButton(
-          onPressed: () {},
-          style: IconButton.styleFrom(
-            foregroundColor: Colors.red,
-            backgroundColor: Colors.grey.shade200,
-          ),
-          icon: Icon(Icons.favorite_border, size: 30.r),
+        BlocBuilder<FavouriteCubit, FavouriteState>(
+          builder: (context, state) {
+            final isFavourite =
+                state is FavouriteChanged &&
+                    state.type == FavouriteType.foodItem &&
+                    state.id == foodItem.id
+                ? state.isFavourite
+                : foodItem.isFavorite ?? false;
+            return IconButton(
+              onPressed: () {
+                if (isFavourite) {
+                  context.read<FavouriteCubit>().removeFoodItemFromFavourite(
+                    foodItem.id,
+                  );
+                } else {
+                  context.read<FavouriteCubit>().addFoodItemToFavourite(
+                    foodItem.id,
+                  );
+                }
+              },
+              style: IconButton.styleFrom(
+                foregroundColor: Colors.red,
+                backgroundColor: Colors.grey.shade200,
+              ),
+              icon: Icon(
+                isFavourite ? Icons.favorite : Icons.favorite_outline,
+                size: 30.r,
+              ),
+            );
+          },
         ),
         15.horizontalSpace,
       ],

@@ -1,5 +1,6 @@
 import 'package:bite_food_delivery/Cubits/CategoriesCubit/categories_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
+import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_category_card.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_heading.dart';
@@ -124,51 +125,67 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(100.h);
   @override
   Widget build(BuildContext context) {
-    return BiteAppBar(
-      isLogoVisible: true,
-      title: Column(
-        children: [
-          Text(
-            'DELIVER TO',
-            style: GoogleFonts.sen(
-              color: Theme.of(context).primaryColor,
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
+    return BlocBuilder<UserAuthCubit, UserAuthState>(
+      builder: (context, state) {
+        final addressText =
+            state is UserLoggedIn && (state.user.addresses?.isNotEmpty ?? false)
+            ? state.user.addresses!.first.street
+            : 'Select Location';
+        return BiteAppBar(
+          isLogoVisible: true,
+          title: Column(
             children: [
-              Icon(Icons.location_on, color: Colors.grey.shade600, size: 16.sp),
-              SizedBox(width: 4.w),
               Text(
-                '123 Main St',
+                'DELIVER TO',
                 style: GoogleFonts.sen(
-                  color: Colors.grey.shade600,
-                  fontSize: 16.sp,
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(width: 4.w),
-              Icon(
-                Icons.keyboard_arrow_down,
-                color: Colors.grey.shade600,
-                size: 16.sp,
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.location_on, 
+                    color: Colors.grey.shade600,
+                    size: 16.sp,
+                  ),
+                  SizedBox(width: 4.w),
+                  SizedBox(
+                    width: 120.w,
+                    child: Text(
+                      addressText,
+                      style: GoogleFonts.sen(
+                        color: Colors.grey.shade600,
+                        fontSize: 15.sp,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  SizedBox(width: 4.w),
+                  Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Colors.grey.shade600,
+                    size: 16.sp,
+                  ),
+                ],
               ),
             ],
           ),
-        ],
-      ),
-      actions: [
-        IconButton(
-          onPressed: () => Navigator.pushNamed(context, '/cart_screen'),
-          style: IconButton.styleFrom(
-            foregroundColor: Colors.white,
-            backgroundColor: Colors.black,
-          ),
-          icon: Icon(Icons.shopping_bag_outlined, size: 35.r),
-        ),
-        15.horizontalSpace,
-      ],
+          actions: [
+            IconButton(
+              onPressed: () => Navigator.pushNamed(context, '/cart_screen'),
+              style: IconButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.black,
+              ),
+              icon: Icon(Icons.shopping_bag_outlined, size: 35.r),
+            ),
+            15.horizontalSpace,
+          ],
+        );
+      },
     );
   }
 }
@@ -178,17 +195,39 @@ class _SearchSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: [
-            Text('Hey Waleed, ', style: GoogleFonts.sen(fontSize: 15.sp)),
-            Text(
-              'Good Morning! 👋',
-              style: GoogleFonts.sen(
-                fontSize: 15.sp,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+        BlocBuilder<UserAuthCubit, UserAuthState>(
+          builder: (context, state) {
+            if (state is UserLoggedIn) {
+              return Row(
+                children: [
+                  Text(
+                    'Hey ${state.user.fullName}, ',
+                    style: GoogleFonts.sen(fontSize: 15.sp),
+                  ),
+                  Text(
+                    'Good Morning! 👋',
+                    style: GoogleFonts.sen(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              return Row(
+                children: [
+                  Text('Hey there, ', style: GoogleFonts.sen(fontSize: 15.sp)),
+                  Text(
+                    'Good Morning! 👋',
+                    style: GoogleFonts.sen(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              );
+            }
+          },
         ),
         20.verticalSpace,
         BiteSearchBar(),

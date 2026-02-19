@@ -1,9 +1,14 @@
+import 'package:bite_food_delivery/Cubits/FavouriteCubit/favourite_cubit.dart';
+import 'package:bite_food_delivery/Models/food_item_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BiteFavouriteBlock extends StatelessWidget {
-  const BiteFavouriteBlock({super.key});
+  final FoodItemModel foodItem;
+  const BiteFavouriteBlock({super.key, required this.foodItem});
 
   @override
   Widget build(BuildContext context) {
@@ -31,20 +36,27 @@ class BiteFavouriteBlock extends StatelessWidget {
                   color: Colors.grey.shade100,
                   borderRadius: BorderRadius.circular(20.r),
                 ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.r),
+                  child: CachedNetworkImage(
+                    imageUrl: foodItem.images[0],
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
               10.horizontalSpace,
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Food Name',
+                    foodItem.name,
                     style: GoogleFonts.sen(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    'Restaurant',
+                    foodItem.category,
                     style: GoogleFonts.sen(
                       fontSize: 15.sp,
                       color: Colors.grey.shade500,
@@ -52,18 +64,8 @@ class BiteFavouriteBlock extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Icon(Icons.star, color: Colors.amber, size: 20.r),
                       Text(
-                        '4.5',
-                        style: GoogleFonts.sen(
-                          fontSize: 15.sp,
-                          color: Colors.grey.shade500,
-                        ),
-                      ),
-                      10.horizontalSpace,
-                      Icon(Icons.timelapse, color: Colors.amber, size: 20.r),
-                      Text(
-                        '15-20 min',
+                        'RS ${foodItem.price.toStringAsFixed(2)}',
                         style: GoogleFonts.sen(
                           fontSize: 15.sp,
                           color: Colors.grey.shade500,
@@ -75,7 +77,49 @@ class BiteFavouriteBlock extends StatelessWidget {
               ),
               10.horizontalSpace,
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text(
+                          'Remove from favourites',
+                          style: GoogleFonts.sen(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        content: Text(
+                          'Are you sure you want to remove this food item from your favourites?',
+                          style: GoogleFonts.sen(fontSize: 16.sp),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              'Cancel',
+                              style: GoogleFonts.sen(fontSize: 16.sp),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              context
+                                  .read<FavouriteCubit>()
+                                  .removeFoodItemFromFavourite(foodItem.id);
+                            },
+                            child: Text(
+                              'Remove',
+                              style: GoogleFonts.sen(fontSize: 16.sp),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
                 icon: Icon(Icons.delete, color: Colors.red, size: 20.r),
               ),
             ],

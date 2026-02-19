@@ -11,13 +11,51 @@ class FavouriteCubit extends Cubit<FavouriteState> {
     final db = getCollection('RestaurantsDB');
     final restaurantDoc = db.doc(restaurantId);
     await restaurantDoc.update({'isFavorite': true});
-    emit(FavouriteAdded());
+    emit(
+      FavouriteChanged(
+        id: restaurantId,
+        type: FavouriteType.restaurant,
+        isFavourite: true,
+      ),
+    );
   }
 
   Future<void> removeFromFavourite(String restaurantId) async {
     final db = getCollection('RestaurantsDB');
     final restaurantDoc = db.doc(restaurantId);
     await restaurantDoc.update({'isFavorite': false});
-    emit(FavouriteRemoved());
+    emit(
+      FavouriteChanged(
+        id: restaurantId,
+        type: FavouriteType.restaurant,
+        isFavourite: false,
+      ),
+    );
+  }
+
+  Future<void> addFoodItemToFavourite(String foodItemId) async {
+    final db = getCollection('FoodItemsDB');
+    final foodItemDoc = db.doc(foodItemId);
+    await foodItemDoc.update({'isFavorite': true});
+    emit(
+      FavouriteChanged(
+        id: foodItemId,
+        type: FavouriteType.foodItem,
+        isFavourite: true,
+      ),
+    );
+  }
+
+  Future<void> removeFoodItemFromFavourite(String foodItemId) async {
+    final db = getCollection('FoodItemsDB');
+    final foodItemDoc = db.doc(foodItemId);
+    await foodItemDoc.update({'isFavorite': false});
+    emit(
+      FavouriteChanged(
+        id: foodItemId,
+        type: FavouriteType.foodItem,
+        isFavourite: false,
+      ),
+    );
   }
 }

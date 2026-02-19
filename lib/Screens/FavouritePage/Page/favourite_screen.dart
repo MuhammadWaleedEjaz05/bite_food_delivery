@@ -1,4 +1,5 @@
 import 'package:bite_food_delivery/Cubits/FavouriteCubit/favourite_cubit.dart';
+import 'package:bite_food_delivery/Cubits/FoodItemCubit/food_item_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Screens/FavouritePage/Widgets/bite_favourite_block.dart';
@@ -52,10 +53,8 @@ class _ReataurantFavouriteSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FavouriteCubit, FavouriteState>(
       builder: (context, state) {
-        if (state is FavouriteInitial) {
-          return Center(child: Text('No favourite restaurants found.'));
-        }
-        if (state is FavouriteAdded || state is FavouriteRemoved) {
+        if (state is FavouriteChanged &&
+            state.type == FavouriteType.restaurant) {
           context.read<RestaurantsCubit>().loadRestaurants();
         }
         return BlocBuilder<RestaurantsCubit, RestaurantsState>(
@@ -93,10 +92,36 @@ class _FoodFavouriteSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemBuilder: (context, index) => BiteFavouriteBlock(),
-      separatorBuilder: (context, index) => 10.verticalSpace,
-      itemCount: 5,
+    return BlocBuilder<FavouriteCubit, FavouriteState>(
+      builder: (context, state) {
+        if (state is FavouriteChanged && state.type == FavouriteType.foodItem) {
+          context.read<FoodItemCubit>().loadFoodItem();
+        }
+        return BlocBuilder<FoodItemCubit, FoodItemState>(
+          builder: (context, state) {
+            if (state is FoodItemLoading) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is FoodItemError) {
+              return Center(child: Text('Error: ${state.message}'));
+            } else if (state is FoodItemLoaded) {
+              final favouriteFoodItems = state.foodItems
+                  .where((foodItem) => foodItem.isFavorite ?? false)
+                  .toList();
+              if (favouriteFoodItems.isEmpty) {
+                return Center(child: Text('No favourite foods found.'));
+              }
+              return ListView.separated(
+                itemBuilder: (context, index) =>
+                    BiteFavouriteBlock(foodItem: favouriteFoodItems[index]),
+                separatorBuilder: (context, index) => 10.verticalSpace,
+                itemCount: favouriteFoodItems.length,
+              );
+            } else {
+              return SizedBox.shrink();
+            }
+          },
+        );
+      },
     );
   }
 }

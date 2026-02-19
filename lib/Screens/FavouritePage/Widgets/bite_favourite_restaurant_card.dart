@@ -17,7 +17,10 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
         Container(
           height: 120.h,
           decoration: BoxDecoration(
-            color: Colors.blueGrey,
+            image: DecorationImage(
+              image: NetworkImage(restaurant.logoUrl),
+              fit: BoxFit.cover,
+            ),
             borderRadius: BorderRadius.circular(20.r),
           ),
         ),
