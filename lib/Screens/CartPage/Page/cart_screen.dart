@@ -166,7 +166,18 @@ class _CheckOutSection extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10.r),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                '/checkout_screen',
+                                arguments: {
+                                  'cartID': state is CartLoaded
+                                      ? state.cart.cartID
+                                      : '',
+                                  'totalAmount': totalAmount,
+                                },
+                              );
+                            },
                             child: Text(
                               'CHECKOUT',
                               style: GoogleFonts.sen(
