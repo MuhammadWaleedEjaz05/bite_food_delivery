@@ -1,10 +1,14 @@
+import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
+import 'package:bite_food_delivery/Models/cart_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BiteCartItemCard extends StatelessWidget {
-  final bool isEditActive;
-  const BiteCartItemCard({super.key, this.isEditActive = false});
+  final CartModel cartItem;
+  const BiteCartItemCard({super.key, required this.cartItem});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +19,10 @@ class BiteCartItemCard extends StatelessWidget {
             width: 136.w,
             height: 170.h,
             decoration: BoxDecoration(
-              color: Colors.white,
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(cartItem.productImage),
+                fit: BoxFit.cover,
+              ),
               borderRadius: BorderRadius.circular(25.r),
             ),
           ),
@@ -27,7 +34,7 @@ class BiteCartItemCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Item Name',
+                cartItem.productName,
                 style: GoogleFonts.sen(fontSize: 25.sp, color: Colors.white),
                 maxLines: 1,
                 softWrap: true,
@@ -37,7 +44,7 @@ class BiteCartItemCard extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'PKR 400',
+                    'PKR ${cartItem.productPrice}',
                     style: GoogleFonts.sen(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
@@ -45,26 +52,7 @@ class BiteCartItemCard extends StatelessWidget {
                     ),
                   ),
                   Spacer(),
-                  isEditActive
-                      ? IconButton(
-                          onPressed: () {},
-                          style: IconButton.styleFrom(
-                            iconSize: 20.r,
-                            backgroundColor: Colors.red,
-                            foregroundColor: Colors.white,
-                          ),
-                          icon: Icon(Icons.delete),
-                        )
-                      : SizedBox.shrink(),
                 ],
-              ),
-              10.verticalSpace,
-              Text(
-                'Extra Cheese + Extra Sauce + Extra Toppings',
-                style: GoogleFonts.sen(fontSize: 12.sp, color: Colors.grey),
-                maxLines: 2,
-                softWrap: true,
-                overflow: TextOverflow.ellipsis,
               ),
               15.verticalSpace,
               Row(
@@ -72,14 +60,18 @@ class BiteCartItemCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      BlocProvider.of<CartCubit>(context).updateCartItem(
+                        cartItem.copyWith(quantity: cartItem.quantity + 1),
+                      );
+                    },
                     style: IconButton.styleFrom(
                       backgroundColor: Colors.white.withAlpha(50),
                     ),
                     icon: Icon(Icons.add, color: Colors.white),
                   ),
                   Text(
-                    '1',
+                    cartItem.quantity.toString(),
                     style: GoogleFonts.sen(
                       fontSize: 25.sp,
                       color: Colors.white,
@@ -87,7 +79,11 @@ class BiteCartItemCard extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      BlocProvider.of<CartCubit>(context).updateCartItem(
+                        cartItem.copyWith(quantity: cartItem.quantity - 1),
+                      );
+                    },
                     style: IconButton.styleFrom(
                       backgroundColor: Colors.white.withAlpha(50),
                     ),

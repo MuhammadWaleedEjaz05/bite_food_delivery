@@ -28,35 +28,5 @@ class FoodItemCubit extends Cubit<FoodItemState> {
     }
   }
 
-  // Future<void> uploadFoodItem() async {
-  //   emit(FoodItemUploading());
-  //   try {
-  //     for (final restaurant in sampleFoodItems) {
-  //       final cloudinary = Cloudinary.signedConfig(
-  //         apiKey: '154652931217786',
-  //         apiSecret: 'VbVfZSTn0f6hxoLOGOpZ33DzM58',
-  //         cloudName: 'dooej7wa6',
-  //       );
-
-  //       final byteData = await rootBundle.load(restaurant.images[0]);
-  //       final byteImage = byteData.buffer.asUint8List();
-
-  //       final response = await cloudinary.upload(
-  //         fileBytes: byteImage,
-  //         fileName: restaurant.name,
-  //         resourceType: CloudinaryResourceType.image,
-  //         folder: 'FoodItems',
-  //       );
-
-  //       final imageUrl = response.secureUrl;
-  //       final restaurantWithImage = restaurant.copyWith(
-  //         images: [imageUrl ?? ''],
-  //       );
-  //       final db = getCollection('FoodItemsDB');
-  //       await db.doc(restaurant.id).set(restaurantWithImage.toJson());
-  //     }
-  //   } catch (e) {
-  //     emit(FoodItemError(message: e.toString()));
-  //   }
-  // }
+  
 }

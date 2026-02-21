@@ -1,3 +1,4 @@
+import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CategoriesCubit/categories_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
@@ -6,6 +7,7 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_category_card.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_heading.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_restaurant_card.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_search_bar.dart';
+import 'package:bite_food_delivery/GlobalWidgets/bite_address_selector_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -119,71 +121,94 @@ class _OpenRestaurantsSection extends StatelessWidget {
   }
 }
 
-class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
+class _AppBarSection extends StatefulWidget implements PreferredSizeWidget {
   const _AppBarSection();
+
   @override
   Size get preferredSize => Size.fromHeight(100.h);
+
+  @override
+  State<_AppBarSection> createState() => _AppBarSectionState();
+}
+
+class _AppBarSectionState extends State<_AppBarSection> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<AddressCubit>().loadAddresses();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserAuthCubit, UserAuthState>(
-      builder: (context, state) {
-        final addressText =
-            state is UserLoggedIn && (state.user.addresses?.isNotEmpty ?? false)
-            ? state.user.addresses!.first.street
-            : 'Select Location';
-        return BiteAppBar(
-          isLogoVisible: true,
-          title: Column(
-            children: [
-              Text(
-                'DELIVER TO',
-                style: GoogleFonts.sen(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
+    return BlocBuilder<AddressCubit, AddressState>(
+      builder: (context, addressState) {
+        String addressText = 'Select Location';
+
+        if (addressState is AddressesLoaded &&
+            addressState.selectedAddress != null) {
+          addressText = addressState.selectedAddress!.street;
+        }
+
+        return BlocBuilder<UserAuthCubit, UserAuthState>(
+          builder: (context, userState) {
+            return BiteAppBar(
+              isLogoVisible: true,
+              title: Column(
                 children: [
-                  Icon(
-                    Icons.location_on, 
-                    color: Colors.grey.shade600,
-                    size: 16.sp,
-                  ),
-                  SizedBox(width: 4.w),
-                  SizedBox(
-                    width: 120.w,
-                    child: Text(
-                      addressText,
-                      style: GoogleFonts.sen(
-                        color: Colors.grey.shade600,
-                        fontSize: 15.sp,
-                      ),
-                      overflow: TextOverflow.ellipsis,
+                  Text(
+                    'DELIVER TO',
+                    style: GoogleFonts.sen(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(width: 4.w),
-                  Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Colors.grey.shade600,
-                    size: 16.sp,
+                  GestureDetector(
+                    onTap: () => showAddressSelectorModal(context),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.location_on,
+                          color: Colors.grey.shade600,
+                          size: 16.sp,
+                        ),
+                        SizedBox(width: 4.w),
+                        SizedBox(
+                          width: 120.w,
+                          child: Text(
+                            addressText,
+                            style: GoogleFonts.sen(
+                              color: Colors.grey.shade600,
+                              fontSize: 15.sp,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        SizedBox(width: 4.w),
+                        Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.grey.shade600,
+                          size: 16.sp,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-            ],
-          ),
-          actions: [
-            IconButton(
-              onPressed: () => Navigator.pushNamed(context, '/cart_screen'),
-              style: IconButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.black,
-              ),
-              icon: Icon(Icons.shopping_bag_outlined, size: 35.r),
-            ),
-            15.horizontalSpace,
-          ],
+              actions: [
+                IconButton(
+                  onPressed: () => Navigator.pushNamed(context, '/cart_screen'),
+                  style: IconButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.black,
+                  ),
+                  icon: Icon(Icons.shopping_bag_outlined, size: 35.r),
+                ),
+                15.horizontalSpace,
+              ],
+            );
+          },
         );
       },
     );

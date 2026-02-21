@@ -63,7 +63,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     BlocConsumer<UserAuthCubit, UserAuthState>(
                       listener: (context, state) {
                         if (state is UserAuthInitial) {
-                          // Show confirmation dialog
+                          
                           showDialog(
                             context: context,
                             barrierDismissible: false,

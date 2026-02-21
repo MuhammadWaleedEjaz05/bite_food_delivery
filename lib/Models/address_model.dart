@@ -1,5 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:uuid/uuid.dart';
+
+final Uuid uuid = Uuid();
 
 class AddressModel extends Equatable {
   final String addressID;
@@ -23,20 +26,34 @@ class AddressModel extends Equatable {
   });
 
   factory AddressModel.fromJson(Map<String, dynamic> json) {
+    
+    LatLng? location;
+    try {
+      if (json['location'] != null) {
+        final locMap = json['location'] as Map<String, dynamic>;
+        final latitude = locMap['latitude'];
+        final longitude = locMap['longitude'];
+        if (latitude != null && longitude != null) {
+          location = LatLng(
+            (latitude as num).toDouble(),
+            (longitude as num).toDouble(),
+          );
+        }
+      }
+    } catch (e) {
+      print('Error parsing location: $e');
+      location = null;
+    }
+
     return AddressModel(
-      addressID: json['id'] as String,
-      userID: json['userID'] as String,
-      label: json['label'] as String? ?? 'Other',
-      street: json['street'] as String,
-      city: json['city'] as String,
-      zipCode: json['zipCode'] as String,
-      country: json['country'] as String,
-      location: json['location'] != null
-          ? LatLng(
-              (json['location']['latitude'] as num).toDouble(),
-              (json['location']['longitude'] as num).toDouble(),
-            )
-          : null,
+      addressID: (json['id'] ?? json['addressID'] ?? '') as String,
+      userID: (json['userID'] ?? '') as String,
+      label: (json['label'] as String?) ?? 'Other',
+      street: (json['street'] ?? '') as String,
+      city: (json['city'] ?? '') as String,
+      zipCode: (json['zipCode'] ?? '') as String,
+      country: (json['country'] ?? '') as String,
+      location: location,
     );
   }
 

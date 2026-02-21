@@ -1,7 +1,10 @@
+import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
 import 'package:bite_food_delivery/Cubits/FavouriteCubit/favourite_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
+import 'package:bite_food_delivery/Models/cart_model.dart';
 import 'package:bite_food_delivery/Models/food_item_model.dart';
 import 'package:bite_food_delivery/Screens/FoodItemPage/Widgets/bite_flavor_list_tile.dart';
+import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -134,22 +137,74 @@ class _AddCardBottomSheet extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 10.h),
-                      backgroundColor: Colors.deepOrange,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.r),
+                  child: BlocListener<CartCubit, CartState>(
+                    listenWhen: (previous, current) {
+                      if (current is CartItemAdded) {
+                        return current.productID == foodItem.id;
+                      } else if (current is CartItemUpdated) {
+                        return current.productID == foodItem.id;
+                      } else if (current is CartError) {
+                        return true;
+                      }
+                      return false;
+                    },
+                    listener: (context, state) {
+                      if (state is CartItemAdded) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Item added to cart!'),
+                            duration: Duration(seconds: 2),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                        Navigator.pop(context);
+                      } else if (state is CartItemUpdated) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Cart updated!'),
+                            duration: Duration(seconds: 2),
+                            backgroundColor: Colors.blue,
+                          ),
+                        );
+                        Navigator.pop(context);
+                      } else if (state is CartError) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.message),
+                            duration: Duration(seconds: 3),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
+                    },
+                    child: ElevatedButton(
+                      onPressed: () {
+                        BlocProvider.of<CartCubit>(context).addToCart(
+                          CartModel(
+                            userID: getCurrentUser()!.uid,
+                            productID: foodItem.id,
+                            productName: foodItem.name,
+                            productImage: foodItem.images[0],
+                            productPrice: foodItem.price,
+                            quantity: 1,
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: 10.h),
+                        backgroundColor: Colors.deepOrange,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
                       ),
-                    ),
-                    child: Text(
-                      'Add to cart',
-                      style: GoogleFonts.sen(
-                        fontSize: 25.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                      child: Text(
+                        'Add to cart',
+                        style: GoogleFonts.sen(
+                          fontSize: 25.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),

@@ -1,3 +1,4 @@
+import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
 import 'package:bite_food_delivery/Cubits/BottomNavigationSelection/bottom_navigation_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CategoriesCubit/categories_cubit.dart';
@@ -36,10 +37,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => CartCubit()),
+        BlocProvider(create: (context) => AddressCubit()),
         BlocProvider(create: (context) => CategoriesCubit()),
         BlocProvider(create: (context) => RestaurantsCubit()),
         BlocProvider(create: (context) => RecentSearchesCubit()),
-        BlocProvider(create: (context) => CartCubit()),
         BlocProvider(create: (context) => BottomNavigationSelectorCubit()),
         BlocProvider(create: (context) => CategorySelectionCubit()),
         BlocProvider(create: (context) => FilterRestaurantsCubit()),

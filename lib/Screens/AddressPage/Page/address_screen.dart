@@ -1,15 +1,26 @@
 import 'package:bite_food_delivery/Screens/AddressPage/Widgets/bite_address_block.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_menu_section.dart';
-import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
+import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
 import 'package:bite_food_delivery/Models/address_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AddressScreen extends StatelessWidget {
+class AddressScreen extends StatefulWidget {
   const AddressScreen({super.key});
+
+  @override
+  State<AddressScreen> createState() => _AddressScreenState();
+}
+
+class _AddressScreenState extends State<AddressScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<AddressCubit>().loadAddresses();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,56 +94,41 @@ class _AddressSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserAuthCubit, UserAuthState>(
+    return BlocBuilder<AddressCubit, AddressState>(
       builder: (context, state) {
-        if (state is UserLoggedIn) {
-          return StreamBuilder<List<AddressModel>>(
-            stream: context.read<UserAuthCubit>().watchAddresses(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              }
+        if (state is AddressLoading) {
+          return Center(child: CircularProgressIndicator());
+        }
 
-              if (snapshot.hasError) {
-                return Text(
-                  'Failed to load addresses',
-                  style: GoogleFonts.sen(
-                    fontSize: 16.sp,
-                    color: Colors.black54,
-                  ),
-                );
-              }
-
-              final addresses = snapshot.data ?? [];
-              if (addresses.isEmpty) {
-                return Text(
-                  'No saved addresses yet',
-                  style: GoogleFonts.sen(
-                    fontSize: 16.sp,
-                    color: Colors.black54,
-                  ),
-                );
-              }
-
-              final items = addresses
-                  .map(
-                    (address) => BiteAddressBlock(
-                      onDelete: () => context
-                          .read<UserAuthCubit>()
-                          .deleteAddress(address.addressID),
-                      label: address.label,
-                      addressText: _formatAddress(address),
-                    ),
-                  )
-                  .toList();
-
-              return BiteMenuSection(menuItems: items);
-            },
+        if (state is AddressError) {
+          return Text(
+            'Failed to load addresses',
+            style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.black54),
           );
         }
 
-        if (state is UserLoading) {
-          return Center(child: CircularProgressIndicator());
+        if (state is AddressesLoaded) {
+          final addresses = state.addresses;
+          if (addresses.isEmpty) {
+            return Text(
+              'No saved addresses yet',
+              style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.black54),
+            );
+          }
+
+          final items = addresses
+              .map(
+                (address) => BiteAddressBlock(
+                  onDelete: () => context.read<AddressCubit>().deleteAddress(
+                    address.addressID,
+                  ),
+                  label: address.label,
+                  addressText: _formatAddress(address),
+                ),
+              )
+              .toList();
+
+          return BiteMenuSection(menuItems: items);
         }
 
         return Text(

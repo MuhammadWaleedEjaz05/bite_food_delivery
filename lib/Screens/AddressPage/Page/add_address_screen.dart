@@ -1,8 +1,9 @@
 import 'package:bite_food_delivery/Cubits/MapLocationCubit/map_location_cubit.dart';
-import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
+import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_address_text_field.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Models/address_model.dart';
+import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -315,9 +316,20 @@ class _SaveAddressSection extends StatelessWidget {
                 );
               }
 
+              final currentUser = getCurrentUser();
+              if (currentUser == null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('User not authenticated'),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+                return;
+              }
+
               final address = AddressModel(
                 addressID: DateTime.now().millisecondsSinceEpoch.toString(),
-                userID: '',
+                userID: currentUser.uid,
                 label: selectedLabel,
                 street: street,
                 city: city,
@@ -326,8 +338,9 @@ class _SaveAddressSection extends StatelessWidget {
                 location: location,
               );
 
-              BlocProvider.of<UserAuthCubit>(context)
-                  .updateProfile('Address', address)
+              context
+                  .read<AddressCubit>()
+                  .addAddress(address)
                   .then((_) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(

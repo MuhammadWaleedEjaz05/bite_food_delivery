@@ -14,7 +14,7 @@ class MapLocationCubit extends Cubit<MapLocationState> {
   Future<void> getCurrentLocation() async {
     emit(MapLocationLoading());
     try {
-      // Check if location service is enabled
+      
       final serviceEnabled = await _location.serviceEnabled();
       if (!serviceEnabled) {
         final result = await _location.requestService();
@@ -24,7 +24,7 @@ class MapLocationCubit extends Cubit<MapLocationState> {
         }
       }
 
-      // Check permission status
+      
       PermissionStatus permissionStatus = await _location.hasPermission();
       if (permissionStatus == PermissionStatus.denied) {
         permissionStatus = await _location.requestPermission();
@@ -34,7 +34,7 @@ class MapLocationCubit extends Cubit<MapLocationState> {
         }
       }
 
-      // Get current location
+      
       final locationData = await _location.getLocation();
       emit(
         MapLocationLoaded(

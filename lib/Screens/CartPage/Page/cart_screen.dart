@@ -1,24 +1,39 @@
+import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
+import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
+import 'package:bite_food_delivery/GlobalWidgets/bite_address_selector_modal.dart';
+import 'package:bite_food_delivery/Models/cart_model.dart';
 import 'package:bite_food_delivery/Screens/CartPage/Widgets/bite_cart_item_card.dart';
+import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
 
   @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    final user = getCurrentUser();
+    if (user != null) {
+      context.read<CartCubit>().initialize(user.uid);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final isEditActive = false;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 2, 30, 46),
-      appBar: _AppBarSection(isEditActive: isEditActive),
-      body: Column(
-        children: [
-          _CartSection(isEditActive: isEditActive),
-          _CheckOutSection(),
-        ],
-      ),
+      appBar: _AppBarSection(),
+      body: Column(children: [_CartSection(), _CheckOutSection()]),
     );
   }
 }
@@ -28,125 +43,277 @@ class _CheckOutSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ClipRRect(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(25.r),
-          topRight: Radius.circular(25.r),
-        ),
-        child: Container(
-          decoration: BoxDecoration(color: Colors.white),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 7.5.h),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      'DELIVERY ADDRESS',
-                      style: GoogleFonts.sen(
-                        fontSize: 15.sp,
-                        color: Colors.grey.shade400,
-                      ),
-                    ),
-                    Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'EDIT',
-                        style: GoogleFonts.sen(
-                          fontSize: 15.sp,
-                          color: Theme.of(context).primaryColor,
-                          decoration: TextDecoration.underline,
-                          decorationColor: Theme.of(context).primaryColor,
-                          decorationThickness: 2,
-                        ),
-                      ),
-                    ),
-                  ],
+    return BlocBuilder<CartCubit, CartState>(
+      builder: (context, state) {
+        if (state is CartLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is CartError) {
+          return Center(child: Text(state.message));
+        } else if (state is CartEmpty) {
+          return const SizedBox.shrink();
+        }
+
+        List<CartModel>? cartItems;
+        double totalAmount = 0;
+
+        if (state is CartLoaded) {
+          cartItems = state.cartItems;
+          totalAmount = state.totalAmount;
+        } else if (state is CartItemAdded) {
+          cartItems = state.cartItems;
+          totalAmount = state.cartItems.fold(
+            0,
+            (sum, item) => sum + item.totalPrice,
+          );
+        } else if (state is CartItemUpdated) {
+          cartItems = state.cartItems;
+          totalAmount = state.cartItems.fold(
+            0,
+            (sum, item) => sum + item.totalPrice,
+          );
+        } else if (state is CartItemRemoved) {
+          cartItems = state.cartItems;
+          totalAmount = state.cartItems.fold(
+            0,
+            (sum, item) => sum + item.totalPrice,
+          );
+        }
+
+        if (cartItems == null || cartItems.isEmpty) {
+          return const SizedBox.shrink();
+        }
+
+        return Expanded(
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25.r),
+              topRight: Radius.circular(25.r),
+            ),
+            child: Container(
+              decoration: BoxDecoration(color: Colors.white),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 15.w,
+                  vertical: 7.5.h,
                 ),
-                10.verticalSpace,
-                TextField(
-                  decoration: InputDecoration(
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.r),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),
-                10.verticalSpace,
-                Row(
+                child: Column(
                   children: [
-                    Text('TOTAL : ', style: GoogleFonts.sen(fontSize: 15.sp)),
-                    Text(
-                      'PKR 400',
-                      style: GoogleFonts.sen(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                  ],
-                ),
-                10.verticalSpace,
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(context).primaryColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          'CHECKOUT',
+                    Row(
+                      children: [
+                        Text(
+                          'DELIVERY ADDRESS',
                           style: GoogleFonts.sen(
                             fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.grey.shade400,
                           ),
                         ),
-                      ),
+                        Spacer(),
+                        BlocBuilder<AddressCubit, AddressState>(
+                          builder: (context, addressState) {
+                            return TextButton(
+                              onPressed: () =>
+                                  showAddressSelectorModal(context),
+                              child: Text(
+                                'EDIT',
+                                style: GoogleFonts.sen(
+                                  fontSize: 15.sp,
+                                  color: Theme.of(context).primaryColor,
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: Theme.of(
+                                    context,
+                                  ).primaryColor,
+                                  decorationThickness: 2,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                    10.verticalSpace,
+                    BlocBuilder<AddressCubit, AddressState>(
+                      builder: (context, addressState) {
+                        String addressText = '';
+                        if (addressState is AddressesLoaded &&
+                            addressState.selectedAddress != null) {
+                          final addr = addressState.selectedAddress!;
+                          addressText =
+                              '${addr.street}, ${addr.city}, ${addr.zipCode}, ${addr.country}';
+                        }
+
+                        return TextField(
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            hintText: 'Select an address',
+                            filled: true,
+                            fillColor: Colors.grey.shade100,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.r),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
+                          controller: TextEditingController(text: addressText),
+                        );
+                      },
+                    ),
+                    10.verticalSpace,
+                    Row(
+                      children: [
+                        Text(
+                          'TOTAL : ',
+                          style: GoogleFonts.sen(fontSize: 15.sp),
+                        ),
+                        Text(
+                          'PKR ${totalAmount.toStringAsFixed(2)}',
+                          style: GoogleFonts.sen(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    10.verticalSpace,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Theme.of(context).primaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
+                            ),
+                            onPressed: () {},
+                            child: Text(
+                              'CHECKOUT',
+                              style: GoogleFonts.sen(
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
 
 class _CartSection extends StatelessWidget {
-  final bool isEditActive;
-  const _CartSection({this.isEditActive = false});
+  const _CartSection();
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 2,
-      child: Container(
-        decoration: BoxDecoration(color: Colors.white.withAlpha(0)),
-        child: ListView.separated(
-          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-          itemBuilder: (context, index) =>
-              BiteCartItemCard(isEditActive: isEditActive),
-          separatorBuilder: (context, index) => 10.verticalSpace,
-          itemCount: 5,
-        ),
-      ),
+    return BlocBuilder<CartCubit, CartState>(
+      builder: (context, state) {
+        if (state is CartLoading) {
+          return Expanded(
+            flex: 2,
+            child: Center(child: CircularProgressIndicator()),
+          );
+        } else if (state is CartError) {
+          return Expanded(flex: 2, child: Center(child: Text(state.message)));
+        } else if (state is CartEmpty) {
+          return Expanded(
+            flex: 2,
+            child: Center(
+              child: Text(
+                'Your cart is empty',
+                style: GoogleFonts.sen(fontSize: 18.sp, color: Colors.white),
+              ),
+            ),
+          );
+        } else if (state is CartLoaded) {
+          if (state.cartItems.isEmpty) {
+            return Expanded(
+              flex: 2,
+              child: Center(
+                child: Text(
+                  'Your cart is empty',
+                  style: GoogleFonts.sen(fontSize: 18.sp, color: Colors.white),
+                ),
+              ),
+            );
+          }
+
+          return Expanded(
+            flex: 2,
+            child: Container(
+              decoration: BoxDecoration(color: Colors.white.withAlpha(0)),
+              child: ListView.separated(
+                shrinkWrap: true,
+                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+                itemBuilder: (context, index) =>
+                    BiteCartItemCard(cartItem: state.cartItems[index]),
+                separatorBuilder: (context, index) => 10.verticalSpace,
+                itemCount: state.cartItems.length,
+              ),
+            ),
+          );
+        } else if (state is CartItemAdded ||
+            state is CartItemUpdated ||
+            state is CartItemRemoved) {
+          List<CartModel> items = [];
+          if (state is CartItemAdded) {
+            items = state.cartItems;
+          } else if (state is CartItemUpdated) {
+            items = state.cartItems;
+          } else if (state is CartItemRemoved) {
+            items = state.cartItems;
+          }
+
+          if (items.isEmpty) {
+            return Expanded(
+              flex: 2,
+              child: Center(
+                child: Text(
+                  'Your cart is empty',
+                  style: GoogleFonts.sen(fontSize: 18.sp, color: Colors.white),
+                ),
+              ),
+            );
+          }
+
+          return Expanded(
+            flex: 2,
+            child: Container(
+              decoration: BoxDecoration(color: Colors.white.withAlpha(0)),
+              child: ListView.separated(
+                shrinkWrap: true,
+                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+                itemBuilder: (context, index) =>
+                    BiteCartItemCard(cartItem: items[index]),
+                separatorBuilder: (context, index) => 10.verticalSpace,
+                itemCount: items.length,
+              ),
+            ),
+          );
+        }
+        return Expanded(
+          flex: 2,
+          child: Center(
+            child: Text(
+              'Initializing cart...',
+              style: GoogleFonts.sen(fontSize: 18.sp, color: Colors.white),
+            ),
+          ),
+        );
+      },
     );
   }
 }
 
 class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
-  final bool isEditActive;
-  const _AppBarSection({this.isEditActive = false});
+  const _AppBarSection();
   @override
   Size get preferredSize => Size.fromHeight(100.h);
   @override
@@ -162,26 +329,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
           color: Colors.white,
         ),
       ),
-      actions: [
-        TextButton(
-          onPressed: () {},
-          child: Text(
-            isEditActive ? 'DONE' : 'EDIT ITEMS',
-            style: GoogleFonts.sen(
-              fontSize: 20.sp,
-              color: isEditActive
-                  ? Colors.green
-                  : Theme.of(context).primaryColor,
-              decoration: TextDecoration.underline,
-              decorationColor: isEditActive
-                  ? Colors.green
-                  : Theme.of(context).primaryColor,
-              decorationThickness: 2,
-            ),
-          ),
-        ),
-        15.horizontalSpace,
-      ],
+      actions: [],
     );
   }
 }

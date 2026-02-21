@@ -103,7 +103,7 @@ class _PreferencesSection extends StatelessWidget {
                   ],
                 ),
                 onTap: () {
-                  // TODO: Navigate to language selection screen
+                  
                 },
               ),
             ),
