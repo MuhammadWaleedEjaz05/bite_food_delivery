@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bite_food_delivery/Models/cart_model.dart';
+import 'package:bite_food_delivery/Models/cart_item_model.dart';
 import 'package:bite_food_delivery/configs/firebase_db_conn.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -9,24 +10,22 @@ part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
   StreamSubscription? _cartSubscription;
-  List<CartModel> _currentCartItems = [];
-  
+
   CartCubit() : super(CartInitial());
 
   void initialize(String userID) {
-    loadCartItems(userID);
+    loadCart(userID);
   }
 
-  void loadCartItems(String userID) {
+  void loadCart(String userID) {
     _cartSubscription?.cancel();
 
-    _cartSubscription = getCartItems(userID).listen(
-      (items) {
-        _currentCartItems = items;
-        if (items.isEmpty) {
+    _cartSubscription = getCart(userID).listen(
+      (cart) {
+        if (cart == null || cart.cartItems.isEmpty) {
           emit(CartEmpty());
         } else {
-          emit(CartLoaded(cartItems: items));
+          emit(CartLoaded(cart: cart));
         }
       },
       onError: (error) {
@@ -35,37 +34,58 @@ class CartCubit extends Cubit<CartState> {
     );
   }
 
-  Future<void> addToCart(CartModel cartItem) async {
+  Future<void> addToCart({
+    required String userID,
+    required CartItemModel cartItem,
+  }) async {
     try {
       final db = getCollection('CartDB');
-      final existingItem = await db
-          .where('userID', isEqualTo: cartItem.userID)
+
+      final cartQuery = await db
+          .where('userID', isEqualTo: userID)
+          .limit(1)
+          .get();
+      String cartID;
+
+      if (cartQuery.docs.isEmpty) {
+        final newCart = CartModel(userID: userID);
+        cartID = newCart.cartID;
+        await db.doc(cartID).set(newCart.toJson());
+      } else {
+        cartID = cartQuery.docs.first.id;
+      }
+
+      final productsCollection = db.doc(cartID).collection('Products');
+      final existingProduct = await productsCollection
           .where('productID', isEqualTo: cartItem.productID)
           .get();
-      if (existingItem.docs.isEmpty) {
-        await db.doc(cartItem.cartID).set(cartItem.toJson());
-        emit(CartItemAdded(productID: cartItem.productID, cartItems: _currentCartItems));
+
+      if (existingProduct.docs.isEmpty) {
+        emit(CartItemAdded(productID: cartItem.productID, cart: null));
+        await productsCollection.doc(cartItem.productID).set(cartItem.toJson());
       } else {
-        final existingDoc = existingItem.docs.first;
-        final existingCartItem = CartModel.fromJson(
-          existingDoc.data() as Map<String, dynamic>,
+        final existingDoc = existingProduct.docs.first;
+        final existingItem = CartItemModel.fromJson(existingDoc.data());
+        final updatedItem = existingItem.copyWith(
+          quantity: existingItem.quantity + cartItem.quantity,
         );
-        final updatedCartItem = existingCartItem.copyWith(
-          quantity: existingCartItem.quantity + cartItem.quantity,
-        );
-        await db.doc(existingDoc.id).update(updatedCartItem.toJson());
-        emit(CartItemUpdated(productID: cartItem.productID, cartItems: _currentCartItems));
+        emit(CartItemUpdated(productID: cartItem.productID, cart: null));
+        await productsCollection
+            .doc(existingDoc.id)
+            .update(updatedItem.toJson());
       }
     } catch (e) {
       emit(CartError(message: 'Failed to add item to cart: ${e.toString()}'));
     }
   }
 
-  Future<void> removeFromCart(String cartID) async {
+  Future<void> removeFromCart({
+    required String cartID,
+    required String productID,
+  }) async {
     try {
       final db = getCollection('CartDB');
-      await db.doc(cartID).delete();
-      emit(CartItemRemoved(cartItems: _currentCartItems));
+      await db.doc(cartID).collection('Products').doc(productID).delete();
     } catch (e) {
       emit(
         CartError(message: 'Failed to remove item from cart: ${e.toString()}'),
@@ -73,14 +93,20 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  Future<void> updateCartItem(CartModel cartItem) async {
+  Future<void> updateCartItem({
+    required String cartID,
+    required CartItemModel cartItem,
+  }) async {
     try {
       final db = getCollection('CartDB');
       if (cartItem.quantity <= 0) {
-        await removeFromCart(cartItem.cartID);
+        await removeFromCart(cartID: cartID, productID: cartItem.productID);
       } else {
-        await db.doc(cartItem.cartID).update(cartItem.toJson());
-        emit(CartItemUpdated(productID: cartItem.productID, cartItems: _currentCartItems));
+        await db
+            .doc(cartID)
+            .collection('Products')
+            .doc(cartItem.productID)
+            .update(cartItem.toJson());
       }
     } catch (e) {
       emit(CartError(message: 'Failed to update cart item: ${e.toString()}'));
@@ -90,22 +116,56 @@ class CartCubit extends Cubit<CartState> {
   Future<void> clearCart(String userID) async {
     try {
       final db = getCollection('CartDB');
-      final snapshot = await db.where('userID', isEqualTo: userID).get();
-      for (var doc in snapshot.docs) {
-        await doc.reference.delete();
+      final cartQuery = await db
+          .where('userID', isEqualTo: userID)
+          .limit(1)
+          .get();
+
+      if (cartQuery.docs.isNotEmpty) {
+        final cartID = cartQuery.docs.first.id;
+        final products = await db.doc(cartID).collection('Products').get();
+        for (var doc in products.docs) {
+          await doc.reference.delete();
+        }
       }
       emit(CartCleared());
     } catch (e) {
       emit(CartError(message: 'Failed to clear cart: ${e.toString()}'));
     }
   }
+
+  @override
+  Future<void> close() {
+    _cartSubscription?.cancel();
+    return super.close();
+  }
 }
 
-Stream<List<CartModel>> getCartItems(String userID) {
+Stream<CartModel?> getCart(String userID) {
   final db = getCollection('CartDB');
-  return db.where('userID', isEqualTo: userID).snapshots().map((snapshot) {
-    return snapshot.docs.map((doc) {
-      return CartModel.fromJson(doc.data() as Map<String, dynamic>);
-    }).toList();
-  });
+
+  return db.where('userID', isEqualTo: userID).limit(1).snapshots().asyncExpand(
+    (cartSnapshot) {
+      if (cartSnapshot.docs.isEmpty) {
+        return Stream.value(null);
+      }
+
+      final cartDoc = cartSnapshot.docs.first;
+      final cartData = cartDoc.data() as Map<String, dynamic>;
+      final cartID = cartDoc.id;
+
+      return db.doc(cartID).collection('Products').snapshots().map((
+        productsSnapshot,
+      ) {
+        final cartItems = productsSnapshot.docs.map((doc) {
+          return CartItemModel.fromJson(doc.data());
+        }).toList();
+
+        return CartModel.fromJson({
+          ...cartData,
+          'cartID': cartID,
+        }, cartItems: cartItems);
+      });
+    },
+  );
 }

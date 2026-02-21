@@ -1,5 +1,5 @@
 import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
-import 'package:bite_food_delivery/Models/cart_model.dart';
+import 'package:bite_food_delivery/Models/cart_item_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,8 +7,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BiteCartItemCard extends StatelessWidget {
-  final CartModel cartItem;
-  const BiteCartItemCard({super.key, required this.cartItem});
+  final CartItemModel cartItem;
+  final String cartID;
+  const BiteCartItemCard({
+    super.key,
+    required this.cartItem,
+    required this.cartID,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,11 @@ class BiteCartItemCard extends StatelessWidget {
             height: 170.h,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: CachedNetworkImageProvider(cartItem.productImage),
+                image: CachedNetworkImageProvider(
+                  cartItem.product.images.isNotEmpty
+                      ? cartItem.product.images[0]
+                      : '',
+                ),
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.circular(25.r),
@@ -34,7 +43,7 @@ class BiteCartItemCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                cartItem.productName,
+                cartItem.product.name,
                 style: GoogleFonts.sen(fontSize: 25.sp, color: Colors.white),
                 maxLines: 1,
                 softWrap: true,
@@ -44,7 +53,7 @@ class BiteCartItemCard extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'PKR ${cartItem.productPrice}',
+                    'PKR ${cartItem.product.price}',
                     style: GoogleFonts.sen(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
@@ -62,7 +71,10 @@ class BiteCartItemCard extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       BlocProvider.of<CartCubit>(context).updateCartItem(
-                        cartItem.copyWith(quantity: cartItem.quantity + 1),
+                        cartID: cartID,
+                        cartItem: cartItem.copyWith(
+                          quantity: cartItem.quantity + 1,
+                        ),
                       );
                     },
                     style: IconButton.styleFrom(
@@ -81,7 +93,10 @@ class BiteCartItemCard extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       BlocProvider.of<CartCubit>(context).updateCartItem(
-                        cartItem.copyWith(quantity: cartItem.quantity - 1),
+                        cartID: cartID,
+                        cartItem: cartItem.copyWith(
+                          quantity: cartItem.quantity - 1,
+                        ),
                       );
                     },
                     style: IconButton.styleFrom(

@@ -1,5 +1,5 @@
 import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
-import 'package:bite_food_delivery/Models/cart_model.dart';
+import 'package:bite_food_delivery/Models/cart_item_model.dart';
 import 'package:bite_food_delivery/Models/food_item_model.dart';
 import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -84,7 +84,6 @@ class BiteFoodCard extends StatelessWidget {
                 Spacer(),
                 BlocListener<CartCubit, CartState>(
                   listenWhen: (previous, current) {
-                    
                     if (current is CartItemAdded) {
                       return current.productID == foodItem.id;
                     } else if (current is CartItemUpdated) {
@@ -127,12 +126,10 @@ class BiteFoodCard extends StatelessWidget {
                     child: IconButton(
                       onPressed: () {
                         BlocProvider.of<CartCubit>(context).addToCart(
-                          CartModel(
-                            userID: getCurrentUser()!.uid,
+                          userID: getCurrentUser()!.uid,
+                          cartItem: CartItemModel(
                             productID: foodItem.id,
-                            productName: foodItem.name,
-                            productImage: foodItem.images[0],
-                            productPrice: foodItem.price,
+                            product: foodItem,
                             quantity: 1,
                           ),
                         );

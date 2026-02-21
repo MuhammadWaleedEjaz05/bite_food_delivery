@@ -2,7 +2,7 @@ import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_address_selector_modal.dart';
-import 'package:bite_food_delivery/Models/cart_model.dart';
+import 'package:bite_food_delivery/Models/cart_item_model.dart';
 import 'package:bite_food_delivery/Screens/CartPage/Widgets/bite_cart_item_card.dart';
 import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
 import 'package:flutter/material.dart';
@@ -53,30 +53,12 @@ class _CheckOutSection extends StatelessWidget {
           return const SizedBox.shrink();
         }
 
-        List<CartModel>? cartItems;
+        List<CartItemModel>? cartItems;
         double totalAmount = 0;
 
         if (state is CartLoaded) {
-          cartItems = state.cartItems;
+          cartItems = state.cart.cartItems;
           totalAmount = state.totalAmount;
-        } else if (state is CartItemAdded) {
-          cartItems = state.cartItems;
-          totalAmount = state.cartItems.fold(
-            0,
-            (sum, item) => sum + item.totalPrice,
-          );
-        } else if (state is CartItemUpdated) {
-          cartItems = state.cartItems;
-          totalAmount = state.cartItems.fold(
-            0,
-            (sum, item) => sum + item.totalPrice,
-          );
-        } else if (state is CartItemRemoved) {
-          cartItems = state.cartItems;
-          totalAmount = state.cartItems.fold(
-            0,
-            (sum, item) => sum + item.totalPrice,
-          );
         }
 
         if (cartItems == null || cartItems.isEmpty) {
@@ -233,7 +215,7 @@ class _CartSection extends StatelessWidget {
             ),
           );
         } else if (state is CartLoaded) {
-          if (state.cartItems.isEmpty) {
+          if (state.cart.cartItems.isEmpty) {
             return Expanded(
               flex: 2,
               child: Center(
@@ -252,48 +234,12 @@ class _CartSection extends StatelessWidget {
               child: ListView.separated(
                 shrinkWrap: true,
                 padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-                itemBuilder: (context, index) =>
-                    BiteCartItemCard(cartItem: state.cartItems[index]),
-                separatorBuilder: (context, index) => 10.verticalSpace,
-                itemCount: state.cartItems.length,
-              ),
-            ),
-          );
-        } else if (state is CartItemAdded ||
-            state is CartItemUpdated ||
-            state is CartItemRemoved) {
-          List<CartModel> items = [];
-          if (state is CartItemAdded) {
-            items = state.cartItems;
-          } else if (state is CartItemUpdated) {
-            items = state.cartItems;
-          } else if (state is CartItemRemoved) {
-            items = state.cartItems;
-          }
-
-          if (items.isEmpty) {
-            return Expanded(
-              flex: 2,
-              child: Center(
-                child: Text(
-                  'Your cart is empty',
-                  style: GoogleFonts.sen(fontSize: 18.sp, color: Colors.white),
+                itemBuilder: (context, index) => BiteCartItemCard(
+                  cartItem: state.cart.cartItems[index],
+                  cartID: state.cart.cartID,
                 ),
-              ),
-            );
-          }
-
-          return Expanded(
-            flex: 2,
-            child: Container(
-              decoration: BoxDecoration(color: Colors.white.withAlpha(0)),
-              child: ListView.separated(
-                shrinkWrap: true,
-                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-                itemBuilder: (context, index) =>
-                    BiteCartItemCard(cartItem: items[index]),
                 separatorBuilder: (context, index) => 10.verticalSpace,
-                itemCount: items.length,
+                itemCount: state.cart.cartItems.length,
               ),
             ),
           );

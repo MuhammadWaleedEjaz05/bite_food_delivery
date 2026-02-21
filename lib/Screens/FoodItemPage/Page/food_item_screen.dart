@@ -1,7 +1,7 @@
 import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
 import 'package:bite_food_delivery/Cubits/FavouriteCubit/favourite_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
-import 'package:bite_food_delivery/Models/cart_model.dart';
+import 'package:bite_food_delivery/Models/cart_item_model.dart';
 import 'package:bite_food_delivery/Models/food_item_model.dart';
 import 'package:bite_food_delivery/Screens/FoodItemPage/Widgets/bite_flavor_list_tile.dart';
 import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
@@ -180,12 +180,10 @@ class _AddCardBottomSheet extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         BlocProvider.of<CartCubit>(context).addToCart(
-                          CartModel(
-                            userID: getCurrentUser()!.uid,
+                          userID: getCurrentUser()!.uid,
+                          cartItem: CartItemModel(
                             productID: foodItem.id,
-                            productName: foodItem.name,
-                            productImage: foodItem.images[0],
-                            productPrice: foodItem.price,
+                            product: foodItem,
                             quantity: 1,
                           ),
                         );

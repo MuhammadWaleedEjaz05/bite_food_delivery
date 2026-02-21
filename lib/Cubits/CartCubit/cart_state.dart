@@ -8,10 +8,12 @@ final class CartInitial extends CartState {}
 final class CartLoading extends CartState {}
 
 final class CartLoaded extends CartState {
-  final List<CartModel> cartItems;
-  double get totalAmount =>
-      cartItems.fold(0, (sum, item) => sum + item.totalPrice);
-  CartLoaded({required this.cartItems});
+  final CartModel cart;
+  double get totalAmount => cart.totalPrice;
+  int get totalItems => cart.totalItems;
+  List<CartItemModel> get cartItems => cart.cartItems;
+
+  CartLoaded({required this.cart});
 }
 
 final class CartError extends CartState {
@@ -24,19 +26,19 @@ final class CartEmpty extends CartState {}
 
 final class CartItemAdded extends CartState {
   final String productID;
-  final List<CartModel> cartItems;
-  CartItemAdded({required this.productID, required this.cartItems});
+  final CartModel? cart;
+  CartItemAdded({required this.productID, this.cart});
 }
 
 final class CartItemRemoved extends CartState {
-  final List<CartModel> cartItems;
-  CartItemRemoved({required this.cartItems});
+  final CartModel? cart;
+  CartItemRemoved({this.cart});
 }
 
 final class CartItemUpdated extends CartState {
   final String productID;
-  final List<CartModel> cartItems;
-  CartItemUpdated({required this.productID, required this.cartItems});
+  final CartModel? cart;
+  CartItemUpdated({required this.productID, this.cart});
 }
 
 final class CartCleared extends CartState {}

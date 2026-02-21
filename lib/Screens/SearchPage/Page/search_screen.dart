@@ -102,8 +102,9 @@ class _RecentSearchSection extends StatelessWidget {
               } else if (state is RecentSearchedRemoved) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content:
-                        Text('Removed "${state.search}" from recent searches'),
+                    content: Text(
+                      'Removed "${state.search}" from recent searches',
+                    ),
                     duration: Duration(seconds: 2),
                   ),
                 );

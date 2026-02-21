@@ -1,3 +1,4 @@
+import 'package:bite_food_delivery/Models/cart_item_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
 
@@ -5,76 +6,48 @@ final Uuid uuid = Uuid();
 
 class CartModel extends Equatable {
   final String cartID;
-  final String productID;
   final String userID;
-  final String productName;
-  final String productImage;
-  final double productPrice;
-  final int quantity;
+  final List<CartItemModel> cartItems;
+
   CartModel({
     String? cartID,
-    required this.productID,
-    required this.productName,
     required this.userID,
-    required this.productImage,
-    required this.productPrice,
-    required this.quantity,
-  }) : cartID = cartID ?? uuid.v4();
+    List<CartItemModel>? cartItems,
+  }) : cartID = cartID ?? uuid.v4(),
+       cartItems = cartItems ?? [];
 
-  double get totalPrice => productPrice * quantity;
+  double get totalPrice =>
+      cartItems.fold(0.0, (sum, item) => sum + item.totalPrice);
 
-  factory CartModel.fromJson(Map<String, dynamic> json) {
+  int get totalItems => cartItems.fold(0, (sum, item) => sum + item.quantity);
+
+  factory CartModel.fromJson(
+    Map<String, dynamic> json, {
+    List<CartItemModel>? cartItems,
+  }) {
     return CartModel(
-      cartID: json['cartID'],
-      productID: json['productID'],
-      userID: json['userID'],
-      productName: json['productName'],
-      productImage: json['productImage'],
-      productPrice: json['productPrice'].toDouble(),
-      quantity: json['quantity'],
+      cartID: json['cartID'] as String,
+      userID: json['userID'] as String,
+      cartItems: cartItems,
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'cartID': cartID,
-      'productID': productID,
-      'userID': userID,
-      'productName': productName,
-      'productImage': productImage,
-      'productPrice': productPrice,
-      'quantity': quantity,
-    };
+    return {'cartID': cartID, 'userID': userID};
   }
 
   CartModel copyWith({
     String? cartID,
-    String? productID,
     String? userID,
-    String? productName,
-    String? productImage,
-    double? productPrice,
-    int? quantity,
+    List<CartItemModel>? cartItems,
   }) {
     return CartModel(
       cartID: cartID ?? this.cartID,
-      productID: productID ?? this.productID,
       userID: userID ?? this.userID,
-      productName: productName ?? this.productName,
-      productImage: productImage ?? this.productImage,
-      productPrice: productPrice ?? this.productPrice,
-      quantity: quantity ?? this.quantity,
+      cartItems: cartItems ?? this.cartItems,
     );
   }
 
   @override
-  List<Object?> get props => [
-    cartID,
-    productID,
-    userID,
-    productName,
-    productImage,
-    productPrice,
-    quantity,
-  ];
+  List<Object?> get props => [cartID, userID, cartItems];
 }
