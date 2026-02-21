@@ -71,147 +71,150 @@ class _AddCardBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey.shade200,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(32.r),
-          topRight: Radius.circular(32.r),
-        ),
-      ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            10.verticalSpace,
-            Row(
-              children: [
-                10.horizontalSpace,
-                Text(
-                  'RS ${foodItem.price.toStringAsFixed(2)}',
-                  style: GoogleFonts.sen(
-                    fontSize: 25.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Spacer(),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.blueGrey,
-                    borderRadius: BorderRadius.circular(30.r),
-                  ),
-                  child: Row(
-                    spacing: 5.w,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.remove),
-                        style: IconButton.styleFrom(
-                          backgroundColor: Colors.blueGrey.shade200,
-                          foregroundColor: Colors.white,
-                        ),
-                        onPressed: () {},
-                      ),
-                      Text(
-                        '1',
-                        style: GoogleFonts.sen(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.add),
-                        style: IconButton.styleFrom(
-                          backgroundColor: Colors.blueGrey.shade200,
-                          foregroundColor: Colors.white,
-                        ),
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+    return BlocBuilder<CartCubit, CartState>(
+      builder: (context, state) {
+        CartItemModel? existingItem;
+        String? cartID;
+
+        if (state is CartLoaded) {
+          cartID = state.cart.cartID;
+          existingItem = state.cart.cartItems.cast<CartItemModel?>().firstWhere(
+            (item) => item?.productID == foodItem.id,
+            orElse: () => null,
+          );
+        }
+
+        final isInCart = existingItem != null;
+        final quantity = existingItem?.quantity ?? 1;
+
+        return Container(
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(32.r),
+              topRight: Radius.circular(32.r),
             ),
-            20.verticalSpace,
-            Row(
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Expanded(
-                  child: BlocListener<CartCubit, CartState>(
-                    listenWhen: (previous, current) {
-                      if (current is CartItemAdded) {
-                        return current.productID == foodItem.id;
-                      } else if (current is CartItemUpdated) {
-                        return current.productID == foodItem.id;
-                      } else if (current is CartError) {
-                        return true;
-                      }
-                      return false;
-                    },
-                    listener: (context, state) {
-                      if (state is CartItemAdded) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Item added to cart!'),
-                            duration: Duration(seconds: 2),
-                            backgroundColor: Colors.green,
-                          ),
-                        );
-                        Navigator.pop(context);
-                      } else if (state is CartItemUpdated) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Cart updated!'),
-                            duration: Duration(seconds: 2),
-                            backgroundColor: Colors.blue,
-                          ),
-                        );
-                        Navigator.pop(context);
-                      } else if (state is CartError) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(state.message),
-                            duration: Duration(seconds: 3),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
-                      }
-                    },
-                    child: ElevatedButton(
-                      onPressed: () {
-                        BlocProvider.of<CartCubit>(context).addToCart(
-                          userID: getCurrentUser()!.uid,
-                          cartItem: CartItemModel(
-                            productID: foodItem.id,
-                            product: foodItem,
-                            quantity: 1,
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 10.h),
-                        backgroundColor: Colors.deepOrange,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.r),
+                10.verticalSpace,
+                Row(
+                  children: [
+                    10.horizontalSpace,
+                    Text(
+                      'RS ${foodItem.price.toStringAsFixed(2)}',
+                      style: GoogleFonts.sen(
+                        fontSize: 25.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Spacer(),
+                    if (isInCart)
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.blueGrey,
+                          borderRadius: BorderRadius.circular(30.r),
+                        ),
+                        child: Row(
+                          spacing: 5.w,
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.remove),
+                              style: IconButton.styleFrom(
+                                backgroundColor: Colors.blueGrey.shade200,
+                                foregroundColor: Colors.white,
+                              ),
+                              onPressed: () {
+                                if (quantity > 1) {
+                                  context.read<CartCubit>().updateCartItem(
+                                    cartID: cartID!,
+                                    cartItem: existingItem!.copyWith(
+                                      quantity: quantity - 1,
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
+                            Text(
+                              '$quantity',
+                              style: GoogleFonts.sen(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.add),
+                              style: IconButton.styleFrom(
+                                backgroundColor: Colors.blueGrey.shade200,
+                                foregroundColor: Colors.white,
+                              ),
+                              onPressed: () {
+                                context.read<CartCubit>().updateCartItem(
+                                  cartID: cartID!,
+                                  cartItem: existingItem!.copyWith(
+                                    quantity: quantity + 1,
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
                         ),
                       ),
-                      child: Text(
-                        'Add to cart',
-                        style: GoogleFonts.sen(
-                          fontSize: 25.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                  ],
+                ),
+                20.verticalSpace,
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (isInCart) {
+                            context.read<CartCubit>().removeFromCart(
+                              cartID: cartID!,
+                              productID: foodItem.id,
+                            );
+                          } else {
+                            context.read<CartCubit>().addToCart(
+                              userID: getCurrentUser()!.uid,
+                              cartItem: CartItemModel(
+                                productID: foodItem.id,
+                                product: foodItem,
+                                quantity: 1,
+                              ),
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          backgroundColor: isInCart
+                              ? Colors.red
+                              : Colors.deepOrange,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                        ),
+                        child: Text(
+                          isInCart ? 'Remove from cart' : 'Add to cart',
+                          style: GoogleFonts.sen(
+                            fontSize: 25.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
