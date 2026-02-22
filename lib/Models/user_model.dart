@@ -1,4 +1,5 @@
 import 'package:bite_food_delivery/Models/address_model.dart';
+import 'package:bite_food_delivery/Models/credit_card_model.dart';
 import 'package:equatable/equatable.dart';
 
 class UserModel extends Equatable {
@@ -10,6 +11,7 @@ class UserModel extends Equatable {
   final String? photoUrl;
   final String? bio;
   final List<AddressModel>? addresses;
+  final List<CreditCardModel>? creditCards;
 
   const UserModel({
     this.id,
@@ -20,6 +22,7 @@ class UserModel extends Equatable {
     this.photoUrl,
     this.bio,
     this.addresses,
+    this.creditCards,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -37,6 +40,12 @@ class UserModel extends Equatable {
                 AddressModel.fromJson(addressJson as Map<String, dynamic>),
           )
           .toList(),
+      creditCards: (json['creditCards'] as List<dynamic>?)
+          ?.map(
+            (cardJson) =>
+                CreditCardModel.fromMap(cardJson as Map<String, dynamic>),
+          )
+          .toList(),
     );
   }
 
@@ -50,6 +59,7 @@ class UserModel extends Equatable {
       'photoUrl': photoUrl,
       'bio': bio,
       'addresses': addresses?.map((address) => address.toJson()).toList(),
+      'creditCards': creditCards?.map((card) => card.toMap()).toList(),
     };
   }
 
@@ -62,6 +72,7 @@ class UserModel extends Equatable {
     String? photoUrl,
     String? bio,
     List<AddressModel>? addresses,
+    List<CreditCardModel>? creditCards,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -72,6 +83,7 @@ class UserModel extends Equatable {
       photoUrl: photoUrl ?? this.photoUrl,
       bio: bio ?? this.bio,
       addresses: addresses ?? this.addresses,
+      creditCards: creditCards ?? this.creditCards,
     );
   }
 
@@ -85,5 +97,6 @@ class UserModel extends Equatable {
     photoUrl,
     bio,
     addresses,
+    creditCards,
   ];
 }

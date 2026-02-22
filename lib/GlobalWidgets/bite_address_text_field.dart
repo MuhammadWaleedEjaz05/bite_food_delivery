@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BiteAddressTextField extends StatelessWidget {
@@ -16,6 +17,9 @@ class BiteAddressTextField extends StatelessWidget {
         5.verticalSpace,
         TextFormField(
           controller: controller,
+          validator: FormBuilderValidators.street(
+            errorText: 'Please enter a valid address',
+          ),
           decoration: InputDecoration(
             hintText: 'Enter $title',
             hintStyle: GoogleFonts.sen(fontSize: 20.sp),

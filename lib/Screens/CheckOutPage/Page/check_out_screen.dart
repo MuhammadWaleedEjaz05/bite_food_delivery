@@ -1,8 +1,11 @@
 import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
+import 'package:bite_food_delivery/Cubits/PaymentCubit/payment_method_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_address_selector_modal.dart';
+import 'package:bite_food_delivery/Models/credit_card_model.dart';
+import 'package:bite_food_delivery/Screens/CheckOutPage/Widgets/bite_check_out_payment_block.dart';
 import 'package:bite_food_delivery/Screens/CheckOutPage/Widgets/bite_checkout_item_tile.dart';
 import 'package:bite_food_delivery/Screens/CheckOutPage/Widgets/bite_summary_row.dart';
 import 'package:bite_food_delivery/Screens/CheckOutPage/Widgets/bite_check_out_address_block.dart';
@@ -225,53 +228,10 @@ class _PaymentMethodSection extends StatelessWidget {
           ],
         ),
         8.verticalSpace,
-        Container(
-          padding: EdgeInsets.all(15.r),
-          decoration: BoxDecoration(
-            color: Colors.grey.shade100,
-            borderRadius: BorderRadius.circular(12.r),
-          ),
-          child: Row(
-            children: [
-              Container(
-                padding: EdgeInsets.all(10.r),
-                decoration: BoxDecoration(
-                  color: Colors.blue.shade50,
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                child: Icon(Icons.credit_card, color: Colors.blue, size: 24.r),
-              ),
-              12.horizontalSpace,
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Cash on Delivery',
-                      style: GoogleFonts.sen(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                      ),
-                    ),
-                    4.verticalSpace,
-                    Text(
-                      'Pay when your order arrives',
-                      style: GoogleFonts.sen(
-                        fontSize: 13.sp,
-                        color: Colors.grey.shade600,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Icon(
-                Icons.check_circle,
-                color: Theme.of(context).primaryColor,
-                size: 22.r,
-              ),
-            ],
-          ),
+        BlocBuilder<PaymentMethodSelectorCubit, CreditCardModel>(
+          builder: (context, state) {
+            return BiteCheckOutPaymentBlock(creditCard: state);
+          },
         ),
       ],
     );

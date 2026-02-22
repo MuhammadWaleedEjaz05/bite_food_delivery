@@ -1,10 +1,14 @@
+import 'package:bite_food_delivery/Cubits/CreditCardCubit/credit_card_cubit.dart';
+import 'package:bite_food_delivery/Cubits/CreditCardCubit/credit_card_type_selector_cubit.dart';
+import 'package:bite_food_delivery/Cubits/PaymentCubit/payment_method_selector_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
+import 'package:bite_food_delivery/Models/credit_card_model.dart';
+import 'package:bite_food_delivery/Screens/PaymentPage/Widgets/bite_credit_card_tile.dart';
 import 'package:bite_food_delivery/Screens/PaymentPage/Widgets/bite_payment_block.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 class PaymentScreen extends StatelessWidget {
   const PaymentScreen({super.key});
@@ -69,130 +73,110 @@ class _CreditCardListSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: 3,
-      separatorBuilder: (context, index) => 10.verticalSpace,
-      itemBuilder: (context, index) => ExpansionTile(
-        backgroundColor: Colors.grey.shade200,
-        collapsedBackgroundColor: Colors.grey.shade200,
-        collapsedShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.r),
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.r),
-        ),
-        leading: SvgPicture.asset(
-          'assets/svgs/Visa.svg',
-          height: 30.h,
-          width: 30.w,
-        ),
-        title: Text(
-          '**** **** **** 4242',
-          style: GoogleFonts.sen(
-            fontWeight: FontWeight.bold,
-            fontSize: 15.sp,
-            color: Theme.of(context).primaryColor,
-          ),
-        ),
-        childrenPadding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-        children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
-              color: Colors.grey.shade100,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              spacing: 5.w,
-              children: [
-                Flexible(
-                  child: Text(
-                    'Holder Name :',
-                    style: GoogleFonts.sen(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
+    return BlocBuilder<CreditCardTypeSelectorCubit, CreditCardType>(
+      builder: (context, type) {
+        return BlocConsumer<CreditCardCubit, CreditCardState>(
+          listener: (context, state) {
+            if (state is CreditCardError) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text('Error: ${state.error}')));
+            } else if (state is CreditCardAdded) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Credit card Added Successfully')),
+              );
+            } else if (state is CreditCardDeleted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Credit card Deleted Successfully')),
+              );
+            }
+          },
+          builder: (context, state) {
+            if (state is CreditCardLoading) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is CreditCardLoaded) {
+              final creditCardsList = state.creditCardList;
+              final filteredCards = creditCardsList
+                  .where((card) => card.cardType == type)
+                  .toList();
+              if (type == CreditCardType.onCash) {
+                return Container(
+                  padding: EdgeInsets.all(20.r),
+                  height: 250.h,
+                  width: 300.w,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20.r),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withAlpha(25),
+                        blurRadius: 10,
+                        offset: const Offset(0, 5),
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Cash on Delivery selected. No credit cards to display.',
+                      style: GoogleFonts.sen(
+                        fontSize: 22.5.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                ),
-                Flexible(
-                  child: Text(
-                    'Waleed Ejaz',
-                    style: GoogleFonts.sen(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepOrange,
+                );
+              } else {
+                if (filteredCards.isEmpty) {
+                  return Container(
+                    padding: EdgeInsets.all(20.r),
+                    height: 250.h,
+                    width: 300.w,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20.r),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withAlpha(25),
+                          blurRadius: 10,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          10.verticalSpace,
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
-              color: Colors.grey.shade100,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              spacing: 5.w,
-              children: [
-                Text(
-                  'Expiry Date :',
-                  style: GoogleFonts.sen(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  DateFormat('MM/yy').format(DateTime(2028, 02)),
-                  style: GoogleFonts.sen(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.deepOrange,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          10.verticalSpace,
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
-              color: Colors.grey.shade100,
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              spacing: 5.w,
-              children: [
-                Text(
-                  'Country : ',
-                  style: GoogleFonts.sen(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  'Pakistan',
-                  style: GoogleFonts.sen(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.deepOrange,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+                    child: Center(
+                      child: Text(
+                        'No credit cards found. Please add a card.',
+                        style: GoogleFonts.sen(
+                          fontSize: 22.5.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  );
+                } else {
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: filteredCards.length,
+                    separatorBuilder: (context, index) => 10.verticalSpace,
+                    itemBuilder: (context, index) =>
+                        BiteCreditCardTile(creditCard: filteredCards[index]),
+                  );
+                }
+              }
+            } else if (state is CreditCardError) {
+              return Center(
+                child: Text('Failed to load credit cards: ${state.error}'),
+              );
+            } else {
+              return Center(
+                child: Text('Unexpected state: ${state.runtimeType}'),
+              );
+            }
+          },
+        );
+      },
     );
   }
 }
@@ -202,21 +186,50 @@ class _PaymentSelectionSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final paymentMethods = [
+      'assets/svgs/Cash.svg',
+      'assets/svgs/Visa.svg',
+      'assets/svgs/Mastercard.svg',
+    ];
+    final List<CreditCardType> creditCardTypes = [
+      CreditCardType.onCash,
+      CreditCardType.visa,
+      CreditCardType.mastercard,
+    ];
     return SizedBox(
       height: 90.h,
       child: ListView(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        children: [
-          BitePaymentBlock(svgPath: 'assets/svgs/Cash.svg'),
-          10.horizontalSpace,
-          BitePaymentBlock(svgPath: 'assets/svgs/Visa.svg'),
-          10.horizontalSpace,
-          BitePaymentBlock(svgPath: 'assets/svgs/Mastercard.svg'),
-          10.horizontalSpace,
-          BitePaymentBlock(svgPath: 'assets/svgs/Paypal.svg'),
-          10.horizontalSpace,
-        ],
+        children: paymentMethods
+            .map(
+              (e) => Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.w),
+                child: GestureDetector(
+                  onLongPress: () {
+                    context
+                        .read<PaymentMethodSelectorCubit>()
+                        .selectPaymentMethod(null, CreditCardType.onCash);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Cash on Delivery selected')),
+                    );
+                    Navigator.pop(context);
+                  },
+                  onTap: () => context
+                      .read<CreditCardTypeSelectorCubit>()
+                      .selectCardType(
+                        creditCardTypes[paymentMethods.indexOf(e)],
+                      ),
+                  child: BitePaymentBlock(
+                    svgPath: e,
+                    isSelected:
+                        context.watch<CreditCardTypeSelectorCubit>().state ==
+                        creditCardTypes[paymentMethods.indexOf(e)],
+                  ),
+                ),
+              ),
+            )
+            .toList(),
       ),
     );
   }

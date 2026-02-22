@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BiteUserAuthTextField extends StatefulWidget {
@@ -77,23 +78,24 @@ class _BiteUserAuthTextFieldState extends State<BiteUserAuthTextField> {
             filled: true,
             fillColor: Colors.grey.shade200,
           ),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter ${widget.title}';
-            }
-            if (widget.isEmail &&
-                !RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-              return 'Please enter a valid email address';
-            }
-            if (widget.isPhone &&
-                !RegExp(r'^\+?[0-9]{7,15}$').hasMatch(value)) {
-              return 'Please enter a valid phone number';
-            }
-            if (widget.isPassword && value.length < 6) {
-              return 'Password must be at least 6 characters';
-            }
-            return null;
-          },
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(
+              errorText: 'Please enter ${widget.title.toLowerCase()}',
+            ),
+            if (widget.isEmail)
+              FormBuilderValidators.email(
+                errorText: 'Please enter a valid email address',
+              ),
+            if (widget.isPhone)
+              FormBuilderValidators.phoneNumber(
+                errorText: 'Please enter a valid phone number',
+              ),
+            if (widget.isPassword)
+              FormBuilderValidators.minLength(
+                8,
+                errorText: 'Password must be at least 8 characters long',
+              ),
+          ]),
         ),
       ],
     );
