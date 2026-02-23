@@ -1,12 +1,36 @@
+import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
+import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
+import 'package:bite_food_delivery/Models/order_model.dart';
 import 'package:bite_food_delivery/Screens/OrderHistoryPage/Widgets/bite_tab_bar.dart';
 import 'package:bite_food_delivery/Screens/OrderHistoryPage/Widgets/biteorder_history_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class OrderHistoryScreen extends StatelessWidget {
+class OrderHistoryScreen extends StatefulWidget {
   const OrderHistoryScreen({super.key});
+
+  @override
+  State<OrderHistoryScreen> createState() => _OrderHistoryScreenState();
+}
+
+class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
+  @override
+  void initState() {
+    super.initState();
+    final userState = context.read<UserAuthCubit>().state;
+    if (userState is UserLoggedIn && userState.user.id != null) {
+      context.read<OrderCubit>().loadOrderHistory(userState.user.id!);
+    }
+  }
+
+  @override
+  void dispose() {
+    context.read<OrderCubit>().stopListeningToOrderHistory();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +42,56 @@ class OrderHistoryScreen extends StatelessWidget {
           children: [
             BiteTabBar(),
             Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-                child: TabBarView(
-                  children: [_OngoingOrderSection(), _HistoryOrderSection()],
-                ),
+              child: BlocBuilder<OrderCubit, OrderState>(
+                builder: (context, state) {
+                  if (state is OrderLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (state is OrderHistoryLoaded) {
+                    final ongoing = state.orders
+                        .where((o) => o.orderStatus != OrderStatus.delivered)
+                        .toList();
+                    final completed = state.orders
+                        .where((o) => o.orderStatus == OrderStatus.delivered)
+                        .toList();
+                    return Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.w,
+                        vertical: 16.h,
+                      ),
+                      child: TabBarView(
+                        children: [
+                          _OrderListView(orders: ongoing, isCompleted: false),
+                          _OrderListView(orders: completed, isCompleted: true),
+                        ],
+                      ),
+                    );
+                  }
+                  if (state is OrderError) {
+                    return Center(
+                      child: Text(
+                        state.message,
+                        style: GoogleFonts.sen(
+                          fontSize: 16.sp,
+                          color: Colors.red,
+                        ),
+                      ),
+                    );
+                  }
+                  // Default / initial state
+                  return Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 16.h,
+                    ),
+                    child: TabBarView(
+                      children: [
+                        _EmptyOrderView(message: 'No ongoing orders'),
+                        _EmptyOrderView(message: 'No order history'),
+                      ],
+                    ),
+                  );
+                },
               ),
             ),
           ],
@@ -53,36 +122,57 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-class _OngoingOrderSection extends StatelessWidget {
-  const _OngoingOrderSection();
+class _OrderListView extends StatelessWidget {
+  final List<OrderModel> orders;
+  final bool isCompleted;
+
+  const _OrderListView({required this.orders, required this.isCompleted});
 
   @override
   Widget build(BuildContext context) {
+    if (orders.isEmpty) {
+      return _EmptyOrderView(
+        message: isCompleted ? 'No completed orders yet' : 'No ongoing orders',
+      );
+    }
     return ListView.separated(
-      itemCount: 5,
+      itemCount: orders.length,
       itemBuilder: (context, index) {
-        return BiteOrderHistoryCard();
+        return BiteOrderHistoryCard(
+          order: orders[index],
+          isCompleted: isCompleted,
+        );
       },
-      separatorBuilder: (context, index) {
-        return 10.verticalSpace;
-      },
+      separatorBuilder: (context, index) => 10.verticalSpace,
     );
   }
 }
 
-class _HistoryOrderSection extends StatelessWidget {
-  const _HistoryOrderSection();
+class _EmptyOrderView extends StatelessWidget {
+  final String message;
+  const _EmptyOrderView({required this.message});
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemCount: 5,
-      itemBuilder: (context, index) {
-        return BiteOrderHistoryCard(isCompleted: true);
-      },
-      separatorBuilder: (context, index) {
-        return 10.verticalSpace;
-      },
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.receipt_long_outlined,
+            size: 80.r,
+            color: Colors.grey.shade300,
+          ),
+          16.verticalSpace,
+          Text(
+            message,
+            style: GoogleFonts.sen(
+              fontSize: 18.sp,
+              color: Colors.grey.shade500,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -9,6 +9,7 @@ import 'package:bite_food_delivery/Cubits/FavouriteCubit/favourite_cubit.dart';
 import 'package:bite_food_delivery/Cubits/FilterRestaurantsCubit/filter_restaurants_cubit.dart';
 import 'package:bite_food_delivery/Cubits/FirstTimeLaunchCubit/first_time_launch_cubit.dart';
 import 'package:bite_food_delivery/Cubits/FoodItemCubit/food_item_cubit.dart';
+import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
 import 'package:bite_food_delivery/Cubits/PaymentCubit/payment_method_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RecentSearchesCubit/recent_searches_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
@@ -27,6 +28,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,6 +56,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => FavouriteCubit()),
         BlocProvider(create: (context) => UserAuthCubit()),
         BlocProvider(create: (context) => FoodItemCubit()),
+        BlocProvider(create: (context) => OrderCubit()..loadActiveOrder()),
         BlocProvider(create: (context) => CreditCardTypeSelectorCubit()),
         BlocProvider(create: (context) => PaymentMethodSelectorCubit()),
         BlocProvider(
@@ -103,6 +106,26 @@ class MainPage extends StatelessWidget {
                   .page!;
             },
           ),
+      floatingActionButton: BlocBuilder<OrderCubit, OrderState>(
+        builder: (context, state) {
+          final hasActive = context.read<OrderCubit>().hasActiveOrder;
+          if (!hasActive) return const SizedBox.shrink();
+          return FloatingActionButton.extended(
+            onPressed: () {
+              Navigator.of(context).pushNamed('/track_order_screen');
+            },
+            backgroundColor: Theme.of(context).primaryColor,
+            icon: const Icon(Icons.delivery_dining, color: Colors.white),
+            label: Text(
+              'Track Order',
+              style: GoogleFonts.sen(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          );
+        },
+      ),
       bottomNavigationBar: BiteBottomNavigationBar(),
     );
   }

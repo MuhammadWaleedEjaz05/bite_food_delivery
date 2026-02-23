@@ -1,10 +1,13 @@
 import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
+import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
 import 'package:bite_food_delivery/Cubits/PaymentCubit/payment_method_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
+import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_address_selector_modal.dart';
 import 'package:bite_food_delivery/Models/credit_card_model.dart';
+import 'package:bite_food_delivery/Models/order_model.dart';
 import 'package:bite_food_delivery/Screens/CheckOutPage/Widgets/bite_check_out_payment_block.dart';
 import 'package:bite_food_delivery/Screens/CheckOutPage/Widgets/bite_checkout_item_tile.dart';
 import 'package:bite_food_delivery/Screens/CheckOutPage/Widgets/bite_summary_row.dart';
@@ -360,108 +363,201 @@ class _PlaceOrderButton extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (ctx) => AlertDialog(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.r),
+          child: BlocConsumer<OrderCubit, OrderState>(
+            listener: (context, state) {
+              if (state is OrderPlaced) {
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (ctx) => AlertDialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.r),
+                    ),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        20.verticalSpace,
+                        Container(
+                          padding: EdgeInsets.all(20.r),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor.withAlpha(25),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            Icons.check_circle_outline,
+                            color: Theme.of(context).primaryColor,
+                            size: 60.r,
+                          ),
+                        ),
+                        20.verticalSpace,
+                        Text(
+                          'Order Placed!',
+                          style: GoogleFonts.sen(
+                            fontSize: 24.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        10.verticalSpace,
+                        Text(
+                          'Your order has been placed successfully.\nTrack your order in real-time.',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.sen(
+                            fontSize: 14.sp,
+                            color: Colors.grey.shade600,
+                          ),
+                        ),
+                        25.verticalSpace,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(ctx).pop();
+                                  Navigator.of(
+                                    context,
+                                  ).popUntil((route) => route.isFirst);
+                                  Navigator.of(
+                                    context,
+                                  ).pushNamed('/track_order_screen');
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  padding: EdgeInsets.symmetric(vertical: 12.h),
+                                  backgroundColor: Theme.of(
+                                    context,
+                                  ).primaryColor,
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                  ),
+                                ),
+                                child: Text(
+                                  'Track Order',
+                                  style: GoogleFonts.sen(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            12.horizontalSpace,
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(ctx).pop();
+                                  Navigator.of(
+                                    context,
+                                  ).popUntil((route) => route.isFirst);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  padding: EdgeInsets.symmetric(vertical: 12.h),
+                                  backgroundColor: Colors.white,
+                                  foregroundColor: Theme.of(
+                                    context,
+                                  ).primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    side: BorderSide(
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                  ),
+                                ),
+                                child: Text(
+                                  'Back to Home',
+                                  style: GoogleFonts.sen(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        10.verticalSpace,
+                      ],
+                    ),
                   ),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      20.verticalSpace,
-                      Container(
-                        padding: EdgeInsets.all(20.r),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor.withAlpha(25),
-                          shape: BoxShape.circle,
+                );
+              } else if (state is OrderError) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.message),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            },
+            builder: (context, state) {
+              return ElevatedButton(
+                onPressed: state is OrderLoading
+                    ? null
+                    : () {
+                        final userState = context.read<UserAuthCubit>().state;
+                        final addressState = context.read<AddressCubit>().state;
+                        final paymentMethod = context
+                            .read<PaymentMethodSelectorCubit>()
+                            .state;
+
+                        final String userId = userState is UserLoggedIn
+                            ? (userState.user.id ?? '')
+                            : '';
+                        final String addressId =
+                            addressState is AddressesLoaded &&
+                                addressState.selectedAddress != null
+                            ? addressState.selectedAddress!.addressID
+                            : '';
+                        final String restaurantId =
+                            cartState is CartLoaded &&
+                                cartState.cart.cartItems.isNotEmpty
+                            ? cartState.cart.cartItems[0].product.RestuarantId
+                            : '';
+
+                        final order = OrderModel(
+                          userId: userId,
+                          restaurantId: restaurantId,
+                          cartID: cartID,
+                          totalPrice: grandTotal,
+                          deliveryAddressId: addressId,
+                          paymentMethod: paymentMethod.cardType,
+                        );
+
+                        context.read<OrderCubit>().placeOrder(order);
+                      },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 14.h),
+                  backgroundColor: Theme.of(context).primaryColor,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  elevation: 2,
+                ),
+                child: state is OrderLoading
+                    ? SizedBox(
+                        height: 22.r,
+                        width: 22.r,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
                         ),
-                        child: Icon(
-                          Icons.check_circle_outline,
-                          color: Theme.of(context).primaryColor,
-                          size: 60.r,
-                        ),
-                      ),
-                      20.verticalSpace,
-                      Text(
-                        'Order Placed!',
-                        style: GoogleFonts.sen(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
-                      ),
-                      10.verticalSpace,
-                      Text(
-                        'Your order has been placed successfully.\nYou can track your order in order history.',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.sen(
-                          fontSize: 14.sp,
-                          color: Colors.grey.shade600,
-                        ),
-                      ),
-                      25.verticalSpace,
-                      Row(
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Expanded(
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(ctx).pop();
-                                Navigator.of(
-                                  context,
-                                ).popUntil((route) => route.isFirst);
-                              },
-                              style: ElevatedButton.styleFrom(
-                                padding: EdgeInsets.symmetric(vertical: 12.h),
-                                backgroundColor: Theme.of(context).primaryColor,
-                                foregroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                ),
-                              ),
-                              child: Text(
-                                'Back to Home',
-                                style: GoogleFonts.sen(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                          Icon(Icons.shopping_cart_checkout, size: 22.r),
+                          10.horizontalSpace,
+                          Text(
+                            'Place Order  •  PKR ${grandTotal.toStringAsFixed(0)}',
+                            style: GoogleFonts.sen(
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
                             ),
                           ),
                         ],
                       ),
-                      10.verticalSpace,
-                    ],
-                  ),
-                ),
               );
             },
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(vertical: 14.h),
-              backgroundColor: Theme.of(context).primaryColor,
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              elevation: 2,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.shopping_cart_checkout, size: 22.r),
-                10.horizontalSpace,
-                Text(
-                  'Place Order  •  PKR ${grandTotal.toStringAsFixed(0)}',
-                  style: GoogleFonts.sen(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
           ),
         ),
       ],

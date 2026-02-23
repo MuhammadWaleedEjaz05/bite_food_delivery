@@ -27,5 +27,12 @@ class RestaurantsCubit extends Cubit<RestaurantsState> {
     }
   }
 
-  
+  String getRestaurantNameById(String restaurantId) {
+    final currentState = state;
+    if (currentState is RestaurantsLoaded) {
+      final match = currentState.restaurants.where((r) => r.id == restaurantId);
+      if (match.isNotEmpty) return match.first.name;
+    }
+    return restaurantId;
+  }
 }

@@ -18,6 +18,7 @@ import 'package:bite_food_delivery/Screens/RestaurantPage/Page/restaurant_screen
 import 'package:bite_food_delivery/Screens/SettingPage/Page/setting_screen.dart';
 import 'package:bite_food_delivery/Screens/PaymentPage/Page/add_card_screen.dart';
 import 'package:bite_food_delivery/Screens/SignupPage/Page/signup_screen.dart';
+import 'package:bite_food_delivery/Screens/TrackOrderPage/Page/track_order_screen.dart';
 import 'package:flutter/material.dart';
 
 final Map<String, Widget Function(BuildContext)> routes = {
@@ -41,4 +42,5 @@ final Map<String, Widget Function(BuildContext)> routes = {
   '/signup_screen': (context) => SignupScreen(),
   '/forgot_password_screen': (context) => ForgotPasswordScreen(),
   '/checkout_screen': (context) => CheckOutScreen(),
+  '/track_order_screen': (context) => TrackOrderScreen(),
 };
