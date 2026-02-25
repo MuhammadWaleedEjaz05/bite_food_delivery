@@ -2,7 +2,7 @@ import 'package:bite_food_delivery/Models/credit_card_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
 
-enum OrderStatus { received, preparing, dispatched, delivered }
+enum OrderStatus { received, preparing, dispatched, delivered, cancelled }
 
 final uuid = Uuid();
 

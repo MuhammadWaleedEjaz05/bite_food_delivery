@@ -1,27 +1,15 @@
-import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
 import 'package:bite_food_delivery/Cubits/BottomNavigationSelection/bottom_navigation_selector_cubit.dart';
-import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
-import 'package:bite_food_delivery/Cubits/CategoriesCubit/categories_cubit.dart';
-import 'package:bite_food_delivery/Cubits/CategorySelectionCubit/category_selection_cubit.dart';
-import 'package:bite_food_delivery/Cubits/CreditCardCubit/credit_card_cubit.dart';
-import 'package:bite_food_delivery/Cubits/CreditCardCubit/credit_card_type_selector_cubit.dart';
-import 'package:bite_food_delivery/Cubits/FavouriteCubit/favourite_cubit.dart';
-import 'package:bite_food_delivery/Cubits/FilterRestaurantsCubit/filter_restaurants_cubit.dart';
-import 'package:bite_food_delivery/Cubits/FirstTimeLaunchCubit/first_time_launch_cubit.dart';
-import 'package:bite_food_delivery/Cubits/FoodItemCubit/food_item_cubit.dart';
 import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
-import 'package:bite_food_delivery/Cubits/PaymentCubit/payment_method_selector_cubit.dart';
-import 'package:bite_food_delivery/Cubits/RecentSearchesCubit/recent_searches_cubit.dart';
-import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
-import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/Screens/SplashPage/Pages/splash_screen.dart';
 import 'package:bite_food_delivery/Themes/light_themes.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_bottom_navigation_bar.dart';
-import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
+import 'package:bite_food_delivery/configs/blocProviderlist.dart';
+import 'package:bite_food_delivery/configs/fcm_initialize.dart';
 import 'package:bite_food_delivery/configs/page_routes.dart';
 import 'package:bite_food_delivery/configs/screen_list.dart';
 import 'package:bite_food_delivery/configs/shared_preference_fucntions.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,6 +23,9 @@ void main() async {
   await Firebase.initializeApp();
   await sharedPreference;
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  FirebaseMessaging.onBackgroundMessage(firebaseBackgroundMessageHandler);
+  await initializeFCM();
+  await NotificationService.instance.initialize();
   runApp(const MyApp());
 }
 
@@ -44,28 +35,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => CartCubit()),
-        BlocProvider(create: (context) => AddressCubit()),
-        BlocProvider(create: (context) => CategoriesCubit()),
-        BlocProvider(create: (context) => RestaurantsCubit()),
-        BlocProvider(create: (context) => RecentSearchesCubit()),
-        BlocProvider(create: (context) => BottomNavigationSelectorCubit()),
-        BlocProvider(create: (context) => CategorySelectionCubit()),
-        BlocProvider(create: (context) => FilterRestaurantsCubit()),
-        BlocProvider(create: (context) => FavouriteCubit()),
-        BlocProvider(create: (context) => UserAuthCubit()),
-        BlocProvider(create: (context) => FoodItemCubit()),
-        BlocProvider(create: (context) => OrderCubit()..loadActiveOrder()),
-        BlocProvider(create: (context) => CreditCardTypeSelectorCubit()),
-        BlocProvider(create: (context) => PaymentMethodSelectorCubit()),
-        BlocProvider(
-          create: (context) => CreditCardCubit(getCurrentUser()!.uid),
-        ),
-        BlocProvider(
-          create: (context) => FirstTimeLaunchCubit()..checkFirstTimeLaunch(),
-        ),
-      ],
+      providers: blocProviderList,
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         builder: (context, child) {

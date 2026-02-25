@@ -1,3 +1,4 @@
+import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/Models/order_model.dart';
 import 'package:bite_food_delivery/Screens/TrackOrderPage/Page/track_order_screen.dart';
@@ -161,7 +162,49 @@ class BiteOrderHistoryCard extends StatelessWidget {
                   Expanded(
                     child: !isCompleted
                         ? ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                  title: Text(
+                                    'Cancel Order',
+                                    style: GoogleFonts.sen(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  content: Text(
+                                    'Are you sure you want to cancel this order?',
+                                    style: GoogleFonts.sen(),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(ctx),
+                                      child: Text(
+                                        'No',
+                                        style: GoogleFonts.sen(
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(ctx);
+                                        context.read<OrderCubit>().cancelOrder(
+                                          order.orderId,
+                                        );
+                                      },
+                                      child: Text(
+                                        'Yes, Cancel',
+                                        style: GoogleFonts.sen(
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Theme.of(context).primaryColor,
                               backgroundColor: Colors.white,
@@ -175,7 +218,12 @@ class BiteOrderHistoryCard extends StatelessWidget {
                             child: Text('Cancel'),
                           )
                         : ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              context.read<OrderCubit>().reorderFromHistory(
+                                order.orderId,
+                                order.userId,
+                              );
+                            },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,
                               backgroundColor: Theme.of(context).primaryColor,

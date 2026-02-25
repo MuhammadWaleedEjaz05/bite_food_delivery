@@ -24,6 +24,8 @@ class TrackOrderScreen extends StatelessWidget {
         return 2;
       case OrderStatus.delivered:
         return 3;
+      case OrderStatus.cancelled:
+        throw UnimplementedError();
     }
   }
 

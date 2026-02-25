@@ -49,6 +49,7 @@ class _SplashScreenState extends State<SplashScreen>
     }
     _didNavigate = true;
     await Future.delayed(const Duration(milliseconds: 800));
+    if (!mounted) return;
 
     final FirstTimeLaunchCubit cubit = context.read<FirstTimeLaunchCubit>();
     FirstTimeLaunchState state = cubit.state;

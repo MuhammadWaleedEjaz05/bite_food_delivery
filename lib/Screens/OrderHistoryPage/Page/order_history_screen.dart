@@ -36,24 +36,70 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _AppBarSection(),
-      body: DefaultTabController(
-        length: 2,
-        child: Column(
-          children: [
-            BiteTabBar(),
-            Expanded(
-              child: BlocBuilder<OrderCubit, OrderState>(
-                builder: (context, state) {
-                  if (state is OrderLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  if (state is OrderHistoryLoaded) {
-                    final ongoing = state.orders
-                        .where((o) => o.orderStatus != OrderStatus.delivered)
-                        .toList();
-                    final completed = state.orders
-                        .where((o) => o.orderStatus == OrderStatus.delivered)
-                        .toList();
+      body: BlocListener<OrderCubit, OrderState>(
+        listener: (context, state) {
+          if (state is ReorderLoaded) {
+            Navigator.pushNamed(context, '/cart_screen');
+          } else if (state is OrderCancelled) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Order cancelled successfully')),
+            );
+          }
+        },
+        child: DefaultTabController(
+          length: 2,
+          child: Column(
+            children: [
+              BiteTabBar(),
+              Expanded(
+                child: BlocBuilder<OrderCubit, OrderState>(
+                  builder: (context, state) {
+                    if (state is OrderLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    if (state is OrderHistoryLoaded) {
+                      final ongoing = state.orders
+                          .where(
+                            (o) =>
+                                o.orderStatus != OrderStatus.delivered &&
+                                o.orderStatus != OrderStatus.cancelled,
+                          )
+                          .toList();
+                      final completed = state.orders
+                          .where(
+                            (o) =>
+                                o.orderStatus == OrderStatus.delivered ||
+                                o.orderStatus == OrderStatus.cancelled,
+                          )
+                          .toList();
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16.w,
+                          vertical: 16.h,
+                        ),
+                        child: TabBarView(
+                          children: [
+                            _OrderListView(orders: ongoing, isCompleted: false),
+                            _OrderListView(
+                              orders: completed,
+                              isCompleted: true,
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                    if (state is OrderError) {
+                      return Center(
+                        child: Text(
+                          state.message,
+                          style: GoogleFonts.sen(
+                            fontSize: 16.sp,
+                            color: Colors.red,
+                          ),
+                        ),
+                      );
+                    }
+                    // Default / initial state
                     return Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: 16.w,
@@ -61,40 +107,16 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                       ),
                       child: TabBarView(
                         children: [
-                          _OrderListView(orders: ongoing, isCompleted: false),
-                          _OrderListView(orders: completed, isCompleted: true),
+                          _EmptyOrderView(message: 'No ongoing orders'),
+                          _EmptyOrderView(message: 'No order history'),
                         ],
                       ),
                     );
-                  }
-                  if (state is OrderError) {
-                    return Center(
-                      child: Text(
-                        state.message,
-                        style: GoogleFonts.sen(
-                          fontSize: 16.sp,
-                          color: Colors.red,
-                        ),
-                      ),
-                    );
-                  }
-                  // Default / initial state
-                  return Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.w,
-                      vertical: 16.h,
-                    ),
-                    child: TabBarView(
-                      children: [
-                        _EmptyOrderView(message: 'No ongoing orders'),
-                        _EmptyOrderView(message: 'No order history'),
-                      ],
-                    ),
-                  );
-                },
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

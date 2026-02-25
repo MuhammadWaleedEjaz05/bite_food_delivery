@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:bite_food_delivery/Cubits/NotificationCubit/notifications_cubit.dart';
+import 'package:bite_food_delivery/Models/cart_model.dart';
 import 'package:bite_food_delivery/Models/order_model.dart';
 import 'package:bite_food_delivery/configs/firebase_db_conn.dart';
 import 'package:bloc/bloc.dart';
@@ -12,13 +14,18 @@ part 'order_state.dart';
 const String _activeOrderKey = 'active_order';
 
 class OrderCubit extends Cubit<OrderState> {
-  OrderCubit() : super(OrderInitial());
+  final NotificationsCubit _notificationsCubit;
+
+  OrderCubit({required NotificationsCubit notificationsCubit})
+    : _notificationsCubit = notificationsCubit,
+      super(OrderInitial());
 
   OrderModel? _activeOrder;
   OrderModel? get activeOrder => _activeOrder;
   bool get hasActiveOrder =>
       _activeOrder != null &&
-      _activeOrder!.orderStatus != OrderStatus.delivered;
+      _activeOrder!.orderStatus != OrderStatus.delivered &&
+      _activeOrder!.orderStatus != OrderStatus.cancelled;
 
   StreamSubscription? _activeOrderSubscription;
   StreamSubscription? _orderHistorySubscription;
@@ -52,12 +59,16 @@ class OrderCubit extends Cubit<OrderState> {
             if (_activeOrder == null ||
                 _activeOrder!.orderStatus != updatedOrder.orderStatus) {
               if (updatedOrder.orderStatus == OrderStatus.delivered) {
+                _notificationsCubit.notifyOrderStatusChanged(updatedOrder);
                 _activeOrder = null;
                 _clearSavedActiveOrder();
                 _activeOrderSubscription?.cancel();
                 _activeOrderSubscription = null;
                 emit(ActiveOrderDelivered(updatedOrder));
               } else {
+                if (_activeOrder != null) {
+                  _notificationsCubit.notifyOrderStatusChanged(updatedOrder);
+                }
                 _activeOrder = updatedOrder;
                 _saveActiveOrder(updatedOrder);
                 emit(ActiveOrderUpdated(updatedOrder));
@@ -115,6 +126,7 @@ class OrderCubit extends Cubit<OrderState> {
       _activeOrder = order;
       await _saveActiveOrder(order);
       emit(OrderPlaced(order));
+      _notificationsCubit.notifyOrderPlaced(order);
 
       _listenToActiveOrder(order.orderId);
     } catch (e) {
@@ -185,6 +197,95 @@ class OrderCubit extends Cubit<OrderState> {
       }
 
       emit(OrderStatusUpdated(updatedOrder));
+    } catch (e) {
+      emit(OrderError(e.toString()));
+    }
+  }
+
+  Future<void> cancelOrder(String orderId) async {
+    emit(OrderLoading());
+    try {
+      final db = getCollection('OrdersDB');
+      final orderDoc = db.doc(orderId);
+      final orderSnapshot = await orderDoc.get();
+
+      if (!orderSnapshot.exists) {
+        emit(const OrderError('Order not found'));
+        return;
+      }
+
+      final orderData = orderSnapshot.data() as Map<String, dynamic>;
+      final order = OrderModel.fromJson(orderData);
+
+      if (order.orderStatus == OrderStatus.dispatched ||
+          order.orderStatus == OrderStatus.delivered) {
+        emit(const OrderError('Order cannot be cancelled at this stage'));
+        return;
+      }
+
+      if (_activeOrder?.orderId == orderId) {
+        _activeOrderSubscription?.cancel();
+        _activeOrderSubscription = null;
+        _activeOrder = null;
+        await _clearSavedActiveOrder();
+      }
+
+      await orderDoc.update({'orderStatus': OrderStatus.cancelled.name});
+      final cancelledOrder = order.copyWith(orderStatus: OrderStatus.cancelled);
+      _notificationsCubit.notifyOrderStatusChanged(cancelledOrder);
+      emit(OrderCancelled(cancelledOrder));
+    } catch (e) {
+      emit(OrderError(e.toString()));
+    }
+  }
+
+  Future<void> reorderFromHistory(String orderId, String userId) async {
+    emit(OrderLoading());
+    try {
+      final orderDB = getCollection('OrdersDB');
+      final cartDB = getCollection('CartDB');
+
+      // Fetch items from the old order
+      final orderItems = await orderDB.doc(orderId).collection('Items').get();
+      if (orderItems.docs.isEmpty) {
+        emit(const OrderError('No items found in this order'));
+        return;
+      }
+
+      // Clear any existing cart for the user
+      final existingCart = await cartDB
+          .where('userID', isEqualTo: userId)
+          .limit(1)
+          .get();
+
+      final batch = database.batch();
+
+      if (existingCart.docs.isNotEmpty) {
+        final oldCartId = existingCart.docs.first.id;
+        final oldProducts = await cartDB
+            .doc(oldCartId)
+            .collection('Products')
+            .get();
+        for (final doc in oldProducts.docs) {
+          batch.delete(doc.reference);
+        }
+        batch.delete(cartDB.doc(oldCartId));
+      }
+
+      // Create a new cart with the old order's items
+      final newCart = CartModel(userID: userId);
+      batch.set(cartDB.doc(newCart.cartID), newCart.toJson());
+
+      final newProductsRef = cartDB.doc(newCart.cartID).collection('Products');
+      for (final doc in orderItems.docs) {
+        final data = doc.data();
+        final productID = data['productID'] as String? ?? doc.id;
+        batch.set(newProductsRef.doc(productID), data);
+      }
+
+      await batch.commit();
+
+      emit(ReorderLoaded(newCart.cartID));
     } catch (e) {
       emit(OrderError(e.toString()));
     }

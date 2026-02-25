@@ -1,6 +1,9 @@
+import 'package:bite_food_delivery/Cubits/NotificationCubit/notifications_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
+import 'package:bite_food_delivery/Models/notification_model.dart';
 import 'package:bite_food_delivery/Screens/NotificationPage/Widgets/bite_notification_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,99 +15,145 @@ class NotificationScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: _AppSection(),
-      body: DefaultTabController(
-        initialIndex: 0,
-        length: 2,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _UnreadCountSection(),
-              15.verticalSpace,
-              _TabSection(),
-              20.verticalSpace,
-              Expanded(child: _NotificationSection()),
-            ],
-          ),
+      body: BlocBuilder<NotificationsCubit, NotificationsState>(
+        builder: (context, state) {
+          if (state is NotificationsLoaded) {
+            return _NotificationBody(state: state);
+          }
+          if (state is NotificationsError) {
+            return Center(
+              child: Text(
+                state.message,
+                style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.grey),
+              ),
+            );
+          }
+          return Center(
+            child: CircularProgressIndicator(
+              color: Theme.of(context).primaryColor,
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _NotificationBody extends StatelessWidget {
+  final NotificationsLoaded state;
+  const _NotificationBody({required this.state});
+
+  @override
+  Widget build(BuildContext context) {
+    if (state.notifications.isEmpty) {
+      return Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.notifications_off_outlined,
+              size: 60.r,
+              color: Colors.grey.shade400,
+            ),
+            15.verticalSpace,
+            Text(
+              'No notifications yet',
+              style: GoogleFonts.sen(
+                fontSize: 18.sp,
+                color: Colors.grey.shade500,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return DefaultTabController(
+      initialIndex: 0,
+      length: 2,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${state.unreadCount} unread notifications',
+              style: GoogleFonts.sen(
+                fontSize: 16.sp,
+                color: Colors.grey.shade600,
+              ),
+            ),
+            15.verticalSpace,
+            _TabSection(
+              totalCount: state.notifications.length,
+              unreadCount: state.unreadCount,
+            ),
+            20.verticalSpace,
+            Expanded(
+              child: TabBarView(
+                children: [
+                  _NotificationList(notifications: state.notifications),
+                  _NotificationList(notifications: state.unreadNotifications),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class _UnreadCountSection extends StatelessWidget {
-  const _UnreadCountSection();
+class _NotificationList extends StatelessWidget {
+  final List<NotificationModel> notifications;
+  const _NotificationList({required this.notifications});
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      '2 unread notifications',
-      style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.grey.shade600),
-    );
-  }
-}
+    if (notifications.isEmpty) {
+      return Center(
+        child: Text(
+          'No notifications',
+          style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.grey),
+        ),
+      );
+    }
 
-class _NotificationSection extends StatelessWidget {
-  const _NotificationSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return TabBarView(
-      children: [_AllNotificationsSection(), _UnreadNotificationsSection()],
-    );
-  }
-}
-
-class _AllNotificationsSection extends StatelessWidget {
-  const _AllNotificationsSection();
-
-  @override
-  Widget build(BuildContext context) {
     return ListView.separated(
-      itemBuilder: (context, index) => BiteNotificationCard(
-        icon: _notificationData(context)[index]['icon'] as IconData,
-        iconColor: _notificationData(context)[index]['iconColor'] as Color,
-        iconBgColor: _notificationData(context)[index]['iconBgColor'] as Color,
-        borderColor: _notificationData(context)[index]['borderColor'] as Color,
-        title: _notificationData(context)[index]['title'] as String,
-        subtitle: _notificationData(context)[index]['subtitle'] as String,
-        time: _notificationData(context)[index]['time'] as String,
-        isUnread: _notificationData(context)[index]['isUnread'] as bool,
-      ),
+      itemCount: notifications.length,
       separatorBuilder: (context, index) => 12.verticalSpace,
-      itemCount: _notificationData(context).length,
-    );
-  }
-}
+      itemBuilder: (context, index) {
+        final notification = notifications[index];
+        final style = _styleForType(notification.type);
 
-class _UnreadNotificationsSection extends StatelessWidget {
-  const _UnreadNotificationsSection();
-
-  @override
-  Widget build(BuildContext context) {
-    final unreadNotifications = _notificationData(
-      context,
-    ).where((n) => n['isUnread'] == true).toList();
-    return ListView.separated(
-      itemBuilder: (context, index) => BiteNotificationCard(
-        icon: unreadNotifications[index]['icon'] as IconData,
-        iconColor: unreadNotifications[index]['iconColor'] as Color,
-        iconBgColor: unreadNotifications[index]['iconBgColor'] as Color,
-        borderColor: unreadNotifications[index]['borderColor'] as Color,
-        title: unreadNotifications[index]['title'] as String,
-        subtitle: unreadNotifications[index]['subtitle'] as String,
-        time: unreadNotifications[index]['time'] as String,
-        isUnread: unreadNotifications[index]['isUnread'] as bool,
-      ),
-      separatorBuilder: (context, index) => 12.verticalSpace,
-      itemCount: unreadNotifications.length,
+        return GestureDetector(
+          onTap: () {
+            if (!notification.isRead) {
+              context.read<NotificationsCubit>().markAsRead(notification.id);
+            }
+          },
+          child: BiteNotificationCard(
+            icon: style.$1,
+            iconColor: style.$2,
+            iconBgColor: style.$3,
+            borderColor: notification.isRead
+                ? Colors.grey.shade300
+                : Theme.of(context).primaryColor,
+            title: notification.title,
+            subtitle: notification.body,
+            time: _timeAgo(notification.createdAt),
+            isUnread: !notification.isRead,
+          ),
+        );
+      },
     );
   }
 }
 
 class _TabSection extends StatelessWidget {
-  const _TabSection();
+  final int totalCount;
+  final int unreadCount;
+  const _TabSection({required this.totalCount, required this.unreadCount});
 
   @override
   Widget build(BuildContext context) {
@@ -120,8 +169,8 @@ class _TabSection extends StatelessWidget {
       labelStyle: GoogleFonts.sen(fontSize: 16.sp, fontWeight: FontWeight.bold),
       unselectedLabelStyle: GoogleFonts.sen(fontSize: 16.sp),
       tabs: [
-        Tab(text: 'All (6)'),
-        Tab(text: 'Unread (2)'),
+        Tab(text: 'All ($totalCount)'),
+        Tab(text: 'Unread ($unreadCount)'),
       ],
     );
   }
@@ -149,57 +198,27 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-List<Map<String, dynamic>> _notificationData(BuildContext context) {
-  return [
-    {
-      'icon': Icons.inventory_2_outlined,
-      'iconColor': Colors.blue,
-      'iconBgColor': Colors.blue.shade50,
-      'borderColor': Theme.of(context).primaryColor,
-      'title': 'Order Delivered',
-      'subtitle': 'Your order #12345 has been delivered successfully',
-      'time': '5 min ago',
-      'isUnread': true,
-    },
-    {
-      'icon': Icons.percent,
-      'iconColor': Colors.deepOrange,
-      'iconBgColor': Colors.orange.shade50,
-      'borderColor': Theme.of(context).primaryColor,
-      'title': 'Special Offer!',
-      'subtitle': 'Get 30% off on your next order. Use code: SAVE30',
-      'time': '1 hour ago',
-      'isUnread': true,
-    },
-    {
-      'icon': Icons.check_circle_outline,
-      'iconColor': Colors.green,
-      'iconBgColor': Colors.green.shade50,
-      'borderColor': Colors.grey.shade300,
-      'title': 'Order Confirmed',
-      'subtitle': 'Your order #12344 has been confirmed and is being prepared',
-      'time': '2 hours ago',
-      'isUnread': false,
-    },
-    {
-      'icon': Icons.notifications_none,
-      'iconColor': Colors.deepOrange,
-      'iconBgColor': Colors.orange.shade50,
-      'borderColor': Colors.grey.shade300,
-      'title': 'Rate Your Order',
-      'subtitle': 'How was your experience with Pizza Paradise?',
-      'time': '5 hours ago',
-      'isUnread': false,
-    },
-    {
-      'icon': Icons.local_shipping_outlined,
-      'iconColor': Colors.blue,
-      'iconBgColor': Colors.blue.shade50,
-      'borderColor': Colors.grey.shade300,
-      'title': 'Order Out for Delivery',
-      'subtitle': 'Your order #12343 is out for delivery',
-      'time': '1 day ago',
-      'isUnread': false,
-    },
-  ];
+(IconData, Color, Color) _styleForType(String type) {
+  switch (type) {
+    case 'order_placed':
+      return (Icons.check_circle_outline, Colors.green, Colors.green.shade50);
+    case 'order_preparing':
+      return (Icons.restaurant, Colors.orange, Colors.orange.shade50);
+    case 'order_dispatched':
+      return (Icons.local_shipping_outlined, Colors.blue, Colors.blue.shade50);
+    case 'order_delivered':
+      return (Icons.inventory_2_outlined, Colors.green, Colors.green.shade50);
+    case 'order_cancelled':
+      return (Icons.cancel_outlined, Colors.red, Colors.red.shade50);
+    default:
+      return (Icons.notifications_none, Colors.grey, Colors.grey.shade50);
+  }
+}
+
+String _timeAgo(DateTime dateTime) {
+  final diff = DateTime.now().difference(dateTime);
+  if (diff.inMinutes < 1) return 'Just now';
+  if (diff.inMinutes < 60) return '${diff.inMinutes} min ago';
+  if (diff.inHours < 24) return '${diff.inHours}h ago';
+  return '${diff.inDays}d ago';
 }

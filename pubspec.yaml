@@ -59,6 +59,9 @@ dependencies:
   location: ^8.0.1
   form_builder_validators: ^11.3.0
   credit_card_type_detector: ^3.0.0
+  firebase_messaging: ^16.1.1
+  timezone: ^0.11.0
+  flutter_local_notifications: ^21.0.0-dev.2
 
 dev_dependencies:
   flutter_test:

@@ -64,3 +64,21 @@ final class ActiveOrderDelivered extends OrderState {
   @override
   List<Object> get props => [order];
 }
+
+final class OrderCancelled extends OrderState {
+  final OrderModel order;
+
+  const OrderCancelled(this.order);
+
+  @override
+  List<Object> get props => [order];
+}
+
+final class ReorderLoaded extends OrderState {
+  final String cartID;
+
+  const ReorderLoaded(this.cartID);
+
+  @override
+  List<Object> get props => [cartID];
+}
