@@ -18,12 +18,13 @@ class BiteCarouselSliderPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          height: 300.h,
-          width: 250.w,
-          decoration: BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.circular(10.r),
+        Flexible(
+          child: Container(
+            width: 250.w,
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(10.r),
+            ),
           ),
         ),
         20.verticalSpace,

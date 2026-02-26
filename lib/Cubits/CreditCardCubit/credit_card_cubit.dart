@@ -7,8 +7,8 @@ part 'credit_card_state.dart';
 
 class CreditCardCubit extends Cubit<CreditCardState> {
   final List<CreditCardModel> _cachedCreditCards = [];
-  CreditCardCubit(String userID) : super(CreditCardInitial()) {
-    loadCreditCards(userID);
+  CreditCardCubit([String? userID]) : super(CreditCardInitial()) {
+    if (userID != null) loadCreditCards(userID);
   }
 
   Future<void> loadCreditCards(String userID) async {

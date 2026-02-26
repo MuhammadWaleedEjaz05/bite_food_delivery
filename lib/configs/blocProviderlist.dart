@@ -37,8 +37,14 @@ List<BlocProvider> blocProviderList = [
   BlocProvider<UserAuthCubit>(create: (context) => UserAuthCubit()),
   BlocProvider<FoodItemCubit>(create: (context) => FoodItemCubit()),
   BlocProvider<NotificationsCubit>(
-    create: (context) =>
-        NotificationsCubit()..loadNotifications(getCurrentUser()!.uid),
+    create: (context) {
+      final cubit = NotificationsCubit();
+      final user = getCurrentUser();
+      if (user != null) {
+        cubit.loadNotifications(user.uid);
+      }
+      return cubit;
+    },
   ),
   BlocProvider<OrderCubit>(
     create: (context) =>
@@ -52,7 +58,7 @@ List<BlocProvider> blocProviderList = [
     create: (context) => PaymentMethodSelectorCubit(),
   ),
   BlocProvider<CreditCardCubit>(
-    create: (context) => CreditCardCubit(getCurrentUser()!.uid),
+    create: (context) => CreditCardCubit(getCurrentUser()?.uid),
   ),
   BlocProvider<FirstTimeLaunchCubit>(
     create: (context) => FirstTimeLaunchCubit()..checkFirstTimeLaunch(),

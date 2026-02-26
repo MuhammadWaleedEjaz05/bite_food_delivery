@@ -9,13 +9,13 @@ class BiteBottomItemModel {
   final IconData icon;
   final IconData selectedIcon;
   final String title;
-  final Widget? page;
+  final Widget page;
 
   BiteBottomItemModel({
     required this.icon,
     required this.selectedIcon,
     required this.title,
-    this.page,
+    required this.page,
   });
 }
 

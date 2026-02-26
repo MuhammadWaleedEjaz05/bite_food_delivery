@@ -71,7 +71,7 @@ class MainPage extends StatelessWidget {
               return screenList[state is BottomNavigationSelectorChanged
                       ? state.selectedIndex
                       : 0]
-                  .page!;
+                  .page;
             },
           ),
       floatingActionButton: BlocBuilder<OrderCubit, OrderState>(
