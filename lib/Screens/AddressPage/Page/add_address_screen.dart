@@ -215,8 +215,8 @@ class _AddressLabelSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
-    final backgroundColor = Theme.of(context).scaffoldBackgroundColor;
+    final primaryColor = Colors.deepOrange;
+    final backgroundColor = Colors.white;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -361,7 +361,7 @@ class _SaveAddressSection extends StatelessWidget {
             },
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(vertical: 10.h),
-              backgroundColor: Theme.of(context).primaryColor,
+              backgroundColor: Colors.deepOrange,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),

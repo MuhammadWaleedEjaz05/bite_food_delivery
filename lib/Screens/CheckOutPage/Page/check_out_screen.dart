@@ -29,7 +29,7 @@ class CheckOutScreen extends StatelessWidget {
     final double totalAmount = (args['totalAmount'] as num?)?.toDouble() ?? 0;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.white,
       appBar: BiteAppBar(
         backButton: true,
         title: Text(
@@ -37,7 +37,7 @@ class CheckOutScreen extends StatelessWidget {
           style: GoogleFonts.sen(
             fontSize: 30.sp,
             fontWeight: FontWeight.bold,
-            color: Theme.of(context).primaryColor,
+            color: Colors.deepOrange,
           ),
         ),
         actions: [],
@@ -74,7 +74,7 @@ class _DeliveryAddressSection extends StatelessWidget {
           children: [
             Icon(
               Icons.location_on_outlined,
-              color: Theme.of(context).primaryColor,
+              color: Colors.deepOrange,
               size: 22.r,
             ),
             8.horizontalSpace,
@@ -94,9 +94,9 @@ class _DeliveryAddressSection extends StatelessWidget {
                 style: GoogleFonts.sen(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
+                  color: Colors.deepOrange,
                   decoration: TextDecoration.underline,
-                  decorationColor: Theme.of(context).primaryColor,
+                  decorationColor: Colors.deepOrange,
                 ),
               ),
             ),
@@ -138,7 +138,7 @@ class _OrderItemsSection extends StatelessWidget {
           children: [
             Icon(
               Icons.shopping_bag_outlined,
-              color: Theme.of(context).primaryColor,
+              color: Colors.deepOrange,
               size: 22.r,
             ),
             8.horizontalSpace,
@@ -198,11 +198,7 @@ class _PaymentMethodSection extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(
-              Icons.payment_outlined,
-              color: Theme.of(context).primaryColor,
-              size: 22.r,
-            ),
+            Icon(Icons.payment_outlined, color: Colors.deepOrange, size: 22.r),
             8.horizontalSpace,
             Text(
               'Payment Method',
@@ -222,9 +218,9 @@ class _PaymentMethodSection extends StatelessWidget {
                 style: GoogleFonts.sen(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
+                  color: Colors.deepOrange,
                   decoration: TextDecoration.underline,
-                  decorationColor: Theme.of(context).primaryColor,
+                  decorationColor: Colors.deepOrange,
                 ),
               ),
             ),
@@ -269,7 +265,7 @@ class _OrderSummarySection extends StatelessWidget {
           children: [
             Icon(
               Icons.receipt_long_outlined,
-              color: Theme.of(context).primaryColor,
+              color: Colors.deepOrange,
               size: 22.r,
             ),
             8.horizontalSpace,
@@ -325,7 +321,7 @@ class _OrderSummarySection extends StatelessWidget {
                     style: GoogleFonts.sen(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColor,
+                      color: Colors.deepOrange,
                     ),
                   ),
                 ],
@@ -380,12 +376,12 @@ class _PlaceOrderButton extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.all(20.r),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor.withAlpha(25),
+                            color: Colors.deepOrange.withAlpha(25),
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
                             Icons.check_circle_outline,
-                            color: Theme.of(context).primaryColor,
+                            color: Colors.deepOrange,
                             size: 60.r,
                           ),
                         ),
@@ -423,9 +419,7 @@ class _PlaceOrderButton extends StatelessWidget {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   padding: EdgeInsets.symmetric(vertical: 12.h),
-                                  backgroundColor: Theme.of(
-                                    context,
-                                  ).primaryColor,
+                                  backgroundColor: Colors.deepOrange,
                                   foregroundColor: Colors.white,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.r),
@@ -452,14 +446,10 @@ class _PlaceOrderButton extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   padding: EdgeInsets.symmetric(vertical: 12.h),
                                   backgroundColor: Colors.white,
-                                  foregroundColor: Theme.of(
-                                    context,
-                                  ).primaryColor,
+                                  foregroundColor: Colors.deepOrange,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.r),
-                                    side: BorderSide(
-                                      color: Theme.of(context).primaryColor,
-                                    ),
+                                    side: BorderSide(color: Colors.deepOrange),
                                   ),
                                 ),
                                 child: Text(
@@ -525,7 +515,7 @@ class _PlaceOrderButton extends StatelessWidget {
                       },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 14.h),
-                  backgroundColor: Theme.of(context).primaryColor,
+                  backgroundColor: Colors.deepOrange,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.r),

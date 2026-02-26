@@ -25,12 +25,12 @@ class BiteCheckOutAddressBlock extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(10.r),
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor.withAlpha(25),
+              color: Colors.deepOrange.withAlpha(25),
               borderRadius: BorderRadius.circular(10.r),
             ),
             child: Icon(
               Icons.location_on,
-              color: Theme.of(context).primaryColor,
+              color: Colors.deepOrange,
               size: 24.r,
             ),
           ),

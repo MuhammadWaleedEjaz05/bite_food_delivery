@@ -36,7 +36,7 @@ class BiteBottomNavigationBar extends StatelessWidget {
           onTap: (value) => context
               .read<BottomNavigationSelectorCubit>()
               .changeSelectedIndex(value),
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          backgroundColor: Colors.white,
           items: screenList
               .map<BottomBarItem>(
                 (BiteBottomItemModel e) => _biteBottomBarItem(
@@ -68,8 +68,8 @@ class BiteBottomNavigationBar extends StatelessWidget {
       icon: Icon(icon),
       selectedIcon: Icon(selectedIcon),
       title: Text(title),
-      selectedColor: Theme.of(context).primaryColor,
-      backgroundColor: Theme.of(context).primaryColor,
+      selectedColor: Colors.deepOrange,
+      backgroundColor: Colors.deepOrange,
     );
   }
 }

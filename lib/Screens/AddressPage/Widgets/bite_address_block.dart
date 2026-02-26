@@ -34,11 +34,7 @@ class BiteAddressBlock extends StatelessWidget {
       leading: CircleAvatar(
         backgroundColor: Colors.white,
         radius: 25.r,
-        child: Icon(
-          _iconForLabel(),
-          size: 25.sp,
-          color: Theme.of(context).primaryColor,
-        ),
+        child: Icon(_iconForLabel(), size: 25.sp, color: Colors.deepOrange),
       ),
       title: Text(
         label,
@@ -60,7 +56,7 @@ class BiteAddressBlock extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.edit),
               iconSize: 20.sp,
-              color: Theme.of(context).primaryColor,
+              color: Colors.deepOrange,
               onPressed: onEdit,
             ),
             IconButton(

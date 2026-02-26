@@ -31,7 +31,7 @@ class BiteEditProfileModal extends StatelessWidget {
     }
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(20.r),
       ),
       child: Column(
@@ -43,7 +43,7 @@ class BiteEditProfileModal extends StatelessWidget {
               style: GoogleFonts.sen(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).primaryColor,
+                color: Colors.deepOrange,
               ),
             ),
             actions: [
@@ -91,7 +91,7 @@ class BiteEditProfileModal extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(vertical: 10.h),
-                        backgroundColor: Theme.of(context).primaryColor,
+                        backgroundColor: Colors.deepOrange,
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.r),

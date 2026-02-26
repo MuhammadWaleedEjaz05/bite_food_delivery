@@ -134,7 +134,7 @@ class _TabSection extends StatelessWidget {
     return TabBar(
       indicatorSize: TabBarIndicatorSize.tab,
       indicator: BoxDecoration(
-        color: Theme.of(context).primaryColor,
+        color: Colors.deepOrange,
         borderRadius: BorderRadius.circular(30.r),
       ),
       dividerColor: Colors.transparent,
@@ -164,7 +164,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
         style: GoogleFonts.sen(
           fontSize: 30.sp,
           fontWeight: FontWeight.bold,
-          color: Theme.of(context).primaryColor,
+          color: Colors.deepOrange,
         ),
       ),
       actions: [],

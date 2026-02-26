@@ -16,7 +16,7 @@ class PaymentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.white,
       appBar: _AppSection(),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -50,7 +50,7 @@ class _AddCardSection extends StatelessWidget {
             },
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(vertical: 10.h),
-              backgroundColor: Theme.of(context).primaryColor,
+              backgroundColor: Colors.deepOrange,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),
@@ -248,7 +248,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
         style: GoogleFonts.sen(
           fontSize: 30.sp,
           fontWeight: FontWeight.bold,
-          color: Theme.of(context).primaryColor,
+          color: Colors.deepOrange,
         ),
       ),
       actions: [],

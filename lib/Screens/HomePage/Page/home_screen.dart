@@ -158,7 +158,7 @@ class _AppBarSectionState extends State<_AppBarSection> {
                   Text(
                     'DELIVER TO',
                     style: GoogleFonts.sen(
-                      color: Theme.of(context).primaryColor,
+                      color: Colors.deepOrange,
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                     ),

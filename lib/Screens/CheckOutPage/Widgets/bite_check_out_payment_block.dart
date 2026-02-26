@@ -53,11 +53,7 @@ class BiteCheckOutPaymentBlock extends StatelessWidget {
               ],
             ),
           ),
-          Icon(
-            Icons.check_circle,
-            color: Theme.of(context).primaryColor,
-            size: 22.r,
-          ),
+          Icon(Icons.check_circle, color: Colors.deepOrange, size: 22.r),
         ],
       ),
     );

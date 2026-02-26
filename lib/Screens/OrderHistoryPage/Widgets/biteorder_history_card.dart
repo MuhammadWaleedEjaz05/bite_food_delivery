@@ -51,7 +51,7 @@ class BiteOrderHistoryCard extends StatelessWidget {
                     height: 75.h,
                     width: 75.w,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
+                      color: Colors.deepOrange,
                       borderRadius: BorderRadius.circular(10.r),
                     ),
                     child: Icon(
@@ -79,7 +79,7 @@ class BiteOrderHistoryCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: isCompleted
                                 ? Colors.green
-                                : Theme.of(context).primaryColor,
+                                : Colors.deepOrange,
                           ),
                         ),
                         Row(
@@ -136,7 +136,7 @@ class BiteOrderHistoryCard extends StatelessWidget {
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,
-                              backgroundColor: Theme.of(context).primaryColor,
+                              backgroundColor: Colors.deepOrange,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r),
                               ),
@@ -146,13 +146,11 @@ class BiteOrderHistoryCard extends StatelessWidget {
                         : ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              foregroundColor: Theme.of(context).primaryColor,
+                              foregroundColor: Colors.deepOrange,
                               backgroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r),
-                                side: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                ),
+                                side: BorderSide(color: Colors.deepOrange),
                               ),
                             ),
                             child: Text('Rate'),
@@ -206,13 +204,11 @@ class BiteOrderHistoryCard extends StatelessWidget {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              foregroundColor: Theme.of(context).primaryColor,
+                              foregroundColor: Colors.deepOrange,
                               backgroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r),
-                                side: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                ),
+                                side: BorderSide(color: Colors.deepOrange),
                               ),
                             ),
                             child: Text('Cancel'),
@@ -226,7 +222,7 @@ class BiteOrderHistoryCard extends StatelessWidget {
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,
-                              backgroundColor: Theme.of(context).primaryColor,
+                              backgroundColor: Colors.deepOrange,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r),
                               ),

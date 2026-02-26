@@ -111,9 +111,7 @@ class TrackOrderScreen extends StatelessWidget {
             builder: (context, state) {
               if (state is MapLocationLoading || state is MapLocationInitial) {
                 return Center(
-                  child: CircularProgressIndicator(
-                    color: Theme.of(context).primaryColor,
-                  ),
+                  child: CircularProgressIndicator(color: Colors.deepOrange),
                 );
               }
 
@@ -210,7 +208,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
         style: GoogleFonts.sen(
           fontSize: 30.sp,
           fontWeight: FontWeight.bold,
-          color: Theme.of(context).primaryColor,
+          color: Colors.deepOrange,
         ),
       ),
       actions: const [],

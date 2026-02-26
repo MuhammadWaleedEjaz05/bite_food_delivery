@@ -18,7 +18,7 @@ class BiteAddCCTextField extends StatelessWidget {
           style: GoogleFonts.sen(
             fontSize: 20.sp,
             fontWeight: FontWeight.bold,
-            color: Theme.of(context).primaryColor,
+            color: Colors.deepOrange,
           ),
         ),
         5.verticalSpace,

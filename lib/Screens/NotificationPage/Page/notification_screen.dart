@@ -29,9 +29,7 @@ class NotificationScreen extends StatelessWidget {
             );
           }
           return Center(
-            child: CircularProgressIndicator(
-              color: Theme.of(context).primaryColor,
-            ),
+            child: CircularProgressIndicator(color: Colors.deepOrange),
           );
         },
       ),
@@ -138,7 +136,7 @@ class _NotificationList extends StatelessWidget {
             iconBgColor: style.$3,
             borderColor: notification.isRead
                 ? Colors.grey.shade300
-                : Theme.of(context).primaryColor,
+                : Colors.deepOrange,
             title: notification.title,
             subtitle: notification.body,
             time: _timeAgo(notification.createdAt),
@@ -160,7 +158,7 @@ class _TabSection extends StatelessWidget {
     return TabBar(
       indicatorSize: TabBarIndicatorSize.tab,
       indicator: BoxDecoration(
-        color: Theme.of(context).primaryColor,
+        color: Colors.deepOrange,
         borderRadius: BorderRadius.circular(30.r),
       ),
       dividerColor: Colors.transparent,
@@ -190,7 +188,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
         style: GoogleFonts.sen(
           fontSize: 30.sp,
           fontWeight: FontWeight.bold,
-          color: Theme.of(context).primaryColor,
+          color: Colors.deepOrange,
         ),
       ),
       actions: [],

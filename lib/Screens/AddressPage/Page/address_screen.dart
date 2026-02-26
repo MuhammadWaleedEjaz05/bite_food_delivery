@@ -55,7 +55,7 @@ class _AddAddressSection extends StatelessWidget {
             onPressed: () =>
                 Navigator.pushNamed(context, '/add_address_screen'),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Theme.of(context).primaryColor,
+              backgroundColor: Colors.deepOrange,
               foregroundColor: Colors.white,
               padding: EdgeInsets.symmetric(vertical: 15.h),
               shape: RoundedRectangleBorder(
@@ -154,7 +154,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
         style: GoogleFonts.sen(
           fontSize: 20.sp,
           fontWeight: FontWeight.bold,
-          color: Theme.of(context).primaryColor,
+          color: Colors.deepOrange,
         ),
       ),
       actions: [],

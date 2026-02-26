@@ -99,11 +99,9 @@ class _CheckOutSection extends StatelessWidget {
                                 'EDIT',
                                 style: GoogleFonts.sen(
                                   fontSize: 15.sp,
-                                  color: Theme.of(context).primaryColor,
+                                  color: Colors.deepOrange,
                                   decoration: TextDecoration.underline,
-                                  decorationColor: Theme.of(
-                                    context,
-                                  ).primaryColor,
+                                  decorationColor: Colors.deepOrange,
                                   decorationThickness: 2,
                                 ),
                               ),
@@ -150,7 +148,7 @@ class _CheckOutSection extends StatelessWidget {
                           style: GoogleFonts.sen(
                             fontSize: 20.sp,
                             fontWeight: FontWeight.bold,
-                            color: Theme.of(context).primaryColor,
+                            color: Colors.deepOrange,
                           ),
                         ),
                       ],
@@ -161,7 +159,7 @@ class _CheckOutSection extends StatelessWidget {
                         Expanded(
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Theme.of(context).primaryColor,
+                              backgroundColor: Colors.deepOrange,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r),
                               ),

@@ -36,7 +36,7 @@ class _AllCategoryScreenState extends State<AllCategoryScreen> {
           style: GoogleFonts.sen(
             fontSize: 30.sp,
             fontWeight: FontWeight.bold,
-            color: Theme.of(context).primaryColor,
+            color: Colors.deepOrange,
           ),
         ),
         actions: [],

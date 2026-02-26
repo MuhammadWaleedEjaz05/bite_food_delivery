@@ -25,15 +25,12 @@ class BiteRecentSearchButton extends StatelessWidget {
       style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.r),
-          side: BorderSide(color: Theme.of(context).primaryColor),
+          side: BorderSide(color: Colors.deepOrange),
         ),
       ),
       child: Text(
         search,
-        style: GoogleFonts.sen(
-          fontSize: 16.sp,
-          color: Theme.of(context).primaryColor,
-        ),
+        style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.deepOrange),
       ),
     );
   }

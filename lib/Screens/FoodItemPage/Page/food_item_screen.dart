@@ -22,7 +22,7 @@ class FoodItemScreen extends StatelessWidget {
     final foodItem = args['foodItem'] as FoodItemModel;
     final restaurantName = args['restaurantName'] as String;
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.white,
       body: ListView(
         children: [
           ClipRRect(

@@ -28,7 +28,7 @@ class _BiteCreditCardTileState extends State<BiteCreditCardTile>
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
+    final primaryColor = Colors.deepOrange;
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
@@ -261,7 +261,7 @@ class _CardDetailRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
+    final primaryColor = Colors.deepOrange;
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),

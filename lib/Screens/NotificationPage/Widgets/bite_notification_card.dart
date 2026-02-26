@@ -93,7 +93,7 @@ class BiteNotificationCard extends StatelessWidget {
               width: 10.r,
               height: 10.r,
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
+                color: Colors.deepOrange,
                 shape: BoxShape.circle,
               ),
             ),

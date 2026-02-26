@@ -16,7 +16,7 @@ class BiteCourierCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
+    final primaryColor = Colors.deepOrange;
 
     return Row(
       children: [

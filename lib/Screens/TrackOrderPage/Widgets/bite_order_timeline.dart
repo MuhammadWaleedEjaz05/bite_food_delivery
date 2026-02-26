@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BiteOrderTimeline extends StatelessWidget {
-  /// 0 = received, 1 = preparing, 2 = picked up, 3 = arriving
   final int currentStep;
 
   const BiteOrderTimeline({super.key, this.currentStep = 0});
@@ -17,7 +16,7 @@ class BiteOrderTimeline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
+    final primaryColor = Colors.deepOrange;
 
     return Column(
       children: List.generate(_labels.length, (index) {

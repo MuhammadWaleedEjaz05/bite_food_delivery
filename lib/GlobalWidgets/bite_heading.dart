@@ -26,7 +26,7 @@ class BiteHeading extends StatelessWidget {
             ? Icon(
                 Icons.arrow_forward_ios,
                 size: 16.sp,
-                color: Theme.of(context).primaryColor,
+                color: Colors.deepOrange,
               )
             : SizedBox.shrink(),
         label: isSeeAll
@@ -34,7 +34,7 @@ class BiteHeading extends StatelessWidget {
                 'See All',
                 style: GoogleFonts.sen(
                   fontSize: 16.sp,
-                  color: Theme.of(context).primaryColor,
+                  color: Colors.deepOrange,
                 ),
               )
             : SizedBox.shrink(),

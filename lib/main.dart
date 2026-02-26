@@ -1,7 +1,6 @@
 import 'package:bite_food_delivery/Cubits/BottomNavigationSelection/bottom_navigation_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
 import 'package:bite_food_delivery/Screens/SplashPage/Pages/splash_screen.dart';
-import 'package:bite_food_delivery/Themes/light_themes.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_bottom_navigation_bar.dart';
 import 'package:bite_food_delivery/configs/blocProviderlist.dart';
 import 'package:bite_food_delivery/configs/fcm_initialize.dart';
@@ -42,7 +41,6 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             routes: routes,
             debugShowCheckedModeBanner: false,
-            theme: lightorangeTheme,
             supportedLocales: FormBuilderLocalizations.supportedLocales,
             localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,
@@ -63,7 +61,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.white,
       body:
           BlocBuilder<
             BottomNavigationSelectorCubit,
@@ -84,7 +82,7 @@ class MainPage extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pushNamed('/track_order_screen');
             },
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Colors.deepOrange,
             icon: const Icon(Icons.delivery_dining, color: Colors.white),
             label: Text(
               'Track Order',

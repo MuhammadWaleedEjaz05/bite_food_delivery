@@ -71,8 +71,8 @@ class _ApplySection extends StatelessWidget {
         Expanded(
           child: OutlinedButton(
             style: OutlinedButton.styleFrom(
-              foregroundColor: Theme.of(context).primaryColor,
-              side: BorderSide(color: Theme.of(context).primaryColor),
+              foregroundColor: Colors.deepOrange,
+              side: BorderSide(color: Colors.deepOrange),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),
               ),
@@ -91,7 +91,7 @@ class _ApplySection extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Theme.of(context).primaryColor,
+              backgroundColor: Colors.deepOrange,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),
               ),
@@ -280,18 +280,12 @@ class _BiteFilterTextButton extends StatelessWidget {
     return TextButton(
       onPressed: onTap,
       style: TextButton.styleFrom(
-        foregroundColor: isSelected
-            ? Colors.white
-            : Theme.of(context).primaryColor,
-        backgroundColor: isSelected
-            ? Theme.of(context).primaryColor
-            : Colors.transparent,
+        foregroundColor: isSelected ? Colors.white : Colors.deepOrange,
+        backgroundColor: isSelected ? Colors.deepOrange : Colors.transparent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.r),
           side: BorderSide(
-            color: isSelected
-                ? Theme.of(context).primaryColor
-                : Theme.of(context).primaryColor,
+            color: isSelected ? Colors.deepOrange : Colors.deepOrange,
           ),
         ),
       ),
