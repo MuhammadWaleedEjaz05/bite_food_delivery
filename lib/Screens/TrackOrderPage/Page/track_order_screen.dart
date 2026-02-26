@@ -1,5 +1,6 @@
 import 'package:bite_food_delivery/Cubits/MapLocationCubit/map_location_cubit.dart';
 import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
+import 'package:bite_food_delivery/Cubits/PhoneCallCubit/phone_call_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Models/order_model.dart';
@@ -13,6 +14,7 @@ import 'package:intl/intl.dart';
 
 class TrackOrderScreen extends StatelessWidget {
   const TrackOrderScreen({super.key});
+  static const String _courierPhoneNumber = '+923186384283';
 
   int _orderStatusToStep(OrderStatus status) {
     switch (status) {
@@ -54,24 +56,57 @@ class TrackOrderScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFEEF0F5),
       appBar: _AppBarSection(),
-      body: BlocProvider(
-        create: (_) => MapLocationCubit(),
-        child: BlocListener<OrderCubit, OrderState>(
-          listener: (context, state) {
-            if (state is ActiveOrderDelivered) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    'Your order has been delivered!',
-                    style: GoogleFonts.sen(fontSize: 14.sp),
-                  ),
-                  backgroundColor: Colors.green,
-                  duration: const Duration(seconds: 3),
-                ),
-              );
-              Navigator.of(context).pop();
-            }
-          },
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_) => MapLocationCubit()),
+          BlocProvider(create: (_) => PhoneCallCubit()),
+        ],
+        child: MultiBlocListener(
+          listeners: [
+            BlocListener<OrderCubit, OrderState>(
+              listener: (context, state) {
+                if (state is ActiveOrderDelivered) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Your order has been delivered!',
+                        style: GoogleFonts.sen(fontSize: 14.sp),
+                      ),
+                      backgroundColor: Colors.green,
+                      duration: const Duration(seconds: 3),
+                    ),
+                  );
+                  Navigator.of(context).pop();
+                }
+              },
+            ),
+            BlocListener<PhoneCallCubit, PhoneCallState>(
+              listener: (context, state) {
+                if (state is PhoneCallFailure) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        state.errorMessage,
+                        style: GoogleFonts.sen(fontSize: 14.sp),
+                      ),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                }
+                if (state is PhoneCallSuccess) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Calling ${state.phoneNumber}...',
+                        style: GoogleFonts.sen(fontSize: 14.sp),
+                      ),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                }
+              },
+            ),
+          ],
           child: BlocBuilder<MapLocationCubit, MapLocationState>(
             builder: (context, state) {
               if (state is MapLocationLoading || state is MapLocationInitial) {
@@ -141,6 +176,11 @@ class TrackOrderScreen extends StatelessWidget {
                           currentStep: _orderStatusToStep(
                             currentOrder.orderStatus,
                           ),
+                          onCallTap: () {
+                            context.read<PhoneCallCubit>().makePhoneCall(
+                              _courierPhoneNumber,
+                            );
+                          },
                         );
                       },
                     ),

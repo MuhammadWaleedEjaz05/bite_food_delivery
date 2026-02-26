@@ -11,6 +11,7 @@ class BiteOrderInfoSheet extends StatelessWidget {
   final int estimatedMinutes;
   final String courierName;
   final int currentStep; // 0-3
+  final VoidCallback onCallTap;
 
   const BiteOrderInfoSheet({
     super.key,
@@ -19,6 +20,7 @@ class BiteOrderInfoSheet extends StatelessWidget {
     required this.items,
     required this.estimatedMinutes,
     required this.courierName,
+    required this.onCallTap,
     this.currentStep = 0,
   });
 
@@ -114,7 +116,7 @@ class BiteOrderInfoSheet extends StatelessWidget {
                 12.verticalSpace,
 
                 // ── Courier Card ──
-                BiteCourierCard(courierName: courierName),
+                BiteCourierCard(courierName: courierName, onCallTap: onCallTap),
                 10.verticalSpace,
               ],
             ),

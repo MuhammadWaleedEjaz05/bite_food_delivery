@@ -5,10 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 class BiteCourierCard extends StatelessWidget {
   final String courierName;
   final String? courierImageUrl;
+  final VoidCallback onCallTap;
 
   const BiteCourierCard({
     super.key,
     required this.courierName,
+    required this.onCallTap,
     this.courierImageUrl,
   });
 
@@ -53,7 +55,7 @@ class BiteCourierCard extends StatelessWidget {
         _ActionCircleButton(
           color: primaryColor,
           icon: Icons.call,
-          onTap: () {},
+          onTap: onCallTap,
         ),
         10.horizontalSpace,
 
