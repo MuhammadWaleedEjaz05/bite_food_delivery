@@ -14,14 +14,14 @@ class PersonInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: BiteAppBar(
         backButton: true,
         title: Text(
           'Personal Info',
-          style: Theme.of(
-            context,
-          ).textTheme.titleLarge!.copyWith(color: Colors.deepOrange),
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            color: Theme.of(context).colorScheme.primary,
+          ),
         ),
         actions: [],
       ),
@@ -83,9 +83,12 @@ class _UserInfoSection extends StatelessWidget {
                         ),
                         Text(
                           state.user.bio ?? 'I Love Fast Food',
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Colors.grey.shade500,
-                          ),
+                          style: Theme.of(context).textTheme.bodyMedium!
+                              .copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSecondary,
+                              ),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ],
@@ -105,7 +108,7 @@ class _UserInfoSection extends StatelessWidget {
                   Text(
                     'Please login to view your profile',
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Colors.grey.shade500,
+                      color: Theme.of(context).colorScheme.onSecondary,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),

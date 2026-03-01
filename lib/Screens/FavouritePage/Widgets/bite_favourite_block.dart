@@ -54,7 +54,7 @@ class BiteFavouriteBlock extends StatelessWidget {
                   Text(
                     foodItem.category,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Colors.grey.shade500,
+                      color: Theme.of(context).colorScheme.onSecondary,
                     ),
                   ),
                   Row(
@@ -62,7 +62,7 @@ class BiteFavouriteBlock extends StatelessWidget {
                       Text(
                         'RS ${foodItem.price.toStringAsFixed(2)}',
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Colors.grey.shade500,
+                          color: Theme.of(context).colorScheme.onSecondary,
                         ),
                       ),
                     ],
@@ -124,7 +124,7 @@ class BiteFavouriteBlock extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepOrange,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.r),
                     ),

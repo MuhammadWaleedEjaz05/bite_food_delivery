@@ -28,14 +28,14 @@ class CheckOutScreen extends StatelessWidget {
     final double totalAmount = (args['totalAmount'] as num?)?.toDouble() ?? 0;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: BiteAppBar(
         backButton: true,
         title: Text(
           'Checkout',
-          style: Theme.of(
-            context,
-          ).textTheme.displaySmall!.copyWith(color: Colors.deepOrange),
+          style: Theme.of(context).textTheme.displaySmall!.copyWith(
+            color: Theme.of(context).colorScheme.primary,
+          ),
         ),
         actions: [],
       ),
@@ -71,15 +71,13 @@ class _DeliveryAddressSection extends StatelessWidget {
           children: [
             Icon(
               Icons.location_on_outlined,
-              color: Colors.deepOrange,
+              color: Theme.of(context).colorScheme.primary,
               size: 22.r,
             ),
             8.horizontalSpace,
             Text(
               'Delivery Address',
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium!.copyWith(color: Colors.black54),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             Spacer(),
             TextButton(
@@ -88,9 +86,9 @@ class _DeliveryAddressSection extends StatelessWidget {
                 'Change',
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: Colors.deepOrange,
+                  color: Theme.of(context).colorScheme.primary,
                   decoration: TextDecoration.underline,
-                  decorationColor: Colors.deepOrange,
+                  decorationColor: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),
@@ -132,16 +130,11 @@ class _OrderItemsSection extends StatelessWidget {
           children: [
             Icon(
               Icons.shopping_bag_outlined,
-              color: Colors.deepOrange,
+              color: Theme.of(context).colorScheme.primary,
               size: 22.r,
             ),
             8.horizontalSpace,
-            Text(
-              'Order Items',
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium!.copyWith(color: Colors.black54),
-            ),
+            Text('Order Items', style: Theme.of(context).textTheme.titleMedium),
           ],
         ),
         12.verticalSpace,
@@ -150,7 +143,7 @@ class _OrderItemsSection extends StatelessWidget {
             if (state is CartLoaded) {
               return Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
+                  color: Theme.of(context).colorScheme.onSecondaryFixed,
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: ListView.separated(
@@ -159,7 +152,9 @@ class _OrderItemsSection extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 5.h),
                   itemCount: state.cart.cartItems.length,
                   separatorBuilder: (context, index) => Divider(
-                    color: Colors.grey.shade300,
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSecondaryFixedVariant,
                     height: 1,
                     indent: 15.w,
                     endIndent: 15.w,
@@ -190,13 +185,15 @@ class _PaymentMethodSection extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(Icons.payment_outlined, color: Colors.deepOrange, size: 22.r),
+            Icon(
+              Icons.payment_outlined,
+              color: Theme.of(context).colorScheme.primary,
+              size: 22.r,
+            ),
             8.horizontalSpace,
             Text(
               'Payment Method',
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium!.copyWith(color: Colors.black54),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             Spacer(),
             TextButton(
@@ -207,9 +204,9 @@ class _PaymentMethodSection extends StatelessWidget {
                 'Change',
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: Colors.deepOrange,
+                  color: Theme.of(context).colorScheme.primary,
                   decoration: TextDecoration.underline,
-                  decorationColor: Colors.deepOrange,
+                  decorationColor: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),
@@ -254,15 +251,13 @@ class _OrderSummarySection extends StatelessWidget {
           children: [
             Icon(
               Icons.receipt_long_outlined,
-              color: Colors.deepOrange,
+              color: Theme.of(context).colorScheme.primary,
               size: 22.r,
             ),
             8.horizontalSpace,
             Text(
               'Order Summary',
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium!.copyWith(color: Colors.black54),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
           ],
         ),
@@ -270,7 +265,7 @@ class _OrderSummarySection extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(15.r),
           decoration: BoxDecoration(
-            color: Colors.grey.shade200,
+            color: Theme.of(context).colorScheme.onSecondaryFixed,
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: Column(
@@ -295,17 +290,12 @@ class _OrderSummarySection extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Total',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleMedium!.copyWith(color: Colors.black54),
-                  ),
+                  Text('Total', style: Theme.of(context).textTheme.titleMedium),
                   Text(
                     'PKR ${grandTotal.toStringAsFixed(2)}',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleMedium!.copyWith(color: Colors.deepOrange),
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ],
               ),
@@ -359,27 +349,32 @@ class _PlaceOrderButton extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.all(20.r),
                           decoration: BoxDecoration(
-                            color: Colors.deepOrange.withAlpha(25),
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.primary.withAlpha(25),
                             shape: BoxShape.circle,
                           ),
                           child: Icon(
                             Icons.check_circle_outline,
-                            color: Colors.deepOrange,
+                            color: Theme.of(context).colorScheme.primary,
                             size: 60.r,
                           ),
                         ),
                         20.verticalSpace,
                         Text(
                           'Order Placed!',
-                          style: Theme.of(context).textTheme.headlineMedium!
-                              .copyWith(color: Colors.black54),
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         10.verticalSpace,
                         Text(
                           'Your order has been placed successfully.\nTrack your order in real-time.',
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.bodySmall!
-                              .copyWith(color: Colors.grey.shade500),
+                              .copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSecondary,
+                              ),
                         ),
                         25.verticalSpace,
                         Row(
@@ -397,7 +392,9 @@ class _PlaceOrderButton extends StatelessWidget {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   padding: EdgeInsets.symmetric(vertical: 12.h),
-                                  backgroundColor: Colors.deepOrange,
+                                  backgroundColor: Theme.of(
+                                    context,
+                                  ).colorScheme.primary,
                                   foregroundColor: Colors.white,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.r),
@@ -420,11 +417,19 @@ class _PlaceOrderButton extends StatelessWidget {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   padding: EdgeInsets.symmetric(vertical: 12.h),
-                                  backgroundColor: Colors.white,
-                                  foregroundColor: Colors.deepOrange,
+                                  backgroundColor: Theme.of(
+                                    context,
+                                  ).colorScheme.surface,
+                                  foregroundColor: Theme.of(
+                                    context,
+                                  ).colorScheme.primary,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.r),
-                                    side: BorderSide(color: Colors.deepOrange),
+                                    side: BorderSide(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.primary,
+                                    ),
                                   ),
                                 ),
                                 child: Text(
@@ -487,7 +492,7 @@ class _PlaceOrderButton extends StatelessWidget {
                       },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 14.h),
-                  backgroundColor: Colors.deepOrange,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.r),

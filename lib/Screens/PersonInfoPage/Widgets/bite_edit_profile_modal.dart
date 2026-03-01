@@ -30,7 +30,7 @@ class BiteEditProfileModal extends StatelessWidget {
     }
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20.r),
       ),
       child: Column(
@@ -41,7 +41,7 @@ class BiteEditProfileModal extends StatelessWidget {
               'Edit $title',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                 fontWeight: FontWeight.bold,
-                color: Colors.deepOrange,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
             actions: [
@@ -49,7 +49,9 @@ class BiteEditProfileModal extends StatelessWidget {
                 onPressed: () => Navigator.pop(context),
                 style: IconButton.styleFrom(
                   foregroundColor: Colors.black,
-                  backgroundColor: Colors.grey.shade200,
+                  backgroundColor: Theme.of(
+                    context,
+                  ).colorScheme.onSecondaryFixed,
                 ),
                 icon: Icon(Icons.close, size: 20.r),
               ),
@@ -77,7 +79,7 @@ class BiteEditProfileModal extends StatelessWidget {
                     borderSide: BorderSide.none,
                   ),
                   filled: true,
-                  fillColor: Colors.grey.shade200,
+                  fillColor: Theme.of(context).colorScheme.onSecondaryFixed,
                 ),
               ),
               20.verticalSpace,
@@ -93,7 +95,7 @@ class BiteEditProfileModal extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(vertical: 10.h),
-                        backgroundColor: Colors.deepOrange,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.r),

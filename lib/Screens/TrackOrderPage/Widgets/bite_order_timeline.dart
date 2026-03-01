@@ -15,7 +15,7 @@ class BiteOrderTimeline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Colors.deepOrange;
+    final primaryColor = Theme.of(context).colorScheme.primary;
 
     return Column(
       children: List.generate(_labels.length, (index) {
@@ -67,7 +67,9 @@ class BiteOrderTimeline extends StatelessWidget {
                   _labels[index],
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-                    color: isCompleted ? primaryColor : Colors.grey,
+                    color: isCompleted
+                        ? primaryColor
+                        : Theme.of(context).colorScheme.secondary,
                   ),
                 ),
               ),

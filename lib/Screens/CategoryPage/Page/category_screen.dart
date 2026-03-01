@@ -126,8 +126,8 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () =>
               showSearch(context: context, delegate: OpenSearchScreen()),
           style: IconButton.styleFrom(
-            foregroundColor: Colors.white,
-            backgroundColor: Colors.black,
+            foregroundColor: Theme.of(context).colorScheme.surface,
+            backgroundColor: Theme.of(context).colorScheme.onSurface,
           ),
           icon: Icon(Icons.search_outlined, size: 30.r),
         ),
@@ -137,7 +137,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
             showDialog(
               context: context,
               builder: (context) => Dialog(
-                backgroundColor: Colors.white,
+                backgroundColor: Theme.of(context).colorScheme.surface,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.r),
                 ),
@@ -146,8 +146,8 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
             );
           },
           style: IconButton.styleFrom(
-            foregroundColor: Colors.black,
-            backgroundColor: Colors.grey.shade200,
+            foregroundColor: Theme.of(context).colorScheme.onSurface,
+            backgroundColor: Theme.of(context).colorScheme.onSecondaryFixed,
           ),
           icon: Icon(Icons.filter_alt_outlined, size: 30.r),
         ),

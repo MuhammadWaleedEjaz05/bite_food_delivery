@@ -49,7 +49,9 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
             ),
           ),
           Container(
-            decoration: BoxDecoration(color: Colors.white),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+            ),
             child: ListView(
               padding: EdgeInsets.symmetric(horizontal: 15.w),
               physics: NeverScrollableScrollPhysics(),
@@ -190,13 +192,17 @@ class _CategorySelectionSection extends StatelessWidget {
                         style: TextButton.styleFrom(
                           foregroundColor: isSelected
                               ? Colors.white
-                              : Colors.black45,
+                              : Theme.of(context).colorScheme.onSurface,
                           backgroundColor: isSelected
-                              ? Colors.deepOrange
-                              : Colors.white,
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.onSecondaryFixed,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.r),
-                            side: BorderSide(color: Colors.grey.shade200),
+                            side: BorderSide(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSecondaryFixed,
+                            ),
                           ),
                           textStyle: Theme.of(context).textTheme.titleSmall,
                           padding: EdgeInsets.symmetric(
@@ -236,7 +242,7 @@ class _FoodNameAndDescSection extends StatelessWidget {
         Text(
           restaurant.description,
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
-            color: Colors.grey,
+            color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -257,7 +263,11 @@ class _RatingAndTimeSection extends StatelessWidget {
         Row(
           spacing: 5.w,
           children: [
-            Icon(Icons.star_outlined, color: Colors.deepOrange, size: 20.r),
+            Icon(
+              Icons.star_outlined,
+              color: Theme.of(context).colorScheme.primary,
+              size: 20.r,
+            ),
             Text(
               restaurant.rating.toString(),
               style: Theme.of(context).textTheme.titleSmall,
@@ -269,7 +279,7 @@ class _RatingAndTimeSection extends StatelessWidget {
           children: [
             Icon(
               Icons.delivery_dining_outlined,
-              color: Colors.deepOrange,
+              color: Theme.of(context).colorScheme.primary,
               size: 20.r,
             ),
             Text(
@@ -283,7 +293,11 @@ class _RatingAndTimeSection extends StatelessWidget {
         Row(
           spacing: 5.w,
           children: [
-            Icon(Icons.timer_outlined, color: Colors.deepOrange, size: 20.r),
+            Icon(
+              Icons.timer_outlined,
+              color: Theme.of(context).colorScheme.primary,
+              size: 20.r,
+            ),
             Text(
               '${restaurant.deliveryTime} min',
               style: Theme.of(context).textTheme.titleSmall,
@@ -326,7 +340,7 @@ class _AppBarSection extends StatelessWidget {
               },
               style: IconButton.styleFrom(
                 foregroundColor: Colors.red,
-                backgroundColor: Colors.grey.shade200,
+                backgroundColor: Theme.of(context).colorScheme.onSecondaryFixed,
               ),
               icon: Icon(
                 isFavourite ? Icons.favorite : Icons.favorite_outline,

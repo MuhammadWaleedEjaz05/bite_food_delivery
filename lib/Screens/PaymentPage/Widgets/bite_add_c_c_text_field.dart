@@ -14,9 +14,9 @@ class BiteAddCCTextField extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Theme.of(
-            context,
-          ).textTheme.titleLarge!.copyWith(color: Colors.deepOrange),
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            color: Theme.of(context).colorScheme.primary,
+          ),
         ),
         5.verticalSpace,
         TextFormField(
@@ -37,7 +37,7 @@ class BiteAddCCTextField extends StatelessWidget {
           ]),
           decoration: InputDecoration(
             filled: true,
-            fillColor: Colors.grey.shade200,
+            fillColor: Theme.of(context).colorScheme.onSecondaryFixed,
             hintText: 'Enter $title',
             hintStyle: Theme.of(
               context,
@@ -45,6 +45,7 @@ class BiteAddCCTextField extends StatelessWidget {
 
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
+              borderSide: BorderSide.none,
             ),
           ),
         ),

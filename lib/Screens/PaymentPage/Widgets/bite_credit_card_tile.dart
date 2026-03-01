@@ -27,7 +27,7 @@ class _BiteCreditCardTileState extends State<BiteCreditCardTile>
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Colors.deepOrange;
+    final primaryColor = Theme.of(context).colorScheme.primary;
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
@@ -78,7 +78,7 @@ class _BiteCreditCardTileState extends State<BiteCreditCardTile>
                       Text(
                         widget.creditCard.cardHolderName,
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                          color: Colors.grey.shade500,
+                          color: Theme.of(context).colorScheme.onSecondary,
                         ),
                       ),
                     ],
@@ -255,7 +255,7 @@ class _CardDetailRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Colors.deepOrange;
+    final primaryColor = Theme.of(context).colorScheme.primary;
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
@@ -269,9 +269,9 @@ class _CardDetailRow extends StatelessWidget {
           10.horizontalSpace,
           Text(
             label,
-            style: Theme.of(
-              context,
-            ).textTheme.bodySmall!.copyWith(color: Colors.grey.shade500),
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+              color: Theme.of(context).colorScheme.onSecondary,
+            ),
           ),
           const Spacer(),
           Text(

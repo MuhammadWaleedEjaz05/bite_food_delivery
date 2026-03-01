@@ -59,23 +59,23 @@ class BiteNotificationCard extends StatelessWidget {
                 5.verticalSpace,
                 Text(
                   subtitle,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodySmall!.copyWith(color: Colors.grey.shade500),
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  ),
                 ),
                 8.verticalSpace,
                 Row(
                   children: [
                     Icon(
                       Icons.access_time,
-                      color: Colors.grey.shade500,
+                      color: Theme.of(context).colorScheme.onSecondary,
                       size: 14.r,
                     ),
                     5.horizontalSpace,
                     Text(
                       time,
                       style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSecondary,
                       ),
                     ),
                   ],
@@ -88,7 +88,7 @@ class BiteNotificationCard extends StatelessWidget {
               width: 10.r,
               height: 10.r,
               decoration: BoxDecoration(
-                color: Colors.deepOrange,
+                color: Theme.of(context).colorScheme.primary,
                 shape: BoxShape.circle,
               ),
             ),

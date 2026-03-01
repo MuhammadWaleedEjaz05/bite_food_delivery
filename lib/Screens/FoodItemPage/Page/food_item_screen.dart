@@ -21,7 +21,7 @@ class FoodItemScreen extends StatelessWidget {
     final foodItem = args['foodItem'] as FoodItemModel;
     final restaurantName = args['restaurantName'] as String;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: ListView(
         children: [
           ClipRRect(
@@ -41,7 +41,9 @@ class FoodItemScreen extends StatelessWidget {
             ),
           ),
           Container(
-            decoration: BoxDecoration(color: Colors.white),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+            ),
             child: ListView(
               padding: EdgeInsets.symmetric(horizontal: 15.w),
               physics: NeverScrollableScrollPhysics(),
@@ -88,7 +90,7 @@ class _AddCardBottomSheet extends StatelessWidget {
 
         return Container(
           decoration: BoxDecoration(
-            color: Colors.grey.shade200,
+            color: Theme.of(context).colorScheme.onSecondaryFixed,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(32.r),
               topRight: Radius.circular(32.r),
@@ -185,7 +187,7 @@ class _AddCardBottomSheet extends StatelessWidget {
                           padding: EdgeInsets.symmetric(vertical: 10.h),
                           backgroundColor: isInCart
                               ? Colors.red
-                              : Colors.deepOrange,
+                              : Theme.of(context).colorScheme.primary,
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.r),
@@ -255,7 +257,7 @@ class _FoodSizeSelectionSection extends StatelessWidget {
               onPressed: () {},
               style: TextButton.styleFrom(
                 foregroundColor: Colors.black,
-                backgroundColor: Colors.grey.shade300,
+                backgroundColor: Theme.of(context).colorScheme.secondaryFixed,
                 textStyle: Theme.of(
                   context,
                 ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
@@ -307,7 +309,7 @@ class _FoodDescSection extends StatelessWidget {
           restaurantName,
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
             fontWeight: FontWeight.normal,
-            color: Colors.grey,
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
         20.verticalSpace,
@@ -315,7 +317,7 @@ class _FoodDescSection extends StatelessWidget {
         Text(
           foodItem.description,
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
-            color: Colors.grey,
+            color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.normal,
           ),
         ),

@@ -36,7 +36,9 @@ class BiteOrderHistoryCard extends StatelessWidget {
         children: [
           Text(
             dateStr,
-            style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.grey),
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall!.copyWith(color: Colors.grey),
           ),
           10.verticalSpace,
           Divider(thickness: 1.h),
@@ -51,7 +53,7 @@ class BiteOrderHistoryCard extends StatelessWidget {
                     height: 75.h,
                     width: 75.w,
                     decoration: BoxDecoration(
-                      color: Colors.deepOrange,
+                      color: Theme.of(context).colorScheme.primary,
                       borderRadius: BorderRadius.circular(10.r),
                     ),
                     child: Icon(
@@ -76,7 +78,7 @@ class BiteOrderHistoryCard extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 color: isCompleted
                                     ? Colors.green
-                                    : Colors.deepOrange,
+                                    : Theme.of(context).colorScheme.primary,
                               ),
                         ),
                         Row(
@@ -92,7 +94,9 @@ class BiteOrderHistoryCard extends StatelessWidget {
                               '|',
                               style: Theme.of(context).textTheme.titleLarge!
                                   .copyWith(
-                                    color: Colors.grey,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.secondary,
                                     fontWeight: FontWeight.normal,
                                   ),
                             ),
@@ -108,9 +112,9 @@ class BiteOrderHistoryCard extends StatelessWidget {
                   Text(
                     '#${order.orderId.substring(0, 8)}',
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                      color: Colors.grey,
+                      color: Theme.of(context).colorScheme.secondary,
                       decoration: TextDecoration.underline,
-                      decorationColor: Colors.grey,
+                      decorationColor: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                 ],
@@ -131,7 +135,9 @@ class BiteOrderHistoryCard extends StatelessWidget {
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,
-                              backgroundColor: Colors.deepOrange,
+                              backgroundColor: Theme.of(
+                                context,
+                              ).colorScheme.primary,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r),
                               ),
@@ -141,11 +147,15 @@ class BiteOrderHistoryCard extends StatelessWidget {
                         : ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              foregroundColor: Colors.deepOrange,
+                              foregroundColor: Theme.of(
+                                context,
+                              ).colorScheme.primary,
                               backgroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r),
-                                side: BorderSide(color: Colors.deepOrange),
+                                side: BorderSide(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
                               ),
                             ),
                             child: Text('Rate'),
@@ -175,7 +185,9 @@ class BiteOrderHistoryCard extends StatelessWidget {
                                       child: Text(
                                         'No',
                                         style: GoogleFonts.sen(
-                                          color: Colors.grey,
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.secondary,
                                         ),
                                       ),
                                     ),
@@ -199,11 +211,15 @@ class BiteOrderHistoryCard extends StatelessWidget {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              foregroundColor: Colors.deepOrange,
+                              foregroundColor: Theme.of(
+                                context,
+                              ).colorScheme.primary,
                               backgroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r),
-                                side: BorderSide(color: Colors.deepOrange),
+                                side: BorderSide(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
                               ),
                             ),
                             child: Text('Cancel'),
@@ -217,7 +233,9 @@ class BiteOrderHistoryCard extends StatelessWidget {
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,
-                              backgroundColor: Colors.deepOrange,
+                              backgroundColor: Theme.of(
+                                context,
+                              ).colorScheme.primary,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r),
                               ),

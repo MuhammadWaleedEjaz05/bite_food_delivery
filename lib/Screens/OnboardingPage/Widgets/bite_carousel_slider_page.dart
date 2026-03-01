@@ -46,8 +46,8 @@ class BiteCarouselSliderPage extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 5.w),
               decoration: BoxDecoration(
                 color: carouselCurrentPage == index
-                    ? Colors.deepOrange
-                    : Colors.grey,
+                    ? Theme.of(context).colorScheme.primary
+                    : Theme.of(context).colorScheme.secondary,
                 borderRadius: BorderRadius.circular(5.r),
               ),
             ),

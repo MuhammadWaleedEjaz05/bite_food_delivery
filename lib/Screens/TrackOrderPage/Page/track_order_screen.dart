@@ -38,13 +38,13 @@ class TrackOrderScreen extends StatelessWidget {
 
     if (order == null) {
       return Scaffold(
-        backgroundColor: const Color(0xFFEEF0F5),
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: _AppBarSection(),
         body: Center(
           child: Text(
             'No active order',
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
-              color: Colors.grey,
+              color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.normal,
             ),
           ),
@@ -57,7 +57,7 @@ class TrackOrderScreen extends StatelessWidget {
     ).format(order.orderPlacedAt);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFEEF0F5),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: _AppBarSection(),
       body: MultiBlocProvider(
         providers: [
@@ -90,7 +90,7 @@ class TrackOrderScreen extends StatelessWidget {
                     SnackBar(
                       content: Text(
                         state.errorMessage,
-                        style:Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       backgroundColor: Colors.red,
                     ),
@@ -114,7 +114,9 @@ class TrackOrderScreen extends StatelessWidget {
             builder: (context, state) {
               if (state is MapLocationLoading || state is MapLocationInitial) {
                 return Center(
-                  child: CircularProgressIndicator(color: Colors.deepOrange),
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 );
               }
 
@@ -123,7 +125,7 @@ class TrackOrderScreen extends StatelessWidget {
                   child: Text(
                     state.message,
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: Colors.grey,
+                      color: Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -135,7 +137,7 @@ class TrackOrderScreen extends StatelessWidget {
                   child: Text(
                     'Location permission denied',
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: Colors.grey,
+                      color: Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -217,7 +219,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
-          color: Colors.deepOrange,
+          color: Theme.of(context).colorScheme.primary,
         ),
       ),
       actions: const [],

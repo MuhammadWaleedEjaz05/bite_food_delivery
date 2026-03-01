@@ -28,7 +28,7 @@ class BiteOrderInfoSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
         boxShadow: [
           BoxShadow(
@@ -71,7 +71,7 @@ class BiteOrderInfoSheet extends StatelessWidget {
                     child: Text(
                       item,
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSecondary,
                       ),
                     ),
                   ),
@@ -90,14 +90,13 @@ class BiteOrderInfoSheet extends StatelessWidget {
                           fontWeight: Theme.of(
                             context,
                           ).textTheme.displayMedium!.fontWeight,
-                          color: Colors.black54,
                         ),
                       ),
                       4.verticalSpace,
                       Text(
                         'ESTIMATED DELIVERY TIME',
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                          color: Colors.grey,
+                          color: Theme.of(context).colorScheme.secondary,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1.2,
                         ),
@@ -149,7 +148,7 @@ class _RestaurantInfoRow extends StatelessWidget {
           ),
           child: Icon(
             Icons.restaurant,
-            color: Colors.grey.shade500,
+            color: Theme.of(context).colorScheme.onSecondary,
             size: 28.r,
           ),
         ),

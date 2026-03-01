@@ -11,7 +11,7 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: _AppBarSection(),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -40,7 +40,7 @@ class _PreferencesSection extends StatelessWidget {
             'PREFERENCES',
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
               fontWeight: FontWeight.w600,
-              color: Colors.grey.shade500,
+              color: Theme.of(context).colorScheme.onSecondary,
               letterSpacing: 1.2,
             ),
           ),
@@ -50,13 +50,15 @@ class _PreferencesSection extends StatelessWidget {
             BiteSettingItem(
               item: BiteSettingItemModel(
                 icon: Icons.notifications_outlined,
-                iconColor: Colors.deepOrange,
-                iconBgColor: Colors.deepOrange.withAlpha(25),
+                iconColor: Theme.of(context).colorScheme.primary,
+                iconBgColor: Theme.of(
+                  context,
+                ).colorScheme.primary.withAlpha(25),
                 title: 'Notifications',
                 trailing: Switch(
                   value: true,
                   onChanged: (value) {},
-                  activeTrackColor: Colors.deepOrange,
+                  activeTrackColor: Theme.of(context).colorScheme.primary,
                   inactiveTrackColor: Colors.grey.shade300,
                   inactiveThumbColor: Colors.white,
                 ),
@@ -65,13 +67,15 @@ class _PreferencesSection extends StatelessWidget {
             BiteSettingItem(
               item: BiteSettingItemModel(
                 icon: Icons.dark_mode_outlined,
-                iconColor: Colors.deepOrange,
-                iconBgColor: Colors.deepOrange.withAlpha(25),
+                iconColor: Theme.of(context).colorScheme.primary,
+                iconBgColor: Theme.of(
+                  context,
+                ).colorScheme.primary.withAlpha(25),
                 title: 'Dark Mode',
                 trailing: Switch(
                   value: false,
                   onChanged: (value) {},
-                  activeTrackColor: Colors.deepOrange,
+                  activeTrackColor: Theme.of(context).colorScheme.primary,
                   inactiveTrackColor: Colors.grey.shade300,
                   inactiveThumbColor: Colors.white,
                 ),
@@ -80,8 +84,10 @@ class _PreferencesSection extends StatelessWidget {
             BiteSettingItem(
               item: BiteSettingItemModel(
                 icon: Icons.language,
-                iconColor: Colors.deepOrange,
-                iconBgColor: Colors.deepOrange.withAlpha(25),
+                iconColor: Theme.of(context).colorScheme.primary,
+                iconBgColor: Theme.of(
+                  context,
+                ).colorScheme.primary.withAlpha(25),
                 title: 'Language',
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -89,7 +95,7 @@ class _PreferencesSection extends StatelessWidget {
                     Text(
                       'English',
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSecondary,
                       ),
                     ),
                     5.horizontalSpace,
@@ -141,7 +147,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
-          color: Colors.deepOrange,
+          color: Theme.of(context).colorScheme.primary,
         ),
       ),
       actions: [],

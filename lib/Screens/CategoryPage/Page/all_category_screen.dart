@@ -32,9 +32,9 @@ class _AllCategoryScreenState extends State<AllCategoryScreen> {
         backButton: true,
         title: Text(
           'All Categories',
-          style: Theme.of(
-            context,
-          ).textTheme.displaySmall!.copyWith(color: Colors.deepOrange),
+          style: Theme.of(context).textTheme.displaySmall!.copyWith(
+            color: Theme.of(context).colorScheme.primary,
+          ),
         ),
         actions: [],
       ),

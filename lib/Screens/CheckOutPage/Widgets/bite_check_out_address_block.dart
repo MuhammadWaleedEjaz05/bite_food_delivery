@@ -16,7 +16,7 @@ class BiteCheckOutAddressBlock extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(15.r),
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: Theme.of(context).colorScheme.onSecondaryFixed,
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Row(
@@ -24,12 +24,12 @@ class BiteCheckOutAddressBlock extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(10.r),
             decoration: BoxDecoration(
-              color: Colors.deepOrange.withAlpha(25),
+              color: Theme.of(context).colorScheme.primary.withAlpha(25),
               borderRadius: BorderRadius.circular(10.r),
             ),
             child: Icon(
               Icons.location_on,
-              color: Colors.deepOrange,
+              color: Theme.of(context).colorScheme.primary,
               size: 24.r,
             ),
           ),
@@ -41,16 +41,14 @@ class BiteCheckOutAddressBlock extends StatelessWidget {
                 if (addressLabel.isNotEmpty)
                   Text(
                     addressLabel,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleSmall!.copyWith(color: Colors.black54),
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                 if (addressLabel.isNotEmpty) 4.verticalSpace,
                 Text(
                   addressText,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodySmall!.copyWith(color: Colors.grey.shade500),
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),

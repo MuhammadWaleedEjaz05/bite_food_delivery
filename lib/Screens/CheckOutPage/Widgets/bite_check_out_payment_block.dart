@@ -11,7 +11,7 @@ class BiteCheckOutPaymentBlock extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(15.r),
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: Theme.of(context).colorScheme.onSecondaryFixed,
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Row(
@@ -31,9 +31,7 @@ class BiteCheckOutPaymentBlock extends StatelessWidget {
               children: [
                 Text(
                   creditCard!.cardHolderName,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleSmall!.copyWith(color: Colors.black54),
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
                 4.verticalSpace,
                 Text(
@@ -42,14 +40,18 @@ class BiteCheckOutPaymentBlock extends StatelessWidget {
                       : creditCard!.cardNumber
                             .substring(creditCard!.cardNumber.length - 4)
                             .padLeft(16, '*'),
-                  style: Theme.of(
-                    context,
-                  ).textTheme.labelLarge!.copyWith(color: Colors.grey.shade500),
+                  style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  ),
                 ),
               ],
             ),
           ),
-          Icon(Icons.check_circle, color: Colors.deepOrange, size: 22.r),
+          Icon(
+            Icons.check_circle,
+            color: Theme.of(context).colorScheme.primary,
+            size: 22.r,
+          ),
         ],
       ),
     );

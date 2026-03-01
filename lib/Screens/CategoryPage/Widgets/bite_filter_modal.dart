@@ -70,8 +70,8 @@ class _ApplySection extends StatelessWidget {
         Expanded(
           child: OutlinedButton(
             style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.deepOrange,
-              side: BorderSide(color: Colors.deepOrange),
+              foregroundColor: Theme.of(context).colorScheme.primary,
+              side: BorderSide(color: Theme.of(context).colorScheme.primary),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),
               ),
@@ -89,7 +89,7 @@ class _ApplySection extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.deepOrange,
+              backgroundColor: Theme.of(context).colorScheme.primary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),
               ),
@@ -277,17 +277,27 @@ class _BiteFilterTextButton extends StatelessWidget {
     return TextButton(
       onPressed: onTap,
       style: TextButton.styleFrom(
-        foregroundColor: isSelected ? Colors.white : Colors.deepOrange,
-        backgroundColor: isSelected ? Colors.deepOrange : Colors.transparent,
+        foregroundColor: isSelected
+            ? Colors.white
+            : Theme.of(context).colorScheme.primary,
+        backgroundColor: isSelected
+            ? Theme.of(context).colorScheme.primary
+            : Colors.transparent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.r),
           side: BorderSide(
-            color: isSelected ? Colors.deepOrange : Colors.deepOrange,
+            color: isSelected
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.primary,
           ),
         ),
       ),
-      child: Text(title, style: Theme.of(context).textTheme.titleSmall!
-                                    .copyWith(fontWeight: FontWeight.normal)),
+      child: Text(
+        title,
+        style: Theme.of(
+          context,
+        ).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.normal),
+      ),
     );
   }
 }

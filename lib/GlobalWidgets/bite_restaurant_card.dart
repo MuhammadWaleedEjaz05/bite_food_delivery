@@ -40,46 +40,50 @@ class BiteRestaurantCard extends StatelessWidget {
             restaurant.category,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
               fontWeight: FontWeight.normal,
-              color: Colors.grey.shade500,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),
           ),
           5.verticalSpace,
           Row(
             children: [
-              Icon(Icons.star_outline, color: Colors.deepOrange, size: 18.sp),
+              Icon(
+                Icons.star_outline,
+                color: Theme.of(context).colorScheme.primary,
+                size: 18.sp,
+              ),
               4.horizontalSpace,
               Text(
                 restaurant.rating.toString(),
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontWeight: FontWeight.normal,
                 ),
               ),
               10.horizontalSpace,
               Icon(
                 Icons.delivery_dining,
-                color: Colors.deepOrange,
+                color: Theme.of(context).colorScheme.primary,
                 size: 18.sp,
               ),
               4.horizontalSpace,
               Text(
                 '${restaurant.deliveryTime.toInt()} min',
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontWeight: FontWeight.normal,
                 ),
               ),
               10.horizontalSpace,
               Icon(
                 Icons.timelapse_outlined,
-                color: Colors.deepOrange,
+                color: Theme.of(context).colorScheme.primary,
                 size: 18.sp,
               ),
               4.horizontalSpace,
               Text(
                 '\$${restaurant.deliveryFee}',
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontWeight: FontWeight.normal,
                 ),
               ),

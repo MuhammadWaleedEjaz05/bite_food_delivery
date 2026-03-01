@@ -15,7 +15,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: _AppBarSection(),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -132,9 +132,12 @@ class _UserInfoSection extends StatelessWidget {
                         ),
                         Text(
                           state.user.bio ?? 'I Love Fast Food',
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Colors.grey.shade500,
-                          ),
+                          style: Theme.of(context).textTheme.bodyMedium!
+                              .copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSecondary,
+                              ),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ],
@@ -152,7 +155,7 @@ class _UserInfoSection extends StatelessWidget {
                         Navigator.pushNamed(context, '/login_screen'),
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.all(10.r),
-                      backgroundColor: Colors.deepOrange,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.r),
@@ -166,7 +169,7 @@ class _UserInfoSection extends StatelessWidget {
                         Navigator.pushNamed(context, '/signup_screen'),
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.all(10.r),
-                      backgroundColor: Colors.deepOrange,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.r),
@@ -194,7 +197,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
-          color: Colors.deepOrange,
+          color: Theme.of(context).colorScheme.primary,
         ),
       ),
       actions: [],

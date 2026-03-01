@@ -42,7 +42,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 topRight: Radius.circular(32.r),
               ),
               child: Container(
-                decoration: BoxDecoration(color: Colors.white),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                ),
                 child: ListView(
                   padding: EdgeInsets.symmetric(
                     horizontal: 15.r,
@@ -97,7 +99,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                       );
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.deepOrange,
+                                      backgroundColor: Theme.of(
+                                        context,
+                                      ).colorScheme.primary,
                                       foregroundColor: Colors.white,
                                     ),
                                     child: Text(
@@ -144,7 +148,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     horizontal: 20.w,
                                     vertical: 10.h,
                                   ),
-                                  backgroundColor: Colors.deepOrange,
+                                  backgroundColor: Theme.of(
+                                    context,
+                                  ).colorScheme.primary,
                                   foregroundColor: Colors.white,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.r),

@@ -19,7 +19,10 @@ class BitePaymentBlock extends StatelessWidget {
         color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(20.r),
         border: isSelected
-            ? Border.all(color: Colors.deepOrange.withAlpha(50), width: 1.5)
+            ? Border.all(
+                color: Theme.of(context).colorScheme.primary.withAlpha(50),
+                width: 1.5,
+              )
             : Border.all(color: Colors.transparent, width: 1.5),
       ),
       child: SvgPicture.asset(svgPath, height: 60.h, width: 60.w),

@@ -40,7 +40,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: _AppBarSection(),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -142,7 +142,7 @@ class _AddCardSection extends StatelessWidget {
             },
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(vertical: 10.h),
-              backgroundColor: Colors.deepOrange,
+              backgroundColor: Theme.of(context).colorScheme.primary,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),
@@ -226,7 +226,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
-          color: Colors.deepOrange,
+          color: Theme.of(context).colorScheme.primary,
         ),
       ),
       actions: [],

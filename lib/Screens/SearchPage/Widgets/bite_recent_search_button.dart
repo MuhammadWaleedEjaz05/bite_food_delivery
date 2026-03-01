@@ -24,13 +24,13 @@ class BiteRecentSearchButton extends StatelessWidget {
       style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.r),
-          side: BorderSide(color: Colors.deepOrange),
+          side: BorderSide(color: Theme.of(context).colorScheme.primary),
         ),
       ),
       child: Text(
         search,
         style: Theme.of(context).textTheme.titleSmall!.copyWith(
-          color: Colors.deepOrange,
+          color: Theme.of(context).colorScheme.primary,
           fontWeight: FontWeight.normal,
         ),
       ),

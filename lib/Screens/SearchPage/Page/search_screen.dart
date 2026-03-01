@@ -16,7 +16,7 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: _AppBarSection(),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -57,7 +57,7 @@ class _PopularRestaurantSection extends StatelessWidget {
                   child: Text(
                     'No popular restaurants found',
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: Colors.grey.shade500,
+                      color: Theme.of(context).colorScheme.onSecondary,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -120,7 +120,7 @@ class _RecentSearchSection extends StatelessWidget {
                     child: Text(
                       'No recent searches',
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: Colors.grey.shade500,
+                        color: Theme.of(context).colorScheme.onSecondary,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -159,7 +159,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
-          color: Colors.deepOrange,
+          color: Theme.of(context).colorScheme.primary,
         ),
       ),
       actions: [

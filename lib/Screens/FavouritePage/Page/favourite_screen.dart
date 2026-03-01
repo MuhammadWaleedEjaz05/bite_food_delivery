@@ -15,7 +15,7 @@ class FavouriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: _AppSection(),
       body: DefaultTabController(
         initialIndex: 0,
@@ -134,12 +134,12 @@ class _TabSection extends StatelessWidget {
     return TabBar(
       indicatorSize: TabBarIndicatorSize.tab,
       indicator: BoxDecoration(
-        color: Colors.deepOrange,
+        color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.circular(30.r),
       ),
       dividerColor: Colors.transparent,
       labelColor: Colors.white,
-      unselectedLabelColor: Colors.black,
+      unselectedLabelColor: Theme.of(context).colorScheme.onSurface,
       labelStyle: Theme.of(context).textTheme.titleSmall,
       unselectedLabelStyle: Theme.of(
         context,
@@ -166,7 +166,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
-          color: Colors.deepOrange,
+          color: Theme.of(context).colorScheme.primary,
         ),
       ),
       actions: [],

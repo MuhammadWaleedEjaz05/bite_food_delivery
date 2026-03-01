@@ -44,7 +44,9 @@ class BiteAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Navigator.pop(context);
               },
               style: IconButton.styleFrom(
-                foregroundColor: isDarkMode ? Colors.white : Colors.black,
+                foregroundColor: isDarkMode
+                    ? Colors.white
+                    : Theme.of(context).colorScheme.onSurface,
                 backgroundColor: Colors.grey.withAlpha(50),
               ),
               icon: Icon(Icons.arrow_back, size: 30.r),

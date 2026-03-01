@@ -7,9 +7,9 @@ class BiteTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TabBar(
-      labelColor: Colors.deepOrange,
-      unselectedLabelColor: Colors.grey,
-      indicatorColor: Colors.deepOrange,
+      labelColor: Theme.of(context).colorScheme.primary,
+      unselectedLabelColor: Theme.of(context).colorScheme.secondary,
+      indicatorColor: Theme.of(context).colorScheme.primary,
       labelStyle: Theme.of(context).textTheme.titleLarge,
       unselectedLabelStyle: Theme.of(context).textTheme.titleLarge,
       tabs: tabsList,

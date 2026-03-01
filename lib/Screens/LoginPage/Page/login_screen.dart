@@ -34,7 +34,9 @@ class LoginScreen extends StatelessWidget {
                 topRight: Radius.circular(32.r),
               ),
               child: Container(
-                decoration: BoxDecoration(color: Colors.white),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                ),
                 child: ListView(
                   padding: EdgeInsets.symmetric(
                     horizontal: 15.r,
@@ -153,7 +155,7 @@ class _NoAccountSection extends StatelessWidget {
           onPressed: () => Navigator.pushNamed(context, '/signup_screen'),
           style: TextButton.styleFrom(
             padding: EdgeInsets.all(10.r),
-            foregroundColor: Colors.deepOrange,
+            foregroundColor: Theme.of(context).colorScheme.primary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.r),
             ),
@@ -191,7 +193,7 @@ class _LoginActionButton extends StatelessWidget {
             },
             style: TextButton.styleFrom(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-              backgroundColor: Colors.deepOrange,
+              backgroundColor: Theme.of(context).colorScheme.primary,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),
@@ -226,7 +228,7 @@ class _LoginOptionalSelectionSection extends StatelessWidget {
               Navigator.pushNamed(context, '/forgot_password_screen'),
           style: TextButton.styleFrom(
             padding: EdgeInsets.all(10.r),
-            foregroundColor: Colors.deepOrange,
+            foregroundColor: Theme.of(context).colorScheme.primary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.r),
             ),

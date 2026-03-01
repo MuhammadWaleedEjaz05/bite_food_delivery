@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: _AppBarSection(),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -157,9 +157,9 @@ class _AppBarSectionState extends State<_AppBarSection> {
                 children: [
                   Text(
                     'DELIVER TO',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleLarge!.copyWith(color: Colors.deepOrange),
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                   GestureDetector(
                     onTap: () => showAddressSelectorModal(context),
@@ -168,7 +168,7 @@ class _AppBarSectionState extends State<_AppBarSection> {
                       children: [
                         Icon(
                           Icons.location_on,
-                          color: Colors.grey.shade500,
+                          color: Theme.of(context).colorScheme.onSecondary,
                           size: 16.sp,
                         ),
                         SizedBox(width: 4.w),
@@ -177,14 +177,18 @@ class _AppBarSectionState extends State<_AppBarSection> {
                           child: Text(
                             addressText,
                             style: Theme.of(context).textTheme.bodyMedium!
-                                .copyWith(color: Colors.grey.shade500),
+                                .copyWith(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSecondary,
+                                ),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         SizedBox(width: 4.w),
                         Icon(
                           Icons.keyboard_arrow_down,
-                          color: Colors.grey.shade500,
+                          color: Theme.of(context).colorScheme.onSecondary,
                           size: 16.sp,
                         ),
                       ],
@@ -223,7 +227,7 @@ class _SearchSection extends StatelessWidget {
                 children: [
                   Text(
                     'Hey ${state.user.fullName}, ',
-                    style: Theme.of(context).textTheme.bodyMedium,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(),
                   ),
                   Text(
                     'Good Morning! 👋',

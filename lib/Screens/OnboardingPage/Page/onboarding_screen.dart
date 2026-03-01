@@ -45,7 +45,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,7 +85,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               },
               style: ElevatedButton.styleFrom(
                 fixedSize: Size(300.w, 50.h),
-                backgroundColor: Colors.deepOrange,
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.r),

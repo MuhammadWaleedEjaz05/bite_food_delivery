@@ -29,14 +29,14 @@ class BiteFoodCard extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(10.r),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(20.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.shade300,
-              spreadRadius: 3.r,
-              blurRadius: 10.r,
-              offset: Offset(0, 10.h),
+              color: Theme.of(context).colorScheme.onSurface.withAlpha(25),
+              spreadRadius: 2.r,
+              blurRadius: 5.r,
+              offset: Offset(0, 3.h),
             ),
           ],
         ),
@@ -65,7 +65,9 @@ class BiteFoodCard extends StatelessWidget {
               foodItem.category,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.grey),
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall!.copyWith(color: Colors.grey),
             ),
             12.verticalSpace,
             Row(
@@ -131,7 +133,7 @@ class BiteFoodCard extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       style: IconButton.styleFrom(
                         foregroundColor: Colors.white,
-                        backgroundColor: Colors.deepOrange,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.r),
                         ),

@@ -15,7 +15,7 @@ class BiteCourierCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Colors.deepOrange;
+    final primaryColor = Theme.of(context).colorScheme.primary;
 
     return Row(
       children: [
@@ -26,7 +26,11 @@ class BiteCourierCard extends StatelessWidget {
               ? NetworkImage(courierImageUrl!)
               : null,
           child: courierImageUrl == null
-              ? Icon(Icons.person, size: 28.r, color: Colors.grey.shade500)
+              ? Icon(
+                  Icons.person,
+                  size: 28.r,
+                  color: Theme.of(context).colorScheme.onSecondary,
+                )
               : null,
         ),
         12.horizontalSpace,

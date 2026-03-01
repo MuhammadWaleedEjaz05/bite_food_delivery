@@ -19,11 +19,18 @@ class BiteSearchBar extends StatelessWidget {
       hintText: 'Search for restaurants or dishes',
       hintStyle: WidgetStatePropertyAll(
         Theme.of(context).textTheme.titleSmall!.copyWith(
-          color: Colors.grey.shade500,
+          color: Theme.of(context).colorScheme.onSecondary,
           fontWeight: FontWeight.normal,
         ),
       ),
-      leading: Icon(Icons.search, size: 25.r, color: Colors.grey.shade500),
+      backgroundColor: WidgetStatePropertyAll(
+        Theme.of(context).colorScheme.onSecondaryFixed,
+      ),
+      leading: Icon(
+        Icons.search,
+        size: 25.r,
+        color: Theme.of(context).colorScheme.onSecondary,
+      ),
       elevation: WidgetStatePropertyAll(0),
       shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
@@ -42,7 +49,7 @@ class OpenSearchScreen extends SearchDelegate {
           onPressed: () => close(context, Null),
 
           style: IconButton.styleFrom(
-            foregroundColor: Colors.black,
+            foregroundColor: Theme.of(context).colorScheme.onSurface,
             backgroundColor: Colors.grey.withAlpha(50),
           ),
           icon: Icon(Icons.arrow_back, size: 30.r),
@@ -57,8 +64,8 @@ class OpenSearchScreen extends SearchDelegate {
       IconButton(
         onPressed: () {},
         style: IconButton.styleFrom(
-          foregroundColor: Colors.white,
-          backgroundColor: Colors.black,
+          foregroundColor: Theme.of(context).colorScheme.onSurface,
+          backgroundColor: Theme.of(context).colorScheme.surface,
         ),
         icon: Icon(Icons.clear_outlined, size: 30.r),
       ),
@@ -87,7 +94,7 @@ class OpenSearchScreen extends SearchDelegate {
               child: Text(
                 'No restaurants found',
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: Colors.grey.shade500,
+                  color: Theme.of(context).colorScheme.onSecondary,
                   fontWeight: FontWeight.normal,
                 ),
               ),
@@ -137,7 +144,7 @@ class OpenSearchScreen extends SearchDelegate {
               child: Text(
                 'No restaurants found',
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: Colors.grey.shade500,
+                  color: Theme.of(context).colorScheme.onSecondary,
                   fontWeight: FontWeight.normal,
                 ),
               ),

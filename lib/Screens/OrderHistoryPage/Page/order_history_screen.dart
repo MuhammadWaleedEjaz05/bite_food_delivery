@@ -136,7 +136,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
-          color: Colors.deepOrange,
+          color: Theme.of(context).colorScheme.primary,
         ),
       ),
       actions: [],
@@ -189,7 +189,7 @@ class _EmptyOrderView extends StatelessWidget {
           Text(
             message,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
-              color: Colors.grey.shade500,
+              color: Theme.of(context).colorScheme.onSecondary,
               fontWeight: FontWeight.normal,
             ),
           ),

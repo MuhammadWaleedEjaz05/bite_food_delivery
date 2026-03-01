@@ -64,7 +64,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                             child: Text(
                               'Location permission is required',
                               style: Theme.of(context).textTheme.titleSmall!
-                                    .copyWith(fontWeight: FontWeight.normal),
+                                  .copyWith(fontWeight: FontWeight.normal),
                             ),
                           );
                         }
@@ -74,7 +74,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                             child: Text(
                               'Error: ${state.message}',
                               style: Theme.of(context).textTheme.titleSmall!
-                                    .copyWith(fontWeight: FontWeight.normal),
+                                  .copyWith(fontWeight: FontWeight.normal),
                             ),
                           );
                         }
@@ -114,7 +114,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
             Expanded(
               flex: 1,
               child: Container(
-                decoration: BoxDecoration(color: Colors.white),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                ),
                 child: ListView(
                   padding: EdgeInsets.symmetric(horizontal: 15.w),
                   children: [
@@ -216,13 +218,18 @@ class _AddressLabelSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Colors.deepOrange;
-    final backgroundColor = Colors.white;
+    final primaryColor = Theme.of(context).colorScheme.primary;
+    final backgroundColor = Theme.of(context).colorScheme.surface;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Label', style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal)),
+        Text(
+          'Label',
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
+        ),
         10.verticalSpace,
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -362,7 +369,7 @@ class _SaveAddressSection extends StatelessWidget {
             },
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(vertical: 10.h),
-              backgroundColor: Colors.deepOrange,
+              backgroundColor: Theme.of(context).colorScheme.primary,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),

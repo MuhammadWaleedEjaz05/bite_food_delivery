@@ -51,9 +51,9 @@ class BiteCheckoutItemTile extends StatelessWidget {
                 4.verticalSpace,
                 Text(
                   'x${item.quantity}',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.labelLarge!.copyWith(color: Colors.grey.shade500),
+                  style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  ),
                 ),
               ],
             ),
@@ -62,7 +62,7 @@ class BiteCheckoutItemTile extends StatelessWidget {
             'PKR ${item.totalPrice.toStringAsFixed(2)}',
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontWeight: FontWeight.bold,
-              color: Colors.deepOrange,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ],

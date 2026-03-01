@@ -28,7 +28,12 @@ class _BiteUserAuthTextFieldState extends State<BiteUserAuthTextField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.title, style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal)),
+        Text(
+          widget.title,
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
+        ),
         5.verticalSpace,
         TextFormField(
           controller: widget.controller,
@@ -55,11 +60,11 @@ class _BiteUserAuthTextFieldState extends State<BiteUserAuthTextField> {
                       shape: CircleBorder(),
                       padding: EdgeInsets.zero,
                       backgroundColor: isPasswordVisible
-                          ? Colors.deepOrange
+                          ? Theme.of(context).colorScheme.primary
                           : Colors.white,
                       foregroundColor: isPasswordVisible
                           ? Colors.white
-                          : Colors.deepOrange,
+                          : Theme.of(context).colorScheme.primary,
                     ),
                     icon: Icon(
                       isPasswordVisible
@@ -69,13 +74,15 @@ class _BiteUserAuthTextFieldState extends State<BiteUserAuthTextField> {
                   )
                 : SizedBox.shrink(),
             hintText: 'Enter ${widget.title}',
-            hintStyle: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
+            hintStyle: Theme.of(
+              context,
+            ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide: BorderSide.none,
             ),
             filled: true,
-            fillColor: Colors.grey.shade200,
+            fillColor: Theme.of(context).colorScheme.onSecondaryFixed,
           ),
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(

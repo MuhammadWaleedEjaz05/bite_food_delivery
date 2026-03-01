@@ -13,7 +13,7 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: _AppSection(),
       body: BlocBuilder<NotificationsCubit, NotificationsState>(
         builder: (context, state) {
@@ -31,7 +31,9 @@ class NotificationScreen extends StatelessWidget {
             );
           }
           return Center(
-            child: CircularProgressIndicator(color: Colors.deepOrange),
+            child: CircularProgressIndicator(
+              color: Theme.of(context).colorScheme.primary,
+            ),
           );
         },
       ),
@@ -59,7 +61,7 @@ class _NotificationBody extends StatelessWidget {
             Text(
               'No notifications yet',
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                color: Colors.grey.shade500,
+                color: Theme.of(context).colorScheme.onSecondary,
                 fontWeight: FontWeight.normal,
               ),
             ),
@@ -79,7 +81,7 @@ class _NotificationBody extends StatelessWidget {
             Text(
               '${state.unreadCount} unread notifications',
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                color: Colors.grey.shade500,
+                color: Theme.of(context).colorScheme.onSecondary,
                 fontWeight: FontWeight.normal,
               ),
             ),
@@ -115,7 +117,7 @@ class _NotificationList extends StatelessWidget {
         child: Text(
           'No notifications',
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
-            color: Colors.grey,
+            color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -141,7 +143,7 @@ class _NotificationList extends StatelessWidget {
             iconBgColor: style.$3,
             borderColor: notification.isRead
                 ? Colors.grey.shade300
-                : Colors.deepOrange,
+                : Theme.of(context).colorScheme.primary,
             title: notification.title,
             subtitle: notification.body,
             time: _timeAgo(notification.createdAt),
@@ -163,7 +165,7 @@ class _TabSection extends StatelessWidget {
     return TabBar(
       indicatorSize: TabBarIndicatorSize.tab,
       indicator: BoxDecoration(
-        color: Colors.deepOrange,
+        color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.circular(30.r),
       ),
       dividerColor: Colors.transparent,
@@ -195,7 +197,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
-          color: Colors.deepOrange,
+          color: Theme.of(context).colorScheme.primary,
         ),
       ),
       actions: [],

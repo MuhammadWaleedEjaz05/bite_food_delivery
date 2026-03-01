@@ -15,9 +15,9 @@ class AllRestaurantScreen extends StatelessWidget {
         backButton: true,
         title: Text(
           'All Restaurants',
-          style: Theme.of(
-            context,
-          ).textTheme.displaySmall!.copyWith(color: Colors.deepOrange),
+          style: Theme.of(context).textTheme.displaySmall!.copyWith(
+            color: Theme.of(context).colorScheme.primary,
+          ),
         ),
         actions: [],
       ),

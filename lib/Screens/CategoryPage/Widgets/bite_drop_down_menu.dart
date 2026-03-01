@@ -20,7 +20,9 @@ class BiteDropDownMenu extends StatelessWidget {
                 ).selectCategory(value as String);
               },
               menuStyle: MenuStyle(
-                backgroundColor: WidgetStatePropertyAll(Colors.white),
+                backgroundColor: WidgetStatePropertyAll(
+                  Theme.of(context).colorScheme.surface,
+                ),
                 shape: WidgetStatePropertyAll(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.r),
@@ -33,7 +35,7 @@ class BiteDropDownMenu extends StatelessWidget {
               ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
               inputDecorationTheme: InputDecorationTheme(
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: Theme.of(context).colorScheme.surface,
                 contentPadding: EdgeInsets.symmetric(horizontal: 20.w),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.r),
@@ -42,19 +44,19 @@ class BiteDropDownMenu extends StatelessWidget {
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.r),
                   borderSide: BorderSide(
-                    color: Colors.grey.shade200,
+                    color: Theme.of(context).colorScheme.onSecondaryFixed,
                     width: 1.w,
                   ),
                 ),
               ),
               trailingIcon: Icon(
                 Icons.arrow_drop_down,
-                color: Colors.deepOrange,
+                color: Theme.of(context).colorScheme.primary,
                 size: 30.sp,
               ),
               selectedTrailingIcon: Icon(
                 Icons.arrow_drop_up,
-                color: Colors.deepOrange,
+                color: Theme.of(context).colorScheme.primary,
                 size: 30.sp,
               ),
               initialSelection: selectedCategory,

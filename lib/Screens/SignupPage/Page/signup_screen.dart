@@ -36,7 +36,9 @@ class SignupScreen extends StatelessWidget {
                 topRight: Radius.circular(32.r),
               ),
               child: Container(
-                decoration: BoxDecoration(color: Colors.white),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                ),
                 child: ListView(
                   padding: EdgeInsets.symmetric(
                     horizontal: 15.r,
@@ -86,7 +88,7 @@ class _SignupActionSection extends StatelessWidget {
             },
             style: TextButton.styleFrom(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-              backgroundColor: Colors.deepOrange,
+              backgroundColor: Theme.of(context).colorScheme.primary,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),

@@ -30,14 +30,14 @@ class BiteHeading extends StatelessWidget {
             ? Icon(
                 Icons.arrow_forward_ios,
                 size: 16.sp,
-                color: Colors.deepOrange,
+                color: Theme.of(context).colorScheme.primary,
               )
             : SizedBox.shrink(),
         label: isSeeAll
             ? Text(
                 'See All',
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: Colors.deepOrange,
+                  color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.normal,
                 ),
               )

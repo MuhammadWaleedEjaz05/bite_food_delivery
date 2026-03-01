@@ -11,7 +11,7 @@ class BiteFlavorListTile extends StatelessWidget {
         CheckboxListTile(
           value: true,
           onChanged: (value) {},
-          activeColor: Colors.deepOrange,
+          activeColor: Theme.of(context).colorScheme.primary,
           checkColor: Colors.white,
 
           title: Row(

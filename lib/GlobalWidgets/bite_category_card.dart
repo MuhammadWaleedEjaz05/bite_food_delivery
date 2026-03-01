@@ -29,9 +29,12 @@ class BiteCategoryCard extends StatelessWidget {
             margin: EdgeInsets.symmetric(vertical: 15.h, horizontal: 5.w),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.r),
-              side: BorderSide(color: Colors.white),
+              side: BorderSide(
+                color: Theme.of(context).colorScheme.surface,
+                width: 1,
+              ),
             ),
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             child: Container(
               height: 90.h,
               width: 110.w,

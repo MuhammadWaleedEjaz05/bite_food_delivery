@@ -22,18 +22,24 @@ class BiteAddressSelectionCard extends StatelessWidget {
         padding: EdgeInsets.all(12.r),
         decoration: BoxDecoration(
           border: Border.all(
-            color: isSelected ? Colors.deepOrange : Colors.grey.shade300,
+            color: isSelected
+                ? Theme.of(context).colorScheme.primary
+                : Colors.grey.shade300,
             width: isSelected ? 2 : 1,
           ),
           borderRadius: BorderRadius.circular(12.r),
-          color: isSelected ? Colors.deepOrange.withAlpha(25) : Colors.white,
+          color: isSelected
+              ? Theme.of(context).colorScheme.primary.withAlpha(25)
+              : Colors.white,
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Icon(
               Icons.location_on,
-              color: isSelected ? Colors.deepOrange : Colors.grey,
+              color: isSelected
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.secondary,
               size: 20.r,
             ),
             SizedBox(width: 10.w),
@@ -45,21 +51,27 @@ class BiteAddressSelectionCard extends StatelessWidget {
                     address.label,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: isSelected ? Colors.deepOrange : Colors.black,
+                      color: isSelected
+                          ? Theme.of(context).colorScheme.primary
+                          : Colors.black,
                     ),
                   ),
                   5.verticalSpace,
                   Text(
                     '${address.street}, ${address.city}',
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                      color: Colors.grey.shade500,
+                      color: Theme.of(context).colorScheme.onSecondary,
                     ),
                   ),
                 ],
               ),
             ),
             if (isSelected)
-              Icon(Icons.check_circle, color: Colors.deepOrange, size: 24.r),
+              Icon(
+                Icons.check_circle,
+                color: Theme.of(context).colorScheme.primary,
+                size: 24.r,
+              ),
           ],
         ),
       ),

@@ -72,7 +72,9 @@ class _CheckOutSection extends StatelessWidget {
               topRight: Radius.circular(25.r),
             ),
             child: Container(
-              decoration: BoxDecoration(color: Colors.white),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+              ),
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 15.w,
@@ -85,7 +87,11 @@ class _CheckOutSection extends StatelessWidget {
                         Text(
                           'DELIVERY ADDRESS',
                           style: Theme.of(context).textTheme.bodyMedium!
-                              .copyWith(color: Colors.grey.shade500),
+                              .copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSecondary,
+                              ),
                         ),
                         Spacer(),
                         BlocBuilder<AddressCubit, AddressState>(
@@ -97,9 +103,13 @@ class _CheckOutSection extends StatelessWidget {
                                 'EDIT',
                                 style: Theme.of(context).textTheme.bodyMedium!
                                     .copyWith(
-                                      color: Colors.deepOrange,
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.primary,
                                       decoration: TextDecoration.underline,
-                                      decorationColor: Colors.deepOrange,
+                                      decorationColor: Theme.of(
+                                        context,
+                                      ).colorScheme.primary,
                                       decorationThickness: 2,
                                     ),
                               ),
@@ -124,7 +134,9 @@ class _CheckOutSection extends StatelessWidget {
                           decoration: InputDecoration(
                             hintText: 'Select an address',
                             filled: true,
-                            fillColor: Colors.grey.shade200,
+                            fillColor: Theme.of(
+                              context,
+                            ).colorScheme.onSecondaryFixed,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.r),
                               borderSide: BorderSide.none,
@@ -144,7 +156,9 @@ class _CheckOutSection extends StatelessWidget {
                         Text(
                           'PKR ${totalAmount.toStringAsFixed(2)}',
                           style: Theme.of(context).textTheme.titleLarge!
-                              .copyWith(color: Colors.deepOrange),
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
                         ),
                       ],
                     ),
@@ -154,7 +168,9 @@ class _CheckOutSection extends StatelessWidget {
                         Expanded(
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.deepOrange,
+                              backgroundColor: Theme.of(
+                                context,
+                              ).colorScheme.primary,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r),
                               ),
