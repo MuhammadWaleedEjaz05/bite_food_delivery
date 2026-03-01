@@ -3,7 +3,6 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteRecentSearchButton extends StatelessWidget {
   final String search;
@@ -30,7 +29,10 @@ class BiteRecentSearchButton extends StatelessWidget {
       ),
       child: Text(
         search,
-        style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.deepOrange),
+        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+          color: Colors.deepOrange,
+          fontWeight: FontWeight.normal,
+        ),
       ),
     );
   }

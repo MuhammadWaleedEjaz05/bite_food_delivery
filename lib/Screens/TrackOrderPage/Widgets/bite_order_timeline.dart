@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteOrderTimeline extends StatelessWidget {
   final int currentStep;
@@ -66,8 +65,7 @@ class BiteOrderTimeline extends StatelessWidget {
                 padding: EdgeInsets.only(top: 2.h),
                 child: Text(
                   _labels[index],
-                  style: GoogleFonts.sen(
-                    fontSize: 14.sp,
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
                     color: isCompleted ? primaryColor : Colors.grey,
                   ),

@@ -7,7 +7,6 @@ import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AddAddressScreen extends StatefulWidget {
@@ -64,7 +63,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                           return Center(
                             child: Text(
                               'Location permission is required',
-                              style: GoogleFonts.sen(fontSize: 16.sp),
+                              style: Theme.of(context).textTheme.titleSmall!
+                                    .copyWith(fontWeight: FontWeight.normal),
                             ),
                           );
                         }
@@ -73,7 +73,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                           return Center(
                             child: Text(
                               'Error: ${state.message}',
-                              style: GoogleFonts.sen(fontSize: 16.sp),
+                              style: Theme.of(context).textTheme.titleSmall!
+                                    .copyWith(fontWeight: FontWeight.normal),
                             ),
                           );
                         }
@@ -221,7 +222,7 @@ class _AddressLabelSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Label', style: GoogleFonts.sen(fontSize: 20.sp)),
+        Text('Label', style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal)),
         10.verticalSpace,
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -246,12 +247,12 @@ class _AddressLabelSection extends StatelessWidget {
                             width: label == selectedLabel ? 2 : 1,
                           ),
                         ),
-                        textStyle: GoogleFonts.sen(
-                          fontSize: 16.sp,
-                          fontWeight: label == selectedLabel
-                              ? FontWeight.w700
-                              : FontWeight.w500,
-                        ),
+                        textStyle: Theme.of(context).textTheme.titleSmall!
+                            .copyWith(
+                              fontWeight: label == selectedLabel
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                            ),
                       ),
                       child: Text(label),
                     ),
@@ -366,10 +367,7 @@ class _SaveAddressSection extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),
               ),
-              textStyle: GoogleFonts.sen(
-                fontSize: 25.sp,
-                fontWeight: FontWeight.bold,
-              ),
+              textStyle: Theme.of(context).textTheme.headlineLarge,
             ),
             child: Text('Save'),
           ),

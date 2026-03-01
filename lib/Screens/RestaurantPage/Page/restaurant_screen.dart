@@ -8,7 +8,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class RestaurantScreen extends StatefulWidget {
   const RestaurantScreen({super.key});
@@ -112,10 +111,7 @@ class _FoodItemSection extends StatelessWidget {
                   children: [
                     Text(
                       selectedCategory.isEmpty ? 'All Items' : selectedCategory,
-                      style: GoogleFonts.sen(
-                        fontSize: 25.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(context).textTheme.headlineLarge,
                     ),
                     GridView.builder(
                       shrinkWrap: true,
@@ -202,10 +198,7 @@ class _CategorySelectionSection extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20.r),
                             side: BorderSide(color: Colors.grey.shade200),
                           ),
-                          textStyle: GoogleFonts.sen(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          textStyle: Theme.of(context).textTheme.titleSmall,
                           padding: EdgeInsets.symmetric(
                             horizontal: 15.w,
                             vertical: 5.h,
@@ -239,13 +232,13 @@ class _FoodNameAndDescSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          restaurant.name,
-          style: GoogleFonts.sen(fontSize: 30.sp, fontWeight: FontWeight.bold),
-        ),
+        Text(restaurant.name, style: Theme.of(context).textTheme.displaySmall),
         Text(
           restaurant.description,
-          style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.grey),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: Colors.grey,
+            fontWeight: FontWeight.normal,
+          ),
         ),
       ],
     );
@@ -267,10 +260,7 @@ class _RatingAndTimeSection extends StatelessWidget {
             Icon(Icons.star_outlined, color: Colors.deepOrange, size: 20.r),
             Text(
               restaurant.rating.toString(),
-              style: GoogleFonts.sen(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.titleSmall,
             ),
           ],
         ),
@@ -286,10 +276,7 @@ class _RatingAndTimeSection extends StatelessWidget {
               restaurant.deliveryFee == 0
                   ? 'Free'
                   : '\$${restaurant.deliveryFee}',
-              style: GoogleFonts.sen(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.titleSmall,
             ),
           ],
         ),
@@ -299,10 +286,7 @@ class _RatingAndTimeSection extends StatelessWidget {
             Icon(Icons.timer_outlined, color: Colors.deepOrange, size: 20.r),
             Text(
               '${restaurant.deliveryTime} min',
-              style: GoogleFonts.sen(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.titleSmall,
             ),
           ],
         ),

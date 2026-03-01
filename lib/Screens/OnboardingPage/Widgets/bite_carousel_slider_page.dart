@@ -1,7 +1,6 @@
 import 'package:bite_food_delivery/Screens/OnboardingPage/Page/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteCarouselSliderPage extends StatelessWidget {
   final String title;
@@ -28,14 +27,13 @@ class BiteCarouselSliderPage extends StatelessWidget {
           ),
         ),
         20.verticalSpace,
-        Text(
-          title,
-          style: GoogleFonts.sen(fontSize: 20.sp, fontWeight: FontWeight.bold),
-        ),
+        Text(title, style: Theme.of(context).textTheme.titleLarge),
         10.verticalSpace,
         Text(
           description,
-          style: GoogleFonts.sen(fontSize: 15.sp, color: Colors.grey),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium!.copyWith(color: Colors.grey),
         ),
         5.verticalSpace,
         Row(

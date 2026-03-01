@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteSupportBlocks extends StatelessWidget {
   final String title;
@@ -43,7 +42,10 @@ class BiteSupportBlocks extends StatelessWidget {
           5.verticalSpace,
           Text(
             title,
-            style: GoogleFonts.sen(fontSize: 20.sp, color: color),
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: color,
+              fontWeight: FontWeight.normal,
+            ),
           ),
         ],
       ),

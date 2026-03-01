@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteCheckOutAddressBlock extends StatelessWidget {
   const BiteCheckOutAddressBlock({
@@ -42,19 +41,16 @@ class BiteCheckOutAddressBlock extends StatelessWidget {
                 if (addressLabel.isNotEmpty)
                   Text(
                     addressLabel,
-                    style: GoogleFonts.sen(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleSmall!.copyWith(color: Colors.black87),
                   ),
                 if (addressLabel.isNotEmpty) 4.verticalSpace,
                 Text(
                   addressText,
-                  style: GoogleFonts.sen(
-                    fontSize: 14.sp,
-                    color: Colors.grey.shade600,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall!.copyWith(color: Colors.grey.shade600),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),

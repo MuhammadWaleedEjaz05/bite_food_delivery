@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteCourierCard extends StatelessWidget {
   final String courierName;
@@ -38,15 +37,15 @@ class BiteCourierCard extends StatelessWidget {
             children: [
               Text(
                 courierName,
-                style: GoogleFonts.sen(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium!.copyWith(color: Colors.black87),
               ),
               Text(
                 'Courier',
-                style: GoogleFonts.sen(fontSize: 14.sp, color: Colors.grey),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall!.copyWith(color: Colors.grey),
               ),
             ],
           ),

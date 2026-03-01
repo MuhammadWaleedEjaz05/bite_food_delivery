@@ -24,7 +24,9 @@ class NotificationScreen extends StatelessWidget {
             return Center(
               child: Text(
                 state.message,
-                style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.grey),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleSmall!.copyWith(color: Colors.grey),
               ),
             );
           }
@@ -56,9 +58,9 @@ class _NotificationBody extends StatelessWidget {
             15.verticalSpace,
             Text(
               'No notifications yet',
-              style: GoogleFonts.sen(
-                fontSize: 18.sp,
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 color: Colors.grey.shade500,
+                fontWeight: FontWeight.normal,
               ),
             ),
           ],
@@ -76,9 +78,9 @@ class _NotificationBody extends StatelessWidget {
           children: [
             Text(
               '${state.unreadCount} unread notifications',
-              style: GoogleFonts.sen(
-                fontSize: 16.sp,
-                color: Colors.grey.shade600,
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                color: Colors.grey.shade500,
+                fontWeight: FontWeight.normal,
               ),
             ),
             15.verticalSpace,
@@ -112,7 +114,10 @@ class _NotificationList extends StatelessWidget {
       return Center(
         child: Text(
           'No notifications',
-          style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.grey),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: Colors.grey,
+            fontWeight: FontWeight.normal,
+          ),
         ),
       );
     }
@@ -164,8 +169,10 @@ class _TabSection extends StatelessWidget {
       dividerColor: Colors.transparent,
       labelColor: Colors.white,
       unselectedLabelColor: Colors.black,
-      labelStyle: GoogleFonts.sen(fontSize: 16.sp, fontWeight: FontWeight.bold),
-      unselectedLabelStyle: GoogleFonts.sen(fontSize: 16.sp),
+      labelStyle: Theme.of(context).textTheme.titleSmall,
+      unselectedLabelStyle: Theme.of(
+        context,
+      ).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.normal),
       tabs: [
         Tab(text: 'All ($totalCount)'),
         Tab(text: 'Unread ($unreadCount)'),
@@ -186,8 +193,8 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         'Notifications',
         style: GoogleFonts.sen(
-          fontSize: 30.sp,
-          fontWeight: FontWeight.bold,
+          fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
+          fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
           color: Colors.deepOrange,
         ),
       ),

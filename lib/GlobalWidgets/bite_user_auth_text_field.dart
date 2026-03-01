@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteUserAuthTextField extends StatefulWidget {
   final bool isPassword;
@@ -29,7 +28,7 @@ class _BiteUserAuthTextFieldState extends State<BiteUserAuthTextField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.title, style: GoogleFonts.sen(fontSize: 20.sp)),
+        Text(widget.title, style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal)),
         5.verticalSpace,
         TextFormField(
           controller: widget.controller,
@@ -70,7 +69,7 @@ class _BiteUserAuthTextFieldState extends State<BiteUserAuthTextField> {
                   )
                 : SizedBox.shrink(),
             hintText: 'Enter ${widget.title}',
-            hintStyle: GoogleFonts.sen(fontSize: 20.sp),
+            hintStyle: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide: BorderSide.none,

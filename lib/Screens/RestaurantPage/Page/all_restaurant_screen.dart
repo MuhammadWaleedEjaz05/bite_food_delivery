@@ -4,7 +4,6 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_restaurant_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AllRestaurantScreen extends StatelessWidget {
   const AllRestaurantScreen({super.key});
@@ -16,11 +15,9 @@ class AllRestaurantScreen extends StatelessWidget {
         backButton: true,
         title: Text(
           'All Restaurants',
-          style: GoogleFonts.sen(
-            fontSize: 30.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.deepOrange,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.displaySmall!.copyWith(color: Colors.deepOrange),
         ),
         actions: [],
       ),

@@ -29,11 +29,18 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(restaurant.name, style: GoogleFonts.sen(fontSize: 25.sp)),
+                Text(
+                  restaurant.name,
+                  style: GoogleFonts.sen(
+                    fontSize: Theme.of(
+                      context,
+                    ).textTheme.headlineLarge!.fontSize,
+                  ),
+                ),
                 Text(
                   restaurant.category,
-                  style: GoogleFonts.sen(
-                    fontSize: 18.sp,
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    fontWeight: FontWeight.normal,
                     color: Colors.grey.shade600,
                   ),
                 ),
@@ -48,11 +55,7 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                     4.horizontalSpace,
                     Text(
                       restaurant.rating.toString(),
-                      style: GoogleFonts.sen(
-                        fontSize: 16.sp,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                     10.horizontalSpace,
                     Icon(
@@ -63,10 +66,7 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                     4.horizontalSpace,
                     Text(
                       '${restaurant.deliveryTime.toInt()} min',
-                      style: GoogleFonts.sen(
-                        fontSize: 16.sp,
-                        color: Colors.black,
-                      ),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                     10.horizontalSpace,
                     Icon(
@@ -77,10 +77,7 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                     4.horizontalSpace,
                     Text(
                       '\$${restaurant.deliveryFee}',
-                      style: GoogleFonts.sen(
-                        fontSize: 16.sp,
-                        color: Colors.black,
-                      ),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ],
                 ),
@@ -95,14 +92,12 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                     return AlertDialog(
                       title: Text(
                         'Remove from favourites',
-                        style: GoogleFonts.sen(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                       content: Text(
                         'Are you sure you want to remove this restaurant from your favourites?',
-                        style: GoogleFonts.sen(fontSize: 16.sp),
+                        style: Theme.of(context).textTheme.titleSmall!
+                                    .copyWith(fontWeight: FontWeight.normal),
                       ),
                       actions: [
                         TextButton(
@@ -111,7 +106,8 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                           },
                           child: Text(
                             'Cancel',
-                            style: GoogleFonts.sen(fontSize: 16.sp),
+                            style: Theme.of(context).textTheme.titleSmall!
+                                    .copyWith(fontWeight: FontWeight.normal),
                           ),
                         ),
                         TextButton(
@@ -123,7 +119,8 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                           },
                           child: Text(
                             'Remove',
-                            style: GoogleFonts.sen(fontSize: 16.sp),
+                            style: Theme.of(context).textTheme.titleSmall!
+                                    .copyWith(fontWeight: FontWeight.normal),
                           ),
                         ),
                       ],

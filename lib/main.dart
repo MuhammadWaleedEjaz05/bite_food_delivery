@@ -2,7 +2,8 @@ import 'package:bite_food_delivery/Cubits/BottomNavigationSelection/bottom_navig
 import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
 import 'package:bite_food_delivery/Screens/SplashPage/Pages/splash_screen.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_bottom_navigation_bar.dart';
-import 'package:bite_food_delivery/configs/blocProviderlist.dart';
+import 'package:bite_food_delivery/Themes/bite_light_themes.dart';
+import 'package:bite_food_delivery/configs/bloc_provider_list.dart';
 import 'package:bite_food_delivery/configs/fcm_initialize.dart';
 import 'package:bite_food_delivery/configs/page_routes.dart';
 import 'package:bite_food_delivery/configs/screen_list.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         designSize: const Size(375, 812),
         builder: (context, child) {
           return MaterialApp(
+            theme: BiteLightThemes.lightThemeOrange,
             routes: routes,
             debugShowCheckedModeBanner: false,
             supportedLocales: FormBuilderLocalizations.supportedLocales,

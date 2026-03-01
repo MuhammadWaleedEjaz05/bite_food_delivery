@@ -9,7 +9,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class FoodItemScreen extends StatelessWidget {
   const FoodItemScreen({super.key});
@@ -106,10 +105,7 @@ class _AddCardBottomSheet extends StatelessWidget {
                     10.horizontalSpace,
                     Text(
                       'RS ${foodItem.price.toStringAsFixed(2)}',
-                      style: GoogleFonts.sen(
-                        fontSize: 25.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(context).textTheme.headlineLarge,
                     ),
                     Spacer(),
                     if (isInCart)
@@ -140,11 +136,8 @@ class _AddCardBottomSheet extends StatelessWidget {
                             ),
                             Text(
                               '$quantity',
-                              style: GoogleFonts.sen(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
+                              style: Theme.of(context).textTheme.titleLarge!
+                                  .copyWith(color: Colors.white),
                             ),
                             IconButton(
                               icon: Icon(Icons.add),
@@ -200,11 +193,8 @@ class _AddCardBottomSheet extends StatelessWidget {
                         ),
                         child: Text(
                           isInCart ? 'Remove from cart' : 'Add to cart',
-                          style: GoogleFonts.sen(
-                            fontSize: 25.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                          style: Theme.of(context).textTheme.headlineLarge!
+                              .copyWith(color: Colors.white),
                         ),
                       ),
                     ),
@@ -231,7 +221,7 @@ class _FlavorSelectionSection extends StatelessWidget {
       children: [
         Text(
           'Choose your flavor',
-          style: GoogleFonts.sen(fontSize: 20.sp, fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         10.verticalSpace,
         ListView.separated(
@@ -256,10 +246,7 @@ class _FoodSizeSelectionSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Choose your size',
-          style: GoogleFonts.sen(fontSize: 20.sp, fontWeight: FontWeight.bold),
-        ),
+        Text('Choose your size', style: Theme.of(context).textTheme.titleLarge),
         10.verticalSpace,
         Row(
           spacing: 10.w,
@@ -269,7 +256,9 @@ class _FoodSizeSelectionSection extends StatelessWidget {
               style: TextButton.styleFrom(
                 foregroundColor: Colors.black,
                 backgroundColor: Colors.grey.shade300,
-                textStyle: GoogleFonts.sen(fontSize: 20.sp),
+                textStyle: Theme.of(
+                  context,
+                ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
               ),
               child: Text('10 inch'),
             ),
@@ -278,7 +267,9 @@ class _FoodSizeSelectionSection extends StatelessWidget {
               style: TextButton.styleFrom(
                 foregroundColor: Colors.black,
                 backgroundColor: Colors.grey.shade300,
-                textStyle: GoogleFonts.sen(fontSize: 20.sp),
+                textStyle: Theme.of(
+                  context,
+                ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
               ),
               child: Text('16 inch'),
             ),
@@ -287,7 +278,9 @@ class _FoodSizeSelectionSection extends StatelessWidget {
               style: TextButton.styleFrom(
                 foregroundColor: Colors.black,
                 backgroundColor: Colors.grey.shade300,
-                textStyle: GoogleFonts.sen(fontSize: 20.sp),
+                textStyle: Theme.of(
+                  context,
+                ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
               ),
               child: Text('20 inch'),
             ),
@@ -308,20 +301,23 @@ class _FoodDescSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          foodItem.name,
-          style: GoogleFonts.sen(fontSize: 30.sp, fontWeight: FontWeight.bold),
-        ),
+        Text(foodItem.name, style: Theme.of(context).textTheme.displaySmall),
         5.verticalSpace,
         Text(
           restaurantName,
-          style: GoogleFonts.sen(fontSize: 20.sp, color: Colors.grey),
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            fontWeight: FontWeight.normal,
+            color: Colors.grey,
+          ),
         ),
         20.verticalSpace,
         10.verticalSpace,
         Text(
           foodItem.description,
-          style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.grey),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: Colors.grey,
+            fontWeight: FontWeight.normal,
+          ),
         ),
       ],
     );

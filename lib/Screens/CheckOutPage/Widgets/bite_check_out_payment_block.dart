@@ -1,7 +1,6 @@
 import 'package:bite_food_delivery/Models/credit_card_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteCheckOutPaymentBlock extends StatelessWidget {
   final CreditCardModel? creditCard;
@@ -32,10 +31,8 @@ class BiteCheckOutPaymentBlock extends StatelessWidget {
               children: [
                 Text(
                   creditCard!.cardHolderName,
-                  style: GoogleFonts.sen(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Colors.black87
                   ),
                 ),
                 4.verticalSpace,
@@ -45,8 +42,7 @@ class BiteCheckOutPaymentBlock extends StatelessWidget {
                       : creditCard!.cardNumber
                             .substring(creditCard!.cardNumber.length - 4)
                             .padLeft(16, '*'),
-                  style: GoogleFonts.sen(
-                    fontSize: 13.sp,
+                  style: Theme.of(context).textTheme.labelLarge!.copyWith(
                     color: Colors.grey.shade600,
                   ),
                 ),

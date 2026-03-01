@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteSettingItem extends StatelessWidget {
   final BiteSettingItemModel item;
@@ -17,7 +16,7 @@ class BiteSettingItem extends StatelessWidget {
         radius: 25.r,
         child: Icon(item.icon, size: 25.r),
       ),
-      title: Text(item.title, style: GoogleFonts.sen(fontSize: 17.5.sp)),
+      title: Text(item.title, style: Theme.of(context).textTheme.labelSmall),
       trailing: item.trailing,
     );
   }

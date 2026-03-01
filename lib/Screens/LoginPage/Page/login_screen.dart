@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -73,7 +72,14 @@ class _OtherLoginOptionSection extends StatelessWidget {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text('Or', style: GoogleFonts.sen(fontSize: 20.sp))],
+          children: [
+            Text(
+              'Or',
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
+            ),
+          ],
         ),
         20.verticalSpace,
         Row(
@@ -141,7 +147,7 @@ class _NoAccountSection extends StatelessWidget {
       children: [
         Text(
           'Don\'t have an account? ',
-          style: GoogleFonts.sen(fontSize: 15.sp),
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
         TextButton(
           onPressed: () => Navigator.pushNamed(context, '/signup_screen'),
@@ -151,10 +157,9 @@ class _NoAccountSection extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.r),
             ),
-            textStyle: GoogleFonts.sen(
-              fontSize: 15.sp,
-              fontWeight: FontWeight.bold,
-            ),
+            textStyle: Theme.of(
+              context,
+            ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
           ),
           child: Text('Sign Up'),
         ),
@@ -191,10 +196,7 @@ class _LoginActionButton extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),
               ),
-              textStyle: GoogleFonts.sen(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.bold,
-              ),
+              textStyle: Theme.of(context).textTheme.titleLarge,
             ),
             child: Text('Login'),
           ),
@@ -215,7 +217,7 @@ class _LoginOptionalSelectionSection extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Checkbox(value: false, onChanged: (value) {}),
-            Text('Remember me', style: GoogleFonts.sen(fontSize: 15.sp)),
+            Text('Remember me', style: Theme.of(context).textTheme.bodyMedium),
           ],
         ),
         Spacer(),
@@ -228,10 +230,9 @@ class _LoginOptionalSelectionSection extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.r),
             ),
-            textStyle: GoogleFonts.sen(
-              fontSize: 15.sp,
-              fontWeight: FontWeight.bold,
-            ),
+            textStyle: Theme.of(
+              context,
+            ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
           ),
           child: Text('Forgot Password?'),
         ),
@@ -280,18 +281,13 @@ class _HeadTitleSection extends StatelessWidget {
           title: SizedBox.shrink(),
           actions: [],
         ),
-        Text(
-          'Log In',
-          style: GoogleFonts.sen(
-            fontSize: 40.sp,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        Text('Log In', style: Theme.of(context).textTheme.displayLarge),
 
         Text(
           'Please Sign In to Continue',
-          style: GoogleFonts.sen(fontSize: 20.sp, color: Colors.white),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge!.copyWith(color: Colors.white),
         ),
       ],
     );

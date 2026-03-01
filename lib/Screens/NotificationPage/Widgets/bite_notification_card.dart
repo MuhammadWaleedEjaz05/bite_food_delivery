@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteNotificationCard extends StatelessWidget {
   const BiteNotificationCard({
@@ -53,17 +52,14 @@ class BiteNotificationCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: GoogleFonts.sen(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleMedium!.copyWith(color: Colors.black),
                 ),
                 5.verticalSpace,
                 Text(
                   subtitle,
-                  style: GoogleFonts.sen(
-                    fontSize: 14.sp,
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     color: Colors.grey.shade600,
                   ),
                 ),
@@ -78,8 +74,7 @@ class BiteNotificationCard extends StatelessWidget {
                     5.horizontalSpace,
                     Text(
                       time,
-                      style: GoogleFonts.sen(
-                        fontSize: 12.sp,
+                      style: Theme.of(context).textTheme.labelMedium!.copyWith(
                         color: Colors.grey.shade500,
                       ),
                     ),

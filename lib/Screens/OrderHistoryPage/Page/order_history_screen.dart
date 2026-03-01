@@ -92,14 +92,14 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                       return Center(
                         child: Text(
                           state.message,
-                          style: GoogleFonts.sen(
-                            fontSize: 16.sp,
-                            color: Colors.red,
-                          ),
+                          style: Theme.of(context).textTheme.titleSmall!
+                              .copyWith(
+                                color: Colors.red,
+                                fontWeight: FontWeight.normal,
+                              ),
                         ),
                       );
                     }
-                    // Default / initial state
                     return Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: 16.w,
@@ -134,8 +134,8 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         'Order History',
         style: GoogleFonts.sen(
-          fontSize: 30.sp,
-          fontWeight: FontWeight.bold,
+          fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
+          fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
           color: Colors.deepOrange,
         ),
       ),
@@ -188,9 +188,9 @@ class _EmptyOrderView extends StatelessWidget {
           16.verticalSpace,
           Text(
             message,
-            style: GoogleFonts.sen(
-              fontSize: 18.sp,
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
               color: Colors.grey.shade500,
+              fontWeight: FontWeight.normal,
             ),
           ),
         ],

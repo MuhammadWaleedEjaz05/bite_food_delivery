@@ -84,10 +84,8 @@ class _CheckOutSection extends StatelessWidget {
                       children: [
                         Text(
                           'DELIVERY ADDRESS',
-                          style: GoogleFonts.sen(
-                            fontSize: 15.sp,
-                            color: Colors.grey.shade400,
-                          ),
+                          style: Theme.of(context).textTheme.bodyMedium!
+                              .copyWith(color: Colors.grey.shade600),
                         ),
                         Spacer(),
                         BlocBuilder<AddressCubit, AddressState>(
@@ -97,13 +95,13 @@ class _CheckOutSection extends StatelessWidget {
                                   showAddressSelectorModal(context),
                               child: Text(
                                 'EDIT',
-                                style: GoogleFonts.sen(
-                                  fontSize: 15.sp,
-                                  color: Colors.deepOrange,
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: Colors.deepOrange,
-                                  decorationThickness: 2,
-                                ),
+                                style: Theme.of(context).textTheme.bodyMedium!
+                                    .copyWith(
+                                      color: Colors.deepOrange,
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: Colors.deepOrange,
+                                      decorationThickness: 2,
+                                    ),
                               ),
                             );
                           },
@@ -141,15 +139,12 @@ class _CheckOutSection extends StatelessWidget {
                       children: [
                         Text(
                           'TOTAL : ',
-                          style: GoogleFonts.sen(fontSize: 15.sp),
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         Text(
                           'PKR ${totalAmount.toStringAsFixed(2)}',
-                          style: GoogleFonts.sen(
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepOrange,
-                          ),
+                          style: Theme.of(context).textTheme.titleLarge!
+                              .copyWith(color: Colors.deepOrange),
                         ),
                       ],
                     ),
@@ -178,11 +173,11 @@ class _CheckOutSection extends StatelessWidget {
                             },
                             child: Text(
                               'CHECKOUT',
-                              style: GoogleFonts.sen(
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
+                              style: Theme.of(context).textTheme.bodyMedium!
+                                  .copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                             ),
                           ),
                         ),
@@ -219,7 +214,10 @@ class _CartSection extends StatelessWidget {
             child: Center(
               child: Text(
                 'Your cart is empty',
-                style: GoogleFonts.sen(fontSize: 18.sp, color: Colors.white),
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
             ),
           );
@@ -230,7 +228,10 @@ class _CartSection extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Your cart is empty',
-                  style: GoogleFonts.sen(fontSize: 18.sp, color: Colors.white),
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
               ),
             );
@@ -258,7 +259,10 @@ class _CartSection extends StatelessWidget {
           child: Center(
             child: Text(
               'Initializing cart...',
-              style: GoogleFonts.sen(fontSize: 18.sp, color: Colors.white),
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.normal,
+              ),
             ),
           ),
         );
@@ -279,8 +283,8 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         'Cart',
         style: GoogleFonts.sen(
-          fontSize: 30.sp,
-          fontWeight: FontWeight.bold,
+          fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
+          fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
           color: Colors.white,
         ),
       ),

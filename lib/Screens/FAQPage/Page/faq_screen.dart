@@ -43,8 +43,8 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         'FAQs',
         style: GoogleFonts.sen(
-          fontSize: 30.sp,
-          fontWeight: FontWeight.bold,
+          fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
+          fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
           color: Colors.deepOrange,
         ),
       ),

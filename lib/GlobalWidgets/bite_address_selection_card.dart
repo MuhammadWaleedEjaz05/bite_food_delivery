@@ -1,7 +1,6 @@
 import 'package:bite_food_delivery/Models/address_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteAddressSelectionCard extends StatelessWidget {
   final AddressModel address;
@@ -44,8 +43,7 @@ class BiteAddressSelectionCard extends StatelessWidget {
                 children: [
                   Text(
                     address.label,
-                    style: GoogleFonts.sen(
-                      fontSize: 14.sp,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       fontWeight: FontWeight.bold,
                       color: isSelected ? Colors.deepOrange : Colors.black,
                     ),
@@ -53,8 +51,7 @@ class BiteAddressSelectionCard extends StatelessWidget {
                   5.verticalSpace,
                   Text(
                     '${address.street}, ${address.city}',
-                    style: GoogleFonts.sen(
-                      fontSize: 13.sp,
+                    style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: Colors.grey.shade600,
                     ),
                   ),

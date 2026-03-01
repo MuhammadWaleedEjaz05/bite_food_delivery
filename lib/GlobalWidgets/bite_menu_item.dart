@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteMenuItem extends StatelessWidget {
   final BiteMenuItemModel item;
@@ -17,11 +16,11 @@ class BiteMenuItem extends StatelessWidget {
         radius: 25.r,
         child: Icon(item.leadingIcon, size: 25.r),
       ),
-      title: Text(item.title, style: GoogleFonts.sen(fontSize: 17.5.sp)),
+      title: Text(item.title, style: Theme.of(context).textTheme.labelSmall),
       subtitle: item.subtitle != null
           ? Text(
               item.subtitle!,
-              style: GoogleFonts.sen(fontSize: 14.sp, color: Colors.grey),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.grey),
             )
           : null,
       trailing: IconButton(

@@ -5,7 +5,6 @@ import 'package:bite_food_delivery/Models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 final _formKey = GlobalKey<FormState>();
 final _emailController = TextEditingController();
@@ -92,10 +91,7 @@ class _SignupActionSection extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),
               ),
-              textStyle: GoogleFonts.sen(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.bold,
-              ),
+              textStyle: Theme.of(context).textTheme.titleLarge,
             ),
             child: Text('Sign Up'),
           ),
@@ -162,18 +158,13 @@ class _HeadTitleSection extends StatelessWidget {
           title: SizedBox.shrink(),
           actions: [],
         ),
-        Text(
-          'Sign Up',
-          style: GoogleFonts.sen(
-            fontSize: 40.sp,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        Text('Sign Up', style: Theme.of(context).textTheme.displayLarge),
 
         Text(
           'Please Sign Up to get started',
-          style: GoogleFonts.sen(fontSize: 20.sp, color: Colors.white),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge!.copyWith(color: Colors.white),
         ),
       ],
     );

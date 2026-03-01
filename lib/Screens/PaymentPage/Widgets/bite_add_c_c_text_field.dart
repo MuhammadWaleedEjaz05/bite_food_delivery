@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteAddCCTextField extends StatelessWidget {
   final TextEditingController? controller;
@@ -15,11 +14,9 @@ class BiteAddCCTextField extends StatelessWidget {
       children: [
         Text(
           title,
-          style: GoogleFonts.sen(
-            fontSize: 20.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.deepOrange,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge!.copyWith(color: Colors.deepOrange),
         ),
         5.verticalSpace,
         TextFormField(
@@ -42,11 +39,9 @@ class BiteAddCCTextField extends StatelessWidget {
             filled: true,
             fillColor: Colors.grey.shade200,
             hintText: 'Enter $title',
-            hintStyle: GoogleFonts.sen(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey,
-            ),
+            hintStyle: Theme.of(
+              context,
+            ).textTheme.titleLarge!.copyWith(color: Colors.grey),
 
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),

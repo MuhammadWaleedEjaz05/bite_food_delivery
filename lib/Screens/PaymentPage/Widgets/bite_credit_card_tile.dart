@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteCreditCardTile extends StatefulWidget {
   final CreditCardModel creditCard;
@@ -71,17 +70,14 @@ class _BiteCreditCardTileState extends State<BiteCreditCardTile>
                     children: [
                       Text(
                         '**** **** **** ${widget.creditCard.cardNumber.substring(widget.creditCard.cardNumber.length - 4)}',
-                        style: GoogleFonts.sen(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.sp,
-                          color: Colors.black87,
-                        ),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleSmall!.copyWith(color: Colors.black87),
                       ),
                       4.verticalSpace,
                       Text(
                         widget.creditCard.cardHolderName,
-                        style: GoogleFonts.sen(
-                          fontSize: 13.sp,
+                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
                           color: Colors.grey.shade600,
                         ),
                       ),
@@ -190,10 +186,10 @@ class _BiteCreditCardTileState extends State<BiteCreditCardTile>
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(12.r),
                                     ),
-                                    textStyle: GoogleFonts.sen(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    textStyle: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall!
+                                        .copyWith(fontWeight: FontWeight.bold),
                                   ),
                                 );
                               },
@@ -224,10 +220,8 @@ class _BiteCreditCardTileState extends State<BiteCreditCardTile>
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.r),
                             ),
-                            textStyle: GoogleFonts.sen(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            textStyle: Theme.of(context).textTheme.bodySmall!
+                                .copyWith(fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
@@ -275,16 +269,14 @@ class _CardDetailRow extends StatelessWidget {
           10.horizontalSpace,
           Text(
             label,
-            style: GoogleFonts.sen(
-              fontSize: 14.sp,
-              color: Colors.grey.shade600,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall!.copyWith(color: Colors.grey.shade600),
           ),
           const Spacer(),
           Text(
             value,
-            style: GoogleFonts.sen(
-              fontSize: 14.sp,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.black87,
             ),

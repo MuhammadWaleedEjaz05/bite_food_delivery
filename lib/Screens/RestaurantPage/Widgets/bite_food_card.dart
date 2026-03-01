@@ -6,7 +6,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteFoodCard extends StatelessWidget {
   final FoodItemModel foodItem;
@@ -59,27 +58,21 @@ class BiteFoodCard extends StatelessWidget {
               foodItem.name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: GoogleFonts.sen(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             4.verticalSpace,
             Text(
               foodItem.category,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: GoogleFonts.sen(fontSize: 14.sp, color: Colors.grey),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.grey),
             ),
             12.verticalSpace,
             Row(
               children: [
                 Text(
                   'Rs ${foodItem.price}',
-                  style: GoogleFonts.sen(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 Spacer(),
                 BlocListener<CartCubit, CartState>(

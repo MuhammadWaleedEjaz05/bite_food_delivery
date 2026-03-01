@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteSummaryRow extends StatelessWidget {
   final String label;
   final String value;
-  const BiteSummaryRow({required this.label, required this.value,super.key});
+  const BiteSummaryRow({required this.label, required this.value, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +12,14 @@ class BiteSummaryRow extends StatelessWidget {
       children: [
         Text(
           label,
-          style: GoogleFonts.sen(fontSize: 15.sp, color: Colors.grey.shade600),
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            color: Colors.grey.shade600,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         Text(
           value,
-          style: GoogleFonts.sen(
-            fontSize: 15.sp,
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontWeight: FontWeight.bold,
             color: Colors.black87,
           ),

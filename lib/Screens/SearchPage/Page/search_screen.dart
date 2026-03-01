@@ -56,7 +56,10 @@ class _PopularRestaurantSection extends StatelessWidget {
                 return Center(
                   child: Text(
                     'No popular restaurants found',
-                    style: GoogleFonts.sen(fontSize: 18.sp),
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Colors.grey.shade600,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
                 );
               }
@@ -116,7 +119,10 @@ class _RecentSearchSection extends StatelessWidget {
                   return Center(
                     child: Text(
                       'No recent searches',
-                      style: GoogleFonts.sen(fontSize: 18.sp),
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: Colors.grey.shade600,
+                        fontWeight: FontWeight.normal,
+                      ),
                     ),
                   );
                 }
@@ -151,8 +157,8 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         'Search',
         style: GoogleFonts.sen(
-          fontSize: 30.sp,
-          fontWeight: FontWeight.bold,
+          fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
+          fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
           color: Colors.deepOrange,
         ),
       ),

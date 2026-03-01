@@ -147,10 +147,7 @@ class _AddCardSection extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),
               ),
-              textStyle: GoogleFonts.sen(
-                fontSize: 25.sp,
-                fontWeight: FontWeight.bold,
-              ),
+              textStyle: Theme.of(context).textTheme.headlineLarge,
             ),
             child: Text('Add Card'),
           ),
@@ -227,8 +224,8 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         'Add Card',
         style: GoogleFonts.sen(
-          fontSize: 30.sp,
-          fontWeight: FontWeight.bold,
+          fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
+          fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
           color: Colors.deepOrange,
         ),
       ),

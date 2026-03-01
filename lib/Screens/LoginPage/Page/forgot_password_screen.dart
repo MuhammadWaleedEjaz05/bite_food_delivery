@@ -4,7 +4,6 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_user_auth_text_field.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 final _forgotPasswordFormKey = GlobalKey<FormState>();
 final _forgotPasswordEmailController = TextEditingController();
@@ -63,7 +62,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     BlocConsumer<UserAuthCubit, UserAuthState>(
                       listener: (context, state) {
                         if (state is UserAuthInitial) {
-                          
                           showDialog(
                             context: context,
                             barrierDismissible: false,
@@ -71,14 +69,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               return AlertDialog(
                                 title: Text(
                                   'Password Reset Link Sent',
-                                  style: GoogleFonts.sen(
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: Theme.of(context).textTheme.titleLarge,
                                 ),
                                 content: Text(
                                   'Check your email for a password reset link. Click the link to reset your password on our website.',
-                                  style: GoogleFonts.sen(fontSize: 16.sp),
+                                  style: Theme.of(context).textTheme.titleSmall!
+                                      .copyWith(fontWeight: FontWeight.normal),
                                 ),
                                 actions: [
                                   ElevatedButton(
@@ -106,10 +102,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     ),
                                     child: Text(
                                       'Done',
-                                      style: GoogleFonts.sen(
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.titleSmall,
                                     ),
                                   ),
                                 ],
@@ -154,10 +149,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.r),
                                   ),
-                                  textStyle: GoogleFonts.sen(
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  textStyle: Theme.of(
+                                    context,
+                                  ).textTheme.titleLarge,
                                 ),
                                 child: isLoading
                                     ? const SizedBox(
@@ -205,16 +199,14 @@ class _HeadTitleSection extends StatelessWidget {
         ),
         Text(
           'Forgot Password',
-          style: GoogleFonts.sen(
-            fontSize: 40.sp,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(context).textTheme.displayLarge,
         ),
 
         Text(
           'Please enter your email address to receive a password reset link.',
-          style: GoogleFonts.sen(fontSize: 15.sp, color: Colors.white),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium!.copyWith(color: Colors.white),
           textAlign: TextAlign.center,
         ),
       ],

@@ -140,8 +140,10 @@ class _TabSection extends StatelessWidget {
       dividerColor: Colors.transparent,
       labelColor: Colors.white,
       unselectedLabelColor: Colors.black,
-      labelStyle: GoogleFonts.sen(fontSize: 16.sp, fontWeight: FontWeight.bold),
-      unselectedLabelStyle: GoogleFonts.sen(fontSize: 16.sp),
+      labelStyle: Theme.of(context).textTheme.titleSmall,
+      unselectedLabelStyle: Theme.of(
+        context,
+      ).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.normal),
       tabs: [
         Tab(text: 'Foods'),
         Tab(text: 'Restaurants'),
@@ -162,8 +164,8 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         'Favourite',
         style: GoogleFonts.sen(
-          fontSize: 30.sp,
-          fontWeight: FontWeight.bold,
+          fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
+          fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
           color: Colors.deepOrange,
         ),
       ),

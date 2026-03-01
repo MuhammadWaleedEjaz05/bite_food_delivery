@@ -2,7 +2,6 @@ import 'package:bite_food_delivery/Models/cart_item_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteCheckoutItemTile extends StatelessWidget {
   final CartItemModel item;
@@ -43,29 +42,25 @@ class BiteCheckoutItemTile extends StatelessWidget {
               children: [
                 Text(
                   item.product.name,
-                  style: GoogleFonts.sen(
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 4.verticalSpace,
                 Text(
                   'x${item.quantity}',
-                  style: GoogleFonts.sen(
-                    fontSize: 13.sp,
-                    color: Colors.grey.shade600,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.labelLarge!.copyWith(color: Colors.grey.shade600),
                 ),
               ],
             ),
           ),
           Text(
             'PKR ${item.totalPrice.toStringAsFixed(2)}',
-            style: GoogleFonts.sen(
-              fontSize: 15.sp,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.deepOrange,
             ),

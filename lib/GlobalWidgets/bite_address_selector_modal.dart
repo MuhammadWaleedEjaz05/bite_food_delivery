@@ -3,7 +3,6 @@ import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void showAddressSelectorModal(BuildContext context) {
   showModalBottomSheet(
@@ -33,10 +32,7 @@ void showAddressSelectorModal(BuildContext context) {
                   children: [
                     Text(
                       'Select Delivery Address',
-                      style: GoogleFonts.sen(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                     20.verticalSpace,
                     Expanded(
@@ -44,7 +40,8 @@ void showAddressSelectorModal(BuildContext context) {
                           ? Center(
                               child: Text(
                                 'No addresses found',
-                                style: GoogleFonts.sen(fontSize: 16.sp),
+                                style: Theme.of(context).textTheme.titleSmall!
+                                    .copyWith(fontWeight: FontWeight.normal),
                               ),
                             )
                           : ListView.separated(

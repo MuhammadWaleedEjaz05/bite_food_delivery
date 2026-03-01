@@ -55,10 +55,7 @@ class _AddCardSection extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),
               ),
-              textStyle: GoogleFonts.sen(
-                fontSize: 25.sp,
-                fontWeight: FontWeight.bold,
-              ),
+              textStyle: Theme.of(context).textTheme.headlineLarge,
             ),
             child: Text('Add New Card'),
           ),
@@ -118,10 +115,7 @@ class _CreditCardListSection extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'Cash on Delivery selected. No credit cards to display.',
-                      style: GoogleFonts.sen(
-                        fontSize: 22.5.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(context).textTheme.headlineSmall,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -146,10 +140,7 @@ class _CreditCardListSection extends StatelessWidget {
                     child: Center(
                       child: Text(
                         'No credit cards found. Please add a card.',
-                        style: GoogleFonts.sen(
-                          fontSize: 22.5.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.headlineSmall,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -246,8 +237,8 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         'Payment Method',
         style: GoogleFonts.sen(
-          fontSize: 30.sp,
-          fontWeight: FontWeight.bold,
+          fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
+          fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
           color: Colors.deepOrange,
         ),
       ),

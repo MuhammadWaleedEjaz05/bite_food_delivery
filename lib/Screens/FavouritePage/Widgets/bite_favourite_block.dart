@@ -4,7 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteFavouriteBlock extends StatelessWidget {
   final FoodItemModel foodItem;
@@ -50,15 +49,11 @@ class BiteFavouriteBlock extends StatelessWidget {
                 children: [
                   Text(
                     foodItem.name,
-                    style: GoogleFonts.sen(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   Text(
                     foodItem.category,
-                    style: GoogleFonts.sen(
-                      fontSize: 15.sp,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: Colors.grey.shade500,
                     ),
                   ),
@@ -66,8 +61,7 @@ class BiteFavouriteBlock extends StatelessWidget {
                     children: [
                       Text(
                         'RS ${foodItem.price.toStringAsFixed(2)}',
-                        style: GoogleFonts.sen(
-                          fontSize: 15.sp,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Colors.grey.shade500,
                         ),
                       ),
@@ -84,14 +78,12 @@ class BiteFavouriteBlock extends StatelessWidget {
                       return AlertDialog(
                         title: Text(
                           'Remove from favourites',
-                          style: GoogleFonts.sen(
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                         content: Text(
                           'Are you sure you want to remove this food item from your favourites?',
-                          style: GoogleFonts.sen(fontSize: 16.sp),
+                          style: Theme.of(context).textTheme.titleSmall!
+                                    .copyWith(fontWeight: FontWeight.normal),
                         ),
                         actions: [
                           TextButton(
@@ -100,7 +92,8 @@ class BiteFavouriteBlock extends StatelessWidget {
                             },
                             child: Text(
                               'Cancel',
-                              style: GoogleFonts.sen(fontSize: 16.sp),
+                              style: Theme.of(context).textTheme.titleSmall!
+                                    .copyWith(fontWeight: FontWeight.normal),
                             ),
                           ),
                           TextButton(
@@ -112,7 +105,8 @@ class BiteFavouriteBlock extends StatelessWidget {
                             },
                             child: Text(
                               'Remove',
-                              style: GoogleFonts.sen(fontSize: 16.sp),
+                              style: Theme.of(context).textTheme.titleSmall!
+                                    .copyWith(fontWeight: FontWeight.normal),
                             ),
                           ),
                         ],
@@ -138,11 +132,7 @@ class BiteFavouriteBlock extends StatelessWidget {
                   onPressed: () {},
                   child: Text(
                     'Order Again',
-                    style: GoogleFonts.sen(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),

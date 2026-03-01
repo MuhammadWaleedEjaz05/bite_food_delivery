@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteFlavorListTile extends StatelessWidget {
   const BiteFlavorListTile({super.key});
@@ -19,10 +18,7 @@ class BiteFlavorListTile extends StatelessWidget {
             children: [
               Text(
                 'Beef Burger',
-                style: GoogleFonts.sen(
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               Spacer(),
               Container(

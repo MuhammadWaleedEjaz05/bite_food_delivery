@@ -7,7 +7,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class PersonInfoScreen extends StatelessWidget {
   const PersonInfoScreen({super.key});
@@ -20,11 +19,9 @@ class PersonInfoScreen extends StatelessWidget {
         backButton: true,
         title: Text(
           'Personal Info',
-          style: GoogleFonts.sen(
-            fontSize: 20.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.deepOrange,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge!.copyWith(color: Colors.deepOrange),
         ),
         actions: [],
       ),
@@ -82,15 +79,11 @@ class _UserInfoSection extends StatelessWidget {
                       children: [
                         Text(
                           state.user.fullName,
-                          style: GoogleFonts.sen(
-                            fontSize: 25.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context).textTheme.headlineLarge,
                         ),
                         Text(
                           state.user.bio ?? 'I Love Fast Food',
-                          style: GoogleFonts.sen(
-                            fontSize: 15.sp,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: Colors.grey.shade500,
                           ),
                           overflow: TextOverflow.ellipsis,
@@ -107,15 +100,11 @@ class _UserInfoSection extends StatelessWidget {
                   20.verticalSpace,
                   Text(
                     'Guest User',
-                    style: GoogleFonts.sen(
-                      fontSize: 25.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.headlineLarge,
                   ),
                   Text(
                     'Please login to view your profile',
-                    style: GoogleFonts.sen(
-                      fontSize: 15.sp,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: Colors.grey.shade500,
                     ),
                     overflow: TextOverflow.ellipsis,

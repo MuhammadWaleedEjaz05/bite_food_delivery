@@ -2,7 +2,6 @@ import 'package:bite_food_delivery/Models/restaurants_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteRestaurantCard extends StatelessWidget {
   final RestaurantModel restaurant;
@@ -31,11 +30,16 @@ class BiteRestaurantCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(20.r),
             ),
           ),
-          Text(restaurant.name, style: GoogleFonts.sen(fontSize: 25.sp)),
+          Text(
+            restaurant.name,
+            style: Theme.of(
+              context,
+            ).textTheme.headlineLarge!.copyWith(fontWeight: FontWeight.normal),
+          ),
           Text(
             restaurant.category,
-            style: GoogleFonts.sen(
-              fontSize: 18.sp,
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+              fontWeight: FontWeight.normal,
               color: Colors.grey.shade600,
             ),
           ),
@@ -46,11 +50,7 @@ class BiteRestaurantCard extends StatelessWidget {
               4.horizontalSpace,
               Text(
                 restaurant.rating.toString(),
-                style: GoogleFonts.sen(
-                  fontSize: 16.sp,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.black,fontWeight: FontWeight.normal),
               ),
               10.horizontalSpace,
               Icon(
@@ -61,7 +61,7 @@ class BiteRestaurantCard extends StatelessWidget {
               4.horizontalSpace,
               Text(
                 '${restaurant.deliveryTime.toInt()} min',
-                style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.black),
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.black,fontWeight: FontWeight.normal),
               ),
               10.horizontalSpace,
               Icon(
@@ -72,7 +72,7 @@ class BiteRestaurantCard extends StatelessWidget {
               4.horizontalSpace,
               Text(
                 '\$${restaurant.deliveryFee}',
-                style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.black),
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.black,fontWeight: FontWeight.normal),
               ),
             ],
           ),

@@ -3,7 +3,6 @@ import 'package:bite_food_delivery/Cubits/CategorySelectionCubit/category_select
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteDropDownMenu extends StatelessWidget {
   const BiteDropDownMenu({super.key});
@@ -29,10 +28,9 @@ class BiteDropDownMenu extends StatelessWidget {
                 ),
               ),
               width: 150.w,
-              textStyle: GoogleFonts.sen(
-                fontSize: 15.sp,
-                fontWeight: FontWeight.bold,
-              ),
+              textStyle: Theme.of(
+                context,
+              ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
               inputDecorationTheme: InputDecorationTheme(
                 filled: true,
                 fillColor: Colors.white,

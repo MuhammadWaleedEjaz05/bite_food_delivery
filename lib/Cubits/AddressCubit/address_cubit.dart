@@ -2,7 +2,7 @@ import 'package:bite_food_delivery/Models/address_model.dart';
 import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
 import 'package:bite_food_delivery/configs/firebase_db_conn.dart';
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'address_state.dart';
@@ -37,7 +37,7 @@ class AddressCubit extends Cubit<AddressState> {
           }
           addresses.add(AddressModel.fromJson(data));
         } catch (e) {
-          print('Error parsing address: $e, Address data: ${doc.data()}');
+          debugPrint('Error parsing address: $e, Address data: ${doc.data()}');
         }
       }
 
@@ -62,7 +62,7 @@ class AddressCubit extends Cubit<AddressState> {
         AddressesLoaded(addresses: addresses, selectedAddress: selectedAddress),
       );
     } catch (e) {
-      print('Error in loadAddresses: $e');
+      debugPrint('Error in loadAddresses: $e');
       emit(AddressError(message: 'Failed to load addresses: ${e.toString()}'));
     }
   }
@@ -76,6 +76,7 @@ class AddressCubit extends Cubit<AddressState> {
       
       await loadAddresses();
     } catch (e) {
+      debugPrint('Error in selectAddress: $e');
       emit(AddressError(message: 'Failed to select address: ${e.toString()}'));
     }
   }

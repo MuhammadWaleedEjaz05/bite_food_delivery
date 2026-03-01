@@ -44,7 +44,10 @@ class BiteCartItemCard extends StatelessWidget {
             children: [
               Text(
                 cartItem.product.name,
-                style: GoogleFonts.sen(fontSize: 25.sp, color: Colors.white),
+                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white,
+                ),
                 maxLines: 1,
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
@@ -54,11 +57,9 @@ class BiteCartItemCard extends StatelessWidget {
                 children: [
                   Text(
                     'PKR ${cartItem.product.price}',
-                    style: GoogleFonts.sen(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleLarge!.copyWith(color: Colors.white),
                   ),
                   Spacer(),
                 ],
@@ -85,9 +86,13 @@ class BiteCartItemCard extends StatelessWidget {
                   Text(
                     cartItem.quantity.toString(),
                     style: GoogleFonts.sen(
-                      fontSize: 25.sp,
+                      fontSize: Theme.of(
+                        context,
+                      ).textTheme.headlineLarge!.fontSize,
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: Theme.of(
+                        context,
+                      ).textTheme.headlineLarge!.fontWeight,
                     ),
                   ),
                   IconButton(

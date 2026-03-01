@@ -36,7 +36,7 @@ class BiteOrderHistoryCard extends StatelessWidget {
         children: [
           Text(
             dateStr,
-            style: GoogleFonts.sen(fontSize: 14.sp, color: Colors.grey),
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.grey),
           ),
           10.verticalSpace,
           Divider(thickness: 1.h),
@@ -67,20 +67,17 @@ class BiteOrderHistoryCard extends StatelessWidget {
                       children: [
                         Text(
                           restaurantName,
-                          style: GoogleFonts.sen(
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                         Text(
                           statusLabel,
-                          style: GoogleFonts.sen(
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                            color: isCompleted
-                                ? Colors.green
-                                : Colors.deepOrange,
-                          ),
+                          style: Theme.of(context).textTheme.bodyMedium!
+                              .copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: isCompleted
+                                    ? Colors.green
+                                    : Colors.deepOrange,
+                              ),
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,21 +85,20 @@ class BiteOrderHistoryCard extends StatelessWidget {
                           children: [
                             Text(
                               'PKR ${order.totalPrice.toStringAsFixed(0)}',
-                              style: GoogleFonts.sen(
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: Theme.of(context).textTheme.bodyMedium!
+                                  .copyWith(fontWeight: FontWeight.bold),
                             ),
                             Text(
                               '|',
-                              style: GoogleFonts.sen(
-                                fontSize: 20.sp,
-                                color: Colors.grey,
-                              ),
+                              style: Theme.of(context).textTheme.titleLarge!
+                                  .copyWith(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.normal,
+                                  ),
                             ),
                             Text(
                               order.paymentMethod.name.toUpperCase(),
-                              style: GoogleFonts.sen(fontSize: 15.sp),
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ],
                         ),
@@ -111,8 +107,7 @@ class BiteOrderHistoryCard extends StatelessWidget {
                   ),
                   Text(
                     '#${order.orderId.substring(0, 8)}',
-                    style: GoogleFonts.sen(
-                      fontSize: 13.sp,
+                    style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: Colors.grey,
                       decoration: TextDecoration.underline,
                       decorationColor: Colors.grey,

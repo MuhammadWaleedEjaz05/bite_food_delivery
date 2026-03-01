@@ -4,7 +4,6 @@ import 'package:bite_food_delivery/Cubits/FilterRestaurantsCubit/filter_restaura
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteFilterModal extends StatelessWidget {
   const BiteFilterModal({super.key});
@@ -80,10 +79,9 @@ class _ApplySection extends StatelessWidget {
             onPressed: onClear,
             child: Text(
               'CLEAR',
-              style: GoogleFonts.sen(
-                fontSize: 15.sp,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -99,10 +97,9 @@ class _ApplySection extends StatelessWidget {
             onPressed: onApply,
             child: Text(
               'APPLY',
-              style: GoogleFonts.sen(
-                fontSize: 15.sp,
-                fontWeight: FontWeight.bold,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 color: Colors.white,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -246,7 +243,7 @@ class _HeadingSection extends StatelessWidget {
     return BiteAppBar(
       title: Text(
         'Filter your search',
-        style: GoogleFonts.sen(fontSize: 20.sp, fontWeight: FontWeight.bold),
+        style: Theme.of(context).textTheme.titleLarge,
       ),
       actions: [
         IconButton(
@@ -289,7 +286,8 @@ class _BiteFilterTextButton extends StatelessWidget {
           ),
         ),
       ),
-      child: Text(title, style: GoogleFonts.sen(fontSize: 16.sp)),
+      child: Text(title, style: Theme.of(context).textTheme.titleSmall!
+                                    .copyWith(fontWeight: FontWeight.normal)),
     );
   }
 }

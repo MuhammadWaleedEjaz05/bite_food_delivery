@@ -11,7 +11,6 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_address_selector_modal.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -158,11 +157,9 @@ class _AppBarSectionState extends State<_AppBarSection> {
                 children: [
                   Text(
                     'DELIVER TO',
-                    style: GoogleFonts.sen(
-                      color: Colors.deepOrange,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleLarge!.copyWith(color: Colors.deepOrange),
                   ),
                   GestureDetector(
                     onTap: () => showAddressSelectorModal(context),
@@ -179,10 +176,8 @@ class _AppBarSectionState extends State<_AppBarSection> {
                           width: 120.w,
                           child: Text(
                             addressText,
-                            style: GoogleFonts.sen(
-                              color: Colors.grey.shade600,
-                              fontSize: 15.sp,
-                            ),
+                            style: Theme.of(context).textTheme.bodyMedium!
+                                .copyWith(color: Colors.grey.shade600),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -228,12 +223,11 @@ class _SearchSection extends StatelessWidget {
                 children: [
                   Text(
                     'Hey ${state.user.fullName}, ',
-                    style: GoogleFonts.sen(fontSize: 15.sp),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Text(
                     'Good Morning! 👋',
-                    style: GoogleFonts.sen(
-                      fontSize: 15.sp,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -242,11 +236,10 @@ class _SearchSection extends StatelessWidget {
             } else {
               return Row(
                 children: [
-                  Text('Hey there, ', style: GoogleFonts.sen(fontSize: 15.sp)),
+                  Text('Hey there, ', style: Theme.of(context).textTheme.bodyMedium),
                   Text(
                     'Good Morning! 👋',
-                    style: GoogleFonts.sen(
-                      fontSize: 15.sp,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 final List<Widget> carouselPages = [
   BiteCarouselSliderPage(
@@ -91,10 +90,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.r),
                 ),
-                textStyle: GoogleFonts.sen(
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.bold,
-                ),
+                textStyle: Theme.of(context).textTheme.titleLarge,
               ),
               child: Text(_isLastPage ? 'Get Started' : 'Next'),
             ),
@@ -109,7 +105,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             },
             child: Text(
               "Skip",
-              style: GoogleFonts.sen(fontSize: 15.sp, color: Colors.grey),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium!.copyWith(color: Colors.grey),
             ),
           ),
         ],

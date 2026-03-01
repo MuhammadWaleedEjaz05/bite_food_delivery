@@ -4,7 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteCategoryCard extends StatelessWidget {
   final CategoryModel category;
@@ -47,7 +46,10 @@ class BiteCategoryCard extends StatelessWidget {
             ),
           ),
         ),
-        Text(category.categoryName, style: GoogleFonts.sen(fontSize: 15.sp)),
+        Text(
+          category.categoryName,
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
       ],
     );
   }

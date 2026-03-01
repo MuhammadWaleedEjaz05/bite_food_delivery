@@ -72,8 +72,7 @@ class BiteOrderInfoSheet extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: 4.h),
                     child: Text(
                       item,
-                      style: GoogleFonts.sen(
-                        fontSize: 14.sp,
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         color: Colors.grey.shade700,
                       ),
                     ),
@@ -81,25 +80,27 @@ class BiteOrderInfoSheet extends StatelessWidget {
                 ),
                 20.verticalSpace,
 
-                // ── Estimated Time ──
                 Center(
                   child: Column(
                     children: [
                       Text(
                         '$estimatedMinutes min',
                         style: GoogleFonts.sen(
-                          fontSize: 34.sp,
-                          fontWeight: FontWeight.bold,
+                          fontSize: Theme.of(
+                            context,
+                          ).textTheme.displayMedium!.fontSize,
+                          fontWeight: Theme.of(
+                            context,
+                          ).textTheme.displayMedium!.fontWeight,
                           color: Colors.black87,
                         ),
                       ),
                       4.verticalSpace,
                       Text(
                         'ESTIMATED DELIVERY TIME',
-                        style: GoogleFonts.sen(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
+                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
                           color: Colors.grey,
+                          fontWeight: FontWeight.bold,
                           letterSpacing: 1.2,
                         ),
                       ),
@@ -108,7 +109,6 @@ class BiteOrderInfoSheet extends StatelessWidget {
                 ),
                 24.verticalSpace,
 
-                // ── Order Status Timeline ──
                 BiteOrderTimeline(currentStep: currentStep),
                 20.verticalSpace,
 
@@ -161,16 +161,16 @@ class _RestaurantInfoRow extends StatelessWidget {
           children: [
             Text(
               restaurantName,
-              style: GoogleFonts.sen(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium!.copyWith(color: Colors.black87),
             ),
             4.verticalSpace,
             Text(
               'Orderd At $orderDate',
-              style: GoogleFonts.sen(fontSize: 14.sp, color: Colors.grey),
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall!.copyWith(color: Colors.grey),
             ),
           ],
         ),

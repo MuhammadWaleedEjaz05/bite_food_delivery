@@ -3,7 +3,6 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 final TextEditingController _controller = TextEditingController();
 
@@ -40,8 +39,7 @@ class BiteEditProfileModal extends StatelessWidget {
           BiteAppBar(
             title: Text(
               'Edit $title',
-              style: GoogleFonts.sen(
-                fontSize: 20.sp,
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Colors.deepOrange,
               ),
@@ -67,9 +65,13 @@ class BiteEditProfileModal extends StatelessWidget {
                 controller: _controller,
                 decoration: InputDecoration(
                   hintText: 'Enter $title',
-                  hintStyle: GoogleFonts.sen(fontSize: 20.sp),
+                  hintStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    fontWeight: FontWeight.normal,
+                  ),
                   labelText: title,
-                  labelStyle: GoogleFonts.sen(fontSize: 20.sp),
+                  labelStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    fontWeight: FontWeight.normal,
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.r),
                     borderSide: BorderSide.none,
@@ -96,10 +98,7 @@ class BiteEditProfileModal extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.r),
                         ),
-                        textStyle: GoogleFonts.sen(
-                          fontSize: 25.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        textStyle: Theme.of(context).textTheme.titleLarge,
                       ),
                       child: Text('Apply'),
                     ),

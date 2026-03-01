@@ -43,7 +43,10 @@ class TrackOrderScreen extends StatelessWidget {
         body: Center(
           child: Text(
             'No active order',
-            style: GoogleFonts.sen(fontSize: 18.sp, color: Colors.grey),
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+              color: Colors.grey,
+              fontWeight: FontWeight.normal,
+            ),
           ),
         ),
       );
@@ -70,7 +73,7 @@ class TrackOrderScreen extends StatelessWidget {
                     SnackBar(
                       content: Text(
                         'Your order has been delivered!',
-                        style: GoogleFonts.sen(fontSize: 14.sp),
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       backgroundColor: Colors.green,
                       duration: const Duration(seconds: 3),
@@ -87,7 +90,7 @@ class TrackOrderScreen extends StatelessWidget {
                     SnackBar(
                       content: Text(
                         state.errorMessage,
-                        style: GoogleFonts.sen(fontSize: 14.sp),
+                        style:Theme.of(context).textTheme.bodySmall,
                       ),
                       backgroundColor: Colors.red,
                     ),
@@ -98,7 +101,7 @@ class TrackOrderScreen extends StatelessWidget {
                     SnackBar(
                       content: Text(
                         'Calling ${state.phoneNumber}...',
-                        style: GoogleFonts.sen(fontSize: 14.sp),
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       backgroundColor: Colors.green,
                     ),
@@ -119,7 +122,10 @@ class TrackOrderScreen extends StatelessWidget {
                 return Center(
                   child: Text(
                     state.message,
-                    style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.grey),
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
                 );
               }
@@ -128,7 +134,10 @@ class TrackOrderScreen extends StatelessWidget {
                 return Center(
                   child: Text(
                     'Location permission denied',
-                    style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.grey),
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
                 );
               }
@@ -206,8 +215,8 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         'Track Order',
         style: GoogleFonts.sen(
-          fontSize: 30.sp,
-          fontWeight: FontWeight.bold,
+          fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
+          fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
           color: Colors.deepOrange,
         ),
       ),

@@ -4,7 +4,6 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_restaurant_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteSearchBar extends StatelessWidget {
   const BiteSearchBar({super.key});
@@ -19,7 +18,10 @@ class BiteSearchBar extends StatelessWidget {
       ),
       hintText: 'Search for restaurants or dishes',
       hintStyle: WidgetStatePropertyAll(
-        GoogleFonts.sen(fontSize: 16.sp, color: Colors.grey.shade600),
+        Theme.of(context).textTheme.titleSmall!.copyWith(
+          color: Colors.grey.shade600,
+          fontWeight: FontWeight.normal,
+        ),
       ),
       leading: Icon(Icons.search, size: 25.r, color: Colors.grey.shade600),
       elevation: WidgetStatePropertyAll(0),
@@ -84,7 +86,10 @@ class OpenSearchScreen extends SearchDelegate {
             return Center(
               child: Text(
                 'No restaurants found',
-                style: GoogleFonts.sen(fontSize: 18.sp),
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  color: Colors.grey.shade600,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
             );
           }
@@ -131,7 +136,10 @@ class OpenSearchScreen extends SearchDelegate {
             return Center(
               child: Text(
                 'No restaurants found',
-                style: GoogleFonts.sen(fontSize: 18.sp),
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  color: Colors.grey.shade600,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
             );
           }

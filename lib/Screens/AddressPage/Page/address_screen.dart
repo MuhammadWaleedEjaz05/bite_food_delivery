@@ -6,7 +6,6 @@ import 'package:bite_food_delivery/Models/address_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AddressScreen extends StatefulWidget {
   const AddressScreen({super.key});
@@ -61,10 +60,7 @@ class _AddAddressSection extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.r),
               ),
-              textStyle: GoogleFonts.sen(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-              ),
+              textStyle: Theme.of(context).textTheme.titleSmall,
             ),
             child: Text('Add Address'),
           ),
@@ -103,7 +99,10 @@ class _AddressSection extends StatelessWidget {
         if (state is AddressError) {
           return Text(
             'Failed to load addresses',
-            style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.black54),
+            style: Theme.of(context).textTheme.titleSmall!.copyWith(
+              color: Colors.black54,
+              fontWeight: FontWeight.normal,
+            ),
           );
         }
 
@@ -112,7 +111,10 @@ class _AddressSection extends StatelessWidget {
           if (addresses.isEmpty) {
             return Text(
               'No saved addresses yet',
-              style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.black54),
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                color: Colors.black54,
+                fontWeight: FontWeight.normal,
+              ),
             );
           }
 
@@ -133,7 +135,10 @@ class _AddressSection extends StatelessWidget {
 
         return Text(
           'Please sign in to view addresses',
-          style: GoogleFonts.sen(fontSize: 16.sp, color: Colors.black54),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+            color: Colors.black54,
+            fontWeight: FontWeight.normal,
+          ),
         );
       },
     );
@@ -151,11 +156,9 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
       backButton: true,
       title: Text(
         'Address',
-        style: GoogleFonts.sen(
-          fontSize: 20.sp,
-          fontWeight: FontWeight.bold,
-          color: Colors.deepOrange,
-        ),
+        style: Theme.of(
+          context,
+        ).textTheme.displaySmall!.copyWith(color: Colors.deepOrange),
       ),
       actions: [],
     );

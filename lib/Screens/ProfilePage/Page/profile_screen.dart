@@ -127,16 +127,12 @@ class _UserInfoSection extends StatelessWidget {
                       children: [
                         Text(
                           state.user.fullName,
-                          style: GoogleFonts.sen(
-                            fontSize: 25.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context).textTheme.headlineLarge,
                           softWrap: true,
                         ),
                         Text(
                           state.user.bio ?? 'I Love Fast Food',
-                          style: GoogleFonts.sen(
-                            fontSize: 15.sp,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: Colors.grey.shade500,
                           ),
                           overflow: TextOverflow.ellipsis,
@@ -161,10 +157,7 @@ class _UserInfoSection extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.r),
                       ),
-                      textStyle: GoogleFonts.sen(
-                        fontSize: 25.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      textStyle: Theme.of(context).textTheme.headlineLarge,
                     ),
                     child: Text('Login'),
                   ),
@@ -178,10 +171,7 @@ class _UserInfoSection extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.r),
                       ),
-                      textStyle: GoogleFonts.sen(
-                        fontSize: 25.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      textStyle: Theme.of(context).textTheme.headlineLarge,
                     ),
                     child: Text('SignUp'),
                   ),
@@ -202,8 +192,8 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         'Profile',
         style: GoogleFonts.sen(
-          fontSize: 30.sp,
-          fontWeight: FontWeight.bold,
+          fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
+          fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
           color: Colors.deepOrange,
         ),
       ),

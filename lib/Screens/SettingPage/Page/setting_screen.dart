@@ -38,8 +38,7 @@ class _PreferencesSection extends StatelessWidget {
           padding: EdgeInsets.only(left: 15.w, bottom: 10.h),
           child: Text(
             'PREFERENCES',
-            style: GoogleFonts.sen(
-              fontSize: 14.sp,
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
               fontWeight: FontWeight.w600,
               color: Colors.grey.shade500,
               letterSpacing: 1.2,
@@ -89,8 +88,7 @@ class _PreferencesSection extends StatelessWidget {
                   children: [
                     Text(
                       'English',
-                      style: GoogleFonts.sen(
-                        fontSize: 15.sp,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Colors.grey.shade500,
                       ),
                     ),
@@ -120,7 +118,7 @@ class _VersionSection extends StatelessWidget {
     return Center(
       child: Text(
         'Version 1.0.0',
-        style: GoogleFonts.sen(fontSize: 14.sp, color: Colors.grey.shade400),
+        style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.grey.shade400),
       ),
     );
   }
@@ -139,8 +137,8 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         'Settings',
         style: GoogleFonts.sen(
-          fontSize: 30.sp,
-          fontWeight: FontWeight.bold,
+          fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
+          fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
           color: Colors.deepOrange,
         ),
       ),

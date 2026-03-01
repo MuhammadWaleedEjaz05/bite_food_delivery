@@ -15,7 +15,6 @@ import 'package:bite_food_delivery/Screens/CheckOutPage/Widgets/bite_check_out_a
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CheckOutScreen extends StatelessWidget {
   const CheckOutScreen({super.key});
@@ -34,9 +33,7 @@ class CheckOutScreen extends StatelessWidget {
         backButton: true,
         title: Text(
           'Checkout',
-          style: GoogleFonts.sen(
-            fontSize: 30.sp,
-            fontWeight: FontWeight.bold,
+          style: Theme.of(context).textTheme.displaySmall!.copyWith(
             color: Colors.deepOrange,
           ),
         ),
@@ -80,19 +77,16 @@ class _DeliveryAddressSection extends StatelessWidget {
             8.horizontalSpace,
             Text(
               'Delivery Address',
-              style: GoogleFonts.sen(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium!.copyWith(color: Colors.black87),
             ),
             Spacer(),
             TextButton(
               onPressed: () => showAddressSelectorModal(context),
               child: Text(
                 'Change',
-                style: GoogleFonts.sen(
-                  fontSize: 14.sp,
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Colors.deepOrange,
                   decoration: TextDecoration.underline,
@@ -144,11 +138,9 @@ class _OrderItemsSection extends StatelessWidget {
             8.horizontalSpace,
             Text(
               'Order Items',
-              style: GoogleFonts.sen(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium!.copyWith(color: Colors.black87),
             ),
           ],
         ),
@@ -202,11 +194,9 @@ class _PaymentMethodSection extends StatelessWidget {
             8.horizontalSpace,
             Text(
               'Payment Method',
-              style: GoogleFonts.sen(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium!.copyWith(color: Colors.black87),
             ),
             Spacer(),
             TextButton(
@@ -215,8 +205,7 @@ class _PaymentMethodSection extends StatelessWidget {
               },
               child: Text(
                 'Change',
-                style: GoogleFonts.sen(
-                  fontSize: 14.sp,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Colors.deepOrange,
                   decoration: TextDecoration.underline,
@@ -271,11 +260,9 @@ class _OrderSummarySection extends StatelessWidget {
             8.horizontalSpace,
             Text(
               'Order Summary',
-              style: GoogleFonts.sen(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium!.copyWith(color: Colors.black87),
             ),
           ],
         ),
@@ -310,19 +297,15 @@ class _OrderSummarySection extends StatelessWidget {
                 children: [
                   Text(
                     'Total',
-                    style: GoogleFonts.sen(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleMedium!.copyWith(color: Colors.black87),
                   ),
                   Text(
                     'PKR ${grandTotal.toStringAsFixed(2)}',
-                    style: GoogleFonts.sen(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepOrange,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleMedium!.copyWith(color: Colors.deepOrange),
                   ),
                 ],
               ),
@@ -388,18 +371,14 @@ class _PlaceOrderButton extends StatelessWidget {
                         20.verticalSpace,
                         Text(
                           'Order Placed!',
-                          style: GoogleFonts.sen(
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
+                          style: Theme.of(context).textTheme.headlineMedium!
+                              .copyWith(color: Colors.black87),
                         ),
                         10.verticalSpace,
                         Text(
                           'Your order has been placed successfully.\nTrack your order in real-time.',
                           textAlign: TextAlign.center,
-                          style: GoogleFonts.sen(
-                            fontSize: 14.sp,
+                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             color: Colors.grey.shade600,
                           ),
                         ),
@@ -427,10 +406,7 @@ class _PlaceOrderButton extends StatelessWidget {
                                 ),
                                 child: Text(
                                   'Track Order',
-                                  style: GoogleFonts.sen(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: Theme.of(context).textTheme.titleSmall,
                                 ),
                               ),
                             ),
@@ -454,10 +430,7 @@ class _PlaceOrderButton extends StatelessWidget {
                                 ),
                                 child: Text(
                                   'Back to Home',
-                                  style: GoogleFonts.sen(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: Theme.of(context).textTheme.titleSmall,
                                 ),
                               ),
                             ),
@@ -538,11 +511,8 @@ class _PlaceOrderButton extends StatelessWidget {
                           10.horizontalSpace,
                           Text(
                             'Place Order  •  PKR ${grandTotal.toStringAsFixed(0)}',
-                            style: GoogleFonts.sen(
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
+                            style: Theme.of(context).textTheme.titleLarge!
+                                .copyWith(color: Colors.white),
                           ),
                         ],
                       ),
