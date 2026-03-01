@@ -1,5 +1,6 @@
 import 'package:bite_food_delivery/Cubits/BottomNavigationSelection/bottom_navigation_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
+import 'package:bite_food_delivery/Cubits/SettingsCubit/settings_cubit.dart';
 import 'package:bite_food_delivery/Screens/SplashPage/Pages/splash_screen.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_bottom_navigation_bar.dart';
 import 'package:bite_food_delivery/Themes/bite_dark_themes.dart';
@@ -43,7 +44,9 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             theme: BiteLightThemes.themeOrange,
             darkTheme: BiteDarkThemes.themeOrange,
-            themeMode: ThemeMode.dark,
+            themeMode: context.watch<SettingsCubit>().state.isDarkMode
+                ? ThemeMode.dark
+                : ThemeMode.light,
             routes: routes,
             debugShowCheckedModeBanner: false,
             supportedLocales: FormBuilderLocalizations.supportedLocales,

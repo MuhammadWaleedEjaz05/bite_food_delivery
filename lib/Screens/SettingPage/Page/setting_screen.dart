@@ -1,7 +1,9 @@
+import 'package:bite_food_delivery/Cubits/SettingsCubit/settings_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_menu_section.dart';
 import 'package:bite_food_delivery/Screens/SettingPage/Widgets/bite_setting_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -45,71 +47,84 @@ class _PreferencesSection extends StatelessWidget {
             ),
           ),
         ),
-        BiteMenuSection(
-          menuItems: [
-            BiteSettingItem(
-              item: BiteSettingItemModel(
-                icon: Icons.notifications_outlined,
-                iconColor: Theme.of(context).colorScheme.primary,
-                iconBgColor: Theme.of(
-                  context,
-                ).colorScheme.primary.withAlpha(25),
-                title: 'Notifications',
-                trailing: Switch(
-                  value: true,
-                  onChanged: (value) {},
-                  activeTrackColor: Theme.of(context).colorScheme.primary,
-                  inactiveTrackColor: Colors.grey.shade300,
-                  inactiveThumbColor: Colors.white,
-                ),
-              ),
-            ),
-            BiteSettingItem(
-              item: BiteSettingItemModel(
-                icon: Icons.dark_mode_outlined,
-                iconColor: Theme.of(context).colorScheme.primary,
-                iconBgColor: Theme.of(
-                  context,
-                ).colorScheme.primary.withAlpha(25),
-                title: 'Dark Mode',
-                trailing: Switch(
-                  value: false,
-                  onChanged: (value) {},
-                  activeTrackColor: Theme.of(context).colorScheme.primary,
-                  inactiveTrackColor: Colors.grey.shade300,
-                  inactiveThumbColor: Colors.white,
-                ),
-              ),
-            ),
-            BiteSettingItem(
-              item: BiteSettingItemModel(
-                icon: Icons.language,
-                iconColor: Theme.of(context).colorScheme.primary,
-                iconBgColor: Theme.of(
-                  context,
-                ).colorScheme.primary.withAlpha(25),
-                title: 'Language',
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'English',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.onSecondary,
-                      ),
+        BlocBuilder<SettingsCubit, SettingsState>(
+          builder: (context, state) {
+            return BiteMenuSection(
+              menuItems: [
+                BiteSettingItem(
+                  item: BiteSettingItemModel(
+                    icon: Icons.notifications_outlined,
+                    iconColor: Theme.of(context).colorScheme.primary,
+                    iconBgColor: Theme.of(
+                      context,
+                    ).colorScheme.primary.withAlpha(25),
+                    title: 'Notifications',
+                    trailing: Switch(
+                      value: state.areNotificationsEnabled,
+                      onChanged: (value) {
+                        context.read<SettingsCubit>().toggleNotifications(
+                          value,
+                        );
+                      },
+                      activeTrackColor: Theme.of(context).colorScheme.primary,
+                      inactiveTrackColor: Colors.grey.shade300,
+                      inactiveThumbColor: Colors.white,
                     ),
-                    5.horizontalSpace,
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      size: 18.r,
-                      color: Colors.grey.shade300,
-                    ),
-                  ],
+                  ),
                 ),
-                onTap: () {},
-              ),
-            ),
-          ],
+                BiteSettingItem(
+                  item: BiteSettingItemModel(
+                    icon: Icons.dark_mode_outlined,
+                    iconColor: Theme.of(context).colorScheme.primary,
+                    iconBgColor: Theme.of(
+                      context,
+                    ).colorScheme.primary.withAlpha(25),
+                    title: 'Dark Mode',
+                    trailing: Switch(
+                      value: state.isDarkMode,
+                      onChanged: (value) {
+                        context.read<SettingsCubit>().toggleDarkMode(value);
+                      },
+                      activeTrackColor: Theme.of(context).colorScheme.primary,
+                      inactiveTrackColor: Colors.grey.shade300,
+                      inactiveThumbColor: Colors.white,
+                    ),
+                  ),
+                ),
+                BiteSettingItem(
+                  item: BiteSettingItemModel(
+                    icon: Icons.language,
+                    iconColor: Theme.of(context).colorScheme.primary,
+                    iconBgColor: Theme.of(
+                      context,
+                    ).colorScheme.primary.withAlpha(25),
+                    title: 'Language',
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'English',
+                          style: Theme.of(context).textTheme.bodyMedium!
+                              .copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSecondary,
+                              ),
+                        ),
+                        5.horizontalSpace,
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          size: 18.r,
+                          color: Colors.grey.shade300,
+                        ),
+                      ],
+                    ),
+                    onTap: () {},
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ],
     );

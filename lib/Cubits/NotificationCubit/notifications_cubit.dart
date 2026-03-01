@@ -4,6 +4,7 @@ import 'package:bite_food_delivery/Models/notification_model.dart';
 import 'package:bite_food_delivery/Models/order_model.dart';
 import 'package:bite_food_delivery/configs/fcm_initialize.dart';
 import 'package:bite_food_delivery/configs/firebase_db_conn.dart';
+import 'package:bite_food_delivery/configs/shared_preference_fucntions.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -13,6 +14,11 @@ class NotificationsCubit extends Cubit<NotificationsState> {
   NotificationsCubit() : super(NotificationsInitial());
 
   StreamSubscription? _notificationsSubscription;
+
+  Future<bool> _areNotificationsEnabled() async {
+    final prefs = await sharedPreference;
+    return prefs.getBool('areNotificationsEnabled') ?? true;
+  }
 
   void loadNotifications(String userId) {
     emit(NotificationsLoading());
@@ -40,7 +46,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
         );
   }
 
-  void notifyOrderPlaced(OrderModel order) {
+  Future<void> notifyOrderPlaced(OrderModel order) async {
     final notification = NotificationModel(
       userId: order.userId,
       title: 'Order Placed',
@@ -50,13 +56,15 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       orderId: order.orderId,
     );
     _addNotification(notification);
-    NotificationService.instance.showNotification(
-      title: notification.title,
-      body: notification.body,
-    );
+    if (await _areNotificationsEnabled()) {
+      NotificationService.instance.showNotification(
+        title: notification.title,
+        body: notification.body,
+      );
+    }
   }
 
-  void notifyOrderStatusChanged(OrderModel order) {
+  Future<void> notifyOrderStatusChanged(OrderModel order) async {
     final notification = NotificationModel(
       userId: order.userId,
       title: _titleForStatus(order.orderStatus),
@@ -65,10 +73,12 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       orderId: order.orderId,
     );
     _addNotification(notification);
-    NotificationService.instance.showNotification(
-      title: notification.title,
-      body: notification.body,
-    );
+    if (await _areNotificationsEnabled()) {
+      NotificationService.instance.showNotification(
+        title: notification.title,
+        body: notification.body,
+      );
+    }
   }
 
   Future<void> markAsRead(String notificationId) async {
