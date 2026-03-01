@@ -34,7 +34,7 @@ class _BiteCreditCardTileState extends State<BiteCreditCardTile>
       curve: Curves.easeInOut,
       padding: EdgeInsets.all(15.r),
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(20.r),
         border: _isExpanded
             ? Border.all(color: primaryColor.withAlpha(50), width: 1.5)
@@ -72,13 +72,13 @@ class _BiteCreditCardTileState extends State<BiteCreditCardTile>
                         '**** **** **** ${widget.creditCard.cardNumber.substring(widget.creditCard.cardNumber.length - 4)}',
                         style: Theme.of(
                           context,
-                        ).textTheme.titleSmall!.copyWith(color: Colors.black87),
+                        ).textTheme.titleSmall!.copyWith(color: Colors.black54),
                       ),
                       4.verticalSpace,
                       Text(
                         widget.creditCard.cardHolderName,
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                          color: Colors.grey.shade600,
+                          color: Colors.grey.shade500,
                         ),
                       ),
                     ],
@@ -271,14 +271,14 @@ class _CardDetailRow extends StatelessWidget {
             label,
             style: Theme.of(
               context,
-            ).textTheme.bodySmall!.copyWith(color: Colors.grey.shade600),
+            ).textTheme.bodySmall!.copyWith(color: Colors.grey.shade500),
           ),
           const Spacer(),
           Text(
             value,
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              color: Colors.black54,
             ),
           ),
         ],

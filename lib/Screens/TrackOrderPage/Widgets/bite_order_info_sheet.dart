@@ -59,21 +59,19 @@ class BiteOrderInfoSheet extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // ── Restaurant Info Row ──
                 _RestaurantInfoRow(
                   restaurantName: restaurantName,
                   orderDate: orderDate,
                 ),
                 16.verticalSpace,
 
-                // ── Ordered Items ──
                 ...items.map(
                   (item) => Padding(
                     padding: EdgeInsets.only(bottom: 4.h),
                     child: Text(
                       item,
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        color: Colors.grey.shade700,
+                        color: Colors.grey.shade500,
                       ),
                     ),
                   ),
@@ -92,7 +90,7 @@ class BiteOrderInfoSheet extends StatelessWidget {
                           fontWeight: Theme.of(
                             context,
                           ).textTheme.displayMedium!.fontWeight,
-                          color: Colors.black87,
+                          color: Colors.black54,
                         ),
                       ),
                       4.verticalSpace,
@@ -151,7 +149,7 @@ class _RestaurantInfoRow extends StatelessWidget {
           ),
           child: Icon(
             Icons.restaurant,
-            color: Colors.grey.shade600,
+            color: Colors.grey.shade500,
             size: 28.r,
           ),
         ),
@@ -163,7 +161,7 @@ class _RestaurantInfoRow extends StatelessWidget {
               restaurantName,
               style: Theme.of(
                 context,
-              ).textTheme.titleMedium!.copyWith(color: Colors.black87),
+              ).textTheme.titleMedium!.copyWith(color: Colors.black54),
             ),
             4.verticalSpace,
             Text(

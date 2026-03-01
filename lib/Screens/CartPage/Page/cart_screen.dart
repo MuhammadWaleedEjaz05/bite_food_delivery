@@ -85,7 +85,7 @@ class _CheckOutSection extends StatelessWidget {
                         Text(
                           'DELIVERY ADDRESS',
                           style: Theme.of(context).textTheme.bodyMedium!
-                              .copyWith(color: Colors.grey.shade600),
+                              .copyWith(color: Colors.grey.shade500),
                         ),
                         Spacer(),
                         BlocBuilder<AddressCubit, AddressState>(
@@ -124,7 +124,7 @@ class _CheckOutSection extends StatelessWidget {
                           decoration: InputDecoration(
                             hintText: 'Select an address',
                             filled: true,
-                            fillColor: Colors.grey.shade100,
+                            fillColor: Colors.grey.shade200,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.r),
                               borderSide: BorderSide.none,

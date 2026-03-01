@@ -41,7 +41,7 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                   restaurant.category,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     fontWeight: FontWeight.normal,
-                    color: Colors.grey.shade600,
+                    color: Colors.grey.shade500,
                   ),
                 ),
                 5.verticalSpace,
@@ -96,8 +96,9 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                       ),
                       content: Text(
                         'Are you sure you want to remove this restaurant from your favourites?',
-                        style: Theme.of(context).textTheme.titleSmall!
-                                    .copyWith(fontWeight: FontWeight.normal),
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          fontWeight: FontWeight.normal,
+                        ),
                       ),
                       actions: [
                         TextButton(
@@ -107,7 +108,7 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                           child: Text(
                             'Cancel',
                             style: Theme.of(context).textTheme.titleSmall!
-                                    .copyWith(fontWeight: FontWeight.normal),
+                                .copyWith(fontWeight: FontWeight.normal),
                           ),
                         ),
                         TextButton(
@@ -120,7 +121,7 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                           child: Text(
                             'Remove',
                             style: Theme.of(context).textTheme.titleSmall!
-                                    .copyWith(fontWeight: FontWeight.normal),
+                                .copyWith(fontWeight: FontWeight.normal),
                           ),
                         ),
                       ],

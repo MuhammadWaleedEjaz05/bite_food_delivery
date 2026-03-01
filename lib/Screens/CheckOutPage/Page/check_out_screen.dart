@@ -33,9 +33,9 @@ class CheckOutScreen extends StatelessWidget {
         backButton: true,
         title: Text(
           'Checkout',
-          style: Theme.of(context).textTheme.displaySmall!.copyWith(
-            color: Colors.deepOrange,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.displaySmall!.copyWith(color: Colors.deepOrange),
         ),
         actions: [],
       ),
@@ -79,7 +79,7 @@ class _DeliveryAddressSection extends StatelessWidget {
               'Delivery Address',
               style: Theme.of(
                 context,
-              ).textTheme.titleMedium!.copyWith(color: Colors.black87),
+              ).textTheme.titleMedium!.copyWith(color: Colors.black54),
             ),
             Spacer(),
             TextButton(
@@ -140,7 +140,7 @@ class _OrderItemsSection extends StatelessWidget {
               'Order Items',
               style: Theme.of(
                 context,
-              ).textTheme.titleMedium!.copyWith(color: Colors.black87),
+              ).textTheme.titleMedium!.copyWith(color: Colors.black54),
             ),
           ],
         ),
@@ -150,7 +150,7 @@ class _OrderItemsSection extends StatelessWidget {
             if (state is CartLoaded) {
               return Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
+                  color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: ListView.separated(
@@ -196,7 +196,7 @@ class _PaymentMethodSection extends StatelessWidget {
               'Payment Method',
               style: Theme.of(
                 context,
-              ).textTheme.titleMedium!.copyWith(color: Colors.black87),
+              ).textTheme.titleMedium!.copyWith(color: Colors.black54),
             ),
             Spacer(),
             TextButton(
@@ -262,7 +262,7 @@ class _OrderSummarySection extends StatelessWidget {
               'Order Summary',
               style: Theme.of(
                 context,
-              ).textTheme.titleMedium!.copyWith(color: Colors.black87),
+              ).textTheme.titleMedium!.copyWith(color: Colors.black54),
             ),
           ],
         ),
@@ -270,7 +270,7 @@ class _OrderSummarySection extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(15.r),
           decoration: BoxDecoration(
-            color: Colors.grey.shade100,
+            color: Colors.grey.shade200,
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: Column(
@@ -299,7 +299,7 @@ class _OrderSummarySection extends StatelessWidget {
                     'Total',
                     style: Theme.of(
                       context,
-                    ).textTheme.titleMedium!.copyWith(color: Colors.black87),
+                    ).textTheme.titleMedium!.copyWith(color: Colors.black54),
                   ),
                   Text(
                     'PKR ${grandTotal.toStringAsFixed(2)}',
@@ -372,15 +372,14 @@ class _PlaceOrderButton extends StatelessWidget {
                         Text(
                           'Order Placed!',
                           style: Theme.of(context).textTheme.headlineMedium!
-                              .copyWith(color: Colors.black87),
+                              .copyWith(color: Colors.black54),
                         ),
                         10.verticalSpace,
                         Text(
                           'Your order has been placed successfully.\nTrack your order in real-time.',
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                            color: Colors.grey.shade600,
-                          ),
+                          style: Theme.of(context).textTheme.bodySmall!
+                              .copyWith(color: Colors.grey.shade500),
                         ),
                         25.verticalSpace,
                         Row(

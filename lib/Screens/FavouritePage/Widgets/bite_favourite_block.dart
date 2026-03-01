@@ -32,7 +32,7 @@ class BiteFavouriteBlock extends StatelessWidget {
                 height: 100.h,
                 width: 100.w,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
+                  color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(20.r),
                 ),
                 child: ClipRRect(
@@ -83,7 +83,7 @@ class BiteFavouriteBlock extends StatelessWidget {
                         content: Text(
                           'Are you sure you want to remove this food item from your favourites?',
                           style: Theme.of(context).textTheme.titleSmall!
-                                    .copyWith(fontWeight: FontWeight.normal),
+                              .copyWith(fontWeight: FontWeight.normal),
                         ),
                         actions: [
                           TextButton(
@@ -93,7 +93,7 @@ class BiteFavouriteBlock extends StatelessWidget {
                             child: Text(
                               'Cancel',
                               style: Theme.of(context).textTheme.titleSmall!
-                                    .copyWith(fontWeight: FontWeight.normal),
+                                  .copyWith(fontWeight: FontWeight.normal),
                             ),
                           ),
                           TextButton(
@@ -106,7 +106,7 @@ class BiteFavouriteBlock extends StatelessWidget {
                             child: Text(
                               'Remove',
                               style: Theme.of(context).textTheme.titleSmall!
-                                    .copyWith(fontWeight: FontWeight.normal),
+                                  .copyWith(fontWeight: FontWeight.normal),
                             ),
                           ),
                         ],
@@ -132,7 +132,10 @@ class BiteFavouriteBlock extends StatelessWidget {
                   onPressed: () {},
                   child: Text(
                     'Order Again',
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),

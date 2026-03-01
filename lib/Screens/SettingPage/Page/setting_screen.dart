@@ -96,7 +96,7 @@ class _PreferencesSection extends StatelessWidget {
                     Icon(
                       Icons.arrow_forward_ios,
                       size: 18.r,
-                      color: Colors.grey.shade400,
+                      color: Colors.grey.shade300,
                     ),
                   ],
                 ),
@@ -118,7 +118,9 @@ class _VersionSection extends StatelessWidget {
     return Center(
       child: Text(
         'Version 1.0.0',
-        style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.grey.shade400),
+        style: Theme.of(
+          context,
+        ).textTheme.bodySmall!.copyWith(color: Colors.grey.shade300),
       ),
     );
   }

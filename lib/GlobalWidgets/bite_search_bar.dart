@@ -19,11 +19,11 @@ class BiteSearchBar extends StatelessWidget {
       hintText: 'Search for restaurants or dishes',
       hintStyle: WidgetStatePropertyAll(
         Theme.of(context).textTheme.titleSmall!.copyWith(
-          color: Colors.grey.shade600,
+          color: Colors.grey.shade500,
           fontWeight: FontWeight.normal,
         ),
       ),
-      leading: Icon(Icons.search, size: 25.r, color: Colors.grey.shade600),
+      leading: Icon(Icons.search, size: 25.r, color: Colors.grey.shade500),
       elevation: WidgetStatePropertyAll(0),
       shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
@@ -87,7 +87,7 @@ class OpenSearchScreen extends SearchDelegate {
               child: Text(
                 'No restaurants found',
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: Colors.grey.shade600,
+                  color: Colors.grey.shade500,
                   fontWeight: FontWeight.normal,
                 ),
               ),
@@ -137,7 +137,7 @@ class OpenSearchScreen extends SearchDelegate {
               child: Text(
                 'No restaurants found',
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: Colors.grey.shade600,
+                  color: Colors.grey.shade500,
                   fontWeight: FontWeight.normal,
                 ),
               ),

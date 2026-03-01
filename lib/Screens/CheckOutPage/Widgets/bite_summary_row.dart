@@ -13,7 +13,7 @@ class BiteSummaryRow extends StatelessWidget {
         Text(
           label,
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-            color: Colors.grey.shade600,
+            color: Colors.grey.shade500,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -21,7 +21,7 @@ class BiteSummaryRow extends StatelessWidget {
           value,
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontWeight: FontWeight.bold,
-            color: Colors.black87,
+            color: Colors.black54,
           ),
         ),
       ],

@@ -52,7 +52,7 @@ class BiteAddressSelectionCard extends StatelessWidget {
                   Text(
                     '${address.street}, ${address.city}',
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                      color: Colors.grey.shade600,
+                      color: Colors.grey.shade500,
                     ),
                   ),
                 ],

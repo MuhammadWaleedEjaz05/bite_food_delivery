@@ -39,7 +39,7 @@ class BiteCourierCard extends StatelessWidget {
                 courierName,
                 style: Theme.of(
                   context,
-                ).textTheme.titleMedium!.copyWith(color: Colors.black87),
+                ).textTheme.titleMedium!.copyWith(color: Colors.black54),
               ),
               Text(
                 'Courier',

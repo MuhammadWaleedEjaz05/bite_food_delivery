@@ -57,7 +57,7 @@ class _PopularRestaurantSection extends StatelessWidget {
                   child: Text(
                     'No popular restaurants found',
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: Colors.grey.shade600,
+                      color: Colors.grey.shade500,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -120,7 +120,7 @@ class _RecentSearchSection extends StatelessWidget {
                     child: Text(
                       'No recent searches',
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: Colors.grey.shade600,
+                        color: Colors.grey.shade500,
                         fontWeight: FontWeight.normal,
                       ),
                     ),

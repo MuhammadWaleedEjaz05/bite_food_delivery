@@ -27,7 +27,7 @@ class BiteNotificationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(15.r),
         border: Border(
           left: BorderSide(color: borderColor, width: 4.w),
@@ -59,9 +59,9 @@ class BiteNotificationCard extends StatelessWidget {
                 5.verticalSpace,
                 Text(
                   subtitle,
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    color: Colors.grey.shade600,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall!.copyWith(color: Colors.grey.shade500),
                 ),
                 8.verticalSpace,
                 Row(

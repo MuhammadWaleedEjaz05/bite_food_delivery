@@ -53,7 +53,7 @@ class _NotificationBody extends StatelessWidget {
             Icon(
               Icons.notifications_off_outlined,
               size: 60.r,
-              color: Colors.grey.shade400,
+              color: Colors.grey.shade300,
             ),
             15.verticalSpace,
             Text(

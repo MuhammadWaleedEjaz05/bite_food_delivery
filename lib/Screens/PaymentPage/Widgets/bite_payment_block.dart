@@ -16,7 +16,7 @@ class BitePaymentBlock extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(15.r),
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(20.r),
         border: isSelected
             ? Border.all(color: Colors.deepOrange.withAlpha(50), width: 1.5)

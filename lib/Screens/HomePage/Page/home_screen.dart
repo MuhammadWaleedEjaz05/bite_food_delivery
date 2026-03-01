@@ -168,7 +168,7 @@ class _AppBarSectionState extends State<_AppBarSection> {
                       children: [
                         Icon(
                           Icons.location_on,
-                          color: Colors.grey.shade600,
+                          color: Colors.grey.shade500,
                           size: 16.sp,
                         ),
                         SizedBox(width: 4.w),
@@ -177,14 +177,14 @@ class _AppBarSectionState extends State<_AppBarSection> {
                           child: Text(
                             addressText,
                             style: Theme.of(context).textTheme.bodyMedium!
-                                .copyWith(color: Colors.grey.shade600),
+                                .copyWith(color: Colors.grey.shade500),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         SizedBox(width: 4.w),
                         Icon(
                           Icons.keyboard_arrow_down,
-                          color: Colors.grey.shade600,
+                          color: Colors.grey.shade500,
                           size: 16.sp,
                         ),
                       ],
@@ -236,7 +236,10 @@ class _SearchSection extends StatelessWidget {
             } else {
               return Row(
                 children: [
-                  Text('Hey there, ', style: Theme.of(context).textTheme.bodyMedium),
+                  Text(
+                    'Hey there, ',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                   Text(
                     'Good Morning! 👋',
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(

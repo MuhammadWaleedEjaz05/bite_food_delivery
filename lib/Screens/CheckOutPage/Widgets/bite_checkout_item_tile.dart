@@ -53,7 +53,7 @@ class BiteCheckoutItemTile extends StatelessWidget {
                   'x${item.quantity}',
                   style: Theme.of(
                     context,
-                  ).textTheme.labelLarge!.copyWith(color: Colors.grey.shade600),
+                  ).textTheme.labelLarge!.copyWith(color: Colors.grey.shade500),
                 ),
               ],
             ),

@@ -40,7 +40,7 @@ class BiteRestaurantCard extends StatelessWidget {
             restaurant.category,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
               fontWeight: FontWeight.normal,
-              color: Colors.grey.shade600,
+              color: Colors.grey.shade500,
             ),
           ),
           5.verticalSpace,
@@ -50,7 +50,10 @@ class BiteRestaurantCard extends StatelessWidget {
               4.horizontalSpace,
               Text(
                 restaurant.rating.toString(),
-                style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.black,fontWeight: FontWeight.normal),
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  color: Colors.black,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
               10.horizontalSpace,
               Icon(
@@ -61,7 +64,10 @@ class BiteRestaurantCard extends StatelessWidget {
               4.horizontalSpace,
               Text(
                 '${restaurant.deliveryTime.toInt()} min',
-                style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.black,fontWeight: FontWeight.normal),
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  color: Colors.black,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
               10.horizontalSpace,
               Icon(
@@ -72,7 +78,10 @@ class BiteRestaurantCard extends StatelessWidget {
               4.horizontalSpace,
               Text(
                 '\$${restaurant.deliveryFee}',
-                style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.black,fontWeight: FontWeight.normal),
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  color: Colors.black,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
             ],
           ),
