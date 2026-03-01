@@ -12,7 +12,20 @@
           "package_name": "com.example.bite_food_delivery"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "964243541876-4dbqnhjn87g7evf2v1v2sso8c5tb455u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bite_food_delivery",
+            "certificate_hash": "d5f3884a94a927f2eef0562839ad1554ca6b70bc"
+          }
+        },
+        {
+          "client_id": "964243541876-a87sl9vuamd6sd5havv9qb6t4tru29kj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBCLW_uefys0sMd1rLiiG2ObxLOaUHD_o8"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "964243541876-a87sl9vuamd6sd5havv9qb6t4tru29kj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "964243541876-4t83om88erv8qesmfp60p8fluvtrqbi8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.biteFoodDelivery"
+              }
+            }
+          ]
         }
       }
     }

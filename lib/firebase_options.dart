@@ -1,9 +1,7 @@
 
-
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
-
 
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
@@ -54,6 +52,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '964243541876',
     projectId: 'bite-food-delivery-3b736',
     storageBucket: 'bite-food-delivery-3b736.firebasestorage.app',
+    androidClientId: '964243541876-4dbqnhjn87g7evf2v1v2sso8c5tb455u.apps.googleusercontent.com',
+    iosClientId: '964243541876-4t83om88erv8qesmfp60p8fluvtrqbi8.apps.googleusercontent.com',
     iosBundleId: 'com.example.biteFoodDelivery',
   );
 
@@ -63,6 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '964243541876',
     projectId: 'bite-food-delivery-3b736',
     storageBucket: 'bite-food-delivery-3b736.firebasestorage.app',
+    androidClientId: '964243541876-4dbqnhjn87g7evf2v1v2sso8c5tb455u.apps.googleusercontent.com',
+    iosClientId: '964243541876-4t83om88erv8qesmfp60p8fluvtrqbi8.apps.googleusercontent.com',
     iosBundleId: 'com.example.biteFoodDelivery',
   );
 
@@ -74,4 +76,5 @@ class DefaultFirebaseOptions {
     authDomain: 'bite-food-delivery-3b736.firebaseapp.com',
     storageBucket: 'bite-food-delivery-3b736.firebasestorage.app',
   );
+
 }

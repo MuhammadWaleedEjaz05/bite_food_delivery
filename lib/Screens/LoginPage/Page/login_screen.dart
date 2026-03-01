@@ -103,7 +103,7 @@ class _OtherLoginOptionSection extends StatelessWidget {
                       backgroundColor: Colors.red,
                     ),
                   );
-                  print('Google Sign-In Error: ${state.message}');
+                  debugPrint('Google Sign-In Error: ${state.message}');
                 }
               },
               builder: (context, state) {
