@@ -167,7 +167,6 @@ class _CardDetailsSection extends StatelessWidget {
           title: 'Card Information',
         ),
         12.verticalSpace,
-        // Card Number
         TextFormField(
           controller: cardNumberController,
           keyboardType: TextInputType.number,
@@ -190,7 +189,6 @@ class _CardDetailsSection extends StatelessWidget {
           ),
         ),
         14.verticalSpace,
-        // Expiry + CVC row
         Row(
           children: [
             Expanded(

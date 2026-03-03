@@ -65,6 +65,8 @@ dependencies:
   flutter_phone_direct_caller: ^2.2.1
   flutter_stripe: ^12.3.0
   dio: ^5.9.2
+  upgrader: ^12.5.0
+  geocoding: ^4.0.0
 
 dev_dependencies:
   flutter_test:

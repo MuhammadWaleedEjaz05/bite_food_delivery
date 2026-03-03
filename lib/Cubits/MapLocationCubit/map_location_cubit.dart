@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:geocoding/geocoding.dart' as geocoding;
 import 'package:location/location.dart';
 import 'package:meta/meta.dart';
 
@@ -14,7 +15,6 @@ class MapLocationCubit extends Cubit<MapLocationState> {
   Future<void> getCurrentLocation() async {
     emit(MapLocationLoading());
     try {
-      
       final serviceEnabled = await _location.serviceEnabled();
       if (!serviceEnabled) {
         final result = await _location.requestService();
@@ -24,7 +24,6 @@ class MapLocationCubit extends Cubit<MapLocationState> {
         }
       }
 
-      
       PermissionStatus permissionStatus = await _location.hasPermission();
       if (permissionStatus == PermissionStatus.denied) {
         permissionStatus = await _location.requestPermission();
@@ -34,7 +33,6 @@ class MapLocationCubit extends Cubit<MapLocationState> {
         }
       }
 
-      
       final locationData = await _location.getLocation();
       emit(
         MapLocationLoaded(
@@ -61,5 +59,35 @@ class MapLocationCubit extends Cubit<MapLocationState> {
         emit(MapLocationError(message: error.toString()));
       },
     );
+  }
+
+  Future<void> pickLocation(double latitude, double longitude) async {
+    try {
+      final placemarks = await geocoding.placemarkFromCoordinates(
+        latitude,
+        longitude,
+      );
+      if (placemarks.isNotEmpty) {
+        final place = placemarks.first;
+        emit(
+          MapLocationPicked(
+            latitude: latitude,
+            longitude: longitude,
+            address: place.name ?? place.thoroughfare ?? '',
+            street: [
+              place.subThoroughfare,
+              place.thoroughfare,
+            ].where((p) => p != null && p.isNotEmpty).join(' '),
+            city: place.locality ?? place.subAdministrativeArea ?? '',
+            zipCode: place.postalCode ?? '',
+            country: place.country ?? '',
+          ),
+        );
+      } else {
+        emit(MapLocationPicked(latitude: latitude, longitude: longitude));
+      }
+    } catch (e) {
+      emit(MapLocationPicked(latitude: latitude, longitude: longitude));
+    }
   }
 }

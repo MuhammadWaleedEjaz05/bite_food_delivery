@@ -16,6 +16,26 @@ final class MapLocationLoaded extends MapLocationState {
 
 final class MapLocationPermissionDenied extends MapLocationState {}
 
+final class MapLocationPicked extends MapLocationState {
+  final double latitude;
+  final double longitude;
+  final String? address;
+  final String? street;
+  final String? city;
+  final String? zipCode;
+  final String? country;
+
+  MapLocationPicked({
+    required this.latitude,
+    required this.longitude,
+    this.address,
+    this.street,
+    this.city,
+    this.zipCode,
+    this.country,
+  });
+}
+
 final class MapLocationError extends MapLocationState {
   final String message;
 

@@ -22,6 +22,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:upgrader/upgrader.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +34,7 @@ void main() async {
   await NotificationService.instance.initialize();
   Stripe.publishableKey = stripePublishableKey;
   await Stripe.instance.applySettings();
+  await Upgrader.clearSavedSettings();
   runApp(const MyApp());
 }
 
@@ -73,41 +75,53 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      body:
-          BlocBuilder<
-            BottomNavigationSelectorCubit,
-            BottomNavigationSelectorState
-          >(
-            builder: (context, state) {
-              return screenList[state is BottomNavigationSelectorChanged
-                      ? state.selectedIndex
-                      : 0]
-                  .page;
-            },
-          ),
-      floatingActionButton: BlocBuilder<OrderCubit, OrderState>(
-        builder: (context, state) {
-          final hasActive = context.read<OrderCubit>().hasActiveOrder;
-          if (!hasActive) return const SizedBox.shrink();
-          return FloatingActionButton.extended(
-            onPressed: () {
-              Navigator.of(context).pushNamed('/track_order_screen');
-            },
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            icon: const Icon(Icons.delivery_dining, color: Colors.white),
-            label: Text(
-              'Track Order',
-              style: GoogleFonts.sen(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          );
-        },
+    return UpgradeAlert(
+      upgrader: Upgrader(
+        debugDisplayAlways: true,
+        debugLogging: true,
+        durationUntilAlertAgain: const Duration(seconds: 0),
       ),
-      bottomNavigationBar: BiteBottomNavigationBar(),
+      dialogStyle: UpgradeDialogStyle.cupertino,
+      showIgnore: false,
+      showLater: true,
+      showReleaseNotes: true,
+      onUpdate: () => true,
+      child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        body:
+            BlocBuilder<
+              BottomNavigationSelectorCubit,
+              BottomNavigationSelectorState
+            >(
+              builder: (context, state) {
+                return screenList[state is BottomNavigationSelectorChanged
+                        ? state.selectedIndex
+                        : 0]
+                    .page;
+              },
+            ),
+        floatingActionButton: BlocBuilder<OrderCubit, OrderState>(
+          builder: (context, state) {
+            final hasActive = context.read<OrderCubit>().hasActiveOrder;
+            if (!hasActive) return const SizedBox.shrink();
+            return FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/track_order_screen');
+              },
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              icon: const Icon(Icons.delivery_dining, color: Colors.white),
+              label: Text(
+                'Track Order',
+                style: GoogleFonts.sen(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            );
+          },
+        ),
+        bottomNavigationBar: BiteBottomNavigationBar(),
+      ),
     );
   }
 }

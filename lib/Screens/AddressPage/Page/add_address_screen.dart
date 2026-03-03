@@ -25,6 +25,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   final TextEditingController _countryController = TextEditingController();
   final List<String> _addressLabels = const ['Home', 'Work', 'Other'];
   String _selectedLabel = 'Home';
+  LatLng? _selectedLocation;
+  bool _isMapMoving = false;
 
   @override
   void dispose() {
@@ -41,6 +43,23 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     mapController = controller;
   }
 
+  void _onCameraMove(CameraPosition position) {
+    _selectedLocation = position.target;
+    if (!_isMapMoving) {
+      setState(() => _isMapMoving = true);
+    }
+  }
+
+  void _onCameraIdle() {
+    if (_isMapMoving && _selectedLocation != null) {
+      setState(() => _isMapMoving = false);
+      context.read<MapLocationCubit>().pickLocation(
+        _selectedLocation!.latitude,
+        _selectedLocation!.longitude,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +72,18 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                 decoration: BoxDecoration(color: Colors.blueGrey),
                 child: Stack(
                   children: [
-                    BlocBuilder<MapLocationCubit, MapLocationState>(
+                    BlocConsumer<MapLocationCubit, MapLocationState>(
+                      listener: (context, state) {
+                        if (state is MapLocationPicked) {
+                          _addressController.text = state.address ?? '';
+                          _streetController.text = state.street ?? '';
+                          _cityController.text = state.city ?? '';
+                          _zipController.text = state.zipCode ?? '';
+                          _countryController.text = state.country ?? '';
+                        }
+                      },
+                      buildWhen: (previous, current) =>
+                          current is! MapLocationPicked,
                       builder: (context, state) {
                         if (state is MapLocationLoading) {
                           return Center(child: CircularProgressIndicator());
@@ -80,12 +110,19 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         }
 
                         if (state is MapLocationLoaded) {
+                          final initialPos = LatLng(
+                            state.latitude,
+                            state.longitude,
+                          );
+                          _selectedLocation ??= initialPos;
                           return GoogleMap(
                             onMapCreated: _onMapCreated,
                             initialCameraPosition: CameraPosition(
-                              target: LatLng(state.latitude, state.longitude),
+                              target: initialPos,
                               zoom: 15,
                             ),
+                            onCameraMove: _onCameraMove,
+                            onCameraIdle: _onCameraIdle,
                             myLocationEnabled: true,
                             myLocationButtonEnabled: true,
                             compassEnabled: true,
@@ -99,6 +136,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                             target: LatLng(37.7749, -122.4194),
                             zoom: 15,
                           ),
+                          onCameraMove: _onCameraMove,
+                          onCameraIdle: _onCameraIdle,
                           myLocationEnabled: true,
                           myLocationButtonEnabled: true,
                           compassEnabled: true,
@@ -106,7 +145,28 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         );
                       },
                     ),
-                    _AppBarSection(),
+                    // Center pin overlay
+                    IgnorePointer(
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 36.h),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 150),
+                            child: Icon(
+                              Icons.location_pin,
+                              size: _isMapMoving ? 48.r : 40.r,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: _AppBarSection(),
+                    ),
                   ],
                 ),
               ),
@@ -146,6 +206,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                       cityController: _cityController,
                       countryController: _countryController,
                       selectedLabel: _selectedLabel,
+                      selectedLocation: _selectedLocation,
                     ),
                   ],
                 ),
@@ -281,6 +342,7 @@ class _SaveAddressSection extends StatelessWidget {
     required this.cityController,
     required this.countryController,
     required this.selectedLabel,
+    required this.selectedLocation,
   });
 
   final TextEditingController addressController;
@@ -289,6 +351,7 @@ class _SaveAddressSection extends StatelessWidget {
   final TextEditingController cityController;
   final TextEditingController countryController;
   final String selectedLabel;
+  final LatLng? selectedLocation;
 
   @override
   Widget build(BuildContext context) {
@@ -315,15 +378,6 @@ class _SaveAddressSection extends StatelessWidget {
                 addressLine,
               ].where((part) => part.isNotEmpty).join(' ');
 
-              final locationState = context.read<MapLocationCubit>().state;
-              LatLng? location;
-              if (locationState is MapLocationLoaded) {
-                location = LatLng(
-                  locationState.latitude,
-                  locationState.longitude,
-                );
-              }
-
               final currentUser = getCurrentUser();
               if (currentUser == null) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -343,7 +397,7 @@ class _SaveAddressSection extends StatelessWidget {
                 city: city,
                 zipCode: zipCode,
                 country: country,
-                location: location,
+                location: selectedLocation,
               );
 
               context
@@ -389,15 +443,11 @@ class _AppBarSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        BiteAppBar(
-          title: SizedBox.shrink(),
-          actions: [],
-          backButton: true,
-          isDarkMode: true,
-        ),
-      ],
+    return BiteAppBar(
+      title: SizedBox.shrink(),
+      actions: [],
+      backButton: true,
+      isDarkMode: true,
     );
   }
 }
