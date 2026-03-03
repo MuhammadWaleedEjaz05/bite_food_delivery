@@ -11,6 +11,7 @@ import 'package:bite_food_delivery/Cubits/FirstTimeLaunchCubit/first_time_launch
 import 'package:bite_food_delivery/Cubits/FoodItemCubit/food_item_cubit.dart';
 import 'package:bite_food_delivery/Cubits/NotificationCubit/notifications_cubit.dart';
 import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
+import 'package:bite_food_delivery/Cubits/PaymentCubit/payment_cubit.dart';
 import 'package:bite_food_delivery/Cubits/PaymentCubit/payment_method_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RecentSearchesCubit/recent_searches_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
@@ -57,6 +58,9 @@ List<BlocProvider> blocProviderList = [
   ),
   BlocProvider<PaymentMethodSelectorCubit>(
     create: (context) => PaymentMethodSelectorCubit(),
+  ),
+  BlocProvider<PaymentCubit>(
+    create: (context) => PaymentCubit(),
   ),
   BlocProvider<CreditCardCubit>(
     create: (context) => CreditCardCubit(getCurrentUser()?.uid),

@@ -1,6 +1,7 @@
 import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
 import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
+import 'package:bite_food_delivery/Cubits/PaymentCubit/payment_cubit.dart';
 import 'package:bite_food_delivery/Cubits/PaymentCubit/payment_method_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
@@ -312,6 +313,128 @@ class _PlaceOrderButton extends StatelessWidget {
   final double totalAmount;
   const _PlaceOrderButton({required this.cartID, required this.totalAmount});
 
+  OrderModel _buildOrder(BuildContext context, double grandTotal) {
+    final cartState = BlocProvider.of<CartCubit>(context).state;
+    final userState = context.read<UserAuthCubit>().state;
+    final addressState = context.read<AddressCubit>().state;
+    final paymentMethod = context.read<PaymentMethodSelectorCubit>().state;
+
+    final String userId = userState is UserLoggedIn
+        ? (userState.user.id ?? '')
+        : '';
+    final String addressId =
+        addressState is AddressesLoaded && addressState.selectedAddress != null
+        ? addressState.selectedAddress!.addressID
+        : '';
+    final String restaurantId =
+        cartState is CartLoaded && cartState.cart.cartItems.isNotEmpty
+        ? cartState.cart.cartItems[0].product.RestuarantId
+        : '';
+
+    return OrderModel(
+      userId: userId,
+      restaurantId: restaurantId,
+      cartID: cartID,
+      totalPrice: grandTotal,
+      deliveryAddressId: addressId,
+      paymentMethod: paymentMethod.cardType,
+    );
+  }
+
+  void _showTrackOrderDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.r),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            20.verticalSpace,
+            Container(
+              padding: EdgeInsets.all(20.r),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary.withAlpha(25),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.check_circle_outline,
+                color: Theme.of(context).colorScheme.primary,
+                size: 60.r,
+              ),
+            ),
+            20.verticalSpace,
+            Text(
+              'Order Placed!',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            10.verticalSpace,
+            Text(
+              'Your order has been placed successfully.\nTrack your order in real-time.',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                color: Theme.of(context).colorScheme.onSecondary,
+              ),
+            ),
+            25.verticalSpace,
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(ctx).pop();
+                      Navigator.of(context).popUntil((route) => route.isFirst);
+                      Navigator.of(context).pushNamed('/track_order_screen');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                    ),
+                    child: Text(
+                      'Track Order',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ),
+                ),
+                12.horizontalSpace,
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(ctx).pop();
+                      Navigator.of(context).popUntil((route) => route.isFirst);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      backgroundColor: Theme.of(context).colorScheme.surface,
+                      foregroundColor: Theme.of(context).colorScheme.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.r),
+                        side: BorderSide(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      'Back to Home',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            10.verticalSpace,
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final cartState = BlocProvider.of<CartCubit>(context).state;
@@ -332,196 +455,110 @@ class _PlaceOrderButton extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: BlocConsumer<OrderCubit, OrderState>(
-            listener: (context, state) {
-              if (state is OrderPlaced) {
-                showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (ctx) => AlertDialog(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16.r),
-                    ),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        20.verticalSpace,
-                        Container(
-                          padding: EdgeInsets.all(20.r),
-                          decoration: BoxDecoration(
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.primary.withAlpha(25),
-                            shape: BoxShape.circle,
-                          ),
-                          child: Icon(
-                            Icons.check_circle_outline,
-                            color: Theme.of(context).colorScheme.primary,
-                            size: 60.r,
-                          ),
+          child: MultiBlocListener(
+            listeners: [
+              BlocListener<PaymentCubit, PaymentState>(
+                listener: (context, paymentState) {
+                  if (paymentState is PaymentSuccess) {
+                    // Payment succeeded — now place the order
+                    final order = _buildOrder(context, grandTotal);
+                    context.read<OrderCubit>().placeOrder(order);
+                  } else if (paymentState is PaymentFailure) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Payment failed: ${paymentState.errorMessage}',
                         ),
-                        20.verticalSpace,
-                        Text(
-                          'Order Placed!',
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                        10.verticalSpace,
-                        Text(
-                          'Your order has been placed successfully.\nTrack your order in real-time.',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodySmall!
-                              .copyWith(
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.onSecondary,
-                              ),
-                        ),
-                        25.verticalSpace,
-                        Row(
-                          children: [
-                            Expanded(
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(ctx).pop();
-                                  Navigator.of(
-                                    context,
-                                  ).popUntil((route) => route.isFirst);
-                                  Navigator.of(
-                                    context,
-                                  ).pushNamed('/track_order_screen');
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.symmetric(vertical: 12.h),
-                                  backgroundColor: Theme.of(
-                                    context,
-                                  ).colorScheme.primary,
-                                  foregroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.r),
-                                  ),
-                                ),
-                                child: Text(
-                                  'Track Order',
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                ),
-                              ),
-                            ),
-                            12.horizontalSpace,
-                            Expanded(
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(ctx).pop();
-                                  Navigator.of(
-                                    context,
-                                  ).popUntil((route) => route.isFirst);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.symmetric(vertical: 12.h),
-                                  backgroundColor: Theme.of(
-                                    context,
-                                  ).colorScheme.surface,
-                                  foregroundColor: Theme.of(
-                                    context,
-                                  ).colorScheme.primary,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.r),
-                                    side: BorderSide(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.primary,
-                                    ),
-                                  ),
-                                ),
-                                child: Text(
-                                  'Back to Home',
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        10.verticalSpace,
-                      ],
-                    ),
-                  ),
-                );
-              } else if (state is OrderError) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(state.message),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              }
-            },
-            builder: (context, state) {
-              return ElevatedButton(
-                onPressed: state is OrderLoading
-                    ? null
-                    : () {
-                        final userState = context.read<UserAuthCubit>().state;
-                        final addressState = context.read<AddressCubit>().state;
-                        final paymentMethod = context
-                            .read<PaymentMethodSelectorCubit>()
-                            .state;
-
-                        final String userId = userState is UserLoggedIn
-                            ? (userState.user.id ?? '')
-                            : '';
-                        final String addressId =
-                            addressState is AddressesLoaded &&
-                                addressState.selectedAddress != null
-                            ? addressState.selectedAddress!.addressID
-                            : '';
-                        final String restaurantId =
-                            cartState is CartLoaded &&
-                                cartState.cart.cartItems.isNotEmpty
-                            ? cartState.cart.cartItems[0].product.RestuarantId
-                            : '';
-
-                        final order = OrderModel(
-                          userId: userId,
-                          restaurantId: restaurantId,
-                          cartID: cartID,
-                          totalPrice: grandTotal,
-                          deliveryAddressId: addressId,
-                          paymentMethod: paymentMethod.cardType,
-                        );
-
-                        context.read<OrderCubit>().placeOrder(order);
-                      },
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 14.h),
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  elevation: 2,
-                ),
-                child: state is OrderLoading
-                    ? SizedBox(
-                        height: 22.r,
-                        width: 22.r,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2,
-                        ),
-                      )
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.shopping_cart_checkout, size: 22.r),
-                          10.horizontalSpace,
-                          Text(
-                            'Place Order  •  PKR ${grandTotal.toStringAsFixed(0)}',
-                            style: Theme.of(context).textTheme.titleLarge!
-                                .copyWith(color: Colors.white),
-                          ),
-                        ],
+                        backgroundColor: Colors.red,
                       ),
-              );
-            },
+                    );
+                  }
+                },
+              ),
+              BlocListener<OrderCubit, OrderState>(
+                listener: (context, orderState) {
+                  if (orderState is OrderPlaced) {
+                    _showTrackOrderDialog(context);
+                  } else if (orderState is OrderError) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(orderState.message),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
+                },
+              ),
+            ],
+            child: BlocBuilder<PaymentCubit, PaymentState>(
+              builder: (context, paymentState) {
+                return BlocBuilder<OrderCubit, OrderState>(
+                  builder: (context, orderState) {
+                    final bool isLoading =
+                        paymentState is PaymentProcessing ||
+                        orderState is OrderLoading;
+
+                    return ElevatedButton(
+                      onPressed: isLoading
+                          ? null
+                          : () {
+                              final paymentMethod = context
+                                  .read<PaymentMethodSelectorCubit>()
+                                  .state;
+
+                              final bool isCardPayment =
+                                  paymentMethod.cardType !=
+                                  CreditCardType.onCash;
+
+                              if (isCardPayment) {
+                                // Process Stripe payment first
+                                context.read<PaymentCubit>().processPayment(
+                                  grandTotal.toInt(),
+                                  'usd',
+                                  paymentMethod.paymentMethodId,
+                                  paymentMethod.customerId,
+                                );
+                              } else {
+                                // Cash on delivery — place order directly
+                                final order = _buildOrder(context, grandTotal);
+                                context.read<OrderCubit>().placeOrder(order);
+                              }
+                            },
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: 14.h),
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                        elevation: 2,
+                      ),
+                      child: isLoading
+                          ? SizedBox(
+                              height: 22.r,
+                              width: 22.r,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.shopping_cart_checkout, size: 22.r),
+                                10.horizontalSpace,
+                                Text(
+                                  'Confirm Payment  •  PKR ${grandTotal.toStringAsFixed(0)}',
+                                  style: Theme.of(context).textTheme.titleLarge!
+                                      .copyWith(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                    );
+                  },
+                );
+              },
+            ),
           ),
         ),
       ],

@@ -10,6 +10,8 @@ import 'package:bite_food_delivery/configs/fcm_initialize.dart';
 import 'package:bite_food_delivery/configs/page_routes.dart';
 import 'package:bite_food_delivery/configs/screen_list.dart';
 import 'package:bite_food_delivery/configs/shared_preference_fucntions.dart';
+import 'package:bite_food_delivery/configs/stripe_const.dart';
+import 'package:bite_food_delivery/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -17,17 +19,20 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await sharedPreference;
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   FirebaseMessaging.onBackgroundMessage(firebaseBackgroundMessageHandler);
   await initializeFCM();
   await NotificationService.instance.initialize();
+  Stripe.publishableKey = stripePublishableKey;
+  await Stripe.instance.applySettings();
   runApp(const MyApp());
 }
 

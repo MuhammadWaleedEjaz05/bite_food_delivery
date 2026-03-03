@@ -56,12 +56,6 @@ class _MenuSection extends StatelessWidget {
                 : const SizedBox.shrink(),
             20.verticalSpace,
             BiteMenuSection(
-              menuItems: pAppList(
-                context,
-              ).map((item) => BiteMenuItem(item: item)).toList(),
-            ),
-            20.verticalSpace,
-            BiteMenuSection(
               menuItems: pSupportList(
                 context,
               ).map((item) => BiteMenuItem(item: item)).toList(),

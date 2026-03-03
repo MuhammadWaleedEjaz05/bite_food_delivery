@@ -9,29 +9,15 @@ sealed class PaymentState extends Equatable {
 
 final class PaymentInitial extends PaymentState {}
 
-final class PaymentLoading extends PaymentState {}
-final class PaymentSuccess extends PaymentState {
-  final String message;
+final class PaymentProcessing extends PaymentState {}
 
-  const PaymentSuccess(this.message);
+final class PaymentSuccess extends PaymentState {}
 
-  @override
-  List<Object> get props => [message];
-}
 final class PaymentFailure extends PaymentState {
-  final String error;
+  final String errorMessage;
 
-  const PaymentFailure(this.error);
-
-  @override
-  List<Object> get props => [error];
-}
-final class PaymentCancelled extends PaymentState {
-  final String message;
-
-  const PaymentCancelled(this.message);
+  const PaymentFailure(this.errorMessage);
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [errorMessage];
 }
-

@@ -69,7 +69,7 @@ class _BiteCreditCardTileState extends State<BiteCreditCardTile>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '**** **** **** ${widget.creditCard.cardNumber.substring(widget.creditCard.cardNumber.length - 4)}',
+                        '**** **** **** ${widget.creditCard.last4}',
                         style: Theme.of(
                           context,
                         ).textTheme.titleSmall!.copyWith(color: Colors.black54),
@@ -132,8 +132,8 @@ class _BiteCreditCardTileState extends State<BiteCreditCardTile>
                             >(
                               builder: (context, selectedCard) {
                                 final isSelected =
-                                    selectedCard.cardNumber ==
-                                    widget.creditCard.cardNumber;
+                                    selectedCard.paymentMethodId ==
+                                    widget.creditCard.paymentMethodId;
                                 return ElevatedButton.icon(
                                   onPressed: isSelected
                                       ? null
@@ -151,7 +151,7 @@ class _BiteCreditCardTileState extends State<BiteCreditCardTile>
                                           ).showSnackBar(
                                             SnackBar(
                                               content: Text(
-                                                'Selected ${widget.creditCard.cardType == CreditCardType.onCash ? 'Cash on Delivery' : 'Card ending in ${widget.creditCard.cardNumber.substring(widget.creditCard.cardNumber.length - 4)}'} as payment method',
+                                                'Selected ${widget.creditCard.cardType == CreditCardType.onCash ? 'Cash on Delivery' : 'Card ending in ${widget.creditCard.last4}'} as payment method',
                                               ),
                                               duration: const Duration(
                                                 seconds: 2,
@@ -207,7 +207,7 @@ class _BiteCreditCardTileState extends State<BiteCreditCardTile>
                                 );
                             context.read<CreditCardCubit>().deleteCreditCard(
                               getCurrentUser()!.uid,
-                              widget.creditCard.cardNumber,
+                              widget.creditCard.paymentMethodId,
                             );
                           },
                           icon: Icon(Icons.delete_outline_rounded, size: 20.r),

@@ -37,9 +37,9 @@ class BiteCheckOutPaymentBlock extends StatelessWidget {
                 Text(
                   creditCard!.cardType == CreditCardType.onCash
                       ? 'Pays When Order Arrives'
-                      : creditCard!.cardNumber
-                            .substring(creditCard!.cardNumber.length - 4)
-                            .padLeft(16, '*'),
+                      : creditCard!.last4.isNotEmpty
+                      ? '**** **** **** ${creditCard!.last4}'
+                      : 'No card details',
                   style: Theme.of(context).textTheme.labelLarge!.copyWith(
                     color: Theme.of(context).colorScheme.onSecondary,
                   ),

@@ -6,9 +6,10 @@ class PaymentMethodSelectorCubit extends Cubit<CreditCardModel> {
     : super(
         CreditCardModel(
           cardHolderName: '',
-          cardNumber: '',
+          customerId: '',
+          paymentMethodId: '',
+          last4: '',
           expiryDate: '',
-          cvv: '',
           cardType: CreditCardType.onCash,
         ),
       );
@@ -21,9 +22,10 @@ class PaymentMethodSelectorCubit extends Cubit<CreditCardModel> {
       emit(
         CreditCardModel(
           cardHolderName: 'Cash on Delivery',
-          cardNumber: '',
+          customerId: '',
+          paymentMethodId: '',
+          last4: '',
           expiryDate: '',
-          cvv: '',
           cardType: CreditCardType.onCash,
         ),
       );

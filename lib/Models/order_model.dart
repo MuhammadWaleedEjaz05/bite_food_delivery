@@ -17,6 +17,7 @@ class OrderModel extends Equatable {
   final DateTime orderPlacedAt;
   final DateTime? orderDeliveredAt;
   final OrderStatus orderStatus;
+  final bool isPaid;
 
   OrderModel({
     String? orderId,
@@ -29,9 +30,11 @@ class OrderModel extends Equatable {
     DateTime? orderPlacedAt,
     this.orderDeliveredAt,
     OrderStatus? orderStatus,
+    bool? isPaid,
   }) : orderId = orderId ?? uuid.v4(),
        orderPlacedAt = orderPlacedAt ?? DateTime.now(),
-       orderStatus = orderStatus ?? OrderStatus.received;
+       orderStatus = orderStatus ?? OrderStatus.received,
+       isPaid = isPaid ?? false;
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     return OrderModel(
@@ -55,6 +58,7 @@ class OrderModel extends Equatable {
         (e) => e.toString() == 'OrderStatus.${json['orderStatus']}',
         orElse: () => OrderStatus.received,
       ),
+      isPaid: json['isPaid'] ?? false,
     );
   }
 
@@ -70,6 +74,7 @@ class OrderModel extends Equatable {
       'orderPlacedAt': orderPlacedAt.toIso8601String(),
       'orderDeliveredAt': orderDeliveredAt?.toIso8601String(),
       'orderStatus': orderStatus.toString().split('.').last,
+      'isPaid': isPaid,
     };
   }
 
@@ -96,6 +101,7 @@ class OrderModel extends Equatable {
       orderPlacedAt: orderPlacedAt ?? this.orderPlacedAt,
       orderDeliveredAt: orderDeliveredAt ?? this.orderDeliveredAt,
       orderStatus: orderStatus ?? this.orderStatus,
+      isPaid: isPaid,
     );
   }
 
@@ -111,5 +117,6 @@ class OrderModel extends Equatable {
     orderPlacedAt,
     orderDeliveredAt,
     orderStatus,
+    isPaid,
   ];
 }
