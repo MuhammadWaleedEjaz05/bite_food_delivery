@@ -16,6 +16,7 @@ import 'package:bite_food_delivery/Cubits/PaymentCubit/payment_method_selector_c
 import 'package:bite_food_delivery/Cubits/RecentSearchesCubit/recent_searches_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/Cubits/SettingsCubit/settings_cubit.dart';
+import 'package:bite_food_delivery/Cubits/UpdateCheckCubit/update_check_cubit.dart';
 import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,9 +60,7 @@ List<BlocProvider> blocProviderList = [
   BlocProvider<PaymentMethodSelectorCubit>(
     create: (context) => PaymentMethodSelectorCubit(),
   ),
-  BlocProvider<PaymentCubit>(
-    create: (context) => PaymentCubit(),
-  ),
+  BlocProvider<PaymentCubit>(create: (context) => PaymentCubit()),
   BlocProvider<CreditCardCubit>(
     create: (context) => CreditCardCubit(getCurrentUser()?.uid),
   ),
@@ -69,4 +68,5 @@ List<BlocProvider> blocProviderList = [
     create: (context) => FirstTimeLaunchCubit()..checkFirstTimeLaunch(),
   ),
   BlocProvider<SettingsCubit>(create: (context) => SettingsCubit()),
+  BlocProvider<UpdateCheckCubit>(create: (context) => UpdateCheckCubit()),
 ];

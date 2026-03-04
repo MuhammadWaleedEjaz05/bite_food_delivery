@@ -1,6 +1,8 @@
 import 'package:bite_food_delivery/Cubits/BottomNavigationSelection/bottom_navigation_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
 import 'package:bite_food_delivery/Cubits/SettingsCubit/settings_cubit.dart';
+import 'package:bite_food_delivery/Cubits/UpdateCheckCubit/update_check_cubit.dart';
+import 'package:bite_food_delivery/GlobalWidgets/bite_update_dialog.dart';
 import 'package:bite_food_delivery/Screens/SplashPage/Pages/splash_screen.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_bottom_navigation_bar.dart';
 import 'package:bite_food_delivery/Themes/bite_dark_themes.dart';
@@ -75,18 +77,44 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body:
-          BlocBuilder<
-            BottomNavigationSelectorCubit,
-            BottomNavigationSelectorState
-          >(
-            builder: (context, state) {
-              return screenList[state is BottomNavigationSelectorChanged
-                      ? state.selectedIndex
-                      : 0]
-                  .page;
-            },
-          ),
+      body: BlocListener<UpdateCheckCubit, UpdateCheckState>(
+        listener: (context, state) {
+          if (state is UpdateRequired) {
+            BiteUpdateDialog.show(
+              context,
+              latestVersion: state.latestVersion,
+              updateUrl: state.updateUrl,
+            );
+          }
+        },
+        child:
+            BlocBuilder<
+              BottomNavigationSelectorCubit,
+              BottomNavigationSelectorState
+            >(
+              builder: (context, state) {
+                final selectedIndex = state is BottomNavigationSelectorChanged
+                    ? state.selectedIndex
+                    : 0;
+                return AnimatedSwitcher(
+                  duration: Duration(milliseconds: 300),
+                  transitionBuilder: (child, animation) {
+                    return SlideTransition(
+                      position: Tween<Offset>(
+                        begin: Offset(1, 0),
+                        end: Offset.zero,
+                      ).animate(animation),
+                      child: child,
+                    );
+                  },
+                  child: KeyedSubtree(
+                    key: ValueKey(selectedIndex),
+                    child: screenList[selectedIndex].page,
+                  ),
+                );
+              },
+            ),
+      ),
       floatingActionButton: BlocBuilder<OrderCubit, OrderState>(
         builder: (context, state) {
           final hasActive = context.read<OrderCubit>().hasActiveOrder;
