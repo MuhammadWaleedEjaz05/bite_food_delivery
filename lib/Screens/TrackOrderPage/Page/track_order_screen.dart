@@ -161,38 +161,63 @@ class TrackOrderScreen extends StatelessWidget {
                       myLocationButtonEnabled: true,
                       zoomControlsEnabled: false,
                       mapToolbarEnabled: false,
-                    ),
-                  ),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: BlocBuilder<OrderCubit, OrderState>(
-                      builder: (context, orderState) {
-                        final currentOrder = orderCubit.activeOrder ?? order;
-                        final restaurantName = context
-                            .read<RestaurantsCubit>()
-                            .getRestaurantNameById(currentOrder.restaurantId);
-                        return BiteOrderInfoSheet(
-                          restaurantName: restaurantName,
-                          orderDate: formattedDate,
-                          items: [
-                            'Order #${currentOrder.orderId.substring(0, 8)}',
-                            'Total: PKR ${currentOrder.totalPrice.toStringAsFixed(0)}',
+                      markers: {
+                        Marker(
+                          markerId: MarkerId('courier'),
+
+                          position: LatLng(30.243319, 71.488739),
+                        ),
+                      },
+                      polylines: {
+                        Polyline(
+                          polylineId: PolylineId('route'),
+                          points: [
+                            LatLng(30.229120224296313, 71.46704279910028),
+                            LatLng(state.latitude, state.longitude),
                           ],
-                          estimatedMinutes: 20,
-                          courierName: 'Courier',
-                          currentStep: _orderStatusToStep(
-                            currentOrder.orderStatus,
-                          ),
-                          onCallTap: () {
-                            context.read<PhoneCallCubit>().makePhoneCall(
-                              _courierPhoneNumber,
-                            );
-                          },
-                        );
+                          color: Theme.of(context).colorScheme.primary,
+                          width: 2,
+                          startCap: Cap.roundCap,
+                          endCap: Cap.roundCap,
+                        ),
                       },
                     ),
+                  ),
+                  DraggableScrollableSheet(
+                    initialChildSize: 0.45,
+                    minChildSize: 0.08,
+                    maxChildSize: 0.75,
+                    snap: true,
+                    snapSizes: const [0.08, 0.45, 0.75],
+                    builder: (context, scrollController) {
+                      return BlocBuilder<OrderCubit, OrderState>(
+                        builder: (context, orderState) {
+                          final currentOrder = orderCubit.activeOrder ?? order;
+                          final restaurantName = context
+                              .read<RestaurantsCubit>()
+                              .getRestaurantNameById(currentOrder.restaurantId);
+                          return BiteOrderInfoSheet(
+                            scrollController: scrollController,
+                            restaurantName: restaurantName,
+                            orderDate: formattedDate,
+                            items: [
+                              'Order #${currentOrder.orderId.substring(0, 8)}',
+                              'Total: PKR ${currentOrder.totalPrice.toStringAsFixed(0)}',
+                            ],
+                            estimatedMinutes: 20,
+                            courierName: 'Courier',
+                            currentStep: _orderStatusToStep(
+                              currentOrder.orderStatus,
+                            ),
+                            onCallTap: () {
+                              context.read<PhoneCallCubit>().makePhoneCall(
+                                _courierPhoneNumber,
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
                   ),
                 ],
               );

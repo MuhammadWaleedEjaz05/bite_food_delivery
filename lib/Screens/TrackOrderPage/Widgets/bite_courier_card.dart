@@ -60,14 +60,6 @@ class BiteCourierCard extends StatelessWidget {
           icon: Icons.call,
           onTap: onCallTap,
         ),
-        10.horizontalSpace,
-
-        _ActionCircleButton(
-          color: primaryColor.withAlpha(40),
-          icon: Icons.message_rounded,
-          iconColor: primaryColor,
-          onTap: () {},
-        ),
       ],
     );
   }
@@ -76,13 +68,11 @@ class BiteCourierCard extends StatelessWidget {
 class _ActionCircleButton extends StatelessWidget {
   final Color color;
   final IconData icon;
-  final Color? iconColor;
   final VoidCallback onTap;
 
   const _ActionCircleButton({
     required this.color,
     required this.icon,
-    this.iconColor,
     required this.onTap,
   });
 
@@ -94,7 +84,7 @@ class _ActionCircleButton extends StatelessWidget {
         height: 45.r,
         width: 45.r,
         decoration: BoxDecoration(shape: BoxShape.circle, color: color),
-        child: Icon(icon, color: iconColor ?? Colors.white, size: 22.r),
+        child: Icon(icon, color:  Colors.white, size: 22.r),
       ),
     );
   }

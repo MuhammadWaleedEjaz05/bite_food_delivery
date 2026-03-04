@@ -10,8 +10,9 @@ class BiteOrderInfoSheet extends StatelessWidget {
   final List<String> items;
   final int estimatedMinutes;
   final String courierName;
-  final int currentStep; // 0-3
+  final int currentStep;
   final VoidCallback onCallTap;
+  final ScrollController? scrollController;
 
   const BiteOrderInfoSheet({
     super.key,
@@ -22,6 +23,7 @@ class BiteOrderInfoSheet extends StatelessWidget {
     required this.courierName,
     required this.onCallTap,
     this.currentStep = 0,
+    this.scrollController,
   });
 
   @override
@@ -38,83 +40,100 @@ class BiteOrderInfoSheet extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // ── Drag Handle ──
-          Padding(
-            padding: EdgeInsets.only(top: 12.h),
-            child: Container(
-              width: 40.w,
-              height: 4.h,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(2.r),
-              ),
-            ),
-          ),
-
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+      child: CustomScrollView(
+        controller: scrollController,
+        slivers: [
+          SliverToBoxAdapter(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                _RestaurantInfoRow(
-                  restaurantName: restaurantName,
-                  orderDate: orderDate,
-                ),
-                16.verticalSpace,
-
-                ...items.map(
-                  (item) => Padding(
-                    padding: EdgeInsets.only(bottom: 4.h),
-                    child: Text(
-                      item,
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        color: Theme.of(context).colorScheme.onSecondary,
-                      ),
+                Padding(
+                  padding: EdgeInsets.only(top: 12.h),
+                  child: Container(
+                    width: 40.w,
+                    height: 4.h,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(2.r),
                     ),
                   ),
                 ),
-                20.verticalSpace,
 
-                Center(
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
+                    vertical: 16.h,
+                  ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        '$estimatedMinutes min',
-                        style: GoogleFonts.sen(
-                          fontSize: Theme.of(
-                            context,
-                          ).textTheme.displayMedium!.fontSize,
-                          fontWeight: Theme.of(
-                            context,
-                          ).textTheme.displayMedium!.fontWeight,
+                      _RestaurantInfoRow(
+                        restaurantName: restaurantName,
+                        orderDate: orderDate,
+                      ),
+                      16.verticalSpace,
+
+                      ...items.map(
+                        (item) => Padding(
+                          padding: EdgeInsets.only(bottom: 4.h),
+                          child: Text(
+                            item,
+                            style: Theme.of(context).textTheme.bodySmall!
+                                .copyWith(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSecondary,
+                                ),
+                          ),
                         ),
                       ),
-                      4.verticalSpace,
-                      Text(
-                        'ESTIMATED DELIVERY TIME',
-                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.secondary,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.2,
+                      20.verticalSpace,
+
+                      Center(
+                        child: Column(
+                          children: [
+                            Text(
+                              '$estimatedMinutes min',
+                              style: GoogleFonts.sen(
+                                fontSize: Theme.of(
+                                  context,
+                                ).textTheme.displayMedium!.fontSize,
+                                fontWeight: Theme.of(
+                                  context,
+                                ).textTheme.displayMedium!.fontWeight,
+                              ),
+                            ),
+                            4.verticalSpace,
+                            Text(
+                              'ESTIMATED DELIVERY TIME',
+                              style: Theme.of(context).textTheme.labelLarge!
+                                  .copyWith(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.secondary,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1.2,
+                                  ),
+                            ),
+                          ],
                         ),
                       ),
+                      24.verticalSpace,
+
+                      BiteOrderTimeline(currentStep: currentStep),
+                      20.verticalSpace,
+
+                      Divider(thickness: 1.h, color: Colors.grey.shade200),
+                      12.verticalSpace,
+
+                      BiteCourierCard(
+                        courierName: courierName,
+                        onCallTap: onCallTap,
+                      ),
+                      10.verticalSpace,
                     ],
                   ),
                 ),
-                24.verticalSpace,
-
-                BiteOrderTimeline(currentStep: currentStep),
-                20.verticalSpace,
-
-                Divider(thickness: 1.h, color: Colors.grey.shade200),
-                12.verticalSpace,
-
-                // ── Courier Card ──
-                BiteCourierCard(courierName: courierName, onCallTap: onCallTap),
-                10.verticalSpace,
               ],
             ),
           ),
@@ -124,7 +143,6 @@ class BiteOrderInfoSheet extends StatelessWidget {
   }
 }
 
-// ── Restaurant Info Row ──────────────────────────────────────────────────────
 class _RestaurantInfoRow extends StatelessWidget {
   final String restaurantName;
   final String orderDate;

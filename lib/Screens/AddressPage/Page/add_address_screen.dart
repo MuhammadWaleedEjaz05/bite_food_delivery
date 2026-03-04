@@ -145,7 +145,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         );
                       },
                     ),
-                    // Center pin overlay
                     IgnorePointer(
                       child: Center(
                         child: Padding(
