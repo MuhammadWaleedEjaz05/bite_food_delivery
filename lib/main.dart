@@ -11,7 +11,7 @@ import 'package:bite_food_delivery/configs/bloc_provider_list.dart';
 import 'package:bite_food_delivery/configs/fcm_initialize.dart';
 import 'package:bite_food_delivery/configs/page_routes.dart';
 import 'package:bite_food_delivery/configs/screen_list.dart';
-import 'package:bite_food_delivery/configs/shared_preference_fucntions.dart';
+import 'package:bite_food_delivery/configs/shared_preference_functions.dart';
 import 'package:bite_food_delivery/configs/stripe_const.dart';
 import 'package:bite_food_delivery/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';

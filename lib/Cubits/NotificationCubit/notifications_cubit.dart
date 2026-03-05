@@ -4,7 +4,7 @@ import 'package:bite_food_delivery/Models/notification_model.dart';
 import 'package:bite_food_delivery/Models/order_model.dart';
 import 'package:bite_food_delivery/configs/fcm_initialize.dart';
 import 'package:bite_food_delivery/configs/firebase_db_conn.dart';
-import 'package:bite_food_delivery/configs/shared_preference_fucntions.dart';
+import 'package:bite_food_delivery/configs/shared_preference_functions.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 

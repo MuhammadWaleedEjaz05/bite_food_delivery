@@ -1,6 +1,6 @@
 import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
 import 'package:bite_food_delivery/configs/firebase_db_conn.dart';
-import 'package:bite_food_delivery/configs/shared_preference_fucntions.dart';
+import 'package:bite_food_delivery/configs/shared_preference_functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';

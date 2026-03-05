@@ -1,4 +1,4 @@
-import 'package:bite_food_delivery/configs/shared_preference_fucntions.dart';
+import 'package:bite_food_delivery/configs/shared_preference_functions.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
