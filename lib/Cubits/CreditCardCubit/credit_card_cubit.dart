@@ -41,8 +41,8 @@ class CreditCardCubit extends Cubit<CreditCardState> {
     required String cvc,
   }) async {
     try {
-      final response = await dio.post(
-        'https://api.stripe.com/v1/payment_methods',
+      final pmResponse = await dio.post(
+        stripeCreatePaymentMethodUrl,
         data: {
           'type': 'card',
           'card[number]': cardNumber,
@@ -53,16 +53,11 @@ class CreditCardCubit extends Cubit<CreditCardState> {
         },
         options: Options(
           contentType: Headers.formUrlEncodedContentType,
-          headers: {
-            'Authorization': 'Bearer $stripePublishableKey',
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
+          headers: {'Authorization': 'Bearer $stripePublishableKey'},
         ),
       );
-
-      final pmData = response.data;
-      final paymentMethodId = pmData['id'] as String;
-      final cardData = pmData['card'] ?? {};
+      final paymentMethodId = pmResponse.data['id'] as String;
+      final cardData = pmResponse.data['card'] as Map<String, dynamic>;
 
       final existingIndex = _cachedCreditCards.indexWhere(
         (card) => card.paymentMethodId == paymentMethodId,
@@ -73,26 +68,28 @@ class CreditCardCubit extends Cubit<CreditCardState> {
       }
 
       final userEmail = getCurrentUser()?.email ?? userID;
-      final customerId = await _getCustomerId(userEmail);
-      if (customerId == null) {
-        emit(CreditCardError('Failed to retrieve customer information.'));
-        return;
-      }
+
+      final customerResponse = await dio.post(
+        stripeCreateCustomerUrl,
+        data: {'email': userEmail, 'payment_method': paymentMethodId},
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          headers: {'Authorization': 'Bearer $stripeSecretKey'},
+        ),
+      );
+      final customerId = customerResponse.data['id'] as String;
 
       await dio.post(
-        'https://api.stripe.com/v1/payment_methods/$paymentMethodId/attach',
+        stripeAttachPaymentMethodUrl(paymentMethodId),
         data: {'customer': customerId},
         options: Options(
           contentType: Headers.formUrlEncodedContentType,
-          headers: {
-            'Authorization': 'Bearer $stripeSecretKey',
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
+          headers: {'Authorization': 'Bearer $stripeSecretKey'},
         ),
       );
 
       final CreditCardType cardType;
-      final brand = (cardData['brand'] ?? '').toString().toLowerCase();
+      final brand = (cardData['brand'] ?? '').toLowerCase();
       switch (brand) {
         case 'visa':
           cardType = CreditCardType.visa;
@@ -106,8 +103,10 @@ class CreditCardCubit extends Cubit<CreditCardState> {
       }
 
       final last4 =
-          (cardData['last4'] ?? cardNumber.substring(cardNumber.length - 4))
-              as String;
+          cardData['last4'] ??
+          cardNumber
+              .replaceAll(' ', '')
+              .substring(cardNumber.replaceAll(' ', '').length - 4);
       final shortYear = expYear.length >= 4 ? expYear.substring(2) : expYear;
       final creditCard = CreditCardModel(
         cardType: cardType,
@@ -128,8 +127,8 @@ class CreditCardCubit extends Cubit<CreditCardState> {
       emit(CreditCardAdded());
       emit(CreditCardLoaded(creditCardList: _cachedCreditCards));
     } on DioException catch (e) {
-      final errorMsg = e.response?.data?['error']?['message'] ?? e.toString();
-      debugPrint('Stripe error: $errorMsg');
+      final errorMsg = e.response?.data?['message'] ?? e.toString();
+      debugPrint('Backend error: $errorMsg');
       emit(CreditCardError(errorMsg.toString()));
     } catch (e) {
       emit(CreditCardError(e.toString()));
@@ -151,44 +150,6 @@ class CreditCardCubit extends Cubit<CreditCardState> {
       emit(CreditCardLoaded(creditCardList: _cachedCreditCards));
     } catch (e) {
       emit(CreditCardError(e.toString()));
-    }
-  }
-
-  Future<String?> _getCustomerId(String userEmail) async {
-    try {
-      final response = await dio.get(
-        "https://api.stripe.com/v1/customers",
-        queryParameters: {'email': userEmail},
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $stripeSecretKey',
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          contentType: Headers.formUrlEncodedContentType,
-        ),
-      );
-
-      final customers = response.data['data'] as List? ?? [];
-      if (customers.isNotEmpty) {
-        return customers.first['id'] as String;
-      }
-
-      final createResponse = await dio.post(
-        "https://api.stripe.com/v1/customers",
-        data: {'email': userEmail},
-        options: Options(
-          contentType: Headers.formUrlEncodedContentType,
-          headers: {
-            'Authorization': 'Bearer $stripeSecretKey',
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-        ),
-      );
-
-      return createResponse.data['id'] as String?;
-    } catch (e) {
-      debugPrint('Error getting/creating Stripe customer: $e');
-      return null;
     }
   }
 }

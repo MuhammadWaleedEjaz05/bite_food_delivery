@@ -10,6 +10,7 @@ part 'payment_state.dart';
 class PaymentCubit extends Cubit<PaymentState> {
   PaymentCubit() : super(PaymentInitial());
   final Dio dio = Dio();
+
   Future<void> processPayment(
     int amount,
     String currency,
@@ -18,17 +19,34 @@ class PaymentCubit extends Cubit<PaymentState> {
   ) async {
     try {
       emit(PaymentProcessing());
-      final clientSecret = await _createPaymentIntent(
-        amount,
-        currency,
-        paymentMethodId,
-        customerId,
-      );
 
-      String? ephemeralKey;
-      if (customerId.isNotEmpty) {
-        ephemeralKey = await _createEphemeralKey(customerId);
-      }
+      final ephemeralResponse = await dio.post(
+        stripeEphemeralKeysUrl,
+        data: {'customer': customerId},
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          headers: {
+            'Authorization': 'Bearer $stripeSecretKey',
+            'Stripe-Version': '2020-08-27',
+          },
+        ),
+      );
+      final ephemeralKey = ephemeralResponse.data['secret'] as String?;
+
+      final piResponse = await dio.post(
+        stripePaymentIntentsUrl,
+        data: {
+          'amount': (amount * 100).toString(),
+          'currency': currency,
+          'customer': customerId,
+          'payment_method_types[]': 'card',
+        },
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          headers: {'Authorization': 'Bearer $stripeSecretKey'},
+        ),
+      );
+      final clientSecret = piResponse.data['client_secret'] as String;
 
       await Stripe.instance.initPaymentSheet(
         paymentSheetParameters: SetupPaymentSheetParameters(
@@ -51,73 +69,12 @@ class PaymentCubit extends Cubit<PaymentState> {
           ),
         );
       }
+    } on DioException catch (e) {
+      final errorMsg = e.response?.data?['message'] ?? 'Payment server error';
+      debugPrint('Backend error: $errorMsg');
+      emit(PaymentFailure(errorMsg.toString()));
     } catch (e) {
       emit(PaymentFailure(e.toString()));
-    }
-  }
-
-  Future<String> _createPaymentIntent(
-    int amount,
-    String currency,
-    String paymentMethodId,
-    String customerId,
-  ) async {
-    try {
-      final data = <String, String>{
-        'amount': (amount * 100).toString(),
-        'currency': currency,
-        'payment_method_types[]': 'card',
-      };
-
-      if (customerId.isNotEmpty) {
-        data['customer'] = customerId;
-      }
-      if (paymentMethodId.isNotEmpty) {
-        data['payment_method'] = paymentMethodId;
-      }
-
-      final response = await dio.post(
-        stripeIntentUrl,
-        data: data,
-        options: Options(
-          contentType: Headers.formUrlEncodedContentType,
-          headers: {
-            'Authorization': 'Bearer $stripeSecretKey',
-            'Content-type': 'application/x-www-form-urlencoded',
-          },
-        ),
-      );
-      final paymentIntent = response.data;
-      debugPrint('Payment Intent created: $paymentIntent');
-      return paymentIntent['client_secret'] as String;
-    } on DioException catch (e) {
-      debugPrint('Error creating payment intent: $e');
-      debugPrint('Stripe response body: ${e.response?.data}');
-      rethrow;
-    } catch (e) {
-      debugPrint('Error creating payment intent: $e');
-      rethrow;
-    }
-  }
-
-  Future<String?> _createEphemeralKey(String customerId) async {
-    try {
-      final response = await dio.post(
-        'https://api.stripe.com/v1/ephemeral_keys',
-        data: {'customer': customerId},
-        options: Options(
-          contentType: Headers.formUrlEncodedContentType,
-          headers: {
-            'Authorization': 'Bearer $stripeSecretKey',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Stripe-Version': '2024-06-20',
-          },
-        ),
-      );
-      return response.data['secret'] as String?;
-    } catch (e) {
-      debugPrint('Error creating ephemeral key: $e');
-      return null;
     }
   }
 }
