@@ -1,0 +1,436 @@
+{
+  "@@locale": "es",
+
+  "allYourFavorites": "Todos tus favoritos",
+  "getLovedFoodsDescription": "Obtén todas tus comidas favoritas en un solo lugar, tú solo haz el pedido y nosotros nos encargamos del resto",
+  "orderFromChosenChef": "Pide al chef elegido",
+  "freeDeliveryOffers": "Ofertas de envío gratis",
+  "getStarted": "Comenzar",
+  "next": "Siguiente",
+  "skip": "Omitir",
+
+  "login": "Iniciar Sesión",
+  "logIn": "Iniciar Sesión",
+  "pleaseSignInToContinue": "Por favor inicia sesión para continuar",
+  "or": "O",
+  "successfullySignedInGoogle": "¡Inicio de sesión exitoso con Google!",
+  "dontHaveAccount": "¿No tienes cuenta? ",
+  "signUp": "Registrarse",
+  "rememberMe": "Recuérdame",
+  "forgotPassword": "¿Olvidaste tu contraseña?",
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+
+  "forgotPasswordTitle": "Olvidé mi Contraseña",
+  "passwordResetLinkSent": "Enlace de Restablecimiento Enviado",
+  "checkEmailResetLink": "Revisa tu correo electrónico para el enlace de restablecimiento de contraseña. Haz clic en el enlace para restablecer tu contraseña.",
+  "done": "Listo",
+  "passwordResetSuccess": "¡Contraseña restablecida exitosamente! Por favor inicia sesión con tu nueva contraseña.",
+  "pleaseEnterEmailReset": "Por favor ingresa tu correo electrónico para recibir un enlace de restablecimiento de contraseña.",
+  "sendResetLink": "Enviar Enlace de Restablecimiento",
+
+  "fullName": "Nombre Completo",
+  "phoneNumber": "Número de Teléfono",
+  "confirmPassword": "Confirmar Contraseña",
+  "pleaseSignUpToGetStarted": "Por favor regístrate para comenzar",
+
+  "deliverTo": "ENTREGAR EN",
+  "selectLocation": "Seleccionar Ubicación",
+  "heyUser": "Hola {userName}, ",
+  "@heyUser": {
+    "placeholders": {
+      "userName": {
+        "type": "String"
+      }
+    }
+  },
+  "goodMorning": "¡Buenos días! 👋",
+  "heyThere": "Hola, ",
+  "allCategories": "Todas las Categorías",
+  "openRestaurants": "Restaurantes Abiertos",
+
+  "search": "Buscar",
+  "popularRestaurants": "Restaurantes Populares",
+  "noPopularRestaurantsFound": "No se encontraron restaurantes populares",
+  "recentKeywords": "Búsquedas Recientes",
+  "noRecentSearches": "No hay búsquedas recientes",
+  "addedToRecentSearches": "\"{searchTerm}\" añadido a búsquedas recientes",
+  "@addedToRecentSearches": {
+    "placeholders": {
+      "searchTerm": {
+        "type": "String"
+      }
+    }
+  },
+  "removedFromRecentSearches": "\"{searchTerm}\" eliminado de búsquedas recientes",
+  "@removedFromRecentSearches": {
+    "placeholders": {
+      "searchTerm": {
+        "type": "String"
+      }
+    }
+  },
+  "searchRestaurantsOrDishes": "Buscar restaurantes o platos",
+  "noRestaurantsFound": "No se encontraron restaurantes",
+
+  "deliveryAddress": "DIRECCIÓN DE ENTREGA",
+  "edit": "EDITAR",
+  "selectAnAddress": "Selecciona una dirección",
+  "totalLabel": "TOTAL : ",
+  "pkrAmount": "PKR {amount}",
+  "@pkrAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "checkoutButton": "PAGAR",
+  "yourCartIsEmpty": "Tu carrito está vacío",
+  "initializingCart": "Cargando carrito...",
+  "cart": "Carrito",
+
+  "checkout": "Pagar",
+  "deliveryAddressTitle": "Dirección de Entrega",
+  "change": "Cambiar",
+  "noAddressSelected": "No se seleccionó dirección",
+  "orderItems": "Artículos del Pedido",
+  "paymentMethod": "Método de Pago",
+  "orderSummary": "Resumen del Pedido",
+  "subtotal": "Subtotal",
+  "deliveryFee": "Costo de Envío",
+  "platformFee": "Tarifa de Plataforma",
+  "total": "Total",
+  "orderPlaced": "¡Pedido Realizado!",
+  "orderPlacedSuccessfully": "Tu pedido ha sido realizado exitosamente.\nRastrea tu pedido en tiempo real.",
+  "trackOrder": "Rastrear Pedido",
+  "backToHome": "Volver al Inicio",
+  "confirmPaymentAmount": "Confirmar Pago  •  PKR {amount}",
+  "@confirmPaymentAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+
+  "rsPrice": "RS {price}",
+  "@rsPrice": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "chooseYourFlavor": "Elige tu sabor",
+  "chooseYourSize": "Elige tu tamaño",
+  "tenInch": "10 pulgadas",
+  "sixteenInch": "16 pulgadas",
+  "twentyInch": "20 pulgadas",
+  "removeFromCart": "Eliminar del carrito",
+  "addToCart": "Añadir al carrito",
+
+  "allItems": "Todos los Artículos",
+  "all": "Todos",
+  "failedLoadFoodItems": "Error al cargar los artículos. Por favor intenta de nuevo más tarde.",
+  "noFoodItemsCategory": "No hay artículos disponibles para esta categoría.",
+  "free": "Gratis",
+  "deliveryTimeMin": "{minutes} min",
+  "@deliveryTimeMin": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "allRestaurants": "Todos los Restaurantes",
+
+  "selectPaymentMethod": "Seleccionar Método de Pago",
+  "cashOnDelivery": "Pago Contra Entrega",
+  "payWhenOrderArrives": "Paga cuando llegue tu pedido",
+  "cashOnDeliverySelected": "Pago contra entrega seleccionado",
+  "visa": "Visa",
+  "selectVisaCards": "Selecciona de tus tarjetas Visa guardadas",
+  "mastercard": "Mastercard",
+  "selectMastercardCards": "Selecciona de tus tarjetas Mastercard guardadas",
+  "cardEndingInSelected": "Tarjeta terminada en {last4} seleccionada",
+  "@cardEndingInSelected": {
+    "placeholders": {
+      "last4": {
+        "type": "String"
+      }
+    }
+  },
+  "noCardsSavedAddFirst": "No hay tarjetas {cardType} guardadas. Agrega una primero.",
+  "@noCardsSavedAddFirst": {
+    "placeholders": {
+      "cardType": {
+        "type": "String"
+      }
+    }
+  },
+  "savedCards": "Tarjetas Guardadas",
+  "creditCardAddedSuccess": "Tarjeta de crédito añadida exitosamente",
+  "creditCardDeletedSuccess": "Tarjeta de crédito eliminada exitosamente",
+  "noSavedCardsYet": "Aún no hay tarjetas guardadas",
+  "addCardBelowToGetStarted": "Agrega una tarjeta abajo para comenzar",
+  "maskedCardNumber": "**** **** **** {last4}",
+  "@maskedCardNumber": {
+    "placeholders": {
+      "last4": {
+        "type": "String"
+      }
+    }
+  },
+  "cardHolderExpiry": "{holderName}  •  {expiryDate}",
+  "@cardHolderExpiry": {
+    "placeholders": {
+      "holderName": {
+        "type": "String"
+      },
+      "expiryDate": {
+        "type": "String"
+      }
+    }
+  },
+  "addNewCard": "Agregar Nueva Tarjeta",
+
+  "cardInformation": "Información de la Tarjeta",
+  "cardNumberPlaceholder": "4242 4242 4242 4242",
+  "cardNumberRequired": "El número de tarjeta es obligatorio",
+  "cardNumberTooShort": "El número de tarjeta es muy corto",
+  "mmyyPlaceholder": "MM/AA",
+  "invalidMonth": "Mes inválido",
+  "cvcPlaceholder": "CVC",
+  "invalidCvc": "CVC inválido",
+  "fullNameOnCard": "Nombre completo en la tarjeta",
+  "cardSecurityNote": "Los datos de tu tarjeta son manejados de forma segura por Stripe. Nunca almacenamos tu número de tarjeta completo.",
+  "adding": "Agregando...",
+  "addCard": "Agregar Tarjeta",
+
+  "addAddress": "Agregar Dirección",
+  "addressNotAvailable": "Dirección no disponible",
+  "failedLoadAddresses": "Error al cargar las direcciones",
+  "noSavedAddresses": "Aún no hay direcciones guardadas",
+  "pleaseSignInAddresses": "Inicia sesión para ver las direcciones",
+  "address": "Dirección",
+  "locationPermissionRequired": "Se requiere permiso de ubicación",
+  "streetNo": "N° de Calle",
+  "zipCode": "Código Postal",
+  "city": "Ciudad",
+  "country": "País",
+  "label": "Etiqueta",
+  "home": "Casa",
+  "work": "Trabajo",
+  "other": "Otro",
+  "pleaseFillAllFields": "Por favor completa todos los campos requeridos",
+  "userNotAuthenticated": "Usuario no autenticado",
+  "addressAddedSuccessfully": "¡Dirección agregada exitosamente!",
+  "failedToAddAddress": "Error al agregar dirección: {error}",
+  "@failedToAddAddress": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "save": "Guardar",
+  "selectDeliveryAddress": "Seleccionar Dirección de Entrega",
+  "noAddressesFound": "No se encontraron direcciones",
+
+  "iLoveFastFood": "Amo la Comida Rápida",
+  "logout": "Cerrar Sesión",
+  "profile": "Perfil",
+
+  "personalInfo": "Información Personal",
+  "guestUser": "Usuario Invitado",
+  "pleaseLoginViewProfile": "Inicia sesión para ver tu perfil",
+  "editTitle": "Editar {title}",
+  "@editTitle": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "enterTitle": "Ingresa {title}",
+  "@enterTitle": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "apply": "Aplicar",
+  "phone": "Teléfono",
+
+  "favourite": "Favorito",
+  "foods": "Comidas",
+  "restaurants": "Restaurantes",
+  "noFavouriteRestaurants": "No se encontraron restaurantes favoritos.",
+  "noFavouriteFoods": "No se encontraron comidas favoritas.",
+
+  "orderRatings": "Calificaciones del Pedido",
+  "restaurantRatings": "Calificaciones del Restaurante",
+  "userReviews": "Reseñas de Usuarios",
+  "submit": "Enviar",
+  "review": "Reseña",
+  "myReviews": "Mis Reseñas",
+
+  "orderCancelledSuccessfully": "Pedido cancelado exitosamente",
+  "clearOrderHistory": "Borrar Historial de Pedidos",
+  "confirmDeleteOrderHistory": "¿Estás seguro de que deseas eliminar todo el historial de pedidos? Esta acción no se puede deshacer.",
+  "cancel": "Cancelar",
+  "clearAll": "Borrar Todo",
+  "clearOrderHistoryMenu": "Borrar historial de pedidos",
+  "orderHistory": "Historial de Pedidos",
+  "noCompletedOrders": "Aún no hay pedidos completados",
+  "noOngoingOrders": "No hay pedidos en curso",
+  "noOrderHistory": "No hay historial de pedidos",
+  "ongoing": "En Curso",
+  "history": "Historial",
+
+  "noActiveOrder": "No hay pedido activo",
+  "orderDelivered": "¡Tu pedido ha sido entregado!",
+  "callingNumber": "Llamando a {phoneNumber}...",
+  "@callingNumber": {
+    "placeholders": {
+      "phoneNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "locationPermissionDenied": "Permiso de ubicación denegado",
+  "orderReceived": "Tu pedido ha sido recibido",
+  "restaurantPreparingFood": "El restaurante está preparando tu comida",
+  "orderPickedUp": "Tu pedido ha sido recogido para entrega",
+  "orderArrivingSoon": "¡El pedido llegará pronto!",
+  "estimatedDeliveryTime": "TIEMPO ESTIMADO DE ENTREGA",
+  "estimatedMinutes": "{minutes} min",
+  "@estimatedMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "orderedAt": "Pedido realizado el {date}",
+  "@orderedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "courier": "Repartidor",
+
+  "noNotificationsYet": "Aún no hay notificaciones",
+  "unreadNotificationsCount": "{count} notificaciones sin leer",
+  "@unreadNotificationsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noNotifications": "Sin notificaciones",
+  "notifications": "Notificaciones",
+  "markAllAsRead": "Marcar todo como leído",
+  "clearAllNotifications": "Borrar todo",
+  "allTab": "Todos",
+  "unread": "Sin leer",
+
+  "preferences": "PREFERENCIAS",
+  "darkMode": "Modo Oscuro",
+  "language": "Idioma",
+  "english": "Inglés",
+  "themes": "Temas",
+  "settings": "Configuración",
+  "versionInfoNotAvailable": "Información de versión no disponible",
+
+  "faqs": "Preguntas Frecuentes",
+  "orderFaq": "Pedido",
+  "paymentsFaq": "Pagos",
+  "deliveryFaq": "Entrega",
+  "chat": "Chat",
+  "call": "Llamar",
+
+  "howTrackOrder": "¿Cómo rastreo mi pedido?",
+  "canCancelOrder": "¿Puedo cancelar mi pedido?",
+  "whatIfOrderDelayed": "¿Qué pasa si mi pedido se retrasa?",
+  "whatPaymentMethodsAccepted": "¿Qué métodos de pago se aceptan?",
+  "isCardSafeBite": "¿Es seguro usar mi tarjeta de crédito/débito en Bite?",
+  "canUseMultiplePaymentMethods": "¿Puedo usar múltiples métodos de pago en un pedido?",
+  "whatIfPaymentFails": "¿Qué debo hacer si un pago falla?",
+  "whatDeliveryHours": "¿Cuáles son sus horarios de entrega?",
+  "chargeDeliveryFee": "¿Cobran tarifa de envío?",
+  "deliverToLocation": "¿Realizan entregas en mi ubicación?",
+  "scheduleDeliveryLater": "¿Puedo programar una entrega para después?",
+
+  "clear": "BORRAR",
+  "applyFilter": "APLICAR",
+  "ratingFilter": "CALIFICACIÓN",
+  "lessThan3_5": "< 3.5",
+  "between3_5And4_0": "3.5 - 4.0",
+  "greaterThan4_0": "> 4.0",
+  "deliveryTimeFilter": "TIEMPO DE ENTREGA",
+  "lessThan15Min": "< 15 min",
+  "between15And30Min": "15 - 30 min",
+  "greaterThan30Min": "> 30 min",
+  "filterYourSearch": "Filtra tu búsqueda",
+
+  "seeAll": "Ver Todo",
+
+  "enterField": "Ingresa {field}",
+  "@enterField": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "pleaseEnterField": "Por favor ingresa {field}",
+  "@pleaseEnterField": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "pleaseEnterValidEmail": "Por favor ingresa un correo electrónico válido",
+  "pleaseEnterValidPhone": "Por favor ingresa un número de teléfono válido",
+  "passwordMinimum8Chars": "La contraseña debe tener al menos 8 caracteres",
+
+  "favorites": "Favoritos",
+  "reviews": "Reseñas",
+
+  "updateAvailable": "Actualización Disponible",
+  "newBiteVersionReady": "¡Una nueva versión de Bite está lista!",
+  "updateDescription": "La versión {version} incluye nuevas funciones, mejoras de rendimiento y correcciones de errores.",
+  "@updateDescription": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "versionPrefix": "v{version}",
+  "@versionPrefix": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateNow": "Actualizar Ahora",
+  "maybeLater": "Quizás Después",
+
+  "errorMessage": "Error: {message}",
+  "@errorMessage": {
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  }
+}

@@ -269,7 +269,7 @@ class _RatingAndTimeSection extends StatelessWidget {
               size: 20.r,
             ),
             Text(
-              restaurant.rating.toString(),
+              restaurant.rating.toStringAsFixed(1),
               style: Theme.of(context).textTheme.titleSmall,
             ),
           ],
@@ -285,7 +285,7 @@ class _RatingAndTimeSection extends StatelessWidget {
             Text(
               restaurant.deliveryFee == 0
                   ? 'Free'
-                  : '\$${restaurant.deliveryFee}',
+                  : 'Rs.${restaurant.deliveryFee.toInt()}',
               style: Theme.of(context).textTheme.titleSmall,
             ),
           ],
@@ -299,7 +299,7 @@ class _RatingAndTimeSection extends StatelessWidget {
               size: 20.r,
             ),
             Text(
-              '${restaurant.deliveryTime} min',
+              '${restaurant.deliveryTime.toInt()} min',
               style: Theme.of(context).textTheme.titleSmall,
             ),
           ],

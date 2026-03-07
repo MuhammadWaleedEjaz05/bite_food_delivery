@@ -1,0 +1,436 @@
+{
+  "@@locale": "ur",
+
+  "allYourFavorites": "آپ کے تمام پسندیدہ",
+  "getLovedFoodsDescription": "اپنی پسندیدہ کھانوں کو ایک جگہ پر حاصل کریں، آپ صرف آرڈر دیں باقی ہم کریں گے",
+  "orderFromChosenChef": "اپنے پسندیدہ شیف سے آرڈر کریں",
+  "freeDeliveryOffers": "مفت ڈیلیوری آفرز",
+  "getStarted": "شروع کریں",
+  "next": "اگلا",
+  "skip": "چھوڑیں",
+
+  "login": "لاگ ان",
+  "logIn": "لاگ ان",
+  "pleaseSignInToContinue": "جاری رکھنے کے لیے سائن ان کریں",
+  "or": "یا",
+  "successfullySignedInGoogle": "گوگل سے کامیابی سے سائن ان ہو گیا!",
+  "dontHaveAccount": "اکاؤنٹ نہیں ہے؟ ",
+  "signUp": "سائن اپ",
+  "rememberMe": "مجھے یاد رکھیں",
+  "forgotPassword": "پاسورڈ بھول گئے؟",
+  "email": "ای میل",
+  "password": "پاسورڈ",
+
+  "forgotPasswordTitle": "پاسورڈ بھول گئے",
+  "passwordResetLinkSent": "پاسورڈ ری سیٹ لنک بھیج دیا گیا",
+  "checkEmailResetLink": "پاسورڈ ری سیٹ لنک کے لیے اپنا ای میل چیک کریں۔ اپنا پاسورڈ ری سیٹ کرنے کے لیے لنک پر کلک کریں۔",
+  "done": "مکمل",
+  "passwordResetSuccess": "پاسورڈ کامیابی سے ری سیٹ ہو گیا! براہ کرم اپنے نئے پاسورڈ سے لاگ ان کریں۔",
+  "pleaseEnterEmailReset": "پاسورڈ ری سیٹ لنک حاصل کرنے کے لیے اپنا ای میل ایڈریس درج کریں۔",
+  "sendResetLink": "ری سیٹ لنک بھیجیں",
+
+  "fullName": "پورا نام",
+  "phoneNumber": "فون نمبر",
+  "confirmPassword": "پاسورڈ کی تصدیق",
+  "pleaseSignUpToGetStarted": "شروع کرنے کے لیے سائن اپ کریں",
+
+  "deliverTo": "ڈیلیوری کا پتہ",
+  "selectLocation": "مقام منتخب کریں",
+  "heyUser": "ہیلو {userName}، ",
+  "@heyUser": {
+    "placeholders": {
+      "userName": {
+        "type": "String"
+      }
+    }
+  },
+  "goodMorning": "صبح بخیر! 👋",
+  "heyThere": "ہیلو، ",
+  "allCategories": "تمام زمرے",
+  "openRestaurants": "کھلے ریستوران",
+
+  "search": "تلاش",
+  "popularRestaurants": "مقبول ریستوران",
+  "noPopularRestaurantsFound": "کوئی مقبول ریستوران نہیں ملا",
+  "recentKeywords": "حالیہ تلاش",
+  "noRecentSearches": "کوئی حالیہ تلاش نہیں",
+  "addedToRecentSearches": "\"{searchTerm}\" حالیہ تلاش میں شامل کیا گیا",
+  "@addedToRecentSearches": {
+    "placeholders": {
+      "searchTerm": {
+        "type": "String"
+      }
+    }
+  },
+  "removedFromRecentSearches": "\"{searchTerm}\" حالیہ تلاش سے ہٹا دیا گیا",
+  "@removedFromRecentSearches": {
+    "placeholders": {
+      "searchTerm": {
+        "type": "String"
+      }
+    }
+  },
+  "searchRestaurantsOrDishes": "ریستوران یا پکوان تلاش کریں",
+  "noRestaurantsFound": "کوئی ریستوران نہیں ملا",
+
+  "deliveryAddress": "ڈیلیوری کا پتہ",
+  "edit": "ترمیم",
+  "selectAnAddress": "پتہ منتخب کریں",
+  "totalLabel": "کل : ",
+  "pkrAmount": "PKR {amount}",
+  "@pkrAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "checkoutButton": "چیک آؤٹ",
+  "yourCartIsEmpty": "آپ کی ٹوکری خالی ہے",
+  "initializingCart": "ٹوکری لوڈ ہو رہی ہے...",
+  "cart": "ٹوکری",
+
+  "checkout": "چیک آؤٹ",
+  "deliveryAddressTitle": "ڈیلیوری کا پتہ",
+  "change": "تبدیل کریں",
+  "noAddressSelected": "کوئی پتہ منتخب نہیں",
+  "orderItems": "آرڈر آئٹمز",
+  "paymentMethod": "ادائیگی کا طریقہ",
+  "orderSummary": "آرڈر کا خلاصہ",
+  "subtotal": "ذیلی کل",
+  "deliveryFee": "ڈیلیوری فیس",
+  "platformFee": "پلیٹ فارم فیس",
+  "total": "کل",
+  "orderPlaced": "آرڈر دے دیا گیا!",
+  "orderPlacedSuccessfully": "آپ کا آرڈر کامیابی سے دے دیا گیا ہے۔\nاپنے آرڈر کو ریئل ٹائم میں ٹریک کریں۔",
+  "trackOrder": "آرڈر ٹریک کریں",
+  "backToHome": "ہوم پر واپس جائیں",
+  "confirmPaymentAmount": "ادائیگی کی تصدیق  •  PKR {amount}",
+  "@confirmPaymentAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+
+  "rsPrice": "RS {price}",
+  "@rsPrice": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "chooseYourFlavor": "اپنا ذائقہ منتخب کریں",
+  "chooseYourSize": "اپنا سائز منتخب کریں",
+  "tenInch": "10 انچ",
+  "sixteenInch": "16 انچ",
+  "twentyInch": "20 انچ",
+  "removeFromCart": "ٹوکری سے ہٹائیں",
+  "addToCart": "ٹوکری میں شامل کریں",
+
+  "allItems": "تمام آئٹمز",
+  "all": "سب",
+  "failedLoadFoodItems": "کھانے کی اشیاء لوڈ کرنے میں ناکامی۔ براہ کرم بعد میں دوبارہ کوشش کریں۔",
+  "noFoodItemsCategory": "اس زمرے میں کوئی کھانے کی اشیاء دستیاب نہیں ہیں۔",
+  "free": "مفت",
+  "deliveryTimeMin": "{minutes} منٹ",
+  "@deliveryTimeMin": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "allRestaurants": "تمام ریستوران",
+
+  "selectPaymentMethod": "ادائیگی کا طریقہ منتخب کریں",
+  "cashOnDelivery": "کیش آن ڈیلیوری",
+  "payWhenOrderArrives": "آرڈر آنے پر ادائیگی کریں",
+  "cashOnDeliverySelected": "کیش آن ڈیلیوری منتخب",
+  "visa": "ویزا",
+  "selectVisaCards": "اپنے محفوظ ویزا کارڈز سے منتخب کریں",
+  "mastercard": "ماسٹر کارڈ",
+  "selectMastercardCards": "اپنے محفوظ ماسٹر کارڈز سے منتخب کریں",
+  "cardEndingInSelected": "{last4} پر ختم ہونے والا کارڈ منتخب",
+  "@cardEndingInSelected": {
+    "placeholders": {
+      "last4": {
+        "type": "String"
+      }
+    }
+  },
+  "noCardsSavedAddFirst": "کوئی {cardType} کارڈ محفوظ نہیں۔ پہلے ایک شامل کریں۔",
+  "@noCardsSavedAddFirst": {
+    "placeholders": {
+      "cardType": {
+        "type": "String"
+      }
+    }
+  },
+  "savedCards": "محفوظ کارڈز",
+  "creditCardAddedSuccess": "کریڈٹ کارڈ کامیابی سے شامل ہو گیا",
+  "creditCardDeletedSuccess": "کریڈٹ کارڈ کامیابی سے حذف ہو گیا",
+  "noSavedCardsYet": "ابھی تک کوئی کارڈ محفوظ نہیں",
+  "addCardBelowToGetStarted": "شروع کرنے کے لیے نیچے کارڈ شامل کریں",
+  "maskedCardNumber": "**** **** **** {last4}",
+  "@maskedCardNumber": {
+    "placeholders": {
+      "last4": {
+        "type": "String"
+      }
+    }
+  },
+  "cardHolderExpiry": "{holderName}  •  {expiryDate}",
+  "@cardHolderExpiry": {
+    "placeholders": {
+      "holderName": {
+        "type": "String"
+      },
+      "expiryDate": {
+        "type": "String"
+      }
+    }
+  },
+  "addNewCard": "نیا کارڈ شامل کریں",
+
+  "cardInformation": "کارڈ کی معلومات",
+  "cardNumberPlaceholder": "4242 4242 4242 4242",
+  "cardNumberRequired": "کارڈ نمبر ضروری ہے",
+  "cardNumberTooShort": "کارڈ نمبر بہت چھوٹا ہے",
+  "mmyyPlaceholder": "MM/YY",
+  "invalidMonth": "غلط مہینہ",
+  "cvcPlaceholder": "CVC",
+  "invalidCvc": "غلط CVC",
+  "fullNameOnCard": "کارڈ پر پورا نام",
+  "cardSecurityNote": "آپ کے کارڈ کی تفصیلات Stripe کے ذریعے محفوظ طریقے سے ہینڈل کی جاتی ہیں۔ ہم آپ کا مکمل کارڈ نمبر کبھی محفوظ نہیں کرتے۔",
+  "adding": "شامل ہو رہا ہے...",
+  "addCard": "کارڈ شامل کریں",
+
+  "addAddress": "پتہ شامل کریں",
+  "addressNotAvailable": "پتہ دستیاب نہیں",
+  "failedLoadAddresses": "پتے لوڈ کرنے میں ناکامی",
+  "noSavedAddresses": "ابھی تک کوئی پتے محفوظ نہیں",
+  "pleaseSignInAddresses": "پتے دیکھنے کے لیے سائن ان کریں",
+  "address": "پتہ",
+  "locationPermissionRequired": "مقام کی اجازت ضروری ہے",
+  "streetNo": "گلی نمبر",
+  "zipCode": "زپ کوڈ",
+  "city": "شہر",
+  "country": "ملک",
+  "label": "لیبل",
+  "home": "گھر",
+  "work": "دفتر",
+  "other": "دیگر",
+  "pleaseFillAllFields": "براہ کرم تمام ضروری فیلڈز بھریں",
+  "userNotAuthenticated": "صارف تصدیق شدہ نہیں ہے",
+  "addressAddedSuccessfully": "پتہ کامیابی سے شامل ہو گیا!",
+  "failedToAddAddress": "پتہ شامل کرنے میں ناکامی: {error}",
+  "@failedToAddAddress": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "save": "محفوظ کریں",
+  "selectDeliveryAddress": "ڈیلیوری کا پتہ منتخب کریں",
+  "noAddressesFound": "کوئی پتہ نہیں ملا",
+
+  "iLoveFastFood": "مجھے فاسٹ فوڈ پسند ہے",
+  "logout": "لاگ آؤٹ",
+  "profile": "پروفائل",
+
+  "personalInfo": "ذاتی معلومات",
+  "guestUser": "مہمان صارف",
+  "pleaseLoginViewProfile": "اپنا پروفائل دیکھنے کے لیے لاگ ان کریں",
+  "editTitle": "{title} میں ترمیم",
+  "@editTitle": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "enterTitle": "{title} درج کریں",
+  "@enterTitle": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "apply": "لاگو کریں",
+  "phone": "فون",
+
+  "favourite": "پسندیدہ",
+  "foods": "کھانے",
+  "restaurants": "ریستوران",
+  "noFavouriteRestaurants": "کوئی پسندیدہ ریستوران نہیں ملا۔",
+  "noFavouriteFoods": "کوئی پسندیدہ کھانے نہیں ملے۔",
+
+  "orderRatings": "آرڈر کی درجہ بندی",
+  "restaurantRatings": "ریستوران کی درجہ بندی",
+  "userReviews": "صارف کے جائزے",
+  "submit": "جمع کریں",
+  "review": "جائزہ",
+  "myReviews": "میرے جائزے",
+
+  "orderCancelledSuccessfully": "آرڈر کامیابی سے منسوخ ہو گیا",
+  "clearOrderHistory": "آرڈر کی تاریخ صاف کریں",
+  "confirmDeleteOrderHistory": "کیا آپ واقعی تمام آرڈر کی تاریخ حذف کرنا چاہتے ہیں؟ یہ عمل واپس نہیں ہو سکتا۔",
+  "cancel": "منسوخ",
+  "clearAll": "سب صاف کریں",
+  "clearOrderHistoryMenu": "آرڈر کی تاریخ صاف کریں",
+  "orderHistory": "آرڈر کی تاریخ",
+  "noCompletedOrders": "ابھی تک کوئی مکمل آرڈر نہیں",
+  "noOngoingOrders": "کوئی جاری آرڈر نہیں",
+  "noOrderHistory": "آرڈر کی کوئی تاریخ نہیں",
+  "ongoing": "جاری",
+  "history": "تاریخ",
+
+  "noActiveOrder": "کوئی فعال آرڈر نہیں",
+  "orderDelivered": "آپ کا آرڈر پہنچا دیا گیا ہے!",
+  "callingNumber": "{phoneNumber} پر کال ہو رہی ہے...",
+  "@callingNumber": {
+    "placeholders": {
+      "phoneNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "locationPermissionDenied": "مقام کی اجازت سے انکار",
+  "orderReceived": "آپ کا آرڈر موصول ہو گیا ہے",
+  "restaurantPreparingFood": "ریستوران آپ کا کھانا تیار کر رہا ہے",
+  "orderPickedUp": "آپ کا آرڈر ڈیلیوری کے لیے اٹھا لیا گیا ہے",
+  "orderArrivingSoon": "آرڈر جلد پہنچنے والا ہے!",
+  "estimatedDeliveryTime": "متوقع ڈیلیوری کا وقت",
+  "estimatedMinutes": "{minutes} منٹ",
+  "@estimatedMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "orderedAt": "آرڈر کیا گیا {date}",
+  "@orderedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "courier": "کوریئر",
+
+  "noNotificationsYet": "ابھی تک کوئی اطلاعات نہیں",
+  "unreadNotificationsCount": "{count} غیر پڑھی اطلاعات",
+  "@unreadNotificationsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noNotifications": "کوئی اطلاعات نہیں",
+  "notifications": "اطلاعات",
+  "markAllAsRead": "سب کو پڑھا ہوا نشان زد کریں",
+  "clearAllNotifications": "سب صاف کریں",
+  "allTab": "سب",
+  "unread": "غیر پڑھی",
+
+  "preferences": "ترجیحات",
+  "darkMode": "ڈارک موڈ",
+  "language": "زبان",
+  "english": "انگریزی",
+  "themes": "تھیمز",
+  "settings": "ترتیبات",
+  "versionInfoNotAvailable": "ورژن کی معلومات دستیاب نہیں",
+
+  "faqs": "عمومی سوالات",
+  "orderFaq": "آرڈر",
+  "paymentsFaq": "ادائیگیاں",
+  "deliveryFaq": "ڈیلیوری",
+  "chat": "چیٹ",
+  "call": "کال",
+
+  "howTrackOrder": "میں اپنا آرڈر کیسے ٹریک کروں؟",
+  "canCancelOrder": "کیا میں اپنا آرڈر منسوخ کر سکتا ہوں؟",
+  "whatIfOrderDelayed": "اگر میرا آرڈر دیر سے آئے تو؟",
+  "whatPaymentMethodsAccepted": "کون سے ادائیگی کے طریقے قبول ہیں؟",
+  "isCardSafeBite": "کیا Bite پر اپنا کریڈٹ/ڈیبٹ کارڈ استعمال کرنا محفوظ ہے؟",
+  "canUseMultiplePaymentMethods": "کیا میں ایک آرڈر کے لیے متعدد ادائیگی کے طریقے استعمال کر سکتا ہوں؟",
+  "whatIfPaymentFails": "اگر ادائیگی ناکام ہو جائے تو مجھے کیا کرنا چاہیے؟",
+  "whatDeliveryHours": "آپ کے ڈیلیوری کے اوقات کیا ہیں؟",
+  "chargeDeliveryFee": "کیا آپ ڈیلیوری فیس لیتے ہیں؟",
+  "deliverToLocation": "کیا آپ میرے مقام پر ڈیلیوری کرتے ہیں؟",
+  "scheduleDeliveryLater": "کیا میں بعد میں ڈیلیوری شیڈول کر سکتا ہوں؟",
+
+  "clear": "صاف کریں",
+  "applyFilter": "لاگو کریں",
+  "ratingFilter": "درجہ بندی",
+  "lessThan3_5": "< 3.5",
+  "between3_5And4_0": "3.5 - 4.0",
+  "greaterThan4_0": "> 4.0",
+  "deliveryTimeFilter": "ڈیلیوری کا وقت",
+  "lessThan15Min": "< 15 منٹ",
+  "between15And30Min": "15 - 30 منٹ",
+  "greaterThan30Min": "> 30 منٹ",
+  "filterYourSearch": "اپنی تلاش فلٹر کریں",
+
+  "seeAll": "سب دیکھیں",
+
+  "enterField": "{field} درج کریں",
+  "@enterField": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "pleaseEnterField": "براہ کرم {field} درج کریں",
+  "@pleaseEnterField": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "pleaseEnterValidEmail": "براہ کرم ایک درست ای میل ایڈریس درج کریں",
+  "pleaseEnterValidPhone": "براہ کرم ایک درست فون نمبر درج کریں",
+  "passwordMinimum8Chars": "پاسورڈ کم از کم 8 حروف کا ہونا چاہیے",
+
+  "favorites": "پسندیدہ",
+  "reviews": "جائزے",
+
+  "updateAvailable": "اپ ڈیٹ دستیاب ہے",
+  "newBiteVersionReady": "Bite کا نیا ورژن تیار ہے!",
+  "updateDescription": "ورژن {version} میں نئی خصوصیات، کارکردگی میں بہتری، اور بگ فکسز شامل ہیں۔",
+  "@updateDescription": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "versionPrefix": "v{version}",
+  "@versionPrefix": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateNow": "ابھی اپ ڈیٹ کریں",
+  "maybeLater": "شاید بعد میں",
+
+  "errorMessage": "خرابی: {message}",
+  "@errorMessage": {
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  }
+}

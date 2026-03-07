@@ -4,6 +4,7 @@ import 'package:bite_food_delivery/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -146,11 +147,7 @@ class _SplashScreenState extends State<SplashScreen>
                   opacity: logoFade,
                   child: Transform.scale(
                     scale: logoScale,
-                    child: Image.asset(
-                      "assets/images/logo.png",
-                      height: 200.h,
-                      width: 200.w,
-                    ),
+                    child: SvgPicture.asset('assets/svgs/logo.svg',height: 200.h,width:200.w)
                   ),
                 ),
               ),

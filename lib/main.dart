@@ -102,13 +102,7 @@ class MainPage extends StatelessWidget {
                 return AnimatedSwitcher(
                   duration: Duration(milliseconds: 300),
                   transitionBuilder: (child, animation) {
-                    return SlideTransition(
-                      position: Tween<Offset>(
-                        begin: Offset(1, 0),
-                        end: Offset.zero,
-                      ).animate(animation),
-                      child: child,
-                    );
+                    return FadeTransition(opacity: animation, child: child);
                   },
                   child: KeyedSubtree(
                     key: ValueKey(selectedIndex),

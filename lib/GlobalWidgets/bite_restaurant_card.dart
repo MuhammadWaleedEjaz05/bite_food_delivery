@@ -53,7 +53,7 @@ class BiteRestaurantCard extends StatelessWidget {
               ),
               4.horizontalSpace,
               Text(
-                restaurant.rating.toString(),
+                restaurant.rating.toStringAsFixed(1),
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                   fontWeight: FontWeight.normal,
@@ -81,7 +81,7 @@ class BiteRestaurantCard extends StatelessWidget {
               ),
               4.horizontalSpace,
               Text(
-                '\$${restaurant.deliveryFee}',
+                'Rs.${restaurant.deliveryFee.toInt()}',
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                   fontWeight: FontWeight.normal,
