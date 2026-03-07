@@ -103,6 +103,19 @@ class NotificationsCubit extends Cubit<NotificationsState> {
     } catch (_) {}
   }
 
+  Future<void> clearAllNotifications(String userId) async {
+    try {
+      final snapshot = await getCollection(
+        'NotificationsDB',
+      ).where('userId', isEqualTo: userId).get();
+      final batch = database.batch();
+      for (final doc in snapshot.docs) {
+        batch.delete(doc.reference);
+      }
+      await batch.commit();
+    } catch (_) {}
+  }
+
   Future<void> _addNotification(NotificationModel notification) async {
     try {
       await getCollection(

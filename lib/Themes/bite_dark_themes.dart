@@ -7,7 +7,7 @@ ThemeData _theme(Color primaryColor) {
   return ThemeData(
     colorScheme: ColorScheme.dark(
       brightness: Brightness.dark,
-      primary: Colors.deepOrange,
+      primary: primaryColor,
       secondary: Colors.grey.shade600,
       onSecondary: Colors.grey.shade400,
       secondaryFixed: Colors.grey.shade200,
@@ -23,7 +23,7 @@ ThemeData _theme(Color primaryColor) {
       titleTextStyle: GoogleFonts.sen(
         fontSize: 30.sp,
         fontWeight: FontWeight.bold,
-        color: Colors.deepOrange,
+        color: primaryColor,
       ),
     ),
   );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BiteAppBar extends StatelessWidget implements PreferredSizeWidget {
   const BiteAppBar({
@@ -30,13 +31,9 @@ class BiteAppBar extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: 100.h,
       leadingWidth: isLogoVisible ? 100.w : 75.w,
       leading: isLogoVisible
-          ? Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/logo.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
+          ? SvgPicture.asset(
+              'assets/svgs/logo.svg',
+              color: Theme.of(context).colorScheme.primary,
             )
           : backButton
           ? IconButton(

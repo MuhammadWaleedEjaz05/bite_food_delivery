@@ -1,4 +1,5 @@
 import 'package:bite_food_delivery/Cubits/NotificationCubit/notifications_cubit.dart';
+import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Models/notification_model.dart';
 import 'package:bite_food_delivery/Screens/NotificationPage/Widgets/bite_notification_card.dart';
@@ -200,7 +201,68 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
           color: Theme.of(context).colorScheme.primary,
         ),
       ),
-      actions: [],
+      actions: [
+        PopupMenuButton<String>(
+          icon: Icon(Icons.more_vert, size: 24.r),
+          onSelected: (value) {
+            final userState = context.read<UserAuthCubit>().state;
+            if (userState is! UserLoggedIn || userState.user.id == null) return;
+            final userId = userState.user.id!;
+            final cubit = context.read<NotificationsCubit>();
+            if (value == 'mark_all_read') {
+              cubit.markAllAsRead(userId);
+            } else if (value == 'clear_all') {
+              showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text('Clear All Notifications'),
+                  content: const Text(
+                    'Are you sure you want to delete all notifications? This action cannot be undone.',
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(ctx),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(ctx);
+                        cubit.clearAllNotifications(userId);
+                      },
+                      child: const Text(
+                        'Clear All',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+          },
+          itemBuilder: (context) => [
+            const PopupMenuItem(
+              value: 'mark_all_read',
+              child: Row(
+                children: [
+                  Icon(Icons.done_all),
+                  SizedBox(width: 8),
+                  Text('Mark all as read'),
+                ],
+              ),
+            ),
+            const PopupMenuItem(
+              value: 'clear_all',
+              child: Row(
+                children: [
+                  Icon(Icons.delete_outline, color: Colors.red),
+                  SizedBox(width: 8),
+                  Text('Clear all', style: TextStyle(color: Colors.red)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

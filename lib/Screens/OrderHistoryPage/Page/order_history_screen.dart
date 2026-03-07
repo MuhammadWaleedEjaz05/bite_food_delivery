@@ -139,7 +139,60 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
           color: Theme.of(context).colorScheme.primary,
         ),
       ),
-      actions: [],
+      actions: [
+        PopupMenuButton<String>(
+          icon: Icon(Icons.more_vert, size: 24.r),
+          onSelected: (value) {
+            if (value == 'clear_history') {
+              final userState = context.read<UserAuthCubit>().state;
+              if (userState is! UserLoggedIn || userState.user.id == null) {
+                return;
+              }
+              final userId = userState.user.id!;
+              showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text('Clear Order History'),
+                  content: const Text(
+                    'Are you sure you want to delete all order history? This action cannot be undone.',
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(ctx),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(ctx);
+                        context.read<OrderCubit>().clearOrderHistory(userId);
+                      },
+                      child: const Text(
+                        'Clear All',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+          },
+          itemBuilder: (context) => [
+            const PopupMenuItem(
+              value: 'clear_history',
+              child: Row(
+                children: [
+                  Icon(Icons.delete_outline, color: Colors.red),
+                  SizedBox(width: 8),
+                  Text(
+                    'Clear order history',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

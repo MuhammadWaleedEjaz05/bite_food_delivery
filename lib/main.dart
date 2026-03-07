@@ -5,14 +5,13 @@ import 'package:bite_food_delivery/Cubits/UpdateCheckCubit/update_check_cubit.da
 import 'package:bite_food_delivery/GlobalWidgets/bite_update_dialog.dart';
 import 'package:bite_food_delivery/Screens/SplashPage/Pages/splash_screen.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_bottom_navigation_bar.dart';
-import 'package:bite_food_delivery/Themes/bite_dark_themes.dart';
-import 'package:bite_food_delivery/Themes/bite_light_themes.dart';
 import 'package:bite_food_delivery/configs/bloc_provider_list.dart';
 import 'package:bite_food_delivery/configs/fcm_initialize.dart';
 import 'package:bite_food_delivery/configs/page_routes.dart';
 import 'package:bite_food_delivery/configs/screen_list.dart';
 import 'package:bite_food_delivery/configs/shared_preference_functions.dart';
 import 'package:bite_food_delivery/configs/stripe_const.dart';
+import 'package:bite_food_delivery/configs/theme_list.dart';
 import 'package:bite_food_delivery/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -48,8 +47,13 @@ class MyApp extends StatelessWidget {
         designSize: const Size(375, 812),
         builder: (context, child) {
           return MaterialApp(
-            theme: BiteLightThemes.themeOrange,
-            darkTheme: BiteDarkThemes.themeOrange,
+            theme:
+                biteLightThemes[context
+                    .watch<SettingsCubit>()
+                    .state
+                    .themeIndex],
+            darkTheme:
+                biteDarkThemes[context.watch<SettingsCubit>().state.themeIndex],
             themeMode: context.watch<SettingsCubit>().state.isDarkMode
                 ? ThemeMode.dark
                 : ThemeMode.light,

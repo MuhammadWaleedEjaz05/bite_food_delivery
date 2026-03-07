@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:bite_food_delivery/Cubits/NotificationCubit/notifications_cubit.dart';
 import 'package:bite_food_delivery/Models/cart_model.dart';
 import 'package:bite_food_delivery/Models/order_model.dart';
@@ -169,6 +168,30 @@ class OrderCubit extends Cubit<OrderState> {
   void stopListeningToOrderHistory() {
     _orderHistorySubscription?.cancel();
     _orderHistorySubscription = null;
+  }
+
+  Future<void> clearOrderHistory(String userId) async {
+    emit(OrderLoading());
+    try {
+      final db = getCollection('OrdersDB');
+      final snapshot = await db.where('userId', isEqualTo: userId).get();
+      if (snapshot.docs.isEmpty) {
+        emit(const OrderHistoryLoaded([]));
+        return;
+      }
+      final batch = database.batch();
+      for (final doc in snapshot.docs) {
+        final items = await doc.reference.collection('Items').get();
+        for (final item in items.docs) {
+          batch.delete(item.reference);
+        }
+        batch.delete(doc.reference);
+      }
+      await batch.commit();
+      emit(const OrderHistoryLoaded([]));
+    } catch (e) {
+      emit(OrderError(e.toString()));
+    }
   }
 
   Future<void> updateOrderStatus(String orderId, OrderStatus newStatus) async {

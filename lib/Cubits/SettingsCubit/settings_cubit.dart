@@ -46,4 +46,11 @@ class SettingsCubit extends Cubit<SettingsState> {
     });
     emit(state.copyWith(areNotificationsEnabled: areEnabled));
   }
+
+  void changeTheme(int themeIndex) {
+    sharedPreference.then((prefs) {
+      prefs.setInt('themeIndex', themeIndex);
+    });
+    emit(state.copyWith(themeIndex: themeIndex));
+  }
 }
