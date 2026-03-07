@@ -18,8 +18,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -59,10 +59,10 @@ class MyApp extends StatelessWidget {
                 : ThemeMode.light,
             routes: routes,
             debugShowCheckedModeBanner: false,
-            supportedLocales: FormBuilderLocalizations.supportedLocales,
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: Locale('en'),
             localizationsDelegates: [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
+              ...AppLocalizations.localizationsDelegates,
               FormBuilderLocalizations.delegate,
             ],
             home: SplashScreen(),
@@ -129,7 +129,7 @@ class MainPage extends StatelessWidget {
             backgroundColor: Theme.of(context).colorScheme.primary,
             icon: const Icon(Icons.delivery_dining, color: Colors.white),
             label: Text(
-              'Track Order',
+              AppLocalizations.of(context)!.trackOrder,
               style: GoogleFonts.sen(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
