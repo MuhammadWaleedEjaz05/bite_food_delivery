@@ -27,7 +27,7 @@ class BiteNotificationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: Theme.of(context).colorScheme.onSecondaryFixed,
         borderRadius: BorderRadius.circular(15.r),
         border: Border(
           left: BorderSide(color: borderColor, width: 4.w),
@@ -50,12 +50,7 @@ class BiteNotificationCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleMedium!.copyWith(color: Colors.black),
-                ),
+                Text(title, style: Theme.of(context).textTheme.titleMedium),
                 5.verticalSpace,
                 Text(
                   subtitle,

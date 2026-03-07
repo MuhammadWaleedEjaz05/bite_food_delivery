@@ -15,6 +15,8 @@ import 'package:bite_food_delivery/Screens/OrderHistoryPage/Page/order_history_s
 import 'package:bite_food_delivery/Screens/PaymentPage/Page/payment_screen.dart';
 import 'package:bite_food_delivery/Screens/PersonInfoPage/Page/person_info_screen.dart';
 import 'package:bite_food_delivery/Screens/RestaurantPage/Page/restaurant_screen.dart';
+import 'package:bite_food_delivery/Screens/ReviewPage/Pages/my_reviews_screen.dart';
+import 'package:bite_food_delivery/Screens/ReviewPage/Pages/review_screen.dart';
 import 'package:bite_food_delivery/Screens/SettingPage/Page/setting_screen.dart';
 import 'package:bite_food_delivery/Screens/PaymentPage/Page/add_card_screen.dart';
 import 'package:bite_food_delivery/Screens/SignupPage/Page/signup_screen.dart';
@@ -43,4 +45,6 @@ final Map<String, Widget Function(BuildContext)> routes = {
   '/forgot_password_screen': (context) => ForgotPasswordScreen(),
   '/checkout_screen': (context) => CheckOutScreen(),
   '/track_order_screen': (context) => TrackOrderScreen(),
+  '/review_screen': (context) => ReviewScreen(),
+  '/my_reviews_screen': (context) => MyReviewsScreen(),
 };

@@ -50,6 +50,12 @@ List<BiteMenuItemModel> pAppList(BuildContext context) => [
     title: 'Payment Method',
     onTap: () => Navigator.pushNamed(context, '/payment_screen'),
   ),
+  BiteMenuItemModel(
+    leadingIcon: Icons.rate_review_outlined,
+    leadingIconColor: Colors.orange,
+    title: 'Reviews',
+    onTap: () => Navigator.pushNamed(context, '/my_reviews_screen'),
+  ),
 ];
 
 List<BiteMenuItemModel> pSupportList(BuildContext context) => [
@@ -111,7 +117,7 @@ List<BiteMenuItemModel> personalInfoList(BuildContext context) => [
                   .user
                   .phoneNumber ??
               ''
-        : '' ,
+        : '',
     onTap: () {
       showDialog(
         context: context,

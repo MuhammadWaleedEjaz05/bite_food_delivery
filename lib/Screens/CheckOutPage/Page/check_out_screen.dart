@@ -391,7 +391,6 @@ class _PlaceOrderButton extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 12.h),
                       backgroundColor: Theme.of(context).colorScheme.primary,
-                      foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.r),
                       ),
@@ -511,15 +510,12 @@ class _PlaceOrderButton extends StatelessWidget {
                                   CreditCardType.onCash;
 
                               if (isCardPayment) {
-                                // Process Stripe payment first
                                 context.read<PaymentCubit>().processPayment(
                                   grandTotal.toInt(),
                                   'usd',
-                                  paymentMethod.paymentMethodId,
                                   paymentMethod.customerId,
                                 );
                               } else {
-                                // Cash on delivery — place order directly
                                 final order = _buildOrder(context, grandTotal);
                                 context.read<OrderCubit>().placeOrder(order);
                               }

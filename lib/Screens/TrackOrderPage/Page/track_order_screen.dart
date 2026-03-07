@@ -79,7 +79,9 @@ class TrackOrderScreen extends StatelessWidget {
                       duration: const Duration(seconds: 3),
                     ),
                   );
-                  Navigator.of(context).pop();
+                  Navigator.of(
+                    context,
+                  ).pushReplacementNamed('/review_screen', arguments: order);
                 }
               },
             ),
@@ -210,8 +212,13 @@ class TrackOrderScreen extends StatelessWidget {
                               currentOrder.orderStatus,
                             ),
                             onCallTap: () {
-                              context.read<PhoneCallCubit>().makePhoneCall(
-                                _courierPhoneNumber,
+                              // context.read<PhoneCallCubit>().makePhoneCall(
+                              //   _courierPhoneNumber,
+                              // );
+                              Navigator.pushReplacementNamed(
+                                context,
+                                '/review_screen',
+                                arguments: currentOrder,
                               );
                             },
                           );

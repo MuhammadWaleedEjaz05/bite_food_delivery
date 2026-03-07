@@ -14,7 +14,6 @@ class PaymentCubit extends Cubit<PaymentState> {
   Future<void> processPayment(
     int amount,
     String currency,
-    String paymentMethodId,
     String customerId,
   ) async {
     try {
