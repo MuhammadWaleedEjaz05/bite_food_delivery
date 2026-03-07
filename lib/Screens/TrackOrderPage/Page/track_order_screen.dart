@@ -212,13 +212,8 @@ class TrackOrderScreen extends StatelessWidget {
                               currentOrder.orderStatus,
                             ),
                             onCallTap: () {
-                              // context.read<PhoneCallCubit>().makePhoneCall(
-                              //   _courierPhoneNumber,
-                              // );
-                              Navigator.pushReplacementNamed(
-                                context,
-                                '/review_screen',
-                                arguments: currentOrder,
+                              context.read<PhoneCallCubit>().makePhoneCall(
+                                _courierPhoneNumber,
                               );
                             },
                           );
