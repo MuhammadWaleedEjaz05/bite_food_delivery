@@ -1,3 +1,4 @@
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -6,11 +7,11 @@ class BiteOrderTimeline extends StatelessWidget {
 
   const BiteOrderTimeline({super.key, this.currentStep = 0});
 
-  static const List<String> _labels = [
-    'Your order has been received',
-    'The restaurant is preparing your food',
-    'Your order has been picked up for delivery',
-    'Order arriving soon!',
+  static final List<String> _labels = [
+    S.current.yourOrderHasBeenReceived,
+    S.current.theRestaurantIsPreparingYourFood,
+    S.current.yourOrderHasBeenPickedUpForDelivery,
+    S.current.orderArrivingSoon,
   ];
 
   @override
@@ -26,7 +27,6 @@ class BiteOrderTimeline extends StatelessWidget {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ── Step indicator column ──
             SizedBox(
               width: 30.w,
               child: Column(
@@ -59,7 +59,6 @@ class BiteOrderTimeline extends StatelessWidget {
             ),
             12.horizontalSpace,
 
-            // ── Label ──
             Expanded(
               child: Padding(
                 padding: EdgeInsets.only(top: 2.h),

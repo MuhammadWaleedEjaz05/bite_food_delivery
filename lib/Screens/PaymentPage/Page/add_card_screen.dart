@@ -1,6 +1,7 @@
 import 'package:bite_food_delivery/Cubits/CreditCardCubit/credit_card_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -164,7 +165,7 @@ class _CardDetailsSection extends StatelessWidget {
       children: [
         _SectionHeader(
           icon: Icons.credit_card_rounded,
-          title: 'Card Information',
+          title: S.of(context).cardInformation,
         ),
         12.verticalSpace,
         TextFormField(
@@ -177,8 +178,8 @@ class _CardDetailsSection extends StatelessWidget {
           ],
           validator: (value) {
             final digits = value?.replaceAll(' ', '') ?? '';
-            if (digits.isEmpty) return 'Card number is required';
-            if (digits.length < 13) return 'Card number is too short';
+            if (digits.isEmpty) return S.of(context).cardNumberIsRequired;
+            if (digits.length < 13) return S.of(context).cardNumberIsTooShort;
             return null;
           },
           style: textTheme.titleMedium,
@@ -202,10 +203,11 @@ class _CardDetailsSection extends StatelessWidget {
                 ],
                 validator: (value) {
                   final text = value?.replaceAll('/', '') ?? '';
-                  if (text.isEmpty) return 'Required';
+                  if (text.isEmpty) return S.of(context).required;
                   if (text.length < 4) return 'MM/YY';
                   final month = int.tryParse(text.substring(0, 2)) ?? 0;
-                  if (month < 1 || month > 12) return 'Invalid month';
+                  if (month < 1 || month > 12)
+                    return S.of(context).invalidMonth;
                   return null;
                 },
                 style: textTheme.titleMedium,
@@ -227,14 +229,15 @@ class _CardDetailsSection extends StatelessWidget {
                   LengthLimitingTextInputFormatter(4),
                 ],
                 validator: (value) {
-                  if (value == null || value.isEmpty) return 'Required';
-                  if (value.length < 3) return 'Invalid CVC';
+                  if (value == null || value.isEmpty)
+                    return S.of(context).required;
+                  if (value.length < 3) return S.of(context).invalidCvc;
                   return null;
                 },
                 style: textTheme.titleMedium,
                 decoration: _inputDecoration(
                   context,
-                  hintText: 'CVC',
+                  hintText: S.of(context).cvc,
                   icon: Icons.lock_outline_rounded,
                 ),
               ),
@@ -303,7 +306,7 @@ class _CardHolderSection extends StatelessWidget {
       children: [
         _SectionHeader(
           icon: Icons.person_outline_rounded,
-          title: 'Card Holder',
+          title: S.of(context).cardHolder,
         ),
         12.verticalSpace,
         TextFormField(
@@ -317,7 +320,7 @@ class _CardHolderSection extends StatelessWidget {
           decoration: InputDecoration(
             filled: true,
             fillColor: colorScheme.onSecondaryFixed,
-            hintText: 'Full name on card',
+            hintText: S.of(context).fullNameOnCard,
             hintStyle: textTheme.titleMedium!.copyWith(
               color: colorScheme.onSecondary,
             ),
@@ -383,7 +386,7 @@ class _SecurityInfoSection extends StatelessWidget {
           14.horizontalSpace,
           Expanded(
             child: Text(
-              'Your card details are securely handled by Stripe. We never store your full card number.',
+              S.of(context).yourCardDetailsAreSecurelyHandledByStripeWeNever,
               style: Theme.of(context).textTheme.labelMedium!.copyWith(
                 color: colorScheme.onSecondary,
                 height: 1.4,
@@ -409,7 +412,7 @@ class _AddCardButton extends StatelessWidget {
         if (state is CreditCardError) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Error: ${state.error}'),
+              content: Text(S.of(context).errorStatemessage(state.error)),
               backgroundColor: Colors.red,
             ),
           );
@@ -431,7 +434,7 @@ class _AddCardButton extends StatelessWidget {
                       ),
                     )
                   : Icon(Icons.add_card_rounded, size: 22.r),
-              label: Text(isLoading ? 'Adding...' : 'Add Card'),
+              label: Text(isLoading ? S.of(context).adding : S.of(context).addCard),
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.symmetric(vertical: 12.h),
                 backgroundColor: Theme.of(context).colorScheme.primary,
@@ -482,7 +485,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
     return BiteAppBar(
       backButton: true,
       title: Text(
-        'Add Card',
+        S.of(context).addCard,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,

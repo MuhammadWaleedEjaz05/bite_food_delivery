@@ -3,6 +3,7 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_menu_item.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_menu_section.dart';
 import 'package:bite_food_delivery/configs/profile_menu_items_list.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,7 +69,7 @@ class _MenuSection extends StatelessWidget {
                         item: BiteMenuItemModel(
                           leadingIcon: Icons.logout,
                           leadingIconColor: Colors.red,
-                          title: 'Logout',
+                          title: S.of(context).logout,
                           onTap: () {
                             context.read<UserAuthCubit>().logout();
                           },
@@ -156,7 +157,7 @@ class _UserInfoSection extends StatelessWidget {
                       ),
                       textStyle: Theme.of(context).textTheme.headlineLarge,
                     ),
-                    child: Text('Login'),
+                    child: Text(S.of(context).login),
                   ),
                   ElevatedButton(
                     onPressed: () =>
@@ -170,7 +171,7 @@ class _UserInfoSection extends StatelessWidget {
                       ),
                       textStyle: Theme.of(context).textTheme.headlineLarge,
                     ),
-                    child: Text('SignUp'),
+                    child: Text(S.of(context).signup),
                   ),
                 ],
               );
@@ -187,7 +188,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return BiteAppBar(
       title: Text(
-        'Profile',
+        S.of(context).profile,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,

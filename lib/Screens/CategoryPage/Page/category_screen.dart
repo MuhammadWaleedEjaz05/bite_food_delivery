@@ -7,6 +7,7 @@ import 'package:bite_food_delivery/Screens/CategoryPage/Widgets/bite_filter_moda
 import 'package:bite_food_delivery/GlobalWidgets/bite_heading.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_restaurant_card.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_search_bar.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,7 +22,7 @@ class CategoryScreen extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         children: [
-          const BiteHeading(title: 'Open Restaurants', isSeeAll: false),
+          BiteHeading(title: S.of(context).openRestaurants, isSeeAll: false),
           20.verticalSpace,
           BlocBuilder<CategorySelectionCubit, String>(
             builder: (context, selectedCategory) {
@@ -35,7 +36,7 @@ class CategoryScreen extends StatelessWidget {
                       if (state is RestaurantsLoading) {
                         return Center(child: CircularProgressIndicator());
                       } else if (state is RestaurantsError) {
-                        return Center(child: Text('Error: ${state.message}'));
+                        return Center(child: Text(S.of(context).errorStatemessage(state.message)));
                       } else if (state is RestaurantsLoaded) {
                         final filteredRestaurants = state.restaurants.where((
                           restaurant,

@@ -1,6 +1,7 @@
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_restaurant_card.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +15,7 @@ class AllRestaurantScreen extends StatelessWidget {
       appBar: BiteAppBar(
         backButton: true,
         title: Text(
-          'All Restaurants',
+          S.of(context).allRestaurants,
           style: Theme.of(context).textTheme.displaySmall!.copyWith(
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -26,7 +27,7 @@ class AllRestaurantScreen extends StatelessWidget {
           if (state is RestaurantsLoading) {
             return Center(child: CircularProgressIndicator());
           } else if (state is RestaurantsError) {
-            return Center(child: Text('Error: ${state.message}'));
+            return Center(child: Text(S.of(context).errorStatemessage(state.message)));
           } else if (state is RestaurantsLoaded) {
             return ListView.builder(
               padding: EdgeInsets.symmetric(horizontal: 15.w),

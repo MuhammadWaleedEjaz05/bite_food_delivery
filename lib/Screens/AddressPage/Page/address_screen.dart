@@ -3,6 +3,7 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_menu_section.dart';
 import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
 import 'package:bite_food_delivery/Models/address_model.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,7 +63,7 @@ class _AddAddressSection extends StatelessWidget {
               ),
               textStyle: Theme.of(context).textTheme.titleSmall,
             ),
-            child: Text('Add Address'),
+            child: Text(S.of(context).addAddress),
           ),
         ),
       ],
@@ -98,7 +99,7 @@ class _AddressSection extends StatelessWidget {
 
         if (state is AddressError) {
           return Text(
-            'Failed to load addresses',
+            S.of(context).failedToLoadAddresses,
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
               color: Colors.black54,
               fontWeight: FontWeight.normal,
@@ -110,7 +111,7 @@ class _AddressSection extends StatelessWidget {
           final addresses = state.addresses;
           if (addresses.isEmpty) {
             return Text(
-              'No saved addresses yet',
+              S.of(context).noSavedAddressesYet,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
                 color: Colors.black54,
                 fontWeight: FontWeight.normal,
@@ -134,7 +135,7 @@ class _AddressSection extends StatelessWidget {
         }
 
         return Text(
-          'Please sign in to view addresses',
+          S.of(context).pleaseSignInToViewAddresses,
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
             color: Colors.black54,
             fontWeight: FontWeight.normal,
@@ -155,7 +156,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
     return BiteAppBar(
       backButton: true,
       title: Text(
-        'Address',
+        S.of(context).address,
         style: Theme.of(context).textTheme.displaySmall!.copyWith(
           color: Theme.of(context).colorScheme.primary,
         ),

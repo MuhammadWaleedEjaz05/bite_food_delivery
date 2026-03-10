@@ -4,6 +4,7 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_menu_item.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_menu_section.dart';
 import 'package:bite_food_delivery/Screens/FAQPage/Widgets/bite_support_blocks.dart';
 import 'package:bite_food_delivery/configs/frequently_asked_questions_list.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -41,7 +42,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
     return BiteAppBar(
       backButton: true,
       title: Text(
-        'FAQs',
+        S.of(context).faqs,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
@@ -60,7 +61,7 @@ class _DeliveryFAQsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BiteHeading(title: 'Delivery', isSeeAll: false),
+        BiteHeading(title: S.of(context).delivery, isSeeAll: false),
         10.verticalSpace,
         Column(
           spacing: 10.h,
@@ -84,7 +85,7 @@ class _PaymentFAQsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BiteHeading(title: 'Payments', isSeeAll: false),
+        BiteHeading(title: S.of(context).payments, isSeeAll: false),
         10.verticalSpace,
         Column(
           spacing: 10.h,
@@ -107,7 +108,7 @@ class _OrderFAQsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BiteHeading(title: 'Order', isSeeAll: false),
+        BiteHeading(title: S.of(context).order, isSeeAll: false),
         10.verticalSpace,
         Column(
           spacing: 10.h,
@@ -132,17 +133,17 @@ class _SupportTeamContactSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         BiteSupportBlocks(
-          title: 'Chat',
+          title: S.of(context).chat,
           icon: Icons.chat_outlined,
           color: Theme.of(context).colorScheme.primary,
         ),
         BiteSupportBlocks(
-          title: 'Call',
+          title: S.of(context).call,
           icon: Icons.call_outlined,
           color: Colors.blue,
         ),
         BiteSupportBlocks(
-          title: 'Email',
+          title: S.of(context).email,
           icon: Icons.email_outlined,
           color: Colors.green,
         ),

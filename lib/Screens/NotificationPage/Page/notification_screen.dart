@@ -3,6 +3,7 @@ import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Models/notification_model.dart';
 import 'package:bite_food_delivery/Screens/NotificationPage/Widgets/bite_notification_card.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,7 +61,7 @@ class _NotificationBody extends StatelessWidget {
             ),
             15.verticalSpace,
             Text(
-              'No notifications yet',
+              S.of(context).noNotificationsYet,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 color: Theme.of(context).colorScheme.onSecondary,
                 fontWeight: FontWeight.normal,
@@ -80,7 +81,9 @@ class _NotificationBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${state.unreadCount} unread notifications',
+              S
+                  .of(context)
+                  .stateunreadcountUnreadNotifications(state.unreadCount),
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
                 color: Theme.of(context).colorScheme.onSecondary,
                 fontWeight: FontWeight.normal,
@@ -116,7 +119,7 @@ class _NotificationList extends StatelessWidget {
     if (notifications.isEmpty) {
       return Center(
         child: Text(
-          'No notifications',
+          S.of(context).noNotificationsYet,
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
             color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.normal,
@@ -177,8 +180,8 @@ class _TabSection extends StatelessWidget {
         context,
       ).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.normal),
       tabs: [
-        Tab(text: 'All ($totalCount)'),
-        Tab(text: 'Unread ($unreadCount)'),
+        Tab(text: S.of(context).allNotifications(totalCount)),
+        Tab(text: S.of(context).unreadNotifications(unreadCount)),
       ],
     );
   }
@@ -194,7 +197,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
     return BiteAppBar(
       backButton: true,
       title: Text(
-        'Notifications',
+        S.of(context).notifications,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
@@ -215,14 +218,14 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
               showDialog(
                 context: context,
                 builder: (ctx) => AlertDialog(
-                  title: const Text('Clear All Notifications'),
-                  content: const Text(
-                    'Are you sure you want to delete all notifications? This action cannot be undone.',
+                  title: Text(S.of(context).clearAllNotifications),
+                  content: Text(
+                    S.of(context).deleteAllNotificationsConfirmation,
                   ),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(ctx),
-                      child: const Text('Cancel'),
+                      child: Text(S.of(context).cancel),
                     ),
                     TextButton(
                       onPressed: () {
@@ -240,23 +243,23 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
             }
           },
           itemBuilder: (context) => [
-            const PopupMenuItem(
+            PopupMenuItem(
               value: 'mark_all_read',
               child: Row(
                 children: [
                   Icon(Icons.done_all),
                   SizedBox(width: 8),
-                  Text('Mark all as read'),
+                  Text(S.of(context).markAllAsRead),
                 ],
               ),
             ),
-            const PopupMenuItem(
+            PopupMenuItem(
               value: 'clear_all',
               child: Row(
                 children: [
                   Icon(Icons.delete_outline, color: Colors.red),
                   SizedBox(width: 8),
-                  Text('Clear all', style: TextStyle(color: Colors.red)),
+                  Text(S.of(context).clearAll, style: TextStyle(color: Colors.red)),
                 ],
               ),
             ),

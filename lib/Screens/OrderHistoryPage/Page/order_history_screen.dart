@@ -4,6 +4,7 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Models/order_model.dart';
 import 'package:bite_food_delivery/Screens/OrderHistoryPage/Widgets/bite_tab_bar.dart';
 import 'package:bite_food_delivery/Screens/OrderHistoryPage/Widgets/biteorder_history_card.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,7 +43,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
             Navigator.pushNamed(context, '/cart_screen');
           } else if (state is OrderCancelled) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Order cancelled successfully')),
+              SnackBar(content: Text(S.of(context).orderCancelledSuccessfully)),
             );
           }
         },
@@ -107,8 +108,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                       ),
                       child: TabBarView(
                         children: [
-                          _EmptyOrderView(message: 'No ongoing orders'),
-                          _EmptyOrderView(message: 'No order history'),
+                          _EmptyOrderView(message: S.of(context).noOngoingOrders),
+                          _EmptyOrderView(message: S.of(context).noOrderHistory),
                         ],
                       ),
                     );
@@ -132,7 +133,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
     return BiteAppBar(
       backButton: true,
       title: Text(
-        'Order History',
+        S.of(context).orderHistory,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
@@ -152,22 +153,22 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
               showDialog(
                 context: context,
                 builder: (ctx) => AlertDialog(
-                  title: const Text('Clear Order History'),
-                  content: const Text(
-                    'Are you sure you want to delete all order history? This action cannot be undone.',
+                  title: Text(S.of(context).clearOrderHistory),
+                  content: Text(
+                    S.of(context).areYouSureYouWantToDeleteAllOrderHistory,
                   ),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(ctx),
-                      child: const Text('Cancel'),
+                      child: Text(S.of(context).cancel),
                     ),
                     TextButton(
                       onPressed: () {
                         Navigator.pop(ctx);
                         context.read<OrderCubit>().clearOrderHistory(userId);
                       },
-                      child: const Text(
-                        'Clear All',
+                      child: Text(
+                        S.of(context).clearAll,
                         style: TextStyle(color: Colors.red),
                       ),
                     ),
@@ -177,15 +178,15 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
             }
           },
           itemBuilder: (context) => [
-            const PopupMenuItem(
+            PopupMenuItem(
               value: 'clear_history',
               child: Row(
                 children: [
-                  Icon(Icons.delete_outline, color: Colors.red),
-                  SizedBox(width: 8),
+                  const Icon(Icons.delete_outline, color: Colors.red),
+                  const SizedBox(width: 8),
                   Text(
-                    'Clear order history',
-                    style: TextStyle(color: Colors.red),
+                    S.of(context).clearOrderHistory,
+                    style: const TextStyle(color: Colors.red),
                   ),
                 ],
               ),
@@ -207,7 +208,7 @@ class _OrderListView extends StatelessWidget {
   Widget build(BuildContext context) {
     if (orders.isEmpty) {
       return _EmptyOrderView(
-        message: isCompleted ? 'No completed orders yet' : 'No ongoing orders',
+        message: isCompleted ? S.of(context).noCompletedOrdersYet : S.of(context).noOngoingOrders,
       );
     }
     return ListView.separated(

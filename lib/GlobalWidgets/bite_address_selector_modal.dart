@@ -1,5 +1,6 @@
 import 'package:bite_food_delivery/GlobalWidgets/bite_address_selection_card.dart';
 import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,7 +20,7 @@ void showAddressSelectorModal(BuildContext context) {
         if (state is AddressLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is AddressError) {
-          return Center(child: Text('Error: ${state.message}'));
+          return Center(child: Text(S.of(context).errorStatemessage(state.message)));
         } else if (state is AddressesLoaded) {
           return DraggableScrollableSheet(
             expand: false,
@@ -31,7 +32,7 @@ void showAddressSelectorModal(BuildContext context) {
                 child: Column(
                   children: [
                     Text(
-                      'Select Delivery Address',
+                      S.of(context).selectDeliveryAddress,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     20.verticalSpace,
@@ -39,7 +40,7 @@ void showAddressSelectorModal(BuildContext context) {
                       child: state.addresses.isEmpty
                           ? Center(
                               child: Text(
-                                'No addresses found',
+                                S.of(context).noAddressesFound,
                                 style: Theme.of(context).textTheme.titleSmall!
                                     .copyWith(fontWeight: FontWeight.normal),
                               ),

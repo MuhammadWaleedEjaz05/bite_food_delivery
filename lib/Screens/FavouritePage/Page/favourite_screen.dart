@@ -4,6 +4,7 @@ import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dar
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Screens/FavouritePage/Widgets/bite_favourite_block.dart';
 import 'package:bite_food_delivery/Screens/FavouritePage/Widgets/bite_favourite_restaurant_card.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -62,13 +63,17 @@ class _ReataurantFavouriteSection extends StatelessWidget {
             if (state is RestaurantsLoading) {
               return Center(child: CircularProgressIndicator());
             } else if (state is RestaurantsError) {
-              return Center(child: Text('Error: ${state.message}'));
+              return Center(
+                child: Text(S.of(context).errorStatemessage(state.message)),
+              );
             } else if (state is RestaurantsLoaded) {
               final favouriteRestaurants = state.restaurants
                   .where((restaurant) => restaurant.isFavorite)
                   .toList();
               if (favouriteRestaurants.isEmpty) {
-                return Center(child: Text('No favourite restaurants found.'));
+                return Center(
+                  child: Text(S.of(context).noFavouriteRestaurantsFound),
+                );
               }
               return ListView.separated(
                 itemBuilder: (context, index) => BiteFavouriteRestaurantCard(
@@ -102,13 +107,15 @@ class _FoodFavouriteSection extends StatelessWidget {
             if (state is FoodItemLoading) {
               return Center(child: CircularProgressIndicator());
             } else if (state is FoodItemError) {
-              return Center(child: Text('Error: ${state.message}'));
+              return Center(
+                child: Text(S.of(context).errorStatemessage(state.message)),
+              );
             } else if (state is FoodItemLoaded) {
               final favouriteFoodItems = state.foodItems
                   .where((foodItem) => foodItem.isFavorite ?? false)
                   .toList();
               if (favouriteFoodItems.isEmpty) {
-                return Center(child: Text('No favourite foods found.'));
+                return Center(child: Text(S.of(context).noFavouriteFoodsFound));
               }
               return ListView.separated(
                 itemBuilder: (context, index) =>
@@ -145,8 +152,8 @@ class _TabSection extends StatelessWidget {
         context,
       ).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.normal),
       tabs: [
-        Tab(text: 'Foods'),
-        Tab(text: 'Restaurants'),
+        Tab(text: S.of(context).foods),
+        Tab(text: S.of(context).restaurants),
       ],
     );
   }

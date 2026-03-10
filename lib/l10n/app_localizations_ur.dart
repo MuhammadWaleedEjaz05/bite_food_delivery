@@ -9,782 +9,725 @@ class AppLocalizationsUr extends AppLocalizations {
   AppLocalizationsUr([String locale = 'ur']) : super(locale);
 
   @override
-  String get allYourFavorites => 'آپ کے تمام پسندیدہ';
+  String get trackOrder => 'ﺭﮈﺭﺁ ﮏﯾﺮﭨ';
 
   @override
-  String get getLovedFoodsDescription =>
-      'اپنی پسندیدہ کھانوں کو ایک جگہ پر حاصل کریں، آپ صرف آرڈر دیں باقی ہم کریں گے';
+  String get locationPermissionIsRequired => '۔ﮯﮨ ﺭﺎﮐﺭﺩ ﺕﺯﺎﺟﺍ ﯽﮐ ﻡﺎﻘﻣ';
 
   @override
-  String get orderFromChosenChef => 'اپنے پسندیدہ شیف سے آرڈر کریں';
-
-  @override
-  String get freeDeliveryOffers => 'مفت ڈیلیوری آفرز';
-
-  @override
-  String get getStarted => 'شروع کریں';
-
-  @override
-  String get next => 'اگلا';
-
-  @override
-  String get skip => 'چھوڑیں';
-
-  @override
-  String get login => 'لاگ ان';
-
-  @override
-  String get logIn => 'لاگ ان';
-
-  @override
-  String get pleaseSignInToContinue => 'جاری رکھنے کے لیے سائن ان کریں';
-
-  @override
-  String get or => 'یا';
-
-  @override
-  String get successfullySignedInGoogle => 'گوگل سے کامیابی سے سائن ان ہو گیا!';
-
-  @override
-  String get dontHaveAccount => 'اکاؤنٹ نہیں ہے؟ ';
-
-  @override
-  String get signUp => 'سائن اپ';
-
-  @override
-  String get rememberMe => 'مجھے یاد رکھیں';
-
-  @override
-  String get forgotPassword => 'پاسورڈ بھول گئے؟';
-
-  @override
-  String get email => 'ای میل';
-
-  @override
-  String get password => 'پاسورڈ';
-
-  @override
-  String get forgotPasswordTitle => 'پاسورڈ بھول گئے';
-
-  @override
-  String get passwordResetLinkSent => 'پاسورڈ ری سیٹ لنک بھیج دیا گیا';
-
-  @override
-  String get checkEmailResetLink =>
-      'پاسورڈ ری سیٹ لنک کے لیے اپنا ای میل چیک کریں۔ اپنا پاسورڈ ری سیٹ کرنے کے لیے لنک پر کلک کریں۔';
-
-  @override
-  String get done => 'مکمل';
-
-  @override
-  String get passwordResetSuccess =>
-      'پاسورڈ کامیابی سے ری سیٹ ہو گیا! براہ کرم اپنے نئے پاسورڈ سے لاگ ان کریں۔';
-
-  @override
-  String get pleaseEnterEmailReset =>
-      'پاسورڈ ری سیٹ لنک حاصل کرنے کے لیے اپنا ای میل ایڈریس درج کریں۔';
-
-  @override
-  String get sendResetLink => 'ری سیٹ لنک بھیجیں';
-
-  @override
-  String get fullName => 'پورا نام';
-
-  @override
-  String get phoneNumber => 'فون نمبر';
-
-  @override
-  String get confirmPassword => 'پاسورڈ کی تصدیق';
-
-  @override
-  String get pleaseSignUpToGetStarted => 'شروع کرنے کے لیے سائن اپ کریں';
-
-  @override
-  String get deliverTo => 'ڈیلیوری کا پتہ';
-
-  @override
-  String get selectLocation => 'مقام منتخب کریں';
-
-  @override
-  String heyUser(String userName) {
-    return 'ہیلو $userName، ';
+  String errorStatemessage(Object stateMessage) {
+    return '\$$stateMessage :ﯽﺑﺍﺮﺧ';
   }
 
   @override
-  String get goodMorning => 'صبح بخیر! 👋';
+  String get address => 'ﮧﺘﭘ';
 
   @override
-  String get heyThere => 'ہیلو، ';
+  String get streetNo => 'ﺮﺒﻤﻧ ﯽﻠﮔ';
 
   @override
-  String get allCategories => 'تمام زمرے';
+  String get zipCode => 'ﮈﻮﮐ ﭖﺯ';
 
   @override
-  String get openRestaurants => 'کھلے ریستوران';
+  String get city => 'ﺮﮩﺷ';
 
   @override
-  String get search => 'تلاش';
+  String get country => 'ﮏﻠﻣ';
 
   @override
-  String get popularRestaurants => 'مقبول ریستوران';
+  String get label => 'ﻞﺒﯿﻟ';
 
   @override
-  String get noPopularRestaurantsFound => 'کوئی مقبول ریستوران نہیں ملا';
+  String get home => 'ﺮﮭﮔ';
 
   @override
-  String get recentKeywords => 'حالیہ تلاش';
+  String get work => 'ﻡﺎﮐ';
 
   @override
-  String get noRecentSearches => 'کوئی حالیہ تلاش نہیں';
+  String get other => 'ﺮﮕﯾﺩ';
 
   @override
-  String addedToRecentSearches(String searchTerm) {
-    return '\"$searchTerm\" حالیہ تلاش میں شامل کیا گیا';
+  String get pleaseFillAllRequiredFields =>
+      '۔ﮟﯾﺮﮐ ﺮﭘُ ﻮﮐ ﺯﮉﻠﯿﻓ ﮧﺑﻮﻠﻄﻣ ﻡﺎﻤﺗ ﻡﺮﮐ ﮦﺍﺮﺑ';
+
+  @override
+  String get userNotAuthenticated => '۔ﯽﺋﻮﮨ ﮟﯿﮩﻧ ﻖﯿﺛﻮﺗ ﯽﮐ ﻑﺭﺎﺻ';
+
+  @override
+  String get addressAddedSuccessfully => '!ﺎﯿﮔ ﺎﯿﮐ ﻞﻣﺎﺷ ﮫﺗﺎﺳ ﮯﮐ ﯽﺑﺎﯿﻣﺎﮐ ﮧﺘﭘ';
+
+  @override
+  String failedToAddAddressError(Object error) {
+    return '\$$error :ﻡﺎﮐﺎﻧ ﮟﯿﻣ ﮯﻧﺮﮐ ﻞﻣﺎﺷ ﮧﺘﭘ';
   }
 
   @override
-  String removedFromRecentSearches(String searchTerm) {
-    return '\"$searchTerm\" حالیہ تلاش سے ہٹا دیا گیا';
+  String get save => '۔ﮟﯾﺮﮐ ﻅﻮﻔﺤﻣ';
+
+  @override
+  String get addAddress => '۔ﮟﯾﺮﮐ ﻞﻣﺎﺷ ﺲﯾﺭﮉﯾﺍ';
+
+  @override
+  String get failedToLoadAddresses => 'ﻡﺎﮐﺎﻧ ﮟﯿﻣ ﮯﻧﺮﮐ ﮈﻮﻟ ﮯﺘﭘ';
+
+  @override
+  String get noSavedAddressesYet => '۔ﮟﯿﮨ ﮟﯿﮩﻧ ﮯﺘﭘ ﮦﺪﺷ ﻅﻮﻔﺤﻣ ﯽﺋﻮﮐ ﮏﺗ ﯽﮭﺑﺍ';
+
+  @override
+  String get pleaseSignInToViewAddresses =>
+      '۔ﮟﯾﺮﮐ ﻥﺍ ﻦﺋﺎﺳ ﮯﯿﻟ ﮯﮐ ﮯﻨﮭﮑﯾﺩ ﮯﺘﭘ ﻡﺮﮐ ﮦﺍﺮﺑ';
+
+  @override
+  String get deliveryAddress2 => 'ﮧﺘﭘ ﺎﮐ ﯼﺭﻮﯿﻠﯾﮈ';
+
+  @override
+  String get edit2 => '۔ﮟﯾﺮﮐ ﻢﯿﻣﺮﺗ';
+
+  @override
+  String get selectAnAddress => '۔ﮟﯾﺮﮐ ﺐﺨﺘﻨﻣ ﮧﺘﭘ ﮏﯾﺍ';
+
+  @override
+  String get total2 => ': ﻞﮐ';
+
+  @override
+  String get checkout2 => 'ﭦﺅﺁ ﮏﯿﭼ';
+
+  @override
+  String get yourCartIsEmpty => '۔ﮯﮨ ﯽﻟﺎﺧ ﯼﺮﮐﻮﭨ ﯽﮐ ﭖﺁ';
+
+  @override
+  String get cart => 'ﯼﺮﮐﻮﭨ';
+
+  @override
+  String get allCategories => 'ﮮﺮﻣﺯ ﻡﺎﻤﺗ';
+
+  @override
+  String get openRestaurants => '۔ﮟﯿﻟﻮﮭﮐ ﮞﺍﺭﻮﺘﺴﯾﺭ';
+
+  @override
+  String get clear2 => '۔ﮟﯾﺮﮐ ﻑﺎﺻ';
+
+  @override
+  String get apply2 => '۔ﮟﯾﺮﮐ ﯽﺋﻼ﻿ﭘﺍ';
+
+  @override
+  String get rating2 => 'ﯼﺪﻨﺑ ﮧﺟﺭﺩ';
+
+  @override
+  String get deliveryTime2 => 'ﺖﻗﻭ ﺎﮐ ﯼﺭﻮﯿﻠﯾﮈ';
+
+  @override
+  String get filterYourSearch => '۔ﮟﯾﺮﮐ ﺮﭩﻠﻓ ﻮﮐ ﺵﻼ﻿ﺗ ﯽﻨﭘﺍ';
+
+  @override
+  String get checkout => 'ﭦﺅﺁ ﮏﯿﭼ';
+
+  @override
+  String get deliveryAddress => 'ﮧﺘﭘ ﺎﮐ ﯼﺭﻮﯿﻠﯾﮈ';
+
+  @override
+  String get change => 'ﯽﻠﯾﺪﺒﺗ';
+
+  @override
+  String get noAddressSelected => '۔ﺎﯿﮔ ﺎﯿﮐ ﮟﯿﮩﻧ ﺐﺨﺘﻨﻣ ﮧﺘﭘ ﯽﺋﻮﮐ';
+
+  @override
+  String get orderItems => 'ﺰﻤﭩﺋﺁ ﺭﮈﺭﺁ';
+
+  @override
+  String get paymentMethod => 'ﮧﻘﯾﺮﻃ ﺎﮐ ﯽﮕﯿﺋﺍﺩﺍ';
+
+  @override
+  String get orderSummary => 'ﮧﺻﻼ﻿ﺧ ﺎﮐ ﺭﮈﺭﺁ';
+
+  @override
+  String get subtotal => 'ﻞﮐ ﯽﻠﯾﺫ';
+
+  @override
+  String get deliveryFee => 'ﺲﯿﻓ ﯼﺭﻮﯿﻠﯾﮈ';
+
+  @override
+  String get platformFee => 'ﺲﯿﻓ ﻡﺭﺎﻓ ﭧﯿﻠﭘ';
+
+  @override
+  String get total => 'ﻞﮐ';
+
+  @override
+  String get orderPlaced => '!ﺎﯿﮔ ﺎﯾﺩ ﺭﮈﺭﺁ';
+
+  @override
+  String get yourOrderHasBeenPlacedSuccessfullyntrackYourOrderInRealtime =>
+      '۔ﮟﯾﺮﮐ ﮏﯾﺮﭨ ﻮﮐ ﺭﮈﺭﺁ ﮯﻨﭘﺍ ﮟﯿﻣ ﻢﺋﺎﭨ ﻞﺌﯾﺭ\\n۔ﮯﮨ ﺎﯿﮔ ﺎﯾﺩ ﮫﺗﺎﺳ ﮯﮐ ﯽﺑﺎﯿﻣﺎﮐ ﺭﮈﺭ';
+
+  @override
+  String get backToHome => 'ﺮﭘ ﺮﮭﮔ ﺲﭘﺍﻭ';
+
+  @override
+  String paymentFailedPaymentstateerrormessage(Object errorMessage) {
+    return '\$$errorMessage :ﯽﺌﮔ ﻮﮨ ﻡﺎﮐﺎﻧ ﯽﮕﯿﺋﺍﺩﺍ';
   }
 
   @override
-  String get searchRestaurantsOrDishes => 'ریستوران یا پکوان تلاش کریں';
-
-  @override
-  String get noRestaurantsFound => 'کوئی ریستوران نہیں ملا';
-
-  @override
-  String get deliveryAddress => 'ڈیلیوری کا پتہ';
-
-  @override
-  String get edit => 'ترمیم';
-
-  @override
-  String get selectAnAddress => 'پتہ منتخب کریں';
-
-  @override
-  String get totalLabel => 'کل : ';
-
-  @override
-  String pkrAmount(String amount) {
-    return 'PKR $amount';
+  String confirmPayment(Object grandTotal) {
+    return 'ادائیگی کی تصدیق کریں • PKR \$$grandTotal';
   }
 
   @override
-  String get checkoutButton => 'چیک آؤٹ';
+  String get paysWhenOrderArrives => '۔ﮯﮨ ﺎﺗﺮﮐ ﯽﮕﯿﺋﺍﺩﺍ ﺮﭘ ﮯﻧﺁ ﺭﮈﺭﺁ';
 
   @override
-  String get yourCartIsEmpty => 'آپ کی ٹوکری خالی ہے';
+  String get noCardDetails => '۔ﮟﯿﮨ ﮟﯿﮩﻧ ﺕﻼ﻿ﯿﺼﻔﺗ ﯽﺋﻮﮐ ﯽﮐ ﮈﺭﺎﮐ';
 
   @override
-  String get initializingCart => 'ٹوکری لوڈ ہو رہی ہے...';
+  String get faqs => 'ﺕﻻ﻿ﺍﻮﺳ ﮯﺌﮔ ﮯﮭﭼﻮﭘ ﺮﺜﮐﺍ';
 
   @override
-  String get cart => 'ٹوکری';
+  String get delivery => 'ﯼﺭﻮﯿﻠﯾﮈ';
 
   @override
-  String get checkout => 'چیک آؤٹ';
+  String get payments => 'ﮞﺎﯿﮕﯿﺋﺍﺩﺍ';
 
   @override
-  String get deliveryAddressTitle => 'ڈیلیوری کا پتہ';
+  String get order => 'ﺭﮈﺭﺁ';
 
   @override
-  String get change => 'تبدیل کریں';
+  String get chat => 'ﭗﺷ ﭗﮔ';
 
   @override
-  String get noAddressSelected => 'کوئی پتہ منتخب نہیں';
+  String get call => '۔ﮟﯾﺮﮐ ﻝﺎﮐ';
 
   @override
-  String get orderItems => 'آرڈر آئٹمز';
+  String get email => 'ﻞﯿﻣ ﯼﺍ';
 
   @override
-  String get paymentMethod => 'ادائیگی کا طریقہ';
+  String get noFavouriteRestaurantsFound => '۔ﻼ﻿ﻣ ﮟﯿﮩﻧ ﮞﺍﺭﻮﺘﺴﯾﺭ ﮦﺪﯾﺪﻨﺴﭘ ﯽﺋﻮﮐ';
 
   @override
-  String get orderSummary => 'آرڈر کا خلاصہ';
+  String get noFavouriteFoodsFound => '۔ﻼ﻿ﻣ ﮟﯿﮩﻧ ﺎﻧﺎﮭﮐ ﮦﺪﯾﺪﻨﺴﭘ ﯽﺋﻮﮐ';
 
   @override
-  String get subtotal => 'ذیلی کل';
+  String get foods => 'ءﺎﯿﺷﺍ ﯽﮐ ﮯﻧﺎﮭﮐ';
 
   @override
-  String get deliveryFee => 'ڈیلیوری فیس';
+  String get restaurants => 'ﮞﺍﺭﻮﺘﺴﯾﺭ';
 
   @override
-  String get platformFee => 'پلیٹ فارم فیس';
+  String get removeFromFavourites => '۔ﮟﯾﺩ ﺎﭩﮨ ﮯﺳ ﮦﺪﯾﺪﻨﺴﭘ';
 
   @override
-  String get total => 'کل';
+  String get areYouSureYouWantToRemoveThisFoodItem =>
+      '؟ﮟﯿﮨ ﮯﺘﮨﺎﭼ ﺎﻧﺎﭩﮨ ﮯﺳ ﮦﺪﯾﺪﻨﺴﭘ ﮯﻨﭘﺍ ﻮﮐ ﺰﯿﭼ ﯽﮐ ﮯﻧﺎﮭﮐ ﺱﺍ ﯽﻌﻗﺍﻭ ﭖﺁ ﺎﯿﮐ';
 
   @override
-  String get orderPlaced => 'آرڈر دے دیا گیا!';
+  String get cancel => '۔ﮟﯾﺮﮐ ﺥﻮﺴﻨﻣ';
 
   @override
-  String get orderPlacedSuccessfully =>
-      'آپ کا آرڈر کامیابی سے دے دیا گیا ہے۔\nاپنے آرڈر کو ریئل ٹائم میں ٹریک کریں۔';
+  String get remove => '۔ﮟﯾﺩ ﺎﭩﮨ';
 
   @override
-  String get trackOrder => 'آرڈر ٹریک کریں';
+  String get orderAgain => '۔ﮟﯾﺮﮐ ﺭﮈﺭﺁ ﮦﺭﺎﺑﻭﺩ';
 
   @override
-  String get backToHome => 'ہوم پر واپس جائیں';
+  String get areYouSureYouWantToRemoveThisRestaurantFrom =>
+      '؟ﮟﯿﮨ ﮯﺘﮨﺎﭼ ﺎﻧﺎﭩﮨ ﮯﺳ ﮟﯿﻣ ﮦﺪﯾﺪﻨﺴﭘ ﮯﻨﭘﺍ ﻮﮐ ﮞﺍﺭﻮﺘﺴﯾﺭ ﺱﺍ ﯽﻌﻗﺍﻭ ﭖﺁ ﺎﯿﮐ';
 
   @override
-  String confirmPaymentAmount(String amount) {
-    return 'ادائیگی کی تصدیق  •  PKR $amount';
+  String get removeFromCart => '۔ﮟﯾﺩ ﺎﭩﮨ ﮯﺳ ﭦﺭﺎﮐ';
+
+  @override
+  String get addToCart => '۔ﮟﯾﺮﮐ ﻞﻣﺎﺷ ﮟﯿﻣ ﯼﺮﮐﻮﭨ';
+
+  @override
+  String get chooseYourFlavor => '۔ﮟﯾﺮﮐ ﺐﺨﺘﻨﻣ ﮧﻘﺋﺍﺫ ﺎﻨﭘﺍ';
+
+  @override
+  String get chooseYourSize => '۔ﮟﯾﺮﮐ ﺐﺨﺘﻨﻣ ﺰﺋﺎﺳ ﺎﻨﭘﺍ';
+
+  @override
+  String get passwordResetLinkSent =>
+      '۔ﺎﯿﮔ ﺎﺠﯿﮭﺑ ﮏﻨﻟ ﺎﮐ ﮯﻨﯾﺩ ﺐﯿﺗﺮﺗ ﮦﺭﺎﺑﻭﺩ ﮈﺭﻭ ﺱﺎﭘ';
+
+  @override
+  String get checkYourEmailForAPasswordResetLink =>
+      '۔ﮟﯾﺮﮐ ﮏﻠﮐ ﺮﭘ ﮏﻨﻟ ﮯﯿﻟ ﮯﮐ ﮯﻨﯾﺩ ﺐﯿﺗﺮﺗ ﮦﺭﺎﺑﻭﺩ ﮈﺭﻭ ﺱﺎﭘ ﺎﻨﭘﺍ ﺮﭘ ﭧﺋﺎﺳ ﺐﯾﻭ ﯼﺭﺎﻤﮨ ۔ﮟﯾﺮﮐ';
+
+  @override
+  String get passwordResetSuccessfully =>
+      '۔ﮟﯾﺮﮐ ﻥﺍ ﮒﻻ﻿ ﮫﺗﺎﺳ ﮯﮐ ﮈﺭﻭ ﺱﺎﭘ ﮯﺌﻧ ﮯﻨﭘﺍ ﻡﺮﮐ ﮦﺍﺮﺑ !ﺎﯾﺩ ﺐﯿﺗﺮﺗ ﮦﺭﺎﺑﻭﺩ ﮯﺳ ﯽﺑﺎﯿﻣﺎﮐ ﮈﺭﻭ';
+
+  @override
+  String get done => 'ﺎﯿﮔ ﻮﮨ';
+
+  @override
+  String get sendResetLink => '۔ﮟﯿﺠﯿﮭﺑ ﮏﻨﻟ ﭧﯿﺳ ﯼﺭ';
+
+  @override
+  String get forgotPassword => '۔ﮯﺌﮔ ﻝﻮﮭﺑ ﮈﺭﻭ ﺱﺎﭘ';
+
+  @override
+  String get pleaseEnterYourEmailAddressToReceiveAPasswordReset =>
+      '۔ﮟﯾﺮﮐ ﺝﺭﺩ ﺲﯾﺭﮉﯾﺍ ﻞﯿﻣ ﯼﺍ ﺎﻨﭘﺍ ﻡﺮﮐ ﮦﺍﺮﺑ ﮯﯿﻟ ﮯﮐ ﮯﻧﺮﮐ ﻞﺻﺎﺣ ﮏﻨﻟ ﺎﮐ ﮯﻨﯾﺩ ﺐﯿﺗﺮﺗ ﮦﺭﺎﺑﻭ';
+
+  @override
+  String get or => 'ﺎﯾ';
+
+  @override
+  String get successfullySignedInWithGoogle =>
+      'Google ﺎﯿﮔ ﻮﮨ ﻥﺍ ﻦﺋﺎﺳ ﮯﺳ ﯽﺑﺎﯿﻣﺎﮐ ﮫﺗﺎﺳ ﮯﮐ!';
+
+  @override
+  String googleSigninErrorStatemessage(Object stateMessage) {
+    return 'Google ﯽﺑﺍﺮﺧ ﮟﯿﻣ ﻥﺍ ﻦﺋﺎﺳ: \$$stateMessage';
   }
 
   @override
-  String rsPrice(String price) {
-    return 'RS $price';
+  String get dontHaveAnAccount => '؟ﮯﮨ ﮟﯿﮩﻧ ﭧﻧﺅﺎﮐﺍ ﺎﮐ ﭖﺁ ﺎﯿﮐ';
+
+  @override
+  String get signUp => '۔ﮟﯾﺮﮐ ﭖﺍ ﻦﺋﺎﺳ';
+
+  @override
+  String get login => 'ﻥﺍ ﮒﻻ';
+
+  @override
+  String get rememberMe => 'ﺎﻨﮭﮐﺭ ﺩﺎﯾ ﮯﮭﺠﻣ';
+
+  @override
+  String get password => 'ﮈﺭﻭ ﺱﺎﭘ';
+
+  @override
+  String get logIn => '۔ﮟﯾﺮﮐ ﻥﺍ ﮒﻻ';
+
+  @override
+  String get pleaseSignInToContinue =>
+      '۔ﮟﯾﺮﮐ ﻥﺍ ﻦﺋﺎﺳ ﮯﯿﻟ ﮯﮐ ﮯﻨﮭﮐﺭ ﯼﺭﺎﺟ ﻡﺮﮐ ﮦﺍﺮﺑ';
+
+  @override
+  String get noNotificationsYet => '۔ﮯﮨ ﮟﯿﮩﻧ ﻉﻼ﻿ﻃﺍ ﯽﺋﻮﮐ ﮏﺗ ﯽﮭﺑﺍ';
+
+  @override
+  String stateunreadcountUnreadNotifications(Object unreadCount) {
+    return '\$$unreadCount ﺕﺎﻋﻼ﻿ﻃﺍ ﯽﺋﻮﮨ ﯽﮬﮍﭘ ﺮﯿﻐﺑ';
   }
 
   @override
-  String get chooseYourFlavor => 'اپنا ذائقہ منتخب کریں';
-
-  @override
-  String get chooseYourSize => 'اپنا سائز منتخب کریں';
-
-  @override
-  String get tenInch => '10 انچ';
-
-  @override
-  String get sixteenInch => '16 انچ';
-
-  @override
-  String get twentyInch => '20 انچ';
-
-  @override
-  String get removeFromCart => 'ٹوکری سے ہٹائیں';
-
-  @override
-  String get addToCart => 'ٹوکری میں شامل کریں';
-
-  @override
-  String get allItems => 'تمام آئٹمز';
-
-  @override
-  String get all => 'سب';
-
-  @override
-  String get failedLoadFoodItems =>
-      'کھانے کی اشیاء لوڈ کرنے میں ناکامی۔ براہ کرم بعد میں دوبارہ کوشش کریں۔';
-
-  @override
-  String get noFoodItemsCategory =>
-      'اس زمرے میں کوئی کھانے کی اشیاء دستیاب نہیں ہیں۔';
-
-  @override
-  String get free => 'مفت';
-
-  @override
-  String deliveryTimeMin(String minutes) {
-    return '$minutes منٹ';
+  String allNotifications(Object totalCount) {
+    return '(\$$totalCount) ﻡﺎﻤﺗ';
   }
 
   @override
-  String get allRestaurants => 'تمام ریستوران';
-
-  @override
-  String get selectPaymentMethod => 'ادائیگی کا طریقہ منتخب کریں';
-
-  @override
-  String get cashOnDelivery => 'کیش آن ڈیلیوری';
-
-  @override
-  String get payWhenOrderArrives => 'آرڈر آنے پر ادائیگی کریں';
-
-  @override
-  String get cashOnDeliverySelected => 'کیش آن ڈیلیوری منتخب';
-
-  @override
-  String get visa => 'ویزا';
-
-  @override
-  String get selectVisaCards => 'اپنے محفوظ ویزا کارڈز سے منتخب کریں';
-
-  @override
-  String get mastercard => 'ماسٹر کارڈ';
-
-  @override
-  String get selectMastercardCards => 'اپنے محفوظ ماسٹر کارڈز سے منتخب کریں';
-
-  @override
-  String cardEndingInSelected(String last4) {
-    return '$last4 پر ختم ہونے والا کارڈ منتخب';
+  String unreadNotifications(Object unreadCount) {
+    return '(\$$unreadCount) ﮯﺋﻮﮨ ﮯﮬﮍﭘ ﺮﯿﻐﺑ';
   }
 
   @override
-  String noCardsSavedAddFirst(String cardType) {
-    return 'کوئی $cardType کارڈ محفوظ نہیں۔ پہلے ایک شامل کریں۔';
+  String get notifications => 'ﺕﺎﻋﻼ﻿ﻃﺍ';
+
+  @override
+  String get clearAllNotifications => '۔ﮟﯾﺮﮐ ﻑﺎﺻ ﻮﮐ ﺕﺎﻋﻼ﻿ﻃﺍ ﻡﺎﻤﺗ';
+
+  @override
+  String get deleteAllNotificationsConfirmation =>
+      '۔ﺎﺘﮑﺳ ﺎﺟ ﺎﯿﮐ ﮟﯿﮩﻧ ﻡﺪﻌﻟﺎﮐ ﻮﮐ ﯽﺋﺍﻭﺭﺭﺎﮐ ﺱﺍ ؟ﮟﯿﮨ ﮯﺘﮨﺎﭼ ﺎﻧﺮﮐ ﻑﺬﺣ ﻮﮐ ﺕﺎﻋﻼ﻿ﻃﺍ ﻡﺎﻤﺗ ﯽﻌﻗ';
+
+  @override
+  String get markAllAsRead => '۔ﮟﯾﺮﮐ ﺩﺯ ﻥﺎﺸﻧ ﺍﻮﮨ ﺎﮬﮍﭘ ﻮﮐ ﯽﮭﺒﺳ';
+
+  @override
+  String get clearAll => '۔ﮟﯾﺮﮐ ﻑﺎﺻ ﺐﺳ';
+
+  @override
+  String get allYourFavorites => 'ﮦﺪﯾﺪﻨﺴﭘ ﻡﺎﻤﺗ ﮯﮐ ﭖﺁ';
+
+  @override
+  String get getAllYourLovedFoodsInOnePlace =>
+      '۔ﮟﯿﮨ ﮯﺗﺮﮐ ﻢﮨ ﯽﻗﺎﺑ ﮟﯾﺩ ﺭﮈﺭﺁ ﺲﺑ ﭖﺁ ،ﮟﯾﺮﮐ ﻞﺻﺎﺣ ﺮﭘ ﮧﮕﺟ ﯽﮨ ﮏﯾﺍ ﮯﻧﺎﮭﮐ ﮦﺪﯾﺪﻨﺴﭘ ﻡﺎﻤﺗ ﮯ';
+
+  @override
+  String get orderFromChoosenChef => '۔ﮟﯾﺮﮐ ﺭﮈﺭﺁ ﮯﺳ ﻒﯿﺷ ﺐﺨﺘﻨﻣ';
+
+  @override
+  String get freeDeliveryOffers => 'ﺯﺮﻓﺁ ﯼﺭﻮﯿﻠﯾﮈ ﺖﻔﻣ';
+
+  @override
+  String get getStarted => 'ﮟﯾﺮﮐ ﻉﻭﺮﺷ';
+
+  @override
+  String get next => 'ﻼ﻿ﮔﺍ';
+
+  @override
+  String get skip => '۔ﮟﯾﮌﻮﮭﭼ';
+
+  @override
+  String get orderCancelledSuccessfully => '۔ﺎﯿﮔ ﻮﮨ ﺥﻮﺴﻨﻣ ﮫﺗﺎﺳ ﮯﮐ ﯽﺑﺎﯿﻣﺎﮐ ﺭﮈﺭﺁ';
+
+  @override
+  String get noOngoingOrders => '۔ﮟﯿﮩﻧ ﺕﺎﻣﺎﮑﺣﺍ ﯼﺭﺎﺟ ﯽﺋﻮﮐ';
+
+  @override
+  String get noOrderHistory => '۔ﮟﯿﮩﻧ ﺦﯾﺭﺎﺗ ﯽﺋﻮﮐ ﯽﮐ ﺭﮈﺭﺁ';
+
+  @override
+  String get orderHistory => 'ﺦﯾﺭﺎﺗ ﯽﮐ ﺭﮈﺭﺁ';
+
+  @override
+  String get clearOrderHistory => '۔ﮟﯾﺮﮐ ﻑﺎﺻ ﺦﯾﺭﺎﺗ ﯽﮐ ﺭﮈﺭﺁ';
+
+  @override
+  String get areYouSureYouWantToDeleteAllOrderHistory =>
+      '۔ﺎﺘﮑﺳ ﺎﺟ ﺎﯿﮐ ﮟﯿﮩﻧ ﻡﺪﻌﻟﺎﮐ ﻮﮐ ﯽﺋﺍﻭﺭﺭﺎﮐ ﺱﺍ ؟ﮟﯿﮨ ﮯﺘﮨﺎﭼ ﺎﻧﺮﮐ ﻑﺬﺣ ﻮﮐ ﺦﯾﺭﺎﺗ ﻡﺎﻤﺗ ﯽﮐ ﺭ';
+
+  @override
+  String get noCompletedOrdersYet => '۔ﮯﮨ ﮟﯿﮩﻧ ﺭﮈﺭﺁ ﻞﻤﮑﻣ ﯽﺋﻮﮐ ﮏﺗ ﯽﮭﺑﺍ';
+
+  @override
+  String get rate => 'ﺡﺮﺷ';
+
+  @override
+  String get cancelOrder => '۔ﮟﯾﺮﮐ ﺥﻮﺴﻨﻣ ﺭﮈﺭﺁ';
+
+  @override
+  String get areYouSureYouWantToCancelThisOrder =>
+      '؟ﮟﯿﮨ ﮯﺘﮨﺎﭼ ﺎﻧﺮﮐ ﺥﻮﺴﻨﻣ ﻮﮐ ﺭﮈﺭﺁ ﺱﺍ ﯽﻌﻗﺍﻭ ﭖﺁ ﺎﯿﮐ';
+
+  @override
+  String get yesCancel => '۔ﮟﯾﺮﮐ ﺥﻮﺴﻨﻣ ،ﮞﺎﮨ';
+
+  @override
+  String get reorder => '۔ﮟﯾﺩ ﺐﯿﺗﺮﺗ ﮦﺭﺎﺑﻭﺩ';
+
+  @override
+  String get cardInformation => 'ﺕﺎﻣﻮﻠﻌﻣ ﯽﮐ ﮈﺭﺎﮐ';
+
+  @override
+  String get cardNumberIsRequired => '۔ﮯﮨ ﺭﺎﮐﺭﺩ ﺮﺒﻤﻧ ﮈﺭﺎﮐ';
+
+  @override
+  String get cardNumberIsTooShort => '۔ﮯﮨ ﺎﭨﻮﮭﭼ ﺖﮩﺑ ﺮﺒﻤﻧ ﮈﺭﺎﮐ';
+
+  @override
+  String get required => '۔ﮯﮨ ﺭﺎﮐﺭﺩ';
+
+  @override
+  String get invalidMonth => 'ﮧﻨﯿﮩﻣ ﻂﻠﻏ';
+
+  @override
+  String get invalidCvc => 'CVC ﻂﻠﻏ';
+
+  @override
+  String get cvc => 'ﯽﺳ ﯼﻭ ﯽﺳ';
+
+  @override
+  String get cardHolder => 'ﺭﮉﻟﻮﮨ ﮈﺭﺎﮐ';
+
+  @override
+  String get fullNameOnCard => 'ﻡﺎﻧ ﺍﺭﻮﭘ ﺮﭘ ﮈﺭﺎﮐ';
+
+  @override
+  String get yourCardDetailsAreSecurelyHandledByStripeWeNever =>
+      '۔ﮟﯿﮨ ﮯﺗﺮﮐ ﮟﯿﮩﻧ ﻅﻮﻔﺤﻣ ﺮﺒﻤﻧ ﮈﺭﺎﮐ ﺍﺭﻮﭘ ﺎﮐ ﭖﺁ ﯽﮭﺑ ﯽﮭﺒﮐ ﻢﮨ ۔ﮯﮨ ﺎﺗﺎﺟ ﺎﯿﮐ ﻝﮉﻨﯿﮨ ﮯﺳ ﮯﻘ';
+
+  @override
+  String get adding => '...ﮯﮨ ﺎﮨﺭ ﺎﺟ ﺎﯿﮐ ﻞﻣﺎﺷ';
+
+  @override
+  String get addCard => '۔ﮟﯾﺮﮐ ﻞﻣﺎﺷ ﮈﺭﺎﮐ';
+
+  @override
+  String get selectPaymentMethod => '۔ﮟﯾﺮﮐ ﺐﺨﺘﻨﻣ ﮧﻘﯾﺮﻃ ﺎﮐ ﯽﮕﯿﺋﺍﺩﺍ';
+
+  @override
+  String get cashOnDelivery => 'ﯼﺭﻮﯿﻠﯾﮈ ﻥﺁ ﺶﯿﮐ';
+
+  @override
+  String get payWhenYourOrderArrives => '۔ﮟﯾﺮﮐ ﯽﮕﯿﺋﺍﺩﺍ ﺮﭘ ﮯﻧﺁ ﺭﮈﺭﺁ ﺎﮐ ﭖﺁ';
+
+  @override
+  String get cashOnDeliverySelected => '۔ﺎﯿﮔ ﺎﯿﮐ ﺏﺎﺨﺘﻧﺍ ﺎﮐ ﯼﺭﻮﯿﻠﯾﮈ ﻥﺁ ﺶﯿﮐ';
+
+  @override
+  String get visa => 'ﺍﺰﯾﻭ';
+
+  @override
+  String get selectFromYourSavedVisaCards =>
+      '۔ﮟﯾﺮﮐ ﺏﺎﺨﺘﻧﺍ ﮯﺳ ﮟﯿﻣ ﺯﮈﺭﺎﮐ ﺍﺰﯾﻭ ﮦﺩﺮﮐ ﻅﻮﻔﺤﻣ ﮯﻨﭘﺍ';
+
+  @override
+  String get mastercard => 'ﮈﺭﺎﮐ ﺮﭩﺳﺎﻣ';
+
+  @override
+  String get selectFromYourSavedMastercards =>
+      '۔ﮟﯾﺮﮐ ﺐﺨﺘﻨﻣ ﮯﺳ ﮟﯿﻣ ﺯﮈﺭﺎﮐ ﺮﭩﺳﺎﻣ ﮦﺩﺮﮐ ﻅﻮﻔﺤﻣ ﮯﻨﭘﺍ';
+
+  @override
+  String get savedCards => 'ﺯﮈﺭﺎﮐ ﮦﺪﺷ ﻅﻮﻔﺤﻣ';
+
+  @override
+  String get creditCardAddedSuccessfully =>
+      '۔ﺎﯿﮔ ﻮﮨ ﻞﻣﺎﺷ ﮫﺗﺎﺳ ﮯﮐ ﯽﺑﺎﯿﻣﺎﮐ ﮈﺭﺎﮐ ﭦﮉﯾﺮﮐ';
+
+  @override
+  String get creditCardDeletedSuccessfully =>
+      '۔ﺎﯿﮔ ﻮﮨ ﻑﺬﺣ ﮯﺳ ﯽﺑﺎﯿﻣﺎﮐ ﮈﺭﺎﮐ ﭦﮉﯾﺮﮐ';
+
+  @override
+  String get failedToLoadCards => 'ﻡﺎﮐﺎﻧ ﮟﯿﻣ ﮯﻧﺮﮐ ﮈﻮﻟ ﺯﮈﺭﺎﮐ';
+
+  @override
+  String get noSavedCardsYet => '۔ﮯﮨ ﮟﯿﮩﻧ ﮈﺭﺎﮐ ﮦﺩﺮﮐ ﻅﻮﻔﺤﻣ ﯽﺋﻮﮐ ﮏﺗ ﯽﮭﺑﺍ';
+
+  @override
+  String get addACardBelowToGetStarted =>
+      '۔ﮟﯾﺮﮐ ﻞﻣﺎﺷ ﮈﺭﺎﮐ ﮏﯾﺍ ﮯﭽﯿﻧ ﮯﯿﻟ ﮯﮐ ﮯﻧﺮﮐ ﻉﻭﺮﺷ';
+
+  @override
+  String cardEndingInCreditcardlast4Selected(Object last4) {
+    return '\$$last4 ۔ﺎﯿﮔ ﺎﯿﮐ ﺐﺨﺘﻨﻣ ﮈﺭﺎﮐ ﻻ﻿ﺍﻭ ﮯﻧﻮﮨ ﻢﺘﺧ ﺮﭘ';
   }
 
   @override
-  String get savedCards => 'محفوظ کارڈز';
+  String get addNewCard => '۔ﮟﯾﺮﮐ ﻞﻣﺎﺷ ﮈﺭﺎﮐ ﺎﯿﻧ';
 
   @override
-  String get creditCardAddedSuccess => 'کریڈٹ کارڈ کامیابی سے شامل ہو گیا';
+  String get personalInfo => 'ﺕﺎﻣﻮﻠﻌﻣ ﯽﺗﺍﺫ';
 
   @override
-  String get creditCardDeletedSuccess => 'کریڈٹ کارڈ کامیابی سے حذف ہو گیا';
+  String get guestUser => 'ﻑﺭﺎﺻ ﻥﺎﻤﮩﻣ';
 
   @override
-  String get noSavedCardsYet => 'ابھی تک کوئی کارڈ محفوظ نہیں';
+  String get pleaseLoginToViewYourProfile =>
+      '۔ﮟﯾﺮﮐ ﻥﺍ ﮒﻻ﻿ ﮯﯿﻟ ﮯﮐ ﮯﻨﮭﮑﯾﺩ ﻞﺋﺎﻓﻭﺮﭘ ﺎﻨﭘﺍ ﻡﺮﮐ ﮦﺍﺮﺑ';
 
   @override
-  String get addCardBelowToGetStarted => 'شروع کرنے کے لیے نیچے کارڈ شامل کریں';
-
-  @override
-  String maskedCardNumber(String last4) {
-    return '**** **** **** $last4';
+  String editTitle(Object title) {
+    return '\$$title ﮟﯾﺮﮐ ﻢﯿﻣﺮﺗ';
   }
 
   @override
-  String cardHolderExpiry(String holderName, String expiryDate) {
-    return '$holderName  •  $expiryDate';
+  String get apply => 'ﮟﯿﺋﺎﮕﻟ';
+
+  @override
+  String get logout => 'ﭦﺅﺁ ﮒﻻ';
+
+  @override
+  String get signup => '۔ﮟﯾﺮﮐ ﭖﺍ ﻦﺋﺎﺳ';
+
+  @override
+  String get profile => 'ﻞﺋﺎﻓﻭﺮﭘ';
+
+  @override
+  String get allRestaurants => 'ﮞﺍﺭﻮﺘﺴﯾﺭ ﻡﺎﻤﺗ';
+
+  @override
+  String get failedToLoadFoodItemsPleaseTryAgainLater =>
+      '۔ﮟﯾﺮﮐ ﺶﺷﻮﮐ ﮦﺭﺎﺑﻭﺩ ﮟﯿﻣ ﺪﻌﺑ ﻡﺮﮐ ﮦﺍﺮﺑ ۔ﻡﺎﮐﺎﻧ ﮟﯿﻣ ﮯﻧﺮﮐ ﮈﻮﻟ ءﺎﯿﺷﺍ ﯽﮐ ﮯﻧﺎﮭﮐ';
+
+  @override
+  String get noFoodItemsAvailableForThisCategory =>
+      '۔ﮟﯿﮨ ﮟﯿﮩﻧ ﺏﺎﯿﺘﺳﺩ ءﺎﯿﺷﺍ ﯽﮐ ﮯﻧﺎﮭﮐ ﯽﺋﻮﮐ ﮯﯿﻟ ﮯﮐ ﮮﺮﻣﺯ ﺱﺍ';
+
+  @override
+  String get myReviews => 'ﮮﺰﺋﺎﺟ ﮮﺮﯿﻣ';
+
+  @override
+  String get popularRestaurants => 'ﮞﺍﺭﻮﺘﺴﯾﺭ ﺭﻮﮩﺸﻣ';
+
+  @override
+  String get noPopularRestaurantsFound => 'ﻼ﻿ﻣ ﮟﯿﮩﻧ ﮞﺍﺭﻮﺘﺴﯾﺭ ﺭﻮﮩﺸﻣ ﯽﺋﻮﮐ';
+
+  @override
+  String get recentKeywords => 'ﻅﺎﻔﻟﺍ ﮧﺑﻮﻠﻄﻣ ﮧﯿﻟﺎﺣ';
+
+  @override
+  String addedStatesearchToRecentSearches(Object search) {
+    return '\"\$$search\" ۔ﺎﯿﮔ ﺎﯿﮐ ﻞﻣﺎﺷ ﮟﯿﻣ ﮞﻮﺷﻼ﻿ﺗ ﮧﯿﻟﺎﺣ ﻮﮐ';
   }
 
   @override
-  String get addNewCard => 'نیا کارڈ شامل کریں';
-
-  @override
-  String get cardInformation => 'کارڈ کی معلومات';
-
-  @override
-  String get cardNumberPlaceholder => '4242 4242 4242 4242';
-
-  @override
-  String get cardNumberRequired => 'کارڈ نمبر ضروری ہے';
-
-  @override
-  String get cardNumberTooShort => 'کارڈ نمبر بہت چھوٹا ہے';
-
-  @override
-  String get mmyyPlaceholder => 'MM/YY';
-
-  @override
-  String get invalidMonth => 'غلط مہینہ';
-
-  @override
-  String get cvcPlaceholder => 'CVC';
-
-  @override
-  String get invalidCvc => 'غلط CVC';
-
-  @override
-  String get fullNameOnCard => 'کارڈ پر پورا نام';
-
-  @override
-  String get cardSecurityNote =>
-      'آپ کے کارڈ کی تفصیلات Stripe کے ذریعے محفوظ طریقے سے ہینڈل کی جاتی ہیں۔ ہم آپ کا مکمل کارڈ نمبر کبھی محفوظ نہیں کرتے۔';
-
-  @override
-  String get adding => 'شامل ہو رہا ہے...';
-
-  @override
-  String get addCard => 'کارڈ شامل کریں';
-
-  @override
-  String get addAddress => 'پتہ شامل کریں';
-
-  @override
-  String get addressNotAvailable => 'پتہ دستیاب نہیں';
-
-  @override
-  String get failedLoadAddresses => 'پتے لوڈ کرنے میں ناکامی';
-
-  @override
-  String get noSavedAddresses => 'ابھی تک کوئی پتے محفوظ نہیں';
-
-  @override
-  String get pleaseSignInAddresses => 'پتے دیکھنے کے لیے سائن ان کریں';
-
-  @override
-  String get address => 'پتہ';
-
-  @override
-  String get locationPermissionRequired => 'مقام کی اجازت ضروری ہے';
-
-  @override
-  String get streetNo => 'گلی نمبر';
-
-  @override
-  String get zipCode => 'زپ کوڈ';
-
-  @override
-  String get city => 'شہر';
-
-  @override
-  String get country => 'ملک';
-
-  @override
-  String get label => 'لیبل';
-
-  @override
-  String get home => 'گھر';
-
-  @override
-  String get work => 'دفتر';
-
-  @override
-  String get other => 'دیگر';
-
-  @override
-  String get pleaseFillAllFields => 'براہ کرم تمام ضروری فیلڈز بھریں';
-
-  @override
-  String get userNotAuthenticated => 'صارف تصدیق شدہ نہیں ہے';
-
-  @override
-  String get addressAddedSuccessfully => 'پتہ کامیابی سے شامل ہو گیا!';
-
-  @override
-  String failedToAddAddress(String error) {
-    return 'پتہ شامل کرنے میں ناکامی: $error';
+  String removedStatesearchFromRecentSearches(Object search) {
+    return '\"\$$search\" ۔ﺎﯿﮔ ﺎﯾﺩ ﺎﭩﮨ ﮯﺳ ﮞﻮﺷﻼ﻿ﺗ ﮧﯿﻟﺎﺣ ﻮﮐ';
   }
 
   @override
-  String get save => 'محفوظ کریں';
+  String get noRecentSearches => '۔ﮟﯿﮩﻧ ﺵﻼ﻿ﺗ ﮧﯿﻟﺎﺣ ﯽﺋﻮﮐ';
 
   @override
-  String get selectDeliveryAddress => 'ڈیلیوری کا پتہ منتخب کریں';
+  String get search => '۔ﮟﯾﺮﮐ ﺵﻼ﻿ﺗ';
 
   @override
-  String get noAddressesFound => 'کوئی پتہ نہیں ملا';
+  String get preferences2 => 'ﺕﺎﺤﯿﺟﺮﺗ';
 
   @override
-  String get iLoveFastFood => 'مجھے فاسٹ فوڈ پسند ہے';
+  String get darkMode => 'ﮈﻮﻣ ﮎﺭﺍﮈ';
 
   @override
-  String get logout => 'لاگ آؤٹ';
+  String get language => 'ﻥﺎﺑﺯ';
 
   @override
-  String get profile => 'پروفائل';
+  String get themes => 'ﺰﻤﯿﮭﺗ';
 
   @override
-  String get personalInfo => 'ذاتی معلومات';
+  String get versionInfoNotAvailable => '۔ﮯﮨ ﮟﯿﮩﻧ ﺏﺎﯿﺘﺳﺩ ﺕﺎﻣﻮﻠﻌﻣ ﯽﮐ ﻥﮊﺭﻭ';
 
   @override
-  String get guestUser => 'مہمان صارف';
+  String get settings => 'ﺕﺎﺒﯿﺗﺮﺗ';
 
   @override
-  String get pleaseLoginViewProfile => 'اپنا پروفائل دیکھنے کے لیے لاگ ان کریں';
+  String get fullName => 'ﻡﺎﻧ ﺍﺭﻮﭘ';
 
   @override
-  String editTitle(String title) {
-    return '$title میں ترمیم';
+  String get phoneNumber => 'ﺮﺒﻤﻧ ﻥﻮﻓ';
+
+  @override
+  String get confirmPassword => '۔ﮟﯾﺮﮐ ﻖﯾﺪﺼﺗ ﯽﮐ ﮈﺭﻭ ﺱﺎﭘ';
+
+  @override
+  String get pleaseSignUpToGetStarted =>
+      '۔ﮟﯾﺮﮐ ﭖﺍ ﻦﺋﺎﺳ ﻡﺮﮐ ﮦﺍﺮﺑ ﮯﯿﻟ ﮯﮐ ﮯﻧﺮﮐ ﻉﻭﺮﺷ';
+
+  @override
+  String get noActiveOrder => '۔ﮯﮨ ﮟﯿﮩﻧ ﺭﮈﺭﺁ ﻝﺎﻌﻓ ﯽﺋﻮﮐ';
+
+  @override
+  String get yourOrderHasBeenDelivered => '!ﮯﮨ ﺎﯿﮔ ﺎﯾﺩ ﺎﭽﻨﮩﭘ ﺭﮈﺭﺁ ﺎﮐ ﭖﺁ';
+
+  @override
+  String callingphonenumber(Object phoneNumber) {
+    return '...\$$phoneNumber ﮯﮨ ﺎﮨﺭ ﺮﮐ ﻝﺎﮐ';
   }
 
   @override
-  String enterTitle(String title) {
-    return '$title درج کریں';
+  String get locationPermissionDenied => '۔ﯽﺌﮔ ﯼﺩ ﺮﮐ ﺩﺮﺘﺴﻣ ﺕﺯﺎﺟﺍ ﯽﮐ ﻡﺎﻘﻣ';
+
+  @override
+  String get courier => 'ﺮﯿﺋﺭﻮﮐ';
+
+  @override
+  String get estimatedDeliveryTime2 => 'ﺖﻗﻭ ﻊﻗﻮﺘﻣ ﺎﮐ ﯼﺭﻮﯿﻠﯾﮈ';
+
+  @override
+  String get yourOrderHasBeenReceived => '۔ﮯﮨ ﺎﯿﮔ ﻞﻣ ﺭﮈﺭﺁ ﺎﮐ ﭖﺁ';
+
+  @override
+  String get theRestaurantIsPreparingYourFood =>
+      '۔ﮯﮨ ﺎﮨﺭ ﺮﮐ ﺭﺎﯿﺗ ﺎﻧﺎﮭﮐ ﺎﮐ ﭖﺁ ﮞﺍﺭﻮﺘﺴﯾﺭ';
+
+  @override
+  String get yourOrderHasBeenPickedUpForDelivery =>
+      '۔ﮯﮨ ﺎﯿﮔ ﺎﯾﺎﮭﭨﺍ ﮯﯿﻟ ﮯﮐ ﯼﺭﻮﯿﻠﯾﮈ ﺭﮈﺭﺁ ﺎﮐ ﭖﺁ';
+
+  @override
+  String get orderArrivingSoon => '!ﮯﮨ ﺎﮨﺭﺁ ﺪﻠﺟ ﺭﮈﺭﺁ';
+
+  @override
+  String get selectDeliveryAddress => '۔ﮟﯾﺮﮐ ﺐﺨﺘﻨﻣ ﮧﺘﭘ ﺎﮐ ﯼﺭﻮﯿﻠﯾﮈ';
+
+  @override
+  String get noAddressesFound => 'ﮯﻠﻣ ﮟﯿﮩﻧ ﮯﺘﭘ ﯽﺋﻮﮐ';
+
+  @override
+  String get pleaseEnterAValidAddress => '۔ﮟﯾﺮﮐ ﺝﺭﺩ ﮧﺘﭘ ﺖﺳﺭﺩ ﮏﯾﺍ ﻡﺮﮐ ﮦﺍﺮﺑ';
+
+  @override
+  String get seeAll => 'ﮟﯿﮭﮑﯾﺩ ﺐﺳ';
+
+  @override
+  String get searchForRestaurantsOrDishes => '۔ﮟﯾﺮﮐ ﺵﻼ﻿ﺗ ﻥﺍﻮﮑﭘ ﺎﯾ ﮞﺍﺭﻮﺘﺴﯾﺭ';
+
+  @override
+  String get noRestaurantsFound => 'ﻼ﻿ﻣ ﮟﯿﮩﻧ ﮞﺍﺭﻮﺘﺴﯾﺭ ﯽﺋﻮﮐ';
+
+  @override
+  String get updateDialog => 'ﮒﻼ﻿ﯿﺋﺍﮈ ﭧﯾﮈ ﭖﺍ';
+
+  @override
+  String get updateAvailable => '۔ﮯﮨ ﺏﺎﯿﺘﺳﺩ ﭧﯾﮈ ﭖﺍ';
+
+  @override
+  String get aNewVersionOfBiteIsReady => 'Bite ﮯﮨ ﺭﺎﯿﺗ ﻥﮊﺭﻭ ﺎﯿﻧ ﮏﯾﺍ ﺎﮐ!';
+
+  @override
+  String get versionLatestversionIncludesNewFeatures =>
+      '،ﮟﯿﮨ ﻞﻣﺎﺷ ﺕﺎﯿﺻﻮﺼﺧ ﯽﺌﻧ ﮟﯿﻣ \$latestVersion ﻥﮊﺭﻭ';
+
+  @override
+  String get performanceImprovementsAndBugFixes =>
+      '۔ﺕﺎﺣﻼ﻿ﺻﺍ ﯽﮐ ﮓﺑ ﺭﻭﺍ ،ﯼﺮﺘﮩﺑ ﮟﯿﻣ ﯽﮔﺩﺮﮐﺭﺎﮐ';
+
+  @override
+  String get updateNow => '۔ﮟﯾﺮﮐ ﭧﯾﮈ ﭖﺍ ﯽﮭﺑﺍ';
+
+  @override
+  String get maybeLater => 'ﮟﯿﻣ ﺪﻌﺑ ﺪﯾﺎﺷ';
+
+  @override
+  String pleaseEnterWidgettitletolowercase(Object title) {
+    return 'ﮟﯾﺮﮐ ﺝﺭﺩ \$$title ﻡﺮﮐ ﮦﺍﺮﺑ';
   }
 
   @override
-  String get apply => 'لاگو کریں';
+  String get pleaseEnterAValidEmailAddress =>
+      '۔ﮟﯾﺮﮐ ﺝﺭﺩ ﺲﯾﺭﮉﯾﺍ ﻞﯿﻣ ﯼﺍ ﺖﺳﺭﺩ ﮏﯾﺍ ﻡﺮﮐ ﮦﺍﺮﺑ';
 
   @override
-  String get phone => 'فون';
+  String get pleaseEnterAValidPhoneNumber =>
+      '۔ﮟﯾﺮﮐ ﺝﺭﺩ ﺮﺒﻤﻧ ﻥﻮﻓ ﺖﺳﺭﺩ ﮏﯾﺍ ﻡﺮﮐ ﮦﺍﺮﺑ';
 
   @override
-  String get favourite => 'پسندیدہ';
+  String get passwordMustBeAtLeast8CharactersLong =>
+      '۔ﮯﯿﮨﺎﭼ ﺎﻧﻮﮨ ﺎﮐ ﻑﻭﺮﺣ 8 ﻢﮐ ﺯﺍ ﻢﮐ ﮈﺭﻭ ﺱﺎﭘ';
 
   @override
-  String get foods => 'کھانے';
+  String get howDoITrackMyOrder => '؟ﮞﻭﺮﮐ ﮏﯾﺮﭨ ﮯﺴﯿﮐ ﻮﮐ ﺭﮈﺭﺁ ﮯﻨﭘﺍ ﮟﯿﻣ';
 
   @override
-  String get restaurants => 'ریستوران';
+  String get canICancelMyOrder => '؟ﮞﻮﮨ ﺎﺘﮑﺳ ﺮﮐ ﺥﻮﺴﻨﻣ ﺭﮈﺭﺁ ﺎﻨﭘﺍ ﮟﯿﻣ ﺎﯿﮐ';
 
   @override
-  String get noFavouriteRestaurants => 'کوئی پسندیدہ ریستوران نہیں ملا۔';
+  String get whatIfMyOrderIsDelayed =>
+      '؟ﺎﮔﻮﮨ ﺎﯿﮐ ﻮﺗ ﮯﺋﺎﺟ ﻮﮨ ﺮﯿﺧﺎﺗ ﮟﯿﻣ ﺭﮈﺭﺁ ﮮﺮﯿﻣ ﺮﮔﺍ';
 
   @override
-  String get noFavouriteFoods => 'کوئی پسندیدہ کھانے نہیں ملے۔';
+  String get whatPaymentMethodsAreAccepted =>
+      '؟ﮟﯿﮨ ﮯﺗﺎﺟ ﮯﯿﮐ ﻝﻮﺒﻗ ﮯﻘﯾﺮﻃ ﮯﺳ ﻥﻮﮐ ﮯﮐ ﯽﮕﯿﺋﺍﺩﺍ';
 
   @override
-  String get orderRatings => 'آرڈر کی درجہ بندی';
+  String get isItSafeToUseMyCreditdebitCardOnBite =>
+      '؟ﮯﮨ ﻅﻮﻔﺤﻣ ﺎﻧﺮﮐ ﻝﺎﻤﻌﺘﺳﺍ ﮈﺭﺎﮐ ﭧﺒﯾﮈ/ﭦﮉﯾﺮﮐ ﺍﺮﯿﻣ ﺮﭘ Bite ﺎﯿﮐ';
 
   @override
-  String get restaurantRatings => 'ریستوران کی درجہ بندی';
+  String get canIUseMultiplePaymentMethodsForOneOrder =>
+      '؟ﮞﻮﮨ ﺎﺘﮑﺳ ﺮﮐ ﻝﺎﻤﻌﺘﺳﺍ ﮯﻘﯾﺮﻃ ﺩﺪﻌﺘﻣ ﮯﮐ ﯽﮕﯿﺋﺍﺩﺍ ﮯﯿﻟ ﮯﮐ ﺭﮈﺭﺁ ﮏﯾﺍ ﮟﯿﻣ ﺎﯿﮐ';
 
   @override
-  String get userReviews => 'صارف کے جائزے';
+  String get whatShouldIDoIfAPaymentFails =>
+      '؟ﮯﯿﮨﺎﭼ ﺎﻧﺮﮐ ﺎﯿﮐ ﮯﮭﺠﻣ ﻮﺗ ﮯﺋﺎﺟ ﻮﮨ ﻡﺎﮐﺎﻧ ﯽﮕﯿﺋﺍﺩﺍ ﺮﮔﺍ';
 
   @override
-  String get submit => 'جمع کریں';
+  String get whatAreYourDeliveryHours => '؟ﮟﯿﮨ ﺎﯿﮐ ﺕﺎﻗﻭﺍ ﮯﮐ ﻞﯿﺳﺮﺗ ﯽﮐ ﭖﺁ';
 
   @override
-  String get review => 'جائزہ';
+  String get doYouChargeADeliveryFee => '؟ﮟﯿﮨ ﮯﺘﯿﻟ ﺲﯿﻓ ﯼﺭﻮﯿﻠﯾﮈ ﭖﺁ ﺎﯿﮐ';
 
   @override
-  String get myReviews => 'میرے جائزے';
+  String get doYouDeliverToMyLocation => '؟ﮟﯿﮨ ﮯﺗﺎﭽﻨﮩﭘ ﺮﭘ ﻡﺎﻘﻣ ﮮﺮﯿﻣ ﭖﺁ ﺎﯿﮐ';
 
   @override
-  String get orderCancelledSuccessfully => 'آرڈر کامیابی سے منسوخ ہو گیا';
+  String get canIScheduleADeliveryForALaterTime =>
+      '؟ﮞﻮﮨ ﺎﺘﮑﺳ ﺎﻨﺑ ﻝﻭﮉﯿﺷ ﺎﮐ ﯼﺭﻮﯿﻠﯾﮈ ﮟﯿﻣ ﺪﻌﺑ ﮟﯿﻣ ﺎﯿﮐ';
 
   @override
-  String get clearOrderHistory => 'آرڈر کی تاریخ صاف کریں';
+  String get ongoing => '۔ﮯﮨ ﯼﺭﺎﺟ';
 
   @override
-  String get confirmDeleteOrderHistory =>
-      'کیا آپ واقعی تمام آرڈر کی تاریخ حذف کرنا چاہتے ہیں؟ یہ عمل واپس نہیں ہو سکتا۔';
+  String get history => 'ﺦﯾﺭﺎﺗ';
 
   @override
-  String get cancel => 'منسوخ';
+  String get favorites => 'ﮦﺪﯾﺪﻨﺴﭘ';
 
   @override
-  String get clearAll => 'سب صاف کریں';
+  String get reviews => 'ﮮﺰﺋﺎﺟ';
 
   @override
-  String get clearOrderHistoryMenu => 'آرڈر کی تاریخ صاف کریں';
-
-  @override
-  String get orderHistory => 'آرڈر کی تاریخ';
-
-  @override
-  String get noCompletedOrders => 'ابھی تک کوئی مکمل آرڈر نہیں';
-
-  @override
-  String get noOngoingOrders => 'کوئی جاری آرڈر نہیں';
-
-  @override
-  String get noOrderHistory => 'آرڈر کی کوئی تاریخ نہیں';
-
-  @override
-  String get ongoing => 'جاری';
-
-  @override
-  String get history => 'تاریخ';
-
-  @override
-  String get noActiveOrder => 'کوئی فعال آرڈر نہیں';
-
-  @override
-  String get orderDelivered => 'آپ کا آرڈر پہنچا دیا گیا ہے!';
-
-  @override
-  String callingNumber(String phoneNumber) {
-    return '$phoneNumber پر کال ہو رہی ہے...';
-  }
-
-  @override
-  String get locationPermissionDenied => 'مقام کی اجازت سے انکار';
-
-  @override
-  String get orderReceived => 'آپ کا آرڈر موصول ہو گیا ہے';
-
-  @override
-  String get restaurantPreparingFood => 'ریستوران آپ کا کھانا تیار کر رہا ہے';
-
-  @override
-  String get orderPickedUp => 'آپ کا آرڈر ڈیلیوری کے لیے اٹھا لیا گیا ہے';
-
-  @override
-  String get orderArrivingSoon => 'آرڈر جلد پہنچنے والا ہے!';
-
-  @override
-  String get estimatedDeliveryTime => 'متوقع ڈیلیوری کا وقت';
-
-  @override
-  String estimatedMinutes(String minutes) {
-    return '$minutes منٹ';
-  }
-
-  @override
-  String orderedAt(String date) {
-    return 'آرڈر کیا گیا $date';
-  }
-
-  @override
-  String get courier => 'کوریئر';
-
-  @override
-  String get noNotificationsYet => 'ابھی تک کوئی اطلاعات نہیں';
-
-  @override
-  String unreadNotificationsCount(int count) {
-    return '$count غیر پڑھی اطلاعات';
-  }
-
-  @override
-  String get noNotifications => 'کوئی اطلاعات نہیں';
-
-  @override
-  String get notifications => 'اطلاعات';
-
-  @override
-  String get markAllAsRead => 'سب کو پڑھا ہوا نشان زد کریں';
-
-  @override
-  String get clearAllNotifications => 'سب صاف کریں';
-
-  @override
-  String get allTab => 'سب';
-
-  @override
-  String get unread => 'غیر پڑھی';
-
-  @override
-  String get preferences => 'ترجیحات';
-
-  @override
-  String get darkMode => 'ڈارک موڈ';
-
-  @override
-  String get language => 'زبان';
-
-  @override
-  String get english => 'انگریزی';
-
-  @override
-  String get themes => 'تھیمز';
-
-  @override
-  String get settings => 'ترتیبات';
-
-  @override
-  String get versionInfoNotAvailable => 'ورژن کی معلومات دستیاب نہیں';
-
-  @override
-  String get faqs => 'عمومی سوالات';
-
-  @override
-  String get orderFaq => 'آرڈر';
-
-  @override
-  String get paymentsFaq => 'ادائیگیاں';
-
-  @override
-  String get deliveryFaq => 'ڈیلیوری';
-
-  @override
-  String get chat => 'چیٹ';
-
-  @override
-  String get call => 'کال';
-
-  @override
-  String get howTrackOrder => 'میں اپنا آرڈر کیسے ٹریک کروں؟';
-
-  @override
-  String get canCancelOrder => 'کیا میں اپنا آرڈر منسوخ کر سکتا ہوں؟';
-
-  @override
-  String get whatIfOrderDelayed => 'اگر میرا آرڈر دیر سے آئے تو؟';
-
-  @override
-  String get whatPaymentMethodsAccepted => 'کون سے ادائیگی کے طریقے قبول ہیں؟';
-
-  @override
-  String get isCardSafeBite =>
-      'کیا Bite پر اپنا کریڈٹ/ڈیبٹ کارڈ استعمال کرنا محفوظ ہے؟';
-
-  @override
-  String get canUseMultiplePaymentMethods =>
-      'کیا میں ایک آرڈر کے لیے متعدد ادائیگی کے طریقے استعمال کر سکتا ہوں؟';
-
-  @override
-  String get whatIfPaymentFails =>
-      'اگر ادائیگی ناکام ہو جائے تو مجھے کیا کرنا چاہیے؟';
-
-  @override
-  String get whatDeliveryHours => 'آپ کے ڈیلیوری کے اوقات کیا ہیں؟';
-
-  @override
-  String get chargeDeliveryFee => 'کیا آپ ڈیلیوری فیس لیتے ہیں؟';
-
-  @override
-  String get deliverToLocation => 'کیا آپ میرے مقام پر ڈیلیوری کرتے ہیں؟';
-
-  @override
-  String get scheduleDeliveryLater =>
-      'کیا میں بعد میں ڈیلیوری شیڈول کر سکتا ہوں؟';
-
-  @override
-  String get clear => 'صاف کریں';
-
-  @override
-  String get applyFilter => 'لاگو کریں';
-
-  @override
-  String get ratingFilter => 'درجہ بندی';
-
-  @override
-  String get lessThan3_5 => '< 3.5';
-
-  @override
-  String get between3_5And4_0 => '3.5 - 4.0';
-
-  @override
-  String get greaterThan4_0 => '> 4.0';
-
-  @override
-  String get deliveryTimeFilter => 'ڈیلیوری کا وقت';
-
-  @override
-  String get lessThan15Min => '< 15 منٹ';
-
-  @override
-  String get between15And30Min => '15 - 30 منٹ';
-
-  @override
-  String get greaterThan30Min => '> 30 منٹ';
-
-  @override
-  String get filterYourSearch => 'اپنی تلاش فلٹر کریں';
-
-  @override
-  String get seeAll => 'سب دیکھیں';
-
-  @override
-  String enterField(String field) {
-    return '$field درج کریں';
-  }
-
-  @override
-  String pleaseEnterField(String field) {
-    return 'براہ کرم $field درج کریں';
-  }
-
-  @override
-  String get pleaseEnterValidEmail =>
-      'براہ کرم ایک درست ای میل ایڈریس درج کریں';
-
-  @override
-  String get pleaseEnterValidPhone => 'براہ کرم ایک درست فون نمبر درج کریں';
-
-  @override
-  String get passwordMinimum8Chars => 'پاسورڈ کم از کم 8 حروف کا ہونا چاہیے';
-
-  @override
-  String get favorites => 'پسندیدہ';
-
-  @override
-  String get reviews => 'جائزے';
-
-  @override
-  String get updateAvailable => 'اپ ڈیٹ دستیاب ہے';
-
-  @override
-  String get newBiteVersionReady => 'Bite کا نیا ورژن تیار ہے!';
-
-  @override
-  String updateDescription(String version) {
-    return 'ورژن $version میں نئی خصوصیات، کارکردگی میں بہتری، اور بگ فکسز شامل ہیں۔';
-  }
-
-  @override
-  String versionPrefix(String version) {
-    return 'v$version';
-  }
-
-  @override
-  String get updateNow => 'ابھی اپ ڈیٹ کریں';
-
-  @override
-  String get maybeLater => 'شاید بعد میں';
-
-  @override
-  String errorMessage(String message) {
-    return 'خرابی: $message';
-  }
+  String get phone => 'ﻥﻮﻓ';
 }

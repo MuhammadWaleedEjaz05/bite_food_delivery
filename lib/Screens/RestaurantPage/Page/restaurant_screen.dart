@@ -4,6 +4,7 @@ import 'package:bite_food_delivery/Cubits/FoodItemCubit/food_item_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Models/restaurants_model.dart';
 import 'package:bite_food_delivery/Screens/RestaurantPage/Widgets/bite_food_card.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -90,7 +91,7 @@ class _FoodItemSection extends StatelessWidget {
             } else if (state is FoodItemError) {
               return Center(
                 child: Text(
-                  'Failed to load food items. Please try again later.',
+                  S.of(context).failedToLoadFoodItemsPleaseTryAgainLater,
                 ),
               );
             } else if (state is FoodItemLoaded) {
@@ -104,7 +105,7 @@ class _FoodItemSection extends StatelessWidget {
                         .toList();
               if (filteredItems.isEmpty) {
                 return Center(
-                  child: Text('No food items available for this category.'),
+                  child: Text(S.of(context).noFoodItemsAvailableForThisCategory),
                 );
               } else {
                 return ListView(
@@ -158,7 +159,7 @@ class _CategorySelectionSection extends StatelessWidget {
             } else if (state is FoodItemError) {
               return Center(
                 child: Text(
-                  'Failed to load food items. Please try again later.',
+                  S.of(context).failedToLoadFoodItemsPleaseTryAgainLater,
                 ),
               );
             } else if (state is FoodItemLoaded) {

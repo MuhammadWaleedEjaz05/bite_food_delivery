@@ -1,3 +1,4 @@
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,7 +22,7 @@ class BiteUpdateDialog extends StatelessWidget {
     return showGeneralDialog(
       context: context,
       barrierDismissible: false,
-      barrierLabel: 'Update Dialog',
+      barrierLabel: S.of(context).updateDialog,
       barrierColor: Colors.black54,
       transitionDuration: const Duration(milliseconds: 350),
       transitionBuilder: (context, anim1, anim2, child) {
@@ -106,7 +107,7 @@ class BiteUpdateDialog extends StatelessWidget {
                       ),
                       12.verticalSpace,
                       Text(
-                        'Update Available',
+                        S.of(context).updateAvailable,
                         style: GoogleFonts.sen(
                           fontSize: 22.sp,
                           fontWeight: FontWeight.bold,
@@ -122,7 +123,7 @@ class BiteUpdateDialog extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        'A new version of Bite is ready!',
+                        S.of(context).aNewVersionOfBiteIsReady,
                         textAlign: TextAlign.center,
                         style: GoogleFonts.sen(
                           fontSize: 16.sp,
@@ -132,8 +133,7 @@ class BiteUpdateDialog extends StatelessWidget {
                       ),
                       8.verticalSpace,
                       Text(
-                        'Version $latestVersion includes new features, '
-                        'performance improvements, and bug fixes.',
+                        S.of(context).versionLatestversionIncludesNewFeatures,
                         textAlign: TextAlign.center,
                         style: GoogleFonts.sen(
                           fontSize: 13.5.sp,
@@ -199,7 +199,7 @@ class BiteUpdateDialog extends StatelessWidget {
                               Icon(Icons.download_rounded, size: 20.sp),
                               8.horizontalSpace,
                               Text(
-                                'Update Now',
+                                S.of(context).updateNow,
                                 style: GoogleFonts.sen(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.bold,
@@ -226,7 +226,7 @@ class BiteUpdateDialog extends StatelessWidget {
                             ),
                           ),
                           child: Text(
-                            'Maybe Later',
+                            S.of(context).maybeLater,
                             style: GoogleFonts.sen(
                               fontSize: 15.sp,
                               fontWeight: FontWeight.w600,

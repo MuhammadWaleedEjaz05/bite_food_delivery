@@ -1,5 +1,6 @@
 import 'package:bite_food_delivery/Cubits/FirstTimeLaunchCubit/first_time_launch_cubit.dart';
 import 'package:bite_food_delivery/Screens/OnboardingPage/Widgets/bite_carousel_slider_page.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:bite_food_delivery/main.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -8,21 +9,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final List<Widget> carouselPages = [
   BiteCarouselSliderPage(
-    title: 'All your favorites',
-    description:
-        'Get all your loved foods in one once place,you just place the orer we do the rest',
+    title: S.current.allYourFavorites,
+    description: S.current.getAllYourLovedFoodsInOnePlace,
     index: 0,
   ),
   BiteCarouselSliderPage(
-    title: 'Order from choosen chef',
-    description:
-        'Get all your loved foods in one once place,you just place the orer we do the rest',
+    title: S.current.orderFromChoosenChef,
+    description: S.current.getAllYourLovedFoodsInOnePlace,
     index: 1,
   ),
   BiteCarouselSliderPage(
-    title: 'Free delivery offers',
-    description:
-        'Get all your loved foods in one once place,you just place the orer we do the rest',
+    title: S.current.freeDeliveryOffers,
+    description: S.current.getAllYourLovedFoodsInOnePlace,
     index: 2,
   ),
 ];
@@ -92,7 +90,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 textStyle: Theme.of(context).textTheme.titleLarge,
               ),
-              child: Text(_isLastPage ? 'Get Started' : 'Next'),
+              child: Text(_isLastPage ? S.of(context).getStarted : S.of(context).next),
             ),
           ),
           5.verticalSpace,
@@ -104,7 +102,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               );
             },
             child: Text(
-              "Skip",
+              S.of(context).skip,
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium!.copyWith(color: Colors.grey),

@@ -5,6 +5,7 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_heading.dart';
 import 'package:bite_food_delivery/Screens/SearchPage/Widgets/bite_recent_search_button.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_restaurant_card.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_search_bar.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,14 +41,16 @@ class _PopularRestaurantSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BiteHeading(title: 'Popular Restaurants', isSeeAll: false),
+        BiteHeading(title: S.of(context).popularRestaurants, isSeeAll: false),
         10.verticalSpace,
         BlocBuilder<RestaurantsCubit, RestaurantsState>(
           builder: (context, state) {
             if (state is RestaurantsLoading) {
               return Center(child: CircularProgressIndicator());
             } else if (state is RestaurantsError) {
-              return Center(child: Text('Error: ${state.message}'));
+              return Center(
+                child: Text(S.of(context).errorStatemessage(state.message)),
+              );
             } else if (state is RestaurantsLoaded) {
               final popular = state.restaurants
                   .where((restaurant) => restaurant.rating >= 4.5)
@@ -55,7 +58,7 @@ class _PopularRestaurantSection extends StatelessWidget {
               if (popular.isEmpty) {
                 return Center(
                   child: Text(
-                    'No popular restaurants found',
+                    S.of(context).noPopularRestaurantsFound,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onSecondary,
                       fontWeight: FontWeight.normal,
@@ -89,7 +92,7 @@ class _RecentSearchSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BiteHeading(title: 'Recent Keywords', isSeeAll: false),
+        BiteHeading(title: S.of(context).recentKeywords, isSeeAll: false),
         10.verticalSpace,
         SizedBox(
           height: 40.h,
@@ -98,7 +101,7 @@ class _RecentSearchSection extends StatelessWidget {
               if (state is RecentSearchedAdded) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('Added "${state.search}" to recent searches'),
+                    content: Text(S.of(context).addedStatesearchToRecentSearches(state.search)),
                     duration: Duration(seconds: 2),
                   ),
                 );
@@ -106,7 +109,7 @@ class _RecentSearchSection extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
-                      'Removed "${state.search}" from recent searches',
+                      S.of(context).removedStatesearchFromRecentSearches(state.search),
                     ),
                     duration: Duration(seconds: 2),
                   ),
@@ -118,7 +121,7 @@ class _RecentSearchSection extends StatelessWidget {
                 if (state.recentSearches.isEmpty) {
                   return Center(
                     child: Text(
-                      'No recent searches',
+                      S.of(context).noRecentSearches,
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: Theme.of(context).colorScheme.onSecondary,
                         fontWeight: FontWeight.normal,
@@ -155,7 +158,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return BiteAppBar(
       title: Text(
-        'Search',
+        S.of(context).search,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,

@@ -3,6 +3,7 @@ import 'package:bite_food_delivery/Cubits/PaymentCubit/payment_method_selector_c
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Models/credit_card_model.dart';
 import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,8 +43,6 @@ class PaymentScreen extends StatelessWidget {
   }
 }
 
-// ─── Payment Method Selection ────────────────────────────────────────────────
-
 class _PaymentMethodSection extends StatelessWidget {
   const _PaymentMethodSection();
 
@@ -54,7 +53,7 @@ class _PaymentMethodSection extends StatelessWidget {
       children: [
         _SectionHeader(
           icon: Icons.payment_outlined,
-          title: 'Select Payment Method',
+          title: S.of(context).selectPaymentMethod,
         ),
         12.verticalSpace,
         BlocBuilder<PaymentMethodSelectorCubit, CreditCardModel>(
@@ -70,8 +69,8 @@ class _PaymentMethodSection extends StatelessWidget {
                 children: [
                   _PaymentMethodTile(
                     svgPath: 'assets/svgs/Cash.svg',
-                    label: 'Cash on Delivery',
-                    subtitle: 'Pay when your order arrives',
+                    label: S.of(context).cashOnDelivery,
+                    subtitle: S.of(context).payWhenYourOrderArrives,
                     isSelected: selectedType == CreditCardType.onCash,
                     onTap: () {
                       context
@@ -79,7 +78,7 @@ class _PaymentMethodSection extends StatelessWidget {
                           .selectPaymentMethod(null, CreditCardType.onCash);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Cash on Delivery selected'),
+                          content: Text(S.of(context).cashOnDeliverySelected),
                           duration: const Duration(seconds: 2),
                         ),
                       );
@@ -96,8 +95,8 @@ class _PaymentMethodSection extends StatelessWidget {
                   ),
                   _PaymentMethodTile(
                     svgPath: 'assets/svgs/Visa.svg',
-                    label: 'Visa',
-                    subtitle: 'Select from your saved Visa cards',
+                    label: S.of(context).visa,
+                    subtitle: S.of(context).selectFromYourSavedVisaCards,
                     isSelected: selectedType == CreditCardType.visa,
                     onTap: () => _selectCardType(context, CreditCardType.visa),
                   ),
@@ -111,8 +110,8 @@ class _PaymentMethodSection extends StatelessWidget {
                   ),
                   _PaymentMethodTile(
                     svgPath: 'assets/svgs/Mastercard.svg',
-                    label: 'Mastercard',
-                    subtitle: 'Select from your saved Mastercards',
+                    label: S.of(context).mastercard,
+                    subtitle: S.of(context).selectFromYourSavedMastercards,
                     isSelected: selectedType == CreditCardType.mastercard,
                     onTap: () =>
                         _selectCardType(context, CreditCardType.mastercard),
@@ -236,8 +235,6 @@ class _PaymentMethodTile extends StatelessWidget {
   }
 }
 
-// ─── Saved Cards List ────────────────────────────────────────────────────────
-
 class _SavedCardsSection extends StatelessWidget {
   const _SavedCardsSection();
 
@@ -246,21 +243,30 @@ class _SavedCardsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _SectionHeader(icon: Icons.credit_card_rounded, title: 'Saved Cards'),
+        _SectionHeader(
+          icon: Icons.credit_card_rounded,
+          title: S.of(context).savedCards,
+        ),
         12.verticalSpace,
         BlocConsumer<CreditCardCubit, CreditCardState>(
           listener: (context, state) {
             if (state is CreditCardError) {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text('Error: ${state.error}')));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(S.of(context).errorStatemessage(state.error)),
+                ),
+              );
             } else if (state is CreditCardAdded) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Credit card added successfully')),
+                SnackBar(
+                  content: Text(S.of(context).creditCardAddedSuccessfully),
+                ),
               );
             } else if (state is CreditCardDeleted) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Credit card deleted successfully')),
+                SnackBar(
+                  content: Text(S.of(context).creditCardDeletedSuccessfully),
+                ),
               );
             }
           },
@@ -303,7 +309,7 @@ class _SavedCardsSection extends StatelessWidget {
               return Center(
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 40.h),
-                  child: Text('Failed to load cards'),
+                  child: Text(S.of(context).failedToLoadCards),
                 ),
               );
             }
@@ -335,14 +341,14 @@ class _EmptyCardPlaceholder extends StatelessWidget {
           ),
           12.verticalSpace,
           Text(
-            'No saved cards yet',
+            S.of(context).noSavedCardsYet,
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
               color: Theme.of(context).colorScheme.onSecondary,
             ),
           ),
           6.verticalSpace,
           Text(
-            'Add a card below to get started',
+            S.of(context).addACardBelowToGetStarted,
             style: Theme.of(context).textTheme.labelMedium!.copyWith(
               color: Theme.of(context).colorScheme.onSecondary,
             ),
@@ -425,7 +431,11 @@ class _SavedCardTile extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              'Card ending in ${creditCard.last4} selected',
+                              S
+                                  .of(context)
+                                  .cardEndingInCreditcardlast4Selected(
+                                    creditCard.last4,
+                                  ),
                             ),
                             duration: const Duration(seconds: 2),
                           ),
@@ -498,8 +508,6 @@ class _SmallActionButton extends StatelessWidget {
   }
 }
 
-// ─── Add Card Button ─────────────────────────────────────────────────────────
-
 class _AddCardButton extends StatelessWidget {
   const _AddCardButton();
 
@@ -513,7 +521,7 @@ class _AddCardButton extends StatelessWidget {
               Navigator.pushNamed(context, '/add_card_screen');
             },
             icon: Icon(Icons.add_rounded, size: 22.r),
-            label: Text('Add New Card'),
+            label: Text(S.of(context).addNewCard),
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(vertical: 12.h),
               backgroundColor: Theme.of(context).colorScheme.primary,
@@ -529,8 +537,6 @@ class _AddCardButton extends StatelessWidget {
     );
   }
 }
-
-// ─── Shared ──────────────────────────────────────────────────────────────────
 
 class _SectionHeader extends StatelessWidget {
   final IconData icon;
@@ -561,7 +567,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
     return BiteAppBar(
       backButton: true,
       title: Text(
-        'Payment Method',
+        S.of(context).paymentMethod,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,

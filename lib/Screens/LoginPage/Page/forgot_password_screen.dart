@@ -1,6 +1,7 @@
 import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_user_auth_text_field.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,7 +56,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     Form(
                       key: _forgotPasswordFormKey,
                       child: BiteUserAuthTextField(
-                        title: 'Email',
+                        title: S.of(context).email,
                         isEmail: true,
                         controller: _forgotPasswordEmailController,
                       ),
@@ -70,11 +71,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             builder: (BuildContext dialogContext) {
                               return AlertDialog(
                                 title: Text(
-                                  'Password Reset Link Sent',
+                                  S.of(context).passwordResetLinkSent,
                                   style: Theme.of(context).textTheme.titleLarge,
                                 ),
                                 content: Text(
-                                  'Check your email for a password reset link. Click the link to reset your password on our website.',
+                                  S
+                                      .of(context)
+                                      .checkYourEmailForAPasswordResetLink,
                                   style: Theme.of(context).textTheme.titleSmall!
                                       .copyWith(fontWeight: FontWeight.normal),
                                 ),
@@ -89,9 +92,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                       ScaffoldMessenger.of(
                                         context,
                                       ).showSnackBar(
-                                        const SnackBar(
+                                        SnackBar(
                                           content: Text(
-                                            'Password reset successfully! Please login with your new password.',
+                                            S
+                                                .of(context)
+                                                .passwordResetSuccessfully,
                                           ),
                                           backgroundColor: Colors.green,
                                           duration: Duration(seconds: 3),
@@ -105,7 +110,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                       foregroundColor: Colors.white,
                                     ),
                                     child: Text(
-                                      'Done',
+                                      S.of(context).done,
                                       style: Theme.of(
                                         context,
                                       ).textTheme.titleSmall,
@@ -118,7 +123,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         } else if (state is UserAuthError) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text(state.message),
+                              content: Text(
+                                S.of(context).errorStatemessage(state.message),
+                              ),
                               backgroundColor: Colors.red,
                             ),
                           );
@@ -171,7 +178,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                               ),
                                         ),
                                       )
-                                    : Text('Send Reset Link'),
+                                    : Text(S.of(context).sendResetLink),
                               ),
                             ),
                           ],
@@ -204,12 +211,12 @@ class _HeadTitleSection extends StatelessWidget {
           actions: [],
         ),
         Text(
-          'Forgot Password',
+          S.of(context).forgotPassword,
           style: Theme.of(context).textTheme.displayLarge,
         ),
 
         Text(
-          'Please enter your email address to receive a password reset link.',
+          S.of(context).pleaseEnterYourEmailAddressToReceiveAPasswordReset,
           style: Theme.of(
             context,
           ).textTheme.bodyMedium!.copyWith(color: Colors.white),

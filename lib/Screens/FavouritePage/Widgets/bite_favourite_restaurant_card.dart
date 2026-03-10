@@ -1,5 +1,6 @@
 import 'package:bite_food_delivery/Cubits/FavouriteCubit/favourite_cubit.dart';
 import 'package:bite_food_delivery/Models/restaurants_model.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -91,11 +92,11 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                   builder: (context) {
                     return AlertDialog(
                       title: Text(
-                        'Remove from favourites',
+                        S.of(context).removeFromFavourites,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       content: Text(
-                        'Are you sure you want to remove this restaurant from your favourites?',
+                        S.of(context).areYouSureYouWantToRemoveThisRestaurantFrom,
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
                           fontWeight: FontWeight.normal,
                         ),
@@ -106,7 +107,7 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                             Navigator.pop(context);
                           },
                           child: Text(
-                            'Cancel',
+                            S.of(context).cancel,
                             style: Theme.of(context).textTheme.titleSmall!
                                 .copyWith(fontWeight: FontWeight.normal),
                           ),
@@ -119,7 +120,7 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                             );
                           },
                           child: Text(
-                            'Remove',
+                            S.of(context).remove,
                             style: Theme.of(context).textTheme.titleSmall!
                                 .copyWith(fontWeight: FontWeight.normal),
                           ),

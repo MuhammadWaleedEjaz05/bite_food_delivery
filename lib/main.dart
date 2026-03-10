@@ -13,15 +13,17 @@ import 'package:bite_food_delivery/configs/shared_preference_functions.dart';
 import 'package:bite_food_delivery/configs/stripe_const.dart';
 import 'package:bite_food_delivery/configs/theme_list.dart';
 import 'package:bite_food_delivery/firebase_options.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
@@ -59,11 +61,12 @@ class MyApp extends StatelessWidget {
                 : ThemeMode.light,
             routes: routes,
             debugShowCheckedModeBanner: false,
-            supportedLocales: AppLocalizations.supportedLocales,
-            locale: Locale('en'),
+            supportedLocales: S.delegate.supportedLocales,
+            locale: Locale(context.watch<SettingsCubit>().state.languageCode),
             localizationsDelegates: [
-              ...AppLocalizations.localizationsDelegates,
+              S.delegate,
               FormBuilderLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
             ],
             home: SplashScreen(),
           );
@@ -123,7 +126,7 @@ class MainPage extends StatelessWidget {
             backgroundColor: Theme.of(context).colorScheme.primary,
             icon: const Icon(Icons.delivery_dining, color: Colors.white),
             label: Text(
-              AppLocalizations.of(context)!.trackOrder,
+              S.of(context).trackOrder,
               style: GoogleFonts.sen(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,

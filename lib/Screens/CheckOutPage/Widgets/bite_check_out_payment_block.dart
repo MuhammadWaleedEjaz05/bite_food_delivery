@@ -1,4 +1,5 @@
 import 'package:bite_food_delivery/Models/credit_card_model.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -36,10 +37,10 @@ class BiteCheckOutPaymentBlock extends StatelessWidget {
                 4.verticalSpace,
                 Text(
                   creditCard!.cardType == CreditCardType.onCash
-                      ? 'Pays When Order Arrives'
+                      ? S.of(context).paysWhenOrderArrives
                       : creditCard!.last4.isNotEmpty
                       ? '**** **** **** ${creditCard!.last4}'
-                      : 'No card details',
+                      : S.of(context).noCardDetails,
                   style: Theme.of(context).textTheme.labelLarge!.copyWith(
                     color: Theme.of(context).colorScheme.onSecondary,
                   ),

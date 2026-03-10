@@ -4,6 +4,7 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_address_text_field.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Models/address_model.dart';
 import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,8 +24,12 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   final TextEditingController _zipController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _countryController = TextEditingController();
-  final List<String> _addressLabels = const ['Home', 'Work', 'Other'];
-  String _selectedLabel = 'Home';
+  final List<String> _addressLabels = [
+    S.current.home,
+    S.current.work,
+    S.current.other,
+  ];
+  String _selectedLabel = S.current.home;
   LatLng? _selectedLocation;
   bool _isMapMoving = false;
 
@@ -92,7 +97,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         if (state is MapLocationPermissionDenied) {
                           return Center(
                             child: Text(
-                              'Location permission is required',
+                              S.of(context).locationPermissionIsRequired,
                               style: Theme.of(context).textTheme.titleSmall!
                                   .copyWith(fontWeight: FontWeight.normal),
                             ),
@@ -102,7 +107,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         if (state is MapLocationError) {
                           return Center(
                             child: Text(
-                              'Error: ${state.message}',
+                              S.of(context).errorStatemessage(state.message),
                               style: Theme.of(context).textTheme.titleSmall!
                                   .copyWith(fontWeight: FontWeight.normal),
                             ),
@@ -237,29 +242,38 @@ class _NewAddressSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BiteAddressTextField(title: 'Address', controller: addressController),
+        BiteAddressTextField(
+          title: S.of(context).address,
+          controller: addressController,
+        ),
         10.verticalSpace,
         Row(
           children: [
             Expanded(
               child: BiteAddressTextField(
-                title: 'Street No.',
+                title: S.of(context).streetNo,
                 controller: streetController,
               ),
             ),
             10.horizontalSpace,
             Expanded(
               child: BiteAddressTextField(
-                title: 'ZIP Code',
+                title: S.of(context).zipCode,
                 controller: zipController,
               ),
             ),
           ],
         ),
         10.verticalSpace,
-        BiteAddressTextField(title: 'City', controller: cityController),
+        BiteAddressTextField(
+          title: S.of(context).city,
+          controller: cityController,
+        ),
         10.verticalSpace,
-        BiteAddressTextField(title: 'Country', controller: countryController),
+        BiteAddressTextField(
+          title: S.of(context).country,
+          controller: countryController,
+        ),
       ],
     );
   }
@@ -285,7 +299,7 @@ class _AddressLabelSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Label',
+          S.of(context).label,
           style: Theme.of(
             context,
           ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
@@ -366,8 +380,8 @@ class _SaveAddressSection extends StatelessWidget {
               final country = countryController.text.trim();
               if (city.isEmpty || zipCode.isEmpty || country.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Please fill all required fields'),
+                  SnackBar(
+                    content: Text(S.of(context).pleaseFillAllRequiredFields),
                   ),
                 );
                 return;
@@ -380,8 +394,8 @@ class _SaveAddressSection extends StatelessWidget {
               final currentUser = getCurrentUser();
               if (currentUser == null) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('User not authenticated'),
+                  SnackBar(
+                    content: Text(S.of(context).userNotAuthenticated),
                     backgroundColor: Colors.red,
                   ),
                 );
@@ -404,8 +418,8 @@ class _SaveAddressSection extends StatelessWidget {
                   .addAddress(address)
                   .then((_) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Address added successfully!'),
+                      SnackBar(
+                        content: Text(S.of(context).addressAddedSuccessfully),
                         backgroundColor: Colors.green,
                       ),
                     );
@@ -414,7 +428,7 @@ class _SaveAddressSection extends StatelessWidget {
                   .catchError((error) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Failed to add address: $error'),
+                        content: Text(S.of(context).failedToAddAddressError(error.toString())),
                         backgroundColor: Colors.red,
                       ),
                     );
@@ -429,7 +443,7 @@ class _SaveAddressSection extends StatelessWidget {
               ),
               textStyle: Theme.of(context).textTheme.headlineLarge,
             ),
-            child: Text('Save'),
+            child: Text(S.of(context).save),
           ),
         ),
       ],

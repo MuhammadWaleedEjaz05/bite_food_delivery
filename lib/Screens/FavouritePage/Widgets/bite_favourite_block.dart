@@ -1,5 +1,6 @@
 import 'package:bite_food_delivery/Cubits/FavouriteCubit/favourite_cubit.dart';
 import 'package:bite_food_delivery/Models/food_item_model.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -77,11 +78,11 @@ class BiteFavouriteBlock extends StatelessWidget {
                     builder: (context) {
                       return AlertDialog(
                         title: Text(
-                          'Remove from favourites',
+                          S.of(context).removeFromFavourites,
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                         content: Text(
-                          'Are you sure you want to remove this food item from your favourites?',
+                          S.of(context).areYouSureYouWantToRemoveThisFoodItem,
                           style: Theme.of(context).textTheme.titleSmall!
                               .copyWith(fontWeight: FontWeight.normal),
                         ),
@@ -91,7 +92,7 @@ class BiteFavouriteBlock extends StatelessWidget {
                               Navigator.pop(context);
                             },
                             child: Text(
-                              'Cancel',
+                              S.of(context).cancel,
                               style: Theme.of(context).textTheme.titleSmall!
                                   .copyWith(fontWeight: FontWeight.normal),
                             ),
@@ -104,7 +105,7 @@ class BiteFavouriteBlock extends StatelessWidget {
                                   .removeFoodItemFromFavourite(foodItem.id);
                             },
                             child: Text(
-                              'Remove',
+                              S.of(context).remove,
                               style: Theme.of(context).textTheme.titleSmall!
                                   .copyWith(fontWeight: FontWeight.normal),
                             ),
@@ -131,7 +132,7 @@ class BiteFavouriteBlock extends StatelessWidget {
                   ),
                   onPressed: () {},
                   child: Text(
-                    'Order Again',
+                    S.of(context).orderAgain,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

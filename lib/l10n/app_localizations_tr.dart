@@ -9,400 +9,18 @@ class AppLocalizationsTr extends AppLocalizations {
   AppLocalizationsTr([String locale = 'tr']) : super(locale);
 
   @override
-  String get allYourFavorites => 'Tüm favorileriniz';
-
-  @override
-  String get getLovedFoodsDescription =>
-      'Sevdiğiniz tüm yemekleri tek bir yerde bulun, siz sadece sipariş verin gerisini biz halledelim';
-
-  @override
-  String get orderFromChosenChef => 'Seçtiğiniz şeften sipariş verin';
-
-  @override
-  String get freeDeliveryOffers => 'Ücretsiz teslimat fırsatları';
-
-  @override
-  String get getStarted => 'Başlayın';
-
-  @override
-  String get next => 'İleri';
-
-  @override
-  String get skip => 'Atla';
-
-  @override
-  String get login => 'Giriş Yap';
-
-  @override
-  String get logIn => 'Giriş Yap';
-
-  @override
-  String get pleaseSignInToContinue => 'Devam etmek için lütfen giriş yapın';
-
-  @override
-  String get or => 'Veya';
-
-  @override
-  String get successfullySignedInGoogle =>
-      'Google ile başarıyla giriş yapıldı!';
-
-  @override
-  String get dontHaveAccount => 'Hesabınız yok mu? ';
-
-  @override
-  String get signUp => 'Kayıt Ol';
-
-  @override
-  String get rememberMe => 'Beni hatırla';
-
-  @override
-  String get forgotPassword => 'Şifrenizi mi unuttunuz?';
-
-  @override
-  String get email => 'E-posta';
-
-  @override
-  String get password => 'Şifre';
-
-  @override
-  String get forgotPasswordTitle => 'Şifremi Unuttum';
-
-  @override
-  String get passwordResetLinkSent => 'Şifre Sıfırlama Bağlantısı Gönderildi';
-
-  @override
-  String get checkEmailResetLink =>
-      'Şifre sıfırlama bağlantısı için e-postanızı kontrol edin. Şifrenizi sıfırlamak için bağlantıya tıklayın.';
-
-  @override
-  String get done => 'Tamam';
-
-  @override
-  String get passwordResetSuccess =>
-      'Şifre başarıyla sıfırlandı! Lütfen yeni şifrenizle giriş yapın.';
-
-  @override
-  String get pleaseEnterEmailReset =>
-      'Şifre sıfırlama bağlantısı almak için lütfen e-posta adresinizi girin.';
-
-  @override
-  String get sendResetLink => 'Sıfırlama Bağlantısı Gönder';
-
-  @override
-  String get fullName => 'Ad Soyad';
-
-  @override
-  String get phoneNumber => 'Telefon Numarası';
-
-  @override
-  String get confirmPassword => 'Şifre Onayı';
-
-  @override
-  String get pleaseSignUpToGetStarted => 'Başlamak için lütfen kayıt olun';
-
-  @override
-  String get deliverTo => 'TESLİMAT ADRESİ';
-
-  @override
-  String get selectLocation => 'Konum Seçin';
-
-  @override
-  String heyUser(String userName) {
-    return 'Merhaba $userName, ';
-  }
-
-  @override
-  String get goodMorning => 'Günaydın! 👋';
-
-  @override
-  String get heyThere => 'Merhaba, ';
-
-  @override
-  String get allCategories => 'Tüm Kategoriler';
-
-  @override
-  String get openRestaurants => 'Açık Restoranlar';
-
-  @override
-  String get search => 'Ara';
-
-  @override
-  String get popularRestaurants => 'Popüler Restoranlar';
-
-  @override
-  String get noPopularRestaurantsFound => 'Popüler restoran bulunamadı';
-
-  @override
-  String get recentKeywords => 'Son Aramalar';
-
-  @override
-  String get noRecentSearches => 'Son arama yok';
-
-  @override
-  String addedToRecentSearches(String searchTerm) {
-    return '\"$searchTerm\" son aramalara eklendi';
-  }
-
-  @override
-  String removedFromRecentSearches(String searchTerm) {
-    return '\"$searchTerm\" son aramalardan kaldırıldı';
-  }
-
-  @override
-  String get searchRestaurantsOrDishes => 'Restoran veya yemek arayın';
-
-  @override
-  String get noRestaurantsFound => 'Restoran bulunamadı';
-
-  @override
-  String get deliveryAddress => 'TESLİMAT ADRESİ';
-
-  @override
-  String get edit => 'DÜZENLE';
-
-  @override
-  String get selectAnAddress => 'Bir adres seçin';
-
-  @override
-  String get totalLabel => 'TOPLAM : ';
-
-  @override
-  String pkrAmount(String amount) {
-    return 'PKR $amount';
-  }
-
-  @override
-  String get checkoutButton => 'ÖDEME YAP';
-
-  @override
-  String get yourCartIsEmpty => 'Sepetiniz boş';
-
-  @override
-  String get initializingCart => 'Sepet yükleniyor...';
-
-  @override
-  String get cart => 'Sepet';
-
-  @override
-  String get checkout => 'Ödeme';
-
-  @override
-  String get deliveryAddressTitle => 'Teslimat Adresi';
-
-  @override
-  String get change => 'Değiştir';
-
-  @override
-  String get noAddressSelected => 'Adres seçilmedi';
-
-  @override
-  String get orderItems => 'Sipariş Kalemleri';
-
-  @override
-  String get paymentMethod => 'Ödeme Yöntemi';
-
-  @override
-  String get orderSummary => 'Sipariş Özeti';
-
-  @override
-  String get subtotal => 'Ara Toplam';
-
-  @override
-  String get deliveryFee => 'Teslimat Ücreti';
-
-  @override
-  String get platformFee => 'Platform Ücreti';
-
-  @override
-  String get total => 'Toplam';
-
-  @override
-  String get orderPlaced => 'Sipariş Verildi!';
-
-  @override
-  String get orderPlacedSuccessfully =>
-      'Siparişiniz başarıyla verildi.\nSiparişinizi gerçek zamanlı takip edin.';
-
-  @override
   String get trackOrder => 'Siparişi Takip Et';
 
   @override
-  String get backToHome => 'Ana Sayfaya Dön';
+  String get locationPermissionIsRequired => 'Konum izni gerekli';
 
   @override
-  String confirmPaymentAmount(String amount) {
-    return 'Ödemeyi Onayla  •  PKR $amount';
+  String errorStatemessage(Object stateMessage) {
+    return 'Hata: \$$stateMessage';
   }
-
-  @override
-  String rsPrice(String price) {
-    return 'RS $price';
-  }
-
-  @override
-  String get chooseYourFlavor => 'Lezzetinizi seçin';
-
-  @override
-  String get chooseYourSize => 'Boyutunuzu seçin';
-
-  @override
-  String get tenInch => '10 inç';
-
-  @override
-  String get sixteenInch => '16 inç';
-
-  @override
-  String get twentyInch => '20 inç';
-
-  @override
-  String get removeFromCart => 'Sepetten çıkar';
-
-  @override
-  String get addToCart => 'Sepete ekle';
-
-  @override
-  String get allItems => 'Tüm Ürünler';
-
-  @override
-  String get all => 'Tümü';
-
-  @override
-  String get failedLoadFoodItems =>
-      'Yemekler yüklenemedi. Lütfen daha sonra tekrar deneyin.';
-
-  @override
-  String get noFoodItemsCategory => 'Bu kategoride yemek bulunamadı.';
-
-  @override
-  String get free => 'Ücretsiz';
-
-  @override
-  String deliveryTimeMin(String minutes) {
-    return '$minutes dk';
-  }
-
-  @override
-  String get allRestaurants => 'Tüm Restoranlar';
-
-  @override
-  String get selectPaymentMethod => 'Ödeme Yöntemi Seçin';
-
-  @override
-  String get cashOnDelivery => 'Kapıda Ödeme';
-
-  @override
-  String get payWhenOrderArrives => 'Siparişiniz geldiğinde ödeyin';
-
-  @override
-  String get cashOnDeliverySelected => 'Kapıda ödeme seçildi';
-
-  @override
-  String get visa => 'Visa';
-
-  @override
-  String get selectVisaCards => 'Kayıtlı Visa kartlarınızdan seçin';
-
-  @override
-  String get mastercard => 'Mastercard';
-
-  @override
-  String get selectMastercardCards => 'Kayıtlı Mastercard kartlarınızdan seçin';
-
-  @override
-  String cardEndingInSelected(String last4) {
-    return '$last4 ile biten kart seçildi';
-  }
-
-  @override
-  String noCardsSavedAddFirst(String cardType) {
-    return 'Kayıtlı $cardType kartı yok. Önce bir tane ekleyin.';
-  }
-
-  @override
-  String get savedCards => 'Kayıtlı Kartlar';
-
-  @override
-  String get creditCardAddedSuccess => 'Kredi kartı başarıyla eklendi';
-
-  @override
-  String get creditCardDeletedSuccess => 'Kredi kartı başarıyla silindi';
-
-  @override
-  String get noSavedCardsYet => 'Henüz kayıtlı kart yok';
-
-  @override
-  String get addCardBelowToGetStarted => 'Başlamak için aşağıdan kart ekleyin';
-
-  @override
-  String maskedCardNumber(String last4) {
-    return '**** **** **** $last4';
-  }
-
-  @override
-  String cardHolderExpiry(String holderName, String expiryDate) {
-    return '$holderName  •  $expiryDate';
-  }
-
-  @override
-  String get addNewCard => 'Yeni Kart Ekle';
-
-  @override
-  String get cardInformation => 'Kart Bilgileri';
-
-  @override
-  String get cardNumberPlaceholder => '4242 4242 4242 4242';
-
-  @override
-  String get cardNumberRequired => 'Kart numarası gerekli';
-
-  @override
-  String get cardNumberTooShort => 'Kart numarası çok kısa';
-
-  @override
-  String get mmyyPlaceholder => 'AA/YY';
-
-  @override
-  String get invalidMonth => 'Geçersiz ay';
-
-  @override
-  String get cvcPlaceholder => 'CVC';
-
-  @override
-  String get invalidCvc => 'Geçersiz CVC';
-
-  @override
-  String get fullNameOnCard => 'Kart üzerindeki ad soyad';
-
-  @override
-  String get cardSecurityNote =>
-      'Kart bilgileriniz Stripe tarafından güvenli bir şekilde işlenir. Tam kart numaranızı asla saklamayız.';
-
-  @override
-  String get adding => 'Ekleniyor...';
-
-  @override
-  String get addCard => 'Kart Ekle';
-
-  @override
-  String get addAddress => 'Adres Ekle';
-
-  @override
-  String get addressNotAvailable => 'Adres mevcut değil';
-
-  @override
-  String get failedLoadAddresses => 'Adresler yüklenemedi';
-
-  @override
-  String get noSavedAddresses => 'Henüz kayıtlı adres yok';
-
-  @override
-  String get pleaseSignInAddresses => 'Adresleri görüntülemek için giriş yapın';
 
   @override
   String get address => 'Adres';
-
-  @override
-  String get locationPermissionRequired => 'Konum izni gerekli';
 
   @override
   String get streetNo => 'Sokak No.';
@@ -420,242 +38,157 @@ class AppLocalizationsTr extends AppLocalizations {
   String get label => 'Etiket';
 
   @override
-  String get home => 'Ev';
+  String get home => 'Ana sayfa';
 
   @override
-  String get work => 'İş';
+  String get work => 'iş';
 
   @override
   String get other => 'Diğer';
 
   @override
-  String get pleaseFillAllFields => 'Lütfen tüm gerekli alanları doldurun';
+  String get pleaseFillAllRequiredFields =>
+      'Lütfen gerekli tüm alanları doldurun';
 
   @override
-  String get userNotAuthenticated => 'Kullanıcı doğrulanmamış';
+  String get userNotAuthenticated => 'Kullanıcının kimliği doğrulanmadı';
 
   @override
   String get addressAddedSuccessfully => 'Adres başarıyla eklendi!';
 
   @override
-  String failedToAddAddress(String error) {
-    return 'Adres eklenemedi: $error';
+  String failedToAddAddressError(Object error) {
+    return 'Adres eklenemedi: \$$error';
   }
 
   @override
   String get save => 'Kaydet';
 
   @override
-  String get selectDeliveryAddress => 'Teslimat Adresi Seçin';
+  String get addAddress => 'Adres Ekle';
 
   @override
-  String get noAddressesFound => 'Adres bulunamadı';
+  String get failedToLoadAddresses => 'Adresler yüklenemedi';
 
   @override
-  String get iLoveFastFood => 'Fast Food Seviyorum';
+  String get noSavedAddressesYet => 'Henüz kayıtlı adres yok';
 
   @override
-  String get logout => 'Çıkış Yap';
+  String get pleaseSignInToViewAddresses =>
+      'Adresleri görüntülemek için lütfen oturum açın';
 
   @override
-  String get profile => 'Profil';
+  String get deliveryAddress2 => 'TESLİMAT ADRESİ';
 
   @override
-  String get personalInfo => 'Kişisel Bilgiler';
+  String get edit2 => 'DÜZENLE';
 
   @override
-  String get guestUser => 'Misafir Kullanıcı';
+  String get selectAnAddress => 'Bir adres seçin';
 
   @override
-  String get pleaseLoginViewProfile =>
-      'Profilinizi görüntülemek için giriş yapın';
+  String get total2 => 'TOPLAM :';
 
   @override
-  String editTitle(String title) {
-    return '$title Düzenle';
+  String get checkout2 => 'ÖDEME';
+
+  @override
+  String get yourCartIsEmpty => 'Sepetiniz boş';
+
+  @override
+  String get cart => 'Sepet';
+
+  @override
+  String get allCategories => 'Tüm Kategoriler';
+
+  @override
+  String get openRestaurants => 'Açık Restoranlar';
+
+  @override
+  String get clear2 => 'TEMİZLE';
+
+  @override
+  String get apply2 => 'BAŞVUR';
+
+  @override
+  String get rating2 => 'DERECELENDİRME';
+
+  @override
+  String get deliveryTime2 => 'TESLİMAT SÜRESİ';
+
+  @override
+  String get filterYourSearch => 'Aramanızı filtreleyin';
+
+  @override
+  String get checkout => 'Ödeme';
+
+  @override
+  String get deliveryAddress => 'Teslimat Adresi';
+
+  @override
+  String get change => 'Değiştir';
+
+  @override
+  String get noAddressSelected => 'Adres seçilmedi';
+
+  @override
+  String get orderItems => 'Sipariş Öğeleri';
+
+  @override
+  String get paymentMethod => 'Ödeme Yöntemi';
+
+  @override
+  String get orderSummary => 'Sipariş Özeti';
+
+  @override
+  String get subtotal => 'Ara toplam';
+
+  @override
+  String get deliveryFee => 'Teslimat Ücreti';
+
+  @override
+  String get platformFee => 'Platform Ücreti';
+
+  @override
+  String get total => 'Toplam';
+
+  @override
+  String get orderPlaced => 'Sipariş Verildi!';
+
+  @override
+  String get yourOrderHasBeenPlacedSuccessfullyntrackYourOrderInRealtime =>
+      'Siparişiniz başarıyla verildi.\\nSiparişinizi gerçek zamanlı olarak takip edin.';
+
+  @override
+  String get backToHome => 'Ana Sayfaya Geri Dön';
+
+  @override
+  String paymentFailedPaymentstateerrormessage(Object errorMessage) {
+    return 'Ödeme başarısız oldu: \$$errorMessage';
   }
 
   @override
-  String enterTitle(String title) {
-    return '$title girin';
+  String confirmPayment(Object grandTotal) {
+    return 'Ödemeyi Onayla • PKR \$$grandTotal';
   }
 
   @override
-  String get apply => 'Uygula';
+  String get paysWhenOrderArrives => 'Sipariş Geldiğinde Öder';
 
   @override
-  String get phone => 'Telefon';
-
-  @override
-  String get favourite => 'Favori';
-
-  @override
-  String get foods => 'Yemekler';
-
-  @override
-  String get restaurants => 'Restoranlar';
-
-  @override
-  String get noFavouriteRestaurants => 'Favori restoran bulunamadı.';
-
-  @override
-  String get noFavouriteFoods => 'Favori yemek bulunamadı.';
-
-  @override
-  String get orderRatings => 'Sipariş Değerlendirmeleri';
-
-  @override
-  String get restaurantRatings => 'Restoran Değerlendirmeleri';
-
-  @override
-  String get userReviews => 'Kullanıcı Yorumları';
-
-  @override
-  String get submit => 'Gönder';
-
-  @override
-  String get review => 'Yorum';
-
-  @override
-  String get myReviews => 'Yorumlarım';
-
-  @override
-  String get orderCancelledSuccessfully => 'Sipariş başarıyla iptal edildi';
-
-  @override
-  String get clearOrderHistory => 'Sipariş Geçmişini Temizle';
-
-  @override
-  String get confirmDeleteOrderHistory =>
-      'Tüm sipariş geçmişini silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.';
-
-  @override
-  String get cancel => 'İptal';
-
-  @override
-  String get clearAll => 'Tümünü Temizle';
-
-  @override
-  String get clearOrderHistoryMenu => 'Sipariş geçmişini temizle';
-
-  @override
-  String get orderHistory => 'Sipariş Geçmişi';
-
-  @override
-  String get noCompletedOrders => 'Henüz tamamlanmış sipariş yok';
-
-  @override
-  String get noOngoingOrders => 'Devam eden sipariş yok';
-
-  @override
-  String get noOrderHistory => 'Sipariş geçmişi yok';
-
-  @override
-  String get ongoing => 'Devam Eden';
-
-  @override
-  String get history => 'Geçmiş';
-
-  @override
-  String get noActiveOrder => 'Aktif sipariş yok';
-
-  @override
-  String get orderDelivered => 'Siparişiniz teslim edildi!';
-
-  @override
-  String callingNumber(String phoneNumber) {
-    return '$phoneNumber aranıyor...';
-  }
-
-  @override
-  String get locationPermissionDenied => 'Konum izni reddedildi';
-
-  @override
-  String get orderReceived => 'Siparişiniz alındı';
-
-  @override
-  String get restaurantPreparingFood => 'Restoran yemeğinizi hazırlıyor';
-
-  @override
-  String get orderPickedUp => 'Siparişiniz teslimata çıktı';
-
-  @override
-  String get orderArrivingSoon => 'Sipariş yakında geliyor!';
-
-  @override
-  String get estimatedDeliveryTime => 'TAHMİNİ TESLİMAT SÜRESİ';
-
-  @override
-  String estimatedMinutes(String minutes) {
-    return '$minutes dk';
-  }
-
-  @override
-  String orderedAt(String date) {
-    return '$date tarihinde sipariş verildi';
-  }
-
-  @override
-  String get courier => 'Kurye';
-
-  @override
-  String get noNotificationsYet => 'Henüz bildirim yok';
-
-  @override
-  String unreadNotificationsCount(int count) {
-    return '$count okunmamış bildirim';
-  }
-
-  @override
-  String get noNotifications => 'Bildirim yok';
-
-  @override
-  String get notifications => 'Bildirimler';
-
-  @override
-  String get markAllAsRead => 'Tümünü okundu işaretle';
-
-  @override
-  String get clearAllNotifications => 'Tümünü temizle';
-
-  @override
-  String get allTab => 'Tümü';
-
-  @override
-  String get unread => 'Okunmamış';
-
-  @override
-  String get preferences => 'TERCİHLER';
-
-  @override
-  String get darkMode => 'Karanlık Mod';
-
-  @override
-  String get language => 'Dil';
-
-  @override
-  String get english => 'İngilizce';
-
-  @override
-  String get themes => 'Temalar';
-
-  @override
-  String get settings => 'Ayarlar';
-
-  @override
-  String get versionInfoNotAvailable => 'Sürüm bilgisi mevcut değil';
+  String get noCardDetails => 'Kart detayı yok';
 
   @override
   String get faqs => 'SSS';
 
   @override
-  String get orderFaq => 'Sipariş';
+  String get delivery => 'Teslimat';
 
   @override
-  String get paymentsFaq => 'Ödemeler';
+  String get payments => 'Ödemeler';
 
   @override
-  String get deliveryFaq => 'Teslimat';
+  String get order => 'Sipariş';
 
   @override
   String get chat => 'Sohbet';
@@ -664,119 +197,457 @@ class AppLocalizationsTr extends AppLocalizations {
   String get call => 'Ara';
 
   @override
-  String get howTrackOrder => 'Siparişimi nasıl takip edebilirim?';
+  String get email => 'E-posta';
 
   @override
-  String get canCancelOrder => 'Siparişimi iptal edebilir miyim?';
+  String get noFavouriteRestaurantsFound => 'Favori restoran bulunamadı.';
 
   @override
-  String get whatIfOrderDelayed => 'Siparişim gecikirse ne olur?';
+  String get noFavouriteFoodsFound => 'Favori yiyecek bulunamadı.';
 
   @override
-  String get whatPaymentMethodsAccepted =>
-      'Hangi ödeme yöntemleri kabul ediliyor?';
+  String get foods => 'Gıdalar';
 
   @override
-  String get isCardSafeBite =>
-      'Bite\'ta kredi/banka kartımı kullanmak güvenli mi?';
+  String get restaurants => 'Restoranlar';
 
   @override
-  String get canUseMultiplePaymentMethods =>
-      'Bir sipariş için birden fazla ödeme yöntemi kullanabilir miyim?';
+  String get removeFromFavourites => 'Favorilerden kaldır';
 
   @override
-  String get whatIfPaymentFails => 'Ödeme başarısız olursa ne yapmalıyım?';
+  String get areYouSureYouWantToRemoveThisFoodItem =>
+      'Bu yiyecek öğesini favorilerinizden çıkarmak istediğinizden emin misiniz?';
 
   @override
-  String get whatDeliveryHours => 'Teslimat saatleriniz nedir?';
+  String get cancel => 'İptal';
 
   @override
-  String get chargeDeliveryFee => 'Teslimat ücreti alıyor musunuz?';
+  String get remove => 'Kaldır';
 
   @override
-  String get deliverToLocation => 'Benim konumuma teslimat yapıyor musunuz?';
+  String get orderAgain => 'Tekrar Sipariş Ver';
 
   @override
-  String get scheduleDeliveryLater =>
-      'Daha sonrası için teslimat planlayabilir miyim?';
+  String get areYouSureYouWantToRemoveThisRestaurantFrom =>
+      'Bu restoranı favorilerinizden çıkarmak istediğinizden emin misiniz?';
 
   @override
-  String get clear => 'TEMİZLE';
+  String get removeFromCart => 'Sepetten kaldır';
 
   @override
-  String get applyFilter => 'UYGULA';
+  String get addToCart => 'Sepete ekle';
 
   @override
-  String get ratingFilter => 'DEĞERLENDİRME';
+  String get chooseYourFlavor => 'Lezzetinizi seçin';
 
   @override
-  String get lessThan3_5 => '< 3.5';
+  String get chooseYourSize => 'Bedeninizi seçin';
 
   @override
-  String get between3_5And4_0 => '3.5 - 4.0';
+  String get passwordResetLinkSent => 'Şifre Sıfırlama Bağlantısı Gönderildi';
 
   @override
-  String get greaterThan4_0 => '> 4.0';
+  String get checkYourEmailForAPasswordResetLink =>
+      'Parola sıfırlama bağlantısı için e-postanızı kontrol edin. Web sitemizdeki şifrenizi sıfırlamak için bağlantıya tıklayın.';
 
   @override
-  String get deliveryTimeFilter => 'TESLİMAT SÜRESİ';
+  String get passwordResetSuccessfully =>
+      'Şifre başarıyla sıfırlandı! Lütfen yeni şifrenizle giriş yapınız.';
 
   @override
-  String get lessThan15Min => '< 15 dk';
+  String get done => 'Bitti';
 
   @override
-  String get between15And30Min => '15 - 30 dk';
+  String get sendResetLink => 'Sıfırlama Bağlantısını Gönder';
 
   @override
-  String get greaterThan30Min => '> 30 dk';
+  String get forgotPassword => 'Şifremi Unuttum';
 
   @override
-  String get filterYourSearch => 'Aramanızı filtreleyin';
+  String get pleaseEnterYourEmailAddressToReceiveAPasswordReset =>
+      'Şifre sıfırlama bağlantısı almak için lütfen e-posta adresinizi girin.';
+
+  @override
+  String get or => 'veya';
+
+  @override
+  String get successfullySignedInWithGoogle =>
+      'Google\'da başarıyla oturum açıldı!';
+
+  @override
+  String googleSigninErrorStatemessage(Object stateMessage) {
+    return 'Google Oturum Açma Hatası: \$$stateMessage';
+  }
+
+  @override
+  String get dontHaveAnAccount => 'Hesabınız yok mu?';
+
+  @override
+  String get signUp => 'Kaydol';
+
+  @override
+  String get login => 'Giriş yap';
+
+  @override
+  String get rememberMe => 'Beni hatırla';
+
+  @override
+  String get password => 'Şifre';
+
+  @override
+  String get logIn => 'Giriş Yap';
+
+  @override
+  String get pleaseSignInToContinue => 'Devam etmek için lütfen oturum açın';
+
+  @override
+  String get noNotificationsYet => 'Henüz bildirim yok';
+
+  @override
+  String stateunreadcountUnreadNotifications(Object unreadCount) {
+    return '\$$unreadCount okunmamış bildirimler';
+  }
+
+  @override
+  String allNotifications(Object totalCount) {
+    return 'Hepsi (\$$totalCount)';
+  }
+
+  @override
+  String unreadNotifications(Object unreadCount) {
+    return 'Okunmamış (\$$unreadCount)';
+  }
+
+  @override
+  String get notifications => 'Bildirimler';
+
+  @override
+  String get clearAllNotifications => 'Tüm Bildirimleri Temizle';
+
+  @override
+  String get deleteAllNotificationsConfirmation =>
+      'Tüm bildirimleri silmek istediğinizden emin misiniz? Bu eylem geri alınamaz.';
+
+  @override
+  String get markAllAsRead => 'Tümünü okundu olarak işaretle';
+
+  @override
+  String get clearAll => 'Tümünü temizle';
+
+  @override
+  String get allYourFavorites => 'Tüm favorileriniz';
+
+  @override
+  String get getAllYourLovedFoodsInOnePlace =>
+      'Sevdiğiniz tüm yiyecekleri tek bir yerde toplayın, siz sadece siparişi verin gerisini biz hallederiz';
+
+  @override
+  String get orderFromChoosenChef => 'Seçilen şeften sipariş verin';
+
+  @override
+  String get freeDeliveryOffers => 'Ücretsiz teslimat teklifleri';
+
+  @override
+  String get getStarted => 'Başlayın';
+
+  @override
+  String get next => 'Sonraki';
+
+  @override
+  String get skip => 'Atla';
+
+  @override
+  String get orderCancelledSuccessfully => 'Sipariş başarıyla iptal edildi';
+
+  @override
+  String get noOngoingOrders => 'Devam eden sipariş yok';
+
+  @override
+  String get noOrderHistory => 'Sipariş geçmişi yok';
+
+  @override
+  String get orderHistory => 'Sipariş Geçmişi';
+
+  @override
+  String get clearOrderHistory => 'Sipariş Geçmişini Temizle';
+
+  @override
+  String get areYouSureYouWantToDeleteAllOrderHistory =>
+      'Tüm sipariş geçmişini silmek istediğinizden emin misiniz? Bu eylem geri alınamaz.';
+
+  @override
+  String get noCompletedOrdersYet => 'Henüz tamamlanmış sipariş yok';
+
+  @override
+  String get rate => 'Oran';
+
+  @override
+  String get cancelOrder => 'Siparişi İptal Et';
+
+  @override
+  String get areYouSureYouWantToCancelThisOrder =>
+      'Bu siparişi iptal etmek istediğinizden emin misiniz?';
+
+  @override
+  String get yesCancel => 'Evet, İptal';
+
+  @override
+  String get reorder => 'Yeniden sırala';
+
+  @override
+  String get cardInformation => 'Kart Bilgileri';
+
+  @override
+  String get cardNumberIsRequired => 'Kart numarası gerekli';
+
+  @override
+  String get cardNumberIsTooShort => 'Kart numarası çok kısa';
+
+  @override
+  String get required => 'Gerekli';
+
+  @override
+  String get invalidMonth => 'Geçersiz ay';
+
+  @override
+  String get invalidCvc => 'Geçersiz CVC';
+
+  @override
+  String get cvc => 'CVC';
+
+  @override
+  String get cardHolder => 'Kart Sahibi';
+
+  @override
+  String get fullNameOnCard => 'Karttaki tam ad';
+
+  @override
+  String get yourCardDetailsAreSecurelyHandledByStripeWeNever =>
+      'Kart bilgileriniz Stripe tarafından güvenli bir şekilde işlenir. Kart numaranızın tamamını asla saklamayız.';
+
+  @override
+  String get adding => 'Ekleniyor...';
+
+  @override
+  String get addCard => 'Kart Ekle';
+
+  @override
+  String get selectPaymentMethod => 'Ödeme Yöntemini Seçin';
+
+  @override
+  String get cashOnDelivery => 'Kapıda Ödeme';
+
+  @override
+  String get payWhenYourOrderArrives => 'Siparişiniz geldiğinde ödeme yapın';
+
+  @override
+  String get cashOnDeliverySelected => 'Kapıda Ödeme seçildi';
+
+  @override
+  String get visa => 'Vize';
+
+  @override
+  String get selectFromYourSavedVisaCards =>
+      'Kayıtlı Visa kartlarınızdan seçim yapın';
+
+  @override
+  String get mastercard => 'Mastercard';
+
+  @override
+  String get selectFromYourSavedMastercards =>
+      'Kayıtlı Mastercard\'larınız arasından seçim yapın';
+
+  @override
+  String get savedCards => 'Kayıtlı Kartlar';
+
+  @override
+  String get creditCardAddedSuccessfully => 'Kredi kartı başarıyla eklendi';
+
+  @override
+  String get creditCardDeletedSuccessfully => 'Kredi kartı başarıyla silindi';
+
+  @override
+  String get failedToLoadCards => 'Kartlar yüklenemedi';
+
+  @override
+  String get noSavedCardsYet => 'Henüz kayıtlı kart yok';
+
+  @override
+  String get addACardBelowToGetStarted =>
+      'Başlamak için aşağıya bir kart ekleyin';
+
+  @override
+  String cardEndingInCreditcardlast4Selected(Object last4) {
+    return '\$$last4 ile biten kart seçildi';
+  }
+
+  @override
+  String get addNewCard => 'Yeni Kart Ekle';
+
+  @override
+  String get personalInfo => 'Kişisel Bilgiler';
+
+  @override
+  String get guestUser => 'Misafir Kullanıcı';
+
+  @override
+  String get pleaseLoginToViewYourProfile =>
+      'Profilinizi görüntülemek için lütfen giriş yapın';
+
+  @override
+  String editTitle(Object title) {
+    return '\$$title\'yi düzenle';
+  }
+
+  @override
+  String get apply => 'Uygula';
+
+  @override
+  String get logout => 'Oturumu kapat';
+
+  @override
+  String get signup => 'Kayıt Ol';
+
+  @override
+  String get profile => 'Profil';
+
+  @override
+  String get allRestaurants => 'Tüm Restoranlar';
+
+  @override
+  String get failedToLoadFoodItemsPleaseTryAgainLater =>
+      'Yiyecek öğeleri yüklenemedi. Lütfen daha sonra tekrar deneyin.';
+
+  @override
+  String get noFoodItemsAvailableForThisCategory =>
+      'Bu kategoriye ait gıda maddesi mevcut değil.';
+
+  @override
+  String get myReviews => 'İncelemelerim';
+
+  @override
+  String get popularRestaurants => 'Popüler Restoranlar';
+
+  @override
+  String get noPopularRestaurantsFound => 'Popüler restoran bulunamadı';
+
+  @override
+  String get recentKeywords => 'Son Anahtar Kelimeler';
+
+  @override
+  String addedStatesearchToRecentSearches(Object search) {
+    return 'Son aramalara \"\$$search\" eklendi';
+  }
+
+  @override
+  String removedStatesearchFromRecentSearches(Object search) {
+    return '\"\$$search\" son aramalardan kaldırıldı';
+  }
+
+  @override
+  String get noRecentSearches => 'Yeni arama yok';
+
+  @override
+  String get search => 'Ara';
+
+  @override
+  String get preferences2 => 'TERCİHLER';
+
+  @override
+  String get darkMode => 'Karanlık Mod';
+
+  @override
+  String get language => 'Dil';
+
+  @override
+  String get themes => 'Temalar';
+
+  @override
+  String get versionInfoNotAvailable => 'Sürüm bilgisi mevcut değil';
+
+  @override
+  String get settings => 'Ayarlar';
+
+  @override
+  String get fullName => 'Tam Ad';
+
+  @override
+  String get phoneNumber => 'Telefon Numarası';
+
+  @override
+  String get confirmPassword => 'Şifreyi Onayla';
+
+  @override
+  String get pleaseSignUpToGetStarted => 'Başlamak için lütfen Kaydolun';
+
+  @override
+  String get noActiveOrder => 'Aktif sipariş yok';
+
+  @override
+  String get yourOrderHasBeenDelivered => 'Siparişiniz teslim edildi!';
+
+  @override
+  String callingphonenumber(Object phoneNumber) {
+    return '\$$phoneNumber aranıyor...';
+  }
+
+  @override
+  String get locationPermissionDenied => 'Konum izni reddedildi';
+
+  @override
+  String get courier => 'Kurye';
+
+  @override
+  String get estimatedDeliveryTime2 => 'TAHMİNİ TESLİMAT SÜRESİ';
+
+  @override
+  String get yourOrderHasBeenReceived => 'Siparişiniz alındı';
+
+  @override
+  String get theRestaurantIsPreparingYourFood =>
+      'Restoran yemeğinizi hazırlıyor';
+
+  @override
+  String get yourOrderHasBeenPickedUpForDelivery =>
+      'Siparişiniz teslim edilmek üzere alınmıştır';
+
+  @override
+  String get orderArrivingSoon => 'Sipariş yakında geliyor!';
+
+  @override
+  String get selectDeliveryAddress => 'Teslimat Adresini Seçin';
+
+  @override
+  String get noAddressesFound => 'Adres bulunamadı';
+
+  @override
+  String get pleaseEnterAValidAddress => 'Lütfen geçerli bir adres girin';
 
   @override
   String get seeAll => 'Tümünü Gör';
 
   @override
-  String enterField(String field) {
-    return '$field girin';
-  }
+  String get searchForRestaurantsOrDishes => 'Restoran veya yemek arayın';
 
   @override
-  String pleaseEnterField(String field) {
-    return 'Lütfen $field girin';
-  }
+  String get noRestaurantsFound => 'Restoran bulunamadı';
 
   @override
-  String get pleaseEnterValidEmail => 'Lütfen geçerli bir e-posta adresi girin';
-
-  @override
-  String get pleaseEnterValidPhone =>
-      'Lütfen geçerli bir telefon numarası girin';
-
-  @override
-  String get passwordMinimum8Chars => 'Şifre en az 8 karakter olmalıdır';
-
-  @override
-  String get favorites => 'Favoriler';
-
-  @override
-  String get reviews => 'Yorumlar';
+  String get updateDialog => 'İletişim Kutusunu Güncelle';
 
   @override
   String get updateAvailable => 'Güncelleme Mevcut';
 
   @override
-  String get newBiteVersionReady => 'Bite\'ın yeni sürümü hazır!';
+  String get aNewVersionOfBiteIsReady => 'Bite\'ın yeni versiyonu hazır!';
 
   @override
-  String updateDescription(String version) {
-    return 'Sürüm $version yeni özellikler, performans iyileştirmeleri ve hata düzeltmeleri içerir.';
-  }
+  String get versionLatestversionIncludesNewFeatures =>
+      'Sürüm \$latestVersion yeni özellikler içerir,';
 
   @override
-  String versionPrefix(String version) {
-    return 'v$version';
-  }
+  String get performanceImprovementsAndBugFixes =>
+      'performans iyileştirmeleri ve hata düzeltmeleri.';
 
   @override
   String get updateNow => 'Şimdi Güncelle';
@@ -785,7 +656,73 @@ class AppLocalizationsTr extends AppLocalizations {
   String get maybeLater => 'Belki Daha Sonra';
 
   @override
-  String errorMessage(String message) {
-    return 'Hata: $message';
+  String pleaseEnterWidgettitletolowercase(Object title) {
+    return 'Lütfen \$$title girin';
   }
+
+  @override
+  String get pleaseEnterAValidEmailAddress =>
+      'Lütfen geçerli bir e-posta adresi girin';
+
+  @override
+  String get pleaseEnterAValidPhoneNumber =>
+      'Lütfen geçerli bir telefon numarası girin';
+
+  @override
+  String get passwordMustBeAtLeast8CharactersLong =>
+      'Şifre en az 8 karakter uzunluğunda olmalıdır';
+
+  @override
+  String get howDoITrackMyOrder => 'Siparişimi nasıl takip ederim?';
+
+  @override
+  String get canICancelMyOrder => 'Siparişimi iptal edebilir miyim?';
+
+  @override
+  String get whatIfMyOrderIsDelayed => 'Siparişim gecikirse ne olur?';
+
+  @override
+  String get whatPaymentMethodsAreAccepted =>
+      'Hangi ödeme yöntemleri kabul ediliyor?';
+
+  @override
+  String get isItSafeToUseMyCreditdebitCardOnBite =>
+      'Kredi/banka kartımı Bite\'ta kullanmak güvenli mi?';
+
+  @override
+  String get canIUseMultiplePaymentMethodsForOneOrder =>
+      'Bir sipariş için birden fazla ödeme yöntemi kullanabilir miyim?';
+
+  @override
+  String get whatShouldIDoIfAPaymentFails =>
+      'Bir ödeme başarısız olursa ne yapmalıyım?';
+
+  @override
+  String get whatAreYourDeliveryHours => 'Teslimat saatleriniz nedir?';
+
+  @override
+  String get doYouChargeADeliveryFee => 'Teslimat ücreti alıyor musunuz?';
+
+  @override
+  String get doYouDeliverToMyLocation =>
+      'Bulunduğum yere teslimat yapıyor musunuz?';
+
+  @override
+  String get canIScheduleADeliveryForALaterTime =>
+      'Teslimatı daha sonraki bir zamana planlayabilir miyim?';
+
+  @override
+  String get ongoing => 'devam ediyor';
+
+  @override
+  String get history => 'Tarih';
+
+  @override
+  String get favorites => 'Favoriler';
+
+  @override
+  String get reviews => 'Yorumlar';
+
+  @override
+  String get phone => 'Telefon';
 }

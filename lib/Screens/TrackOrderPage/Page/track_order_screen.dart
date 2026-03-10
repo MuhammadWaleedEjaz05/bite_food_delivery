@@ -5,6 +5,7 @@ import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dar
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Models/order_model.dart';
 import 'package:bite_food_delivery/Screens/TrackOrderPage/Widgets/bite_order_info_sheet.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,7 +43,7 @@ class TrackOrderScreen extends StatelessWidget {
         appBar: _AppBarSection(),
         body: Center(
           child: Text(
-            'No active order',
+            S.of(context).noActiveOrder,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
               color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.normal,
@@ -72,7 +73,7 @@ class TrackOrderScreen extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                        'Your order has been delivered!',
+                        S.of(context).yourOrderHasBeenDelivered,
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                       backgroundColor: Colors.green,
@@ -102,7 +103,7 @@ class TrackOrderScreen extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                        'Calling ${state.phoneNumber}...',
+                        S.of(context).callingphonenumber(state.phoneNumber),
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                       backgroundColor: Colors.green,
@@ -137,7 +138,7 @@ class TrackOrderScreen extends StatelessWidget {
               if (state is MapLocationPermissionDenied) {
                 return Center(
                   child: Text(
-                    'Location permission denied',
+                    S.of(context).locationPermissionDenied,
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
                       color: Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.normal,
@@ -207,7 +208,7 @@ class TrackOrderScreen extends StatelessWidget {
                               'Total: PKR ${currentOrder.totalPrice.toStringAsFixed(0)}',
                             ],
                             estimatedMinutes: 20,
-                            courierName: 'Courier',
+                            courierName: S.of(context).courier,
                             currentStep: _orderStatusToStep(
                               currentOrder.orderStatus,
                             ),
@@ -242,7 +243,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
     return BiteAppBar(
       backButton: true,
       title: Text(
-        'Track Order',
+        S.of(context).trackOrder,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,

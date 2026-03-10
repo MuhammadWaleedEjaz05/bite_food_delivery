@@ -1,6 +1,7 @@
 import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_user_auth_text_field.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -76,7 +77,7 @@ class _OtherLoginOptionSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Or',
+              S.of(context).or,
               style: Theme.of(
                 context,
               ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
@@ -94,18 +95,23 @@ class _OtherLoginOptionSection extends StatelessWidget {
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('Successfully signed in with Google!'),
+                      content: Text(
+                        S.of(context).successfullySignedInWithGoogle,
+                      ),
                       backgroundColor: Colors.green,
                     ),
                   );
                 } else if (state is UserAuthError) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(state.message),
+                      content: Text(
+                        S
+                            .of(context)
+                            .googleSigninErrorStatemessage(state.message),
+                      ),
                       backgroundColor: Colors.red,
                     ),
                   );
-                  debugPrint('Google Sign-In Error: ${state.message}');
                 }
               },
               builder: (context, state) {
@@ -148,7 +154,7 @@ class _NoAccountSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Don\'t have an account? ',
+          S.of(context).dontHaveAnAccount,
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         TextButton(
@@ -163,7 +169,7 @@ class _NoAccountSection extends StatelessWidget {
               context,
             ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
           ),
-          child: Text('Sign Up'),
+          child: Text(S.of(context).signUp),
         ),
       ],
     );
@@ -200,7 +206,7 @@ class _LoginActionButton extends StatelessWidget {
               ),
               textStyle: Theme.of(context).textTheme.titleLarge,
             ),
-            child: Text('Login'),
+            child: Text(S.of(context).login),
           ),
         ),
       ],
@@ -219,7 +225,7 @@ class _LoginOptionalSelectionSection extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Checkbox(value: false, onChanged: (value) {}),
-            Text('Remember me', style: Theme.of(context).textTheme.bodyMedium),
+            Text(S.of(context).rememberMe, style: Theme.of(context).textTheme.bodyMedium),
           ],
         ),
         Spacer(),
@@ -236,7 +242,7 @@ class _LoginOptionalSelectionSection extends StatelessWidget {
               context,
             ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
           ),
-          child: Text('Forgot Password?'),
+          child: Text(S.of(context).forgotPassword),
         ),
       ],
     );
@@ -253,14 +259,14 @@ class _LoginCredentialSection extends StatelessWidget {
       child: Column(
         children: [
           BiteUserAuthTextField(
-            title: 'Email',
+            title: S.of(context).email,
             isEmail: true,
             controller: _emailController,
           ),
           20.verticalSpace,
           BiteUserAuthTextField(
             isPassword: true,
-            title: 'Password',
+            title: S.of(context).password,
             controller: _passwordController,
           ),
         ],
@@ -283,10 +289,10 @@ class _HeadTitleSection extends StatelessWidget {
           title: SizedBox.shrink(),
           actions: [],
         ),
-        Text('Log In', style: Theme.of(context).textTheme.displayLarge),
+        Text(S.of(context).logIn, style: Theme.of(context).textTheme.displayLarge),
 
         Text(
-          'Please Sign In to Continue',
+          S.of(context).pleaseSignInToContinue,
           style: Theme.of(
             context,
           ).textTheme.titleLarge!.copyWith(color: Colors.white),

@@ -13,6 +13,7 @@ import 'package:bite_food_delivery/Screens/CheckOutPage/Widgets/bite_check_out_p
 import 'package:bite_food_delivery/Screens/CheckOutPage/Widgets/bite_checkout_item_tile.dart';
 import 'package:bite_food_delivery/Screens/CheckOutPage/Widgets/bite_summary_row.dart';
 import 'package:bite_food_delivery/Screens/CheckOutPage/Widgets/bite_check_out_address_block.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,7 +34,7 @@ class CheckOutScreen extends StatelessWidget {
       appBar: BiteAppBar(
         backButton: true,
         title: Text(
-          'Checkout',
+          S.of(context).checkout,
           style: Theme.of(context).textTheme.displaySmall!.copyWith(
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -77,14 +78,14 @@ class _DeliveryAddressSection extends StatelessWidget {
             ),
             8.horizontalSpace,
             Text(
-              'Delivery Address',
+              S.of(context).deliveryAddress,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             Spacer(),
             TextButton(
               onPressed: () => showAddressSelectorModal(context),
               child: Text(
-                'Change',
+                S.of(context).change,
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.primary,
@@ -99,7 +100,7 @@ class _DeliveryAddressSection extends StatelessWidget {
         BlocBuilder<AddressCubit, AddressState>(
           builder: (context, state) {
             String addressLabel = '';
-            String addressText = 'No address selected';
+            String addressText = S.of(context).noAddressSelected;
 
             if (state is AddressesLoaded && state.selectedAddress != null) {
               final addr = state.selectedAddress!;
@@ -135,7 +136,10 @@ class _OrderItemsSection extends StatelessWidget {
               size: 22.r,
             ),
             8.horizontalSpace,
-            Text('Order Items', style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              S.of(context).orderItems,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
           ],
         ),
         12.verticalSpace,
@@ -193,7 +197,7 @@ class _PaymentMethodSection extends StatelessWidget {
             ),
             8.horizontalSpace,
             Text(
-              'Payment Method',
+              S.of(context).paymentMethod,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             Spacer(),
@@ -202,7 +206,7 @@ class _PaymentMethodSection extends StatelessWidget {
                 Navigator.pushNamed(context, '/payment_screen');
               },
               child: Text(
-                'Change',
+                S.of(context).change,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.primary,
@@ -257,7 +261,7 @@ class _OrderSummarySection extends StatelessWidget {
             ),
             8.horizontalSpace,
             Text(
-              'Order Summary',
+              S.of(context).orderSummary,
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ],
@@ -272,17 +276,17 @@ class _OrderSummarySection extends StatelessWidget {
           child: Column(
             children: [
               BiteSummaryRow(
-                label: 'Subtotal',
+                label: S.of(context).subtotal,
                 value: 'PKR ${totalAmount.toStringAsFixed(2)}',
               ),
               10.verticalSpace,
               BiteSummaryRow(
-                label: 'Delivery Fee',
+                label: S.of(context).deliveryFee,
                 value: 'PKR ${deliveryFee.toStringAsFixed(2)}',
               ),
               10.verticalSpace,
               BiteSummaryRow(
-                label: 'Platform Fee',
+                label: S.of(context).platformFee,
                 value: 'PKR ${platformFee.toStringAsFixed(2)}',
               ),
               12.verticalSpace,
@@ -291,7 +295,10 @@ class _OrderSummarySection extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Total', style: Theme.of(context).textTheme.titleMedium),
+                  Text(
+                    S.of(context).total,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                   Text(
                     'PKR ${grandTotal.toStringAsFixed(2)}',
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -367,12 +374,14 @@ class _PlaceOrderButton extends StatelessWidget {
             ),
             20.verticalSpace,
             Text(
-              'Order Placed!',
+              S.of(context).orderPlaced,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             10.verticalSpace,
             Text(
-              'Your order has been placed successfully.\nTrack your order in real-time.',
+              S
+                  .of(context)
+                  .yourOrderHasBeenPlacedSuccessfullyntrackYourOrderInRealtime,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 color: Theme.of(context).colorScheme.onSecondary,
@@ -396,7 +405,7 @@ class _PlaceOrderButton extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'Track Order',
+                      S.of(context).trackOrder,
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
@@ -420,7 +429,7 @@ class _PlaceOrderButton extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'Back to Home',
+                      S.of(context).backToHome,
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
@@ -459,14 +468,17 @@ class _PlaceOrderButton extends StatelessWidget {
               BlocListener<PaymentCubit, PaymentState>(
                 listener: (context, paymentState) {
                   if (paymentState is PaymentSuccess) {
-                    // Payment succeeded — now place the order
                     final order = _buildOrder(context, grandTotal);
                     context.read<OrderCubit>().placeOrder(order);
                   } else if (paymentState is PaymentFailure) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          'Payment failed: ${paymentState.errorMessage}',
+                          S
+                              .of(context)
+                              .paymentFailedPaymentstateerrormessage(
+                                paymentState.errorMessage,
+                              ),
                         ),
                         backgroundColor: Colors.red,
                       ),
@@ -544,7 +556,11 @@ class _PlaceOrderButton extends StatelessWidget {
                                 Icon(Icons.shopping_cart_checkout, size: 22.r),
                                 10.horizontalSpace,
                                 Text(
-                                  'Confirm Payment  •  PKR ${grandTotal.toStringAsFixed(0)}',
+                                  S
+                                      .of(context)
+                                      .confirmPayment(
+                                        grandTotal.toStringAsFixed(0),
+                                      ),
                                   style: Theme.of(context).textTheme.titleLarge!
                                       .copyWith(color: Colors.white),
                                 ),

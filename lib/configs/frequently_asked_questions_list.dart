@@ -1,23 +1,24 @@
 import 'package:bite_food_delivery/GlobalWidgets/bite_menu_item.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 List<BiteMenuItemModel> orderFAQs(BuildContext context) => [
   BiteMenuItemModel(
     leadingIcon: Icons.question_mark,
     leadingIconColor: Colors.deepOrange,
-    title: 'How do I track my order?',
+    title: S.of(context).howDoITrackMyOrder,
     onTap: () {},
   ),
   BiteMenuItemModel(
     leadingIcon: Icons.question_mark,
     leadingIconColor: Colors.deepOrange,
-    title: 'Can I cancel my order?',
+    title: S.of(context).canICancelMyOrder,
     onTap: () {},
   ),
   BiteMenuItemModel(
     leadingIcon: Icons.question_mark,
     leadingIconColor: Colors.deepOrange,
-    title: 'What if my order is delayed?',
+    title: S.of(context).whatIfMyOrderIsDelayed,
     onTap: () {},
   ),
 ];
@@ -26,25 +27,25 @@ List<BiteMenuItemModel> paymentsFAQs(BuildContext context) => [
   BiteMenuItemModel(
     leadingIcon: Icons.question_mark,
     leadingIconColor: Colors.deepOrange,
-    title: 'What payment methods are accepted?',
+    title: S.of(context).whatPaymentMethodsAreAccepted,
     onTap: () {},
   ),
   BiteMenuItemModel(
     leadingIcon: Icons.question_mark,
     leadingIconColor: Colors.deepOrange,
-    title: 'Is it safe to use my credit/debit card on Bite?',
+    title: S.of(context).isItSafeToUseMyCreditdebitCardOnBite,
     onTap: () {},
   ),
   BiteMenuItemModel(
     leadingIcon: Icons.question_mark,
     leadingIconColor: Colors.deepOrange,
-    title: 'Can I use multiple payment methods for one order?',
+    title: S.of(context).canIUseMultiplePaymentMethodsForOneOrder,
     onTap: () {},
   ),
   BiteMenuItemModel(
     leadingIcon: Icons.question_mark,
     leadingIconColor: Colors.deepOrange,
-    title: 'What should I do if a payment fails?',
+    title: S.of(context).whatShouldIDoIfAPaymentFails,
     onTap: () {},
   ),
 ];
@@ -53,25 +54,25 @@ List<BiteMenuItemModel> deliveryFAQs(BuildContext context) => [
   BiteMenuItemModel(
     leadingIcon: Icons.question_mark,
     leadingIconColor: Colors.deepOrange,
-    title: 'What are your delivery hours?',
+    title: S.of(context).whatAreYourDeliveryHours,
     onTap: () {},
   ),
   BiteMenuItemModel(
     leadingIcon: Icons.question_mark,
     leadingIconColor: Colors.deepOrange,
-    title: 'Do you charge a delivery fee?',
+    title: S.of(context).doYouChargeADeliveryFee,
     onTap: () {},
   ),
   BiteMenuItemModel(
     leadingIcon: Icons.question_mark,
     leadingIconColor: Colors.deepOrange,
-    title: 'Do you deliver to my location?',
+    title: S.of(context).doYouDeliverToMyLocation,
     onTap: () {},
   ),
   BiteMenuItemModel(
     leadingIcon: Icons.question_mark,
     leadingIconColor: Colors.deepOrange,
-    title: 'Can I schedule a delivery for a later time?',
+    title: S.of(context).canIScheduleADeliveryForALaterTime,
     onTap: () {},
   ),
 ];

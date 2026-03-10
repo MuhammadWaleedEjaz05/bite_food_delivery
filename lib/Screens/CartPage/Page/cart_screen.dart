@@ -5,6 +5,7 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_address_selector_modal.dar
 import 'package:bite_food_delivery/Models/cart_item_model.dart';
 import 'package:bite_food_delivery/Screens/CartPage/Widgets/bite_cart_item_card.dart';
 import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -85,7 +86,7 @@ class _CheckOutSection extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'DELIVERY ADDRESS',
+                          S.of(context).deliveryAddress2,
                           style: Theme.of(context).textTheme.bodyMedium!
                               .copyWith(
                                 color: Theme.of(
@@ -100,7 +101,7 @@ class _CheckOutSection extends StatelessWidget {
                               onPressed: () =>
                                   showAddressSelectorModal(context),
                               child: Text(
-                                'EDIT',
+                                S.of(context).edit2,
                                 style: Theme.of(context).textTheme.bodyMedium!
                                     .copyWith(
                                       color: Theme.of(
@@ -132,7 +133,7 @@ class _CheckOutSection extends StatelessWidget {
                         return TextField(
                           readOnly: true,
                           decoration: InputDecoration(
-                            hintText: 'Select an address',
+                            hintText: S.of(context).selectAnAddress,
                             filled: true,
                             fillColor: Theme.of(
                               context,
@@ -150,7 +151,7 @@ class _CheckOutSection extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'TOTAL : ',
+                          S.of(context).total2,
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         Text(
@@ -188,7 +189,7 @@ class _CheckOutSection extends StatelessWidget {
                               );
                             },
                             child: Text(
-                              'CHECKOUT',
+                              S.of(context).checkout2,
                               style: Theme.of(context).textTheme.bodyMedium!
                                   .copyWith(
                                     color: Colors.white,
@@ -229,7 +230,7 @@ class _CartSection extends StatelessWidget {
             flex: 2,
             child: Center(
               child: Text(
-                'Your cart is empty',
+                S.of(context).yourCartIsEmpty,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.normal,
@@ -243,7 +244,7 @@ class _CartSection extends StatelessWidget {
               flex: 2,
               child: Center(
                 child: Text(
-                  'Your cart is empty',
+                  S.of(context).yourCartIsEmpty,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.normal,
@@ -274,7 +275,7 @@ class _CartSection extends StatelessWidget {
           flex: 2,
           child: Center(
             child: Text(
-              'Initializing cart...',
+              S.of(context).yourCartIsEmpty,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.normal,
@@ -297,7 +298,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
       isDarkMode: true,
       backButton: true,
       title: Text(
-        'Cart',
+        S.of(context).cart,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,

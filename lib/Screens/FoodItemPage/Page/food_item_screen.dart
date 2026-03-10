@@ -5,6 +5,7 @@ import 'package:bite_food_delivery/Models/cart_item_model.dart';
 import 'package:bite_food_delivery/Models/food_item_model.dart';
 import 'package:bite_food_delivery/Screens/FoodItemPage/Widgets/bite_flavor_list_tile.dart';
 import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -194,7 +195,7 @@ class _AddCardBottomSheet extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          isInCart ? 'Remove from cart' : 'Add to cart',
+                          isInCart ? S.of(context).removeFromCart : S.of(context).addToCart,
                           style: Theme.of(context).textTheme.headlineLarge!
                               .copyWith(color: Colors.white),
                         ),
@@ -222,7 +223,7 @@ class _FlavorSelectionSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Choose your flavor',
+          S.of(context).chooseYourFlavor,
           style: Theme.of(context).textTheme.titleLarge,
         ),
         10.verticalSpace,
@@ -248,7 +249,7 @@ class _FoodSizeSelectionSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Choose your size', style: Theme.of(context).textTheme.titleLarge),
+        Text(S.of(context).chooseYourSize, style: Theme.of(context).textTheme.titleLarge),
         10.verticalSpace,
         Row(
           spacing: 10.w,

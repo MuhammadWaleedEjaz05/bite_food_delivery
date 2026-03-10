@@ -1,3 +1,4 @@
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -73,7 +74,7 @@ class _BiteUserAuthTextFieldState extends State<BiteUserAuthTextField> {
                     ),
                   )
                 : SizedBox.shrink(),
-            hintText: 'Enter ${widget.title}',
+            hintText: S.of(context).editTitle(widget.title),
             hintStyle: Theme.of(
               context,
             ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
@@ -86,20 +87,24 @@ class _BiteUserAuthTextFieldState extends State<BiteUserAuthTextField> {
           ),
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(
-              errorText: 'Please enter ${widget.title.toLowerCase()}',
+              errorText: S
+                  .of(context)
+                  .pleaseEnterWidgettitletolowercase(
+                    widget.title.toLowerCase(),
+                  ),
             ),
             if (widget.isEmail)
               FormBuilderValidators.email(
-                errorText: 'Please enter a valid email address',
+                errorText: S.of(context).pleaseEnterAValidEmailAddress,
               ),
             if (widget.isPhone)
               FormBuilderValidators.phoneNumber(
-                errorText: 'Please enter a valid phone number',
+                errorText: S.of(context).pleaseEnterAValidPhoneNumber,
               ),
             if (widget.isPassword)
               FormBuilderValidators.minLength(
                 8,
-                errorText: 'Password must be at least 8 characters long',
+                errorText: S.of(context).passwordMustBeAtLeast8CharactersLong,
               ),
           ]),
         ),

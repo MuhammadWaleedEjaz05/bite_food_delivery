@@ -1,5 +1,6 @@
 import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +39,7 @@ class BiteEditProfileModal extends StatelessWidget {
         children: [
           BiteAppBar(
             title: Text(
-              'Edit $title',
+              S.of(context).editTitle(title),
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.primary,
@@ -66,7 +67,7 @@ class BiteEditProfileModal extends StatelessWidget {
               TextFormField(
                 controller: _controller,
                 decoration: InputDecoration(
-                  hintText: 'Enter $title',
+                  hintText: S.of(context).editTitle(title),
                   hintStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
                     fontWeight: FontWeight.normal,
                   ),
@@ -102,7 +103,7 @@ class BiteEditProfileModal extends StatelessWidget {
                         ),
                         textStyle: Theme.of(context).textTheme.titleLarge,
                       ),
-                      child: Text('Apply'),
+                      child: Text(S.of(context).apply),
                     ),
                   ),
                 ],

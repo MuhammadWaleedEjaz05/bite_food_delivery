@@ -2,6 +2,7 @@ import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_user_auth_text_field.dart';
 import 'package:bite_food_delivery/Models/user_model.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -95,7 +96,7 @@ class _SignupActionSection extends StatelessWidget {
               ),
               textStyle: Theme.of(context).textTheme.titleLarge,
             ),
-            child: Text('Sign Up'),
+            child: Text(S.of(context).signUp),
           ),
         ),
       ],
@@ -113,31 +114,31 @@ class _SignupCredentialsSection extends StatelessWidget {
       child: Column(
         children: [
           BiteUserAuthTextField(
-            title: 'Full Name',
+            title: S.of(context).fullName,
             controller: _fullNameController,
           ),
           20.verticalSpace,
           BiteUserAuthTextField(
-            title: 'Email',
+            title: S.of(context).email,
             isEmail: true,
             controller: _emailController,
           ),
           20.verticalSpace,
           BiteUserAuthTextField(
-            title: 'Phone Number',
+            title: S.of(context).phoneNumber,
             isPhone: true,
             controller: _phoneController,
           ),
           20.verticalSpace,
           BiteUserAuthTextField(
             isPassword: true,
-            title: 'Password',
+            title: S.of(context).password,
             controller: _passwordController,
           ),
           20.verticalSpace,
           BiteUserAuthTextField(
             isPassword: true,
-            title: 'Confirm Password',
+            title: S.of(context).confirmPassword,
             controller: _confirmPasswordController,
           ),
         ],
@@ -160,10 +161,10 @@ class _HeadTitleSection extends StatelessWidget {
           title: SizedBox.shrink(),
           actions: [],
         ),
-        Text('Sign Up', style: Theme.of(context).textTheme.displayLarge),
+        Text(S.of(context).signUp, style: Theme.of(context).textTheme.displayLarge),
 
         Text(
-          'Please Sign Up to get started',
+          S.of(context).pleaseSignUpToGetStarted,
           style: Theme.of(
             context,
           ).textTheme.titleLarge!.copyWith(color: Colors.white),

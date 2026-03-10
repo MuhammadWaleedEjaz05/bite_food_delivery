@@ -3,7 +3,9 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_menu_section.dart';
 import 'package:bite_food_delivery/Screens/SettingPage/Widgets/bite_setting_item.dart';
 import 'package:bite_food_delivery/configs/app_update_check.dart';
+import 'package:bite_food_delivery/configs/lang_list.dart';
 import 'package:bite_food_delivery/configs/theme_list.dart';
+import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,7 +43,7 @@ class _PreferencesSection extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 15.w, bottom: 10.h),
           child: Text(
-            'PREFERENCES',
+            S.of(context).preferences2,
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
               fontWeight: FontWeight.w600,
               color: Theme.of(context).colorScheme.onSecondary,
@@ -60,7 +62,7 @@ class _PreferencesSection extends StatelessWidget {
                     iconBgColor: Theme.of(
                       context,
                     ).colorScheme.primary.withAlpha(25),
-                    title: 'Notifications',
+                    title: S.of(context).notifications,
                     trailing: Switch(
                       value: state.areNotificationsEnabled,
                       onChanged: (value) {
@@ -81,7 +83,7 @@ class _PreferencesSection extends StatelessWidget {
                     iconBgColor: Theme.of(
                       context,
                     ).colorScheme.primary.withAlpha(25),
-                    title: 'Dark Mode',
+                    title: S.of(context).darkMode,
                     trailing: Switch(
                       value: state.isDarkMode,
                       onChanged: (value) {
@@ -100,12 +102,12 @@ class _PreferencesSection extends StatelessWidget {
                     iconBgColor: Theme.of(
                       context,
                     ).colorScheme.primary.withAlpha(25),
-                    title: 'Language',
+                    title: S.of(context).language,
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          'English',
+                          state.languageCode.toUpperCase(),
                           style: Theme.of(context).textTheme.bodyMedium!
                               .copyWith(
                                 color: Theme.of(
@@ -121,7 +123,44 @@ class _PreferencesSection extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      showModalBottomSheet(
+                        backgroundColor: Theme.of(context).colorScheme.surface,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(20.r),
+                          ),
+                        ),
+                        context: context,
+                        builder: (context) => Center(
+                          child: ListView(
+                            children: langList.keys
+                                .map(
+                                  (lang) => ListTile(
+                                    onTap: () {
+                                      context
+                                          .read<SettingsCubit>()
+                                          .changeLanguage(langList[lang]!);
+                                      Navigator.of(context).pop();
+                                    },
+                                    title: Text(
+                                      lang.toUpperCase(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.onSecondary,
+                                          ),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
                 BiteSettingItem(
@@ -131,7 +170,7 @@ class _PreferencesSection extends StatelessWidget {
                     iconBgColor: Theme.of(
                       context,
                     ).colorScheme.primary.withAlpha(25),
-                    title: 'Themes',
+                    title: S.of(context).themes,
                   ),
                 ),
                 SizedBox(
@@ -180,7 +219,7 @@ class _VersionSectionState extends State<_VersionSection> {
       builder: (context, asyncSnapshot) {
         return Center(
           child: Text(
-            asyncSnapshot.data ?? 'Version info not available',
+            asyncSnapshot.data ?? S.of(context).versionInfoNotAvailable,
             style: Theme.of(
               context,
             ).textTheme.bodySmall!.copyWith(color: Colors.grey.shade300),
@@ -202,7 +241,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
     return BiteAppBar(
       backButton: true,
       title: Text(
-        'Settings',
+        S.of(context).settings,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
