@@ -37,7 +37,7 @@ class BiteBottomNavigationBar extends StatelessWidget {
               .read<BottomNavigationSelectorCubit>()
               .changeSelectedIndex(value),
           backgroundColor: Theme.of(context).colorScheme.surface,
-          items: screenList
+          items: screenList(context)
               .map<BottomBarItem>(
                 (BiteBottomItemModel e) => _biteBottomBarItem(
                   context,

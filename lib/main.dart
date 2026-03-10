@@ -67,6 +67,8 @@ class MyApp extends StatelessWidget {
               S.delegate,
               FormBuilderLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
             ],
             home: SplashScreen(),
           );
@@ -109,7 +111,7 @@ class MainPage extends StatelessWidget {
                   },
                   child: KeyedSubtree(
                     key: ValueKey(selectedIndex),
-                    child: screenList[selectedIndex].page,
+                    child: screenList(context)[selectedIndex].page,
                   ),
                 );
               },
