@@ -4,6 +4,7 @@ import 'package:bite_food_delivery/configs/shared_preference_functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 
@@ -50,19 +51,28 @@ class NotificationService {
 
   Future<void> initialize() async {
     tz.initializeTimeZones();
-    final android = AndroidInitializationSettings('@mipmap/ic_launcher');
     final darwin = DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
     );
-    await _plugin.initialize(
-      settings: InitializationSettings(
-        android: android,
-        iOS: darwin,
-        macOS: darwin,
-      ),
-    );
+    try {
+      await _plugin.initialize(
+        settings: InitializationSettings(
+          android: const AndroidInitializationSettings('ic_launcher'),
+          iOS: darwin,
+          macOS: darwin,
+        ),
+      );
+    } on PlatformException {
+      await _plugin.initialize(
+        settings: InitializationSettings(
+          android: const AndroidInitializationSettings('launcher_icon'),
+          iOS: darwin,
+          macOS: darwin,
+        ),
+      );
+    }
     await FirebaseMessaging.instance.getInitialMessage();
     FirebaseMessaging.onMessage.listen(_handleForegroundMessage);
     FirebaseMessaging.onMessageOpenedApp.listen((_) {});

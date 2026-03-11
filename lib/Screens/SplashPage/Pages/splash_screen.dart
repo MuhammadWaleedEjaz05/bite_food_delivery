@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 4000),
+      duration: const Duration(milliseconds: 1600),
     );
     _scaleAnimation = CurvedAnimation(
       parent: _controller,
@@ -49,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen>
       return;
     }
     _didNavigate = true;
-    await Future.delayed(const Duration(milliseconds: 800));
+    await Future.delayed(const Duration(milliseconds: 150));
     if (!mounted) return;
 
     final FirstTimeLaunchCubit cubit = context.read<FirstTimeLaunchCubit>();
@@ -147,7 +147,11 @@ class _SplashScreenState extends State<SplashScreen>
                   opacity: logoFade,
                   child: Transform.scale(
                     scale: logoScale,
-                    child: SvgPicture.asset('assets/svgs/logo.svg',height: 200.h,width:200.w)
+                    child: SvgPicture.asset(
+                      'assets/svgs/logo.svg',
+                      height: 200.h,
+                      width: 200.w,
+                    ),
                   ),
                 ),
               ),

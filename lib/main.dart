@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bite_food_delivery/Cubits/BottomNavigationSelection/bottom_navigation_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
 import 'package:bite_food_delivery/Cubits/SettingsCubit/settings_cubit.dart';
@@ -28,15 +30,25 @@ import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await sharedPreference;
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await Future.wait([
+    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]),
+  ]);
   FirebaseMessaging.onBackgroundMessage(firebaseBackgroundMessageHandler);
-  await initializeFCM();
-  await NotificationService.instance.initialize();
   Stripe.publishableKey = stripePublishableKey;
-  await Stripe.instance.applySettings();
   runApp(const MyApp());
+  unawaited(_warmUpServices());
+}
+
+Future<void> _warmUpServices() async {
+  try {
+    await Future.wait([
+      sharedPreference.then((_) {}),
+      initializeFCM(),
+      NotificationService.instance.initialize(),
+      Stripe.instance.applySettings(),
+    ]);
+  } catch (_) {}
 }
 
 class MyApp extends StatelessWidget {
