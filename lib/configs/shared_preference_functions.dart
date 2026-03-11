@@ -1,24 +1,31 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<SharedPreferences> get sharedPreference async =>
-    await SharedPreferences.getInstance();
+late SharedPreferences _prefs;
 
-void saveToSharedPreferenceString(String key, String value) async {
-  final SharedPreferences prefs = await sharedPreference;
-  await prefs.setString(key, value);
+Future<void> initSharedPreferences() async {
+  _prefs = await SharedPreferences.getInstance();
 }
 
-Future<String?> getFromSharedPreferenceString(String key) async {
-  final SharedPreferences prefs = await sharedPreference;
-  return prefs.getString(key);
+void saveToSharedPreferenceString(String key, String value) {
+  _prefs.setString(key, value);
 }
 
-void saveToSharedPreferencebool(String key, bool value) async {
-  final SharedPreferences prefs = await sharedPreference;
-  await prefs.setBool(key, value);
+String? getFromSharedPreferenceString(String key) {
+  return _prefs.getString(key);
 }
 
-Future<bool?> getFromSharedPreferencebool(String key) async {
-  final SharedPreferences prefs = await sharedPreference;
-  return prefs.getBool(key);
+void saveToSharedPreferencebool(String key, bool value) {
+  _prefs.setBool(key, value);
+}
+
+bool? getFromSharedPreferencebool(String key) {
+  return _prefs.getBool(key);
+}
+
+void saveToSharedPreferenceInt(String key, int value) {
+  _prefs.setInt(key, value);
+}
+
+int? getFromSharedPreferenceInt(String key) {
+  return _prefs.getInt(key);
 }

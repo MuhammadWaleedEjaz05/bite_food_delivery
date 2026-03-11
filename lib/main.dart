@@ -18,7 +18,6 @@ import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,36 +28,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Future.wait([
-    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]),
-  ]);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseMessaging.onBackgroundMessage(firebaseBackgroundMessageHandler);
   Stripe.publishableKey = stripePublishableKey;
+  await initSharedPreferences();
+  await Future.wait([
+    Stripe.instance.applySettings(),
+    NotificationService.instance.initialize(),
+    initializeFCM(),
+  ]);
   runApp(const MyApp());
-  WidgetsBinding.instance.addPostFrameCallback((_) {
-    unawaited(_warmUpServices());
-  });
-}
-
-Future<void> _warmUpServices() async {
-  await Future<void>.delayed(const Duration(milliseconds: 250));
-
-  try {
-    await sharedPreference;
-  } catch (_) {}
-
-  try {
-    await Stripe.instance.applySettings();
-  } catch (_) {}
-
-  try {
-    await NotificationService.instance.initialize();
-  } catch (_) {}
-
-  try {
-    await initializeFCM();
-  } catch (_) {}
 }
 
 class MyApp extends StatelessWidget {

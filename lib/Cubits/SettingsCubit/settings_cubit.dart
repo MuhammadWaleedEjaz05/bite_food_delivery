@@ -11,11 +11,10 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   Future<void> _loadSettings() async {
-    final prefs = await sharedPreference;
-    final isDarkMode = prefs.getBool('isDarkMode') ?? false;
-    final languageCode = prefs.getString('languageCode') ?? 'en';
+    final isDarkMode = getFromSharedPreferencebool('isDarkMode') ?? false;
+    final languageCode = getFromSharedPreferenceString('languageCode') ?? 'en';
     final areNotificationsEnabled =
-        prefs.getBool('areNotificationsEnabled') ?? true;
+        getFromSharedPreferencebool('areNotificationsEnabled') ?? true;
 
     emit(
       SettingsState(
@@ -27,30 +26,22 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   void toggleDarkMode(bool isDarkMode) {
-    sharedPreference.then((prefs) {
-      prefs.setBool('isDarkMode', isDarkMode);
-    });
+    saveToSharedPreferencebool('isDarkMode', isDarkMode);
     emit(state.copyWith(isDarkMode: isDarkMode));
   }
 
   void changeLanguage(String languageCode) {
-    sharedPreference.then((prefs) {
-      prefs.setString('languageCode', languageCode);
-    });
+    saveToSharedPreferenceString('languageCode', languageCode);
     emit(state.copyWith(languageCode: languageCode));
   }
 
   void toggleNotifications(bool areEnabled) {
-    sharedPreference.then((prefs) {
-      prefs.setBool('areNotificationsEnabled', areEnabled);
-    });
+    saveToSharedPreferencebool('areNotificationsEnabled', areEnabled);
     emit(state.copyWith(areNotificationsEnabled: areEnabled));
   }
 
   void changeTheme(int themeIndex) {
-    sharedPreference.then((prefs) {
-      prefs.setInt('themeIndex', themeIndex);
-    });
+    saveToSharedPreferenceInt('themeIndex', themeIndex);
     emit(state.copyWith(themeIndex: themeIndex));
   }
 }

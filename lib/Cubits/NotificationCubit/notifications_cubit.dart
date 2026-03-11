@@ -16,8 +16,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
   StreamSubscription? _notificationsSubscription;
 
   Future<bool> _areNotificationsEnabled() async {
-    final prefs = await sharedPreference;
-    return prefs.getBool('areNotificationsEnabled') ?? true;
+    return getFromSharedPreferencebool('areNotificationsEnabled') ?? true;
   }
 
   void loadNotifications(String userId) {

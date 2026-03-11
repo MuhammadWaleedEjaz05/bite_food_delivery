@@ -9,7 +9,7 @@ class FirstTimeLaunchCubit extends Cubit<FirstTimeLaunchState> {
 
   Future<void> checkFirstTimeLaunch() async {
     try {
-      final bool? isFirstTimeLaunched = await getFromSharedPreferencebool(
+      final bool? isFirstTimeLaunched = getFromSharedPreferencebool(
         'isFirstTimeLaunched',
       );
       if (isFirstTimeLaunched == null || isFirstTimeLaunched == true) {
