@@ -79,9 +79,8 @@ class NotificationService {
   }
 
   void _handleForegroundMessage(RemoteMessage message) async {
-    final prefs = await sharedPreference;
     final areNotificationsEnabled =
-        prefs.getBool('areNotificationsEnabled') ?? true;
+        getFromSharedPreferencebool('areNotificationsEnabled') ?? true;
     if (!areNotificationsEnabled) return;
 
     final notification = message.notification;
