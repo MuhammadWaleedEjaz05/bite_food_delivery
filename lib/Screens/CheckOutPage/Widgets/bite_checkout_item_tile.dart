@@ -31,7 +31,7 @@ class BiteCheckoutItemTile extends StatelessWidget {
                 width: 55.r,
                 height: 55.r,
                 color: Colors.grey.shade300,
-                child: Icon(Icons.fastfood, color: Colors.grey),
+                child: const Icon(Icons.fastfood, color: Colors.grey),
               ),
             ),
           ),

@@ -32,7 +32,7 @@ class BiteSearchBar extends StatelessWidget {
         size: 25.r,
         color: Theme.of(context).colorScheme.onSecondary,
       ),
-      elevation: WidgetStatePropertyAll(0),
+      elevation: const WidgetStatePropertyAll(0),
       shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
       ),
@@ -79,7 +79,7 @@ class OpenSearchScreen extends SearchDelegate {
     return BlocBuilder<RestaurantsCubit, RestaurantsState>(
       builder: (context, state) {
         if (state is RestaurantsLoading) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (state is RestaurantsError) {
           return Center(
             child: Text(S.of(context).errorStatemessage(state.message)),
@@ -128,7 +128,7 @@ class OpenSearchScreen extends SearchDelegate {
     return BlocBuilder<RestaurantsCubit, RestaurantsState>(
       builder: (context, state) {
         if (state is RestaurantsLoading) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (state is RestaurantsError) {
           return Center(
             child: Text(S.of(context).errorStatemessage(state.message)),

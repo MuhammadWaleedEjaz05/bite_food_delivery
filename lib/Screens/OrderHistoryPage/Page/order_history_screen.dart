@@ -10,33 +10,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class OrderHistoryScreen extends StatefulWidget {
+class OrderHistoryScreen extends StatelessWidget {
   const OrderHistoryScreen({super.key});
-
-  @override
-  State<OrderHistoryScreen> createState() => _OrderHistoryScreenState();
-}
-
-class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
-  @override
-  void initState() {
-    super.initState();
-    final userState = context.read<UserAuthCubit>().state;
-    if (userState is UserLoggedIn && userState.user.id != null) {
-      context.read<OrderCubit>().loadOrderHistory(userState.user.id!);
-    }
-  }
-
-  @override
-  void dispose() {
-    context.read<OrderCubit>().stopListeningToOrderHistory();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _AppBarSection(),
+      appBar: const _AppBarSection(),
       body: BlocListener<OrderCubit, OrderState>(
         listener: (context, state) {
           if (state is ReorderLoaded) {
@@ -51,7 +31,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
           length: 2,
           child: Column(
             children: [
-              BiteTabBar(),
+              const BiteTabBar(),
               Expanded(
                 child: BlocBuilder<OrderCubit, OrderState>(
                   builder: (context, state) {
@@ -108,8 +88,12 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                       ),
                       child: TabBarView(
                         children: [
-                          _EmptyOrderView(message: S.of(context).noOngoingOrders),
-                          _EmptyOrderView(message: S.of(context).noOrderHistory),
+                          _EmptyOrderView(
+                            message: S.of(context).noOngoingOrders,
+                          ),
+                          _EmptyOrderView(
+                            message: S.of(context).noOrderHistory,
+                          ),
                         ],
                       ),
                     );
@@ -169,7 +153,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
                       },
                       child: Text(
                         S.of(context).clearAll,
-                        style: TextStyle(color: Colors.red),
+                        style: const TextStyle(color: Colors.red),
                       ),
                     ),
                   ],
@@ -208,7 +192,9 @@ class _OrderListView extends StatelessWidget {
   Widget build(BuildContext context) {
     if (orders.isEmpty) {
       return _EmptyOrderView(
-        message: isCompleted ? S.of(context).noCompletedOrdersYet : S.of(context).noOngoingOrders,
+        message: isCompleted
+            ? S.of(context).noCompletedOrdersYet
+            : S.of(context).noOngoingOrders,
       );
     }
     return ListView.separated(

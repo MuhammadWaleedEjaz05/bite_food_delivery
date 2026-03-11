@@ -10,21 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class RestaurantScreen extends StatefulWidget {
+class RestaurantScreen extends StatelessWidget {
   const RestaurantScreen({super.key});
-
-  @override
-  State<RestaurantScreen> createState() => _RestaurantScreenState();
-}
-
-class _RestaurantScreenState extends State<RestaurantScreen> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<CategorySelectionCubit>().selectCategory('');
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +42,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
             ),
             child: ListView(
               padding: EdgeInsets.symmetric(horizontal: 15.w),
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               children: [
                 20.verticalSpace,
@@ -87,7 +74,7 @@ class _FoodItemSection extends StatelessWidget {
         return BlocBuilder<FoodItemCubit, FoodItemState>(
           builder: (context, state) {
             if (state is FoodItemLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is FoodItemError) {
               return Center(
                 child: Text(
@@ -105,12 +92,14 @@ class _FoodItemSection extends StatelessWidget {
                         .toList();
               if (filteredItems.isEmpty) {
                 return Center(
-                  child: Text(S.of(context).noFoodItemsAvailableForThisCategory),
+                  child: Text(
+                    S.of(context).noFoodItemsAvailableForThisCategory,
+                  ),
                 );
               } else {
                 return ListView(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   children: [
                     Text(
                       selectedCategory.isEmpty ? 'All Items' : selectedCategory,
@@ -118,7 +107,7 @@ class _FoodItemSection extends StatelessWidget {
                     ),
                     GridView.builder(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 10.w,
@@ -135,7 +124,7 @@ class _FoodItemSection extends StatelessWidget {
                 );
               }
             } else {
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             }
           },
         );
@@ -155,7 +144,7 @@ class _CategorySelectionSection extends StatelessWidget {
         return BlocBuilder<FoodItemCubit, FoodItemState>(
           builder: (context, state) {
             if (state is FoodItemLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is FoodItemError) {
               return Center(
                 child: Text(
@@ -164,7 +153,7 @@ class _CategorySelectionSection extends StatelessWidget {
               );
             } else if (state is FoodItemLoaded) {
               if (state.foodItems.isEmpty) {
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               } else {
                 final restaurantFoodItems = state.foodItems
                     .where((item) => item.RestuarantId == restaurantId)
@@ -220,7 +209,7 @@ class _CategorySelectionSection extends StatelessWidget {
                 );
               }
             } else {
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             }
           },
         );
@@ -319,7 +308,7 @@ class _AppBarSection extends StatelessWidget {
     return BiteAppBar(
       backButton: true,
       isDarkMode: true,
-      title: SizedBox.shrink(),
+      title: const SizedBox.shrink(),
       actions: [
         BlocBuilder<FavouriteCubit, FavouriteState>(
           builder: (context, state) {

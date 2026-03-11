@@ -18,7 +18,7 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _AppBarSection(),
+      appBar: const _AppBarSection(),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         children: [
@@ -34,7 +34,7 @@ class CategoryScreen extends StatelessWidget {
                   return BlocBuilder<RestaurantsCubit, RestaurantsState>(
                     builder: (context, state) {
                       if (state is RestaurantsLoading) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       } else if (state is RestaurantsError) {
                         return Center(child: Text(S.of(context).errorStatemessage(state.message)));
                       } else if (state is RestaurantsLoaded) {
@@ -59,7 +59,7 @@ class CategoryScreen extends StatelessWidget {
                         }).toList();
 
                         return ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: filteredRestaurants.length,
                           itemBuilder: (context, index) {
@@ -71,7 +71,7 @@ class CategoryScreen extends StatelessWidget {
                           },
                         );
                       } else {
-                        return SizedBox();
+                        return const SizedBox();
                       }
                     },
                   );
@@ -121,7 +121,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return BiteAppBar(
       backButton: true,
-      title: BiteDropDownMenu(),
+      title: const BiteDropDownMenu(),
       actions: [
         IconButton(
           onPressed: () =>
@@ -142,7 +142,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.r),
                 ),
-                child: BiteFilterModal(),
+                child: const BiteFilterModal(),
               ),
             );
           },

@@ -39,15 +39,15 @@ class CheckOutScreen extends StatelessWidget {
             color: Theme.of(context).colorScheme.primary,
           ),
         ),
-        actions: [],
+        actions: const [],
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         children: [
           10.verticalSpace,
-          _DeliveryAddressSection(),
+          const _DeliveryAddressSection(),
           25.verticalSpace,
-          _OrderItemsSection(),
+          const _OrderItemsSection(),
           25.verticalSpace,
           _PaymentMethodSection(context),
           25.verticalSpace,
@@ -81,7 +81,7 @@ class _DeliveryAddressSection extends StatelessWidget {
               S.of(context).deliveryAddress,
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            Spacer(),
+            const Spacer(),
             TextButton(
               onPressed: () => showAddressSelectorModal(context),
               child: Text(
@@ -153,7 +153,7 @@ class _OrderItemsSection extends StatelessWidget {
                 ),
                 child: ListView.separated(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(vertical: 5.h),
                   itemCount: state.cart.cartItems.length,
                   separatorBuilder: (context, index) => Divider(
@@ -171,7 +171,7 @@ class _OrderItemsSection extends StatelessWidget {
                 ),
               );
             }
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           },
         ),
       ],
@@ -200,7 +200,7 @@ class _PaymentMethodSection extends StatelessWidget {
               S.of(context).paymentMethod,
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            Spacer(),
+            const Spacer(),
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/payment_screen');
@@ -246,7 +246,7 @@ class _OrderSummarySection extends StatelessWidget {
               )
               .deliveryFee
         : 100.0;
-    final double platformFee = 20.0;
+    const double platformFee = 20.0;
     final double grandTotal = totalAmount + deliveryFee + platformFee;
 
     return Column(
@@ -457,7 +457,7 @@ class _PlaceOrderButton extends StatelessWidget {
               )
               .deliveryFee
         : 100.0;
-    final double platformFee = 20.0;
+    const double platformFee = 20.0;
     final double grandTotal = totalAmount + deliveryFee + platformFee;
 
     return Row(
@@ -545,7 +545,7 @@ class _PlaceOrderButton extends StatelessWidget {
                           ? SizedBox(
                               height: 22.r,
                               width: 22.r,
-                              child: CircularProgressIndicator(
+                              child: const CircularProgressIndicator(
                                 color: Colors.white,
                                 strokeWidth: 2,
                               ),

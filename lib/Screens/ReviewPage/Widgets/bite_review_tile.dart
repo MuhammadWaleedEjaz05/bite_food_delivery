@@ -76,9 +76,9 @@ class BiteReviewTile extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: List.generate(5, (index) {
         if (index < rating.floor()) {
-          return Icon(Icons.star, size: 16, color: Colors.amber);
+          return const Icon(Icons.star, size: 16, color: Colors.amber);
         } else if (index < rating) {
-          return Icon(Icons.star_half, size: 16, color: Colors.amber);
+          return const Icon(Icons.star_half, size: 16, color: Colors.amber);
         }
         return Icon(
           Icons.star_border,

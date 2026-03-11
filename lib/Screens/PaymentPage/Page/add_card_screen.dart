@@ -66,7 +66,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: _AppBarSection(),
+      appBar: const _AppBarSection(),
       body: Column(
         children: [
           Expanded(
@@ -85,7 +85,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                     25.verticalSpace,
                     _CardHolderSection(controller: _cardHolderNameController),
                     25.verticalSpace,
-                    _SecurityInfoSection(),
+                    const _SecurityInfoSection(),
                   ],
                 ),
               ),
@@ -206,8 +206,9 @@ class _CardDetailsSection extends StatelessWidget {
                   if (text.isEmpty) return S.of(context).required;
                   if (text.length < 4) return 'MM/YY';
                   final month = int.tryParse(text.substring(0, 2)) ?? 0;
-                  if (month < 1 || month > 12)
+                  if (month < 1 || month > 12) {
                     return S.of(context).invalidMonth;
+                  }
                   return null;
                 },
                 style: textTheme.titleMedium,
@@ -229,8 +230,9 @@ class _CardDetailsSection extends StatelessWidget {
                   LengthLimitingTextInputFormatter(4),
                 ],
                 validator: (value) {
-                  if (value == null || value.isEmpty)
+                  if (value == null || value.isEmpty) {
                     return S.of(context).required;
+                  }
                   if (value.length < 3) return S.of(context).invalidCvc;
                   return null;
                 },
@@ -266,7 +268,7 @@ class _CardDetailsSection extends StatelessWidget {
         padding: EdgeInsets.only(left: 16.w, right: 10.w),
         child: Icon(icon, color: colorScheme.primary, size: 22.r),
       ),
-      prefixIconConstraints: BoxConstraints(minHeight: 0, minWidth: 0),
+      prefixIconConstraints: const BoxConstraints(minHeight: 0, minWidth: 0),
       contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14.r),
@@ -332,7 +334,7 @@ class _CardHolderSection extends StatelessWidget {
                 size: 22.r,
               ),
             ),
-            prefixIconConstraints: BoxConstraints(minHeight: 0, minWidth: 0),
+            prefixIconConstraints: const BoxConstraints(minHeight: 0, minWidth: 0),
             contentPadding: EdgeInsets.symmetric(
               horizontal: 20.w,
               vertical: 16.h,
@@ -428,7 +430,7 @@ class _AddCardButton extends StatelessWidget {
                   ? SizedBox(
                       height: 20.r,
                       width: 20.r,
-                      child: CircularProgressIndicator(
+                      child: const CircularProgressIndicator(
                         strokeWidth: 2,
                         color: Colors.white,
                       ),
@@ -492,7 +494,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
           color: Theme.of(context).colorScheme.primary,
         ),
       ),
-      actions: [],
+      actions: const [],
     );
   }
 }

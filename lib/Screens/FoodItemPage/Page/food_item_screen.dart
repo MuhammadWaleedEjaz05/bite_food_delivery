@@ -47,7 +47,7 @@ class FoodItemScreen extends StatelessWidget {
             ),
             child: ListView(
               padding: EdgeInsets.symmetric(horizontal: 15.w),
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               children: [
                 20.verticalSpace,
@@ -110,7 +110,7 @@ class _AddCardBottomSheet extends StatelessWidget {
                       'RS ${foodItem.price.toStringAsFixed(2)}',
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
-                    Spacer(),
+                    const Spacer(),
                     if (isInCart)
                       Container(
                         decoration: BoxDecoration(
@@ -121,7 +121,7 @@ class _AddCardBottomSheet extends StatelessWidget {
                           spacing: 5.w,
                           children: [
                             IconButton(
-                              icon: Icon(Icons.remove),
+                              icon: const Icon(Icons.remove),
                               style: IconButton.styleFrom(
                                 backgroundColor: Colors.blueGrey.shade200,
                                 foregroundColor: Colors.white,
@@ -143,7 +143,7 @@ class _AddCardBottomSheet extends StatelessWidget {
                                   .copyWith(color: Colors.white),
                             ),
                             IconButton(
-                              icon: Icon(Icons.add),
+                              icon: const Icon(Icons.add),
                               style: IconButton.styleFrom(
                                 backgroundColor: Colors.blueGrey.shade200,
                                 foregroundColor: Colors.white,
@@ -218,7 +218,7 @@ class _FlavorSelectionSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (foodItem.flavors.isEmpty) return SizedBox.shrink();
+    if (foodItem.flavors.isEmpty) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -229,8 +229,8 @@ class _FlavorSelectionSection extends StatelessWidget {
         10.verticalSpace,
         ListView.separated(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) => BiteFlavorListTile(),
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) => const BiteFlavorListTile(),
           separatorBuilder: (context, index) => 10.verticalSpace,
           itemCount: 5,
         ),
@@ -245,7 +245,7 @@ class _FoodSizeSelectionSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (foodItem.sizes.isEmpty) return SizedBox.shrink();
+    if (foodItem.sizes.isEmpty) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -263,7 +263,7 @@ class _FoodSizeSelectionSection extends StatelessWidget {
                   context,
                 ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
               ),
-              child: Text('10 inch'),
+              child: const Text('10 inch'),
             ),
             TextButton(
               onPressed: () {},
@@ -274,7 +274,7 @@ class _FoodSizeSelectionSection extends StatelessWidget {
                   context,
                 ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
               ),
-              child: Text('16 inch'),
+              child: const Text('16 inch'),
             ),
             TextButton(
               onPressed: () {},
@@ -285,7 +285,7 @@ class _FoodSizeSelectionSection extends StatelessWidget {
                   context,
                 ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
               ),
-              child: Text('20 inch'),
+              child: const Text('20 inch'),
             ),
           ],
         ),
@@ -336,7 +336,7 @@ class _AppBarSection extends StatelessWidget {
     return BiteAppBar(
       backButton: true,
       isDarkMode: true,
-      title: SizedBox.shrink(),
+      title: const SizedBox.shrink(),
       actions: [
         BlocBuilder<FavouriteCubit, FavouriteState>(
           builder: (context, state) {

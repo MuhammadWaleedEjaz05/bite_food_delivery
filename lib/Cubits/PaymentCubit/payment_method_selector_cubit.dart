@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 class PaymentMethodSelectorCubit extends Cubit<CreditCardModel> {
   PaymentMethodSelectorCubit()
     : super(
-        CreditCardModel(
+        const CreditCardModel(
           cardHolderName: '',
           customerId: '',
           paymentMethodId: '',
@@ -20,7 +20,7 @@ class PaymentMethodSelectorCubit extends Cubit<CreditCardModel> {
   ) {
     if (selectedType == CreditCardType.onCash) {
       emit(
-        CreditCardModel(
+        const CreditCardModel(
           cardHolderName: 'Cash on Delivery',
           customerId: '',
           paymentMethodId: '',

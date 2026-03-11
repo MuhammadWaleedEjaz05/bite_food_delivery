@@ -17,7 +17,7 @@ class FavouriteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: _AppSection(),
+      appBar: const _AppSection(),
       body: DefaultTabController(
         initialIndex: 0,
         length: 2,
@@ -25,9 +25,9 @@ class FavouriteScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: Column(
             children: [
-              _TabSection(),
+              const _TabSection(),
               20.verticalSpace,
-              Expanded(child: _FavouriteSection()),
+              const Expanded(child: _FavouriteSection()),
             ],
           ),
         ),
@@ -41,7 +41,7 @@ class _FavouriteSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TabBarView(
+    return const TabBarView(
       children: [_FoodFavouriteSection(), _ReataurantFavouriteSection()],
     );
   }
@@ -61,7 +61,7 @@ class _ReataurantFavouriteSection extends StatelessWidget {
         return BlocBuilder<RestaurantsCubit, RestaurantsState>(
           builder: (context, state) {
             if (state is RestaurantsLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is RestaurantsError) {
               return Center(
                 child: Text(S.of(context).errorStatemessage(state.message)),
@@ -83,7 +83,7 @@ class _ReataurantFavouriteSection extends StatelessWidget {
                 itemCount: favouriteRestaurants.length,
               );
             } else {
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             }
           },
         );
@@ -105,7 +105,7 @@ class _FoodFavouriteSection extends StatelessWidget {
         return BlocBuilder<FoodItemCubit, FoodItemState>(
           builder: (context, state) {
             if (state is FoodItemLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is FoodItemError) {
               return Center(
                 child: Text(S.of(context).errorStatemessage(state.message)),
@@ -124,7 +124,7 @@ class _FoodFavouriteSection extends StatelessWidget {
                 itemCount: favouriteFoodItems.length,
               );
             } else {
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             }
           },
         );
@@ -176,7 +176,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
           color: Theme.of(context).colorScheme.primary,
         ),
       ),
-      actions: [],
+      actions: const [],
     );
   }
 }

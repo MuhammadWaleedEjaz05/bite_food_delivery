@@ -51,23 +51,23 @@ class NotificationService {
 
   Future<void> initialize() async {
     tz.initializeTimeZones();
-    final darwin = DarwinInitializationSettings(
+    const darwin = DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
     );
     try {
       await _plugin.initialize(
-        settings: InitializationSettings(
-          android: const AndroidInitializationSettings('ic_launcher'),
+        settings: const InitializationSettings(
+          android: AndroidInitializationSettings('ic_launcher'),
           iOS: darwin,
           macOS: darwin,
         ),
       );
     } on PlatformException {
       await _plugin.initialize(
-        settings: InitializationSettings(
-          android: const AndroidInitializationSettings('launcher_icon'),
+        settings: const InitializationSettings(
+          android: AndroidInitializationSettings('launcher_icon'),
           iOS: darwin,
           macOS: darwin,
         ),
@@ -101,7 +101,7 @@ class NotificationService {
       id: title.hashCode,
       title: title,
       body: body,
-      notificationDetails: NotificationDetails(
+      notificationDetails: const NotificationDetails(
         android: AndroidNotificationDetails(
           'bite_food_delivery_channel',
           'Bite Food Delivery Notifications',

@@ -6,25 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AllCategoryScreen extends StatefulWidget {
+class AllCategoryScreen extends StatelessWidget {
   const AllCategoryScreen({super.key});
-
-  @override
-  State<AllCategoryScreen> createState() => _AllCategoryScreenState();
-}
-
-class _AllCategoryScreenState extends State<AllCategoryScreen> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final cubit = context.read<CategoriesCubit>();
-      if (cubit.state is! CategoriesLoaded &&
-          cubit.state is! CategoriesLoading) {
-        cubit.loadCategories();
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +20,12 @@ class _AllCategoryScreenState extends State<AllCategoryScreen> {
             color: Theme.of(context).colorScheme.primary,
           ),
         ),
-        actions: [],
+        actions: const [],
       ),
       body: BlocBuilder<CategoriesCubit, CategoriesState>(
         builder: (context, state) {
           if (state is CategoriesLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is CategoriesError) {
             return Center(
               child: Text(S.of(context).errorStatemessage(state.error)),
@@ -58,7 +41,7 @@ class _AllCategoryScreenState extends State<AllCategoryScreen> {
                   BiteCategoryCard(category: state.categories[index]),
             );
           } else {
-            return SizedBox();
+            return const SizedBox();
           }
         },
       ),

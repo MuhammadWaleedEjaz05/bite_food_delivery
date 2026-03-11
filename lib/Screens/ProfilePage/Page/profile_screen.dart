@@ -17,13 +17,13 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: _AppBarSection(),
+      appBar: const _AppBarSection(),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         children: [
-          _UserInfoSection(),
+          const _UserInfoSection(),
           30.verticalSpace,
-          _MenuSection(),
+          const _MenuSection(),
           30.verticalSpace,
         ],
       ),
@@ -195,7 +195,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
           color: Theme.of(context).colorScheme.primary,
         ),
       ),
-      actions: [],
+      actions: const [],
     );
   }
 }

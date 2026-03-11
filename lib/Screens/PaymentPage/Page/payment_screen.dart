@@ -17,7 +17,7 @@ class PaymentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: _AppSection(),
+      appBar: const _AppSection(),
       body: Column(
         children: [
           Expanded(
@@ -25,16 +25,16 @@ class PaymentScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 15.w),
               children: [
                 20.verticalSpace,
-                _PaymentMethodSection(),
+                const _PaymentMethodSection(),
                 25.verticalSpace,
-                _SavedCardsSection(),
+                const _SavedCardsSection(),
                 25.verticalSpace,
               ],
             ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: _AddCardButton(),
+            child: const _AddCardButton(),
           ),
           20.verticalSpace,
         ],
@@ -275,13 +275,13 @@ class _SavedCardsSection extends StatelessWidget {
               return Center(
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 40.h),
-                  child: CircularProgressIndicator(),
+                  child: const CircularProgressIndicator(),
                 ),
               );
             } else if (state is CreditCardLoaded) {
               final cards = state.creditCardList;
               if (cards.isEmpty) {
-                return _EmptyCardPlaceholder();
+                return const _EmptyCardPlaceholder();
               }
               return Container(
                 padding: EdgeInsets.all(12.r),
@@ -293,7 +293,7 @@ class _SavedCardsSection extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: cards.length,
-                  separatorBuilder: (_, __) => Divider(
+                  separatorBuilder: (_, _) => Divider(
                     color: Theme.of(
                       context,
                     ).colorScheme.onSecondaryFixedVariant,
@@ -313,7 +313,7 @@ class _SavedCardsSection extends StatelessWidget {
                 ),
               );
             }
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           },
         ),
       ],
@@ -574,7 +574,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
           color: Theme.of(context).colorScheme.primary,
         ),
       ),
-      actions: [],
+      actions: const [],
     );
   }
 }

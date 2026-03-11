@@ -63,7 +63,7 @@ class CreditCardCubit extends Cubit<CreditCardState> {
         (card) => card.paymentMethodId == paymentMethodId,
       );
       if (existingIndex != -1) {
-        emit(CreditCardError('This card is already added.'));
+        emit(const CreditCardError('This card is already added.'));
         return;
       }
 

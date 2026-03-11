@@ -24,13 +24,13 @@ class PersonInfoScreen extends StatelessWidget {
             color: Theme.of(context).colorScheme.primary,
           ),
         ),
-        actions: [],
+        actions: const [],
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         children: [
           30.verticalSpace,
-          _UserInfoSection(),
+          const _UserInfoSection(),
           40.verticalSpace,
           BiteMenuSection(
             menuItems: personalInfoList(

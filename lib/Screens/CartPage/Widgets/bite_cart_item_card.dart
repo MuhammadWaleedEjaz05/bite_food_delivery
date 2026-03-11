@@ -61,7 +61,7 @@ class BiteCartItemCard extends StatelessWidget {
                       context,
                     ).textTheme.titleLarge!.copyWith(color: Colors.white),
                   ),
-                  Spacer(),
+                  const Spacer(),
                 ],
               ),
               15.verticalSpace,
@@ -81,7 +81,7 @@ class BiteCartItemCard extends StatelessWidget {
                     style: IconButton.styleFrom(
                       backgroundColor: Colors.white.withAlpha(50),
                     ),
-                    icon: Icon(Icons.add, color: Colors.white),
+                    icon: const Icon(Icons.add, color: Colors.white),
                   ),
                   Text(
                     cartItem.quantity.toString(),
@@ -107,7 +107,7 @@ class BiteCartItemCard extends StatelessWidget {
                     style: IconButton.styleFrom(
                       backgroundColor: Colors.white.withAlpha(50),
                     ),
-                    icon: Icon(Icons.remove, color: Colors.white),
+                    icon: const Icon(Icons.remove, color: Colors.white),
                   ),
                 ],
               ),

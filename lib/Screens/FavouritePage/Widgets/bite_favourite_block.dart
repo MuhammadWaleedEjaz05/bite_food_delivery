@@ -21,7 +21,7 @@ class BiteFavouriteBlock extends StatelessWidget {
           BoxShadow(
             color: Colors.black12,
             blurRadius: 10.r,
-            offset: Offset(0, 5),
+            offset: const Offset(0, 5),
           ),
         ],
       ),

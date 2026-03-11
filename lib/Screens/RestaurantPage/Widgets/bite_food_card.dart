@@ -76,7 +76,7 @@ class BiteFoodCard extends StatelessWidget {
                   'Rs ${foodItem.price}',
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
-                Spacer(),
+                const Spacer(),
                 BlocListener<CartCubit, CartState>(
                   listenWhen: (previous, current) {
                     if (current is CartItemAdded) {
@@ -93,7 +93,7 @@ class BiteFoodCard extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('${foodItem.name} added to cart!'),
-                          duration: Duration(seconds: 2),
+                          duration: const Duration(seconds: 2),
                           backgroundColor: Colors.green,
                         ),
                       );
@@ -101,7 +101,7 @@ class BiteFoodCard extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('${foodItem.name} quantity updated!'),
-                          duration: Duration(seconds: 2),
+                          duration: const Duration(seconds: 2),
                           backgroundColor: Colors.blue,
                         ),
                       );
@@ -109,7 +109,7 @@ class BiteFoodCard extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(state.message),
-                          duration: Duration(seconds: 3),
+                          duration: const Duration(seconds: 3),
                           backgroundColor: Colors.red,
                         ),
                       );

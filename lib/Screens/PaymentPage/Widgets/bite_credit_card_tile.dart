@@ -116,7 +116,7 @@ class _BiteCreditCardTileState extends State<BiteCreditCardTile>
                     value: widget.creditCard.expiryDate,
                   ),
                   10.verticalSpace,
-                  _CardDetailRow(
+                  const _CardDetailRow(
                     icon: Icons.public_rounded,
                     label: 'Country',
                     value: 'Pakistan',
@@ -211,7 +211,7 @@ class _BiteCreditCardTileState extends State<BiteCreditCardTile>
                             );
                           },
                           icon: Icon(Icons.delete_outline_rounded, size: 20.r),
-                          label: Text('Remove Card'),
+                          label: const Text('Remove Card'),
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.symmetric(vertical: 10.h),
                             backgroundColor: Colors.red.shade50,

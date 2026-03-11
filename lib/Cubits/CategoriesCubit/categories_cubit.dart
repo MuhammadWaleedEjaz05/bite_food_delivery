@@ -7,9 +7,7 @@ part 'categories_state.dart';
 
 class CategoriesCubit extends Cubit<CategoriesState> {
   final List<CategoryModel> _caches = [];
-  CategoriesCubit() : super(CategoriesInitial()) {
-    loadCategories();
-  }
+  CategoriesCubit() : super(CategoriesInitial());
 
   Future<void> loadCategories() async {
     _caches.clear();

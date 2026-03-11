@@ -20,12 +20,12 @@ class AllRestaurantScreen extends StatelessWidget {
             color: Theme.of(context).colorScheme.primary,
           ),
         ),
-        actions: [],
+        actions: const [],
       ),
       body: BlocBuilder<RestaurantsCubit, RestaurantsState>(
         builder: (context, state) {
           if (state is RestaurantsLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is RestaurantsError) {
             return Center(child: Text(S.of(context).errorStatemessage(state.message)));
           } else if (state is RestaurantsLoaded) {
@@ -38,7 +38,7 @@ class AllRestaurantScreen extends StatelessWidget {
               itemCount: state.restaurants.length,
             );
           } else {
-            return SizedBox();
+            return const SizedBox();
           }
         },
       ),

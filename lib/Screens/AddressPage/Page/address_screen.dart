@@ -8,33 +8,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AddressScreen extends StatefulWidget {
+class AddressScreen extends StatelessWidget {
   const AddressScreen({super.key});
-
-  @override
-  State<AddressScreen> createState() => _AddressScreenState();
-}
-
-class _AddressScreenState extends State<AddressScreen> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<AddressCubit>().loadAddresses();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _AppSection(),
+      appBar: const _AppSection(),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             20.verticalSpace,
-            _AddressSection(),
-            Spacer(),
-            _AddAddressSection(),
+            const _AddressSection(),
+            const Spacer(),
+            const _AddAddressSection(),
             20.verticalSpace,
           ],
         ),
@@ -94,7 +83,7 @@ class _AddressSection extends StatelessWidget {
     return BlocBuilder<AddressCubit, AddressState>(
       builder: (context, state) {
         if (state is AddressLoading) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (state is AddressError) {
@@ -166,7 +155,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
           color: Theme.of(context).colorScheme.primary,
         ),
       ),
-      actions: [],
+      actions: const [],
     );
   }
 }

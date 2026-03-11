@@ -20,7 +20,7 @@ class BiteFlavorListTile extends StatelessWidget {
                 'Beef Burger',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              Spacer(),
+              const Spacer(),
               Container(
                 height: 60.h,
                 width: 60.w,
@@ -37,7 +37,7 @@ class BiteFlavorListTile extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.r),
           ),
         ),
-        Divider(),
+        const Divider(),
       ],
     );
   }

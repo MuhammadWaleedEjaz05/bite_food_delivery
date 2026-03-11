@@ -16,16 +16,16 @@ class FAQScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: _AppBarSection(),
+      appBar: const _AppBarSection(),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         children: [
           20.verticalSpace,
-          _SupportTeamContactSection(),
+          const _SupportTeamContactSection(),
           20.verticalSpace,
-          _OrderFAQsSection(),
-          _PaymentFAQsSection(),
-          _DeliveryFAQsSection(),
+          const _OrderFAQsSection(),
+          const _PaymentFAQsSection(),
+          const _DeliveryFAQsSection(),
         ],
       ),
     );
@@ -49,7 +49,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
           color: Theme.of(context).colorScheme.primary,
         ),
       ),
-      actions: [],
+      actions: const [],
     );
   }
 }

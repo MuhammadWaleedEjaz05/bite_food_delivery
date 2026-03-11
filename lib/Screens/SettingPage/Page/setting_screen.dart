@@ -18,13 +18,13 @@ class SettingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: _AppBarSection(),
+      appBar: const _AppBarSection(),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         children: [
-          _PreferencesSection(),
+          const _PreferencesSection(),
           30.verticalSpace,
-          _VersionSection(),
+          const _VersionSection(),
           30.verticalSpace,
         ],
       ),
@@ -248,7 +248,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
           color: Theme.of(context).colorScheme.primary,
         ),
       ),
-      actions: [],
+      actions: const [],
     );
   }
 }

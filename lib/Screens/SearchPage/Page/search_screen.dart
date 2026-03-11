@@ -18,16 +18,16 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: _AppBarSection(),
+      appBar: const _AppBarSection(),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         children: [
           10.verticalSpace,
-          BiteSearchBar(),
+          const BiteSearchBar(),
           20.verticalSpace,
-          _RecentSearchSection(),
+          const _RecentSearchSection(),
           20.verticalSpace,
-          _PopularRestaurantSection(),
+          const _PopularRestaurantSection(),
         ],
       ),
     );
@@ -46,7 +46,7 @@ class _PopularRestaurantSection extends StatelessWidget {
         BlocBuilder<RestaurantsCubit, RestaurantsState>(
           builder: (context, state) {
             if (state is RestaurantsLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is RestaurantsError) {
               return Center(
                 child: Text(S.of(context).errorStatemessage(state.message)),
@@ -69,14 +69,14 @@ class _PopularRestaurantSection extends StatelessWidget {
               return ListView.builder(
                 shrinkWrap: true,
                 itemCount: popular.length,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) => Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.h),
                   child: BiteRestaurantCard(restaurant: popular[index]),
                 ),
               );
             } else {
-              return SizedBox();
+              return const SizedBox();
             }
           },
         ),
@@ -102,7 +102,7 @@ class _RecentSearchSection extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(S.of(context).addedStatesearchToRecentSearches(state.search)),
-                    duration: Duration(seconds: 2),
+                    duration: const Duration(seconds: 2),
                   ),
                 );
               } else if (state is RecentSearchedRemoved) {
@@ -111,7 +111,7 @@ class _RecentSearchSection extends StatelessWidget {
                     content: Text(
                       S.of(context).removedStatesearchFromRecentSearches(state.search),
                     ),
-                    duration: Duration(seconds: 2),
+                    duration: const Duration(seconds: 2),
                   ),
                 );
               }
@@ -139,7 +139,7 @@ class _RecentSearchSection extends StatelessWidget {
                   separatorBuilder: (context, index) => 5.horizontalSpace,
                 );
               } else {
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }
             },
           ),

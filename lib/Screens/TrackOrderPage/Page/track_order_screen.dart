@@ -40,7 +40,7 @@ class TrackOrderScreen extends StatelessWidget {
     if (order == null) {
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
-        appBar: _AppBarSection(),
+        appBar: const _AppBarSection(),
         body: Center(
           child: Text(
             S.of(context).noActiveOrder,
@@ -59,7 +59,7 @@ class TrackOrderScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: _AppBarSection(),
+      appBar: const _AppBarSection(),
       body: MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => MapLocationCubit()),
@@ -165,7 +165,7 @@ class TrackOrderScreen extends StatelessWidget {
                       zoomControlsEnabled: false,
                       mapToolbarEnabled: false,
                       markers: {
-                        Marker(
+                        const Marker(
                           markerId: MarkerId('courier'),
 
                           position: LatLng(30.243319, 71.488739),
@@ -173,9 +173,9 @@ class TrackOrderScreen extends StatelessWidget {
                       },
                       polylines: {
                         Polyline(
-                          polylineId: PolylineId('route'),
+                          polylineId: const PolylineId('route'),
                           points: [
-                            LatLng(30.229120224296313, 71.46704279910028),
+                            const LatLng(30.229120224296313, 71.46704279910028),
                             LatLng(state.latitude, state.longitude),
                           ],
                           color: Theme.of(context).colorScheme.primary,

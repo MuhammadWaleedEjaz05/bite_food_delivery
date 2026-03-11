@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uuid/uuid.dart';
 
-final Uuid uuid = Uuid();
+const Uuid uuid = Uuid();
 
 class AddressModel extends Equatable {
   final String addressID;

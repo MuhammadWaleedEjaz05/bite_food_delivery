@@ -23,8 +23,8 @@ class LoginScreen extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              decoration: BoxDecoration(color: Colors.blueGrey),
-              child: _HeadTitleSection(),
+              decoration: const BoxDecoration(color: Colors.blueGrey),
+              child: const _HeadTitleSection(),
             ),
           ),
           Expanded(
@@ -45,15 +45,15 @@ class LoginScreen extends StatelessWidget {
                   ),
                   children: [
                     10.verticalSpace,
-                    _LoginCredentialSection(),
+                    const _LoginCredentialSection(),
 
                     10.verticalSpace,
-                    _LoginOptionalSelectionSection(),
+                    const _LoginOptionalSelectionSection(),
                     20.verticalSpace,
-                    _LoginActionButton(),
-                    _NoAccountSection(),
+                    const _LoginActionButton(),
+                    const _NoAccountSection(),
                     5.verticalSpace,
-                    _OtherLoginOptionSection(),
+                    const _OtherLoginOptionSection(),
                     10.verticalSpace,
                   ],
                 ),
@@ -128,7 +128,7 @@ class _OtherLoginOptionSection extends StatelessWidget {
                     backgroundColor: Colors.grey.shade200,
                     radius: 30.r,
                     child: isLoading
-                        ? CircularProgressIndicator()
+                        ? const CircularProgressIndicator()
                         : SvgPicture.asset(
                             'assets/svgs/google.svg',
                             height: 30.h,
@@ -228,7 +228,7 @@ class _LoginOptionalSelectionSection extends StatelessWidget {
             Text(S.of(context).rememberMe, style: Theme.of(context).textTheme.bodyMedium),
           ],
         ),
-        Spacer(),
+        const Spacer(),
         TextButton(
           onPressed: () =>
               Navigator.pushNamed(context, '/forgot_password_screen'),
@@ -283,7 +283,7 @@ class _HeadTitleSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        BiteAppBar(
+        const BiteAppBar(
           backButton: true,
           isDarkMode: true,
           title: SizedBox.shrink(),

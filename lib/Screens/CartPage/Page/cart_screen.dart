@@ -4,35 +4,19 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_address_selector_modal.dart';
 import 'package:bite_food_delivery/Models/cart_item_model.dart';
 import 'package:bite_food_delivery/Screens/CartPage/Widgets/bite_cart_item_card.dart';
-import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
 import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CartScreen extends StatefulWidget {
+class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
-}
-
-class _CartScreenState extends State<CartScreen> {
-  @override
-  void initState() {
-    super.initState();
-
-    final user = getCurrentUser();
-    if (user != null) {
-      context.read<CartCubit>().initialize(user.uid);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 2, 30, 46),
+    return const Scaffold(
+      backgroundColor: Color.fromARGB(255, 2, 30, 46),
       appBar: _AppBarSection(),
       body: Column(children: [_CartSection(), _CheckOutSection()]),
     );
@@ -94,7 +78,7 @@ class _CheckOutSection extends StatelessWidget {
                                 ).colorScheme.onSecondary,
                               ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         BlocBuilder<AddressCubit, AddressState>(
                           builder: (context, addressState) {
                             return TextButton(
@@ -219,7 +203,7 @@ class _CartSection extends StatelessWidget {
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
         if (state is CartLoading) {
-          return Expanded(
+          return const Expanded(
             flex: 2,
             child: Center(child: CircularProgressIndicator()),
           );
@@ -305,7 +289,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
           color: Colors.white,
         ),
       ),
-      actions: [],
+      actions: const [],
     );
   }
 }

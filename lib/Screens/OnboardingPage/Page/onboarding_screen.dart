@@ -72,11 +72,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ).setFirstTimeLaunched();
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => MainPage()),
+                    MaterialPageRoute(builder: (context) => const MainPage()),
                   );
                 } else {
                   buttonCarouselController.nextPage(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     curve: Curves.easeIn,
                   );
                 }
@@ -98,7 +98,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => MainPage()),
+                MaterialPageRoute(builder: (context) => const MainPage()),
               );
             },
             child: Text(

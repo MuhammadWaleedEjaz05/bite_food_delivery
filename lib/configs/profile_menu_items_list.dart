@@ -88,7 +88,7 @@ List<BiteMenuItemModel> personalInfoList(BuildContext context) => [
       showDialog(
         context: context,
         builder: (context) =>
-            Dialog(child: BiteEditProfileModal(title: 'Full Name')),
+            const Dialog(child: BiteEditProfileModal(title: 'Full Name')),
       );
     },
   ),

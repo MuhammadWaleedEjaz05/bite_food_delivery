@@ -5,9 +5,7 @@ import 'package:bloc/bloc.dart';
 part 'restaurants_state.dart';
 
 class RestaurantsCubit extends Cubit<RestaurantsState> {
-  RestaurantsCubit() : super(RestaurantsInitial()) {
-    loadRestaurants();
-  }
+  RestaurantsCubit() : super(RestaurantsInitial());
 
   Future<void> loadRestaurants() async {
     emit(RestaurantsLoading());

@@ -16,7 +16,7 @@ class BiteFilterModal extends StatelessWidget {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _HeadingSection(),
+            const _HeadingSection(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.w),
               child: Column(

@@ -35,7 +35,7 @@ class BiteUpdateDialog extends StatelessWidget {
           child: FadeTransition(opacity: anim1, child: child),
         );
       },
-      pageBuilder: (context, _, __) =>
+      pageBuilder: (context, _, _) =>
           BiteUpdateDialog(latestVersion: latestVersion, updateUrl: updateUrl),
     );
   }

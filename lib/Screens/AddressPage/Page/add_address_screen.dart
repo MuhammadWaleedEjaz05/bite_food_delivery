@@ -74,7 +74,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
           children: [
             Expanded(
               child: Container(
-                decoration: BoxDecoration(color: Colors.blueGrey),
+                decoration: const BoxDecoration(color: Colors.blueGrey),
                 child: Stack(
                   children: [
                     BlocConsumer<MapLocationCubit, MapLocationState>(
@@ -91,7 +91,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                           current is! MapLocationPicked,
                       builder: (context, state) {
                         if (state is MapLocationLoading) {
-                          return Center(child: CircularProgressIndicator());
+                          return const Center(child: CircularProgressIndicator());
                         }
 
                         if (state is MapLocationPermissionDenied) {
@@ -137,7 +137,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
 
                         return GoogleMap(
                           onMapCreated: _onMapCreated,
-                          initialCameraPosition: CameraPosition(
+                          initialCameraPosition: const CameraPosition(
                             target: LatLng(37.7749, -122.4194),
                             zoom: 15,
                           ),
@@ -165,7 +165,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       top: 0,
                       left: 0,
                       right: 0,
@@ -460,7 +460,7 @@ class _AppBarSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BiteAppBar(
+    return const BiteAppBar(
       title: SizedBox.shrink(),
       actions: [],
       backButton: true,

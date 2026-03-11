@@ -25,8 +25,8 @@ class SignupScreen extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              decoration: BoxDecoration(color: Colors.blueGrey),
-              child: _HeadTitleSection(),
+              decoration: const BoxDecoration(color: Colors.blueGrey),
+              child: const _HeadTitleSection(),
             ),
           ),
           Expanded(
@@ -47,10 +47,10 @@ class SignupScreen extends StatelessWidget {
                   ),
                   children: [
                     10.verticalSpace,
-                    _SignupCredentialsSection(),
+                    const _SignupCredentialsSection(),
 
                     20.verticalSpace,
-                    _SignupActionSection(),
+                    const _SignupActionSection(),
                   ],
                 ),
               ),
@@ -155,7 +155,7 @@ class _HeadTitleSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        BiteAppBar(
+        const BiteAppBar(
           backButton: true,
           isDarkMode: true,
           title: SizedBox.shrink(),

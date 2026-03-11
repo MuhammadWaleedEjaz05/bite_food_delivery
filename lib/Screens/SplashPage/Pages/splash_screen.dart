@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bite_food_delivery/Cubits/FirstTimeLaunchCubit/first_time_launch_cubit.dart';
 import 'package:bite_food_delivery/Screens/OnboardingPage/Page/onboarding_screen.dart';
 import 'package:bite_food_delivery/main.dart';
@@ -15,10 +17,16 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
+  static const Duration _kAnimationDuration = Duration(milliseconds: 1600);
+  static const Duration _kNavigationDelay = Duration(milliseconds: 150);
+  static const Duration _kLaunchStateTimeout = Duration(seconds: 2);
+  static const Duration _kFallbackTimeout = Duration(seconds: 4);
+
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
   late Animation<double> _circleFadeAnimation;
   late Animation<double> _logoFadeAnimation;
+  Timer? _fallbackTimer;
   bool _didNavigate = false;
 
   @override
@@ -26,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1600),
+      duration: _kAnimationDuration,
     );
     _scaleAnimation = CurvedAnimation(
       parent: _controller,
@@ -42,23 +50,44 @@ class _SplashScreenState extends State<SplashScreen>
     );
     _controller.addStatusListener(_handleAnimationStatus);
     _controller.forward();
+    _fallbackTimer = Timer(_kFallbackTimeout, _resolveLaunchState);
   }
 
   Future<void> _handleAnimationStatus(AnimationStatus status) async {
-    if (status != AnimationStatus.completed || _didNavigate) {
+    if (status != AnimationStatus.completed) {
       return;
     }
-    _didNavigate = true;
-    await Future.delayed(const Duration(milliseconds: 150));
-    if (!mounted) return;
+    await _resolveLaunchState();
+  }
+
+  Future<void> _resolveLaunchState() async {
+    if (_didNavigate || !mounted) return;
 
     final FirstTimeLaunchCubit cubit = context.read<FirstTimeLaunchCubit>();
     FirstTimeLaunchState state = cubit.state;
+
     if (state is FirstTimeLaunchInitial) {
-      state = await cubit.stream.firstWhere(
-        (state) => state is! FirstTimeLaunchInitial,
-      );
+      unawaited(cubit.checkFirstTimeLaunch());
+      try {
+        state = await cubit.stream
+            .firstWhere((state) => state is! FirstTimeLaunchInitial)
+            .timeout(_kLaunchStateTimeout);
+      } on TimeoutException {
+        state = const FirstTimeLaunchError(
+          errorMessage: 'Timed out while resolving launch state.',
+        );
+      }
     }
+
+    if (state is FirstTimeLaunchError) {
+      state = NotFirstTimeLaunched();
+    }
+
+    _didNavigate = true;
+    _fallbackTimer?.cancel();
+    await Future<void>.delayed(_kNavigationDelay);
+    if (!mounted) return;
+
     _navigateToOnState(state);
   }
 
@@ -92,6 +121,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void dispose() {
+    _fallbackTimer?.cancel();
     _controller.removeStatusListener(_handleAnimationStatus);
     _controller.dispose();
     super.dispose();
@@ -99,17 +129,34 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
+      backgroundColor: colorScheme.surface,
       body: AnimatedBuilder(
         animation: _controller,
         builder: (context, child) {
           final double scale = 1.0 + (3.5 * _scaleAnimation.value);
           final double circleOpacity = 1.0 - _circleFadeAnimation.value;
-          final double logoFade = _logoFadeAnimation.value;
-          final double logoScale = 0.5 + (0.5 * logoFade);
+          final double logoFade = 0.35 + (0.65 * _logoFadeAnimation.value);
+          final double logoScale = 0.92 + (0.08 * _logoFadeAnimation.value);
 
           return Stack(
             children: [
+              Positioned.fill(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        colorScheme.surface,
+                        colorScheme.surfaceContainerLowest,
+                      ],
+                    ),
+                  ),
+                ),
+              ),
               Positioned(
                 left: -30.w,
                 top: -30.h,
@@ -147,10 +194,24 @@ class _SplashScreenState extends State<SplashScreen>
                   opacity: logoFade,
                   child: Transform.scale(
                     scale: logoScale,
-                    child: SvgPicture.asset(
-                      'assets/svgs/logo.svg',
-                      height: 200.h,
-                      width: 200.w,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/svgs/logo.svg',
+                          height: 200.h,
+                          width: 200.w,
+                        ),
+                        24.verticalSpace,
+                        SizedBox(
+                          width: 28.w,
+                          height: 28.w,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 3,
+                            color: colorScheme.primary,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

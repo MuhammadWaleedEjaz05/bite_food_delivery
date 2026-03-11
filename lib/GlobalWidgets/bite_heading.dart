@@ -33,7 +33,7 @@ class BiteHeading extends StatelessWidget {
                 size: 16.sp,
                 color: Theme.of(context).colorScheme.primary,
               )
-            : SizedBox.shrink(),
+            : const SizedBox.shrink(),
         label: isSeeAll
             ? Text(
                 S.of(context).seeAll,
@@ -42,7 +42,7 @@ class BiteHeading extends StatelessWidget {
                   fontWeight: FontWeight.normal,
                 ),
               )
-            : SizedBox.shrink(),
+            : const SizedBox.shrink(),
       ),
     );
   }

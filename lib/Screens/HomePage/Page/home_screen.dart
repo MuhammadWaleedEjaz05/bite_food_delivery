@@ -20,16 +20,16 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: _AppBarSection(),
+      appBar: const _AppBarSection(),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         children: [
           10.verticalSpace,
-          _SearchSection(),
+          const _SearchSection(),
           20.verticalSpace,
-          _CategorySection(),
+          const _CategorySection(),
           20.verticalSpace,
-          _OpenRestaurantsSection(),
+          const _OpenRestaurantsSection(),
         ],
       ),
     );
@@ -53,9 +53,11 @@ class _CategorySection extends StatelessWidget {
         BlocBuilder<CategoriesCubit, CategoriesState>(
           builder: (context, state) {
             if (state is CategoriesLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is CategoriesError) {
-              return Center(child: Text(S.of(context).errorStatemessage(state.error)));
+              return Center(
+                child: Text(S.of(context).errorStatemessage(state.error)),
+              );
             } else if (state is CategoriesLoaded) {
               return SizedBox(
                 height: 179.h,
@@ -96,9 +98,11 @@ class _OpenRestaurantsSection extends StatelessWidget {
         BlocBuilder<RestaurantsCubit, RestaurantsState>(
           builder: (context, state) {
             if (state is RestaurantsLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is RestaurantsError) {
-              return Center(child: Text(S.of(context).errorStatemessage(state.message)));
+              return Center(
+                child: Text(S.of(context).errorStatemessage(state.message)),
+              );
             } else if (state is RestaurantsLoaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
@@ -110,7 +114,7 @@ class _OpenRestaurantsSection extends StatelessWidget {
                 },
                 itemCount: state.restaurants.length,
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
               );
             } else {
               return Text('Unknown state: ${state.runtimeType}');
@@ -122,22 +126,11 @@ class _OpenRestaurantsSection extends StatelessWidget {
   }
 }
 
-class _AppBarSection extends StatefulWidget implements PreferredSizeWidget {
+class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
   const _AppBarSection();
 
   @override
   Size get preferredSize => Size.fromHeight(100.h);
-
-  @override
-  State<_AppBarSection> createState() => _AppBarSectionState();
-}
-
-class _AppBarSectionState extends State<_AppBarSection> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<AddressCubit>().loadAddresses();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -217,6 +210,8 @@ class _AppBarSectionState extends State<_AppBarSection> {
 }
 
 class _SearchSection extends StatelessWidget {
+  const _SearchSection();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -257,7 +252,7 @@ class _SearchSection extends StatelessWidget {
           },
         ),
         20.verticalSpace,
-        BiteSearchBar(),
+        const BiteSearchBar(),
       ],
     );
   }

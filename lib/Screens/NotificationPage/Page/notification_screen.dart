@@ -16,7 +16,7 @@ class NotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: _AppSection(),
+      appBar: const _AppSection(),
       body: BlocBuilder<NotificationsCubit, NotificationsState>(
         builder: (context, state) {
           if (state is NotificationsLoaded) {
@@ -247,8 +247,8 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
               value: 'mark_all_read',
               child: Row(
                 children: [
-                  Icon(Icons.done_all),
-                  SizedBox(width: 8),
+                  const Icon(Icons.done_all),
+                  const SizedBox(width: 8),
                   Text(S.of(context).markAllAsRead),
                 ],
               ),
@@ -257,9 +257,9 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
               value: 'clear_all',
               child: Row(
                 children: [
-                  Icon(Icons.delete_outline, color: Colors.red),
-                  SizedBox(width: 8),
-                  Text(S.of(context).clearAll, style: TextStyle(color: Colors.red)),
+                  const Icon(Icons.delete_outline, color: Colors.red),
+                  const SizedBox(width: 8),
+                  Text(S.of(context).clearAll, style: const TextStyle(color: Colors.red)),
                 ],
               ),
             ),

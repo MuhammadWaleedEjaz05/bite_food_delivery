@@ -4,7 +4,7 @@ import 'package:uuid/uuid.dart';
 
 enum OrderStatus { received, preparing, dispatched, delivered, cancelled }
 
-final uuid = Uuid();
+const uuid = Uuid();
 
 class OrderModel extends Equatable {
   final String orderId;

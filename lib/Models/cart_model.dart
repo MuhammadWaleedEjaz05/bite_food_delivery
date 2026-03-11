@@ -2,7 +2,7 @@ import 'package:bite_food_delivery/Models/cart_item_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
 
-final Uuid uuid = Uuid();
+const Uuid uuid = Uuid();
 
 class CartModel extends Equatable {
   final String cartID;

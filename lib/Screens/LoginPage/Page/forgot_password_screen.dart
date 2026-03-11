@@ -31,8 +31,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         children: [
           Expanded(
             child: Container(
-              decoration: BoxDecoration(color: Colors.blueGrey),
-              child: _HeadTitleSection(),
+              decoration: const BoxDecoration(color: Colors.blueGrey),
+              child: const _HeadTitleSection(),
             ),
           ),
           Expanded(
@@ -99,7 +99,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                                 .passwordResetSuccessfully,
                                           ),
                                           backgroundColor: Colors.green,
-                                          duration: Duration(seconds: 3),
+                                          duration: const Duration(seconds: 3),
                                         ),
                                       );
                                     },
@@ -204,7 +204,7 @@ class _HeadTitleSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        BiteAppBar(
+        const BiteAppBar(
           backButton: true,
           isDarkMode: true,
           title: SizedBox.shrink(),

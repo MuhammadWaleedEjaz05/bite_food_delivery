@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:bite_food_delivery/Cubits/BottomNavigationSelection/bottom_navigation_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
 import 'package:bite_food_delivery/Cubits/SettingsCubit/settings_cubit.dart';
@@ -37,17 +36,28 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(firebaseBackgroundMessageHandler);
   Stripe.publishableKey = stripePublishableKey;
   runApp(const MyApp());
-  unawaited(_warmUpServices());
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    unawaited(_warmUpServices());
+  });
 }
 
 Future<void> _warmUpServices() async {
+  await Future<void>.delayed(const Duration(milliseconds: 250));
+
   try {
-    await Future.wait([
-      sharedPreference.then((_) {}),
-      initializeFCM(),
-      NotificationService.instance.initialize(),
-      Stripe.instance.applySettings(),
-    ]);
+    await sharedPreference;
+  } catch (_) {}
+
+  try {
+    await Stripe.instance.applySettings();
+  } catch (_) {}
+
+  try {
+    await NotificationService.instance.initialize();
+  } catch (_) {}
+
+  try {
+    await initializeFCM();
   } catch (_) {}
 }
 
@@ -75,14 +85,14 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             supportedLocales: S.delegate.supportedLocales,
             locale: Locale(context.watch<SettingsCubit>().state.languageCode),
-            localizationsDelegates: [
+            localizationsDelegates: const [
               S.delegate,
               FormBuilderLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            home: SplashScreen(),
+            home: const SplashScreen(),
           );
         },
       ),
@@ -117,7 +127,7 @@ class MainPage extends StatelessWidget {
                     ? state.selectedIndex
                     : 0;
                 return AnimatedSwitcher(
-                  duration: Duration(milliseconds: 300),
+                  duration: const Duration(milliseconds: 300),
                   transitionBuilder: (child, animation) {
                     return FadeTransition(opacity: animation, child: child);
                   },
@@ -149,7 +159,7 @@ class MainPage extends StatelessWidget {
           );
         },
       ),
-      bottomNavigationBar: BiteBottomNavigationBar(),
+      bottomNavigationBar: const BiteBottomNavigationBar(),
     );
   }
 }

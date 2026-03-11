@@ -14,7 +14,7 @@ class PhoneCallCubit extends Cubit<PhoneCallState> {
         phoneNumber,
       );
       if (callMade == null || !callMade) {
-        emit(PhoneCallFailure('Failed to make the phone call.'));
+        emit(const PhoneCallFailure('Failed to make the phone call.'));
         return;
       }
       emit(PhoneCallSuccess(phoneNumber));

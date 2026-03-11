@@ -2,11 +2,9 @@ import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
 import 'package:bite_food_delivery/Cubits/BottomNavigationSelection/bottom_navigation_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CategoriesCubit/categories_cubit.dart';
-import 'package:bite_food_delivery/Cubits/CategorySelectionCubit/category_selection_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CreditCardCubit/credit_card_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CreditCardCubit/credit_card_type_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/FavouriteCubit/favourite_cubit.dart';
-import 'package:bite_food_delivery/Cubits/FilterRestaurantsCubit/filter_restaurants_cubit.dart';
 import 'package:bite_food_delivery/Cubits/FirstTimeLaunchCubit/first_time_launch_cubit.dart';
 import 'package:bite_food_delivery/Cubits/FoodItemCubit/food_item_cubit.dart';
 import 'package:bite_food_delivery/Cubits/NotificationCubit/notifications_cubit.dart';
@@ -29,12 +27,6 @@ List<BlocProvider> blocProviderList = [
   BlocProvider<RecentSearchesCubit>(create: (context) => RecentSearchesCubit()),
   BlocProvider<BottomNavigationSelectorCubit>(
     create: (context) => BottomNavigationSelectorCubit(),
-  ),
-  BlocProvider<CategorySelectionCubit>(
-    create: (context) => CategorySelectionCubit(),
-  ),
-  BlocProvider<FilterRestaurantsCubit>(
-    create: (context) => FilterRestaurantsCubit(),
   ),
   BlocProvider<FavouriteCubit>(create: (context) => FavouriteCubit()),
   BlocProvider<UserAuthCubit>(create: (context) => UserAuthCubit()),

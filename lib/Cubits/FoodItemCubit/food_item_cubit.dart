@@ -6,9 +6,7 @@ import 'package:equatable/equatable.dart';
 part 'food_item_state.dart';
 
 class FoodItemCubit extends Cubit<FoodItemState> {
-  FoodItemCubit() : super(FoodItemInitial()) {
-    loadFoodItem();
-  }
+  FoodItemCubit() : super(FoodItemInitial());
 
   Future<void> loadFoodItem() async {
     emit(FoodItemLoading());
@@ -27,6 +25,4 @@ class FoodItemCubit extends Cubit<FoodItemState> {
       emit(FoodItemError(message: e.toString()));
     }
   }
-
-  
 }

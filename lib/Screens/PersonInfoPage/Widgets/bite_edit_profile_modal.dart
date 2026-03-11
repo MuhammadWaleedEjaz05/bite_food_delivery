@@ -61,7 +61,7 @@ class BiteEditProfileModal extends StatelessWidget {
           ),
           ListView(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             children: [
               TextFormField(

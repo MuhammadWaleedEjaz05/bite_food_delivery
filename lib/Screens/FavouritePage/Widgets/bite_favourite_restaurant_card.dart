@@ -84,7 +84,7 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             IconButton(
               onPressed: () {
                 showDialog(

@@ -58,7 +58,7 @@ class _BiteUserAuthTextFieldState extends State<BiteUserAuthTextField> {
                     },
                     style: IconButton.styleFrom(
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      shape: CircleBorder(),
+                      shape: const CircleBorder(),
                       padding: EdgeInsets.zero,
                       backgroundColor: isPasswordVisible
                           ? Theme.of(context).colorScheme.primary
@@ -73,7 +73,7 @@ class _BiteUserAuthTextFieldState extends State<BiteUserAuthTextField> {
                           : Icons.visibility,
                     ),
                   )
-                : SizedBox.shrink(),
+                : const SizedBox.shrink(),
             hintText: S.of(context).editTitle(widget.title),
             hintStyle: Theme.of(
               context,

@@ -25,7 +25,7 @@ class MyReviewsScreen extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary,
             ),
           ),
-          actions: [],
+          actions: const [],
         ),
         body: BlocBuilder<RatingAndReviewCubit, RatingAndReviewState>(
           builder: (context, state) {

@@ -41,7 +41,7 @@ class ReviewScreen extends StatelessWidget {
                   _RatingSection(state),
                   20.verticalSpace,
                   _UserReviewSection(reviewTextController),
-                  Spacer(),
+                  const Spacer(),
                   _SubmitSection(order, state, reviewTextController),
                   20.verticalSpace,
                 ],
@@ -62,7 +62,7 @@ class _RatingSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BiteHeading(title: 'Order Ratings', isSeeAll: false),
+        const BiteHeading(title: 'Order Ratings', isSeeAll: false),
         20.verticalSpace,
         StarRating(
           rating: state['orderRating'] ?? 0.0,
@@ -77,7 +77,7 @@ class _RatingSection extends StatelessWidget {
           },
         ),
         20.verticalSpace,
-        BiteHeading(title: 'Restaurant Ratings', isSeeAll: false),
+        const BiteHeading(title: 'Restaurant Ratings', isSeeAll: false),
         20.verticalSpace,
         StarRating(
           rating: state['restaurantRating'] ?? 0.0,
@@ -104,7 +104,7 @@ class _UserReviewSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BiteHeading(title: 'User Reviews', isSeeAll: false),
+        const BiteHeading(title: 'User Reviews', isSeeAll: false),
         20.verticalSpace,
         TextFormField(
           controller: reviewTextController,
@@ -163,7 +163,7 @@ class _SubmitSection extends StatelessWidget {
           side: BorderSide.none,
         ),
       ),
-      child: Text('Submit'),
+      child: const Text('Submit'),
     );
   }
 }
@@ -184,7 +184,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
           color: Theme.of(context).colorScheme.primary,
         ),
       ),
-      actions: [],
+      actions: const [],
     );
   }
 }
