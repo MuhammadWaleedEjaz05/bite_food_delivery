@@ -1,5 +1,6 @@
 import 'package:bite_food_delivery/Screens/AddressPage/Page/add_address_screen.dart';
 import 'package:bite_food_delivery/Screens/AddressPage/Page/address_screen.dart';
+import 'package:bite_food_delivery/Screens/AddressPage/Page/update_address_screen.dart';
 import 'package:bite_food_delivery/Screens/CategoryPage/Page/all_category_screen.dart';
 import 'package:bite_food_delivery/Screens/CheckOutPage/Page/check_out_screen.dart';
 import 'package:bite_food_delivery/Screens/LoginPage/Page/forgot_password_screen.dart';
@@ -36,6 +37,7 @@ final Map<String, Widget Function(BuildContext)> routes = {
   '/setting_screen': (context) => SettingScreen(),
   '/faq_screen': (context) => FAQScreen(),
   '/add_address_screen': (context) => AddAddressScreen(),
+  '/update_address_screen': (context) => UpdateAddressScreen(),
   '/payment_screen': (context) => PaymentScreen(),
   '/add_card_screen': (context) => AddCardScreen(),
   '/restaurant_screen': (context) => RestaurantScreen(),

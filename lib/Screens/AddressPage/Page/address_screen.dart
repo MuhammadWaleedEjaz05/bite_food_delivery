@@ -127,6 +127,11 @@ class _AddressSection extends StatelessWidget {
                   ),
                   label: address.label,
                   addressText: _formatAddress(address),
+                  onEdit: () => Navigator.pushNamed(
+                    context,
+                    '/update_address_screen',
+                    arguments: address,
+                  ),
                 ),
               )
               .toList();

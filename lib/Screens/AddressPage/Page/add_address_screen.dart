@@ -389,7 +389,7 @@ class _SaveAddressSection extends StatelessWidget {
               final street = [
                 streetNo,
                 addressLine,
-              ].where((part) => part.isNotEmpty).join(' ');
+              ].where((part) => part.isNotEmpty).join(', ');
 
               final currentUser = getCurrentUser();
               if (currentUser == null) {
@@ -428,7 +428,11 @@ class _SaveAddressSection extends StatelessWidget {
                   .catchError((error) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text(S.of(context).failedToAddAddressError(error.toString())),
+                        content: Text(
+                          S
+                              .of(context)
+                              .failedToAddAddressError(error.toString()),
+                        ),
                         backgroundColor: Colors.red,
                       ),
                     );
