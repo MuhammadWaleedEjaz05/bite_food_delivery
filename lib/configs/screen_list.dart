@@ -1,6 +1,9 @@
 import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
+import 'package:bite_food_delivery/Cubits/CartCubit/cart_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CategoriesCubit/categories_cubit.dart';
+import 'package:bite_food_delivery/Cubits/FoodItemCubit/food_item_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
+import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
 import 'package:bite_food_delivery/Screens/HomePage/Page/home_screen.dart';
 import 'package:bite_food_delivery/Screens/ProfilePage/Page/profile_screen.dart';
 import 'package:bite_food_delivery/Screens/SearchPage/Page/search_screen.dart';
@@ -23,6 +26,17 @@ void _ensureHomeCubitsReady(BuildContext context) {
   final restaurantsCubit = context.read<RestaurantsCubit>();
   if (restaurantsCubit.state is RestaurantsInitial) {
     restaurantsCubit.loadRestaurants();
+  }
+
+  final cartCubit = context.read<CartCubit>();
+  if (cartCubit.state is CartInitial) {
+    final user = getCurrentUser();
+    if (user != null) cartCubit.initialize(user.uid);
+  }
+
+  final foodItemCubit = context.read<FoodItemCubit>();
+  if (foodItemCubit.state is FoodItemInitial) {
+    foodItemCubit.loadFoodItem();
   }
 }
 

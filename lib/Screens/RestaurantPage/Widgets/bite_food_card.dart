@@ -120,7 +120,7 @@ class BiteFoodCard extends StatelessWidget {
                     width: 34.r,
                     child: IconButton(
                       onPressed: () {
-                        BlocProvider.of<CartCubit>(context).addToCart(
+                        context.read<CartCubit>().addToCart(
                           userID: getCurrentUser()!.uid,
                           cartItem: CartItemModel(
                             productID: foodItem.id,

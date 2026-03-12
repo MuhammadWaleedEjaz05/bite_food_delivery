@@ -68,59 +68,58 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => MapLocationCubit(),
-        child: Column(
-          children: [
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(color: Colors.blueGrey),
-                child: Stack(
-                  children: [
-                    BlocConsumer<MapLocationCubit, MapLocationState>(
-                      listener: (context, state) {
-                        if (state is MapLocationPicked) {
-                          _addressController.text = state.address ?? '';
-                          _streetController.text = state.street ?? '';
-                          _cityController.text = state.city ?? '';
-                          _zipController.text = state.zipCode ?? '';
-                          _countryController.text = state.country ?? '';
-                        }
-                      },
-                      buildWhen: (previous, current) =>
-                          current is! MapLocationPicked,
-                      builder: (context, state) {
-                        if (state is MapLocationLoading) {
-                          return const Center(child: CircularProgressIndicator());
-                        }
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              decoration: const BoxDecoration(color: Colors.blueGrey),
+              child: Stack(
+                children: [
+                  BlocConsumer<MapLocationCubit, MapLocationState>(
+                    listener: (context, state) {
+                      if (state is MapLocationPicked) {
+                        _addressController.text = state.address ?? '';
+                        _streetController.text = state.street ?? '';
+                        _cityController.text = state.city ?? '';
+                        _zipController.text = state.zipCode ?? '';
+                        _countryController.text = state.country ?? '';
+                      }
+                    },
+                    buildWhen: (previous, current) =>
+                        current is! MapLocationPicked,
+                    builder: (context, state) {
+                      if (state is MapLocationLoading) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
 
-                        if (state is MapLocationPermissionDenied) {
-                          return Center(
-                            child: Text(
-                              S.of(context).locationPermissionIsRequired,
-                              style: Theme.of(context).textTheme.titleSmall!
-                                  .copyWith(fontWeight: FontWeight.normal),
-                            ),
-                          );
-                        }
+                      if (state is MapLocationPermissionDenied) {
+                        return Center(
+                          child: Text(
+                            S.of(context).locationPermissionIsRequired,
+                            style: Theme.of(context).textTheme.titleSmall!
+                                .copyWith(fontWeight: FontWeight.normal),
+                          ),
+                        );
+                      }
 
-                        if (state is MapLocationError) {
-                          return Center(
-                            child: Text(
-                              S.of(context).errorStatemessage(state.message),
-                              style: Theme.of(context).textTheme.titleSmall!
-                                  .copyWith(fontWeight: FontWeight.normal),
-                            ),
-                          );
-                        }
+                      if (state is MapLocationError) {
+                        return Center(
+                          child: Text(
+                            S.of(context).errorStatemessage(state.message),
+                            style: Theme.of(context).textTheme.titleSmall!
+                                .copyWith(fontWeight: FontWeight.normal),
+                          ),
+                        );
+                      }
 
-                        if (state is MapLocationLoaded) {
-                          final initialPos = LatLng(
-                            state.latitude,
-                            state.longitude,
-                          );
-                          _selectedLocation ??= initialPos;
-                          return GoogleMap(
+                      if (state is MapLocationLoaded) {
+                        final initialPos = LatLng(
+                          state.latitude,
+                          state.longitude,
+                        );
+                        _selectedLocation ??= initialPos;
+                        return SafeArea(
+                          child: GoogleMap(
                             onMapCreated: _onMapCreated,
                             initialCameraPosition: CameraPosition(
                               target: initialPos,
@@ -132,92 +131,92 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                             myLocationButtonEnabled: true,
                             compassEnabled: true,
                             zoomControlsEnabled: true,
-                          );
-                        }
-
-                        return GoogleMap(
-                          onMapCreated: _onMapCreated,
-                          initialCameraPosition: const CameraPosition(
-                            target: LatLng(37.7749, -122.4194),
-                            zoom: 15,
                           ),
-                          onCameraMove: _onCameraMove,
-                          onCameraIdle: _onCameraIdle,
-                          myLocationEnabled: true,
-                          myLocationButtonEnabled: true,
-                          compassEnabled: true,
-                          zoomControlsEnabled: true,
                         );
-                      },
-                    ),
-                    IgnorePointer(
-                      child: Center(
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 36.h),
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 150),
-                            child: Icon(
-                              Icons.location_pin,
-                              size: _isMapMoving ? 48.r : 40.r,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
+                      }
+
+                      return GoogleMap(
+                        onMapCreated: _onMapCreated,
+                        initialCameraPosition: const CameraPosition(
+                          target: LatLng(37.7749, -122.4194),
+                          zoom: 15,
+                        ),
+                        onCameraMove: _onCameraMove,
+                        onCameraIdle: _onCameraIdle,
+                        myLocationEnabled: true,
+                        myLocationButtonEnabled: true,
+                        compassEnabled: true,
+                        zoomControlsEnabled: true,
+                      );
+                    },
+                  ),
+                  IgnorePointer(
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 36.h),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 150),
+                          child: Icon(
+                            Icons.location_pin,
+                            size: _isMapMoving ? 48.r : 40.r,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                       ),
                     ),
-                    const Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      child: _AppBarSection(),
-                    ),
-                  ],
-                ),
+                  ),
+                  const Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child: _AppBarSection(),
+                  ),
+                ],
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
-                ),
-                child: ListView(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  children: [
-                    20.verticalSpace,
-                    _NewAddressSection(
-                      addressController: _addressController,
-                      streetController: _streetController,
-                      zipController: _zipController,
-                      cityController: _cityController,
-                      countryController: _countryController,
-                    ),
-                    20.verticalSpace,
-                    _AddressLabelSection(
-                      labels: _addressLabels,
-                      selectedLabel: _selectedLabel,
-                      onSelected: (label) {
-                        setState(() {
-                          _selectedLabel = label;
-                        });
-                      },
-                    ),
-                    20.verticalSpace,
-                    _SaveAddressSection(
-                      addressController: _addressController,
-                      streetController: _streetController,
-                      zipController: _zipController,
-                      cityController: _cityController,
-                      countryController: _countryController,
-                      selectedLabel: _selectedLabel,
-                      selectedLocation: _selectedLocation,
-                    ),
-                  ],
-                ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+              ),
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                children: [
+                  20.verticalSpace,
+                  _NewAddressSection(
+                    addressController: _addressController,
+                    streetController: _streetController,
+                    zipController: _zipController,
+                    cityController: _cityController,
+                    countryController: _countryController,
+                  ),
+                  20.verticalSpace,
+                  _AddressLabelSection(
+                    labels: _addressLabels,
+                    selectedLabel: _selectedLabel,
+                    onSelected: (label) {
+                      setState(() {
+                        _selectedLabel = label;
+                      });
+                    },
+                  ),
+                  20.verticalSpace,
+                  _SaveAddressSection(
+                    addressController: _addressController,
+                    streetController: _streetController,
+                    zipController: _zipController,
+                    cityController: _cityController,
+                    countryController: _countryController,
+                    selectedLabel: _selectedLabel,
+                    selectedLocation: _selectedLocation,
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -79,8 +79,8 @@ List<BiteMenuItemModel> personalInfoList(BuildContext context) => [
     leadingIcon: Icons.person_outline,
     leadingIconColor: Colors.deepOrange,
     title: S.of(context).fullName,
-    subtitle: BlocProvider.of<UserAuthCubit>(context).state is UserLoggedIn
-        ? (BlocProvider.of<UserAuthCubit>(context).state as UserLoggedIn)
+    subtitle: context.read<UserAuthCubit>().state is UserLoggedIn
+        ? (context.read<UserAuthCubit>().state as UserLoggedIn)
               .user
               .fullName
         : S.of(context).guestUser,
@@ -96,8 +96,8 @@ List<BiteMenuItemModel> personalInfoList(BuildContext context) => [
     leadingIcon: Icons.email_outlined,
     leadingIconColor: Colors.blue,
     title: S.of(context).email,
-    subtitle: BlocProvider.of<UserAuthCubit>(context).state is UserLoggedIn
-        ? (BlocProvider.of<UserAuthCubit>(context).state as UserLoggedIn)
+    subtitle: context.read<UserAuthCubit>().state is UserLoggedIn
+        ? (context.read<UserAuthCubit>().state as UserLoggedIn)
               .user
               .email
         : '',
@@ -113,17 +113,18 @@ List<BiteMenuItemModel> personalInfoList(BuildContext context) => [
     leadingIcon: Icons.phone_outlined,
     leadingIconColor: Colors.green,
     title: S.of(context).phone,
-    subtitle: BlocProvider.of<UserAuthCubit>(context).state is UserLoggedIn
-        ? (BlocProvider.of<UserAuthCubit>(context).state as UserLoggedIn)
-                  .user
-                  .phoneNumber ??
-              ''
+    subtitle: context.read<UserAuthCubit>().state is UserLoggedIn
+        ? (context.read<UserAuthCubit>().state as UserLoggedIn)
+              .user
+              .phoneNumber ??
+          ''
         : '',
     onTap: () {
       showDialog(
         context: context,
-        builder: (context) =>
-            Dialog(child: BiteEditProfileModal(title: S.of(context).phoneNumber)),
+        builder: (context) => Dialog(
+          child: BiteEditProfileModal(title: S.of(context).phoneNumber),
+        ),
       );
     },
   ),

@@ -67,9 +67,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: ElevatedButton(
               onPressed: () {
                 if (_isLastPage) {
-                  BlocProvider.of<FirstTimeLaunchCubit>(
-                    context,
-                  ).setFirstTimeLaunched();
+                  context.read<FirstTimeLaunchCubit>().setFirstTimeLaunched();
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => const MainPage()),
@@ -90,7 +88,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 textStyle: Theme.of(context).textTheme.titleLarge,
               ),
-              child: Text(_isLastPage ? S.of(context).getStarted : S.of(context).next),
+              child: Text(
+                _isLastPage ? S.of(context).getStarted : S.of(context).next,
+              ),
             ),
           ),
           5.verticalSpace,

@@ -19,7 +19,7 @@ class BiteRecentSearchButton extends StatelessWidget {
         );
       },
       onLongPress: () {
-        BlocProvider.of<RecentSearchesCubit>(context).removeSearch(search);
+        context.read<RecentSearchesCubit>().removeSearch(search);
       },
       style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(

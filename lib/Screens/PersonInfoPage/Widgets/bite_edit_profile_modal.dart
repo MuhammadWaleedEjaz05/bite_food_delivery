@@ -13,7 +13,7 @@ class BiteEditProfileModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userState = BlocProvider.of<UserAuthCubit>(context).state;
+    final userState = context.read<UserAuthCubit>().state;
     if (userState is UserLoggedIn) {
       switch (title) {
         case 'Name':
@@ -89,9 +89,10 @@ class BiteEditProfileModal extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        BlocProvider.of<UserAuthCubit>(
-                          context,
-                        ).updateProfile(title, _controller.text.trim());
+                        context.read<UserAuthCubit>().updateProfile(
+                          title,
+                          _controller.text.trim(),
+                        );
                         Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(

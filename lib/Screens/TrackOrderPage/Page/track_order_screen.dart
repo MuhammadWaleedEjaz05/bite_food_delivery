@@ -60,172 +60,166 @@ class TrackOrderScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: const _AppBarSection(),
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (_) => MapLocationCubit()),
-          BlocProvider(create: (_) => PhoneCallCubit()),
-        ],
-        child: MultiBlocListener(
-          listeners: [
-            BlocListener<OrderCubit, OrderState>(
-              listener: (context, state) {
-                if (state is ActiveOrderDelivered) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        S.of(context).yourOrderHasBeenDelivered,
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                      backgroundColor: Colors.green,
-                      duration: const Duration(seconds: 3),
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<OrderCubit, OrderState>(
+            listener: (context, state) {
+              if (state is ActiveOrderDelivered) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      S.of(context).yourOrderHasBeenDelivered,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
-                  );
-                  Navigator.of(
-                    context,
-                  ).pushReplacementNamed('/review_screen', arguments: order);
-                }
-              },
-            ),
-            BlocListener<PhoneCallCubit, PhoneCallState>(
-              listener: (context, state) {
-                if (state is PhoneCallFailure) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        state.errorMessage,
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-                }
-                if (state is PhoneCallSuccess) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        S.of(context).callingphonenumber(state.phoneNumber),
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
-                }
-              },
-            ),
-          ],
-          child: BlocBuilder<MapLocationCubit, MapLocationState>(
-            builder: (context, state) {
-              if (state is MapLocationLoading || state is MapLocationInitial) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: Theme.of(context).colorScheme.primary,
+                    backgroundColor: Colors.green,
+                    duration: const Duration(seconds: 3),
                   ),
                 );
+                Navigator.of(
+                  context,
+                ).pushReplacementNamed('/review_screen', arguments: order);
               }
-
-              if (state is MapLocationError) {
-                return Center(
-                  child: Text(
-                    state.message,
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                );
-              }
-
-              if (state is MapLocationPermissionDenied) {
-                return Center(
-                  child: Text(
-                    S.of(context).locationPermissionDenied,
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                );
-              }
-
-              final loadedState = state as MapLocationLoaded;
-
-              return Stack(
-                children: [
-                  Positioned.fill(
-                    child: GoogleMap(
-                      initialCameraPosition: CameraPosition(
-                        target: LatLng(
-                          loadedState.latitude,
-                          loadedState.longitude,
-                        ),
-                        zoom: 15,
-                      ),
-                      myLocationEnabled: true,
-                      myLocationButtonEnabled: true,
-                      zoomControlsEnabled: false,
-                      mapToolbarEnabled: false,
-                      markers: {
-                        const Marker(
-                          markerId: MarkerId('courier'),
-
-                          position: LatLng(30.243319, 71.488739),
-                        ),
-                      },
-                      polylines: {
-                        Polyline(
-                          polylineId: const PolylineId('route'),
-                          points: [
-                            const LatLng(30.229120224296313, 71.46704279910028),
-                            LatLng(state.latitude, state.longitude),
-                          ],
-                          color: Theme.of(context).colorScheme.primary,
-                          width: 2,
-                          startCap: Cap.roundCap,
-                          endCap: Cap.roundCap,
-                        ),
-                      },
-                    ),
-                  ),
-                  DraggableScrollableSheet(
-                    initialChildSize: 0.45,
-                    minChildSize: 0.08,
-                    maxChildSize: 0.75,
-                    snap: true,
-                    snapSizes: const [0.08, 0.45, 0.75],
-                    builder: (context, scrollController) {
-                      return BlocBuilder<OrderCubit, OrderState>(
-                        builder: (context, orderState) {
-                          final currentOrder = orderCubit.activeOrder ?? order;
-                          final restaurantName = context
-                              .read<RestaurantsCubit>()
-                              .getRestaurantNameById(currentOrder.restaurantId);
-                          return BiteOrderInfoSheet(
-                            scrollController: scrollController,
-                            restaurantName: restaurantName,
-                            orderDate: formattedDate,
-                            items: [
-                              'Order #${currentOrder.orderId.substring(0, 8)}',
-                              'Total: PKR ${currentOrder.totalPrice.toStringAsFixed(0)}',
-                            ],
-                            estimatedMinutes: 20,
-                            courierName: S.of(context).courier,
-                            currentStep: _orderStatusToStep(
-                              currentOrder.orderStatus,
-                            ),
-                            onCallTap: () {
-                              context.read<PhoneCallCubit>().makePhoneCall(
-                                _courierPhoneNumber,
-                              );
-                            },
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
-              );
             },
           ),
+          BlocListener<PhoneCallCubit, PhoneCallState>(
+            listener: (context, state) {
+              if (state is PhoneCallFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      state.errorMessage,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+              if (state is PhoneCallSuccess) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      S.of(context).callingphonenumber(state.phoneNumber),
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+              }
+            },
+          ),
+        ],
+        child: BlocBuilder<MapLocationCubit, MapLocationState>(
+          builder: (context, state) {
+            if (state is MapLocationLoading || state is MapLocationInitial) {
+              return Center(
+                child: CircularProgressIndicator(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              );
+            }
+
+            if (state is MapLocationError) {
+              return Center(
+                child: Text(
+                  state.message,
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              );
+            }
+
+            if (state is MapLocationPermissionDenied) {
+              return Center(
+                child: Text(
+                  S.of(context).locationPermissionDenied,
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              );
+            }
+
+            final loadedState = state as MapLocationLoaded;
+
+            return Stack(
+              children: [
+                Positioned.fill(
+                  child: GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                      target: LatLng(
+                        loadedState.latitude,
+                        loadedState.longitude,
+                      ),
+                      zoom: 15,
+                    ),
+                    myLocationEnabled: true,
+                    myLocationButtonEnabled: true,
+                    zoomControlsEnabled: false,
+                    mapToolbarEnabled: false,
+                    markers: {
+                      const Marker(
+                        markerId: MarkerId('courier'),
+
+                        position: LatLng(30.243319, 71.488739),
+                      ),
+                    },
+                    polylines: {
+                      Polyline(
+                        polylineId: const PolylineId('route'),
+                        points: [
+                          const LatLng(30.229120224296313, 71.46704279910028),
+                          LatLng(state.latitude, state.longitude),
+                        ],
+                        color: Theme.of(context).colorScheme.primary,
+                        width: 2,
+                        startCap: Cap.roundCap,
+                        endCap: Cap.roundCap,
+                      ),
+                    },
+                  ),
+                ),
+                DraggableScrollableSheet(
+                  initialChildSize: 0.45,
+                  minChildSize: 0.08,
+                  maxChildSize: 0.75,
+                  snap: true,
+                  snapSizes: const [0.08, 0.45, 0.75],
+                  builder: (context, scrollController) {
+                    return BlocBuilder<OrderCubit, OrderState>(
+                      builder: (context, orderState) {
+                        final currentOrder = orderCubit.activeOrder ?? order;
+                        final restaurantName = context
+                            .read<RestaurantsCubit>()
+                            .getRestaurantNameById(currentOrder.restaurantId);
+                        return BiteOrderInfoSheet(
+                          scrollController: scrollController,
+                          restaurantName: restaurantName,
+                          orderDate: formattedDate,
+                          items: [
+                            'Order #${currentOrder.orderId.substring(0, 8)}',
+                            'Total: PKR ${currentOrder.totalPrice.toStringAsFixed(0)}',
+                          ],
+                          estimatedMinutes: 20,
+                          courierName: S.of(context).courier,
+                          currentStep: _orderStatusToStep(
+                            currentOrder.orderStatus,
+                          ),
+                          onCallTap: () {
+                            context.read<PhoneCallCubit>().makePhoneCall(
+                              _courierPhoneNumber,
+                            );
+                          },
+                        );
+                      },
+                    );
+                  },
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

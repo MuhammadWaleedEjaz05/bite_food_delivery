@@ -234,8 +234,8 @@ class _OrderSummarySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartState = BlocProvider.of<CartCubit>(context).state;
-    final restaurantsState = BlocProvider.of<RestaurantsCubit>(context).state;
+    final cartState = context.read<CartCubit>().state;
+    final restaurantsState = context.read<RestaurantsCubit>().state;
 
     final double deliveryFee =
         restaurantsState is RestaurantsLoaded && cartState is CartLoaded
@@ -321,7 +321,7 @@ class _PlaceOrderButton extends StatelessWidget {
   const _PlaceOrderButton({required this.cartID, required this.totalAmount});
 
   OrderModel _buildOrder(BuildContext context, double grandTotal) {
-    final cartState = BlocProvider.of<CartCubit>(context).state;
+    final cartState = context.read<CartCubit>().state;
     final userState = context.read<UserAuthCubit>().state;
     final addressState = context.read<AddressCubit>().state;
     final paymentMethod = context.read<PaymentMethodSelectorCubit>().state;
@@ -445,8 +445,8 @@ class _PlaceOrderButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartState = BlocProvider.of<CartCubit>(context).state;
-    final restaurantsState = BlocProvider.of<RestaurantsCubit>(context).state;
+    final cartState = context.read<CartCubit>().state;
+    final restaurantsState = context.read<RestaurantsCubit>().state;
 
     final double deliveryFee =
         restaurantsState is RestaurantsLoaded && cartState is CartLoaded

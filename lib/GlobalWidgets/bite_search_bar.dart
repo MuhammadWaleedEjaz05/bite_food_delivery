@@ -179,6 +179,6 @@ class OpenSearchScreen extends SearchDelegate {
   void showResults(BuildContext context) {
     super.showResults(context);
     FocusScope.of(context).unfocus();
-    BlocProvider.of<RecentSearchesCubit>(context).addSearch(query);
+    context.read<RecentSearchesCubit>().addSearch(query);
   }
 }

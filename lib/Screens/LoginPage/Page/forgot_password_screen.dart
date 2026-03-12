@@ -142,12 +142,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     : () {
                                         if (_forgotPasswordFormKey.currentState!
                                             .validate()) {
-                                          BlocProvider.of<UserAuthCubit>(
-                                            context,
-                                          ).resetPassword(
-                                            _forgotPasswordEmailController.text
-                                                .trim(),
-                                          );
+                                          context
+                                              .read<UserAuthCubit>()
+                                              .resetPassword(
+                                                _forgotPasswordEmailController
+                                                    .text
+                                                    .trim(),
+                                              );
                                         }
                                       },
                                 style: TextButton.styleFrom(

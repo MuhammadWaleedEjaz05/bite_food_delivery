@@ -73,7 +73,8 @@ class _SignupActionSection extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                BlocProvider.of<UserAuthCubit>(context)
+                context
+                    .read<UserAuthCubit>()
                     .register(
                       UserModel(
                         fullName: _fullNameController.text.trim(),
@@ -161,7 +162,10 @@ class _HeadTitleSection extends StatelessWidget {
           title: SizedBox.shrink(),
           actions: [],
         ),
-        Text(S.of(context).signUp, style: Theme.of(context).textTheme.displayLarge),
+        Text(
+          S.of(context).signUp,
+          style: Theme.of(context).textTheme.displayLarge,
+        ),
 
         Text(
           S.of(context).pleaseSignUpToGetStarted,

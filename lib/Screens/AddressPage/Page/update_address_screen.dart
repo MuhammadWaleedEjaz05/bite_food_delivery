@@ -128,7 +128,9 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
                           current is! MapLocationPicked,
                       builder: (context, state) {
                         if (state is MapLocationLoading) {
-                          return const Center(child: CircularProgressIndicator());
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
                         }
 
                         if (state is MapLocationPermissionDenied) {
@@ -158,18 +160,20 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
                           );
                           _selectedLocation ??= initialPos;
                           final cameraTarget = _selectedLocation ?? initialPos;
-                          return GoogleMap(
-                            onMapCreated: _onMapCreated,
-                            initialCameraPosition: CameraPosition(
-                              target: cameraTarget,
-                              zoom: 15,
+                          return SafeArea(
+                            child: GoogleMap(
+                              onMapCreated: _onMapCreated,
+                              initialCameraPosition: CameraPosition(
+                                target: cameraTarget,
+                                zoom: 15,
+                              ),
+                              onCameraMove: _onCameraMove,
+                              onCameraIdle: _onCameraIdle,
+                              myLocationEnabled: true,
+                              myLocationButtonEnabled: true,
+                              compassEnabled: true,
+                              zoomControlsEnabled: true,
                             ),
-                            onCameraMove: _onCameraMove,
-                            onCameraIdle: _onCameraIdle,
-                            myLocationEnabled: true,
-                            myLocationButtonEnabled: true,
-                            compassEnabled: true,
-                            zoomControlsEnabled: true,
                           );
                         }
 

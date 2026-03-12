@@ -15,9 +15,9 @@ class BiteCategoryCard extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            BlocProvider.of<CategorySelectionCubit>(
-              context,
-            ).selectCategory(category.categoryName);
+            context.read<CategorySelectionCubit>().selectCategory(
+              category.categoryName,
+            );
             Navigator.pushNamed(
               context,
               '/category_screen',

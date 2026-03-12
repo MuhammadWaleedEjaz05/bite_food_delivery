@@ -17,7 +17,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
-  static const Duration _kAnimationDuration = Duration(milliseconds: 1600);
+  static const Duration _kAnimationDuration = Duration(milliseconds: 4000);
   static const Duration _kNavigationDelay = Duration(milliseconds: 150);
   static const Duration _kLaunchStateTimeout = Duration(seconds: 2);
   static const Duration _kFallbackTimeout = Duration(seconds: 4);
@@ -138,7 +138,7 @@ class _SplashScreenState extends State<SplashScreen>
         builder: (context, child) {
           final double scale = 1.0 + (3.5 * _scaleAnimation.value);
           final double circleOpacity = 1.0 - _circleFadeAnimation.value;
-          final double logoFade = 0.35 + (0.65 * _logoFadeAnimation.value);
+          final double logoFade = _logoFadeAnimation.value;
           final double logoScale = 0.92 + (0.08 * _logoFadeAnimation.value);
 
           return Stack(
@@ -194,24 +194,10 @@ class _SplashScreenState extends State<SplashScreen>
                   opacity: logoFade,
                   child: Transform.scale(
                     scale: logoScale,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/svgs/logo.svg',
-                          height: 200.h,
-                          width: 200.w,
-                        ),
-                        24.verticalSpace,
-                        SizedBox(
-                          width: 28.w,
-                          height: 28.w,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 3,
-                            color: colorScheme.primary,
-                          ),
-                        ),
-                      ],
+                    child: SvgPicture.asset(
+                      'assets/svgs/logo.svg',
+                      height: 200.h,
+                      width: 200.w,
                     ),
                   ),
                 ),

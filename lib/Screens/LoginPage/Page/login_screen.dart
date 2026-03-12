@@ -120,9 +120,9 @@ class _OtherLoginOptionSection extends StatelessWidget {
                   onTap: isLoading
                       ? null
                       : () {
-                          BlocProvider.of<UserAuthCubit>(
-                            context,
-                          ).signInWithGoogle();
+                          context
+                              .read<UserAuthCubit>()
+                              .signInWithGoogle();
                         },
                   child: CircleAvatar(
                     backgroundColor: Colors.grey.shade200,
@@ -187,7 +187,8 @@ class _LoginActionButton extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                BlocProvider.of<UserAuthCubit>(context)
+                context
+                    .read<UserAuthCubit>()
                     .login(
                       _emailController.text.trim(),
                       _passwordController.text.trim(),
@@ -225,7 +226,10 @@ class _LoginOptionalSelectionSection extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Checkbox(value: false, onChanged: (value) {}),
-            Text(S.of(context).rememberMe, style: Theme.of(context).textTheme.bodyMedium),
+            Text(
+              S.of(context).rememberMe,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
           ],
         ),
         const Spacer(),
@@ -289,7 +293,10 @@ class _HeadTitleSection extends StatelessWidget {
           title: SizedBox.shrink(),
           actions: [],
         ),
-        Text(S.of(context).logIn, style: Theme.of(context).textTheme.displayLarge),
+        Text(
+          S.of(context).logIn,
+          style: Theme.of(context).textTheme.displayLarge,
+        ),
 
         Text(
           S.of(context).pleaseSignInToContinue,

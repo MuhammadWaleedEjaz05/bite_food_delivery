@@ -15,9 +15,9 @@ class BiteDropDownMenu extends StatelessWidget {
           builder: (context, state) {
             return DropdownMenu(
               onSelected: (value) {
-                BlocProvider.of<CategorySelectionCubit>(
-                  context,
-                ).selectCategory(value as String);
+                context
+                    .read<CategorySelectionCubit>()
+                    .selectCategory(value as String);
               },
               menuStyle: MenuStyle(
                 backgroundColor: WidgetStatePropertyAll(
