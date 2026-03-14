@@ -11,17 +11,14 @@ final List<Widget> carouselPages = [
   BiteCarouselSliderPage(
     title: S.current.allYourFavorites,
     description: S.current.getAllYourLovedFoodsInOnePlace,
-    index: 0,
   ),
   BiteCarouselSliderPage(
     title: S.current.orderFromChoosenChef,
     description: S.current.getAllYourLovedFoodsInOnePlace,
-    index: 1,
   ),
   BiteCarouselSliderPage(
     title: S.current.freeDeliveryOffers,
     description: S.current.getAllYourLovedFoodsInOnePlace,
-    index: 2,
   ),
 ];
 
