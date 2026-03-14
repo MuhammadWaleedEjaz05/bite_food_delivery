@@ -57,7 +57,7 @@ class NotificationService {
     );
     await _plugin.initialize(
       settings: const InitializationSettings(
-        android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+        android: AndroidInitializationSettings('@mipmap/launcher_icon'),
         iOS: darwin,
         macOS: darwin,
       ),
