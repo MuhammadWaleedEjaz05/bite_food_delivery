@@ -146,7 +146,13 @@ class BiteOrderHistoryCard extends StatelessWidget {
                             child: Text(S.of(context).trackOrder),
                           )
                         : ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                '/review_order',
+                                arguments: order,
+                              );
+                            },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Theme.of(
                                 context,
@@ -198,6 +204,7 @@ class BiteOrderHistoryCard extends StatelessWidget {
                                         context.read<OrderCubit>().cancelOrder(
                                           order.orderId,
                                         );
+                                        Navigator.pop(ctx);
                                       },
                                       child: Text(
                                         S.of(context).yesCancel,

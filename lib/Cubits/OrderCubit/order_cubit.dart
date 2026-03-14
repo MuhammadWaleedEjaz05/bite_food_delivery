@@ -268,14 +268,12 @@ class OrderCubit extends Cubit<OrderState> {
       final orderDB = getCollection('OrdersDB');
       final cartDB = getCollection('CartDB');
 
-      // Fetch items from the old order
       final orderItems = await orderDB.doc(orderId).collection('Items').get();
       if (orderItems.docs.isEmpty) {
         emit(const OrderError('No items found in this order'));
         return;
       }
 
-      // Clear any existing cart for the user
       final existingCart = await cartDB
           .where('userID', isEqualTo: userId)
           .limit(1)
@@ -295,7 +293,6 @@ class OrderCubit extends Cubit<OrderState> {
         batch.delete(cartDB.doc(oldCartId));
       }
 
-      // Create a new cart with the old order's items
       final newCart = CartModel(userID: userId);
       batch.set(cartDB.doc(newCart.cartID), newCart.toJson());
 
