@@ -303,6 +303,12 @@
   "favorites": "Favoriler",
   "reviews": "Değerlendirmeler",
   "phone": "Telefon",
-  "addressUpdatedSuccessfully": "Address updated successfully",
-  "failedToUpdateAddress": "Failed to update address: ${error.toString()}"
+  "addressUpdatedSuccessfully": "Adres başarıyla güncellendi",
+  "failedToUpdateAddress": "Adres güncellenemedi: {error}",
+  "@failedToUpdateAddress": {
+    "description": "Error message when updating an address fails, with dynamic error content",
+    "placeholders": {
+      "error": {}
+    }
+  }
 }

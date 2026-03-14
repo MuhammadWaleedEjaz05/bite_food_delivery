@@ -724,4 +724,12 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get phone => 'Telefon';
+
+  @override
+  String get addressUpdatedSuccessfully => 'Adres başarıyla güncellendi';
+
+  @override
+  String failedToUpdateAddress(Object error) {
+    return 'Adres güncellenemedi: $error';
+  }
 }

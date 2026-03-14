@@ -36,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m7(error) => "پتہ شامل کرنے میں ناکام: ${error}";
 
-  static String m8(error) => "Failed to update address: \${error.toString()}";
+  static String m8(error) => "پتہ اپ ڈیٹ کرنے میں ناکام: ${error}";
 
   static String m9(stateMessage) => "Google سائن ان خرابی: ${stateMessage}";
 
@@ -69,7 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "پتہ کامیابی سے شامل کیا گیا!",
     ),
     "addressUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
-      "Address updated successfully",
+      "پتہ کامیابی سے اپ ڈیٹ ہو گیا",
     ),
     "allCategories": MessageLookupByLibrary.simpleMessage("تمام زمرے"),
     "allNotifications": m1,

@@ -303,6 +303,12 @@
   "favorites": "پسندیدہ",
   "reviews": "جائزے",
   "phone": "فون",
-  "addressUpdatedSuccessfully": "Address updated successfully",
-  "failedToUpdateAddress": "Failed to update address: ${error.toString()}"
+  "addressUpdatedSuccessfully": "پتہ کامیابی سے اپ ڈیٹ ہو گیا",
+  "failedToUpdateAddress": "پتہ اپ ڈیٹ کرنے میں ناکام: {error}",
+  "@failedToUpdateAddress": {
+    "description": "Error message when updating an address fails, with dynamic error content",
+    "placeholders": {
+      "error": {}
+    }
+  }
 }

@@ -303,8 +303,8 @@
   "favorites": "Favoritos",
   "reviews": "Reseñas",
   "phone": "Teléfono",
-  "addressUpdatedSuccessfully": "Address updated successfully",
-  "failedToUpdateAddress": "Failed to update address: {error}",
+  "addressUpdatedSuccessfully": "Dirección actualizada exitosamente",
+  "failedToUpdateAddress": "Error al actualizar la dirección: {error}",
   "@failedToUpdateAddress": {
     "description": "Error message when updating an address fails, with dynamic error content",
     "placeholders": {

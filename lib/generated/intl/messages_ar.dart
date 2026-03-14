@@ -36,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m7(error) => "فشل في إضافة العنوان: ${error}";
 
-  static String m8(error) => "Failed to update address: \${error.toString()}";
+  static String m8(error) => "فشل في تحديث العنوان: ${error}";
 
   static String m9(stateMessage) =>
       "خطأ في تسجيل الدخول عبر جوجل: ${stateMessage}";
@@ -70,7 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم إضافة العنوان بنجاح!",
     ),
     "addressUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
-      "Address updated successfully",
+      "تم تحديث العنوان بنجاح",
     ),
     "allCategories": MessageLookupByLibrary.simpleMessage("جميع الفئات"),
     "allNotifications": m1,

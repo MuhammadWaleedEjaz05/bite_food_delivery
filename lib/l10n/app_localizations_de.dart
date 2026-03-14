@@ -736,4 +736,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get phone => 'Telefon';
+
+  @override
+  String get addressUpdatedSuccessfully => 'Adresse erfolgreich aktualisiert';
+
+  @override
+  String failedToUpdateAddress(Object error) {
+    return 'Fehler beim Aktualisieren der Adresse: $error';
+  }
 }

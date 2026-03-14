@@ -722,4 +722,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get phone => 'Phone';
+
+  @override
+  String get addressUpdatedSuccessfully => 'Address updated successfully';
+
+  @override
+  String failedToUpdateAddress(Object error) {
+    return 'Failed to update address: $error';
+  }
 }

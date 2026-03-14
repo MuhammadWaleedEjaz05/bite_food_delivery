@@ -731,4 +731,12 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get phone => 'Teléfono';
+
+  @override
+  String get addressUpdatedSuccessfully => 'Dirección actualizada exitosamente';
+
+  @override
+  String failedToUpdateAddress(Object error) {
+    return 'Error al actualizar la dirección: $error';
+  }
 }

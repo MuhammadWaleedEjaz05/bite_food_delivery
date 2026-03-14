@@ -1419,6 +1419,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Phone'**
   String get phone;
+
+  /// No description provided for @addressUpdatedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Address updated successfully'**
+  String get addressUpdatedSuccessfully;
+
+  /// Error message when updating an address fails, with dynamic error content
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update address: {error}'**
+  String failedToUpdateAddress(Object error);
 }
 
 class _AppLocalizationsDelegate

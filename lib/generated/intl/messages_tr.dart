@@ -36,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m7(error) => "Adres ekleme başarısız: ${error}";
 
-  static String m8(error) => "Failed to update address: \${error.toString()}";
+  static String m8(error) => "Adres güncellenemedi: ${error}";
 
   static String m9(stateMessage) =>
       "Google Oturum Açma Hatası: ${stateMessage}";
@@ -70,7 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Adres başarıyla eklendi!",
     ),
     "addressUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
-      "Address updated successfully",
+      "Adres başarıyla güncellendi",
     ),
     "allCategories": MessageLookupByLibrary.simpleMessage("Tüm Kategoriler"),
     "allNotifications": m1,

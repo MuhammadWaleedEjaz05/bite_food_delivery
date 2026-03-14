@@ -715,4 +715,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get phone => 'الهاتف';
+
+  @override
+  String get addressUpdatedSuccessfully => 'تم تحديث العنوان بنجاح';
+
+  @override
+  String failedToUpdateAddress(Object error) {
+    return 'فشل في تحديث العنوان: $error';
+  }
 }

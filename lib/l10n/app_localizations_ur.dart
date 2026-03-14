@@ -728,4 +728,12 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get phone => 'فون';
+
+  @override
+  String get addressUpdatedSuccessfully => 'پتہ کامیابی سے اپ ڈیٹ ہو گیا';
+
+  @override
+  String failedToUpdateAddress(Object error) {
+    return 'پتہ اپ ڈیٹ کرنے میں ناکام: $error';
+  }
 }
