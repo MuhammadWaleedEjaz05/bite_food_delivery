@@ -81,7 +81,7 @@ class BiteRestaurantCard extends StatelessWidget {
               ),
               4.horizontalSpace,
               Text(
-                'Rs.${restaurant.deliveryFee.toInt()}',
+                'PKR ${restaurant.deliveryFee.toInt()}',
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                   fontWeight: FontWeight.normal,

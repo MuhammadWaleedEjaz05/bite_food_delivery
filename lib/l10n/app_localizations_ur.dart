@@ -16,7 +16,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String errorStatemessage(Object stateMessage) {
-    return 'خرابی: \$$stateMessage';
+    return 'خرابی: $stateMessage';
   }
 
   @override
@@ -57,7 +57,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String failedToAddAddressError(Object error) {
-    return 'پتہ شامل کرنے میں ناکام: \$$error';
+    return 'پتہ شامل کرنے میں ناکام: $error';
   }
 
   @override
@@ -163,12 +163,12 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String paymentFailedPaymentstateerrormessage(Object errorMessage) {
-    return 'ادائیگی ناکام: \$$errorMessage';
+    return 'ادائیگی ناکام: $errorMessage';
   }
 
   @override
   String confirmPayment(Object grandTotal) {
-    return 'ادائیگی کی تصدیق کریں  •  PKR \$$grandTotal';
+    return 'ادائیگی کی تصدیق کریں  •  PKR $grandTotal';
   }
 
   @override
@@ -276,7 +276,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String googleSigninErrorStatemessage(Object stateMessage) {
-    return 'Google سائن ان خرابی: \$$stateMessage';
+    return 'Google سائن ان خرابی: $stateMessage';
   }
 
   @override
@@ -306,17 +306,17 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String stateunreadcountUnreadNotifications(Object unreadCount) {
-    return '\$$unreadCount غیر پڑھی گئی اطلاعات';
+    return '$unreadCount غیر پڑھی گئی اطلاعات';
   }
 
   @override
   String allNotifications(Object totalCount) {
-    return 'تمام (\$$totalCount)';
+    return 'تمام ($totalCount)';
   }
 
   @override
   String unreadNotifications(Object unreadCount) {
-    return 'غیر پڑھے (\$$unreadCount)';
+    return 'غیر پڑھے ($unreadCount)';
   }
 
   @override
@@ -481,7 +481,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String cardEndingInCreditcardlast4Selected(Object last4) {
-    return '\$$last4 پر ختم ہونے والا کارڈ منتخب شدہ';
+    return '$last4 پر ختم ہونے والا کارڈ منتخب شدہ';
   }
 
   @override
@@ -499,7 +499,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String editTitle(Object title) {
-    return '\$$title میں ترمیم کریں';
+    return '$title میں ترمیم کریں';
   }
 
   @override
@@ -539,12 +539,12 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String addedStatesearchToRecentSearches(Object search) {
-    return '\"\$$search\" کو حالیہ تلاش میں شامل کیا گیا';
+    return '\"$search\" کو حالیہ تلاش میں شامل کیا گیا';
   }
 
   @override
   String removedStatesearchFromRecentSearches(Object search) {
-    return '\"\$$search\" کو حالیہ تلاش سے ہٹایا گیا';
+    return '\"$search\" کو حالیہ تلاش سے ہٹایا گیا';
   }
 
   @override
@@ -592,7 +592,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String callingphonenumber(Object phoneNumber) {
-    return '\$$phoneNumber کو کال کیا جا رہا ہے...';
+    return '$phoneNumber کو کال کیا جا رہا ہے...';
   }
 
   @override
@@ -647,7 +647,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get versionLatestversionIncludesNewFeatures =>
-      'ورژن \$latestVersion میں نئی خصوصیات شامل ہیں، ';
+      'ورژن latestVersion میں نئی خصوصیات شامل ہیں، ';
 
   @override
   String get performanceImprovementsAndBugFixes =>
@@ -661,7 +661,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String pleaseEnterWidgettitletolowercase(Object title) {
-    return 'براہ کرم \$$title درج کریں';
+    return 'براہ کرم $title درج کریں';
   }
 
   @override

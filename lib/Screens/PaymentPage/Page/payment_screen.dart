@@ -9,6 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class PaymentScreen extends StatelessWidget {
   const PaymentScreen({super.key});
@@ -76,10 +78,10 @@ class _PaymentMethodSection extends StatelessWidget {
                       context
                           .read<PaymentMethodSelectorCubit>()
                           .selectPaymentMethod(null, CreditCardType.onCash);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(S.of(context).cashOnDeliverySelected),
-                          duration: const Duration(seconds: 2),
+                      showTopSnackBar(
+                        Overlay.of(context),
+                        CustomSnackBar.info(
+                          message: S.of(context).cashOnDeliverySelected,
                         ),
                       );
                       Navigator.pop(context);
@@ -136,18 +138,18 @@ class _PaymentMethodSection extends StatelessWidget {
           matching.first,
           type,
         );
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Card ending in ${matching.first.last4} selected'),
-            duration: const Duration(seconds: 2),
+        showTopSnackBar(
+          Overlay.of(context),
+          CustomSnackBar.info(
+            message: 'Card ending in ${matching.first.last4} selected',
           ),
         );
         Navigator.pop(context);
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('No ${type.name} cards saved. Add one first.'),
-            duration: const Duration(seconds: 2),
+        showTopSnackBar(
+          Overlay.of(context),
+          CustomSnackBar.error(
+            message: 'No ${type.name} cards saved. Add one first.',
           ),
         );
       }
@@ -251,21 +253,22 @@ class _SavedCardsSection extends StatelessWidget {
         BlocConsumer<CreditCardCubit, CreditCardState>(
           listener: (context, state) {
             if (state is CreditCardError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(S.of(context).errorStatemessage(state.error)),
-                ),
+              showTopSnackBar(
+                Overlay.of(context),
+                CustomSnackBar.error(message: state.error),
               );
             } else if (state is CreditCardAdded) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(S.of(context).creditCardAddedSuccessfully),
+              showTopSnackBar(
+                Overlay.of(context),
+                CustomSnackBar.success(
+                  message: S.of(context).creditCardAddedSuccessfully,
                 ),
               );
             } else if (state is CreditCardDeleted) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(S.of(context).creditCardDeletedSuccessfully),
+              showTopSnackBar(
+                Overlay.of(context),
+                CustomSnackBar.success(
+                  message: S.of(context).creditCardDeletedSuccessfully,
                 ),
               );
             }
@@ -428,16 +431,14 @@ class _SavedCardTile extends StatelessWidget {
                               creditCard,
                               creditCard.cardType,
                             );
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              S
-                                  .of(context)
-                                  .cardEndingInCreditcardlast4Selected(
-                                    creditCard.last4,
-                                  ),
-                            ),
-                            duration: const Duration(seconds: 2),
+                        showTopSnackBar(
+                          Overlay.of(context),
+                          CustomSnackBar.info(
+                            message: S
+                                .of(context)
+                                .cardEndingInCreditcardlast4Selected(
+                                  creditCard.last4,
+                                ),
                           ),
                         );
                         Navigator.pop(context);

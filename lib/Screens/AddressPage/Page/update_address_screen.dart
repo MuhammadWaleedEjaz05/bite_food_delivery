@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class UpdateAddressScreen extends StatefulWidget {
   const UpdateAddressScreen({super.key});
@@ -424,9 +426,10 @@ class _SaveAddressSection extends StatelessWidget {
               final zipCode = zipController.text.trim();
               final country = countryController.text.trim();
               if (city.isEmpty || zipCode.isEmpty || country.isEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(S.of(context).pleaseFillAllRequiredFields),
+                showTopSnackBar(
+                  Overlay.of(context),
+                  CustomSnackBar.error(
+                    message: S.of(context).pleaseFillAllRequiredFields,
                   ),
                 );
                 return;
@@ -438,10 +441,10 @@ class _SaveAddressSection extends StatelessWidget {
 
               final currentUser = getCurrentUser();
               if (currentUser == null) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(S.of(context).userNotAuthenticated),
-                    backgroundColor: Colors.red,
+                showTopSnackBar(
+                  Overlay.of(context),
+                  CustomSnackBar.error(
+                    message: S.of(context).userNotAuthenticated,
                   ),
                 );
                 return;
@@ -464,10 +467,10 @@ class _SaveAddressSection extends StatelessWidget {
                   .read<AddressCubit>()
                   .updateAddress(address)
                   .then((_) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Address updated successfully'),
-                        backgroundColor: Colors.green,
+                    showTopSnackBar(
+                      Overlay.of(context),
+                      CustomSnackBar.success(
+                        message: S.of(context).addressUpdatedSuccessfully,
                       ),
                     );
                     Navigator.pop(context);
@@ -476,7 +479,7 @@ class _SaveAddressSection extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          'Failed to update address: ${error.toString()}',
+                          S.of(context).failedToUpdateAddress(error.toString()),
                         ),
                         backgroundColor: Colors.red,
                       ),

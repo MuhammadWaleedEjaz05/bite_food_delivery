@@ -69,10 +69,10 @@ class S {
     );
   }
 
-  /// `Error: ${stateMessage}`
+  /// `Error: {stateMessage}`
   String errorStatemessage(Object stateMessage) {
     return Intl.message(
-      'Error: \$$stateMessage',
+      'Error: $stateMessage',
       name: 'errorStatemessage',
       desc: 'Error message with dynamic content',
       args: [stateMessage],
@@ -154,10 +154,10 @@ class S {
     );
   }
 
-  /// `Failed to add address: ${error}`
+  /// `Failed to add address: {error}`
   String failedToAddAddressError(Object error) {
     return Intl.message(
-      'Failed to add address: \$$error',
+      'Failed to add address: $error',
       name: 'failedToAddAddressError',
       desc:
           'Error message when adding an address fails, with dynamic error content',
@@ -420,20 +420,20 @@ class S {
     return Intl.message('Back to Home', name: 'backToHome', desc: '', args: []);
   }
 
-  /// `Payment failed: ${errorMessage}`
+  /// `Payment failed: {errorMessage}`
   String paymentFailedPaymentstateerrormessage(Object errorMessage) {
     return Intl.message(
-      'Payment failed: \$$errorMessage',
+      'Payment failed: $errorMessage',
       name: 'paymentFailedPaymentstateerrormessage',
       desc: '',
       args: [errorMessage],
     );
   }
 
-  /// `Confirm Payment  •  PKR ${grandTotal}`
+  /// `Confirm Payment  •  PKR {grandTotal}`
   String confirmPayment(Object grandTotal) {
     return Intl.message(
-      'Confirm Payment  •  PKR \$$grandTotal',
+      'Confirm Payment  •  PKR $grandTotal',
       name: 'confirmPayment',
       desc: 'Button text for confirming payment, with dynamic grand total',
       args: [grandTotal],
@@ -685,10 +685,10 @@ class S {
     );
   }
 
-  /// `Google Sign-In Error: ${stateMessage}`
+  /// `Google Sign-In Error: {stateMessage}`
   String googleSigninErrorStatemessage(Object stateMessage) {
     return Intl.message(
-      'Google Sign-In Error: \$$stateMessage',
+      'Google Sign-In Error: $stateMessage',
       name: 'googleSigninErrorStatemessage',
       desc:
           'Error message when Google Sign-In fails, with dynamic state message content',
@@ -751,10 +751,10 @@ class S {
     );
   }
 
-  /// `${unreadCount} unread notifications`
+  /// `{unreadCount} unread notifications`
   String stateunreadcountUnreadNotifications(Object unreadCount) {
     return Intl.message(
-      '\$$unreadCount unread notifications',
+      '$unreadCount unread notifications',
       name: 'stateunreadcountUnreadNotifications',
       desc:
           'Text showing the number of unread notifications, with dynamic unread count',
@@ -762,20 +762,20 @@ class S {
     );
   }
 
-  /// `All (${totalCount})`
+  /// `All ({totalCount})`
   String allNotifications(Object totalCount) {
     return Intl.message(
-      'All (\$$totalCount)',
+      'All ($totalCount)',
       name: 'allNotifications',
       desc: 'Tab text for all notifications, with dynamic total count',
       args: [totalCount],
     );
   }
 
-  /// `Unread (${unreadCount})`
+  /// `Unread ({unreadCount})`
   String unreadNotifications(Object unreadCount) {
     return Intl.message(
-      'Unread (\$$unreadCount)',
+      'Unread ($unreadCount)',
       name: 'unreadNotifications',
       desc: 'Tab text for unread notifications, with dynamic unread count',
       args: [unreadCount],
@@ -1202,10 +1202,10 @@ class S {
     );
   }
 
-  /// `Card ending in ${last4} selected`
+  /// `Card ending in {last4} selected`
   String cardEndingInCreditcardlast4Selected(Object last4) {
     return Intl.message(
-      'Card ending in \$$last4 selected',
+      'Card ending in $last4 selected',
       name: 'cardEndingInCreditcardlast4Selected',
       desc:
           'Message shown when a card is selected, with dynamic last 4 digits of the card',
@@ -1243,10 +1243,10 @@ class S {
     );
   }
 
-  /// `Edit ${title}`
+  /// `Edit {title}`
   String editTitle(Object title) {
     return Intl.message(
-      'Edit \$$title',
+      'Edit $title',
       name: 'editTitle',
       desc: 'Title for edit profile modal, with dynamic field title',
       args: [title],
@@ -1338,10 +1338,10 @@ class S {
     );
   }
 
-  /// `Added "${search}" to recent searches`
+  /// `Added "{search}" to recent searches`
   String addedStatesearchToRecentSearches(Object search) {
     return Intl.message(
-      'Added "\$$search" to recent searches',
+      'Added "$search" to recent searches',
       name: 'addedStatesearchToRecentSearches',
       desc:
           'Message shown when a search keyword is added to recent searches, with dynamic search keyword',
@@ -1349,10 +1349,10 @@ class S {
     );
   }
 
-  /// `Removed "${search}" from recent searches`
+  /// `Removed "{search}" from recent searches`
   String removedStatesearchFromRecentSearches(Object search) {
     return Intl.message(
-      'Removed "\$$search" from recent searches',
+      'Removed "$search" from recent searches',
       name: 'removedStatesearchFromRecentSearches',
       desc:
           'Message shown when a search keyword is removed from recent searches, with dynamic search keyword',
@@ -1470,10 +1470,10 @@ class S {
     );
   }
 
-  /// `Calling ${phoneNumber}...`
+  /// `Calling {phoneNumber}...`
   String callingphonenumber(Object phoneNumber) {
     return Intl.message(
-      'Calling \$$phoneNumber...',
+      'Calling $phoneNumber...',
       name: 'callingphonenumber',
       desc:
           'Message shown when calling the delivery person, with dynamic phone number',
@@ -1631,10 +1631,10 @@ class S {
     );
   }
 
-  /// `Version $latestVersion includes new features, `
+  /// `Version latestVersion includes new features, `
   String get versionLatestversionIncludesNewFeatures {
     return Intl.message(
-      'Version \$latestVersion includes new features, ',
+      'Version latestVersion includes new features, ',
       name: 'versionLatestversionIncludesNewFeatures',
       desc: '',
       args: [],
@@ -1661,10 +1661,10 @@ class S {
     return Intl.message('Maybe Later', name: 'maybeLater', desc: '', args: []);
   }
 
-  /// `Please enter ${title}`
+  /// `Please enter {title}`
   String pleaseEnterWidgettitletolowercase(Object title) {
     return Intl.message(
-      'Please enter \$$title',
+      'Please enter $title',
       name: 'pleaseEnterWidgettitletolowercase',
       desc:
           'Validation error message for required fields, with dynamic field title',
@@ -1835,6 +1835,27 @@ class S {
   /// `Phone`
   String get phone {
     return Intl.message('Phone', name: 'phone', desc: '', args: []);
+  }
+
+  /// `Address updated successfully`
+  String get addressUpdatedSuccessfully {
+    return Intl.message(
+      'Address updated successfully',
+      name: 'addressUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to update address: {error}`
+  String failedToUpdateAddress(Object error) {
+    return Intl.message(
+      'Failed to update address: $error',
+      name: 'failedToUpdateAddress',
+      desc:
+          'Error message when updating an address fails, with dynamic error content',
+      args: [error],
+    );
   }
 }
 

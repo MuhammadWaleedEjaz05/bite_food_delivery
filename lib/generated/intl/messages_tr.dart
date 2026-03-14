@@ -20,34 +20,36 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'tr';
 
-  static String m0(search) => "\"\$${search}\" son aramalara eklendi";
+  static String m0(search) => "\"${search}\" son aramalara eklendi";
 
-  static String m1(totalCount) => "Tümü (\$${totalCount})";
+  static String m1(totalCount) => "Tümü (${totalCount})";
 
-  static String m2(phoneNumber) => "\$${phoneNumber} aranıyor...";
+  static String m2(phoneNumber) => "${phoneNumber} aranıyor...";
 
-  static String m3(last4) => "Son 4 rakamı \$${last4} olan kart seçildi";
+  static String m3(last4) => "Son 4 rakamı ${last4} olan kart seçildi";
 
-  static String m4(grandTotal) => "Ödemeyi Onayla • PKR \$${grandTotal}";
+  static String m4(grandTotal) => "Ödemeyi Onayla • PKR ${grandTotal}";
 
-  static String m5(title) => "\$${title} Düzenle";
+  static String m5(title) => "${title} Düzenle";
 
-  static String m6(stateMessage) => "Hata: \$${stateMessage}";
+  static String m6(stateMessage) => "Hata: ${stateMessage}";
 
-  static String m7(error) => "Adres ekleme başarısız: \$${error}";
+  static String m7(error) => "Adres ekleme başarısız: ${error}";
 
-  static String m8(stateMessage) =>
-      "Google Oturum Açma Hatası: \$${stateMessage}";
+  static String m8(error) => "Failed to update address: \${error.toString()}";
 
-  static String m9(errorMessage) => "Ödeme başarısız: \$${errorMessage}";
+  static String m9(stateMessage) =>
+      "Google Oturum Açma Hatası: ${stateMessage}";
 
-  static String m10(title) => "Lütfen \$${title} girin";
+  static String m10(errorMessage) => "Ödeme başarısız: ${errorMessage}";
 
-  static String m11(search) => "\"\$${search}\" son aramalardan kaldırıldı";
+  static String m11(title) => "Lütfen ${title} girin";
 
-  static String m12(unreadCount) => "\$${unreadCount} okunmamış bildirim";
+  static String m12(search) => "\"${search}\" son aramalardan kaldırıldı";
 
-  static String m13(unreadCount) => "Okunmamış (\$${unreadCount})";
+  static String m13(unreadCount) => "${unreadCount} okunmamış bildirim";
+
+  static String m14(unreadCount) => "Okunmamış (${unreadCount})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -66,6 +68,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "address": MessageLookupByLibrary.simpleMessage("Adres"),
     "addressAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Adres başarıyla eklendi!",
+    ),
+    "addressUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Address updated successfully",
     ),
     "allCategories": MessageLookupByLibrary.simpleMessage("Tüm Kategoriler"),
     "allNotifications": m1,
@@ -185,6 +190,7 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "Yiyecek öğeleri yüklenemedi. Lütfen daha sonra tekrar deneyin.",
         ),
+    "failedToUpdateAddress": m8,
     "faqs": MessageLookupByLibrary.simpleMessage("Sıkça Sorulan Sorular"),
     "favorites": MessageLookupByLibrary.simpleMessage("Favoriler"),
     "filterYourSearch": MessageLookupByLibrary.simpleMessage(
@@ -201,7 +207,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Tüm sevdiğiniz yiyecekleri bir yerde alın, siz sipariş edin biz kalanını yapalım",
     ),
     "getStarted": MessageLookupByLibrary.simpleMessage("Başla"),
-    "googleSigninErrorStatemessage": m8,
+    "googleSigninErrorStatemessage": m9,
     "guestUser": MessageLookupByLibrary.simpleMessage("Misafir Kullanıcı"),
     "history": MessageLookupByLibrary.simpleMessage("Geçmiş"),
     "home": MessageLookupByLibrary.simpleMessage("Ev"),
@@ -310,7 +316,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "payWhenYourOrderArrives": MessageLookupByLibrary.simpleMessage(
       "Siparişiniz geldiğinde öde",
     ),
-    "paymentFailedPaymentstateerrormessage": m9,
+    "paymentFailedPaymentstateerrormessage": m10,
     "paymentMethod": MessageLookupByLibrary.simpleMessage("Ödeme Yöntemi"),
     "payments": MessageLookupByLibrary.simpleMessage("Ödemeler"),
     "paysWhenOrderArrives": MessageLookupByLibrary.simpleMessage(
@@ -332,7 +338,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseEnterAValidPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "Lütfen geçerli bir telefon numarası girin",
     ),
-    "pleaseEnterWidgettitletolowercase": m10,
+    "pleaseEnterWidgettitletolowercase": m11,
     "pleaseEnterYourEmailAddressToReceiveAPasswordReset":
         MessageLookupByLibrary.simpleMessage(
           "Şifre sıfırlama bağlantısı almak için lütfen e-posta adresinizi girin.",
@@ -366,7 +372,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "removeFromFavourites": MessageLookupByLibrary.simpleMessage(
       "Favorilerden kaldır",
     ),
-    "removedStatesearchFromRecentSearches": m11,
+    "removedStatesearchFromRecentSearches": m12,
     "reorder": MessageLookupByLibrary.simpleMessage("Yeniden Sipariş Ver"),
     "required": MessageLookupByLibrary.simpleMessage("Gerekli"),
     "restaurants": MessageLookupByLibrary.simpleMessage("Restoranlar"),
@@ -398,7 +404,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "signUp": MessageLookupByLibrary.simpleMessage("Kaydol"),
     "signup": MessageLookupByLibrary.simpleMessage("Kaydol"),
     "skip": MessageLookupByLibrary.simpleMessage("Atla"),
-    "stateunreadcountUnreadNotifications": m12,
+    "stateunreadcountUnreadNotifications": m13,
     "streetNo": MessageLookupByLibrary.simpleMessage("Sokak No."),
     "subtotal": MessageLookupByLibrary.simpleMessage("Ara Toplam"),
     "successfullySignedInWithGoogle": MessageLookupByLibrary.simpleMessage(
@@ -411,7 +417,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "total": MessageLookupByLibrary.simpleMessage("Toplam"),
     "total2": MessageLookupByLibrary.simpleMessage("TOPLAM: "),
     "trackOrder": MessageLookupByLibrary.simpleMessage("Siparişi Takip Et"),
-    "unreadNotifications": m13,
+    "unreadNotifications": m14,
     "updateAvailable": MessageLookupByLibrary.simpleMessage(
       "Güncelleme Mevcut",
     ),
@@ -425,7 +431,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "versionLatestversionIncludesNewFeatures":
         MessageLookupByLibrary.simpleMessage(
-          "Sürüm \$latestVersion yeni özellikler, ",
+          "Sürüm latestVersion yeni özellikler, ",
         ),
     "visa": MessageLookupByLibrary.simpleMessage("Visa"),
     "whatAreYourDeliveryHours": MessageLookupByLibrary.simpleMessage(

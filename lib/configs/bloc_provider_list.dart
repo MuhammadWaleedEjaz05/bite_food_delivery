@@ -11,6 +11,7 @@ import 'package:bite_food_delivery/Cubits/FoodItemCubit/food_item_cubit.dart';
 import 'package:bite_food_delivery/Cubits/MapLocationCubit/map_location_cubit.dart';
 import 'package:bite_food_delivery/Cubits/NotificationCubit/notifications_cubit.dart';
 import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
+import 'package:bite_food_delivery/Cubits/PaymentCubit/payment_method_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RecentSearchesCubit/recent_searches_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/Cubits/SettingsCubit/settings_cubit.dart';
@@ -60,5 +61,8 @@ List<BlocProvider> blocProviderList = [
   ),
   BlocProvider<FilterRestaurantsCubit>(
     create: (context) => FilterRestaurantsCubit(),
+  ),
+  BlocProvider<PaymentMethodSelectorCubit>(
+    create: (context) => PaymentMethodSelectorCubit(),
   ),
 ];

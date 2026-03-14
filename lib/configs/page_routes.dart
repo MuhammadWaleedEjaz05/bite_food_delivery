@@ -1,7 +1,8 @@
 import 'package:bite_food_delivery/Cubits/CreditCardCubit/credit_card_type_selector_cubit.dart';
+import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
 import 'package:bite_food_delivery/Cubits/PaymentCubit/payment_cubit.dart';
-import 'package:bite_food_delivery/Cubits/PaymentCubit/payment_method_selector_cubit.dart';
 import 'package:bite_food_delivery/Cubits/PhoneCallCubit/phone_call_cubit.dart';
+import 'package:bite_food_delivery/Cubits/RememberMeCubit/remember_me_cubit.dart';
 import 'package:bite_food_delivery/Screens/AddressPage/Page/add_address_screen.dart';
 import 'package:bite_food_delivery/Screens/AddressPage/Page/address_screen.dart';
 import 'package:bite_food_delivery/Screens/AddressPage/Page/update_address_screen.dart';
@@ -26,6 +27,7 @@ import 'package:bite_food_delivery/Screens/SettingPage/Page/setting_screen.dart'
 import 'package:bite_food_delivery/Screens/PaymentPage/Page/add_card_screen.dart';
 import 'package:bite_food_delivery/Screens/SignupPage/Page/signup_screen.dart';
 import 'package:bite_food_delivery/Screens/TrackOrderPage/Page/track_order_screen.dart';
+import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,7 +37,12 @@ final Map<String, Widget Function(BuildContext)> routes = {
   '/all_restaurants_screen': (context) => const AllRestaurantScreen(),
   '/all_categories_screen': (context) => const AllCategoryScreen(),
   '/cart_screen': (context) => const CartScreen(),
-  '/order_history_screen': (context) => const OrderHistoryScreen(),
+  '/order_history_screen': (context) => BlocProvider(
+    create: (context) =>
+        OrderCubit(notificationsCubit: context.read())
+          ..loadOrderHistory(getCurrentUser()?.uid ?? ''),
+    child: const OrderHistoryScreen(),
+  ),
   '/category_screen': (context) => const CategoryScreen(),
   '/favourite': (context) => const FavouriteScreen(),
   '/notification': (context) => const NotificationScreen(),
@@ -45,29 +52,28 @@ final Map<String, Widget Function(BuildContext)> routes = {
   '/update_address_screen': (context) => const UpdateAddressScreen(),
   '/restaurant_screen': (context) => const RestaurantScreen(),
   '/food_item_screen': (context) => const FoodItemScreen(),
-  '/login_screen': (context) => const LoginScreen(),
+  '/login_screen': (context) => BlocProvider(
+    create: (context) => RememberMeCubit()..getRememberMeData(),
+    child: const LoginScreen(),
+  ),
   '/signup_screen': (context) => const SignupScreen(),
   '/forgot_password_screen': (context) => const ForgotPasswordScreen(),
   '/review_screen': (context) => const ReviewScreen(),
   '/my_reviews_screen': (context) => const MyReviewsScreen(),
   '/payment_screen': (context) {
-    return BlocProvider(
-      create: (_) => PaymentMethodSelectorCubit(),
-      child: const PaymentScreen(),
-    );
+    return const PaymentScreen();
   },
+
   '/add_card_screen': (context) => BlocProvider(
     create: (_) => CreditCardTypeSelectorCubit(),
     child: const AddCardScreen(),
   ),
 
-  '/checkout_screen': (context) => MultiBlocProvider(
-    providers: [
-      BlocProvider(create: (_) => PaymentMethodSelectorCubit()),
-      BlocProvider(create: (_) => PaymentCubit()),
-    ],
+  '/checkout_screen': (context) => BlocProvider(
+    create: (context) => PaymentCubit(),
     child: const CheckOutScreen(),
   ),
+
   '/track_order_screen': (context) => BlocProvider(
     create: (_) => PhoneCallCubit(),
     child: const TrackOrderScreen(),

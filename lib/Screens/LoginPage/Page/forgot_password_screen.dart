@@ -5,6 +5,8 @@ import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 final _forgotPasswordFormKey = GlobalKey<FormState>();
 final _forgotPasswordEmailController = TextEditingController();
@@ -89,19 +91,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                       ScaffoldMessenger.of(
                                         context,
                                       ).clearSnackBars();
-                                      ScaffoldMessenger.of(
-                                        context,
-                                      ).showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            S
-                                                .of(context)
-                                                .passwordResetSuccessfully,
-                                          ),
-                                          backgroundColor: Colors.green,
-                                          duration: const Duration(seconds: 3),
-                                        ),
-                                      );
+                                      showTopSnackBar(Overlay.of(context), CustomSnackBar.success(message: S.of(context).passwordResetSuccessfully));
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Theme.of(
@@ -121,13 +111,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             },
                           );
                         } else if (state is UserAuthError) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                S.of(context).errorStatemessage(state.message),
-                              ),
-                              backgroundColor: Colors.red,
-                            ),
+                          showTopSnackBar(
+                            Overlay.of(context),
+                            CustomSnackBar.error(message: state.message),
                           );
                         }
                       },

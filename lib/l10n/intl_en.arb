@@ -2,7 +2,7 @@
   "@@locale": "en",
   "trackOrder": "Track Order",
   "locationPermissionIsRequired": "Location permission is required",
-  "errorStatemessage": "Error: ${stateMessage}",
+  "errorStatemessage": "Error: {stateMessage}",
   "@errorStatemessage": {
     "description": "Error message with dynamic content",
     "placeholders": {
@@ -21,7 +21,7 @@
   "pleaseFillAllRequiredFields": "Please fill all required fields",
   "userNotAuthenticated": "User not authenticated",
   "addressAddedSuccessfully": "Address added successfully!",
-  "failedToAddAddressError": "Failed to add address: ${error}",
+  "failedToAddAddressError": "Failed to add address: {error}",
   "@failedToAddAddressError": {
     "description": "Error message when adding an address fails, with dynamic error content",
     "placeholders": {
@@ -61,14 +61,14 @@
   "orderPlaced": "Order Placed!",
   "yourOrderHasBeenPlacedSuccessfullyntrackYourOrderInRealtime": "Your order has been placed successfully.\\nTrack your order in real-time.",
   "backToHome": "Back to Home",
-  "paymentFailedPaymentstateerrormessage": "Payment failed: ${errorMessage}",
+  "paymentFailedPaymentstateerrormessage": "Payment failed: {errorMessage}",
   "@paymentFailedPaymentstateerrormessage": {
     "description": "",
     "placeholders": {
       "errorMessage": {}
     }
   },
-  "confirmPayment": "Confirm Payment  •  PKR ${grandTotal}",
+  "confirmPayment": "Confirm Payment  •  PKR {grandTotal}",
   "@confirmPayment": {
     "description": "Button text for confirming payment, with dynamic grand total",
     "placeholders": {
@@ -107,7 +107,7 @@
   "pleaseEnterYourEmailAddressToReceiveAPasswordReset": "Please enter your email address to receive a password reset link.",
   "or": "Or",
   "successfullySignedInWithGoogle": "Successfully signed in with Google!",
-  "googleSigninErrorStatemessage": "Google Sign-In Error: ${stateMessage}",
+  "googleSigninErrorStatemessage": "Google Sign-In Error: {stateMessage}",
   "@googleSigninErrorStatemessage": {
     "description": "Error message when Google Sign-In fails, with dynamic state message content",
     "placeholders": {
@@ -122,21 +122,21 @@
   "logIn": "Log In",
   "pleaseSignInToContinue": "Please Sign In to Continue",
   "noNotificationsYet": "No notifications yet",
-  "stateunreadcountUnreadNotifications": "${unreadCount} unread notifications",
+  "stateunreadcountUnreadNotifications": "{unreadCount} unread notifications",
   "@stateunreadcountUnreadNotifications": {
     "description": "Text showing the number of unread notifications, with dynamic unread count",
     "placeholders": {
       "unreadCount": {}
     }
   },
-  "allNotifications": "All (${totalCount})",
+  "allNotifications": "All ({totalCount})",
   "@allNotifications": {
     "description": "Tab text for all notifications, with dynamic total count",
     "placeholders": {
       "totalCount": {}
     }
   },
-  "unreadNotifications": "Unread (${unreadCount})",
+  "unreadNotifications": "Unread ({unreadCount})",
   "@unreadNotifications": {
     "description": "Tab text for unread notifications, with dynamic unread count",
     "placeholders": {
@@ -193,7 +193,7 @@
   "failedToLoadCards": "Failed to load cards",
   "noSavedCardsYet": "No saved cards yet",
   "addACardBelowToGetStarted": "Add a card below to get started",
-  "cardEndingInCreditcardlast4Selected": "Card ending in ${last4} selected",
+  "cardEndingInCreditcardlast4Selected": "Card ending in {last4} selected",
   "@cardEndingInCreditcardlast4Selected": {
     "description": "Message shown when a card is selected, with dynamic last 4 digits of the card",
     "placeholders": {
@@ -204,7 +204,7 @@
   "personalInfo": "Personal Info",
   "guestUser": "Guest User",
   "pleaseLoginToViewYourProfile": "Please login to view your profile",
-  "editTitle": "Edit ${title}",
+  "editTitle": "Edit {title}",
   "@editTitle": {
     "description": "Title for edit profile modal, with dynamic field title",
     "placeholders": {
@@ -222,14 +222,14 @@
   "popularRestaurants": "Popular Restaurants",
   "noPopularRestaurantsFound": "No popular restaurants found",
   "recentKeywords": "Recent Keywords",
-  "addedStatesearchToRecentSearches": "Added \"${search}\" to recent searches",
+  "addedStatesearchToRecentSearches": "Added \"{search}\" to recent searches",
   "@addedStatesearchToRecentSearches": {
     "description": "Message shown when a search keyword is added to recent searches, with dynamic search keyword",
     "placeholders": {
       "search": {}
     }
   },
-  "removedStatesearchFromRecentSearches": "Removed \"${search}\" from recent searches",
+  "removedStatesearchFromRecentSearches": "Removed \"{search}\" from recent searches",
   "@removedStatesearchFromRecentSearches": {
     "description": "Message shown when a search keyword is removed from recent searches, with dynamic search keyword",
     "placeholders": {
@@ -250,7 +250,7 @@
   "pleaseSignUpToGetStarted": "Please Sign Up to get started",
   "noActiveOrder": "No active order",
   "yourOrderHasBeenDelivered": "Your order has been delivered!",
-  "callingphonenumber": "Calling ${phoneNumber}...",
+  "callingphonenumber": "Calling {phoneNumber}...",
   "@callingphonenumber": {
     "description": "Message shown when calling the delivery person, with dynamic phone number",
     "placeholders": {
@@ -273,11 +273,11 @@
   "updateDialog": "Update Dialog",
   "updateAvailable": "Update Available",
   "aNewVersionOfBiteIsReady": "A new version of Bite is ready!",
-  "versionLatestversionIncludesNewFeatures": "Version $latestVersion includes new features, ",
+  "versionLatestversionIncludesNewFeatures": "Version latestVersion includes new features, ",
   "performanceImprovementsAndBugFixes": "performance improvements, and bug fixes.",
   "updateNow": "Update Now",
   "maybeLater": "Maybe Later",
-  "pleaseEnterWidgettitletolowercase": "Please enter ${title}",
+  "pleaseEnterWidgettitletolowercase": "Please enter {title}",
   "@pleaseEnterWidgettitletolowercase": {
     "description": "Validation error message for required fields, with dynamic field title",
     "placeholders": {
@@ -302,5 +302,11 @@
   "history": "History",
   "favorites": "Favorites",
   "reviews": "Reviews",
-  "phone": "Phone"
+  "phone": "Phone",
+  "addressUpdatedSuccessfully": "Address updated successfully",
+  "failedToUpdateAddress": "Failed to update address: {error}",
+  "@failedToUpdateAddress": {
+    "description": "Error message when updating an address fails, with dynamic error content",
+    "placeholders": {
+      "error": {}}}
 }

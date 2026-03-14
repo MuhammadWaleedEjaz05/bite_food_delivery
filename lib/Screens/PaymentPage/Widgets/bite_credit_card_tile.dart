@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class BiteCreditCardTile extends StatefulWidget {
   final CreditCardModel creditCard;
@@ -146,16 +148,11 @@ class _BiteCreditCardTileState extends State<BiteCreditCardTile>
                                                 widget.creditCard,
                                                 widget.creditCard.cardType,
                                               );
-                                          ScaffoldMessenger.of(
-                                            context,
-                                          ).showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                'Selected ${widget.creditCard.cardType == CreditCardType.onCash ? 'Cash on Delivery' : 'Card ending in ${widget.creditCard.last4}'} as payment method',
-                                              ),
-                                              duration: const Duration(
-                                                seconds: 2,
-                                              ),
+                                          showTopSnackBar(
+                                            Overlay.of(context),
+                                            CustomSnackBar.info(
+                                              message:
+                                                  'Selected ${widget.creditCard.cardType == CreditCardType.onCash ? 'Cash on Delivery' : 'Card ending in ${widget.creditCard.last4}'} as payment method',
                                             ),
                                           );
                                           Navigator.pop(context);

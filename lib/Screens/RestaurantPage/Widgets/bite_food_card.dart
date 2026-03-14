@@ -6,6 +6,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class BiteFoodCard extends StatelessWidget {
   final FoodItemModel foodItem;
@@ -73,7 +75,7 @@ class BiteFoodCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'Rs ${foodItem.price}',
+                  'PKR ${foodItem.price.toInt()}',
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const Spacer(),
@@ -90,27 +92,24 @@ class BiteFoodCard extends StatelessWidget {
                   },
                   listener: (context, state) {
                     if (state is CartItemAdded) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('${foodItem.name} added to cart!'),
-                          duration: const Duration(seconds: 2),
-                          backgroundColor: Colors.green,
+                      showTopSnackBar(
+                        Overlay.of(context),
+                        CustomSnackBar.success(
+                          message: '${foodItem.name} added to cart!',
                         ),
                       );
                     } else if (state is CartItemUpdated) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('${foodItem.name} quantity updated!'),
-                          duration: const Duration(seconds: 2),
-                          backgroundColor: Colors.blue,
+                      showTopSnackBar(
+                        Overlay.of(context),
+                        CustomSnackBar.info(
+                          message: '${foodItem.name} quantity updated!',
                         ),
                       );
                     } else if (state is CartError) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(state.message),
-                          duration: const Duration(seconds: 3),
-                          backgroundColor: Colors.red,
+                      showTopSnackBar(
+                        Overlay.of(context),
+                        const CustomSnackBar.error(
+                          message: "Failed to update cart. Please try again.",
                         ),
                       );
                     }

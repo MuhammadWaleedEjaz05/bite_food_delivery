@@ -107,7 +107,7 @@ class _AddCardBottomSheet extends StatelessWidget {
                   children: [
                     10.horizontalSpace,
                     Text(
-                      'RS ${foodItem.price.toStringAsFixed(2)}',
+                      'PKR ${foodItem.price.toStringAsFixed(2)}',
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
                     const Spacer(),
@@ -195,7 +195,9 @@ class _AddCardBottomSheet extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          isInCart ? S.of(context).removeFromCart : S.of(context).addToCart,
+                          isInCart
+                              ? S.of(context).removeFromCart
+                              : S.of(context).addToCart,
                           style: Theme.of(context).textTheme.headlineLarge!
                               .copyWith(color: Colors.white),
                         ),
@@ -249,7 +251,10 @@ class _FoodSizeSelectionSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(S.of(context).chooseYourSize, style: Theme.of(context).textTheme.titleLarge),
+        Text(
+          S.of(context).chooseYourSize,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
         10.verticalSpace,
         Row(
           spacing: 10.w,

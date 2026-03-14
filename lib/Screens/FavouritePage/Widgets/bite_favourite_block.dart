@@ -61,7 +61,7 @@ class BiteFavouriteBlock extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        'RS ${foodItem.price.toStringAsFixed(2)}',
+                        'PKR ${foodItem.price.toStringAsFixed(2)}',
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Theme.of(context).colorScheme.onSecondary,
                         ),

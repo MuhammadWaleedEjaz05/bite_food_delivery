@@ -20,37 +20,36 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(search) =>
-      "تم إضافة \"\$${search}\" إلى عمليات البحث الأخيرة";
+  static String m0(search) => "تم إضافة \"${search}\" إلى عمليات البحث الأخيرة";
 
-  static String m1(totalCount) => "الكل (\$${totalCount})";
+  static String m1(totalCount) => "الكل (${totalCount})";
 
-  static String m2(phoneNumber) => "جاري الاتصال بـ \$${phoneNumber}...";
+  static String m2(phoneNumber) => "جاري الاتصال بـ ${phoneNumber}...";
 
-  static String m3(last4) => "البطاقة المنتهية برقم \$${last4} محددة";
+  static String m3(last4) => "البطاقة المنتهية برقم ${last4} محددة";
 
-  static String m4(grandTotal) =>
-      "تأكيد الدفع  •  جنيه إسترليني \$${grandTotal}";
+  static String m4(grandTotal) => "تأكيد الدفع  •  جنيه إسترليني ${grandTotal}";
 
-  static String m5(title) => "تعديل \$${title}";
+  static String m5(title) => "تعديل ${title}";
 
-  static String m6(stateMessage) => "خطأ: \$${stateMessage}";
+  static String m6(stateMessage) => "خطأ: ${stateMessage}";
 
-  static String m7(error) => "فشل في إضافة العنوان: \$${error}";
+  static String m7(error) => "فشل في إضافة العنوان: ${error}";
 
-  static String m8(stateMessage) =>
-      "خطأ في تسجيل الدخول عبر جوجل: \$${stateMessage}";
+  static String m8(error) => "Failed to update address: \${error.toString()}";
 
-  static String m9(errorMessage) => "فشل الدفع: \$${errorMessage}";
+  static String m9(stateMessage) =>
+      "خطأ في تسجيل الدخول عبر جوجل: ${stateMessage}";
 
-  static String m10(title) => "يرجى إدخال \$${title}";
+  static String m10(errorMessage) => "فشل الدفع: ${errorMessage}";
 
-  static String m11(search) =>
-      "تم إزالة \"\$${search}\" من عمليات البحث الأخيرة";
+  static String m11(title) => "يرجى إدخال ${title}";
 
-  static String m12(unreadCount) => "\$${unreadCount} إشعارات غير مقروءة";
+  static String m12(search) => "تم إزالة \"${search}\" من عمليات البحث الأخيرة";
 
-  static String m13(unreadCount) => "غير مقروءة (\$${unreadCount})";
+  static String m13(unreadCount) => "${unreadCount} إشعارات غير مقروءة";
+
+  static String m14(unreadCount) => "غير مقروءة (${unreadCount})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -69,6 +68,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "address": MessageLookupByLibrary.simpleMessage("العنوان"),
     "addressAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم إضافة العنوان بنجاح!",
+    ),
+    "addressUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Address updated successfully",
     ),
     "allCategories": MessageLookupByLibrary.simpleMessage("جميع الفئات"),
     "allNotifications": m1,
@@ -192,6 +194,7 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "فشل في تحميل عناصر الطعام. يرجى المحاولة لاحقاً.",
         ),
+    "failedToUpdateAddress": m8,
     "faqs": MessageLookupByLibrary.simpleMessage("الأسئلة الشائعة"),
     "favorites": MessageLookupByLibrary.simpleMessage("المفضلة"),
     "filterYourSearch": MessageLookupByLibrary.simpleMessage("صفي بحثك"),
@@ -208,7 +211,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "احصل على جميع الأطعمة المفضلة لديك في مكان واحد، ما عليك سوى وضع الطلب ويتولى الباقي",
     ),
     "getStarted": MessageLookupByLibrary.simpleMessage("ابدأ"),
-    "googleSigninErrorStatemessage": m8,
+    "googleSigninErrorStatemessage": m9,
     "guestUser": MessageLookupByLibrary.simpleMessage("مستخدم ضيف"),
     "history": MessageLookupByLibrary.simpleMessage("السجل"),
     "home": MessageLookupByLibrary.simpleMessage("المنزل"),
@@ -315,7 +318,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "payWhenYourOrderArrives": MessageLookupByLibrary.simpleMessage(
       "ادفع عند وصول طلبك",
     ),
-    "paymentFailedPaymentstateerrormessage": m9,
+    "paymentFailedPaymentstateerrormessage": m10,
     "paymentMethod": MessageLookupByLibrary.simpleMessage("طريقة الدفع"),
     "payments": MessageLookupByLibrary.simpleMessage("الدفع"),
     "paysWhenOrderArrives": MessageLookupByLibrary.simpleMessage(
@@ -337,7 +340,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseEnterAValidPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "يرجى إدخال رقم هاتف صحيح",
     ),
-    "pleaseEnterWidgettitletolowercase": m10,
+    "pleaseEnterWidgettitletolowercase": m11,
     "pleaseEnterYourEmailAddressToReceiveAPasswordReset":
         MessageLookupByLibrary.simpleMessage(
           "يرجى إدخال عنوان بريدك الإلكتروني للحصول على رابط إعادة تعيين كلمة المرور.",
@@ -371,7 +374,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "removeFromFavourites": MessageLookupByLibrary.simpleMessage(
       "إزالة من المفضلة",
     ),
-    "removedStatesearchFromRecentSearches": m11,
+    "removedStatesearchFromRecentSearches": m12,
     "reorder": MessageLookupByLibrary.simpleMessage("إعادة طلب"),
     "required": MessageLookupByLibrary.simpleMessage("مطلوب"),
     "restaurants": MessageLookupByLibrary.simpleMessage("المطاعم"),
@@ -403,7 +406,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "signUp": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "signup": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
-    "stateunreadcountUnreadNotifications": m12,
+    "stateunreadcountUnreadNotifications": m13,
     "streetNo": MessageLookupByLibrary.simpleMessage("رقم الشارع"),
     "subtotal": MessageLookupByLibrary.simpleMessage("المجموع الفرعي"),
     "successfullySignedInWithGoogle": MessageLookupByLibrary.simpleMessage(
@@ -416,7 +419,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "total": MessageLookupByLibrary.simpleMessage("الإجمالي"),
     "total2": MessageLookupByLibrary.simpleMessage("الإجمالي: "),
     "trackOrder": MessageLookupByLibrary.simpleMessage("تتبع الطلب"),
-    "unreadNotifications": m13,
+    "unreadNotifications": m14,
     "updateAvailable": MessageLookupByLibrary.simpleMessage("تحديث متاح"),
     "updateDialog": MessageLookupByLibrary.simpleMessage("حوار التحديث"),
     "updateNow": MessageLookupByLibrary.simpleMessage("تحديث الآن"),
@@ -428,7 +431,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "versionLatestversionIncludesNewFeatures":
         MessageLookupByLibrary.simpleMessage(
-          "الإصدار \$latestVersion يتضمن ميزات جديدة، ",
+          "الإصدار latestVersion يتضمن ميزات جديدة، ",
         ),
     "visa": MessageLookupByLibrary.simpleMessage("فيزا"),
     "whatAreYourDeliveryHours": MessageLookupByLibrary.simpleMessage(

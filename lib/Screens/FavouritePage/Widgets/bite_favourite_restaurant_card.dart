@@ -4,7 +4,6 @@ import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BiteFavouriteRestaurantCard extends StatelessWidget {
   final RestaurantModel restaurant;
@@ -32,10 +31,8 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
               children: [
                 Text(
                   restaurant.name,
-                  style: GoogleFonts.sen(
-                    fontSize: Theme.of(
-                      context,
-                    ).textTheme.headlineLarge!.fontSize,
+                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
                 Text(
@@ -55,7 +52,7 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                     ),
                     4.horizontalSpace,
                     Text(
-                      restaurant.rating.toString(),
+                      restaurant.rating.toStringAsFixed(1),
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                     10.horizontalSpace,
@@ -77,7 +74,7 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                     ),
                     4.horizontalSpace,
                     Text(
-                      '\$${restaurant.deliveryFee}',
+                      'PKR ${restaurant.deliveryFee.toInt()}',
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ],
@@ -96,7 +93,9 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       content: Text(
-                        S.of(context).areYouSureYouWantToRemoveThisRestaurantFrom,
+                        S
+                            .of(context)
+                            .areYouSureYouWantToRemoveThisRestaurantFrom,
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
                           fontWeight: FontWeight.normal,
                         ),

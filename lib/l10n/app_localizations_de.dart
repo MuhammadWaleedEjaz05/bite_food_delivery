@@ -17,7 +17,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String errorStatemessage(Object stateMessage) {
-    return 'Fehler: \$$stateMessage';
+    return 'Fehler: $stateMessage';
   }
 
   @override
@@ -59,7 +59,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String failedToAddAddressError(Object error) {
-    return 'Fehler beim Hinzufügen der Adresse: \$$error';
+    return 'Fehler beim Hinzufügen der Adresse: $error';
   }
 
   @override
@@ -165,12 +165,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String paymentFailedPaymentstateerrormessage(Object errorMessage) {
-    return 'Zahlung fehlgeschlagen: \$$errorMessage';
+    return 'Zahlung fehlgeschlagen: $errorMessage';
   }
 
   @override
   String confirmPayment(Object grandTotal) {
-    return 'Zahlung bestätigen  •  PKR \$$grandTotal';
+    return 'Zahlung bestätigen  •  PKR $grandTotal';
   }
 
   @override
@@ -278,7 +278,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String googleSigninErrorStatemessage(Object stateMessage) {
-    return 'Google-Anmeldungsfehler: \$$stateMessage';
+    return 'Google-Anmeldungsfehler: $stateMessage';
   }
 
   @override
@@ -308,17 +308,17 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String stateunreadcountUnreadNotifications(Object unreadCount) {
-    return '\$$unreadCount ungelesene Benachrichtigungen';
+    return '$unreadCount ungelesene Benachrichtigungen';
   }
 
   @override
   String allNotifications(Object totalCount) {
-    return 'Alle (\$$totalCount)';
+    return 'Alle ($totalCount)';
   }
 
   @override
   String unreadNotifications(Object unreadCount) {
-    return 'Ungelesen (\$$unreadCount)';
+    return 'Ungelesen ($unreadCount)';
   }
 
   @override
@@ -484,7 +484,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String cardEndingInCreditcardlast4Selected(Object last4) {
-    return 'Karte endet auf \$$last4 ausgewählt';
+    return 'Karte endet auf $last4 ausgewählt';
   }
 
   @override
@@ -502,7 +502,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String editTitle(Object title) {
-    return '\$$title bearbeiten';
+    return '$title bearbeiten';
   }
 
   @override
@@ -543,12 +543,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String addedStatesearchToRecentSearches(Object search) {
-    return '\"\$$search\" zu den aktuellen Suchen hinzugefügt';
+    return '\"$search\" zu den aktuellen Suchen hinzugefügt';
   }
 
   @override
   String removedStatesearchFromRecentSearches(Object search) {
-    return '\"\$$search\" aus den aktuellen Suchen entfernt';
+    return '\"$search\" aus den aktuellen Suchen entfernt';
   }
 
   @override
@@ -596,7 +596,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String callingphonenumber(Object phoneNumber) {
-    return 'Rufe \$$phoneNumber an...';
+    return 'Rufe $phoneNumber an...';
   }
 
   @override
@@ -654,7 +654,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get versionLatestversionIncludesNewFeatures =>
-      'Version \$latestVersion enthält neue Funktionen, ';
+      'Version latestVersion enthält neue Funktionen, ';
 
   @override
   String get performanceImprovementsAndBugFixes =>
@@ -668,7 +668,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String pleaseEnterWidgettitletolowercase(Object title) {
-    return 'Bitte geben Sie \$$title ein';
+    return 'Bitte geben Sie $title ein';
   }
 
   @override

@@ -8,6 +8,8 @@ import 'package:bite_food_delivery/Screens/TrackOrderPage/Widgets/bite_order_inf
 import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -65,14 +67,10 @@ class TrackOrderScreen extends StatelessWidget {
           BlocListener<OrderCubit, OrderState>(
             listener: (context, state) {
               if (state is ActiveOrderDelivered) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      S.of(context).yourOrderHasBeenDelivered,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    backgroundColor: Colors.green,
-                    duration: const Duration(seconds: 3),
+                showTopSnackBar(
+                  Overlay.of(context),
+                  CustomSnackBar.success(
+                    message: S.of(context).yourOrderHasBeenDelivered,
                   ),
                 );
                 Navigator.of(
@@ -84,24 +82,20 @@ class TrackOrderScreen extends StatelessWidget {
           BlocListener<PhoneCallCubit, PhoneCallState>(
             listener: (context, state) {
               if (state is PhoneCallFailure) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      state.errorMessage,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    backgroundColor: Colors.red,
+                showTopSnackBar(
+                  Overlay.of(context),
+                  CustomSnackBar.error(
+                    message: "Failed to make the call. Please try again.",
                   ),
                 );
               }
               if (state is PhoneCallSuccess) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      S.of(context).callingphonenumber(state.phoneNumber),
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    backgroundColor: Colors.green,
+                showTopSnackBar(
+                  Overlay.of(context),
+                  CustomSnackBar.success(
+                    message: S
+                        .of(context)
+                        .callingphonenumber(state.phoneNumber),
                   ),
                 );
               }

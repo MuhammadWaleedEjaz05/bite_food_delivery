@@ -80,7 +80,7 @@ class UserAuthCubit extends Cubit<UserAuthState> {
       final db = getCollection('UsersDB');
       await db
           .doc(currentUser.uid)
-          .set(user.copyWith(id: currentUser.uid, password: null).toJson());
+          .set(user.copyWith(id: currentUser.uid).toJson());
       emit(UserCreated());
     } catch (e) {
       emit(UserAuthError(e.toString()));

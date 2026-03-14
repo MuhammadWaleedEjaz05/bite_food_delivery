@@ -8,6 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class AddCardScreen extends StatefulWidget {
   const AddCardScreen({super.key});
@@ -412,11 +414,9 @@ class _AddCardButton extends StatelessWidget {
     return BlocListener<CreditCardCubit, CreditCardState>(
       listener: (context, state) {
         if (state is CreditCardError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(S.of(context).errorStatemessage(state.error)),
-              backgroundColor: Colors.red,
-            ),
+          showTopSnackBar(
+            Overlay.of(context),
+            CustomSnackBar.error(message: state.error),
           );
           print('CreditCardCubit Error: ${state.error}');
         }

@@ -20,34 +20,35 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ur';
 
-  static String m0(search) => "\"\$${search}\" کو حالیہ تلاش میں شامل کیا گیا";
+  static String m0(search) => "\"${search}\" کو حالیہ تلاش میں شامل کیا گیا";
 
-  static String m1(totalCount) => "تمام (\$${totalCount})";
+  static String m1(totalCount) => "تمام (${totalCount})";
 
-  static String m2(phoneNumber) => "\$${phoneNumber} کو کال کیا جا رہا ہے...";
+  static String m2(phoneNumber) => "${phoneNumber} کو کال کیا جا رہا ہے...";
 
-  static String m3(last4) => "\$${last4} پر ختم ہونے والا کارڈ منتخب شدہ";
+  static String m3(last4) => "${last4} پر ختم ہونے والا کارڈ منتخب شدہ";
 
-  static String m4(grandTotal) =>
-      "ادائیگی کی تصدیق کریں  •  PKR \$${grandTotal}";
+  static String m4(grandTotal) => "ادائیگی کی تصدیق کریں  •  PKR ${grandTotal}";
 
-  static String m5(title) => "\$${title} میں ترمیم کریں";
+  static String m5(title) => "${title} میں ترمیم کریں";
 
-  static String m6(stateMessage) => "خرابی: \$${stateMessage}";
+  static String m6(stateMessage) => "خرابی: ${stateMessage}";
 
-  static String m7(error) => "پتہ شامل کرنے میں ناکام: \$${error}";
+  static String m7(error) => "پتہ شامل کرنے میں ناکام: ${error}";
 
-  static String m8(stateMessage) => "Google سائن ان خرابی: \$${stateMessage}";
+  static String m8(error) => "Failed to update address: \${error.toString()}";
 
-  static String m9(errorMessage) => "ادائیگی ناکام: \$${errorMessage}";
+  static String m9(stateMessage) => "Google سائن ان خرابی: ${stateMessage}";
 
-  static String m10(title) => "براہ کرم \$${title} درج کریں";
+  static String m10(errorMessage) => "ادائیگی ناکام: ${errorMessage}";
 
-  static String m11(search) => "\"\$${search}\" کو حالیہ تلاش سے ہٹایا گیا";
+  static String m11(title) => "براہ کرم ${title} درج کریں";
 
-  static String m12(unreadCount) => "\$${unreadCount} غیر پڑھی گئی اطلاعات";
+  static String m12(search) => "\"${search}\" کو حالیہ تلاش سے ہٹایا گیا";
 
-  static String m13(unreadCount) => "غیر پڑھے (\$${unreadCount})";
+  static String m13(unreadCount) => "${unreadCount} غیر پڑھی گئی اطلاعات";
+
+  static String m14(unreadCount) => "غیر پڑھے (${unreadCount})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -66,6 +67,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "address": MessageLookupByLibrary.simpleMessage("پتہ"),
     "addressAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "پتہ کامیابی سے شامل کیا گیا!",
+    ),
+    "addressUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Address updated successfully",
     ),
     "allCategories": MessageLookupByLibrary.simpleMessage("تمام زمرے"),
     "allNotifications": m1,
@@ -191,6 +195,7 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "کھانے کی اشیاء لوڈ کرنے میں ناکام۔ براہ کرم بعد میں دوبارہ کوشش کریں۔",
         ),
+    "failedToUpdateAddress": m8,
     "faqs": MessageLookupByLibrary.simpleMessage("اکثر پوچھے جانے والے سوالات"),
     "favorites": MessageLookupByLibrary.simpleMessage("پسندیدہ"),
     "filterYourSearch": MessageLookupByLibrary.simpleMessage(
@@ -207,7 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "اپنے تمام پسندیدہ کھانے ایک جگہ حاصل کریں، آپ آرڈر دیں ہم باقی کام کریں",
     ),
     "getStarted": MessageLookupByLibrary.simpleMessage("شروع کریں"),
-    "googleSigninErrorStatemessage": m8,
+    "googleSigninErrorStatemessage": m9,
     "guestUser": MessageLookupByLibrary.simpleMessage("مہمان صارف"),
     "history": MessageLookupByLibrary.simpleMessage("تاریخ"),
     "home": MessageLookupByLibrary.simpleMessage("گھر"),
@@ -320,7 +325,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "payWhenYourOrderArrives": MessageLookupByLibrary.simpleMessage(
       "آپ کے آرڈر پہنچنے پر ادا کریں",
     ),
-    "paymentFailedPaymentstateerrormessage": m9,
+    "paymentFailedPaymentstateerrormessage": m10,
     "paymentMethod": MessageLookupByLibrary.simpleMessage("ادائیگی کا طریقہ"),
     "payments": MessageLookupByLibrary.simpleMessage("ادائیگیاں"),
     "paysWhenOrderArrives": MessageLookupByLibrary.simpleMessage(
@@ -342,7 +347,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseEnterAValidPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "براہ کرم ایک درست فون نمبر درج کریں",
     ),
-    "pleaseEnterWidgettitletolowercase": m10,
+    "pleaseEnterWidgettitletolowercase": m11,
     "pleaseEnterYourEmailAddressToReceiveAPasswordReset":
         MessageLookupByLibrary.simpleMessage(
           "پاس ورڈ ری سیٹ لنک وصول کرنے کے لیے براہ کرم اپنا ای میل ایڈریس درج کریں۔",
@@ -376,7 +381,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "removeFromFavourites": MessageLookupByLibrary.simpleMessage(
       "پسندیدہ سے ہٹائیں",
     ),
-    "removedStatesearchFromRecentSearches": m11,
+    "removedStatesearchFromRecentSearches": m12,
     "reorder": MessageLookupByLibrary.simpleMessage("دوبارہ آرڈر کریں"),
     "required": MessageLookupByLibrary.simpleMessage("ضروری"),
     "restaurants": MessageLookupByLibrary.simpleMessage("ریستورانیں"),
@@ -408,7 +413,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "signUp": MessageLookupByLibrary.simpleMessage("سائن اپ کریں"),
     "signup": MessageLookupByLibrary.simpleMessage("سائن اپ"),
     "skip": MessageLookupByLibrary.simpleMessage("چھوڑیں"),
-    "stateunreadcountUnreadNotifications": m12,
+    "stateunreadcountUnreadNotifications": m13,
     "streetNo": MessageLookupByLibrary.simpleMessage("سڑک نمبر"),
     "subtotal": MessageLookupByLibrary.simpleMessage("ذیلی کل"),
     "successfullySignedInWithGoogle": MessageLookupByLibrary.simpleMessage(
@@ -421,7 +426,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "total": MessageLookupByLibrary.simpleMessage("کل"),
     "total2": MessageLookupByLibrary.simpleMessage("کل: "),
     "trackOrder": MessageLookupByLibrary.simpleMessage("آرڈر ٹریک کریں"),
-    "unreadNotifications": m13,
+    "unreadNotifications": m14,
     "updateAvailable": MessageLookupByLibrary.simpleMessage("اپڈیٹ دستیاب ہے"),
     "updateDialog": MessageLookupByLibrary.simpleMessage("اپڈیٹ ڈائیلاگ"),
     "updateNow": MessageLookupByLibrary.simpleMessage("ابھی اپڈیٹ کریں"),
@@ -433,7 +438,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "versionLatestversionIncludesNewFeatures":
         MessageLookupByLibrary.simpleMessage(
-          "ورژن \$latestVersion میں نئی خصوصیات شامل ہیں، ",
+          "ورژن latestVersion میں نئی خصوصیات شامل ہیں، ",
         ),
     "visa": MessageLookupByLibrary.simpleMessage("Visa"),
     "whatAreYourDeliveryHours": MessageLookupByLibrary.simpleMessage(

@@ -16,7 +16,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String errorStatemessage(Object stateMessage) {
-    return 'خطأ: \$$stateMessage';
+    return 'خطأ: $stateMessage';
   }
 
   @override
@@ -57,7 +57,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String failedToAddAddressError(Object error) {
-    return 'فشل في إضافة العنوان: \$$error';
+    return 'فشل في إضافة العنوان: $error';
   }
 
   @override
@@ -162,12 +162,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String paymentFailedPaymentstateerrormessage(Object errorMessage) {
-    return 'فشل الدفع: \$$errorMessage';
+    return 'فشل الدفع: $errorMessage';
   }
 
   @override
   String confirmPayment(Object grandTotal) {
-    return 'تأكيد الدفع  •  جنيه إسترليني \$$grandTotal';
+    return 'تأكيد الدفع  •  جنيه إسترليني $grandTotal';
   }
 
   @override
@@ -274,7 +274,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String googleSigninErrorStatemessage(Object stateMessage) {
-    return 'خطأ في تسجيل الدخول عبر جوجل: \$$stateMessage';
+    return 'خطأ في تسجيل الدخول عبر جوجل: $stateMessage';
   }
 
   @override
@@ -303,17 +303,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String stateunreadcountUnreadNotifications(Object unreadCount) {
-    return '\$$unreadCount إشعارات غير مقروءة';
+    return '$unreadCount إشعارات غير مقروءة';
   }
 
   @override
   String allNotifications(Object totalCount) {
-    return 'الكل (\$$totalCount)';
+    return 'الكل ($totalCount)';
   }
 
   @override
   String unreadNotifications(Object unreadCount) {
-    return 'غير مقروءة (\$$unreadCount)';
+    return 'غير مقروءة ($unreadCount)';
   }
 
   @override
@@ -474,7 +474,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String cardEndingInCreditcardlast4Selected(Object last4) {
-    return 'البطاقة المنتهية برقم \$$last4 محددة';
+    return 'البطاقة المنتهية برقم $last4 محددة';
   }
 
   @override
@@ -492,7 +492,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String editTitle(Object title) {
-    return 'تعديل \$$title';
+    return 'تعديل $title';
   }
 
   @override
@@ -532,12 +532,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String addedStatesearchToRecentSearches(Object search) {
-    return 'تم إضافة \"\$$search\" إلى عمليات البحث الأخيرة';
+    return 'تم إضافة \"$search\" إلى عمليات البحث الأخيرة';
   }
 
   @override
   String removedStatesearchFromRecentSearches(Object search) {
-    return 'تم إزالة \"\$$search\" من عمليات البحث الأخيرة';
+    return 'تم إزالة \"$search\" من عمليات البحث الأخيرة';
   }
 
   @override
@@ -584,7 +584,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String callingphonenumber(Object phoneNumber) {
-    return 'جاري الاتصال بـ \$$phoneNumber...';
+    return 'جاري الاتصال بـ $phoneNumber...';
   }
 
   @override
@@ -637,7 +637,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get versionLatestversionIncludesNewFeatures =>
-      'الإصدار \$latestVersion يتضمن ميزات جديدة، ';
+      'الإصدار latestVersion يتضمن ميزات جديدة، ';
 
   @override
   String get performanceImprovementsAndBugFixes =>
@@ -651,7 +651,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String pleaseEnterWidgettitletolowercase(Object title) {
-    return 'يرجى إدخال \$$title';
+    return 'يرجى إدخال $title';
   }
 
   @override

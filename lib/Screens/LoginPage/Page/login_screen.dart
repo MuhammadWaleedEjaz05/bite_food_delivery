@@ -1,3 +1,4 @@
+import 'package:bite_food_delivery/Cubits/RememberMeCubit/remember_me_cubit.dart';
 import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_user_auth_text_field.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -93,24 +96,19 @@ class _OtherLoginOptionSection extends StatelessWidget {
               listener: (context, state) {
                 if (state is UserLoggedIn) {
                   Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        S.of(context).successfullySignedInWithGoogle,
-                      ),
-                      backgroundColor: Colors.green,
+                  showTopSnackBar(
+                    Overlay.of(context),
+                    CustomSnackBar.success(
+                      message: S.of(context).successfullySignedInWithGoogle,
                     ),
                   );
                 } else if (state is UserAuthError) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        S
-                            .of(context)
-                            .googleSigninErrorStatemessage(state.message),
-                      ),
-                      backgroundColor: Colors.red,
-                    ),
+                  showTopSnackBar(
+                    Overlay.of(context),
+                    CustomSnackBar.error(message: state.message),
+                  );
+                  debugPrint(
+                    S.of(context).googleSigninErrorStatemessage(state.message),
                   );
                 }
               },
@@ -120,9 +118,7 @@ class _OtherLoginOptionSection extends StatelessWidget {
                   onTap: isLoading
                       ? null
                       : () {
-                          context
-                              .read<UserAuthCubit>()
-                              .signInWithGoogle();
+                          context.read<UserAuthCubit>().signInWithGoogle();
                         },
                   child: CircleAvatar(
                     backgroundColor: Colors.grey.shade200,
@@ -220,35 +216,48 @@ class _LoginOptionalSelectionSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
+    return BlocBuilder<RememberMeCubit, RememberMeState>(
+      builder: (context, state) {
+        return Row(
           children: [
-            Checkbox(value: false, onChanged: (value) {}),
-            Text(
-              S.of(context).rememberMe,
-              style: Theme.of(context).textTheme.bodyMedium,
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Checkbox(
+                  value: state.isRememberMe,
+                  onChanged: (value) {
+                    context.read<RememberMeCubit>().toggleRememberMe(
+                      value ?? false,
+                      email: _emailController.text.trim(),
+                      password: _passwordController.text.trim(),
+                    );
+                  },
+                ),
+                Text(
+                  S.of(context).rememberMe,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ],
+            ),
+            const Spacer(),
+            TextButton(
+              onPressed: () =>
+                  Navigator.pushNamed(context, '/forgot_password_screen'),
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.all(10.r),
+                foregroundColor: Theme.of(context).colorScheme.primary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+                textStyle: Theme.of(
+                  context,
+                ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
+              ),
+              child: Text(S.of(context).forgotPassword),
             ),
           ],
-        ),
-        const Spacer(),
-        TextButton(
-          onPressed: () =>
-              Navigator.pushNamed(context, '/forgot_password_screen'),
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.all(10.r),
-            foregroundColor: Theme.of(context).colorScheme.primary,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.r),
-            ),
-            textStyle: Theme.of(
-              context,
-            ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
-          ),
-          child: Text(S.of(context).forgotPassword),
-        ),
-      ],
+        );
+      },
     );
   }
 }
@@ -258,6 +267,9 @@ class _LoginCredentialSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _emailController.text = context.watch<RememberMeCubit>().state.email ?? '';
+    _passwordController.text =
+        context.watch<RememberMeCubit>().state.password ?? '';
     return Form(
       key: _formKey,
       child: Column(

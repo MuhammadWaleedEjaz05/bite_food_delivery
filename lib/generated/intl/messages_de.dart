@@ -21,36 +21,37 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'de';
 
   static String m0(search) =>
-      "\"\$${search}\" zu den aktuellen Suchen hinzugefügt";
+      "\"${search}\" zu den aktuellen Suchen hinzugefügt";
 
-  static String m1(totalCount) => "Alle (\$${totalCount})";
+  static String m1(totalCount) => "Alle (${totalCount})";
 
-  static String m2(phoneNumber) => "Rufe \$${phoneNumber} an...";
+  static String m2(phoneNumber) => "Rufe ${phoneNumber} an...";
 
-  static String m3(last4) => "Karte endet auf \$${last4} ausgewählt";
+  static String m3(last4) => "Karte endet auf ${last4} ausgewählt";
 
-  static String m4(grandTotal) => "Zahlung bestätigen  •  PKR \$${grandTotal}";
+  static String m4(grandTotal) => "Zahlung bestätigen  •  PKR ${grandTotal}";
 
-  static String m5(title) => "\$${title} bearbeiten";
+  static String m5(title) => "${title} bearbeiten";
 
-  static String m6(stateMessage) => "Fehler: \$${stateMessage}";
+  static String m6(stateMessage) => "Fehler: ${stateMessage}";
 
-  static String m7(error) => "Fehler beim Hinzufügen der Adresse: \$${error}";
+  static String m7(error) => "Fehler beim Hinzufügen der Adresse: ${error}";
 
-  static String m8(stateMessage) =>
-      "Google-Anmeldungsfehler: \$${stateMessage}";
+  static String m8(error) => "Failed to update address: \${error.toString()}";
 
-  static String m9(errorMessage) => "Zahlung fehlgeschlagen: \$${errorMessage}";
+  static String m9(stateMessage) => "Google-Anmeldungsfehler: ${stateMessage}";
 
-  static String m10(title) => "Bitte geben Sie \$${title} ein";
+  static String m10(errorMessage) => "Zahlung fehlgeschlagen: ${errorMessage}";
 
-  static String m11(search) =>
-      "\"\$${search}\" aus den aktuellen Suchen entfernt";
+  static String m11(title) => "Bitte geben Sie ${title} ein";
 
-  static String m12(unreadCount) =>
-      "\$${unreadCount} ungelesene Benachrichtigungen";
+  static String m12(search) =>
+      "\"${search}\" aus den aktuellen Suchen entfernt";
 
-  static String m13(unreadCount) => "Ungelesen (\$${unreadCount})";
+  static String m13(unreadCount) =>
+      "${unreadCount} ungelesene Benachrichtigungen";
+
+  static String m14(unreadCount) => "Ungelesen (${unreadCount})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -69,6 +70,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "address": MessageLookupByLibrary.simpleMessage("Adresse"),
     "addressAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Adresse erfolgreich hinzugefügt!",
+    ),
+    "addressUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Address updated successfully",
     ),
     "allCategories": MessageLookupByLibrary.simpleMessage("Alle Kategorien"),
     "allNotifications": m1,
@@ -197,6 +201,7 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "Fehler beim Laden von Speisen. Bitte versuchen Sie es später erneut.",
         ),
+    "failedToUpdateAddress": m8,
     "faqs": MessageLookupByLibrary.simpleMessage("Häufig gestellte Fragen"),
     "favorites": MessageLookupByLibrary.simpleMessage("Favoriten"),
     "filterYourSearch": MessageLookupByLibrary.simpleMessage("Suche filtern"),
@@ -215,7 +220,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Erhalten Sie alle Ihre liebsten Speisen an einem Ort, Sie geben die Bestellung auf, wir machen den Rest",
     ),
     "getStarted": MessageLookupByLibrary.simpleMessage("Jetzt beginnen"),
-    "googleSigninErrorStatemessage": m8,
+    "googleSigninErrorStatemessage": m9,
     "guestUser": MessageLookupByLibrary.simpleMessage("Gastbenutzer"),
     "history": MessageLookupByLibrary.simpleMessage("Verlauf"),
     "home": MessageLookupByLibrary.simpleMessage("Zuhause"),
@@ -332,7 +337,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "payWhenYourOrderArrives": MessageLookupByLibrary.simpleMessage(
       "Bezahlen Sie, wenn Ihre Bestellung ankommt",
     ),
-    "paymentFailedPaymentstateerrormessage": m9,
+    "paymentFailedPaymentstateerrormessage": m10,
     "paymentMethod": MessageLookupByLibrary.simpleMessage("Zahlungsmethode"),
     "payments": MessageLookupByLibrary.simpleMessage("Zahlungen"),
     "paysWhenOrderArrives": MessageLookupByLibrary.simpleMessage(
@@ -356,7 +361,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseEnterAValidPhoneNumber": MessageLookupByLibrary.simpleMessage(
       "Bitte geben Sie eine gültige Telefonnummer ein",
     ),
-    "pleaseEnterWidgettitletolowercase": m10,
+    "pleaseEnterWidgettitletolowercase": m11,
     "pleaseEnterYourEmailAddressToReceiveAPasswordReset":
         MessageLookupByLibrary.simpleMessage(
           "Bitte geben Sie Ihre E-Mail-Adresse ein, um einen Passwort-Zurücksetzen-Link zu erhalten.",
@@ -394,7 +399,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "removeFromFavourites": MessageLookupByLibrary.simpleMessage(
       "Aus Favoriten entfernen",
     ),
-    "removedStatesearchFromRecentSearches": m11,
+    "removedStatesearchFromRecentSearches": m12,
     "reorder": MessageLookupByLibrary.simpleMessage("Erneut bestellen"),
     "required": MessageLookupByLibrary.simpleMessage("Erforderlich"),
     "restaurants": MessageLookupByLibrary.simpleMessage("Restaurants"),
@@ -428,7 +433,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "signUp": MessageLookupByLibrary.simpleMessage("Registrieren"),
     "signup": MessageLookupByLibrary.simpleMessage("Registrieren"),
     "skip": MessageLookupByLibrary.simpleMessage("Überspringen"),
-    "stateunreadcountUnreadNotifications": m12,
+    "stateunreadcountUnreadNotifications": m13,
     "streetNo": MessageLookupByLibrary.simpleMessage("Straße Nr."),
     "subtotal": MessageLookupByLibrary.simpleMessage("Zwischensumme"),
     "successfullySignedInWithGoogle": MessageLookupByLibrary.simpleMessage(
@@ -441,7 +446,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "total": MessageLookupByLibrary.simpleMessage("Gesamt"),
     "total2": MessageLookupByLibrary.simpleMessage("GESAMT: "),
     "trackOrder": MessageLookupByLibrary.simpleMessage("Bestellung verfolgen"),
-    "unreadNotifications": m13,
+    "unreadNotifications": m14,
     "updateAvailable": MessageLookupByLibrary.simpleMessage(
       "Aktualisierung verfügbar",
     ),
@@ -457,7 +462,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "versionLatestversionIncludesNewFeatures":
         MessageLookupByLibrary.simpleMessage(
-          "Version \$latestVersion enthält neue Funktionen, ",
+          "Version latestVersion enthält neue Funktionen, ",
         ),
     "visa": MessageLookupByLibrary.simpleMessage("Visa"),
     "whatAreYourDeliveryHours": MessageLookupByLibrary.simpleMessage(

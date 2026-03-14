@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class AddAddressScreen extends StatefulWidget {
   const AddAddressScreen({super.key});
@@ -378,9 +380,10 @@ class _SaveAddressSection extends StatelessWidget {
               final zipCode = zipController.text.trim();
               final country = countryController.text.trim();
               if (city.isEmpty || zipCode.isEmpty || country.isEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(S.of(context).pleaseFillAllRequiredFields),
+                showTopSnackBar(
+                  Overlay.of(context),
+                  CustomSnackBar.error(
+                    message: S.of(context).pleaseFillAllRequiredFields,
                   ),
                 );
                 return;
@@ -392,15 +395,14 @@ class _SaveAddressSection extends StatelessWidget {
 
               final currentUser = getCurrentUser();
               if (currentUser == null) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(S.of(context).userNotAuthenticated),
-                    backgroundColor: Colors.red,
+                showTopSnackBar(
+                  Overlay.of(context),
+                  CustomSnackBar.error(
+                    message: S.of(context).userNotAuthenticated,
                   ),
                 );
                 return;
               }
-
               final address = AddressModel(
                 addressID: DateTime.now().millisecondsSinceEpoch.toString(),
                 userID: currentUser.uid,
@@ -416,23 +418,21 @@ class _SaveAddressSection extends StatelessWidget {
                   .read<AddressCubit>()
                   .addAddress(address)
                   .then((_) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(S.of(context).addressAddedSuccessfully),
-                        backgroundColor: Colors.green,
+                    showTopSnackBar(
+                      Overlay.of(context),
+                      CustomSnackBar.success(
+                        message: S.of(context).addressAddedSuccessfully,
                       ),
                     );
                     Navigator.pop(context);
                   })
                   .catchError((error) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          S
-                              .of(context)
-                              .failedToAddAddressError(error.toString()),
-                        ),
-                        backgroundColor: Colors.red,
+                    showTopSnackBar(
+                      Overlay.of(context),
+                      CustomSnackBar.error(
+                        message: S
+                            .of(context)
+                            .failedToAddAddressError(error.toString()),
                       ),
                     );
                   });

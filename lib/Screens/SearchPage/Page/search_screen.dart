@@ -8,6 +8,8 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_search_bar.dart';
 import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -99,19 +101,21 @@ class _RecentSearchSection extends StatelessWidget {
           child: BlocConsumer<RecentSearchesCubit, RecentSearchesState>(
             listener: (context, state) {
               if (state is RecentSearchedAdded) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(S.of(context).addedStatesearchToRecentSearches(state.search)),
-                    duration: const Duration(seconds: 2),
+                showTopSnackBar(
+                  Overlay.of(context),
+                  CustomSnackBar.success(
+                    message: S
+                        .of(context)
+                        .addedStatesearchToRecentSearches(state.search),
                   ),
                 );
               } else if (state is RecentSearchedRemoved) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      S.of(context).removedStatesearchFromRecentSearches(state.search),
-                    ),
-                    duration: const Duration(seconds: 2),
+                showTopSnackBar(
+                  Overlay.of(context),
+                  CustomSnackBar.info(
+                    message: S
+                        .of(context)
+                        .removedStatesearchFromRecentSearches(state.search),
                   ),
                 );
               }

@@ -121,7 +121,7 @@ abstract class AppLocalizations {
   /// Error message with dynamic content
   ///
   /// In en, this message translates to:
-  /// **'Error: \${stateMessage}'**
+  /// **'Error: {stateMessage}'**
   String errorStatemessage(Object stateMessage);
 
   /// No description provided for @address.
@@ -199,7 +199,7 @@ abstract class AppLocalizations {
   /// Error message when adding an address fails, with dynamic error content
   ///
   /// In en, this message translates to:
-  /// **'Failed to add address: \${error}'**
+  /// **'Failed to add address: {error}'**
   String failedToAddAddressError(Object error);
 
   /// No description provided for @save.
@@ -403,13 +403,13 @@ abstract class AppLocalizations {
   ///
   ///
   /// In en, this message translates to:
-  /// **'Payment failed: \${errorMessage}'**
+  /// **'Payment failed: {errorMessage}'**
   String paymentFailedPaymentstateerrormessage(Object errorMessage);
 
   /// Button text for confirming payment, with dynamic grand total
   ///
   /// In en, this message translates to:
-  /// **'Confirm Payment  •  PKR \${grandTotal}'**
+  /// **'Confirm Payment  •  PKR {grandTotal}'**
   String confirmPayment(Object grandTotal);
 
   /// No description provided for @paysWhenOrderArrives.
@@ -607,7 +607,7 @@ abstract class AppLocalizations {
   /// Error message when Google Sign-In fails, with dynamic state message content
   ///
   /// In en, this message translates to:
-  /// **'Google Sign-In Error: \${stateMessage}'**
+  /// **'Google Sign-In Error: {stateMessage}'**
   String googleSigninErrorStatemessage(Object stateMessage);
 
   /// No description provided for @dontHaveAnAccount.
@@ -661,19 +661,19 @@ abstract class AppLocalizations {
   /// Text showing the number of unread notifications, with dynamic unread count
   ///
   /// In en, this message translates to:
-  /// **'\${unreadCount} unread notifications'**
+  /// **'{unreadCount} unread notifications'**
   String stateunreadcountUnreadNotifications(Object unreadCount);
 
   /// Tab text for all notifications, with dynamic total count
   ///
   /// In en, this message translates to:
-  /// **'All (\${totalCount})'**
+  /// **'All ({totalCount})'**
   String allNotifications(Object totalCount);
 
   /// Tab text for unread notifications, with dynamic unread count
   ///
   /// In en, this message translates to:
-  /// **'Unread (\${unreadCount})'**
+  /// **'Unread ({unreadCount})'**
   String unreadNotifications(Object unreadCount);
 
   /// No description provided for @notifications.
@@ -979,7 +979,7 @@ abstract class AppLocalizations {
   /// Message shown when a card is selected, with dynamic last 4 digits of the card
   ///
   /// In en, this message translates to:
-  /// **'Card ending in \${last4} selected'**
+  /// **'Card ending in {last4} selected'**
   String cardEndingInCreditcardlast4Selected(Object last4);
 
   /// No description provided for @addNewCard.
@@ -1009,7 +1009,7 @@ abstract class AppLocalizations {
   /// Title for edit profile modal, with dynamic field title
   ///
   /// In en, this message translates to:
-  /// **'Edit \${title}'**
+  /// **'Edit {title}'**
   String editTitle(Object title);
 
   /// No description provided for @apply.
@@ -1081,13 +1081,13 @@ abstract class AppLocalizations {
   /// Message shown when a search keyword is added to recent searches, with dynamic search keyword
   ///
   /// In en, this message translates to:
-  /// **'Added \"\${search}\" to recent searches'**
+  /// **'Added \"{search}\" to recent searches'**
   String addedStatesearchToRecentSearches(Object search);
 
   /// Message shown when a search keyword is removed from recent searches, with dynamic search keyword
   ///
   /// In en, this message translates to:
-  /// **'Removed \"\${search}\" from recent searches'**
+  /// **'Removed \"{search}\" from recent searches'**
   String removedStatesearchFromRecentSearches(Object search);
 
   /// No description provided for @noRecentSearches.
@@ -1177,7 +1177,7 @@ abstract class AppLocalizations {
   /// Message shown when calling the delivery person, with dynamic phone number
   ///
   /// In en, this message translates to:
-  /// **'Calling \${phoneNumber}...'**
+  /// **'Calling {phoneNumber}...'**
   String callingphonenumber(Object phoneNumber);
 
   /// No description provided for @locationPermissionDenied.
@@ -1279,7 +1279,7 @@ abstract class AppLocalizations {
   /// No description provided for @versionLatestversionIncludesNewFeatures.
   ///
   /// In en, this message translates to:
-  /// **'Version \$latestVersion includes new features, '**
+  /// **'Version latestVersion includes new features, '**
   String get versionLatestversionIncludesNewFeatures;
 
   /// No description provided for @performanceImprovementsAndBugFixes.
@@ -1303,7 +1303,7 @@ abstract class AppLocalizations {
   /// Validation error message for required fields, with dynamic field title
   ///
   /// In en, this message translates to:
-  /// **'Please enter \${title}'**
+  /// **'Please enter {title}'**
   String pleaseEnterWidgettitletolowercase(Object title);
 
   /// No description provided for @pleaseEnterAValidEmailAddress.

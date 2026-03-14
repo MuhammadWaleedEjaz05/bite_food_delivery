@@ -17,6 +17,8 @@ import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class CheckOutScreen extends StatelessWidget {
   const CheckOutScreen({super.key});
@@ -471,17 +473,9 @@ class _PlaceOrderButton extends StatelessWidget {
                     final order = _buildOrder(context, grandTotal);
                     context.read<OrderCubit>().placeOrder(order);
                   } else if (paymentState is PaymentFailure) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          S
-                              .of(context)
-                              .paymentFailedPaymentstateerrormessage(
-                                paymentState.errorMessage,
-                              ),
-                        ),
-                        backgroundColor: Colors.red,
-                      ),
+                    showTopSnackBar(
+                      Overlay.of(context),
+                      CustomSnackBar.error(message: paymentState.errorMessage),
                     );
                   }
                 },
@@ -491,11 +485,9 @@ class _PlaceOrderButton extends StatelessWidget {
                   if (orderState is OrderPlaced) {
                     _showTrackOrderDialog(context);
                   } else if (orderState is OrderError) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(orderState.message),
-                        backgroundColor: Colors.red,
-                      ),
+                    showTopSnackBar(
+                      Overlay.of(context),
+                      CustomSnackBar.error(message: orderState.message),
                     );
                   }
                 },

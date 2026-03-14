@@ -75,9 +75,10 @@ class _BiteUserAuthTextFieldState extends State<BiteUserAuthTextField> {
                   )
                 : const SizedBox.shrink(),
             hintText: S.of(context).editTitle(widget.title),
-            hintStyle: Theme.of(
-              context,
-            ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
+            hintStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
+              fontWeight: FontWeight.normal,
+              color: Theme.of(context).colorScheme.onSecondary,
+            ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide: BorderSide.none,

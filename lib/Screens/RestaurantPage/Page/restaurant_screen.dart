@@ -275,7 +275,7 @@ class _RatingAndTimeSection extends StatelessWidget {
             Text(
               restaurant.deliveryFee == 0
                   ? 'Free'
-                  : 'Rs.${restaurant.deliveryFee.toInt()}',
+                  : 'PKR ${restaurant.deliveryFee.toInt()}',
               style: Theme.of(context).textTheme.titleSmall,
             ),
           ],

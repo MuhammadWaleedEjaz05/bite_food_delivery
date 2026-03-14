@@ -17,8 +17,8 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
-  static const Duration _kAnimationDuration = Duration(milliseconds: 4000);
-  static const Duration _kNavigationDelay = Duration(milliseconds: 150);
+  static const Duration _kAnimationDuration = Duration(milliseconds: 5000);
+  static const Duration _kNavigationDelay = Duration(milliseconds: 500);
   static const Duration _kLaunchStateTimeout = Duration(seconds: 2);
   static const Duration _kFallbackTimeout = Duration(seconds: 4);
 
@@ -46,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen>
     );
     _logoFadeAnimation = CurvedAnimation(
       parent: _controller,
-      curve: const Interval(0.75, 0.92, curve: Curves.easeIn),
+      curve: const Interval(0.75, 1.0, curve: Curves.easeOut),
     );
     _controller.addStatusListener(_handleAnimationStatus);
     _controller.forward();
@@ -99,9 +99,12 @@ class _SplashScreenState extends State<SplashScreen>
           pageBuilder: (context, animation, secondaryAnimation) =>
               const OnboardingScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(opacity: animation, child: child);
+            return FadeTransition(
+              opacity: ReverseAnimation(secondaryAnimation),
+              child: FadeTransition(opacity: animation, child: child),
+            );
           },
-          transitionDuration: const Duration(milliseconds: 600),
+          transitionDuration: const Duration(milliseconds: 1000),
         ),
       );
     } else if (state is NotFirstTimeLaunched) {
@@ -111,9 +114,12 @@ class _SplashScreenState extends State<SplashScreen>
           pageBuilder: (context, animation, secondaryAnimation) =>
               const MainPage(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(opacity: animation, child: child);
+            return FadeTransition(
+              opacity: ReverseAnimation(secondaryAnimation),
+              child: FadeTransition(opacity: animation, child: child),
+            );
           },
-          transitionDuration: const Duration(milliseconds: 600),
+          transitionDuration: const Duration(milliseconds: 1000),
         ),
       );
     }

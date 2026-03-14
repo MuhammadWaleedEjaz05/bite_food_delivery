@@ -59,19 +59,31 @@ class _UserInfoSection extends StatelessWidget {
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    height: 90.h,
-                    width: 90.w,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: CachedNetworkImageProvider(
-                          state.user.photoUrl ?? '',
+                  state.user.photoUrl == ''
+                      ? Container(
+                          height: 90.h,
+                          width: 90.w,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: CachedNetworkImageProvider(
+                                state.user.photoUrl ?? '',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        )
+                      : CircleAvatar(
+                          radius: 45.r,
+                          backgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.primary,
+                          child: Text(
+                            state.user.fullName.substring(0, 1).toUpperCase(),
+                            style: Theme.of(context).textTheme.displayLarge!
+                                .copyWith(color: Colors.white),
+                          ),
                         ),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
                   20.horizontalSpace,
                   SizedBox(
                     width: 175.w,
