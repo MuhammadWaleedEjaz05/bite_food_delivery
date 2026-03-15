@@ -53,11 +53,20 @@ class UserAuthCubit extends Cubit<UserAuthState> {
     }
   }
 
+  bool _googleInitialized = false;
+
+  Future<void> _ensureGoogleInitialized() async {
+    if (!_googleInitialized) {
+      await GoogleSignIn.instance.initialize();
+      _googleInitialized = true;
+    }
+  }
+
   Future<void> logout() async {
     try {
       emit(UserLoading());
-      final GoogleSignIn googleSignIn = GoogleSignIn();
-      await googleSignIn.signOut();
+      await _ensureGoogleInitialized();
+      await GoogleSignIn.instance.signOut();
       await auth.signOut();
       emit(UserLoggedOut());
     } catch (e) {
@@ -170,6 +179,7 @@ class UserAuthCubit extends Cubit<UserAuthState> {
           emit(const UserAuthError('No authenticated user'));
           return;
         }
+        await currentUser.verifyBeforeUpdateEmail(value);
         final db = getCollection('UsersDB');
         await db.doc(currentUser.uid).update({'email': value});
 
@@ -312,20 +322,15 @@ class UserAuthCubit extends Cubit<UserAuthState> {
     try {
       emit(UserLoading());
 
-      final GoogleSignIn googleSignIn = GoogleSignIn();
-      await googleSignIn.signOut();
-      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-
-      if (googleUser == null) {
-        emit(UserLoggedOut());
-        return;
-      }
+      await _ensureGoogleInitialized();
+      await GoogleSignIn.instance.signOut();
+      final GoogleSignInAccount googleUser = await GoogleSignIn.instance
+          .authenticate();
 
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
 
       final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
