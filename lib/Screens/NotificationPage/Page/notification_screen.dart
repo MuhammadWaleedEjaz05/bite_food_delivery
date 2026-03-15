@@ -174,7 +174,7 @@ class _TabSection extends StatelessWidget {
       ),
       dividerColor: Colors.transparent,
       labelColor: Colors.white,
-      unselectedLabelColor: Colors.black,
+      unselectedLabelColor: Theme.of(context).colorScheme.primary,
       labelStyle: Theme.of(context).textTheme.titleSmall,
       unselectedLabelStyle: Theme.of(
         context,
@@ -259,7 +259,10 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
                 children: [
                   const Icon(Icons.delete_outline, color: Colors.red),
                   const SizedBox(width: 8),
-                  Text(S.of(context).clearAll, style: const TextStyle(color: Colors.red)),
+                  Text(
+                    S.of(context).clearAll,
+                    style: const TextStyle(color: Colors.red),
+                  ),
                 ],
               ),
             ),

@@ -26,7 +26,9 @@ class OrderHistoryScreen extends StatelessWidget {
           } else if (state is OrderCancelled) {
             showTopSnackBar(
               Overlay.of(context),
-              CustomSnackBar.success(message: S.of(context).orderCancelledSuccessfully),
+              CustomSnackBar.success(
+                message: S.of(context).orderCancelledSuccessfully,
+              ),
             );
           }
         },
@@ -169,11 +171,17 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
               value: 'clear_history',
               child: Row(
                 children: [
-                  const Icon(Icons.delete_outline, color: Colors.red),
+                  Icon(
+                    Icons.delete_outline,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                   const SizedBox(width: 8),
                   Text(
                     S.of(context).clearOrderHistory,
-                    style: const TextStyle(color: Colors.red),
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
                 ],
               ),

@@ -143,29 +143,59 @@ class CartCubit extends Cubit<CartState> {
 
 Stream<CartModel?> getCart(String userID) {
   final db = getCollection('CartDB');
+  late StreamController<CartModel?> controller;
+  StreamSubscription? outerSubscription;
+  StreamSubscription? innerSubscription;
 
-  return db.where('userID', isEqualTo: userID).limit(1).snapshots().asyncExpand(
-    (cartSnapshot) {
+  void startListening() {
+    outerSubscription = db
+        .where('userID', isEqualTo: userID)
+        .limit(1)
+        .snapshots()
+        .listen((cartSnapshot) {
       if (cartSnapshot.docs.isEmpty) {
-        return Stream.value(null);
+        innerSubscription?.cancel();
+        controller.add(null);
+        return;
       }
 
       final cartDoc = cartSnapshot.docs.first;
       final cartData = cartDoc.data() as Map<String, dynamic>;
       final cartID = cartDoc.id;
 
-      return db.doc(cartID).collection('Products').snapshots().map((
-        productsSnapshot,
-      ) {
+      innerSubscription?.cancel();
+      innerSubscription = db
+          .doc(cartID)
+          .collection('Products')
+          .snapshots()
+          .listen((productsSnapshot) {
         final cartItems = productsSnapshot.docs.map((doc) {
           return CartItemModel.fromJson(doc.data());
         }).toList();
 
-        return CartModel.fromJson({
-          ...cartData,
-          'cartID': cartID,
-        }, cartItems: cartItems);
+        controller.add(
+          CartModel.fromJson(
+            {...cartData, 'cartID': cartID},
+            cartItems: cartItems,
+          ),
+        );
+      }, onError: (e) {
+        controller.addError(e);
       });
-    },
+    }, onError: (e) {
+      controller.addError(e);
+    });
+  }
+
+  void stopListening() {
+    innerSubscription?.cancel();
+    outerSubscription?.cancel();
+  }
+
+  controller = StreamController<CartModel?>.broadcast(
+    onListen: startListening,
+    onCancel: stopListening,
   );
+
+  return controller.stream;
 }

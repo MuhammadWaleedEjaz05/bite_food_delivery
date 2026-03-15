@@ -15,12 +15,14 @@ class SettingsCubit extends Cubit<SettingsState> {
     final languageCode = getFromSharedPreferenceString('languageCode') ?? 'en';
     final areNotificationsEnabled =
         getFromSharedPreferencebool('areNotificationsEnabled') ?? true;
+    final themeIndex = getFromSharedPreferenceInt('themeIndex') ?? 0;
 
     emit(
       SettingsState(
         isDarkMode: isDarkMode,
         languageCode: languageCode,
         areNotificationsEnabled: areNotificationsEnabled,
+        themeIndex: themeIndex,
       ),
     );
   }

@@ -149,7 +149,7 @@ class BiteOrderHistoryCard extends StatelessWidget {
                             onPressed: () {
                               Navigator.pushNamed(
                                 context,
-                                '/review_order',
+                                '/review_screen',
                                 arguments: order,
                               );
                             },
@@ -183,7 +183,9 @@ class BiteOrderHistoryCard extends StatelessWidget {
                                     ),
                                   ),
                                   content: Text(
-                                    S.of(context).areYouSureYouWantToCancelThisOrder,
+                                    S
+                                        .of(context)
+                                        .areYouSureYouWantToCancelThisOrder,
                                     style: GoogleFonts.sen(),
                                   ),
                                   actions: [
@@ -204,7 +206,6 @@ class BiteOrderHistoryCard extends StatelessWidget {
                                         context.read<OrderCubit>().cancelOrder(
                                           order.orderId,
                                         );
-                                        Navigator.pop(ctx);
                                       },
                                       child: Text(
                                         S.of(context).yesCancel,

@@ -33,7 +33,10 @@ class BiteAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: isLogoVisible
           ? SvgPicture.asset(
               'assets/svgs/logo.svg',
-              color: Theme.of(context).colorScheme.primary,
+              colorFilter: ColorFilter.mode(
+                Theme.of(context).colorScheme.primary,
+                BlendMode.srcIn,
+              ),
             )
           : backButton
           ? IconButton(

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bite_food_delivery/Cubits/NotificationCubit/notifications_cubit.dart';
 import 'package:bite_food_delivery/Models/cart_model.dart';
 import 'package:bite_food_delivery/Models/order_model.dart';
+import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
 import 'package:bite_food_delivery/configs/firebase_db_conn.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -256,6 +257,7 @@ class OrderCubit extends Cubit<OrderState> {
       await orderDoc.update({'orderStatus': OrderStatus.cancelled.name});
       final cancelledOrder = order.copyWith(orderStatus: OrderStatus.cancelled);
       _notificationsCubit.notifyOrderStatusChanged(cancelledOrder);
+      loadOrderHistory(getCurrentUser()!.uid);
       emit(OrderCancelled(cancelledOrder));
     } catch (e) {
       emit(OrderError(e.toString()));
@@ -304,7 +306,7 @@ class OrderCubit extends Cubit<OrderState> {
       }
 
       await batch.commit();
-
+      loadOrderHistory(getCurrentUser()!.uid);
       emit(ReorderLoaded(newCart.cartID));
     } catch (e) {
       emit(OrderError(e.toString()));
