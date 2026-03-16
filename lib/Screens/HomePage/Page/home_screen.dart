@@ -2,6 +2,7 @@ import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CategoriesCubit/categories_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
+import 'package:bite_food_delivery/Configs/skeleton_widgets.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_category_card.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_heading.dart';
@@ -60,7 +61,7 @@ class _CategorySection extends StatelessWidget {
         BlocBuilder<CategoriesCubit, CategoriesState>(
           builder: (context, state) {
             if (state is CategoriesLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const SkeletonizedCategoryList();
             } else if (state is CategoriesError) {
               return Center(
                 child: Text(S.of(context).errorStatemessage(state.error)),
@@ -105,7 +106,7 @@ class _OpenRestaurantsSection extends StatelessWidget {
         BlocBuilder<RestaurantsCubit, RestaurantsState>(
           builder: (context, state) {
             if (state is RestaurantsLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const SkeletonizedRestaurantList();
             } else if (state is RestaurantsError) {
               return Center(
                 child: Text(S.of(context).errorStatemessage(state.message)),

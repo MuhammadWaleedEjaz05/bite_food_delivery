@@ -53,14 +53,14 @@ class _SplashScreenState extends State<SplashScreen>
         Future.delayed(const Duration(seconds: 2), () {
           _logoAnimation.reverse().then((_) {
             if (_firstTimeLaunchCubit.state is FirstTimeLaunched) {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const OnboardingScreen(),
                 ),
               );
             } else {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => MainPage()),
               );

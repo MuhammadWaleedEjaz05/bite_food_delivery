@@ -1,4 +1,5 @@
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
+import 'package:bite_food_delivery/Configs/skeleton_widgets.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_restaurant_card.dart';
 import 'package:bite_food_delivery/generated/l10n.dart';
@@ -25,9 +26,11 @@ class AllRestaurantScreen extends StatelessWidget {
       body: BlocBuilder<RestaurantsCubit, RestaurantsState>(
         builder: (context, state) {
           if (state is RestaurantsLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const SkeletonizedRestaurantList(itemCount: 5);
           } else if (state is RestaurantsError) {
-            return Center(child: Text(S.of(context).errorStatemessage(state.message)));
+            return Center(
+              child: Text(S.of(context).errorStatemessage(state.message)),
+            );
           } else if (state is RestaurantsLoaded) {
             return ListView.builder(
               padding: EdgeInsets.symmetric(horizontal: 15.w),

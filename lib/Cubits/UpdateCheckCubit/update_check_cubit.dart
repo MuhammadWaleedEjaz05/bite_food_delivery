@@ -23,20 +23,35 @@ class UpdateCheckCubit extends Cubit<UpdateCheckState> {
       await remoteConfig.setConfigSettings(
         RemoteConfigSettings(
           fetchTimeout: const Duration(seconds: 10),
-          minimumFetchInterval: const Duration(minutes: 5),
+          minimumFetchInterval: const Duration(seconds: 10),
         ),
       );
       await remoteConfig.fetchAndActivate();
 
-      final latestVersion = remoteConfig.getString('app_version');
-      final currentVersion = await _getCurrentAppVersion();
+      final latestVersionRaw = remoteConfig.getString('app_version');
+      final latestVersion = latestVersionRaw.trim();
+      final currentVersion = (await _getCurrentAppVersion()).trim();
+      print('Current version: $currentVersion, Latest version: $latestVersion');
 
       final resolvedVersion = latestVersion.isNotEmpty
           ? latestVersion
           : currentVersion;
-      const updateUrl = "https://example.com/update";
+      final updateUrl = remoteConfig.getString('update_url');
+      bool shouldUpdate() {
+        try {
+          final curParts = currentVersion.split('.').map(int.parse).toList();
+          final latParts = resolvedVersion.split('.').map(int.parse).toList();
+          for (var i = 0; i < curParts.length && i < latParts.length; i++) {
+            if (latParts[i] > curParts[i]) return true;
+            if (latParts[i] < curParts[i]) return false;
+          }
+          return latParts.length > curParts.length;
+        } catch (_) {
+          return currentVersion != resolvedVersion;
+        }
+      }
 
-      if (currentVersion != resolvedVersion) {
+      if (shouldUpdate()) {
         emit(
           UpdateRequired(latestVersion: resolvedVersion, updateUrl: updateUrl),
         );

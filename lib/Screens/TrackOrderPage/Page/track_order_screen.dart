@@ -84,7 +84,7 @@ class TrackOrderScreen extends StatelessWidget {
               if (state is PhoneCallFailure) {
                 showTopSnackBar(
                   Overlay.of(context),
-                  CustomSnackBar.error(
+                  const CustomSnackBar.error(
                     message: "Failed to make the call. Please try again.",
                   ),
                 );

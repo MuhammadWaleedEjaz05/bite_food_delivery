@@ -1,5 +1,6 @@
 import 'package:bite_food_delivery/Cubits/RecentSearchesCubit/recent_searches_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
+import 'package:bite_food_delivery/Configs/skeleton_widgets.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_heading.dart';
 import 'package:bite_food_delivery/Screens/SearchPage/Widgets/bite_recent_search_button.dart';
@@ -8,9 +9,9 @@ import 'package:bite_food_delivery/GlobalWidgets/bite_search_bar.dart';
 import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -48,7 +49,7 @@ class _PopularRestaurantSection extends StatelessWidget {
         BlocBuilder<RestaurantsCubit, RestaurantsState>(
           builder: (context, state) {
             if (state is RestaurantsLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const SkeletonizedRestaurantList(itemCount: 3);
             } else if (state is RestaurantsError) {
               return Center(
                 child: Text(S.of(context).errorStatemessage(state.message)),

@@ -1,6 +1,7 @@
 import 'package:bite_food_delivery/Cubits/FavouriteCubit/favourite_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CategorySelectionCubit/category_selection_cubit.dart';
 import 'package:bite_food_delivery/Cubits/FoodItemCubit/food_item_cubit.dart';
+import 'package:bite_food_delivery/Configs/skeleton_widgets.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/Models/restaurants_model.dart';
 import 'package:bite_food_delivery/Screens/RestaurantPage/Widgets/bite_food_card.dart';
@@ -74,7 +75,17 @@ class _FoodItemSection extends StatelessWidget {
         return BlocBuilder<FoodItemCubit, FoodItemState>(
           builder: (context, state) {
             if (state is FoodItemLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return ListView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  Text(
+                    'All Items',
+                    style: Theme.of(context).textTheme.headlineLarge,
+                  ),
+                  SkeletonizedFoodGrid(restaurantName: restaurant.name),
+                ],
+              );
             } else if (state is FoodItemError) {
               return Center(
                 child: Text(
