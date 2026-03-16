@@ -27,11 +27,11 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 3000),
+      duration: const Duration(milliseconds: 2000),
     );
     _logoAnimation = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 500),
     );
     scaleAnimation = Tween<double>(
       begin: 1,
@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen>
     });
     _logoAnimation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Future.delayed(const Duration(seconds: 3), () {
+        Future.delayed(const Duration(seconds: 2), () {
           _logoAnimation.reverse().then((_) {
             if (_firstTimeLaunchCubit.state is FirstTimeLaunched) {
               Navigator.push(
@@ -62,7 +62,7 @@ class _SplashScreenState extends State<SplashScreen>
             } else {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const MainPage()),
+                MaterialPageRoute(builder: (context) => MainPage()),
               );
             }
           });

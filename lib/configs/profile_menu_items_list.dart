@@ -80,9 +80,7 @@ List<BiteMenuItemModel> personalInfoList(BuildContext context) => [
     leadingIconColor: Colors.deepOrange,
     title: S.of(context).fullName,
     subtitle: context.read<UserAuthCubit>().state is UserLoggedIn
-        ? (context.read<UserAuthCubit>().state as UserLoggedIn)
-              .user
-              .fullName
+        ? (context.read<UserAuthCubit>().state as UserLoggedIn).user.fullName
         : S.of(context).guestUser,
     onTap: () {
       showDialog(
@@ -92,32 +90,16 @@ List<BiteMenuItemModel> personalInfoList(BuildContext context) => [
       );
     },
   ),
-  BiteMenuItemModel(
-    leadingIcon: Icons.email_outlined,
-    leadingIconColor: Colors.blue,
-    title: S.of(context).email,
-    subtitle: context.read<UserAuthCubit>().state is UserLoggedIn
-        ? (context.read<UserAuthCubit>().state as UserLoggedIn)
-              .user
-              .email
-        : '',
-    onTap: () {
-      showDialog(
-        context: context,
-        builder: (context) =>
-            Dialog(child: BiteEditProfileModal(title: S.of(context).email)),
-      );
-    },
-  ),
+
   BiteMenuItemModel(
     leadingIcon: Icons.phone_outlined,
     leadingIconColor: Colors.green,
     title: S.of(context).phone,
     subtitle: context.read<UserAuthCubit>().state is UserLoggedIn
         ? (context.read<UserAuthCubit>().state as UserLoggedIn)
-              .user
-              .phoneNumber ??
-          ''
+                  .user
+                  .phoneNumber ??
+              ''
         : '',
     onTap: () {
       showDialog(

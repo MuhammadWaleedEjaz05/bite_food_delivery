@@ -80,8 +80,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatelessWidget {
-  const MainPage({super.key});
-
+  MainPage({super.key});
+  final PageController _pageController = PageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,27 +96,15 @@ class MainPage extends StatelessWidget {
             );
           }
         },
-        child:
-            BlocBuilder<
-              BottomNavigationSelectorCubit,
-              BottomNavigationSelectorState
-            >(
-              builder: (context, state) {
-                final selectedIndex = state is BottomNavigationSelectorChanged
-                    ? state.selectedIndex
-                    : 0;
-                return AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  transitionBuilder: (child, animation) {
-                    return FadeTransition(opacity: animation, child: child);
-                  },
-                  child: KeyedSubtree(
-                    key: ValueKey(selectedIndex),
-                    child: screenList(context)[selectedIndex].page,
-                  ),
-                );
-              },
-            ),
+        child: PageView(
+          controller: _pageController,
+          children: screenList(context).map((e) => e.page).toList(),
+          onPageChanged: (value) {
+            context.read<BottomNavigationSelectorCubit>().changeSelectedIndex(
+              value,
+            );
+          },
+        ),
       ),
       floatingActionButton: BlocBuilder<OrderCubit, OrderState>(
         builder: (context, state) {
@@ -138,7 +126,9 @@ class MainPage extends StatelessWidget {
           );
         },
       ),
-      bottomNavigationBar: const BiteBottomNavigationBar(),
+      bottomNavigationBar: BiteBottomNavigationBar(
+        pageController: _pageController,
+      ),
     );
   }
 }

@@ -21,15 +21,22 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: const _AppBarSection(),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 15.w),
-        children: [
-          10.verticalSpace,
-          const _SearchSection(),
-          20.verticalSpace,
-          const _CategorySection(),
-          20.verticalSpace,
-          const _OpenRestaurantsSection(),
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
+            sliver: SliverList.list(
+              children: [
+                10.verticalSpace,
+                const _SearchSection(),
+                20.verticalSpace,
+                const _CategorySection(),
+                20.verticalSpace,
+                const _OpenRestaurantsSection(),
+              ],
+            ),
+          ),
         ],
       ),
     );

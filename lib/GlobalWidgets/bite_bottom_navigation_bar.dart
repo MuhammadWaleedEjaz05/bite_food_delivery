@@ -20,22 +20,34 @@ class BiteBottomItemModel {
 }
 
 class BiteBottomNavigationBar extends StatelessWidget {
-  const BiteBottomNavigationBar({super.key});
+  final PageController pageController;
+  const BiteBottomNavigationBar({super.key, required this.pageController});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<
+    return BlocSelector<
       BottomNavigationSelectorCubit,
-      BottomNavigationSelectorState
+      BottomNavigationSelectorState,
+      int
     >(
-      builder: (context, state) {
+      selector: (state) {
+        return state is BottomNavigationSelectorChanged
+            ? state.selectedIndex
+            : 0;
+      },
+      builder: (context, index) {
         return StylishBottomBar(
-          currentIndex: state is BottomNavigationSelectorChanged
-              ? state.selectedIndex
-              : 0,
-          onTap: (value) => context
-              .read<BottomNavigationSelectorCubit>()
-              .changeSelectedIndex(value),
+          currentIndex: index,
+          onTap: (value) {
+            pageController.animateToPage(
+              value,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.bounceIn,
+            );
+            context.read<BottomNavigationSelectorCubit>().changeSelectedIndex(
+              value,
+            );
+          },
           backgroundColor: Theme.of(context).colorScheme.surface,
           items: screenList(context)
               .map<BottomBarItem>(
