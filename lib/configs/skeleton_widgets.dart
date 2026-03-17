@@ -8,17 +8,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-// Static models for skeleton loading
+const String _staticImageUrl =
+    'https://img.freepik.com/free-photo/abstract-luxury-plain-blur-grey-black-gradient-used-as-background-studio-wall-display-your-products_1258-101806.jpg?semt=ais_hybrid&w=740&q=80';
 const CategoryModel _staticCategory = CategoryModel(
   categoryID: '',
   categoryName: '',
-  categoryImage: '',
+  categoryImage: _staticImageUrl,
 );
 
 const RestaurantModel _staticRestaurant = RestaurantModel(
   id: '',
   name: '',
-  logoUrl: '',
+  logoUrl: _staticImageUrl,
   description: '',
   address: '',
   rating: 0.0,
@@ -37,12 +38,11 @@ const FoodItemModel _staticFoodItem = FoodItemModel(
   description: '',
   RestuarantId: '',
   price: 0.0,
-  images: [],
+  images: [_staticImageUrl],
   sizes: [],
   flavors: {},
 );
 
-// Custom skeletonized widgets
 class SkeletonizedCategoryCard extends StatelessWidget {
   const SkeletonizedCategoryCard({super.key});
 
@@ -81,7 +81,6 @@ class SkeletonizedFoodCard extends StatelessWidget {
   }
 }
 
-// Skeleton lists
 class SkeletonizedCategoryList extends StatelessWidget {
   final int itemCount;
 

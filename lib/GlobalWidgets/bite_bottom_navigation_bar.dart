@@ -42,7 +42,7 @@ class BiteBottomNavigationBar extends StatelessWidget {
             pageController.animateToPage(
               value,
               duration: const Duration(milliseconds: 300),
-              curve: Curves.bounceIn,
+              curve: Curves.easeIn,
             );
             context.read<BottomNavigationSelectorCubit>().changeSelectedIndex(
               value,
