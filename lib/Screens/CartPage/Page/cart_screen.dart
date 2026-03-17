@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -31,7 +32,13 @@ class _CheckOutSection extends StatelessWidget {
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
         if (state is CartLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: Lottie.asset(
+              'assets/animations/loading.json',
+              height: 75.h,
+              width: 75.w,
+            ),
+          );
         } else if (state is CartError) {
           return Center(child: Text(state.message));
         } else if (state is CartEmpty) {
@@ -203,9 +210,15 @@ class _CartSection extends StatelessWidget {
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
         if (state is CartLoading) {
-          return const Expanded(
+          return Expanded(
             flex: 2,
-            child: Center(child: CircularProgressIndicator()),
+            child: Center(
+              child: Lottie.asset(
+                'assets/animations/loading.json',
+                height: 75.h,
+                width: 75.w,
+              ),
+            ),
           );
         } else if (state is CartError) {
           return Expanded(flex: 2, child: Center(child: Text(state.message)));

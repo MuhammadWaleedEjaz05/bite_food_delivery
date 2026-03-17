@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -93,7 +94,13 @@ class _UserInfoSection extends StatelessWidget {
     return BlocBuilder<UserAuthCubit, UserAuthState>(
       builder: (context, state) {
         if (state is UserLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: Lottie.asset(
+              'assets/animations/loading.json',
+              height: 75.h,
+              width: 75.w,
+            ),
+          );
         } else if (state is UserAuthError) {
           return Center(child: Text(state.message));
         }

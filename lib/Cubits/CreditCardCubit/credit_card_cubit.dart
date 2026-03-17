@@ -26,6 +26,7 @@ class CreditCardCubit extends Cubit<CreditCardState> {
           .toList();
       _cachedCreditCards.clear();
       _cachedCreditCards.addAll(creditCards);
+      Future.delayed(const Duration(seconds: 1));
       emit(CreditCardLoaded(creditCardList: _cachedCreditCards));
     } catch (e) {
       emit(CreditCardError(e.toString()));

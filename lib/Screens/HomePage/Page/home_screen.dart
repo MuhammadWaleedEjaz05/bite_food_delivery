@@ -21,13 +21,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double offsetToArmed = 100.h;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: BitePullToRefresh(
-        offsetToArmed: offsetToArmed,
+        offsetToArmed: 150.h,
         child: BiteAnimatedListView(
-          offsetToArmed: offsetToArmed,
+          offsetToArmed: 100.h,
           header: const _AppBarSection(),
           children: [
             10.verticalSpace,

@@ -4,6 +4,7 @@ import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
 void showAddressSelectorModal(BuildContext context) {
   showModalBottomSheet(
@@ -18,9 +19,17 @@ void showAddressSelectorModal(BuildContext context) {
     builder: (context) => BlocBuilder<AddressCubit, AddressState>(
       builder: (context, state) {
         if (state is AddressLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: Lottie.asset(
+              'assets/animations/loading.json',
+              height: 75.h,
+              width: 75.w,
+            ),
+          );
         } else if (state is AddressError) {
-          return Center(child: Text(S.of(context).errorStatemessage(state.message)));
+          return Center(
+            child: Text(S.of(context).errorStatemessage(state.message)),
+          );
         } else if (state is AddressesLoaded) {
           return DraggableScrollableSheet(
             expand: false,

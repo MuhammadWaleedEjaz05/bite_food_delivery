@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 part 'update_check_state.dart';
@@ -31,7 +31,7 @@ class UpdateCheckCubit extends Cubit<UpdateCheckState> {
       final latestVersionRaw = remoteConfig.getString('app_version');
       final latestVersion = latestVersionRaw.trim();
       final currentVersion = (await _getCurrentAppVersion()).trim();
-      print('Current version: $currentVersion, Latest version: $latestVersion');
+      debugPrint('Current version: $currentVersion, Latest version: $latestVersion');
 
       final resolvedVersion = latestVersion.isNotEmpty
           ? latestVersion

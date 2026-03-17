@@ -70,6 +70,7 @@ class RatingAndReviewCubit extends Cubit<RatingAndReviewState> {
             .toList();
         _cachedReviews.clear();
         _cachedReviews.addAll(reviews);
+        Future.delayed(const Duration(seconds: 1));
         emit(RatingAndReviewLoaded(_cachedReviews));
       } else {
         emit(RatingAndReviewError('No review found for this user.'));

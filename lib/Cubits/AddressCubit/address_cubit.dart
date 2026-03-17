@@ -57,7 +57,7 @@ class AddressCubit extends Cubit<AddressState> {
       } else if (addresses.isNotEmpty) {
         selectedAddress = addresses.first;
       }
-
+      Future.delayed(const Duration(seconds: 1));
       emit(
         AddressesLoaded(addresses: addresses, selectedAddress: selectedAddress),
       );

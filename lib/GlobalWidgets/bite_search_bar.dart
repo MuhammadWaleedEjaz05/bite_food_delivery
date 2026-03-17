@@ -5,6 +5,7 @@ import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
 class BiteSearchBar extends StatelessWidget {
   const BiteSearchBar({super.key});
@@ -79,7 +80,13 @@ class OpenSearchScreen extends SearchDelegate {
     return BlocBuilder<RestaurantsCubit, RestaurantsState>(
       builder: (context, state) {
         if (state is RestaurantsLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: Lottie.asset(
+              'assets/animations/loading.json',
+              height: 75.h,
+              width: 75.w,
+            ),
+          );
         } else if (state is RestaurantsError) {
           return Center(
             child: Text(S.of(context).errorStatemessage(state.message)),
@@ -128,7 +135,13 @@ class OpenSearchScreen extends SearchDelegate {
     return BlocBuilder<RestaurantsCubit, RestaurantsState>(
       builder: (context, state) {
         if (state is RestaurantsLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: Lottie.asset(
+              'assets/animations/loading.json',
+              height: 75.h,
+              width: 75.w,
+            ),
+          );
         } else if (state is RestaurantsError) {
           return Center(
             child: Text(S.of(context).errorStatemessage(state.message)),

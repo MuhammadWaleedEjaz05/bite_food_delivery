@@ -8,6 +8,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
 class PersonInfoScreen extends StatelessWidget {
   const PersonInfoScreen({super.key});
@@ -51,7 +52,13 @@ class _UserInfoSection extends StatelessWidget {
     return BlocBuilder<UserAuthCubit, UserAuthState>(
       builder: (context, state) {
         if (state is UserLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: Lottie.asset(
+              'assets/animations/loading.json',
+              height: 75.h,
+              width: 75.w,
+            ),
+          );
         } else if (state is UserAuthError) {
           return Center(child: Text(state.message));
         }

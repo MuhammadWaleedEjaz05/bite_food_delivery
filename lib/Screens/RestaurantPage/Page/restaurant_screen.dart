@@ -10,6 +10,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
 class RestaurantScreen extends StatelessWidget {
   const RestaurantScreen({super.key});
@@ -155,7 +156,13 @@ class _CategorySelectionSection extends StatelessWidget {
         return BlocBuilder<FoodItemCubit, FoodItemState>(
           builder: (context, state) {
             if (state is FoodItemLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return Center(
+                child: Lottie.asset(
+                  'assets/animations/loading.json',
+                  height: 75.h,
+                  width: 75.w,
+                ),
+              );
             } else if (state is FoodItemError) {
               return Center(
                 child: Text(

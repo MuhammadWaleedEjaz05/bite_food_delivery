@@ -158,6 +158,7 @@ class OrderCubit extends Cubit<OrderState> {
                       OrderModel.fromJson(doc.data() as Map<String, dynamic>),
                 )
                 .toList();
+            Future.delayed(const Duration(seconds: 1));
             emit(OrderHistoryLoaded(orders));
           },
           onError: (error) {

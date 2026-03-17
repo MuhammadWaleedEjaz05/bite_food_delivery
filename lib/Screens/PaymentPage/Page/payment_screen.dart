@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
@@ -278,7 +279,11 @@ class _SavedCardsSection extends StatelessWidget {
               return Center(
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 40.h),
-                  child: const CircularProgressIndicator(),
+                  child: Lottie.asset(
+                    'assets/animations/loading.json',
+                    height: 75.h,
+                    width: 75.w,
+                  ),
                 ),
               );
             } else if (state is CreditCardLoaded) {

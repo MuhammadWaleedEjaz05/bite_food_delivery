@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 
 class MyReviewsScreen extends StatelessWidget {
   const MyReviewsScreen({super.key});
@@ -30,7 +31,13 @@ class MyReviewsScreen extends StatelessWidget {
         body: BlocBuilder<RatingAndReviewCubit, RatingAndReviewState>(
           builder: (context, state) {
             if (state is RatingAndReviewLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return Center(
+                child: Lottie.asset(
+                  'assets/animations/loading.json',
+                  height: 75.h,
+                  width: 75.w,
+                ),
+              );
             }
             if (state is RatingAndReviewError) {
               return Center(

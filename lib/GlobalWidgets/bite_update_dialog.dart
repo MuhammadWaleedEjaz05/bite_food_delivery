@@ -63,7 +63,7 @@ class BiteUpdateDialog extends StatelessWidget {
               borderRadius: BorderRadius.circular(24.r),
               boxShadow: [
                 BoxShadow(
-                  color: colorScheme.primary.withOpacity(isDark ? 0.15 : 0.08),
+                  color: colorScheme.primary.withAlpha(isDark ? 40 : 20),
                   blurRadius: 40,
                   spreadRadius: 2,
                   offset: const Offset(0, 8),
@@ -80,7 +80,7 @@ class BiteUpdateDialog extends StatelessWidget {
                     gradient: LinearGradient(
                       colors: [
                         colorScheme.primary,
-                        colorScheme.primary.withOpacity(0.8),
+                        colorScheme.primary.withAlpha(100),
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -96,7 +96,7 @@ class BiteUpdateDialog extends StatelessWidget {
                         width: 64.w,
                         height: 64.w,
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
+                          color: Colors.white.withAlpha(200),
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
@@ -149,7 +149,7 @@ class BiteUpdateDialog extends StatelessWidget {
                           vertical: 8.h,
                         ),
                         decoration: BoxDecoration(
-                          color: colorScheme.primary.withOpacity(0.1),
+                          color: colorScheme.primary.withAlpha(20),
                           borderRadius: BorderRadius.circular(30.r),
                         ),
                         child: Row(

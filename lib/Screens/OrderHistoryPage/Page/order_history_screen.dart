@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
@@ -41,7 +42,13 @@ class OrderHistoryScreen extends StatelessWidget {
                 child: BlocBuilder<OrderCubit, OrderState>(
                   builder: (context, state) {
                     if (state is OrderLoading) {
-                      return const Center(child: CircularProgressIndicator());
+                      return Center(
+                        child: Lottie.asset(
+                          'assets/animations/loading.json',
+                          height: 75.h,
+                          width: 75.w,
+                        ),
+                      );
                     }
                     if (state is OrderHistoryLoaded) {
                       final ongoing = state.orders

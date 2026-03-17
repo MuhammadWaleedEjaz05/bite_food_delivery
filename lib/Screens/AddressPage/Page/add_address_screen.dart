@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:lottie/lottie.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
@@ -91,7 +92,13 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         current is! MapLocationPicked,
                     builder: (context, state) {
                       if (state is MapLocationLoading) {
-                        return const Center(child: CircularProgressIndicator());
+                        return Center(
+                          child: Lottie.asset(
+                            'assets/animations/loading.json',
+                            height: 75.h,
+                            width: 75.w,
+                          ),
+                        );
                       }
 
                       if (state is MapLocationPermissionDenied) {

@@ -32,11 +32,7 @@ class NotificationScreen extends StatelessWidget {
               ),
             );
           }
-          return Center(
-            child: CircularProgressIndicator(
-              color: Theme.of(context).colorScheme.primary,
-            ),
-          );
+          return const SizedBox.shrink();
         },
       ),
     );

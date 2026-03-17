@@ -8,6 +8,7 @@ import 'package:bite_food_delivery/Screens/TrackOrderPage/Widgets/bite_order_inf
 import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart' hide Marker;
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -106,8 +107,10 @@ class TrackOrderScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is MapLocationLoading || state is MapLocationInitial) {
               return Center(
-                child: CircularProgressIndicator(
-                  color: Theme.of(context).colorScheme.primary,
+                child: Lottie.asset(
+                  'assets/animations/loading.json',
+                  height: 75.h,
+                  width: 75.w,
                 ),
               );
             }

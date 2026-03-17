@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 
 class FavouriteScreen extends StatelessWidget {
   const FavouriteScreen({super.key});
@@ -61,7 +62,13 @@ class _ReataurantFavouriteSection extends StatelessWidget {
         return BlocBuilder<RestaurantsCubit, RestaurantsState>(
           builder: (context, state) {
             if (state is RestaurantsLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return Center(
+                child: Lottie.asset(
+                  'assets/animations/loading.json',
+                  height: 75.h,
+                  width: 75.w,
+                ),
+              );
             } else if (state is RestaurantsError) {
               return Center(
                 child: Text(S.of(context).errorStatemessage(state.message)),
@@ -105,7 +112,13 @@ class _FoodFavouriteSection extends StatelessWidget {
         return BlocBuilder<FoodItemCubit, FoodItemState>(
           builder: (context, state) {
             if (state is FoodItemLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return Center(
+                child: Lottie.asset(
+                  'assets/animations/loading.json',
+                  height: 50.h,
+                  width: 50.w,
+                ),
+              );
             } else if (state is FoodItemError) {
               return Center(
                 child: Text(S.of(context).errorStatemessage(state.message)),

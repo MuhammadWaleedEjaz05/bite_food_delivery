@@ -3,6 +3,7 @@ import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dar
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
 class BitePullToRefresh extends StatelessWidget {
@@ -24,22 +25,21 @@ class BitePullToRefresh extends StatelessWidget {
           context.read<CategoriesCubit>().loadCategories(),
           context.read<RestaurantsCubit>().loadRestaurants(),
         ]);
-        await Future.delayed(const Duration(seconds: 1));
+        await Future.delayed(const Duration(seconds: 2));
       },
       builder: (context, child, controller) => AnimatedBuilder(
         animation: controller,
         builder: (context, child) => Stack(
           children: [
-            Container(
-              color: Theme.of(context).colorScheme.primary.withAlpha(100),
-              height: offsetToArmed * controller.value,
-              alignment: Alignment.center,
-              child: Center(
-                child: Lottie.asset(
-                  'assets/animations/pull_to_refresh_animation.json',
-                  fit: BoxFit.cover,
-                  repeat: true,
-                  animate: controller.isLoading,
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 10.h),
+              child: SizedBox(
+                height: offsetToArmed * controller.value,
+                child: Center(
+                  child: Lottie.asset(
+                    'assets/animations/pull_to_refresh_animation.json',
+                    width: double.infinity,
+                  ),
                 ),
               ),
             ),

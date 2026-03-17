@@ -37,6 +37,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
                   ),
                 )
                 .toList();
+            Future.delayed(const Duration(seconds: 1));
             emit(NotificationsLoaded(notifications));
           },
           onError: (error) {

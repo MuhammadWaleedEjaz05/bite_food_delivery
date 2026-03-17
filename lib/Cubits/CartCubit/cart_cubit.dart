@@ -19,7 +19,7 @@ class CartCubit extends Cubit<CartState> {
 
   void loadCart(String userID) {
     _cartSubscription?.cancel();
-
+    Future.delayed(const Duration(seconds: 1));
     _cartSubscription = getCart(userID).listen(
       (cart) {
         if (cart == null || cart.cartItems.isEmpty) {
@@ -152,39 +152,45 @@ Stream<CartModel?> getCart(String userID) {
         .where('userID', isEqualTo: userID)
         .limit(1)
         .snapshots()
-        .listen((cartSnapshot) {
-      if (cartSnapshot.docs.isEmpty) {
-        innerSubscription?.cancel();
-        controller.add(null);
-        return;
-      }
+        .listen(
+          (cartSnapshot) {
+            if (cartSnapshot.docs.isEmpty) {
+              innerSubscription?.cancel();
+              controller.add(null);
+              return;
+            }
 
-      final cartDoc = cartSnapshot.docs.first;
-      final cartData = cartDoc.data() as Map<String, dynamic>;
-      final cartID = cartDoc.id;
+            final cartDoc = cartSnapshot.docs.first;
+            final cartData = cartDoc.data() as Map<String, dynamic>;
+            final cartID = cartDoc.id;
 
-      innerSubscription?.cancel();
-      innerSubscription = db
-          .doc(cartID)
-          .collection('Products')
-          .snapshots()
-          .listen((productsSnapshot) {
-        final cartItems = productsSnapshot.docs.map((doc) {
-          return CartItemModel.fromJson(doc.data());
-        }).toList();
+            innerSubscription?.cancel();
+            innerSubscription = db
+                .doc(cartID)
+                .collection('Products')
+                .snapshots()
+                .listen(
+                  (productsSnapshot) {
+                    final cartItems = productsSnapshot.docs.map((doc) {
+                      return CartItemModel.fromJson(doc.data());
+                    }).toList();
 
-        controller.add(
-          CartModel.fromJson(
-            {...cartData, 'cartID': cartID},
-            cartItems: cartItems,
-          ),
+                    controller.add(
+                      CartModel.fromJson({
+                        ...cartData,
+                        'cartID': cartID,
+                      }, cartItems: cartItems),
+                    );
+                  },
+                  onError: (e) {
+                    controller.addError(e);
+                  },
+                );
+          },
+          onError: (e) {
+            controller.addError(e);
+          },
         );
-      }, onError: (e) {
-        controller.addError(e);
-      });
-    }, onError: (e) {
-      controller.addError(e);
-    });
   }
 
   void stopListening() {
