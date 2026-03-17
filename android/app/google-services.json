@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "964243541876-rieb8gmhnk5r4hs3vvlomlll69r79c4f.apps.googleusercontent.com",
+          "client_id": "964243541876-0or0ev7e8209oopmq2526gal20tuk146.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.bite_food_delivery",
-            "certificate_hash": "abed82bde3c9f3c8ece10a439a6f21716c02527a"
+            "certificate_hash": "c00962d3839c283d80b3878cb1d5ca978e204754"
           }
         },
         {

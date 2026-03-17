@@ -1,5 +1,5 @@
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
-import 'package:bite_food_delivery/Configs/skeleton_widgets.dart';
+import 'package:bite_food_delivery/configs/skeleton_widgets.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_pull_to_refresh.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_restaurant_card.dart';

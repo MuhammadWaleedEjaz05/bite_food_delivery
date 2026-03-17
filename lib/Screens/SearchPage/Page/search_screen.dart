@@ -1,6 +1,6 @@
 import 'package:bite_food_delivery/Cubits/RecentSearchesCubit/recent_searches_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
-import 'package:bite_food_delivery/Configs/skeleton_widgets.dart';
+import 'package:bite_food_delivery/configs/skeleton_widgets.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_heading.dart';
 import 'package:bite_food_delivery/Screens/SearchPage/Widgets/bite_recent_search_button.dart';

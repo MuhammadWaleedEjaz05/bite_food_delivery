@@ -52,7 +52,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '964243541876',
     projectId: 'bite-food-delivery-3b736',
     storageBucket: 'bite-food-delivery-3b736.firebasestorage.app',
-    androidClientId: '964243541876-4dbqnhjn87g7evf2v1v2sso8c5tb455u.apps.googleusercontent.com',
+    androidClientId: '964243541876-0or0ev7e8209oopmq2526gal20tuk146.apps.googleusercontent.com',
     iosClientId: '964243541876-4t83om88erv8qesmfp60p8fluvtrqbi8.apps.googleusercontent.com',
     iosBundleId: 'com.example.biteFoodDelivery',
   );
@@ -63,7 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '964243541876',
     projectId: 'bite-food-delivery-3b736',
     storageBucket: 'bite-food-delivery-3b736.firebasestorage.app',
-    androidClientId: '964243541876-4dbqnhjn87g7evf2v1v2sso8c5tb455u.apps.googleusercontent.com',
+    androidClientId: '964243541876-0or0ev7e8209oopmq2526gal20tuk146.apps.googleusercontent.com',
     iosClientId: '964243541876-4t83om88erv8qesmfp60p8fluvtrqbi8.apps.googleusercontent.com',
     iosBundleId: 'com.example.biteFoodDelivery',
   );

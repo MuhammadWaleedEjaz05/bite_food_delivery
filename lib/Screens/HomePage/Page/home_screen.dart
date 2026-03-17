@@ -2,7 +2,7 @@ import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
 import 'package:bite_food_delivery/Cubits/CategoriesCubit/categories_cubit.dart';
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
-import 'package:bite_food_delivery/Configs/skeleton_widgets.dart';
+import 'package:bite_food_delivery/configs/skeleton_widgets.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_animated_list_view.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_category_card.dart';
