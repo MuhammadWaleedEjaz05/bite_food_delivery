@@ -1,6 +1,7 @@
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/Configs/skeleton_widgets.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
+import 'package:bite_food_delivery/GlobalWidgets/bite_pull_to_refresh.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_restaurant_card.dart';
 import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -32,13 +33,18 @@ class AllRestaurantScreen extends StatelessWidget {
               child: Text(S.of(context).errorStatemessage(state.message)),
             );
           } else if (state is RestaurantsLoaded) {
-            return ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 15.w),
-              itemBuilder: (context, index) => Padding(
-                padding: EdgeInsets.symmetric(vertical: 10.h),
-                child: BiteRestaurantCard(restaurant: state.restaurants[index]),
+            return BitePullToRefresh(
+              offsetToArmed: 100.h,
+              child: ListView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                itemBuilder: (context, index) => Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                  child: BiteRestaurantCard(
+                    restaurant: state.restaurants[index],
+                  ),
+                ),
+                itemCount: state.restaurants.length,
               ),
-              itemCount: state.restaurants.length,
             );
           } else {
             return const SizedBox();

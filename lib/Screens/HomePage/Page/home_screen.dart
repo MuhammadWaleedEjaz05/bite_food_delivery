@@ -3,9 +3,11 @@ import 'package:bite_food_delivery/Cubits/CategoriesCubit/categories_cubit.dart'
 import 'package:bite_food_delivery/Cubits/RestaurantsCubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/Configs/skeleton_widgets.dart';
+import 'package:bite_food_delivery/GlobalWidgets/bite_animated_list_view.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_category_card.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_heading.dart';
+import 'package:bite_food_delivery/GlobalWidgets/bite_pull_to_refresh.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_restaurant_card.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_search_bar.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_address_selector_modal.dart';
@@ -19,32 +21,23 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double offsetToArmed = 100.h;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          SliverAppBar(
-            backgroundColor: Theme.of(context).colorScheme.surface,
-            surfaceTintColor: Theme.of(context).colorScheme.surface,
-            collapsedHeight: 100.h,
-            floating: true,
-            flexibleSpace: const _AppBarSection(),
-          ),
-          SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            sliver: SliverList.list(
-              children: [
-                10.verticalSpace,
-                const _SearchSection(),
-                20.verticalSpace,
-                const _CategorySection(),
-                20.verticalSpace,
-                const _OpenRestaurantsSection(),
-              ],
-            ),
-          ),
-        ],
+      body: BitePullToRefresh(
+        offsetToArmed: offsetToArmed,
+        child: BiteAnimatedListView(
+          offsetToArmed: offsetToArmed,
+          header: const _AppBarSection(),
+          children: [
+            10.verticalSpace,
+            const _SearchSection(),
+            20.verticalSpace,
+            const _CategorySection(),
+            20.verticalSpace,
+            const _OpenRestaurantsSection(),
+          ],
+        ),
       ),
     );
   }
