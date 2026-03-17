@@ -21,10 +21,16 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: const _AppBarSection(),
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
+          SliverAppBar(
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            surfaceTintColor: Theme.of(context).colorScheme.surface,
+            collapsedHeight: 100.h,
+            floating: true,
+            flexibleSpace: const _AppBarSection(),
+          ),
           SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             sliver: SliverList.list(
