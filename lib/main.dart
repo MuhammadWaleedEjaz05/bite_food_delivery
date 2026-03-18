@@ -1,13 +1,17 @@
 import 'dart:async';
+import 'package:bite_food_delivery/Cubits/AddressCubit/address_cubit.dart';
 import 'package:bite_food_delivery/Cubits/BottomNavigationSelection/bottom_navigation_selector_cubit.dart';
+import 'package:bite_food_delivery/Cubits/NotificationCubit/notifications_cubit.dart';
 import 'package:bite_food_delivery/Cubits/OrderCubit/order_cubit.dart';
 import 'package:bite_food_delivery/Cubits/SettingsCubit/settings_cubit.dart';
 import 'package:bite_food_delivery/Cubits/UpdateCheckCubit/update_check_cubit.dart';
+import 'package:bite_food_delivery/Cubits/UserAuthCubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_update_dialog.dart';
 import 'package:bite_food_delivery/Screens/SplashPage/Pages/splash_screen.dart';
 import 'package:bite_food_delivery/GlobalWidgets/bite_bottom_navigation_bar.dart';
 import 'package:bite_food_delivery/configs/bloc_provider_list.dart';
 import 'package:bite_food_delivery/configs/fcm_initialize.dart';
+import 'package:bite_food_delivery/configs/firebase_auth_conn.dart';
 import 'package:bite_food_delivery/configs/page_routes.dart';
 import 'package:bite_food_delivery/configs/screen_list.dart';
 import 'package:bite_food_delivery/configs/shared_preference_functions.dart';
@@ -46,34 +50,45 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: blocProviderList,
-      child: ScreenUtilInit(
-        designSize: const Size(375, 812),
-        builder: (context, child) {
-          return MaterialApp(
-            theme:
-                biteLightThemes[context
-                    .watch<SettingsCubit>()
-                    .state
-                    .themeIndex],
-            darkTheme:
-                biteDarkThemes[context.watch<SettingsCubit>().state.themeIndex],
-            themeMode: context.watch<SettingsCubit>().state.isDarkMode
-                ? ThemeMode.dark
-                : ThemeMode.light,
-            routes: routes,
-            debugShowCheckedModeBanner: false,
-            supportedLocales: S.delegate.supportedLocales,
-            locale: Locale(context.watch<SettingsCubit>().state.languageCode),
-            localizationsDelegates: const [
-              S.delegate,
-              FormBuilderLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            home: const SplashScreen(),
-          );
+      child: BlocListener<UserAuthCubit, UserAuthState>(
+        listener: (context, state) {
+          if (state is UserLoggedIn) {
+            final user = getCurrentUser();
+            if (user != null) {
+              context.read<AddressCubit>().loadAddresses();
+              context.read<NotificationsCubit>().loadNotifications(user.uid);
+            }
+          }
         },
+        child: ScreenUtilInit(
+          designSize: const Size(375, 812),
+          builder: (context, child) {
+            return MaterialApp(
+              theme:
+                  biteLightThemes[context
+                      .watch<SettingsCubit>()
+                      .state
+                      .themeIndex],
+              darkTheme:
+                  biteDarkThemes[context.watch<SettingsCubit>().state.themeIndex],
+              themeMode: context.watch<SettingsCubit>().state.isDarkMode
+                  ? ThemeMode.dark
+                  : ThemeMode.light,
+              routes: routes,
+              debugShowCheckedModeBanner: false,
+              supportedLocales: S.delegate.supportedLocales,
+              locale: Locale(context.watch<SettingsCubit>().state.languageCode),
+              localizationsDelegates: const [
+                S.delegate,
+                FormBuilderLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              home: const SplashScreen(),
+            );
+          },
+        ),
       ),
     );
   }

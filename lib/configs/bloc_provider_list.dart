@@ -25,14 +25,7 @@ List<BlocProvider> blocProviderList = [
   BlocProvider<CartCubit>(create: (context) => CartCubit()),
   BlocProvider<AddressCubit>(create: (context) => AddressCubit()),
   BlocProvider<NotificationsCubit>(
-    create: (context) {
-      final cubit = NotificationsCubit();
-      final user = getCurrentUser();
-      if (user != null) {
-        cubit.loadNotifications(user.uid);
-      }
-      return cubit;
-    },
+    create: (context) => NotificationsCubit(),
   ),
   BlocProvider<OrderCubit>(
     create: (context) =>
