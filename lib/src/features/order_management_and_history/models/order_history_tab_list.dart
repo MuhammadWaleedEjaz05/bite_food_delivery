@@ -1,7 +1,7 @@
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
-final List<Tab> tabsList = [
-  Tab(text: S.current.ongoing),
-  Tab(text: S.current.history),
+List<Tab> getTabsList(BuildContext context) => [
+  Tab(text: AppLocalizations.of(context)!.ongoing),
+  Tab(text: AppLocalizations.of(context)!.history),
 ];

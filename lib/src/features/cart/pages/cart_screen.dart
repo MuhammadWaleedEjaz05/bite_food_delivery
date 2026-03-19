@@ -4,7 +4,7 @@ import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_address_selector_modal.dart';
 import 'package:bite_food_delivery/src/features/cart/models/cart_item_model.dart';
 import 'package:bite_food_delivery/src/features/cart/widgets/bite_cart_item_card.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -77,7 +77,7 @@ class _CheckOutSection extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          S.of(context).deliveryAddress2,
+                          AppLocalizations.of(context)!.deliveryAddress2,
                           style: Theme.of(context).textTheme.bodyMedium!
                               .copyWith(
                                 color: Theme.of(
@@ -92,7 +92,7 @@ class _CheckOutSection extends StatelessWidget {
                               onPressed: () =>
                                   showAddressSelectorModal(context),
                               child: Text(
-                                S.of(context).edit2,
+                                AppLocalizations.of(context)!.edit2,
                                 style: Theme.of(context).textTheme.bodyMedium!
                                     .copyWith(
                                       color: Theme.of(
@@ -124,7 +124,9 @@ class _CheckOutSection extends StatelessWidget {
                         return TextField(
                           readOnly: true,
                           decoration: InputDecoration(
-                            hintText: S.of(context).selectAnAddress,
+                            hintText: AppLocalizations.of(
+                              context,
+                            )!.selectAnAddress,
                             filled: true,
                             fillColor: Theme.of(
                               context,
@@ -142,7 +144,7 @@ class _CheckOutSection extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          S.of(context).total2,
+                          AppLocalizations.of(context)!.total2,
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         Text(
@@ -180,7 +182,7 @@ class _CheckOutSection extends StatelessWidget {
                               );
                             },
                             child: Text(
-                              S.of(context).checkout2,
+                              AppLocalizations.of(context)!.checkout2,
                               style: Theme.of(context).textTheme.bodyMedium!
                                   .copyWith(
                                     color: Colors.white,
@@ -227,7 +229,7 @@ class _CartSection extends StatelessWidget {
             flex: 2,
             child: Center(
               child: Text(
-                S.of(context).yourCartIsEmpty,
+                AppLocalizations.of(context)!.yourCartIsEmpty,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.normal,
@@ -241,7 +243,7 @@ class _CartSection extends StatelessWidget {
               flex: 2,
               child: Center(
                 child: Text(
-                  S.of(context).yourCartIsEmpty,
+                  AppLocalizations.of(context)!.yourCartIsEmpty,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.normal,
@@ -272,7 +274,7 @@ class _CartSection extends StatelessWidget {
           flex: 2,
           child: Center(
             child: Text(
-              S.of(context).yourCartIsEmpty,
+              AppLocalizations.of(context)!.yourCartIsEmpty,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.normal,
@@ -295,7 +297,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
       isDarkMode: true,
       backButton: true,
       title: Text(
-        S.of(context).cart,
+        AppLocalizations.of(context)!.cart,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,

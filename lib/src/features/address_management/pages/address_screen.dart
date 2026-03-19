@@ -3,7 +3,7 @@ import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_menu_section.dart';
 import 'package:bite_food_delivery/src/features/address_management/cubits/address_cubit/address_cubit.dart';
 import 'package:bite_food_delivery/src/features/address_management/models/address_model.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,7 +53,7 @@ class _AddAddressSection extends StatelessWidget {
               ),
               textStyle: Theme.of(context).textTheme.titleSmall,
             ),
-            child: Text(S.of(context).addAddress),
+            child: Text(AppLocalizations.of(context)!.addAddress),
           ),
         ),
       ],
@@ -95,7 +95,7 @@ class _AddressSection extends StatelessWidget {
 
         if (state is AddressError) {
           return Text(
-            S.of(context).failedToLoadAddresses,
+            AppLocalizations.of(context)!.failedToLoadAddresses,
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
               color: Colors.black54,
               fontWeight: FontWeight.normal,
@@ -107,7 +107,7 @@ class _AddressSection extends StatelessWidget {
           final addresses = state.addresses;
           if (addresses.isEmpty) {
             return Text(
-              S.of(context).noSavedAddressesYet,
+              AppLocalizations.of(context)!.noSavedAddressesYet,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
                 color: Colors.black54,
                 fontWeight: FontWeight.normal,
@@ -136,7 +136,7 @@ class _AddressSection extends StatelessWidget {
         }
 
         return Text(
-          S.of(context).pleaseSignInToViewAddresses,
+          AppLocalizations.of(context)!.pleaseSignInToViewAddresses,
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
             color: Colors.black54,
             fontWeight: FontWeight.normal,
@@ -157,7 +157,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
     return BiteAppBar(
       backButton: true,
       title: Text(
-        S.of(context).address,
+        AppLocalizations.of(context)!.address,
         style: Theme.of(context).textTheme.displaySmall!.copyWith(
           color: Theme.of(context).colorScheme.primary,
         ),

@@ -71,14 +71,12 @@ class BiteCartItemCard extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () {
-                      context
-                          .read<CartCubit>()
-                          .updateCartItem(
-                            cartID: cartID,
-                            cartItem: cartItem.copyWith(
-                              quantity: cartItem.quantity + 1,
-                            ),
-                          );
+                      context.read<CartCubit>().updateCartItem(
+                        cartID: cartID,
+                        cartItem: cartItem.copyWith(
+                          quantity: cartItem.quantity + 1,
+                        ),
+                      );
                     },
                     style: IconButton.styleFrom(
                       backgroundColor: Colors.white.withAlpha(50),
@@ -99,14 +97,12 @@ class BiteCartItemCard extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () {
-                      context
-                          .read<CartCubit>()
-                          .updateCartItem(
-                            cartID: cartID,
-                            cartItem: cartItem.copyWith(
-                              quantity: cartItem.quantity - 1,
-                            ),
-                          );
+                      context.read<CartCubit>().updateCartItem(
+                        cartID: cartID,
+                        cartItem: cartItem.copyWith(
+                          quantity: cartItem.quantity - 1,
+                        ),
+                      );
                     },
                     style: IconButton.styleFrom(
                       backgroundColor: Colors.white.withAlpha(50),

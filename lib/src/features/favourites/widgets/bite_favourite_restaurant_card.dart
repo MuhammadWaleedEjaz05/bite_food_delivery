@@ -1,6 +1,6 @@
 import 'package:bite_food_delivery/src/features/favourites/cubits/favourite_cubit/favourite_cubit.dart';
 import 'package:bite_food_delivery/src/features/restaurants/models/restaurants_model.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -89,12 +89,11 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                   builder: (context) {
                     return AlertDialog(
                       title: Text(
-                        S.of(context).removeFromFavourites,
+                        AppLocalizations.of(context)!.removeFromFavourites,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       content: Text(
-                        S
-                            .of(context)
+                        AppLocalizations.of(context)!
                             .areYouSureYouWantToRemoveThisRestaurantFrom,
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
                           fontWeight: FontWeight.normal,
@@ -106,7 +105,7 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                             Navigator.pop(context);
                           },
                           child: Text(
-                            S.of(context).cancel,
+                            AppLocalizations.of(context)!.cancel,
                             style: Theme.of(context).textTheme.titleSmall!
                                 .copyWith(fontWeight: FontWeight.normal),
                           ),
@@ -119,7 +118,7 @@ class BiteFavouriteRestaurantCard extends StatelessWidget {
                             );
                           },
                           child: Text(
-                            S.of(context).remove,
+                            AppLocalizations.of(context)!.remove,
                             style: Theme.of(context).textTheme.titleSmall!
                                 .copyWith(fontWeight: FontWeight.normal),
                           ),

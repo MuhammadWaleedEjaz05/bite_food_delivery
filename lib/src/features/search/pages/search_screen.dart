@@ -6,7 +6,7 @@ import 'package:bite_food_delivery/src/shared/widgets/bite_heading.dart';
 import 'package:bite_food_delivery/src/features/search/widgets/bite_recent_search_button.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_restaurant_card.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_search_bar.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,7 +44,10 @@ class _PopularRestaurantSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BiteHeading(title: S.of(context).popularRestaurants, isSeeAll: false),
+        BiteHeading(
+          title: AppLocalizations.of(context)!.popularRestaurants,
+          isSeeAll: false,
+        ),
         10.verticalSpace,
         BlocBuilder<RestaurantsCubit, RestaurantsState>(
           builder: (context, state) {
@@ -52,7 +55,11 @@ class _PopularRestaurantSection extends StatelessWidget {
               return const SkeletonizedRestaurantList(itemCount: 3);
             } else if (state is RestaurantsError) {
               return Center(
-                child: Text(S.of(context).errorStatemessage(state.message)),
+                child: Text(
+                  AppLocalizations.of(
+                    context,
+                  )!.errorStatemessage(state.message),
+                ),
               );
             } else if (state is RestaurantsLoaded) {
               final popular = state.restaurants
@@ -61,7 +68,7 @@ class _PopularRestaurantSection extends StatelessWidget {
               if (popular.isEmpty) {
                 return Center(
                   child: Text(
-                    S.of(context).noPopularRestaurantsFound,
+                    AppLocalizations.of(context)!.noPopularRestaurantsFound,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onSecondary,
                       fontWeight: FontWeight.normal,
@@ -95,7 +102,10 @@ class _RecentSearchSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BiteHeading(title: S.of(context).recentKeywords, isSeeAll: false),
+        BiteHeading(
+          title: AppLocalizations.of(context)!.recentKeywords,
+          isSeeAll: false,
+        ),
         10.verticalSpace,
         SizedBox(
           height: 40.h,
@@ -105,8 +115,7 @@ class _RecentSearchSection extends StatelessWidget {
                 showTopSnackBar(
                   Overlay.of(context),
                   CustomSnackBar.success(
-                    message: S
-                        .of(context)
+                    message: AppLocalizations.of(context)!
                         .addedStatesearchToRecentSearches(state.search),
                   ),
                 );
@@ -114,8 +123,7 @@ class _RecentSearchSection extends StatelessWidget {
                 showTopSnackBar(
                   Overlay.of(context),
                   CustomSnackBar.info(
-                    message: S
-                        .of(context)
+                    message: AppLocalizations.of(context)!
                         .removedStatesearchFromRecentSearches(state.search),
                   ),
                 );
@@ -126,7 +134,7 @@ class _RecentSearchSection extends StatelessWidget {
                 if (state.recentSearches.isEmpty) {
                   return Center(
                     child: Text(
-                      S.of(context).noRecentSearches,
+                      AppLocalizations.of(context)!.noRecentSearches,
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: Theme.of(context).colorScheme.onSecondary,
                         fontWeight: FontWeight.normal,
@@ -163,7 +171,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return BiteAppBar(
       title: Text(
-        S.of(context).search,
+        AppLocalizations.of(context)!.search,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,

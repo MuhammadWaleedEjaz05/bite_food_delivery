@@ -28,8 +28,6 @@ final class CreditCardError extends CreditCardState {
   List<Object> get props => [error];
 }
 
-final class CreditCardAdded extends CreditCardState {
-}
+final class CreditCardAdded extends CreditCardState {}
 
-final class CreditCardDeleted extends CreditCardState {
-}
+final class CreditCardDeleted extends CreditCardState {}

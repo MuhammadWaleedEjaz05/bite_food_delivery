@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:bite_food_delivery/src/features/address_management/cubits/address_cubit/address_cubit.dart';
 import 'package:bite_food_delivery/src/shared/cubits/bottom_navigation_selection/bottom_navigation_selector_cubit.dart';
 import 'package:bite_food_delivery/src/features/notifications/cubits/notification_cubit/notifications_cubit.dart';
@@ -18,7 +19,6 @@ import 'package:bite_food_delivery/src/core/utils/shared_preference_functions.da
 import 'package:bite_food_delivery/src/core/constants/stripe_const.dart';
 import 'package:bite_food_delivery/src/core/themes/theme_list.dart';
 import 'package:bite_food_delivery/firebase_options.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -70,16 +70,19 @@ class MyApp extends StatelessWidget {
                       .state
                       .themeIndex],
               darkTheme:
-                  biteDarkThemes[context.watch<SettingsCubit>().state.themeIndex],
+                  biteDarkThemes[context
+                      .watch<SettingsCubit>()
+                      .state
+                      .themeIndex],
               themeMode: context.watch<SettingsCubit>().state.isDarkMode
                   ? ThemeMode.dark
                   : ThemeMode.light,
               routes: routes,
               debugShowCheckedModeBanner: false,
-              supportedLocales: S.delegate.supportedLocales,
+              supportedLocales: AppLocalizations.supportedLocales,
               locale: Locale(context.watch<SettingsCubit>().state.languageCode),
               localizationsDelegates: const [
-                S.delegate,
+                AppLocalizations.delegate,
                 FormBuilderLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
@@ -132,7 +135,7 @@ class MainPage extends StatelessWidget {
             backgroundColor: Theme.of(context).colorScheme.primary,
             icon: const Icon(Icons.delivery_dining, color: Colors.white),
             label: Text(
-              S.of(context).trackOrder,
+              AppLocalizations.of(context)!.trackOrder,
               style: GoogleFonts.sen(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,

@@ -1,4 +1,3 @@
-
 final Map<String, String> langList = {
   'English': 'en',
   'Spanish': 'es',

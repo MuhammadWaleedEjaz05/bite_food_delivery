@@ -1,7 +1,7 @@
 import 'package:bite_food_delivery/src/features/rating_and_reviews/cubits/rating_and_review_cubit/rating_and_review_cubit.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/features/rating_and_reviews/widgets/bite_review_tile.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,7 +19,7 @@ class MyReviewsScreen extends StatelessWidget {
         appBar: BiteAppBar(
           backButton: true,
           title: Text(
-            S.of(context).myReviews,
+            AppLocalizations.of(context)!.myReviews,
             style: GoogleFonts.sen(
               fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
               fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,

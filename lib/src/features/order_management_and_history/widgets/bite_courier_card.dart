@@ -1,4 +1,4 @@
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -47,7 +47,7 @@ class BiteCourierCard extends StatelessWidget {
                 ).textTheme.titleMedium!.copyWith(color: Colors.black54),
               ),
               Text(
-                S.of(context).courier,
+                AppLocalizations.of(context)!.courier,
                 style: Theme.of(
                   context,
                 ).textTheme.bodySmall!.copyWith(color: Colors.grey),
@@ -85,7 +85,7 @@ class _ActionCircleButton extends StatelessWidget {
         height: 45.r,
         width: 45.r,
         decoration: BoxDecoration(shape: BoxShape.circle, color: color),
-        child: Icon(icon, color:  Colors.white, size: 22.r),
+        child: Icon(icon, color: Colors.white, size: 22.r),
       ),
     );
   }

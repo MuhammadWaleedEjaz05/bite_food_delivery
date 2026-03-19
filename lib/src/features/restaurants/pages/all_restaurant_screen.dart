@@ -3,7 +3,7 @@ import 'package:bite_food_delivery/src/shared/widgets/skeleton_widgets.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_pull_to_refresh.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_restaurant_card.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,7 +17,7 @@ class AllRestaurantScreen extends StatelessWidget {
       appBar: BiteAppBar(
         backButton: true,
         title: Text(
-          S.of(context).allRestaurants,
+          AppLocalizations.of(context)!.allRestaurants,
           style: Theme.of(context).textTheme.displaySmall!.copyWith(
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -30,7 +30,9 @@ class AllRestaurantScreen extends StatelessWidget {
             return const SkeletonizedRestaurantList(itemCount: 5);
           } else if (state is RestaurantsError) {
             return Center(
-              child: Text(S.of(context).errorStatemessage(state.message)),
+              child: Text(
+                AppLocalizations.of(context)!.errorStatemessage(state.message),
+              ),
             );
           } else if (state is RestaurantsLoaded) {
             return BitePullToRefresh(

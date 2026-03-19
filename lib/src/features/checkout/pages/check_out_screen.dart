@@ -13,7 +13,7 @@ import 'package:bite_food_delivery/src/features/checkout/widgets/bite_check_out_
 import 'package:bite_food_delivery/src/features/checkout/widgets/bite_checkout_item_tile.dart';
 import 'package:bite_food_delivery/src/features/checkout/widgets/bite_summary_row.dart';
 import 'package:bite_food_delivery/src/features/checkout/widgets/bite_check_out_address_block.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,7 +37,7 @@ class CheckOutScreen extends StatelessWidget {
       appBar: BiteAppBar(
         backButton: true,
         title: Text(
-          S.of(context).checkout,
+          AppLocalizations.of(context)!.checkout,
           style: Theme.of(context).textTheme.displaySmall!.copyWith(
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -81,14 +81,14 @@ class _DeliveryAddressSection extends StatelessWidget {
             ),
             8.horizontalSpace,
             Text(
-              S.of(context).deliveryAddress,
+              AppLocalizations.of(context)!.deliveryAddress,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const Spacer(),
             TextButton(
               onPressed: () => showAddressSelectorModal(context),
               child: Text(
-                S.of(context).change,
+                AppLocalizations.of(context)!.change,
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.primary,
@@ -103,7 +103,9 @@ class _DeliveryAddressSection extends StatelessWidget {
         BlocBuilder<AddressCubit, AddressState>(
           builder: (context, state) {
             String addressLabel = '';
-            String addressText = S.of(context).noAddressSelected;
+            String addressText = AppLocalizations.of(
+              context,
+            )!.noAddressSelected;
 
             if (state is AddressesLoaded && state.selectedAddress != null) {
               final addr = state.selectedAddress!;
@@ -140,7 +142,7 @@ class _OrderItemsSection extends StatelessWidget {
             ),
             8.horizontalSpace,
             Text(
-              S.of(context).orderItems,
+              AppLocalizations.of(context)!.orderItems,
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ],
@@ -200,7 +202,7 @@ class _PaymentMethodSection extends StatelessWidget {
             ),
             8.horizontalSpace,
             Text(
-              S.of(context).paymentMethod,
+              AppLocalizations.of(context)!.paymentMethod,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const Spacer(),
@@ -209,7 +211,7 @@ class _PaymentMethodSection extends StatelessWidget {
                 Navigator.pushNamed(context, '/payment_screen');
               },
               child: Text(
-                S.of(context).change,
+                AppLocalizations.of(context)!.change,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.primary,
@@ -264,7 +266,7 @@ class _OrderSummarySection extends StatelessWidget {
             ),
             8.horizontalSpace,
             Text(
-              S.of(context).orderSummary,
+              AppLocalizations.of(context)!.orderSummary,
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ],
@@ -279,17 +281,17 @@ class _OrderSummarySection extends StatelessWidget {
           child: Column(
             children: [
               BiteSummaryRow(
-                label: S.of(context).subtotal,
+                label: AppLocalizations.of(context)!.subtotal,
                 value: 'PKR ${totalAmount.toStringAsFixed(2)}',
               ),
               10.verticalSpace,
               BiteSummaryRow(
-                label: S.of(context).deliveryFee,
+                label: AppLocalizations.of(context)!.deliveryFee,
                 value: 'PKR ${deliveryFee.toStringAsFixed(2)}',
               ),
               10.verticalSpace,
               BiteSummaryRow(
-                label: S.of(context).platformFee,
+                label: AppLocalizations.of(context)!.platformFee,
                 value: 'PKR ${platformFee.toStringAsFixed(2)}',
               ),
               12.verticalSpace,
@@ -299,7 +301,7 @@ class _OrderSummarySection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    S.of(context).total,
+                    AppLocalizations.of(context)!.total,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   Text(
@@ -377,13 +379,12 @@ class _PlaceOrderButton extends StatelessWidget {
             ),
             20.verticalSpace,
             Text(
-              S.of(context).orderPlaced,
+              AppLocalizations.of(context)!.orderPlaced,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             10.verticalSpace,
             Text(
-              S
-                  .of(context)
+              AppLocalizations.of(context)!
                   .yourOrderHasBeenPlacedSuccessfullyntrackYourOrderInRealtime,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
@@ -408,7 +409,7 @@ class _PlaceOrderButton extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      S.of(context).trackOrder,
+                      AppLocalizations.of(context)!.trackOrder,
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
@@ -432,7 +433,7 @@ class _PlaceOrderButton extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      S.of(context).backToHome,
+                      AppLocalizations.of(context)!.backToHome,
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
@@ -550,11 +551,9 @@ class _PlaceOrderButton extends StatelessWidget {
                                 Icon(Icons.shopping_cart_checkout, size: 22.r),
                                 10.horizontalSpace,
                                 Text(
-                                  S
-                                      .of(context)
-                                      .confirmPayment(
-                                        grandTotal.toStringAsFixed(0),
-                                      ),
+                                  AppLocalizations.of(context)!.confirmPayment(
+                                    grandTotal.toStringAsFixed(0),
+                                  ),
                                   style: Theme.of(context).textTheme.titleLarge!
                                       .copyWith(color: Colors.white),
                                 ),

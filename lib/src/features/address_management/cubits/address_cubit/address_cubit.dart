@@ -21,7 +21,6 @@ class AddressCubit extends Cubit<AddressState> {
 
       final db = getCollection('UsersDB');
 
-      
       final addressesSnapshot = await db
           .doc(user.uid)
           .collection('addresses')
@@ -31,7 +30,7 @@ class AddressCubit extends Cubit<AddressState> {
       for (var doc in addressesSnapshot.docs) {
         try {
           final data = doc.data();
-          
+
           if (!data.containsKey('id')) {
             data['id'] = doc.id;
           }
@@ -41,7 +40,6 @@ class AddressCubit extends Cubit<AddressState> {
         }
       }
 
-      
       final prefs = await SharedPreferences.getInstance();
       final selectedAddressId = prefs.getString('selected_address_id');
 
@@ -73,7 +71,6 @@ class AddressCubit extends Cubit<AddressState> {
       await prefs.setString('selected_address_id', address.addressID);
       emit(AddressSelected(selectedAddress: address));
 
-      
       await loadAddresses();
     } catch (e) {
       debugPrint('Error in selectAddress: $e');
@@ -91,7 +88,6 @@ class AddressCubit extends Cubit<AddressState> {
 
       final db = getCollection('UsersDB');
 
-      
       await db
           .doc(user.uid)
           .collection('addresses')
@@ -114,7 +110,6 @@ class AddressCubit extends Cubit<AddressState> {
 
       final db = getCollection('UsersDB');
 
-      
       await db
           .doc(user.uid)
           .collection('addresses')
@@ -137,7 +132,6 @@ class AddressCubit extends Cubit<AddressState> {
 
       final db = getCollection('UsersDB');
 
-      
       await db.doc(user.uid).collection('addresses').doc(addressID).delete();
 
       await loadAddresses();

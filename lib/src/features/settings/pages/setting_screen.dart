@@ -5,7 +5,7 @@ import 'package:bite_food_delivery/src/features/settings/widgets/bite_setting_it
 import 'package:bite_food_delivery/src/features/app_update/utils/app_update_check.dart';
 import 'package:bite_food_delivery/src/core/constants/lang_list.dart';
 import 'package:bite_food_delivery/src/core/themes/theme_list.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,7 +43,7 @@ class _PreferencesSection extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 15.w, bottom: 10.h),
           child: Text(
-            S.of(context).preferences2,
+            AppLocalizations.of(context)!.preferences2,
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
               fontWeight: FontWeight.w600,
               color: Theme.of(context).colorScheme.onSecondary,
@@ -62,7 +62,7 @@ class _PreferencesSection extends StatelessWidget {
                     iconBgColor: Theme.of(
                       context,
                     ).colorScheme.primary.withAlpha(25),
-                    title: S.of(context).notifications,
+                    title: AppLocalizations.of(context)!.notifications,
                     trailing: Switch(
                       value: state.areNotificationsEnabled,
                       onChanged: (value) {
@@ -83,7 +83,7 @@ class _PreferencesSection extends StatelessWidget {
                     iconBgColor: Theme.of(
                       context,
                     ).colorScheme.primary.withAlpha(25),
-                    title: S.of(context).darkMode,
+                    title: AppLocalizations.of(context)!.darkMode,
                     trailing: Switch(
                       value: state.isDarkMode,
                       onChanged: (value) {
@@ -102,7 +102,7 @@ class _PreferencesSection extends StatelessWidget {
                     iconBgColor: Theme.of(
                       context,
                     ).colorScheme.primary.withAlpha(25),
-                    title: S.of(context).language,
+                    title: AppLocalizations.of(context)!.language,
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -170,7 +170,7 @@ class _PreferencesSection extends StatelessWidget {
                     iconBgColor: Theme.of(
                       context,
                     ).colorScheme.primary.withAlpha(25),
-                    title: S.of(context).themes,
+                    title: AppLocalizations.of(context)!.themes,
                   ),
                 ),
                 SizedBox(
@@ -219,7 +219,8 @@ class _VersionSectionState extends State<_VersionSection> {
       builder: (context, asyncSnapshot) {
         return Center(
           child: Text(
-            asyncSnapshot.data ?? S.of(context).versionInfoNotAvailable,
+            asyncSnapshot.data ??
+                AppLocalizations.of(context)!.versionInfoNotAvailable,
             style: Theme.of(
               context,
             ).textTheme.bodySmall!.copyWith(color: Colors.grey.shade300),
@@ -241,7 +242,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
     return BiteAppBar(
       backButton: true,
       title: Text(
-        S.of(context).settings,
+        AppLocalizations.of(context)!.settings,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,

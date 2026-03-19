@@ -4,7 +4,7 @@ import 'package:bite_food_delivery/src/shared/widgets/bite_address_text_field.da
 import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/features/address_management/models/address_model.dart';
 import 'package:bite_food_delivery/src/services/firebase/firebase_auth_conn.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,12 +27,12 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   final TextEditingController _zipController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _countryController = TextEditingController();
-  final List<String> _addressLabels = [
-    S.current.home,
-    S.current.work,
-    S.current.other,
+  List<String> get _addressLabels => [
+    AppLocalizations.of(context)!.home,
+    AppLocalizations.of(context)!.work,
+    AppLocalizations.of(context)!.other,
   ];
-  String _selectedLabel = S.current.home;
+  String? _selectedLabel;
   LatLng? _selectedLocation;
   bool _isMapMoving = false;
 
@@ -70,6 +70,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _selectedLabel ??= AppLocalizations.of(context)!.home;
     return Scaffold(
       body: Column(
         children: [
@@ -104,7 +105,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                       if (state is MapLocationPermissionDenied) {
                         return Center(
                           child: Text(
-                            S.of(context).locationPermissionIsRequired,
+                            AppLocalizations.of(
+                              context,
+                            )!.locationPermissionIsRequired,
                             style: Theme.of(context).textTheme.titleSmall!
                                 .copyWith(fontWeight: FontWeight.normal),
                           ),
@@ -114,7 +117,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                       if (state is MapLocationError) {
                         return Center(
                           child: Text(
-                            S.of(context).errorStatemessage(state.message),
+                            AppLocalizations.of(
+                              context,
+                            )!.errorStatemessage(state.message),
                             style: Theme.of(context).textTheme.titleSmall!
                                 .copyWith(fontWeight: FontWeight.normal),
                           ),
@@ -204,7 +209,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                   20.verticalSpace,
                   _AddressLabelSection(
                     labels: _addressLabels,
-                    selectedLabel: _selectedLabel,
+                    selectedLabel: _selectedLabel!,
                     onSelected: (label) {
                       setState(() {
                         _selectedLabel = label;
@@ -218,7 +223,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                     zipController: _zipController,
                     cityController: _cityController,
                     countryController: _countryController,
-                    selectedLabel: _selectedLabel,
+                    selectedLabel: _selectedLabel!,
                     selectedLocation: _selectedLocation,
                   ),
                 ],
@@ -251,7 +256,7 @@ class _NewAddressSection extends StatelessWidget {
     return Column(
       children: [
         BiteAddressTextField(
-          title: S.of(context).address,
+          title: AppLocalizations.of(context)!.address,
           controller: addressController,
         ),
         10.verticalSpace,
@@ -259,14 +264,14 @@ class _NewAddressSection extends StatelessWidget {
           children: [
             Expanded(
               child: BiteAddressTextField(
-                title: S.of(context).streetNo,
+                title: AppLocalizations.of(context)!.streetNo,
                 controller: streetController,
               ),
             ),
             10.horizontalSpace,
             Expanded(
               child: BiteAddressTextField(
-                title: S.of(context).zipCode,
+                title: AppLocalizations.of(context)!.zipCode,
                 controller: zipController,
               ),
             ),
@@ -274,12 +279,12 @@ class _NewAddressSection extends StatelessWidget {
         ),
         10.verticalSpace,
         BiteAddressTextField(
-          title: S.of(context).city,
+          title: AppLocalizations.of(context)!.city,
           controller: cityController,
         ),
         10.verticalSpace,
         BiteAddressTextField(
-          title: S.of(context).country,
+          title: AppLocalizations.of(context)!.country,
           controller: countryController,
         ),
       ],
@@ -307,7 +312,7 @@ class _AddressLabelSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          S.of(context).label,
+          AppLocalizations.of(context)!.label,
           style: Theme.of(
             context,
           ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
@@ -390,7 +395,9 @@ class _SaveAddressSection extends StatelessWidget {
                 showTopSnackBar(
                   Overlay.of(context),
                   CustomSnackBar.error(
-                    message: S.of(context).pleaseFillAllRequiredFields,
+                    message: AppLocalizations.of(
+                      context,
+                    )!.pleaseFillAllRequiredFields,
                   ),
                 );
                 return;
@@ -405,7 +412,7 @@ class _SaveAddressSection extends StatelessWidget {
                 showTopSnackBar(
                   Overlay.of(context),
                   CustomSnackBar.error(
-                    message: S.of(context).userNotAuthenticated,
+                    message: AppLocalizations.of(context)!.userNotAuthenticated,
                   ),
                 );
                 return;
@@ -428,7 +435,9 @@ class _SaveAddressSection extends StatelessWidget {
                     showTopSnackBar(
                       Overlay.of(context),
                       CustomSnackBar.success(
-                        message: S.of(context).addressAddedSuccessfully,
+                        message: AppLocalizations.of(
+                          context,
+                        )!.addressAddedSuccessfully,
                       ),
                     );
                     Navigator.pop(context);
@@ -437,9 +446,9 @@ class _SaveAddressSection extends StatelessWidget {
                     showTopSnackBar(
                       Overlay.of(context),
                       CustomSnackBar.error(
-                        message: S
-                            .of(context)
-                            .failedToAddAddressError(error.toString()),
+                        message: AppLocalizations.of(
+                          context,
+                        )!.failedToAddAddressError(error.toString()),
                       ),
                     );
                   });
@@ -453,7 +462,7 @@ class _SaveAddressSection extends StatelessWidget {
               ),
               textStyle: Theme.of(context).textTheme.headlineLarge,
             ),
-            child: Text(S.of(context).save),
+            child: Text(AppLocalizations.of(context)!.save),
           ),
         ),
       ],

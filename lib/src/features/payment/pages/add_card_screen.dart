@@ -1,7 +1,7 @@
 import 'package:bite_food_delivery/src/features/payment/cubits/credit_card_cubit/credit_card_cubit.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/services/firebase/firebase_auth_conn.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -167,7 +167,7 @@ class _CardDetailsSection extends StatelessWidget {
       children: [
         _SectionHeader(
           icon: Icons.credit_card_rounded,
-          title: S.of(context).cardInformation,
+          title: AppLocalizations.of(context)!.cardInformation,
         ),
         12.verticalSpace,
         TextFormField(
@@ -180,8 +180,10 @@ class _CardDetailsSection extends StatelessWidget {
           ],
           validator: (value) {
             final digits = value?.replaceAll(' ', '') ?? '';
-            if (digits.isEmpty) return S.of(context).cardNumberIsRequired;
-            if (digits.length < 13) return S.of(context).cardNumberIsTooShort;
+            if (digits.isEmpty)
+              return AppLocalizations.of(context)!.cardNumberIsRequired;
+            if (digits.length < 13)
+              return AppLocalizations.of(context)!.cardNumberIsTooShort;
             return null;
           },
           style: textTheme.titleMedium,
@@ -205,11 +207,12 @@ class _CardDetailsSection extends StatelessWidget {
                 ],
                 validator: (value) {
                   final text = value?.replaceAll('/', '') ?? '';
-                  if (text.isEmpty) return S.of(context).required;
+                  if (text.isEmpty)
+                    return AppLocalizations.of(context)!.required;
                   if (text.length < 4) return 'MM/YY';
                   final month = int.tryParse(text.substring(0, 2)) ?? 0;
                   if (month < 1 || month > 12) {
-                    return S.of(context).invalidMonth;
+                    return AppLocalizations.of(context)!.invalidMonth;
                   }
                   return null;
                 },
@@ -233,15 +236,16 @@ class _CardDetailsSection extends StatelessWidget {
                 ],
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return S.of(context).required;
+                    return AppLocalizations.of(context)!.required;
                   }
-                  if (value.length < 3) return S.of(context).invalidCvc;
+                  if (value.length < 3)
+                    return AppLocalizations.of(context)!.invalidCvc;
                   return null;
                 },
                 style: textTheme.titleMedium,
                 decoration: _inputDecoration(
                   context,
-                  hintText: S.of(context).cvc,
+                  hintText: AppLocalizations.of(context)!.cvc,
                   icon: Icons.lock_outline_rounded,
                 ),
               ),
@@ -310,7 +314,7 @@ class _CardHolderSection extends StatelessWidget {
       children: [
         _SectionHeader(
           icon: Icons.person_outline_rounded,
-          title: S.of(context).cardHolder,
+          title: AppLocalizations.of(context)!.cardHolder,
         ),
         12.verticalSpace,
         TextFormField(
@@ -324,7 +328,7 @@ class _CardHolderSection extends StatelessWidget {
           decoration: InputDecoration(
             filled: true,
             fillColor: colorScheme.onSecondaryFixed,
-            hintText: S.of(context).fullNameOnCard,
+            hintText: AppLocalizations.of(context)!.fullNameOnCard,
             hintStyle: textTheme.titleMedium!.copyWith(
               color: colorScheme.onSecondary,
             ),
@@ -336,7 +340,10 @@ class _CardHolderSection extends StatelessWidget {
                 size: 22.r,
               ),
             ),
-            prefixIconConstraints: const BoxConstraints(minHeight: 0, minWidth: 0),
+            prefixIconConstraints: const BoxConstraints(
+              minHeight: 0,
+              minWidth: 0,
+            ),
             contentPadding: EdgeInsets.symmetric(
               horizontal: 20.w,
               vertical: 16.h,
@@ -390,7 +397,9 @@ class _SecurityInfoSection extends StatelessWidget {
           14.horizontalSpace,
           Expanded(
             child: Text(
-              S.of(context).yourCardDetailsAreSecurelyHandledByStripeWeNever,
+              AppLocalizations.of(
+                context,
+              )!.yourCardDetailsAreSecurelyHandledByStripeWeNever,
               style: Theme.of(context).textTheme.labelMedium!.copyWith(
                 color: colorScheme.onSecondary,
                 height: 1.4,
@@ -436,7 +445,11 @@ class _AddCardButton extends StatelessWidget {
                       ),
                     )
                   : Icon(Icons.add_card_rounded, size: 22.r),
-              label: Text(isLoading ? S.of(context).adding : S.of(context).addCard),
+              label: Text(
+                isLoading
+                    ? AppLocalizations.of(context)!.adding
+                    : AppLocalizations.of(context)!.addCard,
+              ),
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.symmetric(vertical: 12.h),
                 backgroundColor: Theme.of(context).colorScheme.primary,
@@ -487,7 +500,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
     return BiteAppBar(
       backButton: true,
       title: Text(
-        S.of(context).addCard,
+        AppLocalizations.of(context)!.addCard,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,

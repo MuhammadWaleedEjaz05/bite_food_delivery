@@ -3,7 +3,7 @@ import 'package:bite_food_delivery/src/features/authentication/cubits/user_auth_
 import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/features/notifications/models/notification_model.dart';
 import 'package:bite_food_delivery/src/features/notifications/widgets/bite_notification_card.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -57,7 +57,7 @@ class _NotificationBody extends StatelessWidget {
             ),
             15.verticalSpace,
             Text(
-              S.of(context).noNotificationsYet,
+              AppLocalizations.of(context)!.noNotificationsYet,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 color: Theme.of(context).colorScheme.onSecondary,
                 fontWeight: FontWeight.normal,
@@ -77,8 +77,7 @@ class _NotificationBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              S
-                  .of(context)
+              AppLocalizations.of(context)!
                   .stateunreadcountUnreadNotifications(state.unreadCount),
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
                 color: Theme.of(context).colorScheme.onSecondary,
@@ -115,7 +114,7 @@ class _NotificationList extends StatelessWidget {
     if (notifications.isEmpty) {
       return Center(
         child: Text(
-          S.of(context).noNotificationsYet,
+          AppLocalizations.of(context)!.noNotificationsYet,
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
             color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.normal,
@@ -176,8 +175,10 @@ class _TabSection extends StatelessWidget {
         context,
       ).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.normal),
       tabs: [
-        Tab(text: S.of(context).allNotifications(totalCount)),
-        Tab(text: S.of(context).unreadNotifications(unreadCount)),
+        Tab(text: AppLocalizations.of(context)!.allNotifications(totalCount)),
+        Tab(
+          text: AppLocalizations.of(context)!.unreadNotifications(unreadCount),
+        ),
       ],
     );
   }
@@ -193,7 +194,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
     return BiteAppBar(
       backButton: true,
       title: Text(
-        S.of(context).notifications,
+        AppLocalizations.of(context)!.notifications,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
@@ -214,14 +215,18 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
               showDialog(
                 context: context,
                 builder: (ctx) => AlertDialog(
-                  title: Text(S.of(context).clearAllNotifications),
+                  title: Text(
+                    AppLocalizations.of(context)!.clearAllNotifications,
+                  ),
                   content: Text(
-                    S.of(context).deleteAllNotificationsConfirmation,
+                    AppLocalizations.of(
+                      context,
+                    )!.deleteAllNotificationsConfirmation,
                   ),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(ctx),
-                      child: Text(S.of(context).cancel),
+                      child: Text(AppLocalizations.of(context)!.cancel),
                     ),
                     TextButton(
                       onPressed: () {
@@ -245,7 +250,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
                 children: [
                   const Icon(Icons.done_all),
                   const SizedBox(width: 8),
-                  Text(S.of(context).markAllAsRead),
+                  Text(AppLocalizations.of(context)!.markAllAsRead),
                 ],
               ),
             ),
@@ -256,7 +261,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
                   const Icon(Icons.delete_outline, color: Colors.red),
                   const SizedBox(width: 8),
                   Text(
-                    S.of(context).clearAll,
+                    AppLocalizations.of(context)!.clearAll,
                     style: const TextStyle(color: Colors.red),
                   ),
                 ],

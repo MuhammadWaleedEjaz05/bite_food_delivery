@@ -4,7 +4,7 @@ import 'package:bite_food_delivery/src/features/restaurants/cubits/restaurants_c
 import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/features/favourites/widgets/bite_favourite_block.dart';
 import 'package:bite_food_delivery/src/features/favourites/widgets/bite_favourite_restaurant_card.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -71,7 +71,11 @@ class _ReataurantFavouriteSection extends StatelessWidget {
               );
             } else if (state is RestaurantsError) {
               return Center(
-                child: Text(S.of(context).errorStatemessage(state.message)),
+                child: Text(
+                  AppLocalizations.of(
+                    context,
+                  )!.errorStatemessage(state.message),
+                ),
               );
             } else if (state is RestaurantsLoaded) {
               final favouriteRestaurants = state.restaurants
@@ -79,7 +83,9 @@ class _ReataurantFavouriteSection extends StatelessWidget {
                   .toList();
               if (favouriteRestaurants.isEmpty) {
                 return Center(
-                  child: Text(S.of(context).noFavouriteRestaurantsFound),
+                  child: Text(
+                    AppLocalizations.of(context)!.noFavouriteRestaurantsFound,
+                  ),
                 );
               }
               return ListView.separated(
@@ -121,14 +127,22 @@ class _FoodFavouriteSection extends StatelessWidget {
               );
             } else if (state is FoodItemError) {
               return Center(
-                child: Text(S.of(context).errorStatemessage(state.message)),
+                child: Text(
+                  AppLocalizations.of(
+                    context,
+                  )!.errorStatemessage(state.message),
+                ),
               );
             } else if (state is FoodItemLoaded) {
               final favouriteFoodItems = state.foodItems
                   .where((foodItem) => foodItem.isFavorite ?? false)
                   .toList();
               if (favouriteFoodItems.isEmpty) {
-                return Center(child: Text(S.of(context).noFavouriteFoodsFound));
+                return Center(
+                  child: Text(
+                    AppLocalizations.of(context)!.noFavouriteFoodsFound,
+                  ),
+                );
               }
               return ListView.separated(
                 itemBuilder: (context, index) =>
@@ -165,8 +179,8 @@ class _TabSection extends StatelessWidget {
         context,
       ).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.normal),
       tabs: [
-        Tab(text: S.of(context).foods),
-        Tab(text: S.of(context).restaurants),
+        Tab(text: AppLocalizations.of(context)!.foods),
+        Tab(text: AppLocalizations.of(context)!.restaurants),
       ],
     );
   }

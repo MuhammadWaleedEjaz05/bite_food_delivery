@@ -3,7 +3,7 @@ import 'package:bite_food_delivery/src/features/payment/cubits/payment_cubit/pay
 import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/features/payment/models/credit_card_model.dart';
 import 'package:bite_food_delivery/src/services/firebase/firebase_auth_conn.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -56,7 +56,7 @@ class _PaymentMethodSection extends StatelessWidget {
       children: [
         _SectionHeader(
           icon: Icons.payment_outlined,
-          title: S.of(context).selectPaymentMethod,
+          title: AppLocalizations.of(context)!.selectPaymentMethod,
         ),
         12.verticalSpace,
         BlocBuilder<PaymentMethodSelectorCubit, CreditCardModel>(
@@ -72,8 +72,10 @@ class _PaymentMethodSection extends StatelessWidget {
                 children: [
                   _PaymentMethodTile(
                     svgPath: 'assets/svgs/Cash.svg',
-                    label: S.of(context).cashOnDelivery,
-                    subtitle: S.of(context).payWhenYourOrderArrives,
+                    label: AppLocalizations.of(context)!.cashOnDelivery,
+                    subtitle: AppLocalizations.of(
+                      context,
+                    )!.payWhenYourOrderArrives,
                     isSelected: selectedType == CreditCardType.onCash,
                     onTap: () {
                       context
@@ -82,7 +84,9 @@ class _PaymentMethodSection extends StatelessWidget {
                       showTopSnackBar(
                         Overlay.of(context),
                         CustomSnackBar.info(
-                          message: S.of(context).cashOnDeliverySelected,
+                          message: AppLocalizations.of(
+                            context,
+                          )!.cashOnDeliverySelected,
                         ),
                       );
                       Navigator.pop(context);
@@ -98,8 +102,10 @@ class _PaymentMethodSection extends StatelessWidget {
                   ),
                   _PaymentMethodTile(
                     svgPath: 'assets/svgs/Visa.svg',
-                    label: S.of(context).visa,
-                    subtitle: S.of(context).selectFromYourSavedVisaCards,
+                    label: AppLocalizations.of(context)!.visa,
+                    subtitle: AppLocalizations.of(
+                      context,
+                    )!.selectFromYourSavedVisaCards,
                     isSelected: selectedType == CreditCardType.visa,
                     onTap: () => _selectCardType(context, CreditCardType.visa),
                   ),
@@ -113,8 +119,10 @@ class _PaymentMethodSection extends StatelessWidget {
                   ),
                   _PaymentMethodTile(
                     svgPath: 'assets/svgs/Mastercard.svg',
-                    label: S.of(context).mastercard,
-                    subtitle: S.of(context).selectFromYourSavedMastercards,
+                    label: AppLocalizations.of(context)!.mastercard,
+                    subtitle: AppLocalizations.of(
+                      context,
+                    )!.selectFromYourSavedMastercards,
                     isSelected: selectedType == CreditCardType.mastercard,
                     onTap: () =>
                         _selectCardType(context, CreditCardType.mastercard),
@@ -248,7 +256,7 @@ class _SavedCardsSection extends StatelessWidget {
       children: [
         _SectionHeader(
           icon: Icons.credit_card_rounded,
-          title: S.of(context).savedCards,
+          title: AppLocalizations.of(context)!.savedCards,
         ),
         12.verticalSpace,
         BlocConsumer<CreditCardCubit, CreditCardState>(
@@ -262,14 +270,18 @@ class _SavedCardsSection extends StatelessWidget {
               showTopSnackBar(
                 Overlay.of(context),
                 CustomSnackBar.success(
-                  message: S.of(context).creditCardAddedSuccessfully,
+                  message: AppLocalizations.of(
+                    context,
+                  )!.creditCardAddedSuccessfully,
                 ),
               );
             } else if (state is CreditCardDeleted) {
               showTopSnackBar(
                 Overlay.of(context),
                 CustomSnackBar.success(
-                  message: S.of(context).creditCardDeletedSuccessfully,
+                  message: AppLocalizations.of(
+                    context,
+                  )!.creditCardDeletedSuccessfully,
                 ),
               );
             }
@@ -317,7 +329,7 @@ class _SavedCardsSection extends StatelessWidget {
               return Center(
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 40.h),
-                  child: Text(S.of(context).failedToLoadCards),
+                  child: Text(AppLocalizations.of(context)!.failedToLoadCards),
                 ),
               );
             }
@@ -349,14 +361,14 @@ class _EmptyCardPlaceholder extends StatelessWidget {
           ),
           12.verticalSpace,
           Text(
-            S.of(context).noSavedCardsYet,
+            AppLocalizations.of(context)!.noSavedCardsYet,
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
               color: Theme.of(context).colorScheme.onSecondary,
             ),
           ),
           6.verticalSpace,
           Text(
-            S.of(context).addACardBelowToGetStarted,
+            AppLocalizations.of(context)!.addACardBelowToGetStarted,
             style: Theme.of(context).textTheme.labelMedium!.copyWith(
               color: Theme.of(context).colorScheme.onSecondary,
             ),
@@ -439,8 +451,7 @@ class _SavedCardTile extends StatelessWidget {
                         showTopSnackBar(
                           Overlay.of(context),
                           CustomSnackBar.info(
-                            message: S
-                                .of(context)
+                            message: AppLocalizations.of(context)!
                                 .cardEndingInCreditcardlast4Selected(
                                   creditCard.last4,
                                 ),
@@ -527,7 +538,7 @@ class _AddCardButton extends StatelessWidget {
               Navigator.pushNamed(context, '/add_card_screen');
             },
             icon: Icon(Icons.add_rounded, size: 22.r),
-            label: Text(S.of(context).addNewCard),
+            label: Text(AppLocalizations.of(context)!.addNewCard),
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(vertical: 12.h),
               backgroundColor: Theme.of(context).colorScheme.primary,
@@ -573,7 +584,7 @@ class _AppSection extends StatelessWidget implements PreferredSizeWidget {
     return BiteAppBar(
       backButton: true,
       title: Text(
-        S.of(context).paymentMethod,
+        AppLocalizations.of(context)!.paymentMethod,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,

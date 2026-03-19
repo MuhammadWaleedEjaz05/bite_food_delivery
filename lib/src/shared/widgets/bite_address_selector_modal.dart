@@ -1,6 +1,6 @@
 import 'package:bite_food_delivery/src/shared/widgets/bite_address_selection_card.dart';
 import 'package:bite_food_delivery/src/features/address_management/cubits/address_cubit/address_cubit.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,7 +28,9 @@ void showAddressSelectorModal(BuildContext context) {
           );
         } else if (state is AddressError) {
           return Center(
-            child: Text(S.of(context).errorStatemessage(state.message)),
+            child: Text(
+              AppLocalizations.of(context)!.errorStatemessage(state.message),
+            ),
           );
         } else if (state is AddressesLoaded) {
           return DraggableScrollableSheet(
@@ -41,7 +43,7 @@ void showAddressSelectorModal(BuildContext context) {
                 child: Column(
                   children: [
                     Text(
-                      S.of(context).selectDeliveryAddress,
+                      AppLocalizations.of(context)!.selectDeliveryAddress,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     20.verticalSpace,
@@ -49,7 +51,7 @@ void showAddressSelectorModal(BuildContext context) {
                       child: state.addresses.isEmpty
                           ? Center(
                               child: Text(
-                                S.of(context).noAddressesFound,
+                                AppLocalizations.of(context)!.noAddressesFound,
                                 style: Theme.of(context).textTheme.titleSmall!
                                     .copyWith(fontWeight: FontWeight.normal),
                               ),

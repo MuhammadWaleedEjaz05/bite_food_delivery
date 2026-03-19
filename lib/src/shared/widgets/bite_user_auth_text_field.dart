@@ -1,4 +1,4 @@
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -74,7 +74,7 @@ class _BiteUserAuthTextFieldState extends State<BiteUserAuthTextField> {
                     ),
                   )
                 : const SizedBox.shrink(),
-            hintText: S.of(context).editTitle(widget.title),
+            hintText: AppLocalizations.of(context)!.editTitle(widget.title),
             hintStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
               fontWeight: FontWeight.normal,
               color: Theme.of(context).colorScheme.onSecondary,
@@ -88,24 +88,29 @@ class _BiteUserAuthTextFieldState extends State<BiteUserAuthTextField> {
           ),
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(
-              errorText: S
-                  .of(context)
+              errorText: AppLocalizations.of(context)!
                   .pleaseEnterWidgettitletolowercase(
                     widget.title.toLowerCase(),
                   ),
             ),
             if (widget.isEmail)
               FormBuilderValidators.email(
-                errorText: S.of(context).pleaseEnterAValidEmailAddress,
+                errorText: AppLocalizations.of(
+                  context,
+                )!.pleaseEnterAValidEmailAddress,
               ),
             if (widget.isPhone)
               FormBuilderValidators.phoneNumber(
-                errorText: S.of(context).pleaseEnterAValidPhoneNumber,
+                errorText: AppLocalizations.of(
+                  context,
+                )!.pleaseEnterAValidPhoneNumber,
               ),
             if (widget.isPassword)
               FormBuilderValidators.minLength(
                 8,
-                errorText: S.of(context).passwordMustBeAtLeast8CharactersLong,
+                errorText: AppLocalizations.of(
+                  context,
+                )!.passwordMustBeAtLeast8CharactersLong,
               ),
           ]),
         ),

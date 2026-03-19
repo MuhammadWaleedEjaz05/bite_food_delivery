@@ -1,6 +1,6 @@
 import 'package:bite_food_delivery/src/features/order_management_and_history/widgets/bite_order_timeline.dart';
 import 'package:bite_food_delivery/src/features/order_management_and_history/widgets/bite_courier_card.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -106,7 +106,9 @@ class BiteOrderInfoSheet extends StatelessWidget {
                             ),
                             4.verticalSpace,
                             Text(
-                              S.of(context).estimatedDeliveryTime2,
+                              AppLocalizations.of(
+                                context,
+                              )!.estimatedDeliveryTime2,
                               style: Theme.of(context).textTheme.labelLarge!
                                   .copyWith(
                                     color: Theme.of(

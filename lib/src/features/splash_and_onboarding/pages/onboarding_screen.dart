@@ -1,24 +1,24 @@
 import 'package:bite_food_delivery/src/features/splash_and_onboarding/cubits/first_time_launch_cubit/first_time_launch_cubit.dart';
 import 'package:bite_food_delivery/src/features/splash_and_onboarding/widgets/bite_carousel_slider_page.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:bite_food_delivery/main.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-final List<Widget> carouselPages = [
+List<Widget> getCarouselPages(BuildContext context) => [
   BiteCarouselSliderPage(
-    title: S.current.allYourFavorites,
-    description: S.current.getAllYourLovedFoodsInOnePlace,
+    title: AppLocalizations.of(context)!.allYourFavorites,
+    description: AppLocalizations.of(context)!.getAllYourLovedFoodsInOnePlace,
   ),
   BiteCarouselSliderPage(
-    title: S.current.orderFromChoosenChef,
-    description: S.current.getAllYourLovedFoodsInOnePlace,
+    title: AppLocalizations.of(context)!.orderFromChoosenChef,
+    description: AppLocalizations.of(context)!.getAllYourLovedFoodsInOnePlace,
   ),
   BiteCarouselSliderPage(
-    title: S.current.freeDeliveryOffers,
-    description: S.current.getAllYourLovedFoodsInOnePlace,
+    title: AppLocalizations.of(context)!.freeDeliveryOffers,
+    description: AppLocalizations.of(context)!.getAllYourLovedFoodsInOnePlace,
   ),
 ];
 
@@ -35,7 +35,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final CarouselSliderController buttonCarouselController =
       CarouselSliderController();
 
-  bool get _isLastPage => carouselCurrentPage == carouselPages.length - 1;
+  bool get _isLastPage => carouselCurrentPage == 2;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           CarouselSlider(
             carouselController: buttonCarouselController,
-            items: carouselPages,
+            items: getCarouselPages(context),
             options: CarouselOptions(
               scrollDirection: Axis.horizontal,
               aspectRatio: 3 / 4.2,
@@ -86,7 +86,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 textStyle: Theme.of(context).textTheme.titleLarge,
               ),
               child: Text(
-                _isLastPage ? S.of(context).getStarted : S.of(context).next,
+                _isLastPage
+                    ? AppLocalizations.of(context)!.getStarted
+                    : AppLocalizations.of(context)!.next,
               ),
             ),
           ),
@@ -99,7 +101,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               );
             },
             child: Text(
-              S.of(context).skip,
+              AppLocalizations.of(context)!.skip,
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium!.copyWith(color: Colors.grey),

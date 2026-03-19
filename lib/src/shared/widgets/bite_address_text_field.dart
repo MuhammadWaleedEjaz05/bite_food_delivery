@@ -1,4 +1,4 @@
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -23,7 +23,7 @@ class BiteAddressTextField extends StatelessWidget {
         TextFormField(
           controller: controller,
           validator: FormBuilderValidators.street(
-            errorText: S.of(context).pleaseEnterAValidAddress,
+            errorText: AppLocalizations.of(context)!.pleaseEnterAValidAddress,
           ),
           decoration: InputDecoration(
             hintText: 'Enter $title',

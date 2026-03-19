@@ -1,4 +1,4 @@
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,7 +22,7 @@ class BiteUpdateDialog extends StatelessWidget {
     return showGeneralDialog(
       context: context,
       barrierDismissible: false,
-      barrierLabel: S.of(context).updateDialog,
+      barrierLabel: AppLocalizations.of(context)!.updateDialog,
       barrierColor: Colors.black54,
       transitionDuration: const Duration(milliseconds: 350),
       transitionBuilder: (context, anim1, anim2, child) {
@@ -107,7 +107,7 @@ class BiteUpdateDialog extends StatelessWidget {
                       ),
                       12.verticalSpace,
                       Text(
-                        S.of(context).updateAvailable,
+                        AppLocalizations.of(context)!.updateAvailable,
                         style: GoogleFonts.sen(
                           fontSize: 22.sp,
                           fontWeight: FontWeight.bold,
@@ -123,7 +123,7 @@ class BiteUpdateDialog extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        S.of(context).aNewVersionOfBiteIsReady,
+                        AppLocalizations.of(context)!.aNewVersionOfBiteIsReady,
                         textAlign: TextAlign.center,
                         style: GoogleFonts.sen(
                           fontSize: 16.sp,
@@ -133,7 +133,9 @@ class BiteUpdateDialog extends StatelessWidget {
                       ),
                       8.verticalSpace,
                       Text(
-                        S.of(context).versionLatestversionIncludesNewFeatures,
+                        AppLocalizations.of(
+                          context,
+                        )!.versionLatestversionIncludesNewFeatures,
                         textAlign: TextAlign.center,
                         style: GoogleFonts.sen(
                           fontSize: 13.5.sp,
@@ -199,7 +201,7 @@ class BiteUpdateDialog extends StatelessWidget {
                               Icon(Icons.download_rounded, size: 20.sp),
                               8.horizontalSpace,
                               Text(
-                                S.of(context).updateNow,
+                                AppLocalizations.of(context)!.updateNow,
                                 style: GoogleFonts.sen(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.bold,
@@ -226,7 +228,7 @@ class BiteUpdateDialog extends StatelessWidget {
                             ),
                           ),
                           child: Text(
-                            S.of(context).maybeLater,
+                            AppLocalizations.of(context)!.maybeLater,
                             style: GoogleFonts.sen(
                               fontSize: 15.sp,
                               fontWeight: FontWeight.w600,

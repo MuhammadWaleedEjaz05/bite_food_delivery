@@ -20,7 +20,9 @@ class BiteMenuItem extends StatelessWidget {
       subtitle: item.subtitle != null
           ? Text(
               item.subtitle!,
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.grey),
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall!.copyWith(color: Colors.grey),
             )
           : null,
       trailing: IconButton(

@@ -2,7 +2,7 @@ import 'package:bite_food_delivery/src/features/order_management_and_history/cub
 import 'package:bite_food_delivery/src/features/restaurants/cubits/restaurants_cubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/src/features/order_management_and_history/models/order_model.dart';
 import 'package:bite_food_delivery/src/features/order_management_and_history/pages/track_order_screen.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -143,7 +143,9 @@ class BiteOrderHistoryCard extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10.r),
                               ),
                             ),
-                            child: Text(S.of(context).trackOrder),
+                            child: Text(
+                              AppLocalizations.of(context)!.trackOrder,
+                            ),
                           )
                         : ElevatedButton(
                             onPressed: () {
@@ -165,7 +167,7 @@ class BiteOrderHistoryCard extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            child: Text(S.of(context).rate),
+                            child: Text(AppLocalizations.of(context)!.rate),
                           ),
                   ),
                   30.horizontalSpace,
@@ -177,14 +179,13 @@ class BiteOrderHistoryCard extends StatelessWidget {
                                 context: context,
                                 builder: (ctx) => AlertDialog(
                                   title: Text(
-                                    S.of(context).cancelOrder,
+                                    AppLocalizations.of(context)!.cancelOrder,
                                     style: GoogleFonts.sen(
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   content: Text(
-                                    S
-                                        .of(context)
+                                    AppLocalizations.of(context)!
                                         .areYouSureYouWantToCancelThisOrder,
                                     style: GoogleFonts.sen(),
                                   ),
@@ -208,7 +209,7 @@ class BiteOrderHistoryCard extends StatelessWidget {
                                         );
                                       },
                                       child: Text(
-                                        S.of(context).yesCancel,
+                                        AppLocalizations.of(context)!.yesCancel,
                                         style: GoogleFonts.sen(
                                           color: Colors.red,
                                           fontWeight: FontWeight.bold,
@@ -231,7 +232,7 @@ class BiteOrderHistoryCard extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            child: Text(S.of(context).cancel),
+                            child: Text(AppLocalizations.of(context)!.cancel),
                           )
                         : ElevatedButton(
                             onPressed: () {
@@ -249,7 +250,7 @@ class BiteOrderHistoryCard extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10.r),
                               ),
                             ),
-                            child: Text(S.of(context).reorder),
+                            child: Text(AppLocalizations.of(context)!.reorder),
                           ),
                   ),
                 ],

@@ -2,7 +2,7 @@ import 'package:bite_food_delivery/src/features/authentication/cubits/user_auth_
 import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_user_auth_text_field.dart';
 import 'package:bite_food_delivery/src/features/authentication/models/user_model.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -97,7 +97,7 @@ class _SignupActionSection extends StatelessWidget {
               ),
               textStyle: Theme.of(context).textTheme.titleLarge,
             ),
-            child: Text(S.of(context).signUp),
+            child: Text(AppLocalizations.of(context)!.signUp),
           ),
         ),
       ],
@@ -115,31 +115,31 @@ class _SignupCredentialsSection extends StatelessWidget {
       child: Column(
         children: [
           BiteUserAuthTextField(
-            title: S.of(context).fullName,
+            title: AppLocalizations.of(context)!.fullName,
             controller: _fullNameController,
           ),
           20.verticalSpace,
           BiteUserAuthTextField(
-            title: S.of(context).email,
+            title: AppLocalizations.of(context)!.email,
             isEmail: true,
             controller: _emailController,
           ),
           20.verticalSpace,
           BiteUserAuthTextField(
-            title: S.of(context).phoneNumber,
+            title: AppLocalizations.of(context)!.phoneNumber,
             isPhone: true,
             controller: _phoneController,
           ),
           20.verticalSpace,
           BiteUserAuthTextField(
             isPassword: true,
-            title: S.of(context).password,
+            title: AppLocalizations.of(context)!.password,
             controller: _passwordController,
           ),
           20.verticalSpace,
           BiteUserAuthTextField(
             isPassword: true,
-            title: S.of(context).confirmPassword,
+            title: AppLocalizations.of(context)!.confirmPassword,
             controller: _confirmPasswordController,
           ),
         ],
@@ -163,12 +163,12 @@ class _HeadTitleSection extends StatelessWidget {
           actions: [],
         ),
         Text(
-          S.of(context).signUp,
+          AppLocalizations.of(context)!.signUp,
           style: Theme.of(context).textTheme.displayLarge,
         ),
 
         Text(
-          S.of(context).pleaseSignUpToGetStarted,
+          AppLocalizations.of(context)!.pleaseSignUpToGetStarted,
           style: Theme.of(
             context,
           ).textTheme.titleLarge!.copyWith(color: Colors.white),

@@ -12,7 +12,7 @@ class BiteTabBar extends StatelessWidget {
       indicatorColor: Theme.of(context).colorScheme.primary,
       labelStyle: Theme.of(context).textTheme.titleLarge,
       unselectedLabelStyle: Theme.of(context).textTheme.titleLarge,
-      tabs: tabsList,
+      tabs: getTabsList(context),
     );
   }
 }

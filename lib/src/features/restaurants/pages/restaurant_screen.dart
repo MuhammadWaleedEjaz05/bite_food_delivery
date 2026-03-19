@@ -5,7 +5,7 @@ import 'package:bite_food_delivery/src/shared/widgets/skeleton_widgets.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/features/restaurants/models/restaurants_model.dart';
 import 'package:bite_food_delivery/src/features/restaurants/widgets/bite_food_card.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -90,7 +90,9 @@ class _FoodItemSection extends StatelessWidget {
             } else if (state is FoodItemError) {
               return Center(
                 child: Text(
-                  S.of(context).failedToLoadFoodItemsPleaseTryAgainLater,
+                  AppLocalizations.of(
+                    context,
+                  )!.failedToLoadFoodItemsPleaseTryAgainLater,
                 ),
               );
             } else if (state is FoodItemLoaded) {
@@ -105,7 +107,9 @@ class _FoodItemSection extends StatelessWidget {
               if (filteredItems.isEmpty) {
                 return Center(
                   child: Text(
-                    S.of(context).noFoodItemsAvailableForThisCategory,
+                    AppLocalizations.of(
+                      context,
+                    )!.noFoodItemsAvailableForThisCategory,
                   ),
                 );
               } else {
@@ -166,7 +170,9 @@ class _CategorySelectionSection extends StatelessWidget {
             } else if (state is FoodItemError) {
               return Center(
                 child: Text(
-                  S.of(context).failedToLoadFoodItemsPleaseTryAgainLater,
+                  AppLocalizations.of(
+                    context,
+                  )!.failedToLoadFoodItemsPleaseTryAgainLater,
                 ),
               );
             } else if (state is FoodItemLoaded) {

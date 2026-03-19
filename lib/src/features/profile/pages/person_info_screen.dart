@@ -3,7 +3,7 @@ import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_menu_item.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_menu_section.dart';
 import 'package:bite_food_delivery/src/features/profile/pages/profile_menu_items_list.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +20,7 @@ class PersonInfoScreen extends StatelessWidget {
       appBar: BiteAppBar(
         backButton: true,
         title: Text(
-          S.of(context).personalInfo,
+          AppLocalizations.of(context)!.personalInfo,
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
             color: Theme.of(context).colorScheme.primary,
           ),
@@ -122,11 +122,11 @@ class _UserInfoSection extends StatelessWidget {
                   CircleAvatar(radius: 60.r, backgroundColor: Colors.grey),
                   20.verticalSpace,
                   Text(
-                    S.of(context).guestUser,
+                    AppLocalizations.of(context)!.guestUser,
                     style: Theme.of(context).textTheme.headlineLarge,
                   ),
                   Text(
-                    S.of(context).pleaseLoginToViewYourProfile,
+                    AppLocalizations.of(context)!.pleaseLoginToViewYourProfile,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onSecondary,
                     ),

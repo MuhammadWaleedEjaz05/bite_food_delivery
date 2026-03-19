@@ -31,7 +31,9 @@ class UpdateCheckCubit extends Cubit<UpdateCheckState> {
       final latestVersionRaw = remoteConfig.getString('app_version');
       final latestVersion = latestVersionRaw.trim();
       final currentVersion = (await _getCurrentAppVersion()).trim();
-      debugPrint('Current version: $currentVersion, Latest version: $latestVersion');
+      debugPrint(
+        'Current version: $currentVersion, Latest version: $latestVersion',
+      );
 
       final resolvedVersion = latestVersion.isNotEmpty
           ? latestVersion

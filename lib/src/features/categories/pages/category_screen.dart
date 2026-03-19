@@ -1,3 +1,4 @@
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:bite_food_delivery/src/features/categories/cubits/category_selection_cubit/category_selection_cubit.dart';
 import 'package:bite_food_delivery/src/features/restaurants/cubits/filter_restaurants_cubit/filter_restaurants_cubit.dart';
 import 'package:bite_food_delivery/src/features/restaurants/cubits/restaurants_cubit/restaurants_cubit.dart';
@@ -7,7 +8,6 @@ import 'package:bite_food_delivery/src/features/categories/widgets/bite_filter_m
 import 'package:bite_food_delivery/src/shared/widgets/bite_heading.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_restaurant_card.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_search_bar.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +23,10 @@ class CategoryScreen extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         children: [
-          BiteHeading(title: S.of(context).openRestaurants, isSeeAll: false),
+          BiteHeading(
+            title: AppLocalizations.of(context)!.openRestaurants,
+            isSeeAll: false,
+          ),
           20.verticalSpace,
           BlocBuilder<CategorySelectionCubit, String>(
             builder: (context, selectedCategory) {
@@ -45,7 +48,9 @@ class CategoryScreen extends StatelessWidget {
                       } else if (state is RestaurantsError) {
                         return Center(
                           child: Text(
-                            S.of(context).errorStatemessage(state.message),
+                            AppLocalizations.of(
+                              context,
+                            )!.errorStatemessage(state.message),
                           ),
                         );
                       } else if (state is RestaurantsLoaded) {

@@ -5,7 +5,7 @@ import 'package:bite_food_delivery/src/features/cart/models/cart_item_model.dart
 import 'package:bite_food_delivery/src/features/food_items/models/food_item_model.dart';
 import 'package:bite_food_delivery/src/features/food_items/widgets/bite_flavor_list_tile.dart';
 import 'package:bite_food_delivery/src/services/firebase/firebase_auth_conn.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -198,8 +198,8 @@ class _AddCardBottomSheet extends StatelessWidget {
                         ),
                         child: Text(
                           isInCart
-                              ? S.of(context).removeFromCart
-                              : S.of(context).addToCart,
+                              ? AppLocalizations.of(context)!.removeFromCart
+                              : AppLocalizations.of(context)!.addToCart,
                           style: Theme.of(context).textTheme.headlineLarge!
                               .copyWith(color: Colors.white),
                         ),
@@ -227,7 +227,7 @@ class _FlavorSelectionSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          S.of(context).chooseYourFlavor,
+          AppLocalizations.of(context)!.chooseYourFlavor,
           style: Theme.of(context).textTheme.titleLarge,
         ),
         10.verticalSpace,
@@ -254,7 +254,7 @@ class _FoodSizeSelectionSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          S.of(context).chooseYourSize,
+          AppLocalizations.of(context)!.chooseYourSize,
           style: Theme.of(context).textTheme.titleLarge,
         ),
         10.verticalSpace,

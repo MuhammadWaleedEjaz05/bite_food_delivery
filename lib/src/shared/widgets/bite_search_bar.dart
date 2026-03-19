@@ -1,7 +1,7 @@
 import 'package:bite_food_delivery/src/features/search/cubits/recent_searches_cubit/recent_searches_cubit.dart';
 import 'package:bite_food_delivery/src/features/restaurants/cubits/restaurants_cubit/restaurants_cubit.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_restaurant_card.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,7 +18,7 @@ class BiteSearchBar extends StatelessWidget {
       padding: WidgetStatePropertyAll(
         EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
       ),
-      hintText: S.of(context).searchForRestaurantsOrDishes,
+      hintText: AppLocalizations.of(context)!.searchForRestaurantsOrDishes,
       hintStyle: WidgetStatePropertyAll(
         Theme.of(context).textTheme.titleSmall!.copyWith(
           color: Theme.of(context).colorScheme.onSecondary,
@@ -89,7 +89,9 @@ class OpenSearchScreen extends SearchDelegate {
           );
         } else if (state is RestaurantsError) {
           return Center(
-            child: Text(S.of(context).errorStatemessage(state.message)),
+            child: Text(
+              AppLocalizations.of(context)!.errorStatemessage(state.message),
+            ),
           );
         } else if (state is RestaurantsLoaded) {
           final filteredRestaurants = state.restaurants
@@ -102,7 +104,7 @@ class OpenSearchScreen extends SearchDelegate {
           if (filteredRestaurants.isEmpty) {
             return Center(
               child: Text(
-                S.of(context).noRestaurantsFound,
+                AppLocalizations.of(context)!.noRestaurantsFound,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   color: Theme.of(context).colorScheme.onSecondary,
                   fontWeight: FontWeight.normal,
@@ -144,7 +146,9 @@ class OpenSearchScreen extends SearchDelegate {
           );
         } else if (state is RestaurantsError) {
           return Center(
-            child: Text(S.of(context).errorStatemessage(state.message)),
+            child: Text(
+              AppLocalizations.of(context)!.errorStatemessage(state.message),
+            ),
           );
         } else if (state is RestaurantsLoaded) {
           final filteredRestaurants = query.isEmpty
@@ -160,7 +164,7 @@ class OpenSearchScreen extends SearchDelegate {
           if (filteredRestaurants.isEmpty) {
             return Center(
               child: Text(
-                S.of(context).noRestaurantsFound,
+                AppLocalizations.of(context)!.noRestaurantsFound,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   color: Theme.of(context).colorScheme.onSecondary,
                   fontWeight: FontWeight.normal,

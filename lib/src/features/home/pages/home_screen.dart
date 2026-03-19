@@ -11,7 +11,7 @@ import 'package:bite_food_delivery/src/shared/widgets/bite_pull_to_refresh.dart'
 import 'package:bite_food_delivery/src/shared/widgets/bite_restaurant_card.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_search_bar.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_address_selector_modal.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,7 +50,7 @@ class _CategorySection extends StatelessWidget {
     return Column(
       children: [
         BiteHeading(
-          title: S.of(context).allCategories,
+          title: AppLocalizations.of(context)!.allCategories,
           isSeeAll: true,
           onSeeAllPressed: () =>
               Navigator.pushNamed(context, '/all_categories_screen'),
@@ -62,7 +62,9 @@ class _CategorySection extends StatelessWidget {
               return const SkeletonizedCategoryList();
             } else if (state is CategoriesError) {
               return Center(
-                child: Text(S.of(context).errorStatemessage(state.error)),
+                child: Text(
+                  AppLocalizations.of(context)!.errorStatemessage(state.error),
+                ),
               );
             } else if (state is CategoriesLoaded) {
               return SizedBox(
@@ -95,7 +97,7 @@ class _OpenRestaurantsSection extends StatelessWidget {
     return Column(
       children: [
         BiteHeading(
-          title: S.of(context).openRestaurants,
+          title: AppLocalizations.of(context)!.openRestaurants,
           isSeeAll: true,
           onSeeAllPressed: () =>
               Navigator.pushNamed(context, '/all_restaurants_screen'),
@@ -107,7 +109,11 @@ class _OpenRestaurantsSection extends StatelessWidget {
               return const SkeletonizedRestaurantList();
             } else if (state is RestaurantsError) {
               return Center(
-                child: Text(S.of(context).errorStatemessage(state.message)),
+                child: Text(
+                  AppLocalizations.of(
+                    context,
+                  )!.errorStatemessage(state.message),
+                ),
               );
             } else if (state is RestaurantsLoaded) {
               return ListView.builder(

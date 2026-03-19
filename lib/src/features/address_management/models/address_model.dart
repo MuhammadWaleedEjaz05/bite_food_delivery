@@ -27,7 +27,6 @@ class AddressModel extends Equatable {
   });
 
   factory AddressModel.fromJson(Map<String, dynamic> json) {
-    
     LatLng? location;
     try {
       if (json['location'] != null) {

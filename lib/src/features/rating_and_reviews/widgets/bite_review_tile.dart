@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 class BiteReviewTile extends StatelessWidget {
   final RatingAndReviewModel review;
 
-  const BiteReviewTile({super.key,required this.review});
+  const BiteReviewTile({super.key, required this.review});
 
   @override
   Widget build(BuildContext context) {

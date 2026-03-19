@@ -15,7 +15,7 @@ import 'app_localizations_ur.dart';
 // ignore_for_file: type=lint
 
 /// Callers can lookup localized strings with an instance of AppLocalizations
-/// returned by `AppLocalizations.of(context)`.
+/// returned by `AppLocalizationAppLocalizations.of(context)!`.
 ///
 /// Applications need to include `AppLocalizations.delegate()` in their app's
 /// `localizationDelegates` list, and the locales they support in the app's

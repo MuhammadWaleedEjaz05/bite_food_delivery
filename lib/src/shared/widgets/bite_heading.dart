@@ -1,4 +1,4 @@
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -36,7 +36,7 @@ class BiteHeading extends StatelessWidget {
             : const SizedBox.shrink(),
         label: isSeeAll
             ? Text(
-                S.of(context).seeAll,
+                AppLocalizations.of(context)!.seeAll,
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.normal,

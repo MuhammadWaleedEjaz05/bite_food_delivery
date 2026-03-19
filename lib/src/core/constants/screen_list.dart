@@ -8,7 +8,7 @@ import 'package:bite_food_delivery/src/features/home/pages/home_screen.dart';
 import 'package:bite_food_delivery/src/features/profile/pages/profile_screen.dart';
 import 'package:bite_food_delivery/src/features/search/pages/search_screen.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_bottom_navigation_bar.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -51,7 +51,7 @@ List<BiteBottomItemModel> screenList(BuildContext context) => [
   BiteBottomItemModel(
     icon: Icons.home_outlined,
     selectedIcon: Icons.home,
-    title: S.of(context).home,
+    title: AppLocalizations.of(context)!.home,
     page: Builder(
       builder: (context) {
         _ensureHomeCubitsReady(context);
@@ -62,7 +62,7 @@ List<BiteBottomItemModel> screenList(BuildContext context) => [
   BiteBottomItemModel(
     icon: Icons.search_outlined,
     selectedIcon: Icons.search,
-    title: S.of(context).search,
+    title: AppLocalizations.of(context)!.search,
     page: Builder(
       builder: (context) {
         _ensureSearchCubitsReady(context);
@@ -73,7 +73,7 @@ List<BiteBottomItemModel> screenList(BuildContext context) => [
   BiteBottomItemModel(
     icon: Icons.person_outlined,
     selectedIcon: Icons.person,
-    title: S.of(context).profile,
+    title: AppLocalizations.of(context)!.profile,
     page: const ProfileScreen(),
   ),
 ];

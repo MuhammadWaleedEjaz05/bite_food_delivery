@@ -4,7 +4,7 @@ import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/features/order_management_and_history/models/order_model.dart';
 import 'package:bite_food_delivery/src/features/order_management_and_history/widgets/bite_tab_bar.dart';
 import 'package:bite_food_delivery/src/features/order_management_and_history/widgets/biteorder_history_card.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,7 +28,9 @@ class OrderHistoryScreen extends StatelessWidget {
             showTopSnackBar(
               Overlay.of(context),
               CustomSnackBar.success(
-                message: S.of(context).orderCancelledSuccessfully,
+                message: AppLocalizations.of(
+                  context,
+                )!.orderCancelledSuccessfully,
               ),
             );
           }
@@ -101,10 +103,14 @@ class OrderHistoryScreen extends StatelessWidget {
                       child: TabBarView(
                         children: [
                           _EmptyOrderView(
-                            message: S.of(context).noOngoingOrders,
+                            message: AppLocalizations.of(
+                              context,
+                            )!.noOngoingOrders,
                           ),
                           _EmptyOrderView(
-                            message: S.of(context).noOrderHistory,
+                            message: AppLocalizations.of(
+                              context,
+                            )!.noOrderHistory,
                           ),
                         ],
                       ),
@@ -129,7 +135,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
     return BiteAppBar(
       backButton: true,
       title: Text(
-        S.of(context).orderHistory,
+        AppLocalizations.of(context)!.orderHistory,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,
@@ -149,14 +155,16 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
               showDialog(
                 context: context,
                 builder: (ctx) => AlertDialog(
-                  title: Text(S.of(context).clearOrderHistory),
+                  title: Text(AppLocalizations.of(context)!.clearOrderHistory),
                   content: Text(
-                    S.of(context).areYouSureYouWantToDeleteAllOrderHistory,
+                    AppLocalizations.of(
+                      context,
+                    )!.areYouSureYouWantToDeleteAllOrderHistory,
                   ),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(ctx),
-                      child: Text(S.of(context).cancel),
+                      child: Text(AppLocalizations.of(context)!.cancel),
                     ),
                     TextButton(
                       onPressed: () {
@@ -164,7 +172,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
                         context.read<OrderCubit>().clearOrderHistory(userId);
                       },
                       child: Text(
-                        S.of(context).clearAll,
+                        AppLocalizations.of(context)!.clearAll,
                         style: const TextStyle(color: Colors.red),
                       ),
                     ),
@@ -184,7 +192,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    S.of(context).clearOrderHistory,
+                    AppLocalizations.of(context)!.clearOrderHistory,
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.normal,
@@ -211,8 +219,8 @@ class _OrderListView extends StatelessWidget {
     if (orders.isEmpty) {
       return _EmptyOrderView(
         message: isCompleted
-            ? S.of(context).noCompletedOrdersYet
-            : S.of(context).noOngoingOrders,
+            ? AppLocalizations.of(context)!.noCompletedOrdersYet
+            : AppLocalizations.of(context)!.noOngoingOrders,
       );
     }
     return ListView.separated(

@@ -1,7 +1,7 @@
 import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_heading.dart';
 import 'package:bite_food_delivery/src/features/restaurants/cubits/filter_restaurants_cubit/filter_restaurants_cubit.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -79,7 +79,7 @@ class _ApplySection extends StatelessWidget {
             ),
             onPressed: onClear,
             child: Text(
-              S.of(context).clear2,
+              AppLocalizations.of(context)!.clear2,
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
@@ -97,7 +97,7 @@ class _ApplySection extends StatelessWidget {
             ),
             onPressed: onApply,
             child: Text(
-              S.of(context).apply2,
+              AppLocalizations.of(context)!.apply2,
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -120,7 +120,10 @@ class _RatingSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        BiteHeading(title: S.of(context).rating2, isSeeAll: false),
+        BiteHeading(
+          title: AppLocalizations.of(context)!.rating2,
+          isSeeAll: false,
+        ),
         15.verticalSpace,
         SizedBox(
           height: 40.h,
@@ -184,7 +187,10 @@ class _DeliveryTimeSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        BiteHeading(title: S.of(context).deliveryTime2, isSeeAll: false),
+        BiteHeading(
+          title: AppLocalizations.of(context)!.deliveryTime2,
+          isSeeAll: false,
+        ),
         15.verticalSpace,
         SizedBox(
           height: 40.h,
@@ -243,7 +249,7 @@ class _HeadingSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BiteAppBar(
       title: Text(
-        S.of(context).filterYourSearch,
+        AppLocalizations.of(context)!.filterYourSearch,
         style: Theme.of(context).textTheme.titleLarge,
       ),
       actions: [

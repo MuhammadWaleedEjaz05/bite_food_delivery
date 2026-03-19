@@ -5,7 +5,7 @@ import 'package:bite_food_delivery/src/features/restaurants/cubits/restaurants_c
 import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/features/order_management_and_history/models/order_model.dart';
 import 'package:bite_food_delivery/src/features/order_management_and_history/widgets/bite_order_info_sheet.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart' hide Marker;
@@ -46,7 +46,7 @@ class TrackOrderScreen extends StatelessWidget {
         appBar: const _AppBarSection(),
         body: Center(
           child: Text(
-            S.of(context).noActiveOrder,
+            AppLocalizations.of(context)!.noActiveOrder,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
               color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.normal,
@@ -71,7 +71,9 @@ class TrackOrderScreen extends StatelessWidget {
                 showTopSnackBar(
                   Overlay.of(context),
                   CustomSnackBar.success(
-                    message: S.of(context).yourOrderHasBeenDelivered,
+                    message: AppLocalizations.of(
+                      context,
+                    )!.yourOrderHasBeenDelivered,
                   ),
                 );
                 Navigator.of(
@@ -94,8 +96,7 @@ class TrackOrderScreen extends StatelessWidget {
                 showTopSnackBar(
                   Overlay.of(context),
                   CustomSnackBar.success(
-                    message: S
-                        .of(context)
+                    message: AppLocalizations.of(context)!
                         .callingphonenumber(state.phoneNumber),
                   ),
                 );
@@ -130,7 +131,7 @@ class TrackOrderScreen extends StatelessWidget {
             if (state is MapLocationPermissionDenied) {
               return Center(
                 child: Text(
-                  S.of(context).locationPermissionDenied,
+                  AppLocalizations.of(context)!.locationPermissionDenied,
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
                     color: Theme.of(context).colorScheme.secondary,
                     fontWeight: FontWeight.normal,
@@ -200,7 +201,7 @@ class TrackOrderScreen extends StatelessWidget {
                             'Total: PKR ${currentOrder.totalPrice.toStringAsFixed(0)}',
                           ],
                           estimatedMinutes: 20,
-                          courierName: S.of(context).courier,
+                          courierName: AppLocalizations.of(context)!.courier,
                           currentStep: _orderStatusToStep(
                             currentOrder.orderStatus,
                           ),
@@ -234,7 +235,7 @@ class _AppBarSection extends StatelessWidget implements PreferredSizeWidget {
     return BiteAppBar(
       backButton: true,
       title: Text(
-        S.of(context).trackOrder,
+        AppLocalizations.of(context)!.trackOrder,
         style: GoogleFonts.sen(
           fontSize: Theme.of(context).textTheme.displaySmall!.fontSize,
           fontWeight: Theme.of(context).textTheme.displaySmall!.fontWeight,

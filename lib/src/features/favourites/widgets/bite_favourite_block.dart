@@ -1,6 +1,6 @@
 import 'package:bite_food_delivery/src/features/favourites/cubits/favourite_cubit/favourite_cubit.dart';
 import 'package:bite_food_delivery/src/features/food_items/models/food_item_model.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,11 +78,13 @@ class BiteFavouriteBlock extends StatelessWidget {
                     builder: (context) {
                       return AlertDialog(
                         title: Text(
-                          S.of(context).removeFromFavourites,
+                          AppLocalizations.of(context)!.removeFromFavourites,
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                         content: Text(
-                          S.of(context).areYouSureYouWantToRemoveThisFoodItem,
+                          AppLocalizations.of(
+                            context,
+                          )!.areYouSureYouWantToRemoveThisFoodItem,
                           style: Theme.of(context).textTheme.titleSmall!
                               .copyWith(fontWeight: FontWeight.normal),
                         ),
@@ -92,7 +94,7 @@ class BiteFavouriteBlock extends StatelessWidget {
                               Navigator.pop(context);
                             },
                             child: Text(
-                              S.of(context).cancel,
+                              AppLocalizations.of(context)!.cancel,
                               style: Theme.of(context).textTheme.titleSmall!
                                   .copyWith(fontWeight: FontWeight.normal),
                             ),
@@ -105,7 +107,7 @@ class BiteFavouriteBlock extends StatelessWidget {
                                   .removeFoodItemFromFavourite(foodItem.id);
                             },
                             child: Text(
-                              S.of(context).remove,
+                              AppLocalizations.of(context)!.remove,
                               style: Theme.of(context).textTheme.titleSmall!
                                   .copyWith(fontWeight: FontWeight.normal),
                             ),
@@ -132,7 +134,7 @@ class BiteFavouriteBlock extends StatelessWidget {
                   ),
                   onPressed: () {},
                   child: Text(
-                    S.of(context).orderAgain,
+                    AppLocalizations.of(context)!.orderAgain,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

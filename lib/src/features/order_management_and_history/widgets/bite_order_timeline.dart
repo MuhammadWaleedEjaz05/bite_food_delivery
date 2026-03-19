@@ -1,4 +1,4 @@
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,22 +7,23 @@ class BiteOrderTimeline extends StatelessWidget {
 
   const BiteOrderTimeline({super.key, this.currentStep = 0});
 
-  static final List<String> _labels = [
-    S.current.yourOrderHasBeenReceived,
-    S.current.theRestaurantIsPreparingYourFood,
-    S.current.yourOrderHasBeenPickedUpForDelivery,
-    S.current.orderArrivingSoon,
+  List<String> _getLabels(BuildContext context) => [
+    AppLocalizations.of(context)!.yourOrderHasBeenReceived,
+    AppLocalizations.of(context)!.theRestaurantIsPreparingYourFood,
+    AppLocalizations.of(context)!.yourOrderHasBeenPickedUpForDelivery,
+    AppLocalizations.of(context)!.orderArrivingSoon,
   ];
 
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).colorScheme.primary;
+    final labels = _getLabels(context);
 
     return Column(
-      children: List.generate(_labels.length, (index) {
+      children: List.generate(labels.length, (index) {
         final bool isCompleted = index <= currentStep;
         final bool isActive = index == currentStep;
-        final bool isLast = index == _labels.length - 1;
+        final bool isLast = index == labels.length - 1;
 
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +64,7 @@ class BiteOrderTimeline extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(top: 2.h),
                 child: Text(
-                  _labels[index],
+                  labels[index],
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
                     color: isCompleted

@@ -1,7 +1,7 @@
 import 'package:bite_food_delivery/src/features/authentication/cubits/user_auth_cubit/user_auth_cubit.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_user_auth_text_field.dart';
-import 'package:bite_food_delivery/generated/l10n.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -58,7 +58,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     Form(
                       key: _forgotPasswordFormKey,
                       child: BiteUserAuthTextField(
-                        title: S.of(context).email,
+                        title: AppLocalizations.of(context)!.email,
                         isEmail: true,
                         controller: _forgotPasswordEmailController,
                       ),
@@ -73,13 +73,15 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             builder: (BuildContext dialogContext) {
                               return AlertDialog(
                                 title: Text(
-                                  S.of(context).passwordResetLinkSent,
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.passwordResetLinkSent,
                                   style: Theme.of(context).textTheme.titleLarge,
                                 ),
                                 content: Text(
-                                  S
-                                      .of(context)
-                                      .checkYourEmailForAPasswordResetLink,
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.checkYourEmailForAPasswordResetLink,
                                   style: Theme.of(context).textTheme.titleSmall!
                                       .copyWith(fontWeight: FontWeight.normal),
                                 ),
@@ -91,7 +93,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                       ScaffoldMessenger.of(
                                         context,
                                       ).clearSnackBars();
-                                      showTopSnackBar(Overlay.of(context), CustomSnackBar.success(message: S.of(context).passwordResetSuccessfully));
+                                      showTopSnackBar(
+                                        Overlay.of(context),
+                                        CustomSnackBar.success(
+                                          message: AppLocalizations.of(
+                                            context,
+                                          )!.passwordResetSuccessfully,
+                                        ),
+                                      );
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Theme.of(
@@ -100,7 +109,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                       foregroundColor: Colors.white,
                                     ),
                                     child: Text(
-                                      S.of(context).done,
+                                      AppLocalizations.of(context)!.done,
                                       style: Theme.of(
                                         context,
                                       ).textTheme.titleSmall,
@@ -165,7 +174,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                               ),
                                         ),
                                       )
-                                    : Text(S.of(context).sendResetLink),
+                                    : Text(
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.sendResetLink,
+                                      ),
                               ),
                             ),
                           ],
@@ -198,12 +211,14 @@ class _HeadTitleSection extends StatelessWidget {
           actions: [],
         ),
         Text(
-          S.of(context).forgotPassword,
+          AppLocalizations.of(context)!.forgotPassword,
           style: Theme.of(context).textTheme.displayLarge,
         ),
 
         Text(
-          S.of(context).pleaseEnterYourEmailAddressToReceiveAPasswordReset,
+          AppLocalizations.of(
+            context,
+          )!.pleaseEnterYourEmailAddressToReceiveAPasswordReset,
           style: Theme.of(
             context,
           ).textTheme.bodyMedium!.copyWith(color: Colors.white),
