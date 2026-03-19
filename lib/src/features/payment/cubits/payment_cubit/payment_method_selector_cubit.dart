@@ -1,0 +1,36 @@
+import 'package:bite_food_delivery/src/features/payment/models/credit_card_model.dart';
+import 'package:bloc/bloc.dart';
+
+class PaymentMethodSelectorCubit extends Cubit<CreditCardModel> {
+  PaymentMethodSelectorCubit()
+    : super(
+        const CreditCardModel(
+          cardHolderName: '',
+          customerId: '',
+          paymentMethodId: '',
+          last4: '',
+          expiryDate: '',
+          cardType: CreditCardType.onCash,
+        ),
+      );
+
+  void selectPaymentMethod(
+    CreditCardModel? creditCard,
+    CreditCardType? selectedType,
+  ) {
+    if (selectedType == CreditCardType.onCash) {
+      emit(
+        const CreditCardModel(
+          cardHolderName: 'Cash on Delivery',
+          customerId: '',
+          paymentMethodId: '',
+          last4: '',
+          expiryDate: '',
+          cardType: CreditCardType.onCash,
+        ),
+      );
+    } else {
+      emit(creditCard!);
+    }
+  }
+}
