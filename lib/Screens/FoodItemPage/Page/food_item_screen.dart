@@ -178,7 +178,9 @@ class _AddCardBottomSheet extends StatelessWidget {
                               userID: getCurrentUser()!.uid,
                               cartItem: CartItemModel(
                                 productID: foodItem.id,
-                                product: foodItem,
+                                product: foodItem.copyWith(sizes: ['12', '10']),
+                                selectedFlavor: 'beef',
+                                selectedSize: '12',
                                 quantity: 1,
                               ),
                             );
@@ -262,8 +264,8 @@ class _FoodSizeSelectionSection extends StatelessWidget {
             TextButton(
               onPressed: () {},
               style: TextButton.styleFrom(
-                foregroundColor: Colors.black,
-                backgroundColor: Theme.of(context).colorScheme.secondaryFixed,
+                foregroundColor: Theme.of(context).colorScheme.onSurface,
+                backgroundColor: Theme.of(context).colorScheme.surface,
                 textStyle: Theme.of(
                   context,
                 ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
