@@ -39,11 +39,15 @@ class BiteBottomNavigationBar extends StatelessWidget {
         return StylishBottomBar(
           currentIndex: index,
           onTap: (value) {
-            pageController.animateToPage(
-              value,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeIn,
-            );
+            if (value == index + 1 || value == index - 1) {
+              pageController.animateToPage(
+                value,
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeIn,
+              );
+            } else {
+              pageController.jumpToPage(value);
+            }
             context.read<BottomNavigationSelectorCubit>().changeSelectedIndex(
               value,
             );
