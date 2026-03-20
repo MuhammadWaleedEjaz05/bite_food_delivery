@@ -4,6 +4,7 @@ import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/features/cart/models/cart_item_model.dart';
 import 'package:bite_food_delivery/src/features/food_items/models/food_item_model.dart';
 import 'package:bite_food_delivery/src/features/food_items/widgets/bite_flavor_list_tile.dart';
+import 'package:bite_food_delivery/src/features/food_items/cubits/size_and_flavour_selection_cubit/size_and_flavour_selection_cubit_cubit.dart';
 import 'package:bite_food_delivery/src/services/firebase/firebase_auth_conn.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -21,48 +22,57 @@ class FoodItemScreen extends StatelessWidget {
         {};
     final foodItem = args['foodItem'] as FoodItemModel;
     final restaurantName = args['restaurantName'] as String;
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      body: ListView(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(32.r),
-              bottomRight: Radius.circular(32.r),
-            ),
-            child: Container(
-              height: 250.h,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: CachedNetworkImageProvider(foodItem.images[0]),
-                  fit: BoxFit.cover,
-                ),
+    return BlocProvider(
+      create: (context) {
+        final cubit = SizeAndFlavourSelectionCubitCubit();
+        if (foodItem.sizes.isNotEmpty) {
+          cubit.selectSize(foodItem.sizes.first);
+        }
+        return cubit;
+      },
+      child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        body: ListView(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(32.r),
+                bottomRight: Radius.circular(32.r),
               ),
-              child: Column(children: [_AppBarSection(foodItem)]),
+              child: Container(
+                height: 250.h,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: CachedNetworkImageProvider(foodItem.images[0]),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Column(children: [_AppBarSection(foodItem)]),
+              ),
             ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
+            Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+              ),
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                children: [
+                  20.verticalSpace,
+                  _FoodDescSection(foodItem, restaurantName),
+                  20.verticalSpace,
+                  _FoodSizeSelectionSection(foodItem),
+                  30.verticalSpace,
+                  _FlavorSelectionSection(foodItem),
+                  150.verticalSpace,
+                ],
+              ),
             ),
-            child: ListView(
-              padding: EdgeInsets.symmetric(horizontal: 15.w),
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              children: [
-                20.verticalSpace,
-                _FoodDescSection(foodItem, restaurantName),
-                20.verticalSpace,
-                _FoodSizeSelectionSection(foodItem),
-                30.verticalSpace,
-                _FlavorSelectionSection(foodItem),
-                150.verticalSpace,
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
+        bottomSheet: _AddCardBottomSheet(foodItem),
       ),
-      bottomSheet: _AddCardBottomSheet(foodItem),
     );
   }
 }
@@ -73,143 +83,164 @@ class _AddCardBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartCubit, CartState>(
-      builder: (context, state) {
-        CartItemModel? existingItem;
-        String? cartID;
+    return BlocBuilder<
+      SizeAndFlavourSelectionCubitCubit,
+      SizeAndFlavourSelectionCubitState
+    >(
+      builder: (context, selectionState) {
+        return BlocBuilder<CartCubit, CartState>(
+          builder: (context, state) {
+            CartItemModel? existingItem;
+            String? cartID;
 
-        if (state is CartLoaded) {
-          cartID = state.cart.cartID;
-          existingItem = state.cart.cartItems.cast<CartItemModel?>().firstWhere(
-            (item) => item?.productID == foodItem.id,
-            orElse: () => null,
-          );
-        }
+            if (state is CartLoaded) {
+              cartID = state.cart.cartID;
+              existingItem = state.cart.cartItems
+                  .cast<CartItemModel?>()
+                  .firstWhere(
+                    (item) => item?.productID == foodItem.id,
+                    orElse: () => null,
+                  );
+            }
 
-        final isInCart = existingItem != null;
-        final quantity = existingItem?.quantity ?? 1;
+            final isInCart = existingItem != null;
+            final quantity = existingItem?.quantity ?? 1;
 
-        return Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.onSecondaryFixed,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(32.r),
-              topRight: Radius.circular(32.r),
-            ),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                10.verticalSpace,
-                Row(
+            return Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.onSecondaryFixed,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(32.r),
+                  topRight: Radius.circular(32.r),
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    10.horizontalSpace,
-                    Text(
-                      'PKR ${foodItem.price.toStringAsFixed(2)}',
-                      style: Theme.of(context).textTheme.headlineLarge,
-                    ),
-                    const Spacer(),
-                    if (isInCart)
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey,
-                          borderRadius: BorderRadius.circular(30.r),
+                    10.verticalSpace,
+                    Row(
+                      children: [
+                        10.horizontalSpace,
+                        Text(
+                          'PKR ${foodItem.price.toStringAsFixed(2)}',
+                          style: Theme.of(context).textTheme.headlineLarge,
                         ),
-                        child: Row(
-                          spacing: 5.w,
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.remove),
-                              style: IconButton.styleFrom(
-                                backgroundColor: Colors.blueGrey.shade200,
-                                foregroundColor: Colors.white,
-                              ),
-                              onPressed: () {
-                                if (quantity > 1) {
-                                  context.read<CartCubit>().updateCartItem(
-                                    cartID: cartID!,
-                                    cartItem: existingItem!.copyWith(
-                                      quantity: quantity - 1,
-                                    ),
-                                  );
-                                }
-                              },
+                        const Spacer(),
+                        if (isInCart)
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.blueGrey,
+                              borderRadius: BorderRadius.circular(30.r),
                             ),
-                            Text(
-                              '$quantity',
-                              style: Theme.of(context).textTheme.titleLarge!
-                                  .copyWith(color: Colors.white),
+                            child: Row(
+                              spacing: 5.w,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.remove),
+                                  style: IconButton.styleFrom(
+                                    backgroundColor: Colors.blueGrey.shade200,
+                                    foregroundColor: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    if (quantity > 1) {
+                                      context.read<CartCubit>().updateCartItem(
+                                        cartID: cartID!,
+                                        cartItem: existingItem!.copyWith(
+                                          quantity: quantity - 1,
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
+                                Text(
+                                  '$quantity',
+                                  style: Theme.of(context).textTheme.titleLarge!
+                                      .copyWith(color: Colors.white),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.add),
+                                  style: IconButton.styleFrom(
+                                    backgroundColor: Colors.blueGrey.shade200,
+                                    foregroundColor: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    context.read<CartCubit>().updateCartItem(
+                                      cartID: cartID!,
+                                      cartItem: existingItem!.copyWith(
+                                        quantity: quantity + 1,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
                             ),
-                            IconButton(
-                              icon: const Icon(Icons.add),
-                              style: IconButton.styleFrom(
-                                backgroundColor: Colors.blueGrey.shade200,
-                                foregroundColor: Colors.white,
-                              ),
-                              onPressed: () {
-                                context.read<CartCubit>().updateCartItem(
+                          ),
+                      ],
+                    ),
+                    20.verticalSpace,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (isInCart) {
+                                context.read<CartCubit>().removeFromCart(
                                   cartID: cartID!,
-                                  cartItem: existingItem!.copyWith(
-                                    quantity: quantity + 1,
+                                  productID: foodItem.id,
+                                );
+                              } else {
+                                context.read<CartCubit>().addToCart(
+                                  userID: getCurrentUser()!.uid,
+                                  cartItem: CartItemModel(
+                                    productID: foodItem.id,
+                                    product: foodItem.copyWith(
+                                      sizes: foodItem.sizes,
+                                    ),
+                                    selectedFlavor:
+                                        selectionState
+                                            .selectedFlavours
+                                            .isNotEmpty
+                                        ? selectionState.selectedFlavours.join(
+                                            ', ',
+                                          )
+                                        : null,
+                                    selectedSize:
+                                        selectionState.selectedSize.isNotEmpty
+                                        ? selectionState.selectedSize
+                                        : null,
+                                    quantity: 1,
                                   ),
                                 );
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                  ],
-                ),
-                20.verticalSpace,
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (isInCart) {
-                            context.read<CartCubit>().removeFromCart(
-                              cartID: cartID!,
-                              productID: foodItem.id,
-                            );
-                          } else {
-                            context.read<CartCubit>().addToCart(
-                              userID: getCurrentUser()!.uid,
-                              cartItem: CartItemModel(
-                                productID: foodItem.id,
-                                product: foodItem.copyWith(sizes: ['12', '10']),
-                                selectedFlavor: 'beef',
-                                selectedSize: '12',
-                                quantity: 1,
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.symmetric(vertical: 10.h),
+                              backgroundColor: isInCart
+                                  ? Colors.red
+                                  : Theme.of(context).colorScheme.primary,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.r),
                               ),
-                            );
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(vertical: 10.h),
-                          backgroundColor: isInCart
-                              ? Colors.red
-                              : Theme.of(context).colorScheme.primary,
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.r),
+                            ),
+                            child: Text(
+                              isInCart
+                                  ? AppLocalizations.of(context)!.removeFromCart
+                                  : AppLocalizations.of(context)!.addToCart,
+                              style: Theme.of(context).textTheme.headlineLarge!
+                                  .copyWith(color: Colors.white),
+                            ),
                           ),
                         ),
-                        child: Text(
-                          isInCart
-                              ? AppLocalizations.of(context)!.removeFromCart
-                              : AppLocalizations.of(context)!.addToCart,
-                          style: Theme.of(context).textTheme.headlineLarge!
-                              .copyWith(color: Colors.white),
-                        ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         );
       },
     );
@@ -223,22 +254,51 @@ class _FlavorSelectionSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (foodItem.flavors.isEmpty) return const SizedBox.shrink();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          AppLocalizations.of(context)!.chooseYourFlavor,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        10.verticalSpace,
-        ListView.separated(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) => const BiteFlavorListTile(),
-          separatorBuilder: (context, index) => 10.verticalSpace,
-          itemCount: 5,
-        ),
-      ],
+    final flavorKeys = foodItem.flavors.keys.toList();
+    final flavorValues = foodItem.flavors.values.toList();
+    return BlocBuilder<
+      SizeAndFlavourSelectionCubitCubit,
+      SizeAndFlavourSelectionCubitState
+    >(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              AppLocalizations.of(context)!.chooseYourFlavor,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            10.verticalSpace,
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                final flavor = flavorKeys[index];
+                final flavorImage = flavorValues[index];
+                final isSelected = state.selectedFlavours.contains(flavor);
+                return BiteFlavorListTile(
+                  title: flavor,
+                  imageUrl: flavorImage,
+                  isSelected: isSelected,
+                  onChanged: (val) {
+                    if (val == true) {
+                      context
+                          .read<SizeAndFlavourSelectionCubitCubit>()
+                          .selectFlavour(flavor);
+                    } else {
+                      context
+                          .read<SizeAndFlavourSelectionCubitCubit>()
+                          .removeFlavour(flavor);
+                    }
+                  },
+                );
+              },
+              separatorBuilder: (context, index) => 10.verticalSpace,
+              itemCount: flavorKeys.length,
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -250,53 +310,83 @@ class _FoodSizeSelectionSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (foodItem.sizes.isEmpty) return const SizedBox.shrink();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          AppLocalizations.of(context)!.chooseYourSize,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        10.verticalSpace,
-        Row(
-          spacing: 10.w,
+    return BlocBuilder<
+      SizeAndFlavourSelectionCubitCubit,
+      SizeAndFlavourSelectionCubitState
+    >(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextButton(
-              onPressed: () {},
-              style: TextButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.onSurface,
-                backgroundColor: Theme.of(context).colorScheme.surface,
-                textStyle: Theme.of(
-                  context,
-                ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
-              ),
-              child: const Text('10 inch'),
+            Text(
+              AppLocalizations.of(context)!.chooseYourSize,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
-            TextButton(
-              onPressed: () {},
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.black,
-                backgroundColor: Colors.grey.shade300,
-                textStyle: Theme.of(
-                  context,
-                ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
+            10.verticalSpace,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              clipBehavior: Clip.none,
+              padding: EdgeInsets.symmetric(vertical: 8.h),
+              child: Row(
+                spacing: 10.w,
+                children: foodItem.sizes.map((size) {
+                  final isSelected = state.selectedSize == size;
+                  return GestureDetector(
+                    onTap: () {
+                      context
+                          .read<SizeAndFlavourSelectionCubitCubit>()
+                          .selectSize(size);
+                    },
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 250),
+                      curve: Curves.easeInOut,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 24.w,
+                        vertical: 12.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: isSelected
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.surface,
+                        borderRadius: BorderRadius.circular(30.r),
+                        border: Border.all(
+                          color: isSelected
+                              ? Theme.of(context).colorScheme.primary
+                              : Colors.grey.shade300,
+                          width: 1.5,
+                        ),
+                        boxShadow: isSelected
+                            ? [
+                                BoxShadow(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.primary.withValues(alpha: 0.3),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ]
+                            : [],
+                      ),
+                      child: Text(
+                        size,
+                        style: Theme.of(context).textTheme.titleMedium!
+                            .copyWith(
+                              color: isSelected
+                                  ? Colors.white
+                                  : Theme.of(context).colorScheme.onSurface,
+                              fontWeight: isSelected
+                                  ? FontWeight.bold
+                                  : FontWeight.w500,
+                            ),
+                      ),
+                    ),
+                  );
+                }).toList(),
               ),
-              child: const Text('16 inch'),
-            ),
-            TextButton(
-              onPressed: () {},
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.black,
-                backgroundColor: Colors.grey.shade300,
-                textStyle: Theme.of(
-                  context,
-                ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.normal),
-              ),
-              child: const Text('20 inch'),
             ),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }
