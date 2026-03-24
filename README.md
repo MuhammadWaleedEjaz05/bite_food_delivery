@@ -1,8 +1,22 @@
-# 🍔 Bite — Food Delivery App
+<p align="center">
+  <img src="assets/images/logo.png" alt="Bite Logo" width="120" />
+</p>
 
-A full-featured, production-ready **food delivery mobile application** built with **Flutter** and **Firebase**. Bite provides a seamless food ordering experience with real-time order tracking, secure payments via Stripe, push notifications, and a polished UI with dark mode support.
+<h1 align="center">🍔 Bite — Food Delivery App</h1>
 
-> **Built with:** Flutter 3.10+ · Firebase · BLoC/Cubit · Stripe · Google Maps
+<p align="center">
+  A full-featured food delivery mobile application built with <strong>Flutter</strong> and <strong>Firebase</strong>.<br/>
+  Stripe payments · Real-time order tracking · Push notifications · Dark mode
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Flutter-3.10+-02569B?logo=flutter&logoColor=white" />
+  <img src="https://img.shields.io/badge/Dart-3.10+-0175C2?logo=dart&logoColor=white" />
+  <img src="https://img.shields.io/badge/Firebase-Backend-FFCA28?logo=firebase&logoColor=black" />
+  <img src="https://img.shields.io/badge/Stripe-Payments-635BFF?logo=stripe&logoColor=white" />
+  <img src="https://img.shields.io/badge/BLoC-State%20Mgmt-blue" />
+  <img src="https://img.shields.io/badge/License-MIT-green" />
+</p>
 
 ---
 
@@ -15,7 +29,7 @@ A full-featured, production-ready **food delivery mobile application** built wit
 - [Project Structure](#-project-structure)
 - [Firebase Collections](#-firebase-collections)
 - [Getting Started](#-getting-started)
-- [Configuration](#-configuration)
+- [Configuration](#%EF%B8%8F-configuration)
 - [Dependencies](#-dependencies)
 - [Contributing](#-contributing)
 - [License](#-license)
@@ -24,61 +38,109 @@ A full-featured, production-ready **food delivery mobile application** built wit
 
 ## ✨ Features
 
-### Authentication & User Management
-- Email/Password sign-in and registration
-- Google Sign-In integration
+<table>
+<tr>
+<td width="50%">
+
+### 🔐 Authentication & User Management
+- Email/Password & Google Sign-In
 - Password reset via email
 - Profile management (name, email, phone, photo)
 - Onboarding flow for first-time users
+- Remember me functionality
 
-### Restaurant & Food Browsing
+</td>
+<td width="50%">
+
+### 🍽️ Restaurant & Food Browsing
 - Browse restaurants by location and category
-- Real-time restaurant search with recent search history
-- Restaurant details with ratings, delivery time, and delivery fee
+- Real-time search with recent search history
+- Restaurant details with ratings, delivery time & fees
 - Menu browsing with category-based filtering
-- Food item details with size and flavor selection
-- Mark restaurants and food items as favorites
+- Food item details with size & flavor selection
 
-### Shopping Cart & Checkout
+</td>
+</tr>
+<tr>
+<td>
+
+### 🛒 Shopping Cart & Checkout
 - Add/remove items with quantity control
 - Size and flavor customization per item
 - Real-time price calculation
 - Cart persistence via Firestore
-- Delivery address selection with Google Maps integration
+- Delivery address selection with Google Maps
 - Order summary review before placing
 
-### Payment System
-- **Stripe** payment integration with secure processing
-- Multiple payment methods: Visa, Mastercard, PayPal, Cash on Delivery
-- Save and manage credit cards
+</td>
+<td>
+
+### 💳 Payment System
+- **Stripe** integration with secure processing
+- Multiple methods: Visa, Mastercard, PayPal, Cash on Delivery
+- Save and manage credit/debit cards
 - Automatic card type detection
 
-### Order Tracking
-- Real-time order status updates: `Received → Preparing → Dispatched → Delivered`
-- Active order tracking with floating action button on home screen
-- Visual order timeline with courier details
-- Order history with Ongoing/History tabs
-- Reorder from previous orders
-- Cancel orders (before dispatch)
+</td>
+</tr>
+<tr>
+<td>
 
-### Notifications
-- Push notifications via Firebase Cloud Messaging (FCM)
+### 📦 Order Tracking & History
+- Real-time status: `Received → Preparing → Dispatched → Delivered`
+- Floating action button for active order tracking
+- Visual order timeline with courier details
+- Ongoing/History tabs with reorder capability
+- Cancel orders before dispatch
+
+</td>
+<td>
+
+### 🔔 Notifications
+- Push notifications via Firebase Cloud Messaging
 - Local notifications for order status changes
 - Notification history with read/unread states
 - Toggle notifications on/off from settings
 
-### Settings & Preferences
+</td>
+</tr>
+<tr>
+<td>
+
+### ⭐ Ratings & Reviews
+- Rate and review restaurants after delivery
+- View your review history
+- Star-based rating system
+
+</td>
+<td>
+
+### ⚙️ Settings & Preferences
 - 🌙 Dark mode / Light mode toggle
 - Language selection support (i18n ready)
 - App update checking via Firebase Remote Config
 - FAQ section (Orders, Payments, Delivery)
+
+</td>
+</tr>
+<tr>
+<td colspan="2">
+
+### ❤️ Favourites & Address Management
+- Mark restaurants and food items as favourites
+- Manage multiple delivery addresses with Google Maps integration
+- Add, update, and delete saved addresses
+
+</td>
+</tr>
+</table>
 
 ---
 
 ## 📱 Screenshots
 
 <!-- Add your screenshots here -->
-<!-- 
+<!--
 | Home | Restaurant | Cart | Track Order |
 |:----:|:----------:|:----:|:-----------:|
 | ![Home](screenshots/home.png) | ![Restaurant](screenshots/restaurant.png) | ![Cart](screenshots/cart.png) | ![Track](screenshots/track.png) |
@@ -90,52 +152,63 @@ A full-featured, production-ready **food delivery mobile application** built wit
 
 ## 🏗 Architecture
 
-The app follows a **clean, feature-based architecture** using the **BLoC/Cubit pattern** for state management:
+The app follows a **clean, feature-first architecture** with the **BLoC/Cubit pattern** for state management. Each feature module encapsulates its own pages, cubits, models, and widgets.
 
 ```
-┌──────────────────────────────────────────────┐
-│                    UI Layer                   │
-│          (Screens + Global Widgets)           │
-├──────────────────────────────────────────────┤
-│              State Management                 │
-│           (Cubits / BLoC Pattern)             │
-├──────────────────────────────────────────────┤
-│                 Data Layer                    │
-│    (Models + Firebase/Stripe Services)        │
-└──────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────┐
+│                   Presentation                    │
+│         (Pages · Shared Widgets · Themes)         │
+├───────────────────────────────────────────────────┤
+│                State Management                   │
+│            (26 Cubits / BLoC Pattern)             │
+├───────────────────────────────────────────────────┤
+│                   Data Layer                      │
+│       (11 Models · Firebase · Stripe · Maps)      │
+└───────────────────────────────────────────────────┘
 ```
 
-### State Management — 17 Cubits
+### Feature Modules (19)
+
+| Domain | Features |
+|--------|----------|
+| **Core Flow** | `home` · `restaurants` · `food_items` · `categories` · `search` |
+| **Commerce** | `cart` · `checkout` · `payment` · `order_management_and_history` |
+| **User** | `authentication` · `profile` · `address_management` · `favourites` |
+| **Engagement** | `notifications` · `rating_and_reviews` · `faq_help_support` |
+| **System** | `settings` · `splash_and_onboarding` · `app_update` |
+
+### State Management — 26 Cubits
 
 | Category | Cubits |
 |----------|--------|
-| **Auth** | `UserAuthCubit` |
-| **Shopping** | `CartCubit`, `RestaurantsCubit`, `CategoriesCubit`, `CategorySelectionCubit`, `FoodItemCubit`, `FilterRestaurantsCubit` |
-| **User Data** | `AddressCubit`, `FavouriteCubit`, `CreditCardCubit` |
-| **Orders** | `OrderCubit`, `NotificationsCubit` |
-| **Payments** | `PaymentCubit`, `PaymentMethodSelectorCubit`, `CreditCardTypeSelectorCubit` |
-| **UI/System** | `BottomNavigationSelectorCubit`, `RecentSearchesCubit`, `SettingsCubit`, `FirstTimeLaunchCubit`, `UpdateCheckCubit` |
+| **Auth** | `UserAuthCubit` · `RememberMeCubit` |
+| **Shopping** | `RestaurantsCubit` · `FilterRestaurantsCubit` · `CategoriesCubit` · `CategorySelectionCubit` · `FoodItemCubit` · `SizeAndFlavourSelectionCubit` |
+| **Cart & Orders** | `CartCubit` · `OrderCubit` |
+| **Payments** | `PaymentCubit` · `PaymentMethodSelectorCubit` · `CreditCardCubit` · `CreditCardTypeSelectorCubit` |
+| **User Data** | `AddressCubit` · `MapLocationCubit` · `FavouriteCubit` · `RecentSearchesCubit` |
+| **Engagement** | `NotificationsCubit` · `RatingAndReviewCubit` · `RatingChangeCubit` |
+| **UI / System** | `BottomNavigationSelectorCubit` · `SettingsCubit` · `FirstTimeLaunchCubit` · `UpdateCheckCubit` · `PhoneCallCubit` |
 
 ---
 
 ## 🛠 Tech Stack
 
 | Layer | Technology |
-|-------|-----------|
+|-------|------------|
 | **Framework** | Flutter 3.10+ (Dart) |
-| **State Management** | flutter_bloc / Cubit |
-| **Backend & Auth** | Firebase Auth, Cloud Firestore |
-| **Push Notifications** | Firebase Cloud Messaging + flutter_local_notifications |
+| **State Management** | `flutter_bloc` / Cubit |
+| **Backend & Auth** | Firebase Auth · Cloud Firestore |
+| **Push Notifications** | Firebase Cloud Messaging + `flutter_local_notifications` |
 | **Remote Config** | Firebase Remote Config |
-| **Payments** | Stripe (flutter_stripe + Dio for API calls) |
-| **Maps & Location** | Google Maps Flutter + Geocoding + Location |
-| **Responsive UI** | flutter_screenutil (375×812 design) |
+| **Payments** | Stripe (`flutter_stripe` + `dio` for API calls) |
+| **Maps & Location** | Google Maps Flutter · Geocoding · Location |
+| **Responsive UI** | `flutter_screenutil` (375×812 design) |
 | **Typography** | Google Fonts (Sen) |
-| **Image Handling** | cached_network_image, flutter_svg |
-| **Local Storage** | SharedPreferences |
-| **Form Validation** | form_builder_validators |
-| **Theming** | Material Design 3 with Light & Dark themes |
-| **Localization** | Flutter intl (l10n) |
+| **Image Handling** | `cached_network_image` · `flutter_svg` |
+| **Animations** | Lottie (loading, pull-to-refresh) |
+| **Local Storage** | `SharedPreferences` |
+| **Form Validation** | `form_builder_validators` |
+| **Theming** | Material Design 3 — Light & Dark themes |
 
 ---
 
@@ -143,72 +216,55 @@ The app follows a **clean, feature-based architecture** using the **BLoC/Cubit p
 
 ```
 lib/
-├── main.dart                    # App entry point & initialization
-├── firebase_options.dart        # Firebase platform configurations
+├── main.dart                         # App entry point & initialization
+├── firebase_options.dart             # Firebase platform configurations
 │
-├── configs/
-│   ├── bloc_provider_list.dart  # All Cubit/BLoC providers
-│   ├── page_routes.dart         # Named route definitions (21 routes)
-│   ├── screen_list.dart         # Bottom navigation screens
-│   ├── stripe_const.dart        # Stripe API configuration
-│   ├── firebase_auth_conn.dart  # Firebase Auth instance
-│   ├── firebase_db_conn.dart    # Firestore instance
-│   └── fcm_initialize.dart      # FCM & local notifications setup
+├── src/
+│   ├── core/
+│   │   ├── constants/                # Screen list, Stripe keys, language list
+│   │   ├── themes/                   # Light/Dark themes, text styles, theme list
+│   │   ├── utils/                    # SharedPreferences helpers
+│   │   └── lang/                     # Language utilities
+│   │
+│   ├── features/
+│   │   ├── authentication/           # Login, Signup, Forgot Password, Remember Me
+│   │   ├── home/                     # Home page with restaurant listings
+│   │   ├── restaurants/              # Restaurant details, all restaurants view
+│   │   ├── food_items/               # Food item details, size & flavor selection
+│   │   ├── categories/               # Category browsing & filtering
+│   │   ├── search/                   # Search with recent search history
+│   │   ├── cart/                     # Shopping cart management
+│   │   ├── checkout/                 # Checkout flow
+│   │   ├── payment/                  # Stripe payments, card management
+│   │   ├── order_management_and_history/  # Order tracking & history
+│   │   ├── notifications/            # Push notification handling
+│   │   ├── favourites/               # Favourite restaurants & items
+│   │   ├── address_management/       # Address CRUD with Google Maps
+│   │   ├── profile/                  # User profile management
+│   │   ├── rating_and_reviews/       # Restaurant ratings & reviews
+│   │   ├── settings/                 # App settings (theme, language)
+│   │   ├── splash_and_onboarding/    # Splash screen & onboarding flow
+│   │   ├── faq_help_support/         # FAQ section
+│   │   └── app_update/               # Remote config update checking
+│   │
+│   ├── shared/
+│   │   ├── widgets/                  # 16 reusable widgets (BiteAppBar, BiteSearchBar, etc.)
+│   │   └── cubits/                   # Shared cubits (BottomNavigation)
+│   │
+│   ├── services/
+│   │   ├── firebase/                 # Firebase Auth & Firestore connections, FCM setup
+│   │   ├── cubit/                    # Bloc provider list
+│   │   └── phone_call_cubit/         # Phone call service
+│   │
+│   └── routes/
+│       └── page_routes.dart          # 24 named route definitions
 │
-├── Models/
-│   ├── user_model.dart          # User data model
-│   ├── restaurant_model.dart    # Restaurant data model
-│   ├── food_item_model.dart     # Food item with sizes/flavors
-│   ├── category_model.dart      # Food category model
-│   ├── cart_model.dart          # Cart & CartItem models
-│   ├── order_model.dart         # Order with status tracking
-│   ├── address_model.dart       # Delivery address model
-│   ├── credit_card_model.dart   # Payment card model
-│   └── notification_model.dart  # Notification model
+├── assets/
+│   ├── images/                       # App logo & decorative assets
+│   ├── svgs/                         # SVG icons and illustrations
+│   └── animations/                   # Lottie animations (loading, pull-to-refresh)
 │
-├── Cubits/                      # 17+ Cubits for state management
-│   ├── UserAuthCubit/
-│   ├── CartCubit/
-│   ├── OrderCubit/
-│   ├── RestaurantsCubit/
-│   ├── PaymentCubit/
-│   └── ...
-│
-├── Screens/                     # 21 screens in 18 feature directories
-│   ├── HomePage/
-│   ├── RestaurantPage/
-│   ├── CartPage/
-│   ├── CheckOutPage/
-│   ├── TrackOrderPage/
-│   ├── PaymentPage/
-│   ├── OrderHistoryPage/
-│   ├── SearchPage/
-│   ├── LoginPage/
-│   ├── SignupPage/
-│   ├── ProfilePage/
-│   ├── AddressPage/
-│   ├── FavouritePage/
-│   ├── NotificationPage/
-│   ├── SettingPage/
-│   ├── OnboardingPage/
-│   ├── FAQPage/
-│   └── SplashPage/
-│
-├── GlobalWidgets/               # 14 reusable widgets
-│   ├── bite_app_bar.dart
-│   ├── bite_bottom_navigation_bar.dart
-│   ├── bite_search_bar.dart
-│   ├── bite_restaurant_card.dart
-│   ├── bite_category_card.dart
-│   └── ...
-│
-├── Themes/
-│   ├── bite_light_themes.dart   # Light theme variants
-│   ├── bite_dark_themes.dart    # Dark theme variants
-│   └── bite_text_styles.dart    # Typography system (Sen font)
-│
-└── l10n/                        # Localization files
-    └── app_en.arb               # English translations
+└── l10n/                             # Localization ARB files
 ```
 
 ---
@@ -217,15 +273,15 @@ lib/
 
 | Collection | Description | Key Fields |
 |-----------|-------------|------------|
-| **UsersDB** | User profiles | id, fullName, email, phoneNumber, photoUrl, token |
-| **RestaurantsDB** | Restaurant listings | id, name, rating, deliveryFee, deliveryTime, isOpen, category |
-| **CategoriesDB** | Food categories | id, name, image |
-| **FoodItemsDB** | Menu items | id, name, price, sizes[], flavors{}, isPopular, isAvailable |
-| **CartDB** | User cart (per user) | cartID, userID → *subcollection: Products* |
-| **OrdersDB** | Order records | orderId, userId, orderStatus, totalPrice, paymentMethod |
-| **NotificationsDB** | Push notification log | id, userId, title, body, type, isRead |
+| **UsersDB** | User profiles | `id`, `fullName`, `email`, `phoneNumber`, `photoUrl`, `token` |
+| **RestaurantsDB** | Restaurant listings | `id`, `name`, `rating`, `deliveryFee`, `deliveryTime`, `isOpen`, `category` |
+| **CategoriesDB** | Food categories | `id`, `name`, `image` |
+| **FoodItemsDB** | Menu items | `id`, `name`, `price`, `sizes[]`, `flavors{}`, `isPopular`, `isAvailable` |
+| **CartDB** | User cart (per user) | `cartID`, `userID` → *subcollection: Products* |
+| **OrdersDB** | Order records | `orderId`, `userId`, `orderStatus`, `totalPrice`, `paymentMethod` |
+| **NotificationsDB** | Push notifications | `id`, `userId`, `title`, `body`, `type`, `isRead` |
 
-**Subcollections:** Users → `addresses` | Cart → `Products` | Orders → `Items`
+**Subcollections:** `Users → addresses` · `Cart → Products` · `Orders → Items`
 
 ---
 
@@ -233,85 +289,90 @@ lib/
 
 ### Prerequisites
 
-- Flutter SDK 3.10.7 or higher
-- Dart SDK ^3.10.7
+- **Flutter SDK** 3.10.7 or higher
+- **Dart SDK** ^3.10.7
 - Firebase project configured
-- Stripe account (test mode)
+- Stripe account (test or live)
 - Google Maps API key
 - Android Studio / VS Code
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/bite-food-delivery.git
-   cd bite-food-delivery
-   ```
+```bash
+# 1. Clone the repository
+git clone https://github.com/MuhammadWaleedEjaz21/bite-food-delivery.git
+cd bite-food-delivery
 
-2. **Install dependencies**
-   ```bash
-   flutter pub get
-   ```
+# 2. Install dependencies
+flutter pub get
 
-3. **Configure Firebase**
-   - Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
-   - Enable Authentication (Email/Password, Google Sign-In)
-   - Enable Cloud Firestore
-   - Enable Cloud Messaging
-   - Enable Remote Config
-   - Download and replace `google-services.json` (Android) and `GoogleService-Info.plist` (iOS)
-   - Update `lib/firebase_options.dart` with your Firebase config
+# 3. Run the app
+flutter run
+```
 
-4. **Configure Stripe**
-   - Get your Stripe test keys from [Stripe Dashboard](https://dashboard.stripe.com/)
-   - Update `lib/configs/stripe_const.dart` with your publishable and secret keys
+### Firebase Setup
 
-5. **Configure Google Maps**
-   - Get an API key from [Google Cloud Console](https://console.cloud.google.com/)
-   - Add the key to `android/app/src/main/AndroidManifest.xml`
-   - Add the key to `ios/Runner/AppDelegate.swift`
+1. Create a project at the [Firebase Console](https://console.firebase.google.com/)
+2. Enable the following services:
+   - **Authentication** — Email/Password & Google Sign-In
+   - **Cloud Firestore** — database
+   - **Cloud Messaging** — push notifications
+   - **Remote Config** — app update checks
+3. Download `google-services.json` (Android) and `GoogleService-Info.plist` (iOS)
+4. Update `lib/firebase_options.dart` with your configuration
 
-6. **Run the app**
-   ```bash
-   flutter run
-   ```
+### Stripe Setup
+
+1. Get your test keys from the [Stripe Dashboard](https://dashboard.stripe.com/)
+2. Update `lib/src/core/constants/stripe_const.dart` with your publishable and secret keys
+
+### Google Maps Setup
+
+1. Get an API key from the [Google Cloud Console](https://console.cloud.google.com/)
+2. Android: Add the key to `android/app/src/main/AndroidManifest.xml`
+3. iOS: Add the key to `ios/Runner/AppDelegate.swift`
 
 ---
 
-## ⚙ Configuration
+## ⚙️ Configuration
 
-| Config File | Purpose |
-|------------|---------|
-| `lib/configs/stripe_const.dart` | Stripe API keys and endpoints |
+| File | Purpose |
+|------|---------|
+| `lib/src/core/constants/stripe_const.dart` | Stripe API keys and endpoints |
 | `lib/firebase_options.dart` | Firebase platform configurations |
-| `lib/configs/fcm_initialize.dart` | FCM and local notification setup |
-| `flutter_launcher_icons.yaml` | App icon configuration |
+| `lib/src/services/firebase/fcm_initialize.dart` | FCM & local notification setup |
+| `flutter_launcher_icons.yaml` | App icon generation config |
 | `firebase.json` | Firebase hosting/deployment config |
 
 ---
 
-## 📦 Dependencies
+## 📦 Key Dependencies
 
 | Package | Purpose |
 |---------|---------|
-| `flutter_bloc` | State management (BLoC/Cubit) |
-| `firebase_core` / `firebase_auth` / `cloud_firestore` | Firebase services |
-| `firebase_messaging` / `flutter_local_notifications` | Push notifications |
+| `flutter_bloc` | State management (BLoC / Cubit) |
+| `firebase_core` · `firebase_auth` · `cloud_firestore` | Firebase services |
+| `firebase_messaging` · `flutter_local_notifications` | Push notifications |
 | `firebase_remote_config` | Remote app configuration |
-| `flutter_stripe` / `dio` | Stripe payment processing |
-| `google_maps_flutter` / `location` / `geocoding` | Maps and location |
-| `flutter_screenutil` | Responsive design |
+| `flutter_stripe` · `dio` | Stripe payment processing |
+| `google_maps_flutter` · `location` · `geocoding` | Maps and geolocation |
+| `flutter_screenutil` | Responsive design (375×812) |
 | `google_fonts` | Custom typography (Sen) |
-| `cached_network_image` / `flutter_svg` | Image handling |
-| `shared_preferences` | Local data persistence |
+| `cached_network_image` · `flutter_svg` | Image loading & SVGs |
+| `lottie` | Lottie animations |
+| `shared_preferences` | Local key-value storage |
 | `carousel_slider` | Onboarding carousel |
 | `stylish_bottom_bar` | Custom bottom navigation |
-| `equatable` | Value equality for states |
-| `form_builder_validators` | Form validation |
+| `equatable` | Value equality for BLoC states |
+| `form_builder_validators` | Form field validation |
 | `credit_card_type_detector` | Auto-detect card type |
-| `package_info_plus` | App version info |
-| `url_launcher` | External link handling |
+| `skeletonizer` | Shimmer loading skeletons |
+| `top_snackbar_flutter` | Top snackbar notifications |
+| `custom_refresh_indicator` | Pull-to-refresh with Lottie |
+| `flutter_rating` | Star rating widget |
 | `uuid` | Unique ID generation |
+| `url_launcher` | External link handling |
+| `package_info_plus` | App version info |
 
 ---
 
@@ -319,11 +380,19 @@ lib/
 
 Contributions are welcome! Feel free to open issues or submit pull requests.
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+```bash
+# 1. Fork the repository
+# 2. Create your feature branch
+git checkout -b feature/amazing-feature
+
+# 3. Commit your changes
+git commit -m "Add amazing feature"
+
+# 4. Push to the branch
+git push origin feature/amazing-feature
+
+# 5. Open a Pull Request
+```
 
 ---
 
