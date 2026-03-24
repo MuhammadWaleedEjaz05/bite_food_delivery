@@ -1,7 +1,10 @@
 import 'package:bite_food_delivery/src/features/order_management_and_history/widgets/bite_order_timeline.dart';
 import 'package:bite_food_delivery/src/features/order_management_and_history/widgets/bite_courier_card.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
+import 'package:bite_food_delivery/src/features/restaurants/cubits/restaurants_cubit/restaurants_cubit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -157,6 +160,11 @@ class _RestaurantInfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final imageUrl =
+        (context.read<RestaurantsCubit>().state as RestaurantsLoaded)
+            .restaurants
+            .firstWhere((restaurant) => restaurant.name == restaurantName)
+            .logoUrl;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -164,13 +172,11 @@ class _RestaurantInfoRow extends StatelessWidget {
           height: 55.h,
           width: 55.w,
           decoration: BoxDecoration(
-            color: Colors.grey.shade300,
+            image: DecorationImage(
+              image: CachedNetworkImageProvider(imageUrl),
+              fit: BoxFit.cover,
+            ),
             borderRadius: BorderRadius.circular(10.r),
-          ),
-          child: Icon(
-            Icons.restaurant,
-            color: Theme.of(context).colorScheme.onSecondary,
-            size: 28.r,
           ),
         ),
         12.horizontalSpace,
@@ -179,9 +185,7 @@ class _RestaurantInfoRow extends StatelessWidget {
           children: [
             Text(
               restaurantName,
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium!.copyWith(color: Colors.black54),
+              style: Theme.of(context).textTheme.titleMedium!,
             ),
             4.verticalSpace,
             Text(

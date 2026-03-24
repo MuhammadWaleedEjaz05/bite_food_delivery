@@ -96,8 +96,9 @@ class TrackOrderScreen extends StatelessWidget {
                 showTopSnackBar(
                   Overlay.of(context),
                   CustomSnackBar.success(
-                    message: AppLocalizations.of(context)!
-                        .callingphonenumber(state.phoneNumber),
+                    message: AppLocalizations.of(
+                      context,
+                    )!.callingphonenumber(state.phoneNumber),
                   ),
                 );
               }
@@ -141,6 +142,19 @@ class TrackOrderScreen extends StatelessWidget {
             }
 
             final loadedState = state as MapLocationLoaded;
+            final order = context.read<OrderCubit>().activeOrder;
+            if (order == null) return const SizedBox.shrink();
+            final customerLocation = LatLng(
+              loadedState.latitude,
+              loadedState.longitude,
+            );
+            final restaurant =
+                (context.read<RestaurantsCubit>().state as RestaurantsLoaded)
+                    .restaurants
+                    .firstWhere(
+                      (restaurant) => restaurant.id == order.restaurantId,
+                    );
+            final restuarantLocation = restaurant.geoLocation;
 
             return Stack(
               children: [
@@ -158,23 +172,31 @@ class TrackOrderScreen extends StatelessWidget {
                     zoomControlsEnabled: false,
                     mapToolbarEnabled: false,
                     markers: {
-                      const Marker(
-                        markerId: MarkerId('courier'),
+                      Marker(
+                        markerId: const MarkerId('restaurant'),
 
-                        position: LatLng(30.243319, 71.488739),
+                        position: restuarantLocation,
+                        icon: BitmapDescriptor.defaultMarkerWithHue(
+                          BitmapDescriptor.hueRed,
+                        ),
+                      ),
+                      Marker(
+                        markerId: const MarkerId('customer'),
+
+                        position: customerLocation,
+                        icon: BitmapDescriptor.defaultMarkerWithHue(
+                          BitmapDescriptor.hueGreen,
+                        ),
                       ),
                     },
                     polylines: {
                       Polyline(
                         polylineId: const PolylineId('route'),
-                        points: [
-                          const LatLng(30.229120224296313, 71.46704279910028),
-                          LatLng(state.latitude, state.longitude),
-                        ],
+                        points: [restuarantLocation, customerLocation],
                         color: Theme.of(context).colorScheme.primary,
                         width: 2,
-                        startCap: Cap.roundCap,
-                        endCap: Cap.roundCap,
+                        startCap: Cap.buttCap,
+                        endCap: Cap.buttCap,
                       ),
                     },
                   ),

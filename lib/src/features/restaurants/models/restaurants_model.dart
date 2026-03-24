@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class RestaurantModel extends Equatable {
   final String id;
@@ -13,6 +15,7 @@ class RestaurantModel extends Equatable {
   final bool isOpen;
   final String category;
   final bool isFavorite;
+  final LatLng geoLocation;
 
   const RestaurantModel({
     required this.id,
@@ -27,7 +30,8 @@ class RestaurantModel extends Equatable {
     required this.isOpen,
     required this.category,
     required this.isFavorite,
-  });
+    LatLng? geoLocation,
+  }) : geoLocation = geoLocation ?? const LatLng(0, 0);
 
   factory RestaurantModel.fromJson(Map<String, dynamic> json) {
     return RestaurantModel(
@@ -43,6 +47,12 @@ class RestaurantModel extends Equatable {
       isOpen: json['isOpen'],
       category: json['category'],
       isFavorite: json['isFavorite'],
+      geoLocation: json['geoLocation'] != null
+          ? LatLng(
+              (json['geoLocation'] as GeoPoint).latitude,
+              (json['geoLocation'] as GeoPoint).longitude,
+            )
+          : const LatLng(0, 0),
     );
   }
 
@@ -51,7 +61,6 @@ class RestaurantModel extends Equatable {
       'id': id,
       'name': name,
       'logoUrl': logoUrl,
-      'description': description,
       'address': address,
       'rating': rating,
       'reviewsCount': reviewsCount,
@@ -60,6 +69,10 @@ class RestaurantModel extends Equatable {
       'isOpen': isOpen,
       'category': category,
       'isFavorite': isFavorite,
+      'geoLocation': {
+        'latitude': geoLocation.latitude,
+        'longitude': geoLocation.longitude,
+      },
     };
   }
 
@@ -76,6 +89,7 @@ class RestaurantModel extends Equatable {
     bool? isFavorite,
     bool? isOpen,
     String? category,
+    LatLng? geoLocation,
   }) {
     return RestaurantModel(
       id: id ?? this.id,
@@ -90,6 +104,7 @@ class RestaurantModel extends Equatable {
       isFavorite: isFavorite ?? this.isFavorite,
       isOpen: isOpen ?? this.isOpen,
       category: category ?? this.category,
+      geoLocation: geoLocation ?? this.geoLocation,
     );
   }
 
@@ -107,5 +122,6 @@ class RestaurantModel extends Equatable {
     isFavorite,
     isOpen,
     category,
+    geoLocation,
   ];
 }

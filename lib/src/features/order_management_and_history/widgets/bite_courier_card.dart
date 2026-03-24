@@ -40,17 +40,12 @@ class BiteCourierCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                courierName,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleMedium!.copyWith(color: Colors.black54),
-              ),
+              Text(courierName, style: Theme.of(context).textTheme.titleMedium),
               Text(
                 AppLocalizations.of(context)!.courier,
-                style: Theme.of(
-                  context,
-                ).textTheme.bodySmall!.copyWith(color: Colors.grey),
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ),
               ),
             ],
           ),
