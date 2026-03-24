@@ -1,7 +1,6 @@
 import 'package:bite_food_delivery/src/features/address_management/cubits/map_location_cubit/map_location_cubit.dart';
 import 'package:bite_food_delivery/src/features/address_management/cubits/address_cubit/address_cubit.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_address_text_field.dart';
-import 'package:bite_food_delivery/src/shared/widgets/bite_app_bar.dart';
 import 'package:bite_food_delivery/src/features/address_management/models/address_model.dart';
 import 'package:bite_food_delivery/src/services/firebase/firebase_auth_conn.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
@@ -149,41 +148,35 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         );
                       }
 
-                      return GoogleMap(
-                        onMapCreated: _onMapCreated,
-                        initialCameraPosition: const CameraPosition(
-                          target: LatLng(37.7749, -122.4194),
-                          zoom: 15,
+                      return SafeArea(
+                        child: GoogleMap(
+                          onMapCreated: _onMapCreated,
+                          initialCameraPosition: const CameraPosition(
+                            target: LatLng(37.7749, -122.4194),
+                            zoom: 15,
+                          ),
+                          onCameraMove: _onCameraMove,
+                          onCameraIdle: _onCameraIdle,
+                          myLocationEnabled: true,
+                          myLocationButtonEnabled: true,
+                          compassEnabled: true,
+                          zoomControlsEnabled: true,
                         ),
-                        onCameraMove: _onCameraMove,
-                        onCameraIdle: _onCameraIdle,
-                        myLocationEnabled: true,
-                        myLocationButtonEnabled: true,
-                        compassEnabled: true,
-                        zoomControlsEnabled: true,
                       );
                     },
                   ),
-                  IgnorePointer(
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: 36.h),
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 150),
-                          child: Icon(
-                            Icons.location_pin,
-                            size: _isMapMoving ? 48.r : 40.r,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
+                  Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 36.h),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 150),
+                        child: Icon(
+                          Icons.location_pin,
+                          size: _isMapMoving ? 48.r : 40.r,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                     ),
-                  ),
-                  const Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    child: _AppBarSection(),
                   ),
                 ],
               ),
@@ -466,20 +459,6 @@ class _SaveAddressSection extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _AppBarSection extends StatelessWidget {
-  const _AppBarSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return const BiteAppBar(
-      title: SizedBox.shrink(),
-      actions: [],
-      backButton: true,
-      isDarkMode: true,
     );
   }
 }
