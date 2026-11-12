@@ -732,4 +732,278 @@ class AppLocalizationsTr extends AppLocalizations {
   String failedToUpdateAddress(Object error) {
     return 'Adres güncellenemedi: $error';
   }
+
+  @override
+  String get homeDeliverTo => 'Teslimat adresi';
+
+  @override
+  String get homeHeadline => 'Lezzetli bir şey seni bekliyor.';
+
+  @override
+  String get homeSubtitle => 'Bir sonraki favori yemeğini keşfet.';
+
+  @override
+  String get browseRestaurants => 'Restoranları keşfet';
+
+  @override
+  String get retryAction => 'Tekrar dene';
+
+  @override
+  String get catalogLoadFailure => 'Şu anda yüklenemedi.';
+
+  @override
+  String get catalogRefreshFailure =>
+      'Kaydedilen sonuçlar gösteriliyor. Yeniden denemek için yenileyin.';
+
+  @override
+  String get noCategoriesAvailable => 'Henüz kategori yok.';
+
+  @override
+  String get noOpenRestaurants => 'Şu anda açık restoran yok.';
+
+  @override
+  String deliveryMinutes(int minutes) {
+    return '$minutes dk';
+  }
+
+  @override
+  String get rememberEmail => 'E-postayı hatırla';
+
+  @override
+  String get menuAllItems => 'Tüm ürünler';
+
+  @override
+  String get restaurantOpen => 'Şimdi açık';
+
+  @override
+  String get restaurantClosed => 'Kapalı';
+
+  @override
+  String get itemUnavailable => 'Şu anda mevcut değil';
+
+  @override
+  String get itemAddedToCart => 'Sepete eklendi';
+
+  @override
+  String get cartAddFailed => 'Eklenemedi. Lütfen tekrar deneyin.';
+
+  @override
+  String get signInToOrder => 'Sipariş için giriş yapın';
+
+  @override
+  String get quantityLabel => 'Adet';
+
+  @override
+  String get increaseQuantity => 'Adedi artır';
+
+  @override
+  String get decreaseQuantity => 'Adedi azalt';
+
+  @override
+  String get catalogMissing => 'Bu ürün artık mevcut değil.';
+
+  @override
+  String get optionalChoices => 'İsteğe bağlı · favorilerini seç';
+
+  @override
+  String get savingItem => 'Ekleniyor…';
+
+  @override
+  String get viewCartAction => 'Sepeti görüntüle';
+
+  @override
+  String get discoverTab => 'Keşfet';
+
+  @override
+  String get ordersTab => 'Siparişler';
+
+  @override
+  String get accountTab => 'Hesap';
+
+  @override
+  String get discoveryAll => 'Tümü';
+
+  @override
+  String get discoveryOpen => 'Şimdi açık';
+
+  @override
+  String get discoveryCategories => 'Tüm kategoriler';
+
+  @override
+  String get discoveryRated => 'En yüksek puan';
+
+  @override
+  String get discoveryName => 'Ad';
+
+  @override
+  String get discoveryDelivery => 'En hızlı teslimat';
+
+  @override
+  String get discoveryReset => 'Filtreleri sıfırla';
+
+  @override
+  String get discoveryEmpty =>
+      'Sonuç bulunamadı. Başka bir arama yapın veya filtreleri sıfırlayın.';
+
+  @override
+  String get discoveryMore => 'Daha fazla göster';
+
+  @override
+  String get cartChangeFailed =>
+      'Sepet güncellenemedi. Ürünleriniz hâlâ gösteriliyor.';
+
+  @override
+  String get cartNeedsReview =>
+      'Sepeti kontrol edin: tek restoran, mevcut ürünler ve geçerli miktarlar.';
+
+  @override
+  String get cartEstimate =>
+      'Tahmini ürün toplamı. Güncel fiyatlar ve teslimat ücreti ödeme adımında doğrulanır.';
+
+  @override
+  String get checkoutChanged =>
+      'Sepet, adres veya fiyatlar değişti. Toplamı tekrar inceleyin.';
+
+  @override
+  String get checkoutTryAgain =>
+      'Sipariş tamamlanamadı. Lütfen tekrar deneyin.';
+
+  @override
+  String get checkoutCashNote =>
+      'Kapıda nakit ödeme. Siparişten önce onaylanan toplamı inceleyin.';
+
+  @override
+  String get checkoutReview => 'Toplamı incele';
+
+  @override
+  String get payByCard => 'Kartla öde';
+
+  @override
+  String get resumeCardPayment => 'Kart ödemesine devam et';
+
+  @override
+  String get cancelCardPayment => 'Kart ödemesini iptal et';
+
+  @override
+  String get cardPaymentPending =>
+      'Kart ödemeniz bekliyor. Sepeti değiştirmeden önce devam edin veya iptal edin.';
+
+  @override
+  String get paymentAtCheckout =>
+      'Ödeme sırasında yönteminizi seçin. Kart bilgilerini Stripe güvenle alır; Bite kartları kaydetmez.';
+
+  @override
+  String get updateAddress => 'Adresi Güncelle';
+
+  @override
+  String get saveAddress => 'Adresi Kaydet';
+
+  @override
+  String get street => 'Sokak';
+
+  @override
+  String get enterStreet => 'Sokak adresini girin';
+
+  @override
+  String get enterCity => 'Şehir girin';
+
+  @override
+  String get enterZipCode => 'Posta kodunu girin';
+
+  @override
+  String get enterCountry => 'Ülke girin';
+
+  @override
+  String get orderReceived => 'Sipariş Alındı';
+
+  @override
+  String get orderReceivedSubtitle => 'Siparişiniz restoran tarafından alındı';
+
+  @override
+  String get preparing => 'Hazırlanıyor';
+
+  @override
+  String get preparingSubtitle => 'Mutfak yemeğinizi hazırlıyor';
+
+  @override
+  String get dispatched => 'Yolda';
+
+  @override
+  String get dispatchedSubtitle => 'Kurye yemeğinizi teslim aldı';
+
+  @override
+  String get delivered => 'Teslim Edildi';
+
+  @override
+  String get deliveredSubtitle => 'Sipariş başarıyla teslim edildi';
+
+  @override
+  String get cancelled => 'İptal Edildi';
+
+  @override
+  String get orderStatus => 'Sipariş Durumu';
+
+  @override
+  String get orderDetails => 'Sipariş Detayları';
+
+  @override
+  String get orderId => 'Sipariş No';
+
+  @override
+  String get orderDate => 'Sipariş Tarihi';
+
+  @override
+  String get totalPrice => 'Toplam Fiyat';
+
+  @override
+  String estimatedDeliveryTime(String time) {
+    return 'Tahmini teslimat: $time';
+  }
+
+  @override
+  String get orderDeliveredSuccessfully =>
+      'Siparişiniz başarıyla teslim edildi!';
+
+  @override
+  String get helpAndSupport => 'Yardım ve Destek';
+
+  @override
+  String get deliveryRider => 'Kurye';
+
+  @override
+  String get review => 'Değerlendir';
+
+  @override
+  String get noOrdersInHistory => 'Henüz geçmiş sipariş yok';
+
+  @override
+  String get writeReview => 'Değerlendirme Yaz';
+
+  @override
+  String get rateOrder => 'Siparişi Değerlendir';
+
+  @override
+  String get rateRestaurant => 'Restoranı Değerlendir';
+
+  @override
+  String get tellUsYourExperience => 'Deneyiminizi anlatın...';
+
+  @override
+  String get submitReview => 'Değerlendirmeyi Gönder';
+
+  @override
+  String get reviewSubmitted => 'Değerlendirme başarıyla gönderildi';
+
+  @override
+  String get noReviewsYet => 'Henüz değerlendirme yazılmadı';
+
+  @override
+  String get orderRating => 'Sipariş Değerlendirmesi';
+
+  @override
+  String get restaurantRating => 'Restoran Değerlendirmesi';
+
+  @override
+  String get feedbackOptional =>
+      'Geri bildiriminiz restoranların gelişmesine yardımcı olur';
 }

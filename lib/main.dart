@@ -1,23 +1,22 @@
+import 'package:bite_food_delivery/features/orders/bloc/order_cubit.dart';
+import 'package:bite_food_delivery/features/favourites/bloc/favourite_cubit.dart';
+import 'package:go_router/go_router.dart';
+import 'package:bite_food_delivery/features/cart/bloc/cart_cubit.dart';
+import 'package:bite_food_delivery/core/di/di.dart';
+import 'package:bite_food_delivery/app/theme/app_theme.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
-import 'package:bite_food_delivery/src/features/address_management/cubits/address_cubit/address_cubit.dart';
-import 'package:bite_food_delivery/src/shared/cubits/bottom_navigation_selection/bottom_navigation_selector_cubit.dart';
-import 'package:bite_food_delivery/src/features/notifications/cubits/notification_cubit/notifications_cubit.dart';
-import 'package:bite_food_delivery/src/features/order_management_and_history/cubits/order_cubit/order_cubit.dart';
-import 'package:bite_food_delivery/src/features/settings/cubits/settings_cubit/settings_cubit.dart';
-import 'package:bite_food_delivery/src/features/app_update/cubits/update_check_cubit/update_check_cubit.dart';
-import 'package:bite_food_delivery/src/features/authentication/cubits/user_auth_cubit/user_auth_cubit.dart';
-import 'package:bite_food_delivery/src/shared/widgets/bite_update_dialog.dart';
-import 'package:bite_food_delivery/src/features/splash_and_onboarding/pages/splash_screen.dart';
-import 'package:bite_food_delivery/src/shared/widgets/bite_bottom_navigation_bar.dart';
+import 'package:bite_food_delivery/features/addresses/bloc/address_cubit.dart';
+import 'package:bite_food_delivery/features/notifications/bloc/notifications_cubit.dart';
+import 'package:bite_food_delivery/features/settings/bloc/settings_cubit.dart';
+import 'package:bite_food_delivery/features/authentication/bloc/user_auth_cubit.dart';
 import 'package:bite_food_delivery/src/services/cubit/bloc_provider_list.dart';
 import 'package:bite_food_delivery/src/services/firebase/fcm_initialize.dart';
 import 'package:bite_food_delivery/src/services/firebase/firebase_auth_conn.dart';
-import 'package:bite_food_delivery/src/routes/page_routes.dart';
-import 'package:bite_food_delivery/src/core/constants/screen_list.dart';
 import 'package:bite_food_delivery/src/core/utils/shared_preference_functions.dart';
 import 'package:bite_food_delivery/src/core/constants/stripe_const.dart';
-import 'package:bite_food_delivery/src/core/themes/theme_list.dart';
 import 'package:bite_food_delivery/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -28,16 +27,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
-import 'package:google_fonts/google_fonts.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseMessaging.onBackgroundMessage(firebaseBackgroundMessageHandler);
-  Stripe.publishableKey = stripePublishableKey;
+  if (stripePublishableKey.isNotEmpty) {
+    Stripe.publishableKey = stripePublishableKey;
+  }
   await initSharedPreferences();
+  Di.configure(
+    database: FirebaseFirestore.instance,
+    preferences: await SharedPreferences.getInstance(),
+  );
   await Future.wait([
-    Stripe.instance.applySettings(),
+    if (stripePublishableKey.isNotEmpty) Stripe.instance.applySettings(),
     NotificationService.instance.initialize(),
     initializeFCM(),
   ]);
@@ -52,32 +55,39 @@ class MyApp extends StatelessWidget {
       providers: blocProviderList,
       child: BlocListener<UserAuthCubit, UserAuthState>(
         listener: (context, state) {
+          if (state is UserLoggedOut) {
+            context.read<FavouriteCubit>().bindUser(null);
+            context.read<CartCubit>().clearSession();
+            context.read<OrderCubit>().clearSession();
+            Di.sl<GoRouter>().refresh();
+          }
           if (state is UserLoggedIn) {
             final user = getCurrentUser();
             if (user != null) {
+              context.read<FavouriteCubit>().bindUser(user.uid);
               context.read<AddressCubit>().loadAddresses();
+              context.read<CartCubit>().initialize(user.uid);
               context.read<NotificationsCubit>().loadNotifications(user.uid);
             }
           }
         },
         child: ScreenUtilInit(
           designSize: const Size(375, 812),
+          minTextAdapt: true,
           builder: (context, child) {
-            return MaterialApp(
-              theme:
-                  biteLightThemes[context
-                      .watch<SettingsCubit>()
-                      .state
-                      .themeIndex],
-              darkTheme:
-                  biteDarkThemes[context
-                      .watch<SettingsCubit>()
-                      .state
-                      .themeIndex],
+            return MaterialApp.router(
+              theme: AppTheme.build(
+                brightness: Brightness.light,
+                accentIndex: context.watch<SettingsCubit>().state.themeIndex,
+              ),
+              darkTheme: AppTheme.build(
+                brightness: Brightness.dark,
+                accentIndex: context.watch<SettingsCubit>().state.themeIndex,
+              ),
               themeMode: context.watch<SettingsCubit>().state.isDarkMode
                   ? ThemeMode.dark
                   : ThemeMode.light,
-              routes: routes,
+              routerConfig: Di.sl<GoRouter>(),
               debugShowCheckedModeBanner: false,
               supportedLocales: AppLocalizations.supportedLocales,
               locale: Locale(context.watch<SettingsCubit>().state.languageCode),
@@ -88,64 +98,9 @@ class MyApp extends StatelessWidget {
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
               ],
-              home: const SplashScreen(),
             );
           },
         ),
-      ),
-    );
-  }
-}
-
-class MainPage extends StatelessWidget {
-  MainPage({super.key});
-  final PageController _pageController = PageController();
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      body: BlocListener<UpdateCheckCubit, UpdateCheckState>(
-        listener: (context, state) {
-          if (state is UpdateRequired) {
-            BiteUpdateDialog.show(
-              context,
-              latestVersion: state.latestVersion,
-              updateUrl: state.updateUrl,
-            );
-          }
-        },
-        child: PageView(
-          controller: _pageController,
-          children: screenList(context).map((e) => e.page).toList(),
-          onPageChanged: (value) {
-            context.read<BottomNavigationSelectorCubit>().changeSelectedIndex(
-              value,
-            );
-          },
-        ),
-      ),
-      floatingActionButton: BlocBuilder<OrderCubit, OrderState>(
-        builder: (context, state) {
-          final hasActive = context.read<OrderCubit>().hasActiveOrder;
-          if (!hasActive) return const SizedBox.shrink();
-          return FloatingActionButton.extended(
-            onPressed: () {
-              Navigator.of(context).pushNamed('/track_order_screen');
-            },
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            icon: const Icon(Icons.delivery_dining, color: Colors.white),
-            label: Text(
-              AppLocalizations.of(context)!.trackOrder,
-              style: GoogleFonts.sen(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          );
-        },
-      ),
-      bottomNavigationBar: BiteBottomNavigationBar(
-        pageController: _pageController,
       ),
     );
   }

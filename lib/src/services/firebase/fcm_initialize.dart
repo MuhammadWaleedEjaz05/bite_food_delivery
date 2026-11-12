@@ -33,8 +33,12 @@ Future<void> initializeFCM() async {
       provisional: false,
       sound: true,
     );
+    // The existing backend stores FCM tokens. The new registration API emits
+    // installation IDs; migrate the backend contract before changing this.
+    // ignore: deprecated_member_use
     final tokenFCM = await messaging.getToken();
     await _saveTokenToFirestore(tokenFCM);
+    // ignore: deprecated_member_use
     messaging.onTokenRefresh.listen((newToken) async {
       await _saveTokenToFirestore(newToken);
     });

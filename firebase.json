@@ -1,1 +1,37 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"bite-food-delivery-3b736","appId":"1:964243541876:android:16bad4fb5257f36249e621","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"bite-food-delivery-3b736","configurations":{"android":"1:964243541876:android:16bad4fb5257f36249e621","ios":"1:964243541876:ios:c224568b1614211549e621","macos":"1:964243541876:ios:c224568b1614211549e621","web":"1:964243541876:web:f18c76c0c6e82ae749e621","windows":"1:964243541876:web:6c1c7f3d1d7189be49e621"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "bite-food-delivery-3b736",
+          "appId": "1:964243541876:android:16bad4fb5257f36249e621",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "bite-food-delivery-3b736",
+          "configurations": {
+            "android": "1:964243541876:android:16bad4fb5257f36249e621",
+            "ios": "1:964243541876:ios:c224568b1614211549e621",
+            "macos": "1:964243541876:ios:c224568b1614211549e621",
+            "web": "1:964243541876:web:f18c76c0c6e82ae749e621",
+            "windows": "1:964243541876:web:6c1c7f3d1d7189be49e621"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "checkout",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "*.log",
+        ".env*"
+      ]
+    }
+  ]
+}

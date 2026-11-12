@@ -4,6 +4,11 @@ late SharedPreferences _prefs;
 
 Future<void> initSharedPreferences() async {
   _prefs = await SharedPreferences.getInstance();
+  await _prefs.remove('rememberMePassword');
+}
+
+void setSharedPreferencesForTesting(SharedPreferences prefs) {
+  _prefs = prefs;
 }
 
 void saveToSharedPreferenceString(String key, String value) {

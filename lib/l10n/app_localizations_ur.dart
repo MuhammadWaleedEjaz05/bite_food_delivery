@@ -736,4 +736,277 @@ class AppLocalizationsUr extends AppLocalizations {
   String failedToUpdateAddress(Object error) {
     return 'پتہ اپ ڈیٹ کرنے میں ناکام: $error';
   }
+
+  @override
+  String get homeDeliverTo => 'یہاں ڈیلیور کریں';
+
+  @override
+  String get homeHeadline => 'کچھ مزیدار آپ کا منتظر ہے۔';
+
+  @override
+  String get homeSubtitle => 'اپنا اگلا پسندیدہ کھانا تلاش کریں۔';
+
+  @override
+  String get browseRestaurants => 'ریستوران تلاش کریں';
+
+  @override
+  String get retryAction => 'دوبارہ کوشش کریں';
+
+  @override
+  String get catalogLoadFailure => 'ابھی لوڈ نہیں ہو سکا۔';
+
+  @override
+  String get catalogRefreshFailure =>
+      'پچھلے نتائج دکھائے جا رہے ہیں۔ دوبارہ ریفریش کریں۔';
+
+  @override
+  String get noCategoriesAvailable => 'ابھی کوئی زمرہ دستیاب نہیں۔';
+
+  @override
+  String get noOpenRestaurants => 'ابھی کوئی ریستوران کھلا نہیں۔';
+
+  @override
+  String deliveryMinutes(int minutes) {
+    return '$minutes منٹ';
+  }
+
+  @override
+  String get rememberEmail => 'ای میل یاد رکھیں';
+
+  @override
+  String get menuAllItems => 'تمام اشیاء';
+
+  @override
+  String get restaurantOpen => 'ابھی کھلا ہے';
+
+  @override
+  String get restaurantClosed => 'بند';
+
+  @override
+  String get itemUnavailable => 'فی الحال دستیاب نہیں';
+
+  @override
+  String get itemAddedToCart => 'کارٹ میں شامل ہو گیا';
+
+  @override
+  String get cartAddFailed => 'شامل نہیں ہو سکا۔ دوبارہ کوشش کریں۔';
+
+  @override
+  String get signInToOrder => 'آرڈر کے لیے سائن ان کریں';
+
+  @override
+  String get quantityLabel => 'تعداد';
+
+  @override
+  String get increaseQuantity => 'تعداد بڑھائیں';
+
+  @override
+  String get decreaseQuantity => 'تعداد کم کریں';
+
+  @override
+  String get catalogMissing => 'یہ آئٹم اب دستیاب نہیں۔';
+
+  @override
+  String get optionalChoices => 'اختیاری · اپنی پسند منتخب کریں';
+
+  @override
+  String get savingItem => 'شامل ہو رہا ہے…';
+
+  @override
+  String get viewCartAction => 'کارٹ دیکھیں';
+
+  @override
+  String get discoverTab => 'دریافت کریں';
+
+  @override
+  String get ordersTab => 'آرڈرز';
+
+  @override
+  String get accountTab => 'اکاؤنٹ';
+
+  @override
+  String get discoveryAll => 'سب';
+
+  @override
+  String get discoveryOpen => 'ابھی کھلا ہے';
+
+  @override
+  String get discoveryCategories => 'تمام زمرے';
+
+  @override
+  String get discoveryRated => 'بہترین درجہ بندی';
+
+  @override
+  String get discoveryName => 'نام';
+
+  @override
+  String get discoveryDelivery => 'تیز ترین ترسیل';
+
+  @override
+  String get discoveryReset => 'فلٹرز ری سیٹ کریں';
+
+  @override
+  String get discoveryEmpty =>
+      'کوئی نتیجہ نہیں۔ دوسری تلاش کریں یا فلٹرز ری سیٹ کریں۔';
+
+  @override
+  String get discoveryMore => 'مزید دکھائیں';
+
+  @override
+  String get cartChangeFailed =>
+      'کارٹ اپ ڈیٹ نہیں ہو سکا۔ آپ کی اشیا اب بھی دکھائی گئی ہیں۔';
+
+  @override
+  String get cartNeedsReview =>
+      'کارٹ دیکھیں: ایک ریسٹورنٹ اور درست مقدار میں دستیاب اشیا منتخب کریں۔';
+
+  @override
+  String get cartEstimate =>
+      'اشیا کا تخمینی مجموعہ۔ چیک آؤٹ موجودہ قیمتوں اور ترسیل کی فیس کی تصدیق کرتا ہے۔';
+
+  @override
+  String get checkoutChanged =>
+      'کارٹ، پتہ یا قیمتیں بدل گئی ہیں۔ مجموعہ دوبارہ دیکھیں۔';
+
+  @override
+  String get checkoutTryAgain => 'چیک آؤٹ مکمل نہیں ہو سکا۔ دوبارہ کوشش کریں۔';
+
+  @override
+  String get checkoutCashNote =>
+      'ترسیل پر نقد ادائیگی کریں۔ آرڈر دینے سے پہلے تصدیق شدہ مجموعہ دیکھیں۔';
+
+  @override
+  String get checkoutReview => 'مجموعہ دیکھیں';
+
+  @override
+  String get payByCard => 'کارڈ سے ادائیگی';
+
+  @override
+  String get resumeCardPayment => 'کارڈ ادائیگی جاری رکھیں';
+
+  @override
+  String get cancelCardPayment => 'کارڈ ادائیگی منسوخ کریں';
+
+  @override
+  String get cardPaymentPending =>
+      'کارڈ کی ادائیگی زیر التوا ہے۔ کارٹ بدلنے سے پہلے اسے مکمل یا منسوخ کریں۔';
+
+  @override
+  String get paymentAtCheckout =>
+      'چیک آؤٹ پر ادائیگی کا طریقہ منتخب کریں۔ کارڈ کی تفصیلات Stripe محفوظ طریقے سے لیتا ہے؛ Bite کارڈ محفوظ نہیں کرتا۔';
+
+  @override
+  String get updateAddress => 'پتہ اپ ڈیٹ کریں';
+
+  @override
+  String get saveAddress => 'پتہ محفوظ کریں';
+
+  @override
+  String get street => 'گلی';
+
+  @override
+  String get enterStreet => 'گلی کا پتہ درج کریں';
+
+  @override
+  String get enterCity => 'شہر درج کریں';
+
+  @override
+  String get enterZipCode => 'زپ کوڈ درج کریں';
+
+  @override
+  String get enterCountry => 'ملک درج کریں';
+
+  @override
+  String get orderReceived => 'آرڈر موصول ہوا';
+
+  @override
+  String get orderReceivedSubtitle => 'آپ کا آرڈر ریستوران کو موصول ہو گیا ہے';
+
+  @override
+  String get preparing => 'کھانا تیار ہو رہا ہے';
+
+  @override
+  String get preparingSubtitle => 'کچن آپ کا کھانا تیار کر رہا ہے';
+
+  @override
+  String get dispatched => 'ڈیلیوری کے لیے روانہ';
+
+  @override
+  String get dispatchedSubtitle => 'رائڈر نے آپ کا کھانا اٹھا لیا ہے';
+
+  @override
+  String get delivered => 'ڈیلیور ہو گیا';
+
+  @override
+  String get deliveredSubtitle => 'آرڈر بحفاظت پہنچا دیا گیا ہے';
+
+  @override
+  String get cancelled => 'منسوخ شدہ';
+
+  @override
+  String get orderStatus => 'آرڈر کی صورتحال';
+
+  @override
+  String get orderDetails => 'آرڈر کی تفصیلات';
+
+  @override
+  String get orderId => 'آرڈر نمبر';
+
+  @override
+  String get orderDate => 'آرڈر کی تاریخ';
+
+  @override
+  String get totalPrice => 'کل رقم';
+
+  @override
+  String estimatedDeliveryTime(String time) {
+    return 'متوقع ڈیلیوری: $time';
+  }
+
+  @override
+  String get orderDeliveredSuccessfully =>
+      'آپ کا آرڈر کامیابی سے ڈیلیور ہو گیا ہے!';
+
+  @override
+  String get helpAndSupport => 'مدد اور رہنمائی';
+
+  @override
+  String get deliveryRider => 'ڈیلیوری رائیڈر';
+
+  @override
+  String get review => 'رائے دیں';
+
+  @override
+  String get noOrdersInHistory => 'ابھی تک کوئی پرانا آرڈر نہیں ہے';
+
+  @override
+  String get writeReview => 'تبصرہ لکھیں';
+
+  @override
+  String get rateOrder => 'آرڈر کی درجہ بندی کریں';
+
+  @override
+  String get rateRestaurant => 'ریستوراں کی درجہ بندی کریں';
+
+  @override
+  String get tellUsYourExperience => 'اپنے تجربے کے بارے میں بتائیں...';
+
+  @override
+  String get submitReview => 'تبصرہ جمع کرائیں';
+
+  @override
+  String get reviewSubmitted => 'تبصرہ کامیابی سے جمع ہو گیا';
+
+  @override
+  String get noReviewsYet => 'ابھی تک کوئی تبصرہ نہیں لکھا گیا';
+
+  @override
+  String get orderRating => 'آرڈر کی درجہ بندی';
+
+  @override
+  String get restaurantRating => 'ریستوراں کی درجہ بندی';
+
+  @override
+  String get feedbackOptional =>
+      'آپ کی رائے ریستوراں کو بہتر بنانے میں مدد کرتی ہے';
 }

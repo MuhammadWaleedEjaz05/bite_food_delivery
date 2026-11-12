@@ -744,4 +744,281 @@ class AppLocalizationsDe extends AppLocalizations {
   String failedToUpdateAddress(Object error) {
     return 'Fehler beim Aktualisieren der Adresse: $error';
   }
+
+  @override
+  String get homeDeliverTo => 'Liefern an';
+
+  @override
+  String get homeHeadline => 'Etwas Köstliches wartet.';
+
+  @override
+  String get homeSubtitle => 'Entdecke dein nächstes Lieblingsgericht.';
+
+  @override
+  String get browseRestaurants => 'Restaurants entdecken';
+
+  @override
+  String get retryAction => 'Erneut versuchen';
+
+  @override
+  String get catalogLoadFailure => 'Das konnte gerade nicht geladen werden.';
+
+  @override
+  String get catalogRefreshFailure =>
+      'Gespeicherte Ergebnisse werden angezeigt. Bitte erneut aktualisieren.';
+
+  @override
+  String get noCategoriesAvailable => 'Noch keine Kategorien verfügbar.';
+
+  @override
+  String get noOpenRestaurants => 'Derzeit sind keine Restaurants geöffnet.';
+
+  @override
+  String deliveryMinutes(int minutes) {
+    return '$minutes Min.';
+  }
+
+  @override
+  String get rememberEmail => 'E-Mail merken';
+
+  @override
+  String get menuAllItems => 'Alle Gerichte';
+
+  @override
+  String get restaurantOpen => 'Jetzt geöffnet';
+
+  @override
+  String get restaurantClosed => 'Geschlossen';
+
+  @override
+  String get itemUnavailable => 'Derzeit nicht verfügbar';
+
+  @override
+  String get itemAddedToCart => 'Zum Warenkorb hinzugefügt';
+
+  @override
+  String get cartAddFailed =>
+      'Hinzufügen fehlgeschlagen. Bitte erneut versuchen.';
+
+  @override
+  String get signInToOrder => 'Zum Bestellen anmelden';
+
+  @override
+  String get quantityLabel => 'Menge';
+
+  @override
+  String get increaseQuantity => 'Menge erhöhen';
+
+  @override
+  String get decreaseQuantity => 'Menge verringern';
+
+  @override
+  String get catalogMissing => 'Dieses Gericht ist nicht mehr verfügbar.';
+
+  @override
+  String get optionalChoices => 'Optional · wähle deine Favoriten';
+
+  @override
+  String get savingItem => 'Wird hinzugefügt…';
+
+  @override
+  String get viewCartAction => 'Warenkorb ansehen';
+
+  @override
+  String get discoverTab => 'Entdecken';
+
+  @override
+  String get ordersTab => 'Bestellungen';
+
+  @override
+  String get accountTab => 'Konto';
+
+  @override
+  String get discoveryAll => 'Alle';
+
+  @override
+  String get discoveryOpen => 'Jetzt geöffnet';
+
+  @override
+  String get discoveryCategories => 'Alle Kategorien';
+
+  @override
+  String get discoveryRated => 'Beste Bewertung';
+
+  @override
+  String get discoveryName => 'Name';
+
+  @override
+  String get discoveryDelivery => 'Schnellste Lieferung';
+
+  @override
+  String get discoveryReset => 'Filter zurücksetzen';
+
+  @override
+  String get discoveryEmpty =>
+      'Keine Treffer. Versuche eine andere Suche oder setze die Filter zurück.';
+
+  @override
+  String get discoveryMore => 'Mehr anzeigen';
+
+  @override
+  String get cartChangeFailed =>
+      'Der Warenkorb konnte nicht aktualisiert werden. Deine Artikel werden weiterhin angezeigt.';
+
+  @override
+  String get cartNeedsReview =>
+      'Prüfe den Warenkorb: ein Restaurant, verfügbare Artikel und gültige Mengen.';
+
+  @override
+  String get cartEstimate =>
+      'Geschätzte Artikelsumme. Aktuelle Preise und Lieferkosten werden beim Checkout bestätigt.';
+
+  @override
+  String get checkoutChanged =>
+      'Warenkorb, Adresse oder Preise haben sich geändert. Prüfe die Summe erneut.';
+
+  @override
+  String get checkoutTryAgain =>
+      'Die Bestellung konnte nicht abgeschlossen werden. Bitte versuche es erneut.';
+
+  @override
+  String get checkoutCashNote =>
+      'Barzahlung bei Lieferung. Prüfe die bestätigte Summe vor der Bestellung.';
+
+  @override
+  String get checkoutReview => 'Summe prüfen';
+
+  @override
+  String get payByCard => 'Mit Karte bezahlen';
+
+  @override
+  String get resumeCardPayment => 'Kartenzahlung fortsetzen';
+
+  @override
+  String get cancelCardPayment => 'Kartenzahlung abbrechen';
+
+  @override
+  String get cardPaymentPending =>
+      'Ihre Kartenzahlung ist offen. Setzen Sie sie fort oder brechen Sie sie ab, bevor Sie den Warenkorb ändern.';
+
+  @override
+  String get paymentAtCheckout =>
+      'Wählen Sie die Zahlungsart an der Kasse. Stripe erfasst Kartendaten sicher; Bite speichert keine Karten.';
+
+  @override
+  String get updateAddress => 'Adresse aktualisieren';
+
+  @override
+  String get saveAddress => 'Adresse speichern';
+
+  @override
+  String get street => 'Straße';
+
+  @override
+  String get enterStreet => 'Straße eingeben';
+
+  @override
+  String get enterCity => 'Stadt eingeben';
+
+  @override
+  String get enterZipCode => 'Postleitzahl eingeben';
+
+  @override
+  String get enterCountry => 'Land eingeben';
+
+  @override
+  String get orderReceived => 'Bestellung eingegangen';
+
+  @override
+  String get orderReceivedSubtitle =>
+      'Deine Bestellung wurde vom Restaurant empfangen';
+
+  @override
+  String get preparing => 'Wird zubereitet';
+
+  @override
+  String get preparingSubtitle => 'Die Küche bereitet dein Essen zu';
+
+  @override
+  String get dispatched => 'Unterwegs';
+
+  @override
+  String get dispatchedSubtitle => 'Der Kurier hat dein Essen abgeholt';
+
+  @override
+  String get delivered => 'Geliefert';
+
+  @override
+  String get deliveredSubtitle => 'Bestellung wurde sicher geliefert';
+
+  @override
+  String get cancelled => 'Storniert';
+
+  @override
+  String get orderStatus => 'Bestellstatus';
+
+  @override
+  String get orderDetails => 'Bestelldetails';
+
+  @override
+  String get orderId => 'Bestell-ID';
+
+  @override
+  String get orderDate => 'Bestelldatum';
+
+  @override
+  String get totalPrice => 'Gesamtpreis';
+
+  @override
+  String estimatedDeliveryTime(String time) {
+    return 'Voraussichtliche Lieferung: $time';
+  }
+
+  @override
+  String get orderDeliveredSuccessfully =>
+      'Deine Bestellung wurde erfolgreich geliefert!';
+
+  @override
+  String get helpAndSupport => 'Hilfe & Support';
+
+  @override
+  String get deliveryRider => 'Kurier';
+
+  @override
+  String get review => 'Bewerten';
+
+  @override
+  String get noOrdersInHistory => 'Noch keine vergangenen Bestellungen';
+
+  @override
+  String get writeReview => 'Bewertung schreiben';
+
+  @override
+  String get rateOrder => 'Bestellung bewerten';
+
+  @override
+  String get rateRestaurant => 'Restaurant bewerten';
+
+  @override
+  String get tellUsYourExperience =>
+      'Erzählen Sie uns von Ihren Erfahrungen...';
+
+  @override
+  String get submitReview => 'Bewertung absenden';
+
+  @override
+  String get reviewSubmitted => 'Bewertung erfolgreich übermittelt';
+
+  @override
+  String get noReviewsYet => 'Noch keine Bewertungen verfasst';
+
+  @override
+  String get orderRating => 'Bestellbewertung';
+
+  @override
+  String get restaurantRating => 'Restaurantbewertung';
+
+  @override
+  String get feedbackOptional =>
+      'Ihr Feedback hilft Restaurants sich zu verbessern';
 }

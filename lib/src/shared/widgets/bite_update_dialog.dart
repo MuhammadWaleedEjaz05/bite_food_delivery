@@ -223,7 +223,9 @@ class BiteUpdateDialog extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(14.r),
                               side: BorderSide(
-                                color: colorScheme.secondary.withOpacity(0.3),
+                                color: colorScheme.secondary.withValues(
+                                  alpha: 0.3,
+                                ),
                               ),
                             ),
                           ),

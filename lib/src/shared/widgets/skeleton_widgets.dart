@@ -1,9 +1,9 @@
-import 'package:bite_food_delivery/src/features/categories/models/category_model.dart';
-import 'package:bite_food_delivery/src/features/food_items/models/food_item_model.dart';
-import 'package:bite_food_delivery/src/features/restaurants/models/restaurants_model.dart';
+import 'package:bite_food_delivery/features/categories/models/category_model.dart';
+import 'package:bite_food_delivery/features/food_items/models/food_item_model.dart';
+import 'package:bite_food_delivery/features/restaurants/models/restaurants_model.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_category_card.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_restaurant_card.dart';
-import 'package:bite_food_delivery/src/features/restaurants/widgets/bite_food_card.dart';
+import 'package:bite_food_delivery/src/shared/widgets/bite_food_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -36,7 +36,7 @@ const FoodItemModel _staticFoodItem = FoodItemModel(
   name: '',
   category: '',
   description: '',
-  RestuarantId: '',
+  restaurantId: '',
   price: 0.0,
   images: [_staticImageUrl],
   sizes: [],

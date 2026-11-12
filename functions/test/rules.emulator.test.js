@@ -1,0 +1,36 @@
+import test from 'node:test';
+import {readFile} from 'node:fs/promises';
+import {initializeTestEnvironment,assertFails,assertSucceeds} from '@firebase/rules-unit-testing';
+import {doc,setDoc,getDoc,updateDoc,deleteDoc,writeBatch} from 'firebase/firestore';
+const enabled=Boolean(process.env.FIRESTORE_EMULATOR_HOST);
+if(enabled && (!process.env.GCLOUD_PROJECT?.startsWith('demo-') || !/^(127\.0\.0\.1|localhost):/.test(process.env.FIRESTORE_EMULATOR_HOST))) throw new Error('Local demo emulator required');
+test('commerce rules enforce ownership, server authority and payment cart locks',{skip:!enabled},async t=>{
+ const [host,port]=process.env.FIRESTORE_EMULATOR_HOST.split(':');
+ const env=await initializeTestEnvironment({projectId:process.env.GCLOUD_PROJECT,firestore:{host,port:Number(port),rules:await readFile(new URL('../../firebase/firestore.rules',import.meta.url),'utf8')}});
+ t.after(()=>env.cleanup());
+ await env.withSecurityRulesDisabled(async context=>{
+  const db=context.firestore();
+  await setDoc(doc(db,'CartDB/rules'),{cartID:'rules',userID:'owner'});
+  await setDoc(doc(db,'OrdersDB/rules'),{userId:'owner',isPaid:true});
+  await setDoc(doc(db,'OrdersDB/rules/Items/one'),{quantity:1});
+ });
+ const db=env.authenticatedContext('owner').firestore(),other=env.authenticatedContext('other').firestore();
+ await assertSucceeds(getDoc(doc(db,'OrdersDB/rules')));
+ await assertFails(getDoc(doc(other,'OrdersDB/rules')));
+ await assertSucceeds(getDoc(doc(db,'OrdersDB/rules/Items/one')));
+ await assertFails(getDoc(doc(other,'OrdersDB/rules/Items/one')));
+ await assertFails(updateDoc(doc(db,'OrdersDB/rules'),{isPaid:false}));
+ await assertFails(setDoc(doc(db,'CheckoutQuotes/forged'),{userId:'owner'}));
+ await assertFails(setDoc(doc(db,'FoodItemsDB/forged'),{price:1}));
+ await assertFails(updateDoc(doc(db,'CartDB/rules'),{userID:'other'}));
+ await assertSucceeds(setDoc(doc(db,'CartDB/rules/Products/line'),{productID:'food',quantity:1}));
+ await assertFails(setDoc(doc(other,'CartDB/rules/Products/line'),{productID:'food',quantity:1}));
+ await env.withSecurityRulesDisabled(c=>updateDoc(doc(c.firestore(),'CartDB/rules'),{checkoutQuoteId:'reserved'}));
+ await assertFails(updateDoc(doc(db,'CartDB/rules/Products/line'),{quantity:2}));
+ await assertFails(deleteDoc(doc(db,'CartDB/rules/Products/line')));
+ await assertFails(deleteDoc(doc(db,'CartDB/rules')));
+ await assertFails(updateDoc(doc(db,'CartDB/rules'),{checkoutQuoteId:null}));
+ await assertFails(setDoc(doc(db,'UsersDB/other/addresses/home'),{userID:'owner'}));
+ await assertSucceeds(setDoc(doc(db,'UsersDB/owner/addresses/home'),{userID:'owner'}));
+ const batch=writeBatch(db);batch.set(doc(db,'CartDB/new-rules'),{userID:'owner',cartID:'new-rules'});batch.set(doc(db,'CartDB/new-rules/Products/line'),{productID:'food',quantity:1});await assertSucceeds(batch.commit());
+});

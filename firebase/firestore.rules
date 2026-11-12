@@ -1,0 +1,49 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function owner(uid) { return signedIn() && request.auth.uid == uid; }
+    function cart(cid) { return get(/databases/$(database)/documents/CartDB/$(cid)).data; }
+    function cartAfter(cid) { return getAfter(/databases/$(database)/documents/CartDB/$(cid)).data; }
+    function unlocked(data) { return data.get('checkoutQuoteId', null) == null; }
+    match /CheckoutQuotes/{id} { allow read, write: if false; }
+    match /OrdersDB/{id} {
+      allow read: if owner(resource.data.userId);
+      allow write: if false;
+      match /Items/{item} {
+        allow read: if owner(get(/databases/$(database)/documents/OrdersDB/$(id)).data.userId);
+        allow write: if false;
+      }
+    }
+    match /CartDB/{cid} {
+      allow read: if owner(resource.data.userID);
+      allow create: if owner(request.resource.data.userID)
+        && request.resource.data.keys().hasOnly(['cartID', 'userID'])
+        && request.resource.data.cartID == cid;
+      allow update: if owner(resource.data.userID) && unlocked(resource.data)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['cartID'])
+        && request.resource.data.cartID == cid;
+      allow delete: if owner(resource.data.userID) && unlocked(resource.data);
+      match /Products/{line} {
+        allow read: if owner(cart(cid).userID);
+        allow create, update: if owner(cartAfter(cid).userID) && unlocked(cartAfter(cid))
+          && request.resource.data.quantity is int
+          && request.resource.data.quantity >= 1 && request.resource.data.quantity <= 99
+          && request.resource.data.productID is string;
+        allow delete: if owner(cart(cid).userID) && unlocked(cart(cid));
+      }
+    }
+    match /UsersDB/{uid}/addresses/{address} {
+      allow read, delete: if owner(uid);
+      allow create, update: if owner(uid) && request.resource.data.userID == uid;
+    }
+    match /UsersDB/{uid}/favourites/{id} { allow read, write: if owner(uid); }
+    match /UsersDB/{uid}/CreditCards/{id} { allow read, write: if false; }
+    match /FoodItemsDB/{id} { allow read: if true; allow write: if false; }
+    match /RestaurantsDB/{id} { allow read: if true; allow write: if false; }
+    match /CategoriesDB/{id} { allow read: if true; allow write: if false; }
+    // This is the commerce release candidate, not a replacement for unreviewed
+    // profile/review/notification rules. Merge explicitly and test those features.
+    match /{document=**} { allow read, write: if false; }
+  }
+}

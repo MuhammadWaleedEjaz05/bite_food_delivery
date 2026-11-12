@@ -1,3 +1,4 @@
+import 'package:bite_food_delivery/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -39,18 +40,7 @@ class BiteAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             )
           : backButton
-          ? IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              style: IconButton.styleFrom(
-                foregroundColor: isDarkMode
-                    ? Colors.white
-                    : Theme.of(context).colorScheme.onSurface,
-                backgroundColor: Colors.grey.withAlpha(50),
-              ),
-              icon: Icon(Icons.arrow_back, size: 30.r),
-            )
+          ? const CustomBackButton()
           : null,
       centerTitle: isLogoVisible ? true : false,
       title: title,

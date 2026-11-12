@@ -1,59 +1,78 @@
-import 'package:bite_food_delivery/src/shared/widgets/bite_address_selection_card.dart';
-import 'package:bite_food_delivery/src/features/address_management/cubits/address_cubit/address_cubit.dart';
+import 'package:bite_food_delivery/app/theme/app_text_styles.dart';
+import 'package:bite_food_delivery/core/extensions/theme_extensions.dart';
+import 'package:bite_food_delivery/features/addresses/bloc/address_cubit.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
+import 'package:bite_food_delivery/src/shared/widgets/bite_address_selection_card.dart';
+import 'package:bite_food_delivery/widgets/app_feedback.dart';
+import 'package:bite_food_delivery/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
 
 void showAddressSelectorModal(BuildContext context) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
+    backgroundColor: context.appColors.surface,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(25.r),
-        topRight: Radius.circular(25.r),
+        topLeft: Radius.circular(24.r),
+        topRight: Radius.circular(24.r),
       ),
     ),
     builder: (context) => BlocBuilder<AddressCubit, AddressState>(
       builder: (context, state) {
         if (state is AddressLoading) {
-          return Center(
-            child: Lottie.asset(
-              'assets/animations/loading.json',
-              height: 75.h,
-              width: 75.w,
-            ),
+          return Padding(
+            padding: const EdgeInsets.all(32).r,
+            child: const Center(child: CircularProgressIndicator.adaptive()),
           );
         } else if (state is AddressError) {
-          return Center(
-            child: Text(
-              AppLocalizations.of(context)!.errorStatemessage(state.message),
+          return Padding(
+            padding: const EdgeInsets.all(24).r,
+            child: AppFeedback(
+              message: AppLocalizations.of(
+                context,
+              )!.errorStatemessage(state.message),
+              actionLabel: AppLocalizations.of(context)!.retryAction,
+              onAction: () => context.read<AddressCubit>().loadAddresses(),
             ),
           );
         } else if (state is AddressesLoaded) {
           return DraggableScrollableSheet(
             expand: false,
-            initialChildSize: 0.6,
-            maxChildSize: 0.9,
+            initialChildSize: 0.55,
+            maxChildSize: 0.85,
             builder: (context, scrollController) {
               return Padding(
-                padding: EdgeInsets.all(15.w),
+                padding: const EdgeInsets.all(20).r,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      AppLocalizations.of(context)!.selectDeliveryAddress,
-                      style: Theme.of(context).textTheme.titleLarge,
+                    Center(
+                      child: Container(
+                        width: 40.r,
+                        height: 4.r,
+                        decoration: BoxDecoration(
+                          color: context.appColors.outlineVariant,
+                          borderRadius: BorderRadius.circular(2).r,
+                        ),
+                      ),
                     ),
-                    20.verticalSpace,
+                    16.verticalSpace,
+                    AppText(
+                      AppLocalizations.of(context)!.selectDeliveryAddress,
+                      style: AppTextStyles.titleLarge(context),
+                    ),
+                    16.verticalSpace,
                     Expanded(
                       child: state.addresses.isEmpty
                           ? Center(
-                              child: Text(
-                                AppLocalizations.of(context)!.noAddressesFound,
-                                style: Theme.of(context).textTheme.titleSmall!
-                                    .copyWith(fontWeight: FontWeight.normal),
+                              child: AppFeedback(
+                                message: AppLocalizations.of(
+                                  context,
+                                )!.noAddressesFound,
+                                icon: Icons.location_off_outlined,
                               ),
                             )
                           : ListView.separated(
@@ -74,8 +93,7 @@ void showAddressSelectorModal(BuildContext context) {
                                   },
                                 );
                               },
-                              separatorBuilder: (context, index) =>
-                                  10.verticalSpace,
+                              separatorBuilder: (_, _) => 12.verticalSpace,
                               itemCount: state.addresses.length,
                             ),
                     ),

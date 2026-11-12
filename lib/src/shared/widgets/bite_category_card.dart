@@ -1,59 +1,18 @@
-import 'package:bite_food_delivery/src/features/categories/cubits/category_selection_cubit/category_selection_cubit.dart';
-import 'package:bite_food_delivery/src/features/categories/models/category_model.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:bite_food_delivery/app/routes/app_navigation.dart';
+import 'package:bite_food_delivery/features/categories/models/category_model.dart';
+import 'package:bite_food_delivery/widgets/app_category_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BiteCategoryCard extends StatelessWidget {
-  final CategoryModel category;
   const BiteCategoryCard({super.key, required this.category});
-
+  final CategoryModel category;
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: () {
-            context.read<CategorySelectionCubit>().selectCategory(
-              category.categoryName,
-            );
-            Navigator.pushNamed(
-              context,
-              '/category_screen',
-              arguments: category.categoryName,
-            );
-          },
-          child: Card(
-            elevation: 4,
-            margin: EdgeInsets.symmetric(vertical: 15.h, horizontal: 5.w),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.r),
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.surface,
-                width: 1,
-              ),
-            ),
-            color: Theme.of(context).colorScheme.surface,
-            child: Container(
-              height: 90.h,
-              width: 110.w,
-              margin: EdgeInsets.all(15.r),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: CachedNetworkImageProvider(category.categoryImage),
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.circular(20.r),
-              ),
-            ),
-          ),
-        ),
-        Text(
-          category.categoryName,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => AppCategoryCard(
+    name: category.categoryName,
+    imageUrl: category.categoryImage,
+    onTap: () => AppNavigation.push(
+      context,
+      '/discover/category/${Uri.encodeComponent(category.categoryName)}',
+    ),
+  );
 }

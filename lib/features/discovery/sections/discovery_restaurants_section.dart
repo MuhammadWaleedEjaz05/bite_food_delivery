@@ -1,0 +1,73 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:bite_food_delivery/features/discovery/bloc/discovery_cubit.dart';
+import 'package:bite_food_delivery/l10n/app_localizations.dart';
+import 'package:bite_food_delivery/core/extensions/responsive_extensions.dart';
+import 'package:bite_food_delivery/features/favourites/bloc/favourite_cubit.dart';
+import 'package:bite_food_delivery/widgets/app_section_heading.dart';
+import 'package:bite_food_delivery/widgets/app_restaurant_card.dart';
+import 'package:bite_food_delivery/features/favourites/sections/catalog_favourite_section.dart';
+import 'package:bite_food_delivery/app/routes/app_navigation.dart';
+import 'package:bite_food_delivery/core/extensions/price_format.dart';
+
+class DiscoveryRestaurantsSection extends StatelessWidget {
+  const DiscoveryRestaurantsSection({super.key, this.savedOnly = false});
+  final bool savedOnly;
+  @override
+  Widget build(BuildContext context) {
+    final state = context.watch<DiscoveryCubit>().state;
+    final favourites = context.watch<FavouriteCubit>().state;
+    final items = state.restaurantResults(
+      saved: savedOnly ? favourites.keys : null,
+    );
+    final t = AppLocalizations.of(context)!;
+    if (items.isEmpty || (savedOnly && favourites.userId == null)) {
+      return const SliverToBoxAdapter();
+    }
+    return SliverPadding(
+      padding: context.contentInsets(),
+      sliver: SliverMainAxisGroup(
+        slivers: [
+          SliverToBoxAdapter(child: AppSectionHeading(title: t.restaurants)),
+          SliverList.separated(
+            itemCount: items.length.clamp(0, state.limit),
+            separatorBuilder: (_, _) => 16.verticalSpace,
+            itemBuilder: (context, index) {
+              final item = items[index];
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  AppRestaurantCard(
+                    name: item.name,
+                    imageUrl: item.logoUrl,
+                    category: item.isOpen
+                        ? item.category
+                        : '${item.category} · ${t.itemUnavailable}',
+                    rating: item.rating.toStringAsFixed(1),
+                    deliveryTime: t.deliveryMinutes(item.deliveryTime.round()),
+                    deliveryFee: context.priceLabel(item.deliveryFee),
+                    onTap: () => AppNavigation.push(
+                      context,
+                      '/restaurant_screen',
+                      arguments: item,
+                    ),
+                  ),
+                  Align(
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: CatalogFavouriteSection(
+                      id: item.id,
+                      food: false,
+                      initialValue: false,
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}

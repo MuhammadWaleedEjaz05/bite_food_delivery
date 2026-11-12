@@ -1431,6 +1431,522 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to update address: {error}'**
   String failedToUpdateAddress(Object error);
+
+  /// No description provided for @homeDeliverTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Deliver to'**
+  String get homeDeliverTo;
+
+  /// No description provided for @homeHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Something delicious awaits.'**
+  String get homeHeadline;
+
+  /// No description provided for @homeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Find your next favourite, one bite at a time.'**
+  String get homeSubtitle;
+
+  /// No description provided for @browseRestaurants.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse restaurants'**
+  String get browseRestaurants;
+
+  /// No description provided for @retryAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get retryAction;
+
+  /// No description provided for @catalogLoadFailure.
+  ///
+  /// In en, this message translates to:
+  /// **'We could not load this right now.'**
+  String get catalogLoadFailure;
+
+  /// No description provided for @catalogRefreshFailure.
+  ///
+  /// In en, this message translates to:
+  /// **'Your saved results are shown. Refresh to try again.'**
+  String get catalogRefreshFailure;
+
+  /// No description provided for @noCategoriesAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No categories available yet.'**
+  String get noCategoriesAvailable;
+
+  /// No description provided for @noOpenRestaurants.
+  ///
+  /// In en, this message translates to:
+  /// **'No restaurants are open right now.'**
+  String get noOpenRestaurants;
+
+  /// No description provided for @deliveryMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min'**
+  String deliveryMinutes(int minutes);
+
+  /// No description provided for @rememberEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember email'**
+  String get rememberEmail;
+
+  /// No description provided for @menuAllItems.
+  ///
+  /// In en, this message translates to:
+  /// **'All items'**
+  String get menuAllItems;
+
+  /// No description provided for @restaurantOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open now'**
+  String get restaurantOpen;
+
+  /// No description provided for @restaurantClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get restaurantClosed;
+
+  /// No description provided for @itemUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Currently unavailable'**
+  String get itemUnavailable;
+
+  /// No description provided for @itemAddedToCart.
+  ///
+  /// In en, this message translates to:
+  /// **'Added to your cart'**
+  String get itemAddedToCart;
+
+  /// No description provided for @cartAddFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not add this item. Please try again.'**
+  String get cartAddFailed;
+
+  /// No description provided for @signInToOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to place an order'**
+  String get signInToOrder;
+
+  /// No description provided for @quantityLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity'**
+  String get quantityLabel;
+
+  /// No description provided for @increaseQuantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Increase quantity'**
+  String get increaseQuantity;
+
+  /// No description provided for @decreaseQuantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Decrease quantity'**
+  String get decreaseQuantity;
+
+  /// No description provided for @catalogMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'This item is no longer available.'**
+  String get catalogMissing;
+
+  /// No description provided for @optionalChoices.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional · choose your favourites'**
+  String get optionalChoices;
+
+  /// No description provided for @savingItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Adding…'**
+  String get savingItem;
+
+  /// No description provided for @viewCartAction.
+  ///
+  /// In en, this message translates to:
+  /// **'View cart'**
+  String get viewCartAction;
+
+  /// No description provided for @discoverTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover'**
+  String get discoverTab;
+
+  /// No description provided for @ordersTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders'**
+  String get ordersTab;
+
+  /// No description provided for @accountTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get accountTab;
+
+  /// No description provided for @discoveryAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get discoveryAll;
+
+  /// No description provided for @discoveryOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open now'**
+  String get discoveryOpen;
+
+  /// No description provided for @discoveryCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'All categories'**
+  String get discoveryCategories;
+
+  /// No description provided for @discoveryRated.
+  ///
+  /// In en, this message translates to:
+  /// **'Top rated'**
+  String get discoveryRated;
+
+  /// No description provided for @discoveryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get discoveryName;
+
+  /// No description provided for @discoveryDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Fastest delivery'**
+  String get discoveryDelivery;
+
+  /// No description provided for @discoveryReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset filters'**
+  String get discoveryReset;
+
+  /// No description provided for @discoveryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No matches yet. Try another search or reset your filters.'**
+  String get discoveryEmpty;
+
+  /// No description provided for @discoveryMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Show more'**
+  String get discoveryMore;
+
+  /// No description provided for @cartChangeFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cart could not be updated. Your items are still shown.'**
+  String get cartChangeFailed;
+
+  /// No description provided for @cartNeedsReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Review your cart: use one restaurant and available items with valid quantities.'**
+  String get cartNeedsReview;
+
+  /// No description provided for @cartEstimate.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated item subtotal. Checkout confirms current prices and delivery fees.'**
+  String get cartEstimate;
+
+  /// No description provided for @checkoutChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cart, address or prices changed. Review your total again.'**
+  String get checkoutChanged;
+
+  /// No description provided for @checkoutTryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Checkout could not be completed. Please try again.'**
+  String get checkoutTryAgain;
+
+  /// No description provided for @checkoutCashNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay cash on delivery. Review the confirmed total before placing your order.'**
+  String get checkoutCashNote;
+
+  /// No description provided for @checkoutReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Review total'**
+  String get checkoutReview;
+
+  /// No description provided for @payByCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay by card'**
+  String get payByCard;
+
+  /// No description provided for @resumeCardPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume card payment'**
+  String get resumeCardPayment;
+
+  /// No description provided for @cancelCardPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel card payment'**
+  String get cancelCardPayment;
+
+  /// No description provided for @cardPaymentPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Your card payment is pending. Resume it or cancel before changing your cart.'**
+  String get cardPaymentPending;
+
+  /// No description provided for @paymentAtCheckout.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your payment method at checkout. Card details are collected by Stripe’s secure payment sheet; Bite does not save cards.'**
+  String get paymentAtCheckout;
+
+  /// No description provided for @updateAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Address'**
+  String get updateAddress;
+
+  /// No description provided for @saveAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Address'**
+  String get saveAddress;
+
+  /// No description provided for @street.
+  ///
+  /// In en, this message translates to:
+  /// **'Street'**
+  String get street;
+
+  /// No description provided for @enterStreet.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter street address'**
+  String get enterStreet;
+
+  /// No description provided for @enterCity.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter city'**
+  String get enterCity;
+
+  /// No description provided for @enterZipCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter ZIP code'**
+  String get enterZipCode;
+
+  /// No description provided for @enterCountry.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter country'**
+  String get enterCountry;
+
+  /// No description provided for @orderReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Received'**
+  String get orderReceived;
+
+  /// No description provided for @orderReceivedSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your order has been received by the restaurant'**
+  String get orderReceivedSubtitle;
+
+  /// No description provided for @preparing.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing Food'**
+  String get preparing;
+
+  /// No description provided for @preparingSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'The kitchen is cooking your meal'**
+  String get preparingSubtitle;
+
+  /// No description provided for @dispatched.
+  ///
+  /// In en, this message translates to:
+  /// **'Out for Delivery'**
+  String get dispatched;
+
+  /// No description provided for @dispatchedSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Courier has picked up your food'**
+  String get dispatchedSubtitle;
+
+  /// No description provided for @delivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get delivered;
+
+  /// No description provided for @deliveredSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Order has been delivered safely'**
+  String get deliveredSubtitle;
+
+  /// No description provided for @cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get cancelled;
+
+  /// No description provided for @orderStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Status'**
+  String get orderStatus;
+
+  /// No description provided for @orderDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Details'**
+  String get orderDetails;
+
+  /// No description provided for @orderId.
+  ///
+  /// In en, this message translates to:
+  /// **'Order ID'**
+  String get orderId;
+
+  /// No description provided for @orderDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Date'**
+  String get orderDate;
+
+  /// No description provided for @totalPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Price'**
+  String get totalPrice;
+
+  /// Estimated delivery arrival string
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated delivery: {time}'**
+  String estimatedDeliveryTime(String time);
+
+  /// No description provided for @orderDeliveredSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Your order has been delivered successfully!'**
+  String get orderDeliveredSuccessfully;
+
+  /// No description provided for @helpAndSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Help & Support'**
+  String get helpAndSupport;
+
+  /// No description provided for @deliveryRider.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery Courier'**
+  String get deliveryRider;
+
+  /// No description provided for @review.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get review;
+
+  /// No description provided for @noOrdersInHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'No past orders yet'**
+  String get noOrdersInHistory;
+
+  /// No description provided for @writeReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a Review'**
+  String get writeReview;
+
+  /// No description provided for @rateOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate Order'**
+  String get rateOrder;
+
+  /// No description provided for @rateRestaurant.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate Restaurant'**
+  String get rateRestaurant;
+
+  /// No description provided for @tellUsYourExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us about your experience...'**
+  String get tellUsYourExperience;
+
+  /// No description provided for @submitReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Review'**
+  String get submitReview;
+
+  /// No description provided for @reviewSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Review submitted successfully'**
+  String get reviewSubmitted;
+
+  /// No description provided for @noReviewsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No reviews written yet'**
+  String get noReviewsYet;
+
+  /// No description provided for @orderRating.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Rating'**
+  String get orderRating;
+
+  /// No description provided for @restaurantRating.
+  ///
+  /// In en, this message translates to:
+  /// **'Restaurant Rating'**
+  String get restaurantRating;
+
+  /// No description provided for @feedbackOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Your feedback helps restaurants improve'**
+  String get feedbackOptional;
 }
 
 class _AppLocalizationsDelegate

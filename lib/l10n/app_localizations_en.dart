@@ -730,4 +730,278 @@ class AppLocalizationsEn extends AppLocalizations {
   String failedToUpdateAddress(Object error) {
     return 'Failed to update address: $error';
   }
+
+  @override
+  String get homeDeliverTo => 'Deliver to';
+
+  @override
+  String get homeHeadline => 'Something delicious awaits.';
+
+  @override
+  String get homeSubtitle => 'Find your next favourite, one bite at a time.';
+
+  @override
+  String get browseRestaurants => 'Browse restaurants';
+
+  @override
+  String get retryAction => 'Try again';
+
+  @override
+  String get catalogLoadFailure => 'We could not load this right now.';
+
+  @override
+  String get catalogRefreshFailure =>
+      'Your saved results are shown. Refresh to try again.';
+
+  @override
+  String get noCategoriesAvailable => 'No categories available yet.';
+
+  @override
+  String get noOpenRestaurants => 'No restaurants are open right now.';
+
+  @override
+  String deliveryMinutes(int minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String get rememberEmail => 'Remember email';
+
+  @override
+  String get menuAllItems => 'All items';
+
+  @override
+  String get restaurantOpen => 'Open now';
+
+  @override
+  String get restaurantClosed => 'Closed';
+
+  @override
+  String get itemUnavailable => 'Currently unavailable';
+
+  @override
+  String get itemAddedToCart => 'Added to your cart';
+
+  @override
+  String get cartAddFailed => 'Could not add this item. Please try again.';
+
+  @override
+  String get signInToOrder => 'Sign in to place an order';
+
+  @override
+  String get quantityLabel => 'Quantity';
+
+  @override
+  String get increaseQuantity => 'Increase quantity';
+
+  @override
+  String get decreaseQuantity => 'Decrease quantity';
+
+  @override
+  String get catalogMissing => 'This item is no longer available.';
+
+  @override
+  String get optionalChoices => 'Optional · choose your favourites';
+
+  @override
+  String get savingItem => 'Adding…';
+
+  @override
+  String get viewCartAction => 'View cart';
+
+  @override
+  String get discoverTab => 'Discover';
+
+  @override
+  String get ordersTab => 'Orders';
+
+  @override
+  String get accountTab => 'Account';
+
+  @override
+  String get discoveryAll => 'All';
+
+  @override
+  String get discoveryOpen => 'Open now';
+
+  @override
+  String get discoveryCategories => 'All categories';
+
+  @override
+  String get discoveryRated => 'Top rated';
+
+  @override
+  String get discoveryName => 'Name';
+
+  @override
+  String get discoveryDelivery => 'Fastest delivery';
+
+  @override
+  String get discoveryReset => 'Reset filters';
+
+  @override
+  String get discoveryEmpty =>
+      'No matches yet. Try another search or reset your filters.';
+
+  @override
+  String get discoveryMore => 'Show more';
+
+  @override
+  String get cartChangeFailed =>
+      'Your cart could not be updated. Your items are still shown.';
+
+  @override
+  String get cartNeedsReview =>
+      'Review your cart: use one restaurant and available items with valid quantities.';
+
+  @override
+  String get cartEstimate =>
+      'Estimated item subtotal. Checkout confirms current prices and delivery fees.';
+
+  @override
+  String get checkoutChanged =>
+      'Your cart, address or prices changed. Review your total again.';
+
+  @override
+  String get checkoutTryAgain =>
+      'Checkout could not be completed. Please try again.';
+
+  @override
+  String get checkoutCashNote =>
+      'Pay cash on delivery. Review the confirmed total before placing your order.';
+
+  @override
+  String get checkoutReview => 'Review total';
+
+  @override
+  String get payByCard => 'Pay by card';
+
+  @override
+  String get resumeCardPayment => 'Resume card payment';
+
+  @override
+  String get cancelCardPayment => 'Cancel card payment';
+
+  @override
+  String get cardPaymentPending =>
+      'Your card payment is pending. Resume it or cancel before changing your cart.';
+
+  @override
+  String get paymentAtCheckout =>
+      'Choose your payment method at checkout. Card details are collected by Stripe’s secure payment sheet; Bite does not save cards.';
+
+  @override
+  String get updateAddress => 'Update Address';
+
+  @override
+  String get saveAddress => 'Save Address';
+
+  @override
+  String get street => 'Street';
+
+  @override
+  String get enterStreet => 'Enter street address';
+
+  @override
+  String get enterCity => 'Enter city';
+
+  @override
+  String get enterZipCode => 'Enter ZIP code';
+
+  @override
+  String get enterCountry => 'Enter country';
+
+  @override
+  String get orderReceived => 'Order Received';
+
+  @override
+  String get orderReceivedSubtitle =>
+      'Your order has been received by the restaurant';
+
+  @override
+  String get preparing => 'Preparing Food';
+
+  @override
+  String get preparingSubtitle => 'The kitchen is cooking your meal';
+
+  @override
+  String get dispatched => 'Out for Delivery';
+
+  @override
+  String get dispatchedSubtitle => 'Courier has picked up your food';
+
+  @override
+  String get delivered => 'Delivered';
+
+  @override
+  String get deliveredSubtitle => 'Order has been delivered safely';
+
+  @override
+  String get cancelled => 'Cancelled';
+
+  @override
+  String get orderStatus => 'Order Status';
+
+  @override
+  String get orderDetails => 'Order Details';
+
+  @override
+  String get orderId => 'Order ID';
+
+  @override
+  String get orderDate => 'Order Date';
+
+  @override
+  String get totalPrice => 'Total Price';
+
+  @override
+  String estimatedDeliveryTime(String time) {
+    return 'Estimated delivery: $time';
+  }
+
+  @override
+  String get orderDeliveredSuccessfully =>
+      'Your order has been delivered successfully!';
+
+  @override
+  String get helpAndSupport => 'Help & Support';
+
+  @override
+  String get deliveryRider => 'Delivery Courier';
+
+  @override
+  String get review => 'Review';
+
+  @override
+  String get noOrdersInHistory => 'No past orders yet';
+
+  @override
+  String get writeReview => 'Write a Review';
+
+  @override
+  String get rateOrder => 'Rate Order';
+
+  @override
+  String get rateRestaurant => 'Rate Restaurant';
+
+  @override
+  String get tellUsYourExperience => 'Tell us about your experience...';
+
+  @override
+  String get submitReview => 'Submit Review';
+
+  @override
+  String get reviewSubmitted => 'Review submitted successfully';
+
+  @override
+  String get noReviewsYet => 'No reviews written yet';
+
+  @override
+  String get orderRating => 'Order Rating';
+
+  @override
+  String get restaurantRating => 'Restaurant Rating';
+
+  @override
+  String get feedbackOptional => 'Your feedback helps restaurants improve';
 }

@@ -723,4 +723,274 @@ class AppLocalizationsAr extends AppLocalizations {
   String failedToUpdateAddress(Object error) {
     return 'فشل في تحديث العنوان: $error';
   }
+
+  @override
+  String get homeDeliverTo => 'التوصيل إلى';
+
+  @override
+  String get homeHeadline => 'وجبة لذيذة بانتظارك.';
+
+  @override
+  String get homeSubtitle => 'اكتشف وجبتك المفضلة التالية.';
+
+  @override
+  String get browseRestaurants => 'تصفح المطاعم';
+
+  @override
+  String get retryAction => 'حاول مجدداً';
+
+  @override
+  String get catalogLoadFailure => 'تعذر التحميل الآن.';
+
+  @override
+  String get catalogRefreshFailure =>
+      'نعرض النتائج المحفوظة. حدّث للمحاولة مجدداً.';
+
+  @override
+  String get noCategoriesAvailable => 'لا توجد فئات متاحة بعد.';
+
+  @override
+  String get noOpenRestaurants => 'لا توجد مطاعم مفتوحة الآن.';
+
+  @override
+  String deliveryMinutes(int minutes) {
+    return '$minutes دقيقة';
+  }
+
+  @override
+  String get rememberEmail => 'تذكر البريد الإلكتروني';
+
+  @override
+  String get menuAllItems => 'كل الأصناف';
+
+  @override
+  String get restaurantOpen => 'مفتوح الآن';
+
+  @override
+  String get restaurantClosed => 'مغلق';
+
+  @override
+  String get itemUnavailable => 'غير متاح حالياً';
+
+  @override
+  String get itemAddedToCart => 'تمت الإضافة إلى السلة';
+
+  @override
+  String get cartAddFailed => 'تعذرت الإضافة. حاول مجدداً.';
+
+  @override
+  String get signInToOrder => 'سجّل الدخول للطلب';
+
+  @override
+  String get quantityLabel => 'الكمية';
+
+  @override
+  String get increaseQuantity => 'زيادة الكمية';
+
+  @override
+  String get decreaseQuantity => 'تقليل الكمية';
+
+  @override
+  String get catalogMissing => 'هذا الصنف لم يعد متاحاً.';
+
+  @override
+  String get optionalChoices => 'اختياري · اختر ما تفضله';
+
+  @override
+  String get savingItem => 'جارٍ الإضافة…';
+
+  @override
+  String get viewCartAction => 'عرض السلة';
+
+  @override
+  String get discoverTab => 'استكشف';
+
+  @override
+  String get ordersTab => 'الطلبات';
+
+  @override
+  String get accountTab => 'الحساب';
+
+  @override
+  String get discoveryAll => 'الكل';
+
+  @override
+  String get discoveryOpen => 'مفتوح الآن';
+
+  @override
+  String get discoveryCategories => 'كل الفئات';
+
+  @override
+  String get discoveryRated => 'الأعلى تقييمًا';
+
+  @override
+  String get discoveryName => 'الاسم';
+
+  @override
+  String get discoveryDelivery => 'الأسرع توصيلاً';
+
+  @override
+  String get discoveryReset => 'إعادة ضبط الفلاتر';
+
+  @override
+  String get discoveryEmpty =>
+      'لا توجد نتائج. جرّب بحثًا آخر أو أعد ضبط الفلاتر.';
+
+  @override
+  String get discoveryMore => 'عرض المزيد';
+
+  @override
+  String get cartChangeFailed => 'تعذر تحديث سلتك. لا تزال العناصر معروضة.';
+
+  @override
+  String get cartNeedsReview =>
+      'راجع سلتك: اختر مطعمًا واحدًا وعناصر متاحة بكميات صحيحة.';
+
+  @override
+  String get cartEstimate =>
+      'مجموع تقديري للعناصر. يؤكد الدفع الأسعار الحالية ورسوم التوصيل.';
+
+  @override
+  String get checkoutChanged =>
+      'تغيرت السلة أو العنوان أو الأسعار. راجع المجموع مجددًا.';
+
+  @override
+  String get checkoutTryAgain => 'تعذر إكمال الطلب. حاول مجددًا.';
+
+  @override
+  String get checkoutCashNote =>
+      'الدفع نقدًا عند الاستلام. راجع المجموع المؤكد قبل الطلب.';
+
+  @override
+  String get checkoutReview => 'مراجعة المجموع';
+
+  @override
+  String get payByCard => 'الدفع بالبطاقة';
+
+  @override
+  String get resumeCardPayment => 'استئناف الدفع بالبطاقة';
+
+  @override
+  String get cancelCardPayment => 'إلغاء الدفع بالبطاقة';
+
+  @override
+  String get cardPaymentPending =>
+      'الدفع بالبطاقة معلق. استأنفه أو ألغِه قبل تغيير السلة.';
+
+  @override
+  String get paymentAtCheckout =>
+      'اختر طريقة الدفع عند إتمام الطلب. تجمع Stripe بيانات البطاقة بأمان؛ لا يحفظ Bite البطاقات.';
+
+  @override
+  String get updateAddress => 'تحديث العنوان';
+
+  @override
+  String get saveAddress => 'حفظ العنوان';
+
+  @override
+  String get street => 'الشارع';
+
+  @override
+  String get enterStreet => 'أدخل عنوان الشارع';
+
+  @override
+  String get enterCity => 'أدخل المدينة';
+
+  @override
+  String get enterZipCode => 'أدخل الرمز البريدي';
+
+  @override
+  String get enterCountry => 'أدخل البلد';
+
+  @override
+  String get orderReceived => 'تم استلام الطلب';
+
+  @override
+  String get orderReceivedSubtitle => 'تم استلام طلبك من قِبل المطعم';
+
+  @override
+  String get preparing => 'جارٍ التحضير';
+
+  @override
+  String get preparingSubtitle => 'المطبخ يحضر وجبتك الآن';
+
+  @override
+  String get dispatched => 'في الطريق إليك';
+
+  @override
+  String get dispatchedSubtitle => 'السائق استلم طلبك وهو في الطريق';
+
+  @override
+  String get delivered => 'تم التوصيل';
+
+  @override
+  String get deliveredSubtitle => 'تم تسليم الطلب بنجاح';
+
+  @override
+  String get cancelled => 'ملغي';
+
+  @override
+  String get orderStatus => 'حالة الطلب';
+
+  @override
+  String get orderDetails => 'تفاصيل الطلب';
+
+  @override
+  String get orderId => 'رقم الطلب';
+
+  @override
+  String get orderDate => 'تاريخ الطلب';
+
+  @override
+  String get totalPrice => 'السعر الإجمالي';
+
+  @override
+  String estimatedDeliveryTime(String time) {
+    return 'وقت التوصيل المتوقع: $time';
+  }
+
+  @override
+  String get orderDeliveredSuccessfully => 'تم توصيل طلبك بنجاح!';
+
+  @override
+  String get helpAndSupport => 'المساعدة والدعم';
+
+  @override
+  String get deliveryRider => 'مندوب التوصيل';
+
+  @override
+  String get review => 'تقييم';
+
+  @override
+  String get noOrdersInHistory => 'لا توجد طلبات سابقة';
+
+  @override
+  String get writeReview => 'اكتب تقييماً';
+
+  @override
+  String get rateOrder => 'تقييم الطلب';
+
+  @override
+  String get rateRestaurant => 'تقييم المطعم';
+
+  @override
+  String get tellUsYourExperience => 'أخبرنا عن تجربتك...';
+
+  @override
+  String get submitReview => 'إرسال التقييم';
+
+  @override
+  String get reviewSubmitted => 'تم إرسال التقييم بنجاح';
+
+  @override
+  String get noReviewsYet => 'لم يتم كتابة أي تقييمات بعد';
+
+  @override
+  String get orderRating => 'تقييم الطلب';
+
+  @override
+  String get restaurantRating => 'تقييم المطعم';
+
+  @override
+  String get feedbackOptional => 'ملاحظاتك تساعد المطاعم على التحسين';
 }

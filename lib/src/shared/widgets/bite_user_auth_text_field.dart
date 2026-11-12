@@ -88,10 +88,9 @@ class _BiteUserAuthTextFieldState extends State<BiteUserAuthTextField> {
           ),
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(
-              errorText: AppLocalizations.of(context)!
-                  .pleaseEnterWidgettitletolowercase(
-                    widget.title.toLowerCase(),
-                  ),
+              errorText: AppLocalizations.of(
+                context,
+              )!.pleaseEnterWidgettitletolowercase(widget.title.toLowerCase()),
             ),
             if (widget.isEmail)
               FormBuilderValidators.email(

@@ -1,0 +1,106 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+/// Raw palette values are confined to the theme definition.
+abstract final class AppTheme {
+  static const accents = [
+    Color(0xFFBD3E10),
+    Color(0xFF245DB2),
+    Color(0xFF277344),
+    Color(0xFF7746A5),
+    Color(0xFFAF376D),
+    Color(0xFF007C78),
+    Color(0xFF4A51AA),
+  ];
+
+  static ThemeData lightTheme({int accentIndex = 0}) =>
+      build(brightness: Brightness.light, accentIndex: accentIndex);
+
+  static ThemeData darkTheme({int accentIndex = 0}) =>
+      build(brightness: Brightness.dark, accentIndex: accentIndex);
+
+  static ThemeData build({
+    required Brightness brightness,
+    int accentIndex = 0,
+  }) {
+    final index = accentIndex >= 0 && accentIndex < accents.length
+        ? accentIndex
+        : 0;
+    final dark = brightness == Brightness.dark;
+    final scheme =
+        ColorScheme.fromSeed(
+          seedColor: accents[index],
+          brightness: brightness,
+        ).copyWith(
+          surface: dark ? const Color(0xFF191714) : const Color(0xFFFFFBF5),
+          surfaceContainerLow: dark
+              ? const Color(0xFF24211D)
+              : const Color(0xFFFFFFFF),
+          surfaceContainerHighest: dark
+              ? const Color(0xFF38332D)
+              : const Color(0xFFF2EDE6),
+        );
+    final base = ThemeData(
+      brightness: brightness,
+      colorScheme: scheme,
+      useMaterial3: true,
+      fontFamily: 'Sen',
+    );
+    final text = base.textTheme
+        .copyWith(
+          headlineLarge: TextStyle(
+            fontFamily: 'Sen',
+            fontSize: 32.sp,
+            height: 1.15,
+            fontWeight: FontWeight.w800,
+          ),
+          headlineMedium: TextStyle(
+            fontFamily: 'Sen',
+            fontSize: 28.sp,
+            height: 1.2,
+            fontWeight: FontWeight.w700,
+          ),
+          titleLarge: TextStyle(
+            fontFamily: 'Sen',
+            fontSize: 21.sp,
+            height: 1.3,
+            fontWeight: FontWeight.w700,
+          ),
+          titleMedium: TextStyle(
+            fontFamily: 'Sen',
+            fontSize: 17.sp,
+            height: 1.35,
+            fontWeight: FontWeight.w700,
+          ),
+          bodyLarge: TextStyle(fontFamily: 'Sen', fontSize: 16.sp, height: 1.5),
+          bodyMedium: TextStyle(
+            fontFamily: 'Sen',
+            fontSize: 14.sp,
+            height: 1.5,
+          ),
+          labelLarge: TextStyle(
+            fontFamily: 'Sen',
+            fontSize: 14.sp,
+            height: 1.3,
+            fontWeight: FontWeight.w700,
+          ),
+          labelMedium: TextStyle(
+            fontFamily: 'Sen',
+            fontSize: 13.sp,
+            height: 1.3,
+            fontWeight: FontWeight.w600,
+          ),
+          labelSmall: TextStyle(
+            fontFamily: 'Sen',
+            fontSize: 12.sp,
+            height: 1.3,
+            fontWeight: FontWeight.w600,
+          ),
+        )
+        .apply(bodyColor: scheme.onSurface, displayColor: scheme.onSurface);
+    return base.copyWith(
+      textTheme: text,
+      scaffoldBackgroundColor: scheme.surface,
+    );
+  }
+}

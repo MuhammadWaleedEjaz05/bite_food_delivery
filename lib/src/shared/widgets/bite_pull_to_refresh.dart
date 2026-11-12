@@ -1,5 +1,5 @@
-import 'package:bite_food_delivery/src/features/categories/cubits/categories_cubit/categories_cubit.dart';
-import 'package:bite_food_delivery/src/features/restaurants/cubits/restaurants_cubit/restaurants_cubit.dart';
+import 'package:bite_food_delivery/features/categories/bloc/categories_cubit.dart';
+import 'package:bite_food_delivery/features/restaurants/bloc/restaurants_cubit.dart';
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
