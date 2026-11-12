@@ -39,41 +39,34 @@ class DashboardNavigationBar extends StatelessWidget {
     return SafeArea(
       top: false,
       child: Padding(
-        padding: EdgeInsets.fromLTRB(16.w, 4.h, 16.w, 10.h).r,
-        child: Container(
-          decoration: BoxDecoration(
-            color:
-                (dark
-                        ? context.appColors.surfaceContainerLow
-                        : context.appColors.surface)
-                    .withValues(alpha: 0.88),
-            borderRadius: BorderRadius.circular(28).r,
-            border: Border.all(
-              color: context.appColors.outlineVariant.withValues(
-                alpha: dark ? 0.25 : 0.45,
-              ),
-              width: 1.r,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: dark ? 0.35 : 0.08),
-                blurRadius: 20.r,
-                offset: Offset(0, 8.h),
-              ),
-              BoxShadow(
-                color: context.appColors.primary.withValues(
-                  alpha: dark ? 0.08 : 0.04,
-                ),
-                blurRadius: 30.r,
-                offset: Offset(0, 10.h),
-              ),
-            ],
-          ),
-          clipBehavior: Clip.antiAlias,
+        padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 6.h).r,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(24).r,
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 8.h).r,
+            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+            child: Container(
+              decoration: BoxDecoration(
+                color:
+                    (dark
+                            ? context.appColors.surfaceContainerLow
+                            : context.appColors.surface)
+                        .withValues(alpha: dark ? 0.35 : 0.45),
+                borderRadius: BorderRadius.circular(24).r,
+                border: Border.all(
+                  color:
+                      (dark ? Colors.white : context.appColors.outlineVariant)
+                          .withValues(alpha: dark ? 0.14 : 0.25),
+                  width: 1.r,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: dark ? 0.25 : 0.05),
+                    blurRadius: 16.r,
+                    offset: Offset(0, 4.h),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.h).r,
               child: Row(
                 children: [
                   for (var i = 0; i < labels.length; i++)
@@ -85,7 +78,7 @@ class DashboardNavigationBar extends StatelessWidget {
                           onTap: () => onSelected(i),
                           pressedScale: 0.92,
                           child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 4.h).r,
+                            padding: EdgeInsets.symmetric(vertical: 2.h).r,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -93,8 +86,8 @@ class DashboardNavigationBar extends StatelessWidget {
                                   duration: const Duration(milliseconds: 240),
                                   curve: Curves.easeOutCubic,
                                   padding: EdgeInsets.symmetric(
-                                    horizontal: 16.w,
-                                    vertical: 6.h,
+                                    horizontal: 10.w,
+                                    vertical: 3.h,
                                   ).r,
                                   decoration: BoxDecoration(
                                     color: index == i
@@ -102,27 +95,28 @@ class DashboardNavigationBar extends StatelessWidget {
                                             alpha: 0.14,
                                           )
                                         : Colors.transparent,
-                                    borderRadius: BorderRadius.circular(16).r,
+                                    borderRadius: BorderRadius.circular(12).r,
                                   ),
                                   child: AnimatedScale(
                                     duration: const Duration(milliseconds: 220),
-                                    scale: index == i ? 1.08 : 0.94,
+                                    scale: index == i ? 1.06 : 0.94,
                                     curve: Curves.easeOutBack,
                                     child: Icon(
                                       index == i ? selectedIcons[i] : icons[i],
-                                      size: 22.r,
+                                      size: 20.r,
                                       color: index == i
                                           ? context.appColors.primary
                                           : context.appColors.onSurfaceVariant,
                                     ),
                                   ),
                                 ),
-                                4.verticalSpace,
+                                2.verticalSpace,
                                 AppText(
                                   labels[i],
                                   textAlign: TextAlign.center,
                                   style: AppTextStyles.labelSmall(context)
                                       .copyWith(
+                                        fontSize: 10.sp,
                                         color: index == i
                                             ? context.appColors.primary
                                             : context

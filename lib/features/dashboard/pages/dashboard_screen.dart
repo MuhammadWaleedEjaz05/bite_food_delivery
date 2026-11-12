@@ -8,6 +8,7 @@ class DashboardScreen extends StatelessWidget {
   final StatefulNavigationShell shell;
   @override
   Widget build(BuildContext context) => Scaffold(
+    extendBody: true,
     body: DashboardBodySection(child: shell),
     bottomNavigationBar: DashboardNavigationSection(shell: shell),
   );

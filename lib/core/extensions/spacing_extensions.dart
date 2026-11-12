@@ -26,4 +26,3 @@ extension SpacingContextExtensions on BuildContext {
   /// Compact card padding (12.r all sides)
   EdgeInsets get cardCompactPadding => AppPadding.cardCompact;
 }
-
