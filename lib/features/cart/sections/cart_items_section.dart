@@ -5,6 +5,7 @@ import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:bite_food_delivery/core/extensions/responsive_extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bite_food_delivery/features/cart/widgets/cart_line_card.dart';
+import 'package:bite_food_delivery/widgets/app_staggered_entrance.dart';
 import 'package:bite_food_delivery/core/extensions/price_format.dart';
 
 class CartItemsSection extends StatelessWidget {
@@ -27,27 +28,30 @@ class CartItemsSection extends StatelessWidget {
                   cartID: state.cart.cartID,
                   cartItem: line.copyWith(quantity: quantity),
                 );
-            return CartLineCard(
-              key: ValueKey(line.documentID),
-              name: line.product.name,
-              options: [
-                line.selectedSize,
-                (line.selectedFlavors ?? []).isNotEmpty
-                    ? line.selectedFlavors!.join(', ')
-                    : line.selectedFlavor,
-              ].whereType<String>().where((v) => v.isNotEmpty).join(' · '),
-              imageUrl: line.product.images.firstOrNull ?? '',
-              price: context.priceLabel(line.totalPrice),
-              quantity: line.quantity,
-              quantityLabel: t.quantityLabel,
-              increaseLabel: t.increaseQuantity,
-              decreaseLabel: line.quantity == 1
-                  ? t.removeFromCart
-                  : t.decreaseQuantity,
-              onIncrease: busy || line.quantity >= 99
-                  ? null
-                  : () => change(line.quantity + 1),
-              onDecrease: busy ? null : () => change(line.quantity - 1),
+            return AppStaggeredEntrance(
+              index: index,
+              child: CartLineCard(
+                key: ValueKey(line.documentID),
+                name: line.product.name,
+                options: [
+                  line.selectedSize,
+                  (line.selectedFlavors ?? []).isNotEmpty
+                      ? line.selectedFlavors!.join(', ')
+                      : line.selectedFlavor,
+                ].whereType<String>().where((v) => v.isNotEmpty).join(' · '),
+                imageUrl: line.product.images.firstOrNull ?? '',
+                price: context.priceLabel(line.totalPrice),
+                quantity: line.quantity,
+                quantityLabel: t.quantityLabel,
+                increaseLabel: t.increaseQuantity,
+                decreaseLabel: line.quantity == 1
+                    ? t.removeFromCart
+                    : t.decreaseQuantity,
+                onIncrease: busy || line.quantity >= 99
+                    ? null
+                    : () => change(line.quantity + 1),
+                onDecrease: busy ? null : () => change(line.quantity - 1),
+              ),
             );
           },
         ),

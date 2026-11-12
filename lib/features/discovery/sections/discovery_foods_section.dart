@@ -7,6 +7,7 @@ import 'package:bite_food_delivery/core/extensions/responsive_extensions.dart';
 import 'package:bite_food_delivery/features/favourites/bloc/favourite_cubit.dart';
 import 'package:bite_food_delivery/widgets/app_section_heading.dart';
 import 'package:bite_food_delivery/widgets/app_food_card.dart';
+import 'package:bite_food_delivery/widgets/app_staggered_entrance.dart';
 import 'package:bite_food_delivery/features/food_items/models/food_detail_arguments.dart';
 import 'package:bite_food_delivery/features/favourites/sections/catalog_favourite_section.dart';
 import 'package:bite_food_delivery/app/routes/app_navigation.dart';
@@ -35,36 +36,39 @@ class DiscoveryFoodsSection extends StatelessWidget {
             itemBuilder: (context, index) {
               final item = items[index];
               final parent = state.byRestaurant[item.restaurantId];
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  AppFoodCard(
-                    compact: true,
-                    name: item.name,
-                    subtitle: parent!.name,
-                    price: context.priceLabel(item.price),
-                    imageUrl: item.images.firstOrNull ?? '',
-                    available: parent.isOpen && item.isAvailable != false,
-                    availabilityLabel: t.itemUnavailable,
-                    onTap: () => AppNavigation.push(
-                      context,
-                      '/food_item_screen',
-                      arguments: FoodDetailArguments(
-                        item: item,
-                        restaurantName: parent.name,
-                        restaurantOpen: parent.isOpen,
+              return AppStaggeredEntrance(
+                index: index,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    AppFoodCard(
+                      compact: true,
+                      name: item.name,
+                      subtitle: parent!.name,
+                      price: context.priceLabel(item.price),
+                      imageUrl: item.images.firstOrNull ?? '',
+                      available: parent.isOpen && item.isAvailable != false,
+                      availabilityLabel: t.itemUnavailable,
+                      onTap: () => AppNavigation.push(
+                        context,
+                        '/food_item_screen',
+                        arguments: FoodDetailArguments(
+                          item: item,
+                          restaurantName: parent.name,
+                          restaurantOpen: parent.isOpen,
+                        ),
                       ),
                     ),
-                  ),
-                  Align(
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: CatalogFavouriteSection(
-                      id: item.id,
-                      food: true,
-                      initialValue: false,
+                    Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: CatalogFavouriteSection(
+                        id: item.id,
+                        food: true,
+                        initialValue: false,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               );
             },
           ),

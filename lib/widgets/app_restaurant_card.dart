@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:bite_food_delivery/widgets/app_bouncing_tap.dart';
 import 'package:bite_food_delivery/widgets/app_text.dart';
 import 'package:bite_food_delivery/widgets/app_network_image.dart';
 import 'package:bite_food_delivery/app/theme/app_text_styles.dart';
@@ -16,93 +17,174 @@ class AppRestaurantCard extends StatelessWidget {
     required this.deliveryFee,
     required this.onTap,
   });
+
   final String name, imageUrl, category, rating, deliveryTime, deliveryFee;
   final VoidCallback onTap;
+
   @override
-  Widget build(BuildContext context) => Material(
-    color: context.appColors.surfaceContainerLow,
-    borderRadius: BorderRadius.circular(24).r,
-    clipBehavior: Clip.antiAlias,
-    child: InkWell(
+  Widget build(BuildContext context) {
+    final dark = Theme.of(context).brightness == Brightness.dark;
+
+    return AppBouncingTap(
       onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.all(12).r,
+      child: Container(
+        decoration: BoxDecoration(
+          color: context.appColors.surfaceContainerLow,
+          borderRadius: BorderRadius.circular(22).r,
+          border: Border.all(
+            color: context.appColors.outlineVariant.withValues(
+              alpha: dark ? 0.25 : 0.45,
+            ),
+            width: 1.r,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: dark ? 0.28 : 0.04),
+              blurRadius: 16.r,
+              offset: Offset(0, 6.h),
+            ),
+            BoxShadow(
+              color: context.appColors.primary.withValues(
+                alpha: dark ? 0.04 : 0.02,
+              ),
+              blurRadius: 24.r,
+              offset: Offset(0, 10.h),
+            ),
+          ],
+        ),
+        clipBehavior: Clip.antiAlias,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppNetworkImage(
-              url: imageUrl,
-              height: 170.r,
-              width: double.infinity,
-              radius: 16,
-            ),
-            14.verticalSpace,
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Stack(
               children: [
-                Expanded(
-                  child: AppText(
-                    name,
-                    style: AppTextStyles.titleMedium(context),
-                    maxLines: 2,
+                AppNetworkImage(
+                  url: imageUrl,
+                  height: 160.r,
+                  width: double.infinity,
+                  radius: 0,
+                ),
+                Positioned.fill(
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.black.withValues(alpha: 0.15),
+                          Colors.transparent,
+                          Colors.black.withValues(alpha: 0.35),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-                8.horizontalSpace,
-                Icon(
-                  Icons.star_rounded,
-                  color: context.appColors.primary,
-                  size: 18.r,
+                Positioned(
+                  top: 10.r,
+                  right: 10.r,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 8.w,
+                      vertical: 4.h,
+                    ).r,
+                    decoration: BoxDecoration(
+                      color: Colors.black.withValues(alpha: 0.65),
+                      borderRadius: BorderRadius.circular(12).r,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.star_rounded,
+                          color: const Color(0xFFFFB800),
+                          size: 15.r,
+                        ),
+                        4.horizontalSpace,
+                        AppText(
+                          rating,
+                          style: AppTextStyles.labelMedium(
+                            context,
+                          ).copyWith(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                4.horizontalSpace,
-                AppText(rating, style: AppTextStyles.labelLarge(context)),
               ],
             ),
-            4.verticalSpace,
-            AppText(
-              category,
-              style: AppTextStyles.bodyMedium(
-                context,
-              ).copyWith(color: context.appColors.onSurfaceVariant),
-              maxLines: 2,
+            Padding(
+              padding: EdgeInsets.all(12.r),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppText(
+                    name,
+                    style: AppTextStyles.titleMedium(context),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  4.verticalSpace,
+                  AppText(
+                    category,
+                    style: AppTextStyles.bodySmall(
+                      context,
+                    ).copyWith(color: context.appColors.onSurfaceVariant),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  10.verticalSpace,
+                  Wrap(
+                    spacing: 10.w,
+                    runSpacing: 6.h,
+                    children: [
+                      _MetadataChip(
+                        icon: Icons.schedule_rounded,
+                        label: deliveryTime,
+                      ),
+                      _MetadataChip(
+                        icon: Icons.delivery_dining_rounded,
+                        label: deliveryFee,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            12.verticalSpace,
-            Wrap(
-              spacing: 16.r,
-              runSpacing: 8.r,
-              children: [
-                _Metadata(icon: Icons.schedule_rounded, label: deliveryTime),
-                _Metadata(
-                  icon: Icons.delivery_dining_rounded,
-                  label: deliveryFee,
-                ),
-              ],
-            ),
-            4.verticalSpace,
           ],
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
-class _Metadata extends StatelessWidget {
-  const _Metadata({required this.icon, required this.label});
+class _MetadataChip extends StatelessWidget {
+  const _MetadataChip({required this.icon, required this.label});
   final IconData icon;
   final String label;
+
   @override
-  Widget build(BuildContext context) => Row(
-    mainAxisSize: MainAxisSize.min,
-    children: [
-      Icon(icon, size: 18.r, color: context.appColors.onSurfaceVariant),
-      6.horizontalSpace,
-      Flexible(
-        child: AppText(
-          label,
-          style: AppTextStyles.labelSmall(
-            context,
-          ).copyWith(color: context.appColors.onSurfaceVariant),
+  Widget build(BuildContext context) => Container(
+    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h).r,
+    decoration: BoxDecoration(
+      color: context.appColors.surfaceContainerHighest.withValues(alpha: 0.6),
+      borderRadius: BorderRadius.circular(8).r,
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 14.r, color: context.appColors.onSurfaceVariant),
+        4.horizontalSpace,
+        Flexible(
+          child: AppText(
+            label,
+            style: AppTextStyles.labelSmall(
+              context,
+            ).copyWith(color: context.appColors.onSurfaceVariant),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
-      ),
-    ],
+      ],
+    ),
   );
 }

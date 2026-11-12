@@ -13,6 +13,17 @@ class CheckoutTotalsCard extends StatelessWidget {
     decoration: BoxDecoration(
       color: context.appColors.surfaceContainerLow,
       borderRadius: BorderRadius.circular(24).r,
+      border: Border.all(
+        color: context.appColors.outlineVariant.withValues(alpha: 0.6),
+        width: 1,
+      ),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withValues(alpha: 0.03),
+          blurRadius: 10.r,
+          offset: Offset(0, 4.r),
+        ),
+      ],
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

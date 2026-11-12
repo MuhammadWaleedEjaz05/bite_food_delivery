@@ -5,6 +5,7 @@ import 'package:bite_food_delivery/features/restaurants/bloc/restaurants_cubit.d
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:bite_food_delivery/widgets/app_feedback.dart';
 import 'package:bite_food_delivery/widgets/app_restaurant_card.dart';
+import 'package:bite_food_delivery/widgets/app_staggered_entrance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -49,19 +50,22 @@ class AllRestaurantListSection extends StatelessWidget {
               separatorBuilder: (_, _) => 16.verticalSpace,
               itemBuilder: (context, index) {
                 final r = restaurants[index];
-                return AppRestaurantCard(
-                  name: r.name,
-                  imageUrl: r.logoUrl,
-                  category: r.isOpen
-                      ? r.category
-                      : '${r.category} · ${t.itemUnavailable}',
-                  rating: r.rating.toStringAsFixed(1),
-                  deliveryTime: t.deliveryMinutes(r.deliveryTime.round()),
-                  deliveryFee: context.priceLabel(r.deliveryFee),
-                  onTap: () => AppNavigation.push(
-                    context,
-                    '/restaurant_screen',
-                    arguments: r,
+                return AppStaggeredEntrance(
+                  index: index,
+                  child: AppRestaurantCard(
+                    name: r.name,
+                    imageUrl: r.logoUrl,
+                    category: r.isOpen
+                        ? r.category
+                        : '${r.category} · ${t.itemUnavailable}',
+                    rating: r.rating.toStringAsFixed(1),
+                    deliveryTime: t.deliveryMinutes(r.deliveryTime.round()),
+                    deliveryFee: context.priceLabel(r.deliveryFee),
+                    onTap: () => AppNavigation.push(
+                      context,
+                      '/restaurant_screen',
+                      arguments: r,
+                    ),
                   ),
                 );
               },

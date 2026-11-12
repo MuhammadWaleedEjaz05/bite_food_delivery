@@ -9,6 +9,7 @@ import 'package:bite_food_delivery/features/restaurants/bloc/restaurant_menu_cub
 
 import 'package:bite_food_delivery/widgets/app_feedback.dart';
 import 'package:bite_food_delivery/widgets/app_food_card.dart';
+import 'package:bite_food_delivery/widgets/app_staggered_entrance.dart';
 import 'package:bite_food_delivery/features/food_items/models/food_detail_arguments.dart';
 
 class RestaurantMenuSection extends StatelessWidget {
@@ -45,23 +46,26 @@ class RestaurantMenuSection extends StatelessWidget {
                     separatorBuilder: (_, _) => 12.verticalSpace,
                     itemBuilder: (context, index) {
                       final item = state.visibleItems[index];
-                      return AppFoodCard(
-                        compact: true,
-                        name: item.name,
-                        subtitle: item.description,
-                        price: context.priceLabel(item.price),
-                        imageUrl: item.images.firstOrNull ?? '',
-                        available:
-                            item.isAvailable != false &&
-                            cubit.restaurant.isOpen,
-                        availabilityLabel: strings.itemUnavailable,
-                        onTap: () => AppNavigation.push(
-                          context,
-                          '/food_item_screen',
-                          arguments: FoodDetailArguments(
-                            item: item,
-                            restaurantName: cubit.restaurant.name,
-                            restaurantOpen: cubit.restaurant.isOpen,
+                      return AppStaggeredEntrance(
+                        index: index,
+                        child: AppFoodCard(
+                          compact: true,
+                          name: item.name,
+                          subtitle: item.description,
+                          price: context.priceLabel(item.price),
+                          imageUrl: item.images.firstOrNull ?? '',
+                          available:
+                              item.isAvailable != false &&
+                              cubit.restaurant.isOpen,
+                          availabilityLabel: strings.itemUnavailable,
+                          onTap: () => AppNavigation.push(
+                            context,
+                            '/food_item_screen',
+                            arguments: FoodDetailArguments(
+                              item: item,
+                              restaurantName: cubit.restaurant.name,
+                              restaurantOpen: cubit.restaurant.isOpen,
+                            ),
                           ),
                         ),
                       );

@@ -106,26 +106,92 @@ abstract final class AppRouter {
       ),
       GoRoute(
         path: '/restaurants/:id',
-        builder: (_, state) => CatalogRouteScope(
-          key: ValueKey(state.uri.path),
-          id: state.pathParameters['id']!,
+        pageBuilder: (context, state) => CustomTransitionPage<void>(
+          key: state.pageKey,
+          name: state.uri.toString(),
+          transitionDuration: const Duration(milliseconds: 260),
+          reverseTransitionDuration: const Duration(milliseconds: 200),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            final curved = CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeOutCubic,
+              reverseCurve: Curves.easeInCubic,
+            );
+            return FadeTransition(
+              opacity: curved,
+              child: SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(0.05, 0),
+                  end: Offset.zero,
+                ).animate(curved),
+                child: child,
+              ),
+            );
+          },
+          child: CatalogRouteScope(
+            key: ValueKey(state.uri.path),
+            id: state.pathParameters['id']!,
+          ),
         ),
       ),
       GoRoute(
         path: '/foods/:id',
-        builder: (_, state) => CatalogRouteScope(
-          key: ValueKey(state.uri.path),
-          id: state.pathParameters['id']!,
-          food: true,
+        pageBuilder: (context, state) => CustomTransitionPage<void>(
+          key: state.pageKey,
+          name: state.uri.toString(),
+          transitionDuration: const Duration(milliseconds: 260),
+          reverseTransitionDuration: const Duration(milliseconds: 200),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            final curved = CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeOutCubic,
+              reverseCurve: Curves.easeInCubic,
+            );
+            return FadeTransition(
+              opacity: curved,
+              child: SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(0.05, 0),
+                  end: Offset.zero,
+                ).animate(curved),
+                child: child,
+              ),
+            );
+          },
+          child: CatalogRouteScope(
+            key: ValueKey(state.uri.path),
+            id: state.pathParameters['id']!,
+            food: true,
+          ),
         ),
       ),
       for (final entry in routes.entries)
         GoRoute(
           path: entry.key,
-          pageBuilder: (context, state) => MaterialPage<void>(
+          pageBuilder: (context, state) => CustomTransitionPage<void>(
             key: state.pageKey,
             name: state.uri.toString(),
             arguments: state.extra,
+            transitionDuration: const Duration(milliseconds: 260),
+            reverseTransitionDuration: const Duration(milliseconds: 200),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+                  final curved = CurvedAnimation(
+                    parent: animation,
+                    curve: Curves.easeOutCubic,
+                    reverseCurve: Curves.easeInCubic,
+                  );
+                  return FadeTransition(
+                    opacity: curved,
+                    child: SlideTransition(
+                      position: Tween<Offset>(
+                        begin: const Offset(0.05, 0),
+                        end: Offset.zero,
+                      ).animate(curved),
+                      child: child,
+                    ),
+                  );
+                },
             child: Builder(builder: entry.value),
           ),
         ),

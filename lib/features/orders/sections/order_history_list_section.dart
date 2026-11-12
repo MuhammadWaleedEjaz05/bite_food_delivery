@@ -6,6 +6,7 @@ import 'package:bite_food_delivery/features/orders/widgets/order_history_card.da
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:bite_food_delivery/src/services/firebase/firebase_auth_conn.dart';
 import 'package:bite_food_delivery/widgets/app_feedback.dart';
+import 'package:bite_food_delivery/widgets/app_staggered_entrance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -64,16 +65,19 @@ class OrderHistoryListSection extends StatelessWidget {
               separatorBuilder: (_, _) => 14.verticalSpace,
               itemBuilder: (context, index) {
                 final order = filtered[index];
-                return OrderHistoryCard(
-                  order: order,
-                  onTrack: () =>
-                      AppNavigation.push(context, '/track_order_screen'),
-                  onReorder: () =>
-                      cubit.reorderFromHistory(order.orderId, userId),
-                  onReview: () => AppNavigation.push(
-                    context,
-                    '/review_screen',
-                    arguments: order,
+                return AppStaggeredEntrance(
+                  index: index,
+                  child: OrderHistoryCard(
+                    order: order,
+                    onTrack: () =>
+                        AppNavigation.push(context, '/track_order_screen'),
+                    onReorder: () =>
+                        cubit.reorderFromHistory(order.orderId, userId),
+                    onReview: () => AppNavigation.push(
+                      context,
+                      '/review_screen',
+                      arguments: order,
+                    ),
                   ),
                 );
               },

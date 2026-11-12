@@ -7,6 +7,7 @@ import 'package:bite_food_delivery/core/extensions/responsive_extensions.dart';
 import 'package:bite_food_delivery/features/favourites/bloc/favourite_cubit.dart';
 import 'package:bite_food_delivery/widgets/app_section_heading.dart';
 import 'package:bite_food_delivery/widgets/app_restaurant_card.dart';
+import 'package:bite_food_delivery/widgets/app_staggered_entrance.dart';
 import 'package:bite_food_delivery/features/favourites/sections/catalog_favourite_section.dart';
 import 'package:bite_food_delivery/app/routes/app_navigation.dart';
 import 'package:bite_food_delivery/core/extensions/price_format.dart';
@@ -36,33 +37,38 @@ class DiscoveryRestaurantsSection extends StatelessWidget {
             itemBuilder: (context, index) {
               final item = items[index];
 
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  AppRestaurantCard(
-                    name: item.name,
-                    imageUrl: item.logoUrl,
-                    category: item.isOpen
-                        ? item.category
-                        : '${item.category} · ${t.itemUnavailable}',
-                    rating: item.rating.toStringAsFixed(1),
-                    deliveryTime: t.deliveryMinutes(item.deliveryTime.round()),
-                    deliveryFee: context.priceLabel(item.deliveryFee),
-                    onTap: () => AppNavigation.push(
-                      context,
-                      '/restaurant_screen',
-                      arguments: item,
+              return AppStaggeredEntrance(
+                index: index,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    AppRestaurantCard(
+                      name: item.name,
+                      imageUrl: item.logoUrl,
+                      category: item.isOpen
+                          ? item.category
+                          : '${item.category} · ${t.itemUnavailable}',
+                      rating: item.rating.toStringAsFixed(1),
+                      deliveryTime: t.deliveryMinutes(
+                        item.deliveryTime.round(),
+                      ),
+                      deliveryFee: context.priceLabel(item.deliveryFee),
+                      onTap: () => AppNavigation.push(
+                        context,
+                        '/restaurant_screen',
+                        arguments: item,
+                      ),
                     ),
-                  ),
-                  Align(
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: CatalogFavouriteSection(
-                      id: item.id,
-                      food: false,
-                      initialValue: false,
+                    Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: CatalogFavouriteSection(
+                        id: item.id,
+                        food: false,
+                        initialValue: false,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               );
             },
           ),

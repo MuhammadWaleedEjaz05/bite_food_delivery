@@ -15,7 +15,17 @@ class ProfileMenuGroup extends StatelessWidget {
       decoration: BoxDecoration(
         color: colors.surfaceContainerLow,
         borderRadius: BorderRadius.circular(20).r,
-        border: Border.all(color: colors.outlineVariant, width: 1),
+        border: Border.all(
+          color: colors.outlineVariant.withValues(alpha: 0.6),
+          width: 1,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.03),
+            blurRadius: 10.r,
+            offset: Offset(0, 4.r),
+          ),
+        ],
       ),
       child: Column(children: children),
     );

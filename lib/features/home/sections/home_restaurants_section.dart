@@ -7,6 +7,7 @@ import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:bite_food_delivery/features/restaurants/bloc/restaurants_cubit.dart';
 import 'package:bite_food_delivery/widgets/app_section_heading.dart';
 import 'package:bite_food_delivery/widgets/app_feedback.dart';
+import 'package:bite_food_delivery/widgets/app_staggered_entrance.dart';
 import 'package:bite_food_delivery/src/shared/widgets/bite_restaurant_card.dart';
 
 class HomeRestaurantsSection extends StatelessWidget {
@@ -47,8 +48,11 @@ class HomeRestaurantsSection extends StatelessWidget {
                   else
                     SliverList.separated(
                       itemCount: state.openRestaurants.length,
-                      itemBuilder: (context, index) => BiteRestaurantCard(
-                        restaurant: state.openRestaurants[index],
+                      itemBuilder: (context, index) => AppStaggeredEntrance(
+                        index: index,
+                        child: BiteRestaurantCard(
+                          restaurant: state.openRestaurants[index],
+                        ),
                       ),
                       separatorBuilder: (_, _) => 16.verticalSpace,
                     ),

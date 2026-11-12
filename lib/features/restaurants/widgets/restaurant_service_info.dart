@@ -33,18 +33,34 @@ class _ServiceBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) => DecoratedBox(
     decoration: BoxDecoration(
-      color: context.appColors.surfaceContainerHighest,
-      borderRadius: BorderRadius.circular(12).r,
+      color: context.appColors.surfaceContainerLow,
+      borderRadius: BorderRadius.circular(14).r,
+      border: Border.all(
+        color: context.appColors.outlineVariant.withValues(alpha: 0.6),
+        width: 1,
+      ),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withValues(alpha: 0.02),
+          blurRadius: 4.r,
+          offset: Offset(0, 1.r),
+        ),
+      ],
     ),
     child: Padding(
-      padding: const EdgeInsets.all(10).r,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8).r,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 18.r, color: context.appColors.primary),
+          Icon(icon, size: 16.r, color: context.appColors.primary),
           6.horizontalSpace,
           Flexible(
-            child: AppText(label, style: AppTextStyles.labelSmall(context)),
+            child: AppText(
+              label,
+              style: AppTextStyles.labelSmall(
+                context,
+              ).copyWith(fontWeight: FontWeight.w600),
+            ),
           ),
         ],
       ),

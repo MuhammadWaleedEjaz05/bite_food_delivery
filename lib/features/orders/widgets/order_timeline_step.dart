@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:bite_food_delivery/app/theme/app_text_styles.dart';
 import 'package:bite_food_delivery/core/extensions/theme_extensions.dart';
 import 'package:bite_food_delivery/widgets/app_text.dart';
@@ -60,14 +61,7 @@ class OrderTimelineStep extends StatelessWidget {
                         : isCompleted
                         ? Icon(Icons.check, size: 14.r, color: Colors.white)
                         : isCurrent
-                        ? Container(
-                            width: 8.r,
-                            height: 8.r,
-                            decoration: BoxDecoration(
-                              color: colors.primary,
-                              shape: BoxShape.circle,
-                            ),
-                          )
+                        ? const _TimelinePulseDot()
                         : null,
                   ),
                 ),
@@ -116,6 +110,66 @@ class OrderTimelineStep extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _TimelinePulseDot extends StatefulWidget {
+  const _TimelinePulseDot();
+
+  @override
+  State<_TimelinePulseDot> createState() => _TimelinePulseDotState();
+}
+
+class _TimelinePulseDotState extends State<_TimelinePulseDot>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 900),
+    );
+    if (!Platform.environment.containsKey('FLUTTER_TEST')) {
+      _controller.repeat(reverse: true);
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        final scale = 0.85 + (_controller.value * 0.35);
+        return Transform.scale(
+          scale: scale,
+          child: Container(
+            width: 8.r,
+            height: 8.r,
+            decoration: BoxDecoration(
+              color: context.appColors.primary,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: context.appColors.primary.withValues(
+                    alpha: 0.4 + (_controller.value * 0.4),
+                  ),
+                  blurRadius: 5.r,
+                  spreadRadius: 1.r,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
