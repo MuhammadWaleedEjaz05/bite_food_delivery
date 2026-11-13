@@ -10,6 +10,7 @@ import 'package:bite_food_delivery/app/routes/app_navigation.dart';
 class DiscoveryStatusSection extends StatelessWidget {
   const DiscoveryStatusSection({super.key, this.savedOnly = false});
   final bool savedOnly;
+
   @override
   Widget build(BuildContext context) {
     final state = context.watch<DiscoveryCubit>().state;
@@ -17,44 +18,48 @@ class DiscoveryStatusSection extends StatelessWidget {
     final c = context.read<DiscoveryCubit>();
     final t = AppLocalizations.of(context)!;
     final saved = savedOnly ? favourites.keys : null;
+
+    final Widget? feedbackWidget = savedOnly && favourites.userId == null
+        ? AppFeedback(
+            message: t.pleaseSignInToContinue,
+            actionLabel: t.login,
+            onAction: () => AppNavigation.push(context, '/login_screen'),
+          )
+        : savedOnly && favourites.failed
+        ? AppFeedback(
+            message: t.catalogLoadFailure,
+            actionLabel: t.retryAction,
+            onAction: () => context.read<FavouriteCubit>().bindUser(
+              favourites.userId,
+              retry: true,
+            ),
+          )
+        : (state.loading && !state.loaded) || (savedOnly && favourites.loading)
+        ? const AppLoadingCard()
+        : state.failed
+        ? AppFeedback(
+            message: state.loaded
+                ? t.catalogRefreshFailure
+                : t.catalogLoadFailure,
+            actionLabel: t.retryAction,
+            onAction: c.load,
+          )
+        : state.restaurantResults(saved: saved).isEmpty &&
+              state.foodResults(saved: saved).isEmpty
+        ? AppFeedback(
+            message: t.discoveryEmpty,
+            actionLabel: t.discoveryReset,
+            onAction: c.reset,
+          )
+        : null;
+
+    if (feedbackWidget == null) {
+      return const SliverToBoxAdapter();
+    }
+
     return SliverPadding(
-      padding: context.contentInsets(),
-      sliver: SliverToBoxAdapter(
-        child: savedOnly && favourites.userId == null
-            ? AppFeedback(
-                message: t.pleaseSignInToContinue,
-                actionLabel: t.login,
-                onAction: () => AppNavigation.push(context, '/login_screen'),
-              )
-            : savedOnly && favourites.failed
-            ? AppFeedback(
-                message: t.catalogLoadFailure,
-                actionLabel: t.retryAction,
-                onAction: () => context.read<FavouriteCubit>().bindUser(
-                  favourites.userId,
-                  retry: true,
-                ),
-              )
-            : (state.loading && !state.loaded) ||
-                  (savedOnly && favourites.loading)
-            ? const AppLoadingCard()
-            : state.failed
-            ? AppFeedback(
-                message: state.loaded
-                    ? t.catalogRefreshFailure
-                    : t.catalogLoadFailure,
-                actionLabel: t.retryAction,
-                onAction: c.load,
-              )
-            : state.restaurantResults(saved: saved).isEmpty &&
-                  state.foodResults(saved: saved).isEmpty
-            ? AppFeedback(
-                message: t.discoveryEmpty,
-                actionLabel: t.discoveryReset,
-                onAction: c.reset,
-              )
-            : const SizedBox.shrink(),
-      ),
+      padding: context.contentInsets(bottom: 16),
+      sliver: SliverToBoxAdapter(child: feedbackWidget),
     );
   }
 }

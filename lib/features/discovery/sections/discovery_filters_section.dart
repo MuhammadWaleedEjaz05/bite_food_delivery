@@ -11,7 +11,7 @@ class DiscoveryFiltersSection extends StatelessWidget {
   const DiscoveryFiltersSection({super.key});
   @override
   Widget build(BuildContext context) => SliverPadding(
-    padding: context.contentInsets(),
+    padding: context.contentInsets(bottom: 14),
     sliver: SliverToBoxAdapter(
       child: BlocBuilder<DiscoveryCubit, DiscoveryState>(
         builder: (context, state) {

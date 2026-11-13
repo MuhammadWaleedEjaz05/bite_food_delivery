@@ -18,7 +18,7 @@ class DiscoveryMoreSection extends StatelessWidget {
       return const SliverToBoxAdapter();
     }
     return SliverPadding(
-      padding: context.contentInsets(),
+      padding: context.contentInsets(bottom: 84),
       sliver: SliverToBoxAdapter(
         child: AppPrimaryButton(
           label: AppLocalizations.of(context)!.discoveryMore,

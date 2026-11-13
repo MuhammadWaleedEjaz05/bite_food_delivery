@@ -26,10 +26,18 @@ class DiscoveryFoodsSection extends StatelessWidget {
       return const SliverToBoxAdapter();
     }
     return SliverPadding(
-      padding: context.contentInsets(),
+      padding: context.contentInsets(bottom: 24),
       sliver: SliverMainAxisGroup(
         slivers: [
-          SliverToBoxAdapter(child: AppSectionHeading(title: t.foods)),
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppSectionHeading(title: t.foods),
+                12.verticalSpace,
+              ],
+            ),
+          ),
           SliverList.separated(
             itemCount: items.length.clamp(0, state.limit),
             separatorBuilder: (_, _) => 16.verticalSpace,
