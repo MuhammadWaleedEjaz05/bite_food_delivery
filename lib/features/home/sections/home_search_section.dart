@@ -8,7 +8,7 @@ class HomeSearchSection extends StatelessWidget {
   const HomeSearchSection({super.key});
   @override
   Widget build(BuildContext context) => SliverPadding(
-    padding: context.contentInsets(),
+    padding: context.contentInsets(bottom: 16),
     sliver: SliverToBoxAdapter(
       child: HomeSearchButton(
         label: AppLocalizations.of(context)!.searchForRestaurantsOrDishes,

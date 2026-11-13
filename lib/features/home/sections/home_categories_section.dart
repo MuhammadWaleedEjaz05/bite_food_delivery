@@ -14,7 +14,7 @@ class HomeCategoriesSection extends StatelessWidget {
   const HomeCategoriesSection({super.key});
   @override
   Widget build(BuildContext context) => SliverPadding(
-    padding: context.contentInsets(),
+    padding: context.contentInsets(bottom: 22),
     sliver: SliverToBoxAdapter(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -14,15 +14,21 @@ class HomeRestaurantsSection extends StatelessWidget {
   const HomeRestaurantsSection({super.key});
   @override
   Widget build(BuildContext context) => SliverPadding(
-    padding: context.contentInsets(),
+    padding: context.contentInsets(bottom: 84),
     sliver: SliverMainAxisGroup(
       slivers: [
         SliverToBoxAdapter(
-          child: AppSectionHeading(
-            title: AppLocalizations.of(context)!.openRestaurants,
-            actionLabel: AppLocalizations.of(context)!.seeAll,
-            onAction: () =>
-                AppNavigation.push(context, '/all_restaurants_screen'),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppSectionHeading(
+                title: AppLocalizations.of(context)!.openRestaurants,
+                actionLabel: AppLocalizations.of(context)!.seeAll,
+                onAction: () =>
+                    AppNavigation.push(context, '/all_restaurants_screen'),
+              ),
+              12.verticalSpace,
+            ],
           ),
         ),
         BlocBuilder<RestaurantsCubit, RestaurantsState>(

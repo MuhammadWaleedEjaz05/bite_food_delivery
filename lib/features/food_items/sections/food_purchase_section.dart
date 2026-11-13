@@ -8,12 +8,14 @@ import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:bite_food_delivery/core/extensions/responsive_extensions.dart';
 import 'package:bite_food_delivery/core/extensions/price_format.dart';
 import 'package:bite_food_delivery/features/food_items/bloc/food_details_cubit.dart';
-
+import 'package:bite_food_delivery/widgets/app_text.dart';
+import 'package:bite_food_delivery/app/theme/app_text_styles.dart';
 import 'package:bite_food_delivery/widgets/app_primary_button.dart';
 import 'package:bite_food_delivery/widgets/app_feedback.dart';
 
 class FoodPurchaseSection extends StatelessWidget {
   const FoodPurchaseSection({super.key});
+
   @override
   Widget build(
     BuildContext context,
@@ -30,7 +32,7 @@ class FoodPurchaseSection extends StatelessWidget {
       };
       return Container(
         decoration: BoxDecoration(
-          color: context.appColors.surface.withValues(alpha: 0.92),
+          color: context.appColors.surface.withValues(alpha: 0.94),
           border: Border(
             top: BorderSide(
               color: context.appColors.outlineVariant.withValues(alpha: 0.3),
@@ -51,7 +53,7 @@ class FoodPurchaseSection extends StatelessWidget {
             child: SafeArea(
               top: false,
               child: Padding(
-                padding: context.contentInsets(top: 12, bottom: 12),
+                padding: context.contentInsets(top: 10, bottom: 12),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -71,14 +73,82 @@ class FoodPurchaseSection extends StatelessWidget {
                             ? () => AppNavigation.push(context, '/cart_screen')
                             : null,
                       ),
-                    AppPrimaryButton(
-                      label: !cubit.available
-                          ? strings.itemUnavailable
-                          : state.submitting
-                          ? strings.savingItem
-                          : '${strings.addToCart} · ${context.priceLabel(cubit.total)}',
-                      busy: state.submitting,
-                      onTap: cubit.available ? cubit.addToCart : null,
+                    Row(
+                      children: [
+                        // Quantity stepper pill (matching template Screen 2)
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 4.w,
+                            vertical: 2.h,
+                          ).r,
+                          decoration: BoxDecoration(
+                            color: context.appColors.surfaceContainerHighest
+                                .withValues(alpha: 0.5),
+                            borderRadius: BorderRadius.circular(24).r,
+                            border: Border.all(
+                              color: context.appColors.outlineVariant
+                                  .withValues(alpha: 0.3),
+                              width: 1.r,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.remove, size: 16.r),
+                                visualDensity: VisualDensity.compact,
+                                padding: EdgeInsets.zero,
+                                constraints: BoxConstraints(
+                                  minWidth: 28.r,
+                                  minHeight: 28.r,
+                                ),
+                                onPressed:
+                                    state.submitting || state.quantity <= 1
+                                    ? null
+                                    : () =>
+                                          cubit.setQuantity(state.quantity - 1),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 4.w,
+                                ).r,
+                                child: AppText(
+                                  state.quantity.toString().padLeft(2, '0'),
+                                  style: AppTextStyles.labelLarge(
+                                    context,
+                                  ).copyWith(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.add, size: 16.r),
+                                visualDensity: VisualDensity.compact,
+                                padding: EdgeInsets.zero,
+                                constraints: BoxConstraints(
+                                  minWidth: 28.r,
+                                  minHeight: 28.r,
+                                ),
+                                onPressed:
+                                    state.submitting || state.quantity >= 99
+                                    ? null
+                                    : () =>
+                                          cubit.setQuantity(state.quantity + 1),
+                              ),
+                            ],
+                          ),
+                        ),
+                        10.horizontalSpace,
+                        Expanded(
+                          child: AppPrimaryButton(
+                            label: !cubit.available
+                                ? strings.itemUnavailable
+                                : state.submitting
+                                ? strings.savingItem
+                                : '${strings.addToCart} · ${context.priceLabel(cubit.total)}',
+                            busy: state.submitting,
+                            onTap: cubit.available ? cubit.addToCart : null,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

@@ -139,15 +139,15 @@ class HomeIntro extends StatelessWidget {
                           8.verticalSpace,
                           Container(
                             padding: EdgeInsets.symmetric(
-                              horizontal: 8.w,
-                              vertical: 3.5.h,
+                              horizontal: 10.w,
+                              vertical: 5.h,
                             ).r,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: const Color(0xFF141416),
                               borderRadius: BorderRadius.circular(20).r,
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withValues(alpha: 0.12),
+                                  color: Colors.black.withValues(alpha: 0.18),
                                   blurRadius: 6.r,
                                   offset: Offset(0, 2.h),
                                 ),
@@ -161,7 +161,7 @@ class HomeIntro extends StatelessWidget {
                                     'Order now',
                                     style: AppTextStyles.labelMedium(context)
                                         .copyWith(
-                                          color: context.appColors.primary,
+                                          color: Colors.white,
                                           fontWeight: FontWeight.w800,
                                         ),
                                     maxLines: 1,
@@ -169,10 +169,10 @@ class HomeIntro extends StatelessWidget {
                                   ),
                                 ),
                                 4.horizontalSpace,
-                                Icon(
+                                const Icon(
                                   Icons.arrow_forward_rounded,
-                                  size: 13.r,
-                                  color: context.appColors.primary,
+                                  size: 13,
+                                  color: Colors.white,
                                 ),
                               ],
                             ),

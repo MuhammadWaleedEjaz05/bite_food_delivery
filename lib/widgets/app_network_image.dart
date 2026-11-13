@@ -10,11 +10,13 @@ class AppNetworkImage extends StatelessWidget {
     this.height,
     this.width,
     this.radius = 20,
+    this.fit = BoxFit.cover,
   });
   final String url;
   final double? height;
   final double? width;
   final double radius;
+  final BoxFit fit;
   @override
   Widget build(BuildContext context) {
     final uri = Uri.tryParse(url);
@@ -32,7 +34,7 @@ class AppNetworkImage extends StatelessWidget {
                 imageUrl: url,
                 width: width,
                 height: height,
-                fit: BoxFit.cover,
+                fit: fit,
                 placeholder: (_, _) => const _ImagePlaceholder(),
                 errorWidget: (_, _, _) => const _ImagePlaceholder(),
               )

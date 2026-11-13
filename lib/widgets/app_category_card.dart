@@ -27,46 +27,41 @@ class AppCategoryCard extends StatelessWidget {
     return AppBouncingTap(
       onTap: onTap,
       child: Container(
-        width: 86.w,
-        padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 10.h).r,
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h).r,
         decoration: BoxDecoration(
           color: context.appColors.surfaceContainerLow,
-          borderRadius: BorderRadius.circular(18).r,
+          borderRadius: BorderRadius.circular(24).r,
           border: Border.all(
             color: context.appColors.outlineVariant.withValues(
-              alpha: dark ? 0.22 : 0.45,
+              alpha: dark ? 0.25 : 0.45,
             ),
             width: 1.r,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: dark ? 0.24 : 0.04),
+              color: Colors.black.withValues(alpha: dark ? 0.22 : 0.03),
               blurRadius: 10.r,
               offset: Offset(0, 3.h),
             ),
           ],
         ),
-        child: Column(
+        child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              padding: EdgeInsets.all(5.r),
+              padding: EdgeInsets.all(2.r),
               decoration: BoxDecoration(
-                color: context.appColors.primary.withValues(alpha: 0.09),
+                color: context.appColors.primary.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
-                border: Border.all(
-                  color: context.appColors.primary.withValues(alpha: 0.15),
-                  width: 1.r,
-                ),
               ),
               child: AppNetworkImage(
                 url: imageUrl,
-                height: 52.r,
-                width: 52.r,
-                radius: 26,
+                height: 32.r,
+                width: 32.r,
+                radius: 16,
               ),
             ),
-            8.verticalSpace,
+            8.horizontalSpace,
             AppText(
               displayName,
               style: AppTextStyles.labelMedium(
@@ -74,8 +69,8 @@ class AppCategoryCard extends StatelessWidget {
               ).copyWith(fontWeight: FontWeight.w700),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
             ),
+            4.horizontalSpace,
           ],
         ),
       ),

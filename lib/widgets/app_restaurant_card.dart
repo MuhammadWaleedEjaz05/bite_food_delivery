@@ -102,12 +102,13 @@ class AppRestaurantCard extends StatelessWidget {
                       vertical: 4.h,
                     ).r,
                     decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.7),
-                      borderRadius: BorderRadius.circular(12).r,
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16).r,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.25),
+                          color: Colors.black.withValues(alpha: 0.18),
                           blurRadius: 6.r,
+                          offset: Offset(0, 2.h),
                         ),
                       ],
                     ),
@@ -123,8 +124,8 @@ class AppRestaurantCard extends StatelessWidget {
                         AppText(
                           rating,
                           style: AppTextStyles.labelMedium(context).copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                            color: const Color(0xFF141416),
+                            fontWeight: FontWeight.w800,
                           ),
                         ),
                       ],
@@ -140,7 +141,9 @@ class AppRestaurantCard extends StatelessWidget {
                 children: [
                   AppText(
                     name,
-                    style: AppTextStyles.titleMedium(context),
+                    style: AppTextStyles.titleMedium(
+                      context,
+                    ).copyWith(fontWeight: FontWeight.bold),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -154,17 +157,37 @@ class AppRestaurantCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   10.verticalSpace,
-                  Wrap(
-                    spacing: 10.w,
-                    runSpacing: 6.h,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _MetadataChip(
-                        icon: Icons.schedule_rounded,
-                        label: deliveryTime,
+                      Flexible(
+                        child: Wrap(
+                          spacing: 8.w,
+                          runSpacing: 6.h,
+                          children: [
+                            _MetadataChip(
+                              icon: Icons.schedule_rounded,
+                              label: deliveryTime,
+                            ),
+                            _MetadataChip(
+                              icon: Icons.delivery_dining_rounded,
+                              label: deliveryFee,
+                            ),
+                          ],
+                        ),
                       ),
-                      _MetadataChip(
-                        icon: Icons.delivery_dining_rounded,
-                        label: deliveryFee,
+                      8.horizontalSpace,
+                      Container(
+                        padding: EdgeInsets.all(7.r),
+                        decoration: BoxDecoration(
+                          color: dark ? Colors.white : const Color(0xFF141416),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.arrow_forward_rounded,
+                          size: 13.r,
+                          color: dark ? const Color(0xFF141416) : Colors.white,
+                        ),
                       ),
                     ],
                   ),
