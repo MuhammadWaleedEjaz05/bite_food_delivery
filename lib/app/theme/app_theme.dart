@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 /// Raw palette values are confined to the theme definition.
 abstract final class AppTheme {
   static const accents = [
-    Color(0xFFBD3E10),
+    Color(0xFFFF5222), // Vibrant Modern Food Delivery Coral-Orange
     Color(0xFF245DB2),
     Color(0xFF277344),
     Color(0xFF7746A5),
@@ -32,13 +32,13 @@ abstract final class AppTheme {
           seedColor: accents[index],
           brightness: brightness,
         ).copyWith(
-          surface: dark ? const Color(0xFF191714) : const Color(0xFFFFFBF5),
+          surface: dark ? const Color(0xFF111114) : const Color(0xFFFAFAFC),
           surfaceContainerLow: dark
-              ? const Color(0xFF24211D)
+              ? const Color(0xFF1B1B22)
               : const Color(0xFFFFFFFF),
           surfaceContainerHighest: dark
-              ? const Color(0xFF38332D)
-              : const Color(0xFFF2EDE6),
+              ? const Color(0xFF282834)
+              : const Color(0xFFF0F1F5),
         );
     final base = ThemeData(
       brightness: brightness,

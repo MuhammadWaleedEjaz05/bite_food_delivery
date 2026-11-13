@@ -6,13 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class BiteRestaurantCard extends StatelessWidget {
-  const BiteRestaurantCard({super.key, required this.restaurant});
+  const BiteRestaurantCard({
+    super.key,
+    required this.restaurant,
+    this.favouriteButton,
+  });
   final RestaurantModel restaurant;
+  final Widget? favouriteButton;
   @override
   Widget build(BuildContext context) => AppRestaurantCard(
     name: restaurant.name,
     imageUrl: restaurant.logoUrl,
     category: restaurant.category,
+    favouriteButton: favouriteButton,
     rating: NumberFormat.decimalPatternDigits(
       locale: Localizations.localeOf(context).toString(),
       decimalDigits: 1,

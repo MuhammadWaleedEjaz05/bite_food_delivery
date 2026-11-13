@@ -15,11 +15,27 @@ class FoodHeroSection extends StatelessWidget {
     return SliverPadding(
       padding: context.contentInsets(bottom: 24),
       sliver: SliverToBoxAdapter(
-        child: AppNetworkImage(
-          url: item.images.firstOrNull ?? "",
-          height: 220.r,
-          width: double.infinity,
-          radius: 24,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24).r,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(
+                  alpha: Theme.of(context).brightness == Brightness.dark
+                      ? 0.3
+                      : 0.08,
+                ),
+                blurRadius: 18.r,
+                offset: Offset(0, 6.h),
+              ),
+            ],
+          ),
+          child: AppNetworkImage(
+            url: item.images.firstOrNull ?? "",
+            height: 220.r,
+            width: double.infinity,
+            radius: 24,
+          ),
         ),
       ),
     );

@@ -57,26 +57,63 @@ class AppFeedback extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.all(20).r,
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, size: 28.r, color: context.appColors.onSurfaceVariant),
-        12.verticalSpace,
-        AppText(
-          message,
-          style: AppTextStyles.bodyMedium(context),
-          textAlign: TextAlign.center,
-        ),
-        if (onAction != null && actionLabel != null)
-          TextButton(
-            onPressed: onAction,
-            child: AppText(
-              actionLabel!,
-              style: AppTextStyles.labelLarge(context),
+    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20).r,
+    child: Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 64.r,
+            height: 64.r,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  context.appColors.primary.withValues(alpha: 0.14),
+                  context.appColors.primary.withValues(alpha: 0.04),
+                ],
+              ),
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: context.appColors.primary.withValues(alpha: 0.2),
+                width: 1.5.r,
+              ),
             ),
+            child: Icon(icon, size: 30.r, color: context.appColors.primary),
           ),
-      ],
+          14.verticalSpace,
+          AppText(
+            message,
+            style: AppTextStyles.titleMedium(context),
+            textAlign: TextAlign.center,
+          ),
+          if (onAction != null && actionLabel != null) ...[
+            14.verticalSpace,
+            FilledButton.tonal(
+              onPressed: onAction,
+              style: FilledButton.styleFrom(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16.w,
+                  vertical: 8.h,
+                ).r,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16).r,
+                ),
+              ),
+              child: AppText(
+                actionLabel!,
+                style: AppTextStyles.labelLarge(context).copyWith(
+                  color: context.appColors.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ],
+      ),
     ),
   );
 }

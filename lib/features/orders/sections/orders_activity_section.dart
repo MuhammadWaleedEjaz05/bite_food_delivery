@@ -1,3 +1,4 @@
+import 'package:bite_food_delivery/features/orders/widgets/orders_guest_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
@@ -14,12 +15,7 @@ class OrdersActivitySection extends StatelessWidget {
       builder: (context, session) {
         final text = AppLocalizations.of(context)!;
         if (session is! UserLoggedIn) {
-          return AppFeedback(
-            message: text.pleaseSignInToContinue,
-            actionLabel: text.login,
-            onAction: () => AppNavigation.push(context, '/login_screen'),
-            icon: Icons.receipt_long_outlined,
-          );
+          return const OrdersGuestCard();
         }
         return BlocBuilder<OrderCubit, OrderState>(
           builder: (context, state) {

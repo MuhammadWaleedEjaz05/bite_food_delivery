@@ -39,35 +39,25 @@ class DiscoveryRestaurantsSection extends StatelessWidget {
 
               return AppStaggeredEntrance(
                 index: index,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    AppRestaurantCard(
-                      name: item.name,
-                      imageUrl: item.logoUrl,
-                      category: item.isOpen
-                          ? item.category
-                          : '${item.category} · ${t.itemUnavailable}',
-                      rating: item.rating.toStringAsFixed(1),
-                      deliveryTime: t.deliveryMinutes(
-                        item.deliveryTime.round(),
-                      ),
-                      deliveryFee: context.priceLabel(item.deliveryFee),
-                      onTap: () => AppNavigation.push(
-                        context,
-                        '/restaurant_screen',
-                        arguments: item,
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: CatalogFavouriteSection(
-                        id: item.id,
-                        food: false,
-                        initialValue: false,
-                      ),
-                    ),
-                  ],
+                child: AppRestaurantCard(
+                  name: item.name,
+                  imageUrl: item.logoUrl,
+                  category: item.isOpen
+                      ? item.category
+                      : '${item.category} · ${t.itemUnavailable}',
+                  rating: item.rating.toStringAsFixed(1),
+                  deliveryTime: t.deliveryMinutes(item.deliveryTime.round()),
+                  deliveryFee: context.priceLabel(item.deliveryFee),
+                  favouriteButton: CatalogFavouriteSection(
+                    id: item.id,
+                    food: false,
+                    initialValue: false,
+                  ),
+                  onTap: () => AppNavigation.push(
+                    context,
+                    '/restaurant_screen',
+                    arguments: item,
+                  ),
                 ),
               );
             },

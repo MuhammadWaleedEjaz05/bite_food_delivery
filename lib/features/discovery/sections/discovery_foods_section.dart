@@ -38,36 +38,28 @@ class DiscoveryFoodsSection extends StatelessWidget {
               final parent = state.byRestaurant[item.restaurantId];
               return AppStaggeredEntrance(
                 index: index,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    AppFoodCard(
-                      compact: true,
-                      name: item.name,
-                      subtitle: parent!.name,
-                      price: context.priceLabel(item.price),
-                      imageUrl: item.images.firstOrNull ?? '',
-                      available: parent.isOpen && item.isAvailable != false,
-                      availabilityLabel: t.itemUnavailable,
-                      onTap: () => AppNavigation.push(
-                        context,
-                        '/food_item_screen',
-                        arguments: FoodDetailArguments(
-                          item: item,
-                          restaurantName: parent.name,
-                          restaurantOpen: parent.isOpen,
-                        ),
-                      ),
+                child: AppFoodCard(
+                  compact: true,
+                  name: item.name,
+                  subtitle: parent!.name,
+                  price: context.priceLabel(item.price),
+                  imageUrl: item.images.firstOrNull ?? '',
+                  available: parent.isOpen && item.isAvailable != false,
+                  availabilityLabel: t.itemUnavailable,
+                  favouriteButton: CatalogFavouriteSection(
+                    id: item.id,
+                    food: true,
+                    initialValue: false,
+                  ),
+                  onTap: () => AppNavigation.push(
+                    context,
+                    '/food_item_screen',
+                    arguments: FoodDetailArguments(
+                      item: item,
+                      restaurantName: parent.name,
+                      restaurantOpen: parent.isOpen,
                     ),
-                    Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: CatalogFavouriteSection(
-                        id: item.id,
-                        food: true,
-                        initialValue: false,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               );
             },

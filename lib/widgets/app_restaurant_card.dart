@@ -16,10 +16,12 @@ class AppRestaurantCard extends StatelessWidget {
     required this.deliveryTime,
     required this.deliveryFee,
     required this.onTap,
+    this.favouriteButton,
   });
 
   final String name, imageUrl, category, rating, deliveryTime, deliveryFee;
   final VoidCallback onTap;
+  final Widget? favouriteButton;
 
   @override
   Widget build(BuildContext context) {
@@ -71,25 +73,43 @@ class AppRestaurantCard extends StatelessWidget {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Colors.black.withValues(alpha: 0.15),
+                          Colors.black.withValues(alpha: 0.25),
                           Colors.transparent,
-                          Colors.black.withValues(alpha: 0.35),
+                          Colors.black.withValues(alpha: 0.55),
                         ],
                       ),
                     ),
                   ),
                 ),
+                if (favouriteButton != null)
+                  Positioned(
+                    top: 10.r,
+                    right: 10.r,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.4),
+                        shape: BoxShape.circle,
+                      ),
+                      child: favouriteButton!,
+                    ),
+                  ),
                 Positioned(
-                  top: 10.r,
-                  right: 10.r,
+                  bottom: 10.r,
+                  left: 10.r,
                   child: Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: 8.w,
                       vertical: 4.h,
                     ).r,
                     decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.65),
+                      color: Colors.black.withValues(alpha: 0.7),
                       borderRadius: BorderRadius.circular(12).r,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.25),
+                          blurRadius: 6.r,
+                        ),
+                      ],
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -102,9 +122,10 @@ class AppRestaurantCard extends StatelessWidget {
                         4.horizontalSpace,
                         AppText(
                           rating,
-                          style: AppTextStyles.labelMedium(
-                            context,
-                          ).copyWith(color: Colors.white),
+                          style: AppTextStyles.labelMedium(context).copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),

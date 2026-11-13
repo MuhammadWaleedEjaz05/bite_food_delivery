@@ -1,6 +1,9 @@
+import 'dart:ui';
 import 'package:bite_food_delivery/app/routes/app_navigation.dart';
+import 'package:bite_food_delivery/core/extensions/theme_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:bite_food_delivery/core/extensions/responsive_extensions.dart';
 import 'package:bite_food_delivery/core/extensions/price_format.dart';
@@ -25,37 +28,62 @@ class FoodPurchaseSection extends StatelessWidget {
         FoodActionResult.unavailable => strings.itemUnavailable,
         FoodActionResult.idle => null,
       };
-      return SafeArea(
-        top: false,
-        child: Padding(
-          padding: context.contentInsets(top: 12, bottom: 12),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (message != null)
-                AppFeedback(
-                  message: message,
-                  actionLabel: state.result == FoodActionResult.signInRequired
-                      ? strings.login
-                      : state.result == FoodActionResult.added
-                      ? strings.viewCartAction
-                      : null,
-                  onAction: state.result == FoodActionResult.signInRequired
-                      ? () => AppNavigation.push(context, '/login_screen')
-                      : state.result == FoodActionResult.added
-                      ? () => AppNavigation.push(context, '/cart_screen')
-                      : null,
+      return Container(
+        decoration: BoxDecoration(
+          color: context.appColors.surface.withValues(alpha: 0.92),
+          border: Border(
+            top: BorderSide(
+              color: context.appColors.outlineVariant.withValues(alpha: 0.3),
+              width: 1.r,
+            ),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.06),
+              blurRadius: 16.r,
+              offset: Offset(0, -4.h),
+            ),
+          ],
+        ),
+        child: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+            child: SafeArea(
+              top: false,
+              child: Padding(
+                padding: context.contentInsets(top: 12, bottom: 12),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (message != null)
+                      AppFeedback(
+                        message: message,
+                        actionLabel:
+                            state.result == FoodActionResult.signInRequired
+                            ? strings.login
+                            : state.result == FoodActionResult.added
+                            ? strings.viewCartAction
+                            : null,
+                        onAction:
+                            state.result == FoodActionResult.signInRequired
+                            ? () => AppNavigation.push(context, '/login_screen')
+                            : state.result == FoodActionResult.added
+                            ? () => AppNavigation.push(context, '/cart_screen')
+                            : null,
+                      ),
+                    AppPrimaryButton(
+                      label: !cubit.available
+                          ? strings.itemUnavailable
+                          : state.submitting
+                          ? strings.savingItem
+                          : '${strings.addToCart} · ${context.priceLabel(cubit.total)}',
+                      busy: state.submitting,
+                      onTap: cubit.available ? cubit.addToCart : null,
+                    ),
+                  ],
                 ),
-              AppPrimaryButton(
-                label: !cubit.available
-                    ? strings.itemUnavailable
-                    : state.submitting
-                    ? strings.savingItem
-                    : '${strings.addToCart} · ${context.priceLabel(cubit.total)}',
-                busy: state.submitting,
-                onTap: cubit.available ? cubit.addToCart : null,
               ),
-            ],
+            ),
           ),
         ),
       );

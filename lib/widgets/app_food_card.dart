@@ -17,11 +17,13 @@ class AppFoodCard extends StatelessWidget {
     required this.availabilityLabel,
     this.available = true,
     this.compact = false,
+    this.favouriteButton,
   });
 
   final String name, subtitle, price, imageUrl, availabilityLabel;
   final bool available, compact;
   final VoidCallback onTap;
+  final Widget? favouriteButton;
 
   @override
   Widget build(BuildContext context) {
@@ -64,24 +66,56 @@ class AppFoodCard extends StatelessWidget {
                       ),
                     ),
                     12.horizontalSpace,
-                    AppNetworkImage(
-                      url: imageUrl,
-                      width: 84.r,
-                      height: 88.r,
-                      radius: 14,
+                    Stack(
+                      children: [
+                        AppNetworkImage(
+                          url: imageUrl,
+                          width: 84.r,
+                          height: 88.r,
+                          radius: 14,
+                        ),
+                        if (favouriteButton != null)
+                          Positioned(
+                            top: 4.r,
+                            right: 4.r,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black.withValues(alpha: 0.38),
+                                shape: BoxShape.circle,
+                              ),
+                              child: favouriteButton!,
+                            ),
+                          ),
+                      ],
                     ),
                   ],
                 )
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AspectRatio(
-                      aspectRatio: 4 / 3,
-                      child: AppNetworkImage(
-                        url: imageUrl,
-                        width: double.infinity,
-                        radius: 14,
-                      ),
+                    Stack(
+                      children: [
+                        AspectRatio(
+                          aspectRatio: 4 / 3,
+                          child: AppNetworkImage(
+                            url: imageUrl,
+                            width: double.infinity,
+                            radius: 14,
+                          ),
+                        ),
+                        if (favouriteButton != null)
+                          Positioned(
+                            top: 8.r,
+                            right: 8.r,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black.withValues(alpha: 0.38),
+                                shape: BoxShape.circle,
+                              ),
+                              child: favouriteButton!,
+                            ),
+                          ),
+                      ],
                     ),
                     10.verticalSpace,
                     _FoodCardCopy(

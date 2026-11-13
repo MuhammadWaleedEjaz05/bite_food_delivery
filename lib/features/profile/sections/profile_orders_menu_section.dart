@@ -15,8 +15,6 @@ class ProfileOrdersMenuSection extends StatelessWidget {
     final t = AppLocalizations.of(context)!;
     final isLoggedIn = context.watch<UserAuthCubit>().state is UserLoggedIn;
 
-    if (!isLoggedIn) return const SliverToBoxAdapter(child: SizedBox.shrink());
-
     return SliverPadding(
       padding: context.contentInsets(bottom: 16),
       sliver: SliverToBoxAdapter(
@@ -25,7 +23,10 @@ class ProfileOrdersMenuSection extends StatelessWidget {
             ProfileMenuTile(
               icon: Icons.receipt_long_outlined,
               title: t.orderHistory,
-              onTap: () => AppNavigation.push(context, '/order_history_screen'),
+              onTap: () => AppNavigation.push(
+                context,
+                isLoggedIn ? '/order_history_screen' : '/login_screen',
+              ),
             ),
             ProfileMenuTile(
               icon: Icons.shopping_bag_outlined,
@@ -37,11 +38,12 @@ class ProfileOrdersMenuSection extends StatelessWidget {
               title: t.favorites,
               onTap: () => AppNavigation.push(context, '/favourite'),
             ),
-            ProfileMenuTile(
-              icon: Icons.rate_review_outlined,
-              title: t.myReviews,
-              onTap: () => AppNavigation.push(context, '/my_reviews_screen'),
-            ),
+            if (isLoggedIn)
+              ProfileMenuTile(
+                icon: Icons.rate_review_outlined,
+                title: t.myReviews,
+                onTap: () => AppNavigation.push(context, '/my_reviews_screen'),
+              ),
             ProfileMenuTile(
               icon: Icons.notifications_none_rounded,
               title: t.notifications,

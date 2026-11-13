@@ -82,22 +82,35 @@ class ProfileUserCardSection extends StatelessWidget {
               return Column(
                 children: [
                   Container(
-                    width: 72.r,
-                    height: 72.r,
+                    width: 76.r,
+                    height: 76.r,
                     decoration: BoxDecoration(
-                      color: colors.primary.withValues(alpha: 0.12),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          colors.primary.withValues(alpha: 0.16),
+                          colors.primary.withValues(alpha: 0.05),
+                        ],
+                      ),
                       shape: BoxShape.circle,
+                      border: Border.all(
+                        color: colors.primary.withValues(alpha: 0.25),
+                        width: 2.r,
+                      ),
                     ),
                     child: Icon(
                       Icons.person_rounded,
-                      size: 36.r,
+                      size: 38.r,
                       color: colors.primary,
                     ),
                   ),
                   12.verticalSpace,
                   AppText(
                     t.guestUser,
-                    style: AppTextStyles.titleMedium(context),
+                    style: AppTextStyles.titleMedium(
+                      context,
+                    ).copyWith(fontWeight: FontWeight.w800, fontSize: 18.sp),
                   ),
                   6.verticalSpace,
                   AppText(
@@ -106,7 +119,40 @@ class ProfileUserCardSection extends StatelessWidget {
                       context,
                     ).copyWith(color: colors.onSurfaceVariant),
                   ),
-                  16.verticalSpace,
+                  10.verticalSpace,
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 10.w,
+                      vertical: 4.h,
+                    ).r,
+                    decoration: BoxDecoration(
+                      color: colors.primary.withValues(alpha: 0.08),
+                      borderRadius: BorderRadius.circular(12).r,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.local_offer_rounded,
+                          size: 13.r,
+                          color: colors.primary,
+                        ),
+                        6.horizontalSpace,
+                        Flexible(
+                          child: AppText(
+                            'Join & get 20% OFF your first 3 orders',
+                            style: AppTextStyles.labelSmall(context).copyWith(
+                              color: colors.primary,
+                              fontWeight: FontWeight.w700,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  18.verticalSpace,
                   Row(
                     children: [
                       Expanded(
@@ -115,6 +161,12 @@ class ProfileUserCardSection extends StatelessWidget {
                               AppNavigation.push(context, '/login_screen'),
                           style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 12).r,
+                            side: BorderSide(
+                              color: colors.outlineVariant.withValues(
+                                alpha: 0.8,
+                              ),
+                              width: 1.r,
+                            ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(14).r,
                             ),
@@ -132,13 +184,19 @@ class ProfileUserCardSection extends StatelessWidget {
                               AppNavigation.push(context, '/signup_screen'),
                           style: FilledButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 12).r,
+                            backgroundColor: colors.primary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(14).r,
                             ),
+                            elevation: 2,
+                            shadowColor: colors.primary.withValues(alpha: 0.4),
                           ),
                           child: AppText(
                             t.signup,
-                            style: AppTextStyles.labelLarge(context),
+                            style: AppTextStyles.labelLarge(context).copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),

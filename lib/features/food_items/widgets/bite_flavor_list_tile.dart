@@ -43,6 +43,17 @@ class BiteFlavorListTile extends StatelessWidget {
           child: CheckboxListTile(
             value: isSelected,
             onChanged: onChanged,
+            activeColor: colors.primary,
+            checkColor: Colors.white,
+            checkboxShape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6).r,
+            ),
+            side: BorderSide(
+              color: isSelected
+                  ? colors.primary
+                  : colors.outlineVariant.withValues(alpha: 0.8),
+              width: 1.5.r,
+            ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16).r,
             ),
@@ -53,14 +64,24 @@ class BiteFlavorListTile extends StatelessWidget {
             title: AppText(
               title,
               style: AppTextStyles.bodyLarge(context).copyWith(
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
               ),
             ),
-            secondary: AppNetworkImage(
-              url: imageUrl,
-              width: 44.r,
-              height: 44.r,
-              radius: 10,
+            secondary: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10).r,
+                border: Border.all(
+                  color: colors.outlineVariant.withValues(alpha: 0.3),
+                  width: 1.r,
+                ),
+              ),
+              clipBehavior: Clip.antiAlias,
+              child: AppNetworkImage(
+                url: imageUrl,
+                width: 44.r,
+                height: 44.r,
+                radius: 10,
+              ),
             ),
           ),
         ),
