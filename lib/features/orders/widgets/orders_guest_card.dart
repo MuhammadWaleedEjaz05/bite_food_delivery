@@ -5,7 +5,7 @@ import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:bite_food_delivery/widgets/app_bouncing_tap.dart';
 import 'package:bite_food_delivery/widgets/app_primary_button.dart';
 import 'package:bite_food_delivery/widgets/app_text.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrdersGuestCard extends StatelessWidget {
@@ -109,8 +109,10 @@ class OrdersGuestCard extends StatelessWidget {
               ),
             ),
             24.verticalSpace,
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            const Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 8,
+              runSpacing: 8,
               children: [
                 _FeaturePill(icon: Icons.gps_fixed_rounded, label: 'Live GPS'),
                 _FeaturePill(
@@ -137,7 +139,7 @@ class _FeaturePill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h).r,
+    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h).r,
     decoration: BoxDecoration(
       color: context.appColors.primary.withValues(alpha: 0.08),
       borderRadius: BorderRadius.circular(12).r,
@@ -145,14 +147,16 @@ class _FeaturePill extends StatelessWidget {
     child: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 14.r, color: context.appColors.primary),
-        5.horizontalSpace,
+        Icon(icon, size: 13.r, color: context.appColors.primary),
+        4.horizontalSpace,
         AppText(
           label,
           style: AppTextStyles.labelSmall(context).copyWith(
             color: context.appColors.primary,
             fontWeight: FontWeight.w700,
           ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
       ],
     ),
