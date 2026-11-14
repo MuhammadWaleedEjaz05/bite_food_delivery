@@ -8,7 +8,7 @@ import 'package:bite_food_delivery/features/restaurants/bloc/restaurants_cubit.d
 import 'package:bite_food_delivery/widgets/app_section_heading.dart';
 import 'package:bite_food_delivery/widgets/app_feedback.dart';
 import 'package:bite_food_delivery/widgets/app_staggered_entrance.dart';
-import 'package:bite_food_delivery/src/shared/widgets/bite_restaurant_card.dart';
+import 'package:bite_food_delivery/features/restaurants/widgets/restaurant_card.dart';
 
 class HomeRestaurantsSection extends StatelessWidget {
   const HomeRestaurantsSection({super.key});

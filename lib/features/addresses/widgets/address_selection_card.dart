@@ -5,12 +5,12 @@ import 'package:bite_food_delivery/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BiteAddressSelectionCard extends StatelessWidget {
+class AddressSelectionCard extends StatelessWidget {
   final AddressModel address;
   final bool isSelected;
   final VoidCallback onSelect;
 
-  const BiteAddressSelectionCard({
+  const AddressSelectionCard({
     super.key,
     required this.address,
     required this.isSelected,
@@ -110,3 +110,7 @@ class BiteAddressSelectionCard extends StatelessWidget {
     );
   }
 }
+
+// Backward-compatibility alias
+typedef BiteAddressSelectionCard = AddressSelectionCard;
+

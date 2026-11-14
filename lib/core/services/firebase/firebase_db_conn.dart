@@ -5,3 +5,4 @@ final FirebaseFirestore database = FirebaseFirestore.instance;
 CollectionReference getCollection(String collectionName) {
   return database.collection(collectionName);
 }
+

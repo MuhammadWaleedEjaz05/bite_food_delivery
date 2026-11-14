@@ -8,7 +8,7 @@ import 'package:bite_food_delivery/features/categories/bloc/categories_cubit.dar
 import 'package:bite_food_delivery/widgets/app_section_heading.dart';
 import 'package:bite_food_delivery/widgets/app_feedback.dart';
 import 'package:bite_food_delivery/widgets/app_staggered_entrance.dart';
-import 'package:bite_food_delivery/src/shared/widgets/bite_category_card.dart';
+import 'package:bite_food_delivery/features/categories/widgets/category_card.dart';
 
 class HomeCategoriesSection extends StatelessWidget {
   const HomeCategoriesSection({super.key});

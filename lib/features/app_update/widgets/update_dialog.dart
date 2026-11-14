@@ -4,11 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class BiteUpdateDialog extends StatelessWidget {
+class UpdateDialog extends StatelessWidget {
   final String latestVersion;
   final String updateUrl;
 
-  const BiteUpdateDialog({
+  const UpdateDialog({
     super.key,
     required this.latestVersion,
     required this.updateUrl,
@@ -36,7 +36,7 @@ class BiteUpdateDialog extends StatelessWidget {
         );
       },
       pageBuilder: (context, _, _) =>
-          BiteUpdateDialog(latestVersion: latestVersion, updateUrl: updateUrl),
+          UpdateDialog(latestVersion: latestVersion, updateUrl: updateUrl),
     );
   }
 
@@ -117,7 +117,6 @@ class BiteUpdateDialog extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 Padding(
                   padding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 8.h),
                   child: Column(
@@ -144,7 +143,6 @@ class BiteUpdateDialog extends StatelessWidget {
                         ),
                       ),
                       20.verticalSpace,
-
                       Container(
                         padding: EdgeInsets.symmetric(
                           horizontal: 16.w,
@@ -177,7 +175,6 @@ class BiteUpdateDialog extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 Padding(
                   padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 24.h),
                   child: Column(
@@ -212,7 +209,6 @@ class BiteUpdateDialog extends StatelessWidget {
                         ),
                       ),
                       12.verticalSpace,
-
                       SizedBox(
                         width: double.infinity,
                         height: 50.h,
@@ -249,3 +245,7 @@ class BiteUpdateDialog extends StatelessWidget {
     );
   }
 }
+
+// Backward-compatibility alias
+typedef BiteUpdateDialog = UpdateDialog;
+

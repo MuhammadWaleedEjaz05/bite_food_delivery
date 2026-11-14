@@ -6,7 +6,7 @@ import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:bite_food_delivery/core/extensions/responsive_extensions.dart';
 import 'package:bite_food_delivery/widgets/app_feedback.dart';
 import 'package:bite_food_delivery/features/addresses/bloc/address_cubit.dart';
-import 'package:bite_food_delivery/src/shared/widgets/bite_address_selector_modal.dart';
+import 'package:bite_food_delivery/features/addresses/widgets/address_selector_modal.dart';
 
 class CheckoutAddressSection extends StatelessWidget {
   const CheckoutAddressSection({super.key});

@@ -34,3 +34,4 @@ void saveToSharedPreferenceInt(String key, int value) {
 int? getFromSharedPreferenceInt(String key) {
   return _prefs.getInt(key);
 }
+

@@ -3,7 +3,7 @@ import 'package:bite_food_delivery/features/addresses/bloc/address_cubit.dart';
 import 'package:bite_food_delivery/features/addresses/bloc/address_editor_cubit.dart';
 import 'package:bite_food_delivery/features/addresses/bloc/address_editor_state.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
-import 'package:bite_food_delivery/src/services/firebase/firebase_auth_conn.dart';
+import 'package:bite_food_delivery/core/services/firebase/firebase_auth_conn.dart';
 import 'package:bite_food_delivery/widgets/app_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

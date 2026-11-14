@@ -219,20 +219,37 @@ lib/
 ├── main.dart                         # App entry point & initialization
 ├── firebase_options.dart             # Firebase platform configurations
 │
-├── src/
-│   ├── core/
-│   │   ├── constants/                # Screen list, Stripe keys, language list
-│   │   ├── themes/                   # Light/Dark themes, text styles, theme list
-│   │   ├── utils/                    # SharedPreferences helpers
-│   │   └── lang/                     # Language utilities
-│   │
-│   ├── features/
-│   │   ├── authentication/           # Login, Signup, Forgot Password, Remember Me
-│   │   ├── home/                     # Home page with restaurant listings
-│   │   ├── restaurants/              # Restaurant details, all restaurants view
-│   │   ├── food_items/               # Food item details, size & flavor selection
-│   │   ├── categories/               # Category browsing & filtering
-│   │   ├── search/                   # Search with recent search history
+├── app/                              # App-level routing, theme, providers & constants
+│   ├── theme/                        # Light/Dark AppTheme and typography tokens
+│   ├── routes/                       # Router definitions & route scopes
+│   ├── constants/                    # Stripe and app-wide constants
+│   └── bloc_providers.dart           # Root BlocProvider tree
+│
+├── core/                             # Core infrastructure & cross-cutting concerns
+│   ├── di/                           # Dependency injection (GetIt)
+│   ├── extensions/                   # Responsive, theme, spacing & currency extensions
+│   ├── services/                     # Firebase & telephony services
+│   └── utils/                        # SharedPreferences & persistence helpers
+│
+├── features/                         # Feature-first domain modules (Page -> Section -> Widget)
+│   ├── authentication/               # Login, Signup, Forgot Password, User Auth
+│   ├── home/                         # Home feed with restaurant listings & categories
+│   ├── restaurants/                  # Restaurant details & catalog
+│   ├── food_items/                   # Food item details, sizes & options
+│   ├── categories/                   # Category browsing & filtering
+│   ├── discovery/                    # Unified search & discovery
+│   ├── cart/                         # Cart management & calculations
+│   ├── checkout/                     # Checkout & payments
+│   ├── orders/                       # Order history & live order tracking
+│   ├── addresses/                    # Delivery address management
+│   ├── favourites/                   # User bookmarks & favourites
+│   ├── notifications/                # In-app & push notification handling
+│   ├── reviews/                      # Ratings & reviews
+│   ├── profile/                      # User profile & account details
+│   ├── settings/                     # App settings, language & theme preferences
+│   └── faq/                          # Frequently asked questions & support
+│
+└── widgets/                          # Global reusable UI primitives (cards, buttons, inputs)
 │   │   ├── cart/                     # Shopping cart management
 │   │   ├── checkout/                 # Checkout flow
 │   │   ├── payment/                  # Stripe payments, card management
@@ -324,7 +341,7 @@ flutter run
 ### Stripe Setup
 
 1. Get your test keys from the [Stripe Dashboard](https://dashboard.stripe.com/)
-2. Update `lib/src/core/constants/stripe_const.dart` with your publishable and secret keys
+2. Pass `--dart-define=STRIPE_PUBLISHABLE_KEY=...` or configure `lib/app/constants/stripe_const.dart`
 
 ### Google Maps Setup
 
@@ -338,9 +355,9 @@ flutter run
 
 | File | Purpose |
 |------|---------|
-| `lib/src/core/constants/stripe_const.dart` | Stripe API keys and endpoints |
+| `lib/app/constants/stripe_const.dart` | Stripe client publishable key configuration |
 | `lib/firebase_options.dart` | Firebase platform configurations |
-| `lib/src/services/firebase/fcm_initialize.dart` | FCM & local notification setup |
+| `lib/core/services/firebase/fcm_initialize.dart` | FCM & local notification setup |
 | `flutter_launcher_icons.yaml` | App icon generation config |
 | `firebase.json` | Firebase hosting/deployment config |
 

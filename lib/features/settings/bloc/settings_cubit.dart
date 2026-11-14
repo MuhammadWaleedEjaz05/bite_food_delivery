@@ -1,5 +1,5 @@
 import 'package:bite_food_delivery/features/settings/bloc/settings_state.dart';
-import 'package:bite_food_delivery/src/core/utils/shared_preference_functions.dart';
+import 'package:bite_food_delivery/core/utils/shared_preference_functions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 export 'settings_state.dart';

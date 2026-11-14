@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import '../domain/card_payment_gateway.dart';
 import '../domain/checkout_repository.dart';
-import 'package:bite_food_delivery/src/core/constants/stripe_const.dart';
+import 'package:bite_food_delivery/app/constants/stripe_const.dart';
 
 class StripeCardPaymentGateway implements CardPaymentGateway {
   const StripeCardPaymentGateway(this.functions);

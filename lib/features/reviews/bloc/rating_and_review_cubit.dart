@@ -2,8 +2,8 @@ import 'package:bite_food_delivery/features/restaurants/bloc/restaurants_cubit.d
 import 'package:bite_food_delivery/features/restaurants/data/restaurant_dto.dart';
 import 'package:bite_food_delivery/features/reviews/bloc/rating_and_review_state.dart';
 import 'package:bite_food_delivery/features/reviews/models/rating_and_review_model.dart';
-import 'package:bite_food_delivery/src/services/firebase/firebase_auth_conn.dart';
-import 'package:bite_food_delivery/src/services/firebase/firebase_db_conn.dart';
+import 'package:bite_food_delivery/core/services/firebase/firebase_auth_conn.dart';
+import 'package:bite_food_delivery/core/services/firebase/firebase_db_conn.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RatingAndReviewCubit extends Cubit<RatingAndReviewState> {

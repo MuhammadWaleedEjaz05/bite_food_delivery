@@ -1,5 +1,5 @@
 import 'package:bite_food_delivery/features/onboarding/bloc/first_time_launch_state.dart';
-import 'package:bite_food_delivery/src/core/utils/shared_preference_functions.dart';
+import 'package:bite_food_delivery/core/utils/shared_preference_functions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FirstTimeLaunchCubit extends Cubit<FirstTimeLaunchState> {

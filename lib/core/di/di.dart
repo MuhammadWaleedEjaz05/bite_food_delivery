@@ -11,7 +11,7 @@ import 'package:bite_food_delivery/features/favourites/domain/favourites_reposit
 import 'package:bite_food_delivery/features/favourites/data/firestore_favourites_repository.dart';
 import 'package:bite_food_delivery/features/orders/bloc/order_cubit.dart';
 import 'package:bite_food_delivery/features/notifications/bloc/notifications_cubit.dart';
-import 'package:bite_food_delivery/src/services/phone_call_cubit/phone_call_cubit.dart';
+import 'package:bite_food_delivery/core/services/phone_call/phone_call_cubit.dart';
 import 'package:bite_food_delivery/features/catalog/bloc/catalog_route_cubit.dart';
 import 'package:bite_food_delivery/features/catalog/domain/catalog_lookup.dart';
 import 'package:bite_food_delivery/features/catalog/data/firestore_catalog_lookup.dart';
@@ -26,7 +26,7 @@ import 'package:bite_food_delivery/features/food_items/bloc/food_details_cubit.d
 import 'package:bite_food_delivery/features/food_items/models/food_detail_arguments.dart';
 import 'package:bite_food_delivery/features/restaurants/bloc/restaurant_menu_cubit.dart';
 import 'package:bite_food_delivery/features/restaurants/models/restaurants_model.dart';
-import 'package:bite_food_delivery/src/services/firebase/firebase_auth_conn.dart';
+import 'package:bite_food_delivery/core/services/firebase/firebase_auth_conn.dart';
 import 'package:bite_food_delivery/features/cart/bloc/cart_cubit.dart';
 import 'package:bite_food_delivery/features/addresses/bloc/address_cubit.dart';
 import 'package:bite_food_delivery/features/food_items/bloc/food_item_cubit.dart';

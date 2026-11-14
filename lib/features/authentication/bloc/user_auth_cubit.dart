@@ -1,8 +1,8 @@
 import 'package:bite_food_delivery/features/addresses/models/address_model.dart';
 import 'package:bite_food_delivery/features/authentication/bloc/user_auth_state.dart';
 import 'package:bite_food_delivery/features/authentication/models/user_model.dart';
-import 'package:bite_food_delivery/src/services/firebase/firebase_auth_conn.dart';
-import 'package:bite_food_delivery/src/services/firebase/firebase_db_conn.dart';
+import 'package:bite_food_delivery/core/services/firebase/firebase_auth_conn.dart';
+import 'package:bite_food_delivery/core/services/firebase/firebase_db_conn.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';

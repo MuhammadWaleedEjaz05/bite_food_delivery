@@ -2,7 +2,7 @@ import 'package:bite_food_delivery/core/extensions/responsive_extensions.dart';
 import 'package:bite_food_delivery/features/orders/bloc/order_cubit.dart';
 import 'package:bite_food_delivery/features/orders/models/order_model.dart';
 import 'package:bite_food_delivery/features/orders/widgets/courier_contact_card.dart';
-import 'package:bite_food_delivery/src/services/phone_call_cubit/phone_call_cubit.dart';
+import 'package:bite_food_delivery/core/services/phone_call/phone_call_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

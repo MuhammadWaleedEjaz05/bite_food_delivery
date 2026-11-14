@@ -7,7 +7,7 @@ import 'package:bite_food_delivery/features/home/widgets/delivery_location_butto
 import 'package:bite_food_delivery/features/home/widgets/home_cart_button.dart';
 import 'package:bite_food_delivery/features/addresses/bloc/address_cubit.dart';
 import 'package:bite_food_delivery/features/cart/bloc/cart_cubit.dart';
-import 'package:bite_food_delivery/src/shared/widgets/bite_address_selector_modal.dart';
+import 'package:bite_food_delivery/features/addresses/widgets/address_selector_modal.dart';
 
 class HomeHeaderSection extends StatelessWidget {
   const HomeHeaderSection({super.key});

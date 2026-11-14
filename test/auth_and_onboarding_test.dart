@@ -26,7 +26,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:bite_food_delivery/src/core/utils/shared_preference_functions.dart';
+import 'package:bite_food_delivery/core/utils/shared_preference_functions.dart';
 
 class TestUserAuthCubit extends UserAuthCubit {
   TestUserAuthCubit() : super(autoCheck: false);

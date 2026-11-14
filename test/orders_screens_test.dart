@@ -11,7 +11,7 @@ import 'package:bite_food_delivery/features/payments/models/credit_card_model.da
 import 'package:bite_food_delivery/features/restaurants/bloc/restaurants_cubit.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:bite_food_delivery/features/notifications/bloc/notifications_cubit.dart';
-import 'package:bite_food_delivery/src/services/phone_call_cubit/phone_call_cubit.dart';
+import 'package:bite_food_delivery/core/services/phone_call/phone_call_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';

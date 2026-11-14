@@ -4,7 +4,7 @@ import 'package:bite_food_delivery/features/authentication/bloc/user_auth_cubit.
 import 'package:bite_food_delivery/features/notifications/bloc/notifications_cubit.dart';
 import 'package:bite_food_delivery/features/notifications/widgets/notification_card.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
-import 'package:bite_food_delivery/src/services/firebase/firebase_auth_conn.dart';
+import 'package:bite_food_delivery/core/services/firebase/firebase_auth_conn.dart';
 import 'package:bite_food_delivery/widgets/app_feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

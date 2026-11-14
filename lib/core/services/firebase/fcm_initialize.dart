@@ -1,6 +1,6 @@
-import 'package:bite_food_delivery/src/services/firebase/firebase_auth_conn.dart';
-import 'package:bite_food_delivery/src/services/firebase/firebase_db_conn.dart';
-import 'package:bite_food_delivery/src/core/utils/shared_preference_functions.dart';
+import 'package:bite_food_delivery/core/services/firebase/firebase_auth_conn.dart';
+import 'package:bite_food_delivery/core/services/firebase/firebase_db_conn.dart';
+import 'package:bite_food_delivery/core/utils/shared_preference_functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -106,3 +106,4 @@ class NotificationService {
     );
   }
 }
+

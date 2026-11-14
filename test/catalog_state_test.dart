@@ -10,7 +10,7 @@ import 'package:bite_food_delivery/features/restaurants/bloc/restaurants_cubit.d
 import 'package:bite_food_delivery/features/restaurants/domain/restaurants_repository.dart';
 import 'package:bite_food_delivery/features/categories/models/category_model.dart';
 import 'package:bite_food_delivery/features/restaurants/models/restaurants_model.dart';
-import 'package:bite_food_delivery/src/core/utils/shared_preference_functions.dart';
+import 'package:bite_food_delivery/core/utils/shared_preference_functions.dart';
 
 class FakeCategories implements CategoriesRepository {
   List<CategoryModel> items = [];

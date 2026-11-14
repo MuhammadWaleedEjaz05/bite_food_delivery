@@ -9,3 +9,4 @@ User? getCurrentUser() {
     return null;
   }
 }
+

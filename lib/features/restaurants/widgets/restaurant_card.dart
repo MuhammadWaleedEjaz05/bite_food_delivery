@@ -5,8 +5,8 @@ import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class BiteRestaurantCard extends StatelessWidget {
-  const BiteRestaurantCard({
+class RestaurantCard extends StatelessWidget {
+  const RestaurantCard({
     super.key,
     required this.restaurant,
     this.favouriteButton,
@@ -37,3 +37,7 @@ class BiteRestaurantCard extends StatelessWidget {
     ),
   );
 }
+
+// Backward-compatibility alias
+typedef BiteRestaurantCard = RestaurantCard;
+

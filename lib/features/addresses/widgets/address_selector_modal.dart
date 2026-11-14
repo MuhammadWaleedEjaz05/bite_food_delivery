@@ -2,8 +2,8 @@ import 'package:bite_food_delivery/app/routes/app_navigation.dart';
 import 'package:bite_food_delivery/app/theme/app_text_styles.dart';
 import 'package:bite_food_delivery/core/extensions/theme_extensions.dart';
 import 'package:bite_food_delivery/features/addresses/bloc/address_cubit.dart';
+import 'package:bite_food_delivery/features/addresses/widgets/address_selection_card.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
-import 'package:bite_food_delivery/src/shared/widgets/bite_address_selection_card.dart';
 import 'package:bite_food_delivery/widgets/app_feedback.dart';
 import 'package:bite_food_delivery/widgets/app_primary_button.dart';
 import 'package:bite_food_delivery/widgets/app_text.dart';
@@ -159,7 +159,7 @@ void showAddressSelectorModal(BuildContext context) {
                                 final isSelected =
                                     state.selectedAddress?.addressID ==
                                     address.addressID;
-                                return BiteAddressSelectionCard(
+                                return AddressSelectionCard(
                                   address: address,
                                   isSelected: isSelected,
                                   onSelect: () {
@@ -185,3 +185,4 @@ void showAddressSelectorModal(BuildContext context) {
     ),
   );
 }
+

@@ -3,7 +3,7 @@ import 'package:bite_food_delivery/features/notifications/bloc/notifications_cub
 import 'package:bite_food_delivery/app/routes/catalog_routes.dart';
 import 'package:bite_food_delivery/core/di/di.dart';
 import 'package:bite_food_delivery/features/orders/bloc/order_cubit.dart';
-import 'package:bite_food_delivery/src/services/phone_call_cubit/phone_call_cubit.dart';
+import 'package:bite_food_delivery/core/services/phone_call/phone_call_cubit.dart';
 import 'package:bite_food_delivery/features/authentication/bloc/remember_me_cubit.dart';
 import 'package:bite_food_delivery/features/addresses/pages/add_address_screen.dart';
 import 'package:bite_food_delivery/features/addresses/pages/address_screen.dart';
@@ -24,7 +24,7 @@ import 'package:bite_food_delivery/features/reviews/pages/review_screen.dart';
 import 'package:bite_food_delivery/features/settings/pages/setting_screen.dart';
 import 'package:bite_food_delivery/features/authentication/pages/signup_screen.dart';
 import 'package:bite_food_delivery/features/orders/pages/track_order_screen.dart';
-import 'package:bite_food_delivery/src/services/firebase/firebase_auth_conn.dart';
+import 'package:bite_food_delivery/core/services/firebase/firebase_auth_conn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bite_food_delivery/features/app_update/bloc/update_check_cubit.dart';
 import 'package:bite_food_delivery/features/app_update/bloc/update_check_state.dart';
-import 'package:bite_food_delivery/src/shared/widgets/bite_update_dialog.dart';
+import 'package:bite_food_delivery/features/app_update/widgets/update_dialog.dart';
 
 class DashboardBodySection extends StatelessWidget {
   const DashboardBodySection({super.key, required this.child});

@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:bite_food_delivery/features/notifications/bloc/notifications_state.dart';
 import 'package:bite_food_delivery/features/notifications/models/notification_model.dart';
 import 'package:bite_food_delivery/features/orders/models/order_model.dart';
-import 'package:bite_food_delivery/src/core/utils/shared_preference_functions.dart';
-import 'package:bite_food_delivery/src/services/firebase/fcm_initialize.dart';
-import 'package:bite_food_delivery/src/services/firebase/firebase_db_conn.dart';
+import 'package:bite_food_delivery/core/utils/shared_preference_functions.dart';
+import 'package:bite_food_delivery/core/services/firebase/fcm_initialize.dart';
+import 'package:bite_food_delivery/core/services/firebase/firebase_db_conn.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

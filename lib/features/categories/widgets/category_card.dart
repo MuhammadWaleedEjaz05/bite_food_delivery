@@ -3,8 +3,8 @@ import 'package:bite_food_delivery/features/categories/models/category_model.dar
 import 'package:bite_food_delivery/widgets/app_category_card.dart';
 import 'package:flutter/material.dart';
 
-class BiteCategoryCard extends StatelessWidget {
-  const BiteCategoryCard({super.key, required this.category});
+class CategoryCard extends StatelessWidget {
+  const CategoryCard({super.key, required this.category});
   final CategoryModel category;
   @override
   Widget build(BuildContext context) => AppCategoryCard(
@@ -16,3 +16,7 @@ class BiteCategoryCard extends StatelessWidget {
     ),
   );
 }
+
+// Backward-compatibility alias
+typedef BiteCategoryCard = CategoryCard;
+

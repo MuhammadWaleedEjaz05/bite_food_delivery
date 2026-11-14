@@ -1,4 +1,5 @@
 import 'package:bite_food_delivery/core/di/di.dart';
+import 'package:bite_food_delivery/core/services/firebase/firebase_auth_conn.dart';
 import 'package:bite_food_delivery/features/addresses/bloc/address_cubit.dart';
 import 'package:bite_food_delivery/features/cart/bloc/cart_cubit.dart';
 import 'package:bite_food_delivery/features/categories/bloc/categories_cubit.dart';
@@ -12,7 +13,6 @@ import 'package:bite_food_delivery/features/restaurants/bloc/restaurants_cubit.d
 import 'package:bite_food_delivery/features/settings/bloc/settings_cubit.dart';
 import 'package:bite_food_delivery/features/app_update/bloc/update_check_cubit.dart';
 import 'package:bite_food_delivery/features/authentication/bloc/user_auth_cubit.dart';
-import 'package:bite_food_delivery/src/services/firebase/firebase_auth_conn.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 List<BlocProvider> blocProviderList = [
@@ -51,3 +51,4 @@ List<BlocProvider> blocProviderList = [
     create: (context) => Di.sl<FoodItemCubit>()..loadFoodItem(),
   ),
 ];
+
