@@ -2,7 +2,7 @@ import 'package:bite_food_delivery/core/extensions/responsive_extensions.dart';
 import 'package:bite_food_delivery/core/extensions/theme_extensions.dart';
 import 'package:bite_food_delivery/features/orders/bloc/order_cubit.dart';
 import 'package:bite_food_delivery/features/restaurants/bloc/restaurants_cubit.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

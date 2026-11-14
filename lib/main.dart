@@ -20,9 +20,8 @@ import 'package:bite_food_delivery/app/constants/stripe_const.dart';
 import 'package:bite_food_delivery/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -92,11 +91,8 @@ class MyApp extends StatelessWidget {
               supportedLocales: AppLocalizations.supportedLocales,
               locale: Locale(context.watch<SettingsCubit>().state.languageCode),
               localizationsDelegates: const [
-                AppLocalizations.delegate,
+                ...AppLocalizations.localizationsDelegates,
                 FormBuilderLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
               ],
             );
           },

@@ -1,5 +1,5 @@
 import 'package:bite_food_delivery/app/constants/app_spacing.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// Context extensions providing ergonomic access to consistent spacing,

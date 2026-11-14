@@ -1,7 +1,7 @@
 import 'package:bite_food_delivery/features/faq/sections/faq_accordion_section.dart';
 import 'package:bite_food_delivery/features/faq/sections/faq_contact_section.dart';
 import 'package:bite_food_delivery/features/faq/sections/faq_header_section.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FAQScreen extends StatelessWidget {
   const FAQScreen({super.key});

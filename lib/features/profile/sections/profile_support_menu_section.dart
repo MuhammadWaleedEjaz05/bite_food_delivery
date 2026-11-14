@@ -3,7 +3,7 @@ import 'package:bite_food_delivery/core/extensions/responsive_extensions.dart';
 import 'package:bite_food_delivery/features/profile/widgets/profile_menu_group.dart';
 import 'package:bite_food_delivery/features/profile/widgets/profile_menu_tile.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:bite_food_delivery/app/theme/app_text_styles.dart';
 import 'package:bite_food_delivery/core/extensions/theme_extensions.dart';

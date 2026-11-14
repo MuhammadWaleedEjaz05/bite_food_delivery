@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import '../sections/cart_header_section.dart';
 import '../sections/cart_feedback_section.dart';
 import '../sections/cart_items_section.dart';

@@ -4,7 +4,7 @@ import 'package:bite_food_delivery/features/profile/sections/profile_logout_sect
 import 'package:bite_food_delivery/features/profile/sections/profile_orders_menu_section.dart';
 import 'package:bite_food_delivery/features/profile/sections/profile_support_menu_section.dart';
 import 'package:bite_food_delivery/features/profile/sections/profile_user_card_section.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

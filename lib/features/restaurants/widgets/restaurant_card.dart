@@ -2,7 +2,7 @@ import 'package:bite_food_delivery/app/routes/app_navigation.dart';
 import 'package:bite_food_delivery/features/restaurants/models/restaurants_model.dart';
 import 'package:bite_food_delivery/widgets/app_restaurant_card.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:intl/intl.dart';
 
 class RestaurantCard extends StatelessWidget {

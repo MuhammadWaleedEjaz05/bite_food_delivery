@@ -1,5 +1,5 @@
 import 'package:bite_food_delivery/features/onboarding/sections/splash_content_section.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

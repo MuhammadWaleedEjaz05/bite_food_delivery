@@ -1,6 +1,6 @@
 import 'support/catalog_fixtures.dart';
 import 'package:bite_food_delivery/features/dashboard/widgets/dashboard_navigation_bar.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

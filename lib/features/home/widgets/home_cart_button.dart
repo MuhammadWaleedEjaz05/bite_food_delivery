@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bite_food_delivery/widgets/app_bouncing_tap.dart';
 import 'package:bite_food_delivery/widgets/app_text.dart';

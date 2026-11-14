@@ -1,6 +1,6 @@
 import 'package:bite_food_delivery/core/extensions/theme_extensions.dart';
 import 'package:bite_food_delivery/widgets/app_bouncing_tap.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

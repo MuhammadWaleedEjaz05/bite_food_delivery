@@ -4,7 +4,7 @@ import 'package:bite_food_delivery/features/orders/sections/track_order_header_s
 import 'package:bite_food_delivery/features/orders/sections/track_order_map_section.dart';
 import 'package:bite_food_delivery/features/orders/sections/track_order_status_section.dart';
 import 'package:bite_food_delivery/features/orders/sections/track_order_timeline_section.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class TrackOrderScreen extends StatelessWidget {
   const TrackOrderScreen({super.key});

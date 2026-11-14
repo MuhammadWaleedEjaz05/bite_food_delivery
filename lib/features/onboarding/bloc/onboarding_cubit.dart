@@ -1,5 +1,5 @@
 import 'package:bite_food_delivery/features/onboarding/bloc/onboarding_state.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OnboardingCubit extends Cubit<OnboardingState> {

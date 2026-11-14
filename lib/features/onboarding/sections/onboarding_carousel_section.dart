@@ -3,7 +3,7 @@ import 'package:bite_food_delivery/features/onboarding/bloc/onboarding_state.dar
 import 'package:bite_food_delivery/features/onboarding/widgets/onboarding_page_indicator.dart';
 import 'package:bite_food_delivery/features/onboarding/widgets/onboarding_slide.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

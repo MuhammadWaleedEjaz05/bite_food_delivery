@@ -1,7 +1,7 @@
 import 'package:bite_food_delivery/features/addresses/sections/address_action_section.dart';
 import 'package:bite_food_delivery/features/addresses/sections/address_header_section.dart';
 import 'package:bite_food_delivery/features/addresses/sections/address_list_section.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AddressScreen extends StatelessWidget {
   const AddressScreen({super.key});

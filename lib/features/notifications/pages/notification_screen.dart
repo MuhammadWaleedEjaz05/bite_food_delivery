@@ -1,6 +1,6 @@
 import 'package:bite_food_delivery/features/notifications/sections/notification_header_section.dart';
 import 'package:bite_food_delivery/features/notifications/sections/notification_list_section.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});

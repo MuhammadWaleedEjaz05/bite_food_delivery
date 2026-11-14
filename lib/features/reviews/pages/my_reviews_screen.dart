@@ -1,7 +1,7 @@
 import 'package:bite_food_delivery/features/reviews/bloc/rating_and_review_cubit.dart';
 import 'package:bite_food_delivery/features/reviews/sections/my_reviews_header_section.dart';
 import 'package:bite_food_delivery/features/reviews/sections/my_reviews_list_section.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyReviewsScreen extends StatelessWidget {

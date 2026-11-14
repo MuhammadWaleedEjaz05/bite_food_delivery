@@ -1,5 +1,5 @@
 import 'package:bite_food_delivery/features/discovery/sections/discovery_refresh_section.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:bite_food_delivery/features/discovery/sections/discovery_header_section.dart';
 import 'package:bite_food_delivery/features/discovery/sections/discovery_search_section.dart';
 import 'package:bite_food_delivery/features/discovery/sections/discovery_filters_section.dart';

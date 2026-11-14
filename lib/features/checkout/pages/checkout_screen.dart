@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import '../sections/checkout_header_section.dart';
 import '../sections/checkout_card_section.dart';
 import '../sections/checkout_address_section.dart';

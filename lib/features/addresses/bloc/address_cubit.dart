@@ -2,7 +2,7 @@ import 'package:bite_food_delivery/features/addresses/models/address_model.dart'
 import 'package:bite_food_delivery/core/services/firebase/firebase_auth_conn.dart';
 import 'package:bite_food_delivery/core/services/firebase/firebase_db_conn.dart';
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'address_state.dart';

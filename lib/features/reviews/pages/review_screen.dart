@@ -7,7 +7,7 @@ import 'package:bite_food_delivery/features/reviews/sections/review_header_secti
 import 'package:bite_food_delivery/features/reviews/sections/review_stars_section.dart';
 import 'package:bite_food_delivery/features/reviews/sections/review_submit_section.dart';
 import 'package:bite_food_delivery/features/reviews/sections/review_target_section.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReviewScreen extends StatelessWidget {

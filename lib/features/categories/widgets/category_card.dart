@@ -1,7 +1,7 @@
 import 'package:bite_food_delivery/app/routes/app_navigation.dart';
 import 'package:bite_food_delivery/features/categories/models/category_model.dart';
 import 'package:bite_food_delivery/widgets/app_category_card.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({super.key, required this.category});

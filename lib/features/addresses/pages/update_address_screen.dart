@@ -6,7 +6,7 @@ import 'package:bite_food_delivery/features/addresses/sections/address_form_sect
 import 'package:bite_food_delivery/features/addresses/sections/address_label_section.dart';
 import 'package:bite_food_delivery/features/addresses/sections/address_map_section.dart';
 import 'package:bite_food_delivery/features/addresses/sections/address_save_section.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UpdateAddressScreen extends StatelessWidget {

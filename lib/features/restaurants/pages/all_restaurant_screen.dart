@@ -1,6 +1,6 @@
 import 'package:bite_food_delivery/features/restaurants/sections/all_restaurant_header_section.dart';
 import 'package:bite_food_delivery/features/restaurants/sections/all_restaurant_list_section.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AllRestaurantScreen extends StatelessWidget {
   const AllRestaurantScreen({super.key});

@@ -2,7 +2,7 @@ import 'package:bite_food_delivery/core/extensions/responsive_extensions.dart';
 import 'package:bite_food_delivery/features/addresses/bloc/address_editor_cubit.dart';
 import 'package:bite_food_delivery/features/addresses/bloc/map_location_cubit.dart';
 import 'package:bite_food_delivery/features/addresses/widgets/address_map_picker.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 

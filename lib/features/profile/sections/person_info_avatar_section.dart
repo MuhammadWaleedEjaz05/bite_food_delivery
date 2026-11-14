@@ -1,7 +1,7 @@
 import 'package:bite_food_delivery/core/extensions/responsive_extensions.dart';
 import 'package:bite_food_delivery/features/profile/widgets/profile_avatar.dart';
 import 'package:bite_food_delivery/features/authentication/bloc/user_auth_cubit.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PersonInfoAvatarSection extends StatelessWidget {

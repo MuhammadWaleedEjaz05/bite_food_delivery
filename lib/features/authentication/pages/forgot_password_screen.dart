@@ -2,7 +2,7 @@ import 'package:bite_food_delivery/features/authentication/bloc/forgot_password_
 import 'package:bite_food_delivery/features/authentication/sections/forgot_password_actions_section.dart';
 import 'package:bite_food_delivery/features/authentication/sections/forgot_password_form_section.dart';
 import 'package:bite_food_delivery/features/authentication/sections/forgot_password_header_section.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {

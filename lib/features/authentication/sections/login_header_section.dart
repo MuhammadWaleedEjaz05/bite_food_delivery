@@ -3,7 +3,7 @@ import 'package:bite_food_delivery/core/extensions/theme_extensions.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:bite_food_delivery/widgets/app_text.dart';
 import 'package:bite_food_delivery/widgets/custom_app_bar.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginHeaderSection extends StatelessWidget {

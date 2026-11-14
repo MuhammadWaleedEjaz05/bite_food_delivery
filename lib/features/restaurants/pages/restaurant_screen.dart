@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:bite_food_delivery/features/restaurants/sections/restaurant_header_section.dart';
 import 'package:bite_food_delivery/features/restaurants/sections/restaurant_hero_section.dart';
 import 'package:bite_food_delivery/features/restaurants/sections/restaurant_info_section.dart';

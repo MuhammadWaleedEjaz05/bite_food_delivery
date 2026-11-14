@@ -17,7 +17,7 @@ import 'package:bite_food_delivery/features/settings/bloc/settings_cubit.dart';
 import 'package:bite_food_delivery/features/settings/pages/setting_screen.dart';
 import 'package:bite_food_delivery/features/settings/widgets/setting_tile.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

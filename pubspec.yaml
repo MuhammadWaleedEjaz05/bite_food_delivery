@@ -55,6 +55,8 @@ dependencies:
   go_router: ^18.1.4
   cloud_functions: ^7.0.1
 
+  material_ui: any
+  cupertino_ui: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -25,7 +25,7 @@ import 'package:bite_food_delivery/features/settings/pages/setting_screen.dart';
 import 'package:bite_food_delivery/features/authentication/pages/signup_screen.dart';
 import 'package:bite_food_delivery/features/orders/pages/track_order_screen.dart';
 import 'package:bite_food_delivery/core/services/firebase/firebase_auth_conn.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 final Map<String, Widget Function(BuildContext)> routes = {

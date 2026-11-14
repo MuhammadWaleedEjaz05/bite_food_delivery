@@ -5,7 +5,7 @@ import 'package:bite_food_delivery/features/authentication/bloc/user_auth_cubit.
 import 'package:bite_food_delivery/features/authentication/sections/login_actions_section.dart';
 import 'package:bite_food_delivery/features/authentication/sections/login_form_section.dart';
 import 'package:bite_food_delivery/features/authentication/sections/login_header_section.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:bite_food_delivery/features/categories/sections/all_category_grid_section.dart';
 import 'package:bite_food_delivery/features/categories/sections/all_category_header_section.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AllCategoryScreen extends StatelessWidget {
   const AllCategoryScreen({super.key});

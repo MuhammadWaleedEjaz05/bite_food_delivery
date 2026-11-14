@@ -1,7 +1,7 @@
 import 'app_navigation.dart';
 import 'package:bite_food_delivery/features/addresses/models/address_model.dart';
 import 'package:bite_food_delivery/features/orders/models/order_model.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bite_food_delivery/features/dashboard/pages/dashboard_screen.dart';
 import 'package:bite_food_delivery/features/home/pages/home_screen.dart';

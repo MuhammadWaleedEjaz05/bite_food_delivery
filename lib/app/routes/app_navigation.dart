@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:go_router/go_router.dart';
 import 'package:bite_food_delivery/features/restaurants/models/restaurants_model.dart';
 import 'package:bite_food_delivery/features/food_items/models/food_item_model.dart';
