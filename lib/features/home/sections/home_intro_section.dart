@@ -7,7 +7,7 @@ class HomeIntroSection extends StatelessWidget {
   const HomeIntroSection({super.key});
   @override
   Widget build(BuildContext context) => SliverPadding(
-    padding: context.contentInsets(top: 14, bottom: 16),
+    padding: context.contentInsets(top: 10, bottom: 12),
     sliver: SliverToBoxAdapter(
       child: HomeIntro(
         headline: AppLocalizations.of(context)!.homeHeadline,

@@ -35,7 +35,7 @@ class DiscoveryRestaurantsSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppSectionHeading(title: t.restaurants),
-                12.verticalSpace,
+                16.verticalSpace,
               ],
             ),
           ),

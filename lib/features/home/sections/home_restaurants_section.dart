@@ -27,7 +27,7 @@ class HomeRestaurantsSection extends StatelessWidget {
                 onAction: () =>
                     AppNavigation.push(context, '/all_restaurants_screen'),
               ),
-              12.verticalSpace,
+              16.verticalSpace,
             ],
           ),
         ),

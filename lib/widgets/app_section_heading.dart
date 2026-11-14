@@ -24,7 +24,9 @@ class AppSectionHeading extends StatelessWidget {
           context,
         ).copyWith(fontWeight: FontWeight.bold),
       );
-      if (actionLabel == null || onAction == null) return heading;
+      if (actionLabel == null || onAction == null) {
+        return SizedBox(width: double.infinity, child: heading);
+      }
       final action = TextButton(
         onPressed: onAction,
         style: TextButton.styleFrom(
@@ -41,18 +43,24 @@ class AppSectionHeading extends StatelessWidget {
         ),
       );
       if (MediaQuery.textScalerOf(context).scale(1) > 1.3) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [heading, 4.verticalSpace, action],
+        return SizedBox(
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [heading, 4.verticalSpace, action],
+          ),
         );
       }
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(child: heading),
-          8.horizontalSpace,
-          action,
-        ],
+      return SizedBox(
+        width: double.infinity,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(child: heading),
+            8.horizontalSpace,
+            action,
+          ],
+        ),
       );
     },
   );
