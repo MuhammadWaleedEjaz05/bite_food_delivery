@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bite_food_delivery/app/routes/app_router.dart';
 import 'package:bite_food_delivery/app/routes/app_navigation.dart';
 import 'package:bite_food_delivery/app/theme/app_theme.dart';
+import 'package:bite_food_delivery/app/constants/app_localizations_delegates.dart';
 import 'package:bite_food_delivery/core/di/di.dart';
 import 'package:bite_food_delivery/features/catalog/bloc/catalog_route_cubit.dart';
 import 'package:bite_food_delivery/features/catalog/domain/catalog_lookup.dart';
@@ -79,7 +80,7 @@ void main() {
           builder: (_, _) => MaterialApp.router(
             routerConfig: router,
             theme: AppTheme.build(brightness: Brightness.light),
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            localizationsDelegates: appLocalizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
           ),
         ),
@@ -209,7 +210,7 @@ void main() {
         builder: (_, _) => MaterialApp.router(
           routerConfig: router,
           theme: AppTheme.build(brightness: Brightness.light),
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
         ),
       ),
@@ -264,7 +265,7 @@ void main() {
         builder: (_, _) => MaterialApp.router(
           routerConfig: router,
           theme: AppTheme.build(brightness: Brightness.light),
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
         ),
       ),
@@ -288,7 +289,7 @@ void main() {
           builder: (_, _) => MaterialApp(
             theme: AppTheme.build(brightness: Brightness.dark),
             locale: Locale(locale),
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            localizationsDelegates: appLocalizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             builder: (context, child) => MediaQuery(
               data: MediaQuery.of(

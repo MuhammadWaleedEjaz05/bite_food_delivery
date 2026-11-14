@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:bite_food_delivery/app/theme/app_theme.dart';
+import 'package:bite_food_delivery/app/constants/app_localizations_delegates.dart';
 import 'package:bite_food_delivery/features/orders/models/order_model.dart';
 import 'package:bite_food_delivery/features/payments/models/credit_card_model.dart';
 import 'package:bite_food_delivery/features/restaurants/bloc/restaurants_cubit.dart';
@@ -103,7 +104,7 @@ Future<void> pumpReviewScreen(
           theme: AppTheme.build(brightness: brightness),
           locale: Locale(locale),
           supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationsDelegates,
           builder: (context, child) => MediaQuery(
             data: MediaQuery.of(
               context,
@@ -151,7 +152,7 @@ Future<void> pumpMyReviewsScreen(
           theme: AppTheme.build(brightness: brightness),
           locale: Locale(locale),
           supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationsDelegates,
           builder: (context, child) => MediaQuery(
             data: MediaQuery.of(
               context,

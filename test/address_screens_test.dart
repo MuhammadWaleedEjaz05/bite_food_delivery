@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:bite_food_delivery/app/theme/app_theme.dart';
+import 'package:bite_food_delivery/app/constants/app_localizations_delegates.dart';
 import 'package:bite_food_delivery/features/addresses/bloc/address_cubit.dart';
 import 'package:bite_food_delivery/features/addresses/bloc/address_editor_cubit.dart';
 import 'package:bite_food_delivery/features/addresses/models/address_model.dart';
@@ -78,7 +79,7 @@ Future<void> pumpAddressScreen(
           theme: AppTheme.build(brightness: brightness),
           locale: Locale(locale),
           supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationsDelegates,
           builder: (context, child) => MediaQuery(
             data: MediaQuery.of(
               context,
@@ -181,7 +182,7 @@ void main() {
           child: ScreenUtilInit(
             designSize: const Size(375, 812),
             builder: (_, _) => const MaterialApp(
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              localizationsDelegates: appLocalizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               home: AddAddressScreen(),
             ),
@@ -201,7 +202,7 @@ void main() {
           child: ScreenUtilInit(
             designSize: const Size(375, 812),
             builder: (_, _) => const MaterialApp(
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              localizationsDelegates: appLocalizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               home: UpdateAddressScreen(address: sampleAddress),
             ),

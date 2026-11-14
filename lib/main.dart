@@ -17,6 +17,7 @@ import 'package:bite_food_delivery/core/services/firebase/fcm_initialize.dart';
 import 'package:bite_food_delivery/core/services/firebase/firebase_auth_conn.dart';
 import 'package:bite_food_delivery/core/utils/shared_preference_functions.dart';
 import 'package:bite_food_delivery/app/constants/stripe_const.dart';
+import 'package:bite_food_delivery/app/constants/app_localizations_delegates.dart';
 import 'package:bite_food_delivery/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -91,7 +92,7 @@ class MyApp extends StatelessWidget {
               supportedLocales: AppLocalizations.supportedLocales,
               locale: Locale(context.watch<SettingsCubit>().state.languageCode),
               localizationsDelegates: const [
-                ...AppLocalizations.localizationsDelegates,
+                ...appLocalizationsDelegates,
                 FormBuilderLocalizations.delegate,
               ],
             );

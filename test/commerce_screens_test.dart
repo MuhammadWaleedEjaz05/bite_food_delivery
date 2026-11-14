@@ -13,6 +13,7 @@ import 'package:bite_food_delivery/features/checkout/pages/checkout_screen.dart'
 import 'package:bite_food_delivery/features/addresses/bloc/address_cubit.dart';
 import 'package:bite_food_delivery/features/addresses/models/address_model.dart';
 import 'package:bite_food_delivery/app/theme/app_theme.dart';
+import 'package:bite_food_delivery/app/constants/app_localizations_delegates.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'commerce_state_test.dart';
 
@@ -69,7 +70,7 @@ Future<void> pumpCommerce(
           theme: AppTheme.build(brightness: brightness),
           locale: Locale(locale),
           supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationsDelegates,
           builder: (context, child) => MediaQuery(
             data: MediaQuery.of(
               context,

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:bite_food_delivery/app/theme/app_theme.dart';
+import 'package:bite_food_delivery/app/constants/app_localizations_delegates.dart';
 import 'package:bite_food_delivery/features/authentication/bloc/forgot_password_form_cubit.dart';
 import 'package:bite_food_delivery/features/authentication/bloc/login_form_cubit.dart';
 import 'package:bite_food_delivery/features/authentication/bloc/remember_me_cubit.dart';
@@ -93,7 +94,7 @@ Widget buildAuthHarness({
           debugShowCheckedModeBanner: false,
           theme: theme ?? AppTheme.lightTheme(),
           locale: locale,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: child,
         ),

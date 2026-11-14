@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bite_food_delivery/app/theme/app_theme.dart';
+import 'package:bite_food_delivery/app/constants/app_localizations_delegates.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:bite_food_delivery/features/home/pages/home_screen.dart';
 import 'package:bite_food_delivery/features/categories/bloc/categories_cubit.dart';
@@ -63,7 +64,7 @@ Future<void> pumpHome(
           theme: AppTheme.build(brightness: brightness),
           locale: Locale(locale),
           supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationsDelegates,
           builder: (context, child) => MediaQuery(
             data: MediaQuery.of(
               context,

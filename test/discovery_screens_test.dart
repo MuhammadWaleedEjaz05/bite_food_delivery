@@ -12,6 +12,7 @@ import 'package:bite_food_delivery/features/favourites/pages/favourites_screen.d
 import 'package:bite_food_delivery/features/favourites/bloc/favourite_cubit.dart';
 import 'package:bite_food_delivery/l10n/app_localizations.dart';
 import 'package:bite_food_delivery/app/theme/app_theme.dart';
+import 'package:bite_food_delivery/app/constants/app_localizations_delegates.dart';
 import 'package:bite_food_delivery/widgets/app_food_card.dart';
 import 'package:bite_food_delivery/widgets/app_restaurant_card.dart';
 import 'package:bite_food_delivery/widgets/app_favorite_button.dart';
@@ -57,7 +58,7 @@ Future<DiscoveryCubit> pumpDiscovery(
         builder: (_, _) => MaterialApp(
           theme: AppTheme.build(brightness: brightness),
           locale: Locale(locale),
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           builder: (context, child) => MediaQuery(
             data: MediaQuery.of(

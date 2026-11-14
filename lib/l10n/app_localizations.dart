@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:material_ui/material_ui.dart' as mui;
-import 'package:cupertino_ui/cupertino_ui.dart' as cui;
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_ar.dart';
@@ -96,8 +94,6 @@ abstract class AppLocalizations {
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
-        mui.GlobalMaterialLocalizations.delegate,
-        cui.GlobalCupertinoLocalizations.delegate,
       ];
 
   /// A list of this localizations delegate's supported locales.

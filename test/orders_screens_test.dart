@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:bite_food_delivery/app/theme/app_theme.dart';
+import 'package:bite_food_delivery/app/constants/app_localizations_delegates.dart';
 import 'package:bite_food_delivery/features/orders/bloc/order_cubit.dart';
 import 'package:bite_food_delivery/features/orders/models/order_model.dart';
 import 'package:bite_food_delivery/features/orders/pages/order_history_screen.dart';
@@ -122,7 +123,7 @@ Future<void> pumpOrderHistory(
           theme: AppTheme.build(brightness: brightness),
           locale: Locale(locale),
           supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationsDelegates,
           builder: (context, child) => MediaQuery(
             data: MediaQuery.of(
               context,
@@ -178,7 +179,7 @@ Future<FakePhoneCallCubit> pumpTrackOrder(
           theme: AppTheme.build(brightness: brightness),
           locale: Locale(locale),
           supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: appLocalizationsDelegates,
           builder: (context, child) => MediaQuery(
             data: MediaQuery.of(
               context,
