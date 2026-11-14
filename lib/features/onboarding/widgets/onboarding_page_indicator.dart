@@ -21,16 +21,16 @@ class OnboardingPageIndicator extends StatelessWidget {
       children: List.generate(count, (index) {
         final isSelected = index == currentIndex;
         return AnimatedContainer(
-          duration: const Duration(milliseconds: 250),
-          curve: Curves.easeInOut,
-          margin: EdgeInsets.symmetric(horizontal: 4.w),
-          height: 8.h,
-          width: isSelected ? 24.w : 8.w,
+          duration: const Duration(milliseconds: 260),
+          curve: Curves.easeOutCubic,
+          margin: EdgeInsets.symmetric(horizontal: 4.w).r,
+          height: 7.h,
+          width: isSelected ? 28.w : 8.w,
           decoration: BoxDecoration(
             color: isSelected
                 ? colors.primary
-                : colors.onSurfaceVariant.withValues(alpha: 0.25),
-            borderRadius: BorderRadius.circular(4.r),
+                : colors.onSurfaceVariant.withValues(alpha: 0.22),
+            borderRadius: BorderRadius.circular(10).r,
           ),
         );
       }),

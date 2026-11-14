@@ -25,7 +25,7 @@ class OnboardingActionsSection extends StatelessWidget {
     final colors = context.appColors;
 
     return SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h).r,
       sliver: SliverToBoxAdapter(
         child: BlocBuilder<OnboardingCubit, OnboardingState>(
           builder: (context, state) {
@@ -44,11 +44,20 @@ class OnboardingActionsSection extends StatelessWidget {
                 12.verticalSpace,
                 TextButton(
                   onPressed: () => _finishOnboarding(context),
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 8.h,
+                    ).r,
+                  ),
                   child: AppText(
                     t.skip,
                     style: AppTextStyles.bodyMedium(
                       context,
-                    ).copyWith(color: colors.onSurfaceVariant),
+                    ).copyWith(
+                      color: colors.onSurfaceVariant,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ],

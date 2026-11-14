@@ -11,9 +11,24 @@ class SplashBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.appColors;
+    final dark = Theme.of(context).brightness == Brightness.dark;
 
     return Stack(
       children: [
+        Container(
+          decoration: BoxDecoration(
+            gradient: RadialGradient(
+              center: Alignment.center,
+              radius: 1.1,
+              colors: [
+                dark
+                    ? colors.surfaceContainer
+                    : context.pastelButter.withValues(alpha: 0.35),
+                colors.surface,
+              ],
+            ),
+          ),
+        ),
         Positioned(
           left: -100.w,
           top: -100.h,
@@ -23,7 +38,7 @@ class SplashBackground extends StatelessWidget {
               'assets/svgs/circle.svg',
               height: 200.h,
               colorFilter: ColorFilter.mode(
-                colors.primary.withValues(alpha: 0.15),
+                colors.primary.withValues(alpha: 0.12),
                 BlendMode.srcIn,
               ),
             ),
@@ -37,7 +52,10 @@ class SplashBackground extends StatelessWidget {
             child: SvgPicture.asset(
               'assets/svgs/circle.svg',
               height: 200.h,
-              colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                colors.primary.withValues(alpha: 0.85),
+                BlendMode.srcIn,
+              ),
             ),
           ),
         ),
