@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bite_food_delivery/core/extensions/theme_extensions.dart';
 import 'package:bite_food_delivery/widgets/app_text.dart';
 import 'package:bite_food_delivery/widgets/app_network_image.dart';
-import 'package:bite_food_delivery/widgets/app_quantity_control.dart';
+import 'package:bite_food_delivery/widgets/app_stepper_pill.dart';
 import 'package:bite_food_delivery/app/theme/app_text_styles.dart';
 
 class CartLineCard extends StatelessWidget {
@@ -82,27 +82,32 @@ class CartLineCard extends StatelessWidget {
                         ).copyWith(color: colors.onSurfaceVariant),
                       ),
                     ],
-                    8.verticalSpace,
-                    AppText(
-                      price,
-                      style: AppTextStyles.titleMedium(context).copyWith(
-                        color: colors.primary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                   ],
                 ),
               ),
             ],
           ),
           12.verticalSpace,
-          AppQuantityControl(
-            value: quantity,
-            label: quantityLabel,
-            increaseLabel: increaseLabel,
-            decreaseLabel: decreaseLabel,
-            onIncrease: onIncrease,
-            onDecrease: onDecrease,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: AppText(
+                  price,
+                  style: AppTextStyles.titleMedium(context).copyWith(
+                    color: colors.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              8.horizontalSpace,
+              AppStepperPill(
+                quantity: quantity,
+                compact: true,
+                onIncrease: onIncrease,
+                onDecrease: onDecrease,
+              ),
+            ],
           ),
         ],
       ),
