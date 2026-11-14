@@ -29,28 +29,24 @@ class AppRestaurantCard extends StatelessWidget {
 
     return AppBouncingTap(
       onTap: onTap,
+      pressedScale: 0.97,
       child: Container(
         decoration: BoxDecoration(
-          color: context.appColors.surfaceContainerLow,
-          borderRadius: BorderRadius.circular(22).r,
+          color: dark
+              ? const Color(0xFF181820)
+              : Colors.white,
+          borderRadius: BorderRadius.circular(26).r,
           border: Border.all(
-            color: context.appColors.outlineVariant.withValues(
-              alpha: dark ? 0.25 : 0.45,
-            ),
+            color: dark
+                ? Colors.white.withValues(alpha: 0.1)
+                : const Color(0xFFEEEEEE),
             width: 1.r,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: dark ? 0.28 : 0.04),
-              blurRadius: 16.r,
+              color: Colors.black.withValues(alpha: dark ? 0.35 : 0.06),
+              blurRadius: 18.r,
               offset: Offset(0, 6.h),
-            ),
-            BoxShadow(
-              color: context.appColors.primary.withValues(
-                alpha: dark ? 0.04 : 0.02,
-              ),
-              blurRadius: 24.r,
-              offset: Offset(0, 10.h),
             ),
           ],
         ),
@@ -58,13 +54,15 @@ class AppRestaurantCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Top Hero Image Stage
             Stack(
               children: [
                 AppNetworkImage(
                   url: imageUrl,
-                  height: 160.r,
+                  height: 165.r,
                   width: double.infinity,
                   radius: 0,
+                  fit: BoxFit.cover,
                 ),
                 Positioned.fill(
                   child: DecoratedBox(
@@ -73,28 +71,17 @@ class AppRestaurantCard extends StatelessWidget {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Colors.black.withValues(alpha: 0.25),
+                          Colors.black.withValues(alpha: 0.32),
                           Colors.transparent,
-                          Colors.black.withValues(alpha: 0.55),
+                          Colors.black.withValues(alpha: 0.52),
                         ],
                       ),
                     ),
                   ),
                 ),
-                if (favouriteButton != null)
-                  Positioned(
-                    top: 10.r,
-                    right: 10.r,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.4),
-                        shape: BoxShape.circle,
-                      ),
-                      child: favouriteButton!,
-                    ),
-                  ),
+                // Top-Left Fast Delivery Tag
                 Positioned(
-                  bottom: 10.r,
+                  top: 10.r,
                   left: 10.r,
                   child: Container(
                     padding: EdgeInsets.symmetric(
@@ -102,11 +89,63 @@ class AppRestaurantCard extends StatelessWidget {
                       vertical: 4.h,
                     ).r,
                     decoration: BoxDecoration(
+                      color: const Color(0xFF141416).withValues(alpha: 0.85),
+                      borderRadius: BorderRadius.circular(14).r,
+                      border: Border.all(
+                        color: Colors.white.withValues(alpha: 0.15),
+                        width: 1.r,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.bolt_rounded,
+                          size: 13.r,
+                          color: const Color(0xFFFFB800),
+                        ),
+                        4.horizontalSpace,
+                        AppText(
+                          'FEATURED',
+                          style: AppTextStyles.labelSmall(context).copyWith(
+                            color: Colors.white,
+                            fontSize: 9.sp,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                // Top-Right Favorite Button
+                if (favouriteButton != null)
+                  Positioned(
+                    top: 10.r,
+                    right: 10.r,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.35),
+                        shape: BoxShape.circle,
+                      ),
+                      child: favouriteButton!,
+                    ),
+                  ),
+                // Bottom-Left Rating Pill
+                Positioned(
+                  bottom: 10.r,
+                  left: 10.r,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 9.w,
+                      vertical: 4.h,
+                    ).r,
+                    decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16).r,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.18),
+                          color: Colors.black.withValues(alpha: 0.2),
                           blurRadius: 6.r,
                           offset: Offset(0, 2.h),
                         ),
@@ -125,7 +164,8 @@ class AppRestaurantCard extends StatelessWidget {
                           rating,
                           style: AppTextStyles.labelMedium(context).copyWith(
                             color: const Color(0xFF141416),
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 11.sp,
                           ),
                         ),
                       ],
@@ -134,29 +174,52 @@ class AppRestaurantCard extends StatelessWidget {
                 ),
               ],
             ),
+            // Bottom Metadata & Content Section
             Padding(
-              padding: EdgeInsets.all(12.r),
+              padding: EdgeInsets.all(14.r),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AppText(
-                    name,
-                    style: AppTextStyles.titleMedium(
-                      context,
-                    ).copyWith(fontWeight: FontWeight.bold),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: AppText(
+                          name,
+                          style: AppTextStyles.titleMedium(
+                            context,
+                          ).copyWith(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 16.sp,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      8.horizontalSpace,
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 8.w,
+                          vertical: 3.h,
+                        ).r,
+                        decoration: BoxDecoration(
+                          color: context.appColors.primary.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(10).r,
+                        ),
+                        child: AppText(
+                          category,
+                          style: AppTextStyles.labelSmall(context).copyWith(
+                            color: context.appColors.primary,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 10.sp,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
                   ),
-                  4.verticalSpace,
-                  AppText(
-                    category,
-                    style: AppTextStyles.bodySmall(
-                      context,
-                    ).copyWith(color: context.appColors.onSurfaceVariant),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  10.verticalSpace,
+                  12.verticalSpace,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -178,15 +241,29 @@ class AppRestaurantCard extends StatelessWidget {
                       ),
                       8.horizontalSpace,
                       Container(
-                        padding: EdgeInsets.all(7.r),
+                        width: 34.r,
+                        height: 34.r,
                         decoration: BoxDecoration(
-                          color: dark ? Colors.white : const Color(0xFF141416),
+                          color: dark
+                              ? Colors.white
+                              : const Color(0xFF141416),
                           shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.18),
+                              blurRadius: 6.r,
+                              offset: Offset(0, 2.h),
+                            ),
+                          ],
                         ),
-                        child: Icon(
-                          Icons.arrow_forward_rounded,
-                          size: 13.r,
-                          color: dark ? const Color(0xFF141416) : Colors.white,
+                        child: Center(
+                          child: Icon(
+                            Icons.arrow_forward_rounded,
+                            size: 15.r,
+                            color: dark
+                                ? const Color(0xFF141416)
+                                : Colors.white,
+                          ),
                         ),
                       ),
                     ],
@@ -208,10 +285,10 @@ class _MetadataChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h).r,
+    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h).r,
     decoration: BoxDecoration(
-      color: context.appColors.surfaceContainerHighest.withValues(alpha: 0.6),
-      borderRadius: BorderRadius.circular(8).r,
+      color: context.appColors.surfaceContainerHighest.withValues(alpha: 0.55),
+      borderRadius: BorderRadius.circular(10).r,
     ),
     child: Row(
       mainAxisSize: MainAxisSize.min,
@@ -223,7 +300,10 @@ class _MetadataChip extends StatelessWidget {
             label,
             style: AppTextStyles.labelSmall(
               context,
-            ).copyWith(color: context.appColors.onSurfaceVariant),
+            ).copyWith(
+              color: context.appColors.onSurfaceVariant,
+              fontWeight: FontWeight.w600,
+            ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

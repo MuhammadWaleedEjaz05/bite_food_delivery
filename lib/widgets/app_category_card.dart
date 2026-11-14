@@ -26,20 +26,23 @@ class AppCategoryCard extends StatelessWidget {
 
     return AppBouncingTap(
       onTap: onTap,
+      pressedScale: 0.93,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h).r,
+        padding: EdgeInsets.fromLTRB(6.w, 5.h, 14.w, 5.h).r,
         decoration: BoxDecoration(
-          color: context.appColors.surfaceContainerLow,
-          borderRadius: BorderRadius.circular(24).r,
+          color: dark
+              ? const Color(0xFF1E1E26)
+              : Colors.white,
+          borderRadius: BorderRadius.circular(28).r,
           border: Border.all(
-            color: context.appColors.outlineVariant.withValues(
-              alpha: dark ? 0.25 : 0.45,
-            ),
+            color: dark
+                ? Colors.white.withValues(alpha: 0.1)
+                : const Color(0xFFEEEEEE),
             width: 1.r,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: dark ? 0.22 : 0.03),
+              color: Colors.black.withValues(alpha: dark ? 0.28 : 0.05),
               blurRadius: 10.r,
               offset: Offset(0, 3.h),
             ),
@@ -49,28 +52,38 @@ class AppCategoryCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              padding: EdgeInsets.all(2.r),
+              width: 36.r,
+              height: 36.r,
               decoration: BoxDecoration(
-                color: context.appColors.primary.withValues(alpha: 0.1),
+                color: context.appColors.primary.withValues(alpha: 0.12),
                 shape: BoxShape.circle,
+                border: Border.all(
+                  color: context.appColors.primary.withValues(alpha: 0.25),
+                  width: 1.r,
+                ),
               ),
-              child: AppNetworkImage(
-                url: imageUrl,
-                height: 32.r,
-                width: 32.r,
-                radius: 16,
+              child: Center(
+                child: AppNetworkImage(
+                  url: imageUrl,
+                  height: 24.r,
+                  width: 24.r,
+                  radius: 12,
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
-            8.horizontalSpace,
-            AppText(
-              displayName,
-              style: AppTextStyles.labelMedium(
-                context,
-              ).copyWith(fontWeight: FontWeight.w700),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+            10.horizontalSpace,
+            Flexible(
+              child: AppText(
+                displayName,
+                style: AppTextStyles.labelMedium(context).copyWith(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 12.sp,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-            4.horizontalSpace,
           ],
         ),
       ),
