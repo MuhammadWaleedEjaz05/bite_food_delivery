@@ -12,6 +12,7 @@ class CartSummaryCard extends StatelessWidget {
     required this.note,
   });
   final String label, amount, note;
+
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.all(20).r,
@@ -33,6 +34,54 @@ class CartSummaryCard extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Free Delivery Unlock Progress Banner
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h).r,
+          decoration: BoxDecoration(
+            color: context.appColors.primary.withValues(alpha: 0.08),
+            borderRadius: BorderRadius.circular(16).r,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.bolt_rounded,
+                    size: 16.r,
+                    color: context.appColors.primary,
+                  ),
+                  6.horizontalSpace,
+                  Flexible(
+                    child: AppText(
+                      'Free Express Delivery Unlocked!',
+                      style: AppTextStyles.labelSmall(context).copyWith(
+                        fontWeight: FontWeight.w800,
+                        color: context.appColors.primary,
+                        fontSize: 11.sp,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+              8.verticalSpace,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(6).r,
+                child: LinearProgressIndicator(
+                  value: 0.85,
+                  minHeight: 5.h,
+                  backgroundColor:
+                      context.appColors.primary.withValues(alpha: 0.15),
+                  valueColor:
+                      AlwaysStoppedAnimation(context.appColors.primary),
+                ),
+              ),
+            ],
+          ),
+        ),
+        16.verticalSpace,
         Wrap(
           spacing: 20.r,
           runSpacing: 8.r,
