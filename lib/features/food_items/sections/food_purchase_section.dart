@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:bite_food_delivery/app/routes/app_navigation.dart';
+import 'package:bite_food_delivery/app/theme/app_theme.dart';
 import 'package:bite_food_delivery/core/extensions/theme_extensions.dart';
 import 'package:bite_food_delivery/widgets/app_fly_to_cart.dart';
 import 'package:material_ui/material_ui.dart';
@@ -110,6 +111,22 @@ class FoodPurchaseSection extends StatelessWidget {
                                     ? strings.savingItem
                                     : '${strings.addToCart} · ${context.priceLabel(cubit.total)}',
                                 busy: state.submitting,
+                                backgroundColor: AppPastelColors.neonLime,
+                                foregroundColor: const Color(0xFF141416),
+                                borderRadius: 24,
+                                trailing: Container(
+                                  width: 24.r,
+                                  height: 24.r,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFF141416),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Icon(
+                                    Icons.arrow_forward_rounded,
+                                    size: 13.r,
+                                    color: Colors.white,
+                                  ),
+                                ),
                                 onTap: cubit.available ? cubit.addToCart : null,
                               ),
                             ),

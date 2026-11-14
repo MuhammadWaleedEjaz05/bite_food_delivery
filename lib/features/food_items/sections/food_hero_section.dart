@@ -13,7 +13,7 @@ class FoodHeroSection extends StatelessWidget {
     final item = cubit.arguments.item;
 
     return SliverPadding(
-      padding: context.contentInsets(bottom: 20),
+      padding: context.contentInsets(bottom: 10),
       sliver: SliverToBoxAdapter(
         child: FoodTurntableDisplay(
           imageUrl: item.images.firstOrNull ?? '',

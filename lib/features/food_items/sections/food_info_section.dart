@@ -20,7 +20,7 @@ class FoodInfoSection extends StatelessWidget {
     final colors = context.appColors;
 
     return SliverPadding(
-      padding: context.contentInsets(bottom: 20),
+      padding: context.contentInsets(bottom: 12),
       sliver: SliverToBoxAdapter(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,6 +100,34 @@ class FoodInfoSection extends StatelessWidget {
                     vertical: 5.h,
                   ).r,
                   decoration: BoxDecoration(
+                    color: colors.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(14).r,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AppText(
+                        'Nutrition',
+                        style: AppTextStyles.labelSmall(context).copyWith(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 11.sp,
+                        ),
+                      ),
+                      4.horizontalSpace,
+                      Icon(
+                        Icons.info_outline_rounded,
+                        size: 13.r,
+                        color: colors.primary,
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                    vertical: 5.h,
+                  ).r,
+                  decoration: BoxDecoration(
                     color: const Color(0xFF00C853).withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(14).r,
                     border: Border.all(
@@ -131,28 +159,28 @@ class FoodInfoSection extends StatelessWidget {
                 ),
               ],
             ),
-            14.verticalSpace,
+            10.verticalSpace,
             // Quick metrics row (⭐ 4.6 · ⏱ 20-25 min · 🔥 320 Kcal)
             const FoodQuickMetricsRow(),
-            16.verticalSpace,
-            // Courier snippet card
-            const FoodDetailsCourierSnippet(),
             if (item.description.isNotEmpty) ...[
-              18.verticalSpace,
+              10.verticalSpace,
               AppText(
                 'Description',
                 style: AppTextStyles.titleMedium(
                   context,
                 ).copyWith(fontWeight: FontWeight.bold),
               ),
-              8.verticalSpace,
+              4.verticalSpace,
               AppText(
                 item.description,
                 style: AppTextStyles.bodyMedium(
                   context,
-                ).copyWith(color: colors.onSurfaceVariant, height: 1.5),
+                ).copyWith(color: colors.onSurfaceVariant, height: 1.4),
               ),
             ],
+            10.verticalSpace,
+            // Courier snippet card
+            const FoodDetailsCourierSnippet(),
           ],
         ),
       ),

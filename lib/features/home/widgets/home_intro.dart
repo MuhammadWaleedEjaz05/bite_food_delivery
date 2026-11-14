@@ -1,4 +1,5 @@
 import 'package:bite_food_delivery/core/utils/environment_utils.dart';
+import 'package:bite_food_delivery/app/theme/app_theme.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bite_food_delivery/app/routes/app_navigation.dart';
@@ -237,20 +238,26 @@ class _HomeIntroState extends State<HomeIntro> with TickerProviderStateMixin {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  // Limited Time Tag
+                                  // Limited Time Tag in Electric Neon Lime from UI kit
                                   Container(
                                     padding: EdgeInsets.symmetric(
                                       horizontal: 8.w,
                                       vertical: 3.h,
                                     ).r,
                                     decoration: BoxDecoration(
-                                      color: Colors.white.withValues(alpha: 0.28),
+                                      color: AppPastelColors.neonLime,
                                       borderRadius: BorderRadius.circular(10).r,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: AppPastelColors.neonLime.withValues(alpha: 0.35),
+                                          blurRadius: 6.r,
+                                        ),
+                                      ],
                                     ),
                                     child: AppText(
                                       '⚡ 30% OFF',
                                       style: AppTextStyles.labelSmall(context).copyWith(
-                                        color: Colors.white,
+                                        color: const Color(0xFF141416),
                                         fontWeight: FontWeight.w900,
                                         fontSize: 10.sp,
                                         letterSpacing: 0.6,

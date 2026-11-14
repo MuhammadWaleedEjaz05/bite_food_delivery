@@ -3,10 +3,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// Dribbble-inspired soft pastel background tokens for food cards & hero banners.
 abstract final class AppPastelColors {
+  // Brand specific tokens from UI kit
+  static const neonLime = Color(0xFFDFFF32);
+  static const warmCoral = Color(0xFFEE6445);
+  static const blushPeach = Color(0xFFFFE0DD);
+  static const pitchDark = Color(0xFF000000);
+  static const charcoal = Color(0xFF141416);
+  static const pureWhite = Color(0xFFFFFFFF);
+
   static const mint = Color(0xFFE8F5E9);
   static const skyBlue = Color(0xFFE3F2FD);
   static const butter = Color(0xFFFEF8E7);
-  static const peach = Color(0xFFFFF0EB);
+  static const peach = Color(0xFFFFE0DD);
   static const darkNav = Color(0xFF141416);
   static const darkPill = Color(0xFF18181C);
   static const activePill = Color(0xFFFFFFFF);

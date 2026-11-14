@@ -22,7 +22,7 @@ class FoodItemScreen extends StatelessWidget {
           const FoodInfoSection(),
           const FoodSizeSection(),
           const FoodFlavorSection(),
-          SliverToBoxAdapter(child: 20.verticalSpace),
+          SliverToBoxAdapter(child: 120.verticalSpace),
         ],
       ),
     ),

@@ -2,8 +2,10 @@ import 'package:bite_food_delivery/core/utils/environment_utils.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bite_food_delivery/app/theme/app_text_styles.dart';
+import 'package:bite_food_delivery/app/theme/app_theme.dart';
 import 'package:bite_food_delivery/widgets/app_text.dart';
 import 'package:bite_food_delivery/widgets/app_network_image.dart';
+import 'package:bite_food_delivery/features/food_items/widgets/food_callout_badge.dart';
 
 class FoodTurntableDisplay extends StatefulWidget {
   const FoodTurntableDisplay({
@@ -71,7 +73,7 @@ class _FoodTurntableDisplayState extends State<FoodTurntableDisplay>
 
     return Container(
       width: double.infinity,
-      height: 250.h,
+      height: 200.h,
       decoration: BoxDecoration(
         color: dark ? const Color(0xFF1E2820) : const Color(0xFFDCEFD9),
         borderRadius: BorderRadius.circular(28).r,
@@ -98,10 +100,10 @@ class _FoodTurntableDisplayState extends State<FoodTurntableDisplay>
           children: [
             // Ambient Radial Dish Saucer Glow
             Positioned(
-              bottom: 22.h,
+              bottom: 14.h,
               child: Container(
-                width: 180.w,
-                height: 38.h,
+                width: 160.w,
+                height: 32.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.elliptical(180.w, 38.h)),
                   color: dark
@@ -221,12 +223,32 @@ class _FoodTurntableDisplayState extends State<FoodTurntableDisplay>
                     ..rotateY(_rotationY),
                   child: AppNetworkImage(
                     url: widget.imageUrl,
-                    height: 185.r,
-                    width: 240.w,
+                    height: 145.r,
+                    width: 200.w,
                     radius: 20,
                     fit: BoxFit.contain,
                   ),
                 ),
+              ),
+            ),
+
+            // Dynamic Callout Badges with pointer anchored to the food (from UI kit)
+            Positioned(
+              left: 10.r,
+              top: 32.h,
+              child: const FoodCalloutBadge(
+                label: 'Full of protein',
+                backgroundColor: AppPastelColors.blushPeach,
+                pointerDirection: CalloutPointerDirection.right,
+              ),
+            ),
+            Positioned(
+              right: 10.r,
+              bottom: 32.h,
+              child: const FoodCalloutBadge(
+                label: 'Popular',
+                backgroundColor: Color(0xFFFFD8D4),
+                pointerDirection: CalloutPointerDirection.left,
               ),
             ),
 

@@ -11,25 +11,36 @@ class AppPrimaryButton extends StatelessWidget {
     required this.label,
     required this.onTap,
     this.busy = false,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.borderRadius,
+    this.trailing,
   });
 
   final String label;
   final VoidCallback? onTap;
   final bool busy;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
+  final double? borderRadius;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
     final enabled = onTap != null && !busy;
+    final effectiveBg = backgroundColor ?? context.appColors.primary;
+    final effectiveFg = foregroundColor ?? context.appColors.onPrimary;
+    final effectiveRadius = borderRadius ?? 18.0;
 
     return AppBouncingTap(
       onTap: enabled ? onTap : null,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18).r,
+          borderRadius: BorderRadius.circular(effectiveRadius).r,
           boxShadow: enabled
               ? [
                   BoxShadow(
-                    color: context.appColors.primary.withValues(alpha: 0.32),
+                    color: effectiveBg.withValues(alpha: 0.32),
                     blurRadius: 14.r,
                     offset: Offset(0, 5.h),
                   ),
@@ -39,11 +50,11 @@ class AppPrimaryButton extends StatelessWidget {
         child: FilledButton(
           onPressed: enabled ? onTap : null,
           style: FilledButton.styleFrom(
-            padding: const EdgeInsets.all(16).r,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14).r,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18).r,
+              borderRadius: BorderRadius.circular(effectiveRadius).r,
             ),
-            backgroundColor: context.appColors.primary,
+            backgroundColor: effectiveBg,
             disabledBackgroundColor: context.appColors.onSurface.withValues(
               alpha: 0.12,
             ),
@@ -56,7 +67,7 @@ class AppPrimaryButton extends StatelessWidget {
                   dimension: 18.r,
                   child: CircularProgressIndicator(
                     strokeWidth: 2.r,
-                    color: context.appColors.onPrimary,
+                    color: effectiveFg,
                   ),
                 ),
                 10.horizontalSpace,
@@ -66,13 +77,19 @@ class AppPrimaryButton extends StatelessWidget {
                   label,
                   style: AppTextStyles.labelLarge(context).copyWith(
                     color: enabled
-                        ? context.appColors.onPrimary
+                        ? effectiveFg
                         : context.appColors.onSurface.withValues(alpha: 0.38),
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w800,
                   ),
                   textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
+              if (trailing != null) ...[
+                8.horizontalSpace,
+                trailing!,
+              ],
             ],
           ),
         ),
