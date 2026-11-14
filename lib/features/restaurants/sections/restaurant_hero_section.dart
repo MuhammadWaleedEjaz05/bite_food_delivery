@@ -1,10 +1,8 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bite_food_delivery/core/extensions/responsive_extensions.dart';
 import 'package:bite_food_delivery/features/restaurants/bloc/restaurant_menu_cubit.dart';
-
-import 'package:bite_food_delivery/widgets/app_network_image.dart';
+import 'package:bite_food_delivery/features/restaurants/widgets/restaurant_hero_banner.dart';
 
 class RestaurantHeroSection extends StatelessWidget {
   const RestaurantHeroSection({super.key});
@@ -15,12 +13,7 @@ class RestaurantHeroSection extends StatelessWidget {
     return SliverPadding(
       padding: context.contentInsets(bottom: 24),
       sliver: SliverToBoxAdapter(
-        child: AppNetworkImage(
-          url: item.logoUrl,
-          height: 220.r,
-          width: double.infinity,
-          radius: 24,
-        ),
+        child: RestaurantHeroBanner(restaurant: item),
       ),
     );
   }

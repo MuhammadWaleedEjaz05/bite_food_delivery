@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:bite_food_delivery/core/utils/environment_utils.dart';
 import 'package:bite_food_delivery/app/theme/app_text_styles.dart';
 import 'package:bite_food_delivery/core/extensions/price_format.dart';
 import 'package:bite_food_delivery/core/extensions/theme_extensions.dart';
@@ -434,7 +434,7 @@ class _PulsingStatusDotState extends State<_PulsingStatusDot>
       vsync: this,
       duration: const Duration(milliseconds: 1000),
     );
-    if (!Platform.environment.containsKey('FLUTTER_TEST')) {
+    if (!EnvironmentUtils.isTest) {
       _controller.repeat(reverse: true);
     }
   }

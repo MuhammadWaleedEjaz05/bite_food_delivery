@@ -26,13 +26,36 @@ class FoodInfoSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (cubit.arguments.restaurantName.isNotEmpty) ...[
-              AppText(
-                cubit.arguments.restaurantName,
-                style: AppTextStyles.labelLarge(
-                  context,
-                ).copyWith(color: colors.primary, fontWeight: FontWeight.w600),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h).r,
+                decoration: BoxDecoration(
+                  color: colors.primary.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(16).r,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.storefront_rounded,
+                      size: 14.r,
+                      color: colors.primary,
+                    ),
+                    5.horizontalSpace,
+                    Flexible(
+                      child: AppText(
+                        cubit.arguments.restaurantName,
+                        style: AppTextStyles.labelMedium(context).copyWith(
+                          color: colors.primary,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              6.verticalSpace,
+              8.verticalSpace,
             ],
             AppText(
               item.name,
@@ -40,13 +63,73 @@ class FoodInfoSection extends StatelessWidget {
                 context,
               ).copyWith(fontWeight: FontWeight.w800),
             ),
-            10.verticalSpace,
-            // Bold price pill
-            AppText(
-              context.priceLabel(item.price),
-              style: AppTextStyles.headlineSmall(
-                context,
-              ).copyWith(fontWeight: FontWeight.w900, color: colors.onSurface),
+            12.verticalSpace,
+            // Bold price pill & freshness badge
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 10.w,
+              runSpacing: 8.h,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 14.w,
+                    vertical: 6.h,
+                  ).r,
+                  decoration: BoxDecoration(
+                    color: colors.primary,
+                    borderRadius: BorderRadius.circular(20).r,
+                    boxShadow: [
+                      BoxShadow(
+                        color: colors.primary.withValues(alpha: 0.3),
+                        blurRadius: 10.r,
+                        offset: Offset(0, 4.h),
+                      ),
+                    ],
+                  ),
+                  child: AppText(
+                    context.priceLabel(item.price),
+                    style: AppTextStyles.headlineSmall(context).copyWith(
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                    vertical: 5.h,
+                  ).r,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF00C853).withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(14).r,
+                    border: Border.all(
+                      color: const Color(0xFF00C853).withValues(alpha: 0.3),
+                      width: 1.r,
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        width: 6.r,
+                        height: 6.r,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF00C853),
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      6.horizontalSpace,
+                      AppText(
+                        'Freshly Prepared',
+                        style: AppTextStyles.labelSmall(context).copyWith(
+                          color: const Color(0xFF00C853),
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
             14.verticalSpace,
             // Quick metrics row (⭐ 4.6 · ⏱ 20-25 min · 🔥 320 Kcal)
