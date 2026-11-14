@@ -1,4 +1,6 @@
+import 'package:bite_food_delivery/app/theme/app_text_styles.dart';
 import 'package:bite_food_delivery/core/extensions/theme_extensions.dart';
+import 'package:bite_food_delivery/widgets/app_text.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -52,14 +54,71 @@ class AddressMapPicker extends StatelessWidget {
             Center(
               child: Padding(
                 padding: EdgeInsets.only(bottom: 24.h),
-                child: AnimatedScale(
-                  scale: isMoving ? 1.2 : 1.0,
-                  duration: const Duration(milliseconds: 150),
-                  child: Icon(
-                    Icons.location_pin,
-                    size: 40.r,
-                    color: colors.primary,
-                  ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Floating "Deliver here" tooltip
+                    AnimatedOpacity(
+                      opacity: isMoving ? 0.0 : 1.0,
+                      duration: const Duration(milliseconds: 180),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10.w,
+                          vertical: 3.h,
+                        ).r,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF141416),
+                          borderRadius: BorderRadius.circular(12).r,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.22),
+                              blurRadius: 6.r,
+                              offset: Offset(0, 2.h),
+                            ),
+                          ],
+                        ),
+                        child: AppText(
+                          'Deliver here',
+                          style: AppTextStyles.labelSmall(context).copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 9.sp,
+                          ),
+                        ),
+                      ),
+                    ),
+                    3.verticalSpace,
+                    // Jumping Pin with Spring Bounce
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeOutBack,
+                      transform: Matrix4.translationValues(
+                        0,
+                        isMoving ? -12.h : 0,
+                        0,
+                      ),
+                      child: Icon(
+                        Icons.location_pin,
+                        size: 40.r,
+                        color: colors.primary,
+                      ),
+                    ),
+                    // Dynamic Ground Shadow
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeOutCubic,
+                      width: isMoving ? 10.r : 16.r,
+                      height: 4.h,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.elliptical(isMoving ? 10.r : 16.r, 4.h),
+                        ),
+                        color: Colors.black.withValues(
+                          alpha: isMoving ? 0.16 : 0.42,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

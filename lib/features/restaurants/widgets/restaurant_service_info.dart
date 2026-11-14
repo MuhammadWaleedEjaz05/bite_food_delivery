@@ -13,57 +13,91 @@ class RestaurantServiceInfo extends StatelessWidget {
     required this.status,
   });
   final String rating, time, fee, status;
+
   @override
-  Widget build(BuildContext context) => Wrap(
-    spacing: 12.r,
-    runSpacing: 10.r,
-    children: [
-      _ServiceBadge(icon: Icons.star_rounded, label: rating),
-      _ServiceBadge(icon: Icons.schedule_outlined, label: time),
-      _ServiceBadge(icon: Icons.delivery_dining, label: fee),
-      _ServiceBadge(icon: Icons.storefront_outlined, label: status),
-    ],
-  );
+  Widget build(BuildContext context) {
+    final colors = context.appColors;
+
+    return Wrap(
+      spacing: 10.w,
+      runSpacing: 8.h,
+      children: [
+        _ServiceBadge(
+          icon: Icons.star_rounded,
+          label: rating,
+          iconColor: const Color(0xFFFFB800),
+        ),
+        _ServiceBadge(
+          icon: Icons.access_time_rounded,
+          label: time,
+          iconColor: colors.primary,
+        ),
+        _ServiceBadge(
+          icon: Icons.delivery_dining_rounded,
+          label: fee,
+          iconColor: const Color(0xFF00C853),
+        ),
+        _ServiceBadge(
+          icon: Icons.storefront_rounded,
+          label: status,
+          iconColor: colors.primary,
+        ),
+      ],
+    );
+  }
 }
 
 class _ServiceBadge extends StatelessWidget {
-  const _ServiceBadge({required this.icon, required this.label});
+  const _ServiceBadge({
+    required this.icon,
+    required this.label,
+    this.iconColor,
+  });
   final IconData icon;
   final String label;
+  final Color? iconColor;
+
   @override
-  Widget build(BuildContext context) => DecoratedBox(
-    decoration: BoxDecoration(
-      color: context.appColors.surfaceContainerLow,
-      borderRadius: BorderRadius.circular(14).r,
-      border: Border.all(
-        color: context.appColors.outlineVariant.withValues(alpha: 0.6),
-        width: 1,
-      ),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withValues(alpha: 0.02),
-          blurRadius: 4.r,
-          offset: Offset(0, 1.r),
+  Widget build(BuildContext context) {
+    final colors = context.appColors;
+    final effectiveColor = iconColor ?? colors.primary;
+
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: colors.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(16).r,
+        border: Border.all(
+          color: colors.outlineVariant.withValues(alpha: 0.5),
+          width: 1.r,
         ),
-      ],
-    ),
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8).r,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 16.r, color: context.appColors.primary),
-          6.horizontalSpace,
-          Flexible(
-            child: AppText(
-              label,
-              style: AppTextStyles.labelSmall(
-                context,
-              ).copyWith(fontWeight: FontWeight.w600),
-            ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.03),
+            blurRadius: 6.r,
+            offset: Offset(0, 2.h),
           ),
         ],
       ),
-    ),
-  );
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h).r,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 16.r, color: effectiveColor),
+            6.horizontalSpace,
+            Flexible(
+              child: AppText(
+                label,
+                style: AppTextStyles.labelSmall(
+                  context,
+                ).copyWith(fontWeight: FontWeight.w700),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
