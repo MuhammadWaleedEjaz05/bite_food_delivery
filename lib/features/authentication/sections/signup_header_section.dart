@@ -16,7 +16,7 @@ class SignupHeaderSection extends StatelessWidget {
 
     return SliverToBoxAdapter(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h).r,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -27,12 +27,39 @@ class SignupHeaderSection extends StatelessWidget {
               ),
               16.verticalSpace,
             ] else
-              24.verticalSpace,
+              20.verticalSpace,
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h).r,
+              decoration: BoxDecoration(
+                color: colors.primary.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(20).r,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.person_add_rounded,
+                    size: 13.r,
+                    color: colors.primary,
+                  ),
+                  4.horizontalSpace,
+                  AppText(
+                    'NEW ACCOUNT',
+                    style: AppTextStyles.labelSmall(context).copyWith(
+                      color: colors.primary,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 0.8,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            12.verticalSpace,
             AppText(
               t.signUp,
               style: AppTextStyles.headlineMedium(
                 context,
-              ).copyWith(fontWeight: FontWeight.bold),
+              ).copyWith(fontWeight: FontWeight.w800, letterSpacing: -0.5),
             ),
             8.verticalSpace,
             AppText(
