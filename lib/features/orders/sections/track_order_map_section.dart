@@ -1,6 +1,7 @@
 import 'package:bite_food_delivery/core/extensions/responsive_extensions.dart';
 import 'package:bite_food_delivery/core/extensions/theme_extensions.dart';
 import 'package:bite_food_delivery/features/orders/bloc/order_cubit.dart';
+import 'package:bite_food_delivery/features/orders/widgets/track_order_radar_pill.dart';
 import 'package:bite_food_delivery/features/restaurants/bloc/restaurants_cubit.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,23 +63,33 @@ class _TrackOrderMapSectionState extends State<TrackOrderMapSection> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(24).r,
           child: Container(
-            height: 200.r,
+            height: 220.r,
             decoration: BoxDecoration(
               color: colors.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(24).r,
               border: Border.all(color: colors.outlineVariant, width: 1),
             ),
-            child: GoogleMap(
-              initialCameraPosition: CameraPosition(
-                target: restaurantLocation,
-                zoom: 14,
-              ),
-              onMapCreated: (c) => _controller = c,
-              markers: markers,
-              myLocationEnabled: false,
-              myLocationButtonEnabled: false,
-              zoomControlsEnabled: false,
-              compassEnabled: false,
+            child: Stack(
+              children: [
+                GoogleMap(
+                  initialCameraPosition: CameraPosition(
+                    target: restaurantLocation,
+                    zoom: 14,
+                  ),
+                  onMapCreated: (c) => _controller = c,
+                  markers: markers,
+                  myLocationEnabled: false,
+                  myLocationButtonEnabled: false,
+                  zoomControlsEnabled: false,
+                  compassEnabled: false,
+                ),
+                Positioned(
+                  top: 10.r,
+                  left: 10.r,
+                  right: 10.r,
+                  child: const TrackOrderRadarPill(),
+                ),
+              ],
             ),
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:bite_food_delivery/widgets/app_confetti_celebration.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bite_food_delivery/features/checkout/bloc/checkout_cubit.dart';
@@ -18,12 +19,20 @@ class CheckoutStatusSection extends StatelessWidget {
       padding: context.contentInsets(),
       sliver: SliverToBoxAdapter(
         child: state.orderId != null
-            ? AppFeedback(
-                message: t.orderPlaced,
-                actionLabel: t.orderHistory,
-                onAction: () =>
-                    AppNavigation.push(context, '/order_history_screen'),
-                icon: Icons.check_circle_outline,
+            ? Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  AppFeedback(
+                    message: t.orderPlaced,
+                    actionLabel: t.orderHistory,
+                    onAction: () =>
+                        AppNavigation.push(context, '/order_history_screen'),
+                    icon: Icons.check_circle_outline,
+                  ),
+                  const Positioned.fill(
+                    child: AppConfettiCelebration(),
+                  ),
+                ],
               )
             : state.reviewing
             ? const AppLoadingCard()

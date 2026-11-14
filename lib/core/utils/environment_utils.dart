@@ -6,3 +6,4 @@ abstract final class EnvironmentUtils {
       WidgetsBinding.instance.runtimeType.toString().contains('Test') ||
       Platform.environment.containsKey('FLUTTER_TEST');
 }
+

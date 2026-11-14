@@ -55,60 +55,99 @@ class DashboardNavigationBar extends StatelessWidget {
             ],
           ),
           padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h).r,
-          child: Row(
-            children: [
-              for (var i = 0; i < labels.length; i++)
-                Expanded(
-                  child: Semantics(
-                    selected: index == i,
-                    button: true,
-                    child: AppBouncingTap(
-                      onTap: () => onSelected(i),
-                      pressedScale: 0.92,
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 220),
-                        curve: Curves.easeOutCubic,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 4.w,
-                          vertical: 5.h,
-                        ).r,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final tabCount = labels.isEmpty ? 1 : labels.length;
+              final tabWidth = constraints.maxWidth / tabCount;
+              final safeIndex = index.clamp(0, tabCount - 1);
+
+              return Stack(
+                alignment: Alignment.centerLeft,
+                children: [
+                  // Sliding Liquid Mercury Capsule
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 260),
+                    curve: Curves.easeOutCubic,
+                    left: safeIndex * tabWidth,
+                    width: tabWidth,
+                    top: 0,
+                    bottom: 0,
+                    child: Padding(
+                      padding: EdgeInsets.all(2.r),
+                      child: Container(
                         decoration: BoxDecoration(
-                          color: index == i ? Colors.white : Colors.transparent,
-                          borderRadius: BorderRadius.circular(22).r,
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              index == i ? selectedIcons[i] : icons[i],
-                              size: 19.r,
-                              color: index == i
-                                  ? const Color(0xFF141416)
-                                  : Colors.white.withValues(alpha: 0.65),
-                            ),
-                            2.verticalSpace,
-                            AppText(
-                              labels[i],
-                              textAlign: TextAlign.center,
-                              style: AppTextStyles.labelSmall(context).copyWith(
-                                fontSize: 10.sp,
-                                color: index == i
-                                    ? const Color(0xFF141416)
-                                    : Colors.white.withValues(alpha: 0.7),
-                                fontWeight: index == i
-                                    ? FontWeight.w800
-                                    : FontWeight.w500,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(24).r,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.white.withValues(alpha: 0.18),
+                              blurRadius: 10.r,
+                              offset: Offset(0, 2.h),
                             ),
                           ],
                         ),
                       ),
                     ),
                   ),
-                ),
-            ],
+
+                  // Tab Items
+                  Row(
+                    children: [
+                      for (var i = 0; i < labels.length; i++)
+                        Expanded(
+                          child: Semantics(
+                            selected: index == i,
+                            button: true,
+                            child: AppBouncingTap(
+                              onTap: () => onSelected(i),
+                              pressedScale: 0.92,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 4.w,
+                                  vertical: 6.h,
+                                ).r,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    AnimatedScale(
+                                      scale: index == i ? 1.08 : 1.0,
+                                      duration: const Duration(milliseconds: 200),
+                                      curve: Curves.easeOutCubic,
+                                      child: Icon(
+                                        index == i ? selectedIcons[i] : icons[i],
+                                        size: 19.r,
+                                        color: index == i
+                                            ? const Color(0xFF141416)
+                                            : Colors.white.withValues(alpha: 0.65),
+                                      ),
+                                    ),
+                                    2.verticalSpace,
+                                    AppText(
+                                      labels[i],
+                                      textAlign: TextAlign.center,
+                                      style: AppTextStyles.labelSmall(context).copyWith(
+                                        fontSize: 10.sp,
+                                        color: index == i
+                                            ? const Color(0xFF141416)
+                                            : Colors.white.withValues(alpha: 0.7),
+                                        fontWeight: index == i
+                                            ? FontWeight.w800
+                                            : FontWeight.w500,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),
