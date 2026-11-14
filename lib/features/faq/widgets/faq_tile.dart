@@ -24,14 +24,26 @@ class _FaqTileState extends State<FaqTile> {
     return Container(
       decoration: BoxDecoration(
         color: colors.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(16).r,
-        border: Border.all(color: colors.outlineVariant, width: 1),
+        borderRadius: BorderRadius.circular(18).r,
+        border: Border.all(
+          color: _isExpanded
+              ? colors.primary.withValues(alpha: 0.35)
+              : colors.outlineVariant.withValues(alpha: 0.6),
+          width: 1.r,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: _isExpanded ? 0.05 : 0.02),
+            blurRadius: 8.r,
+            offset: Offset(0, 2.h),
+          ),
+        ],
       ),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           onTap: () => setState(() => _isExpanded = !_isExpanded),
-          borderRadius: BorderRadius.circular(16).r,
+          borderRadius: BorderRadius.circular(18).r,
           child: Padding(
             padding: const EdgeInsets.all(16).r,
             child: Column(
@@ -42,7 +54,9 @@ class _FaqTileState extends State<FaqTile> {
                     Container(
                       padding: const EdgeInsets.all(6).r,
                       decoration: BoxDecoration(
-                        color: colors.primary.withValues(alpha: 0.12),
+                        color: _isExpanded
+                            ? colors.primary.withValues(alpha: 0.15)
+                            : colors.primary.withValues(alpha: 0.08),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
@@ -57,28 +71,51 @@ class _FaqTileState extends State<FaqTile> {
                         widget.question,
                         style: AppTextStyles.bodyLarge(
                           context,
-                        ).copyWith(fontWeight: FontWeight.w600),
+                        ).copyWith(fontWeight: FontWeight.w700),
                       ),
                     ),
-                    Icon(
-                      _isExpanded
-                          ? Icons.keyboard_arrow_up_rounded
-                          : Icons.keyboard_arrow_down_rounded,
-                      color: colors.onSurfaceVariant,
+                    AnimatedRotation(
+                      turns: _isExpanded ? 0.5 : 0.0,
+                      duration: const Duration(milliseconds: 220),
+                      curve: Curves.easeOutCubic,
+                      child: Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: _isExpanded
+                            ? colors.primary
+                            : colors.onSurfaceVariant,
+                        size: 22.r,
+                      ),
                     ),
                   ],
                 ),
-                if (_isExpanded) ...[
-                  12.verticalSpace,
-                  Divider(color: colors.outlineVariant, height: 1),
-                  12.verticalSpace,
-                  AppText(
-                    widget.answer,
-                    style: AppTextStyles.bodyMedium(
-                      context,
-                    ).copyWith(color: colors.onSurfaceVariant),
+                AnimatedCrossFade(
+                  firstChild: const SizedBox(width: double.infinity),
+                  secondChild: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      12.verticalSpace,
+                      Divider(
+                        color: colors.outlineVariant.withValues(alpha: 0.5),
+                        height: 1,
+                      ),
+                      12.verticalSpace,
+                      AppText(
+                        widget.answer,
+                        style: AppTextStyles.bodyMedium(
+                          context,
+                        ).copyWith(
+                          color: colors.onSurfaceVariant,
+                          height: 1.45,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                  crossFadeState: _isExpanded
+                      ? CrossFadeState.showSecond
+                      : CrossFadeState.showFirst,
+                  duration: const Duration(milliseconds: 220),
+                  sizeCurve: Curves.easeOutCubic,
+                ),
               ],
             ),
           ),
