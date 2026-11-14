@@ -105,7 +105,7 @@ void main() {
             of: find.byType(CustomScrollView),
             matching: find.byType(Scrollable),
           )
-          .first,
+          .last,
     );
     await tester.tap(find.byType(AppFoodCard));
     await tester.pumpAndSettle();
@@ -118,7 +118,7 @@ void main() {
             of: find.byType(CustomScrollView),
             matching: find.byType(Scrollable),
           )
-          .first,
+          .last,
     );
     await tester.tap(find.text('Large'));
     await tester.pump();
@@ -145,7 +145,7 @@ void main() {
             of: find.byType(CustomScrollView),
             matching: find.byType(Scrollable),
           )
-          .first,
+          .last,
     );
     await tester.drag(find.byType(CustomScrollView), const Offset(0, -200));
     await tester.pumpAndSettle();
